@@ -1,6 +1,7 @@
 ###############
 # This Workflow is used to mirror the main branch to a preview branch.
 # Useful for having a preview URL that can be used by Sanity Studio.
+# Github Worflow permissions should be set to Read and write => https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository#configuring-the-default-github_token-permissions
 ###############
 name: Mirror Main Branch
 

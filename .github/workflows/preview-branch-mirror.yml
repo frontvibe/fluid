@@ -1,0 +1,28 @@
+###############
+# This Workflow is used to mirror the main branch to a preview branch.
+# Useful for having a preview URL that can be used by Sanity Studio.
+###############
+name: Mirror Main Branch
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Fetch latest changes
+        run: git fetch origin main
+
+      - name: Push to Mirror Branch
+        run: |
+          git checkout -b preview
+          git push --force origin preview
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

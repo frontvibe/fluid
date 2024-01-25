@@ -151,7 +151,7 @@ export default function App() {
         <Links />
       </head>
       <body
-        className="color-scheme flex min-h-screen flex-col [&_main]:flex-1"
+        className="color-scheme flex min-h-screen flex-col [&_main]:grow"
         style={cssVars}
       >
         <Layout>
@@ -188,7 +188,7 @@ export function ErrorBoundary() {
         <Fonts />
         <Links />
       </head>
-      <body className="flex min-h-screen flex-col [&_main]:flex-1">
+      <body className="flex min-h-screen flex-col [&_main]:grow">
         <Layout>
           <section>
             <div className="container">

@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: var(--body-font-family), var(--body-font-type);
+    font-size: calc(var(--body-base-size) * 1px);
+    line-height: var(--body-line-height);
+    letter-spacing: calc(var(--body-letter-spacing) * 1px);
+    -webkit-font-smoothing: var(--body-font-webkit-font-smoothing);
+    -moz-osx-font-smoothing: var(--body-font-moz-osx-font-smoothing);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--heading-font-family), var(--heading-font-type);
+    letter-spacing: calc(var(--heading-letter-spacing) * 1px);
+    line-height: var(--heading-line-height);
+    text-transform: var(--heading-capitalize);
+    -webkit-font-smoothing: var(--heading-font-webkit-font-smoothing);
+    -moz-osx-font-smoothing: var(--heading-font-moz-osx-font-smoothing);
+  }
+
+  h1 {
+    font-size: calc(var(--heading-base-size) * 1px);
+  }
+
+  h2 {
+    font-size: calc(var(--heading-base-size) * 0.75 * 1px);
+  }
+
+  h3 {
+    font-size: calc(var(--heading-base-size) * 0.65 * 1px);
+  }
+
+  h4 {
+    font-size: calc(var(--heading-base-size) * 0.5 * 1px);
+  }
+
+  h5 {
+    font-size: calc(var(--heading-base-size) * 0.45 * 1px);
+  }
+
+  h6 {
+    font-size: calc(var(--heading-base-size) * 0.375 * 1px);
+  }
+}

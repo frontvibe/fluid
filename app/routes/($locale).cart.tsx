@@ -1,4 +1,4 @@
-import type {CartQueryData} from '@shopify/hydrogen';
+import type {CartQueryDataReturn} from '@shopify/hydrogen';
 import type {
   ActionFunctionArgs,
   LoaderFunctionArgs,
@@ -24,7 +24,7 @@ export async function action({context, request}: ActionFunctionArgs) {
   invariant(action, 'No cartAction defined');
 
   let status = 200;
-  let result: CartQueryData;
+  let result: CartQueryDataReturn;
 
   switch (action) {
     case CartForm.ACTIONS.LinesAdd:

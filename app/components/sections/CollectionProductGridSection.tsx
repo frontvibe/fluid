@@ -11,7 +11,7 @@ import {
   useNavigate,
   useSearchParams,
 } from '@remix-run/react';
-import {Pagination, flattenConnection} from '@shopify/hydrogen';
+import {Pagination} from '@shopify/hydrogen';
 import {Suspense, useEffect} from 'react';
 
 import type {SectionDefaultProps} from '~/lib/type';
@@ -66,6 +66,7 @@ export function CollectionProductGridSection(
               <SortFilter
                 appliedFilters={appliedFilters}
                 filters={collection?.products.filters as Filter[]}
+                sectionSettings={props.data.settings}
               >
                 <Pagination connection={collection?.products}>
                   {({

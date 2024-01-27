@@ -14,6 +14,11 @@ import {
 import {useMemo, useState} from 'react';
 import {useDebounce} from 'react-use';
 
+import {
+  type CmsSectionSettings,
+  useSettingsCssVars,
+} from '~/hooks/useSettingsCssVars';
+
 import {IconFilters} from '../icons/IconFilters';
 import {IconSort} from '../icons/IconSort';
 import {IconXMark} from '../icons/IconXMark';
@@ -48,11 +53,18 @@ type Props = {
   appliedFilters?: AppliedFilter[];
   children: React.ReactNode;
   filters: Filter[];
+  sectionSettings?: CmsSectionSettings;
 };
 export const FILTER_URL_PREFIX = 'filter.';
 
-export function SortFilter({appliedFilters = [], children, filters}: Props) {
+export function SortFilter({
+  appliedFilters = [],
+  children,
+  filters,
+  sectionSettings,
+}: Props) {
   const [isOpen, setIsOpen] = useState(false);
+
   return (
     <>
       <div className="flex w-full items-center justify-between">
@@ -64,7 +76,7 @@ export function SortFilter({appliedFilters = [], children, filters}: Props) {
         >
           <IconFilters />
         </button>
-        <SortMenu />
+        <SortMenu sectionSettings={sectionSettings} />
       </div>
       <div className="flex flex-row flex-wrap">
         <div
@@ -316,7 +328,9 @@ function filterInputToParams(
   return params;
 }
 
-export default function SortMenu() {
+export default function SortMenu(props: {
+  sectionSettings?: CmsSectionSettings;
+}) {
   // Todo => add strings to themeContent
   const items: {key: SortParam; label: string}[] = useMemo(
     () => [
@@ -345,6 +359,7 @@ export default function SortMenu() {
   const location = useLocation();
   const search = location.search;
   const activeItem = items.find((item) => search.includes(`?sort=${item.key}`));
+  const cssVars = useSettingsCssVars({settings: props.sectionSettings});
 
   return (
     <DropdownMenu>
@@ -360,6 +375,7 @@ export default function SortMenu() {
       </DropdownMenuTrigger>
       <DropdownMenuContent asChild>
         <nav>
+          <style dangerouslySetInnerHTML={{__html: cssVars}} />
           {items.map((item) => (
             <DropdownMenuItem asChild key={item.label}>
               <Link

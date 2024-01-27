@@ -35,7 +35,7 @@ export function RichtextLayout(props: {
           required: cleanContentPosition,
         }),
         'max-w-[var(--maxWidth)] space-y-2 overflow-hidden',
-        '[&_blockquote]:border-l-2 [&_blockquote]:pl-6 [&_blockquote]:italic',
+        '[&_blockquote]:border-border [&_blockquote]:border-l-2 [&_blockquote]:pl-6 [&_blockquote]:italic',
         '[&_ul>li]:mt-2 [&_ul]:list-inside [&_ul]:list-disc',
         '[&_ol>li]:mt-2 [&_ol]:list-inside [&_ol]:list-decimal',
       ])}

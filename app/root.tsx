@@ -149,11 +149,9 @@ export default function App() {
         <Meta />
         <Fonts />
         <Links />
+        <style dangerouslySetInnerHTML={{__html: cssVars}} />
       </head>
-      <body
-        className="color-scheme flex min-h-screen flex-col [&_main]:grow"
-        style={cssVars}
-      >
+      <body className="bg-background text-foreground flex min-h-screen flex-col [&_main]:grow">
         <Layout>
           <Outlet />
         </Layout>

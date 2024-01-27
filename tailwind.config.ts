@@ -1,7 +1,6 @@
 /* eslint perfectionist/sort-objects: 0 */
 import type {Config} from 'tailwindcss';
 
-import formsPlugin from '@tailwindcss/forms';
 import typographyPlugin from '@tailwindcss/typography';
 import plugin from 'tailwindcss/plugin';
 import tailwindAnimatePlugin from 'tailwindcss-animate';
@@ -14,14 +13,39 @@ export default {
     },
     extend: {
       colors: {
-        'color-scheme-bg': 'rgb(var(--backgroundColor) / <alpha-value>)',
-        'color-scheme-text': 'rgb(var(--textColor) / <alpha-value>)',
-        'color-scheme-primary-button-bg':
-          'rgb(var(--primaryButtonBackground) / <alpha-value>)',
-        'color-scheme-primary-button-label':
-          'rgb(var(--primaryButtonLabel) / <alpha-value>)',
-        'color-scheme-outline-button':
-          'rgb(var(--outlineButton) / <alpha-value>)',
+        background: 'rgb(var(--background) / <alpha-value>)',
+        foreground: 'rgb(var(--foreground) / <alpha-value>)',
+        border: 'rgb(var(--border) / <alpha-value>)',
+        input: 'rgb(var(--input) / <alpha-value>)',
+        ring: 'rgb(var(--ring) / <alpha-value>)',
+        primary: {
+          DEFAULT: 'rgb(var(--primary) / <alpha-value>)',
+          foreground: 'rgb(var(--primary-foreground) / <alpha-value>)',
+        },
+        secondary: {
+          DEFAULT: 'rgb(var(--secondary) / <alpha-value>)',
+          foreground: 'rgb(var(--secondary-foreground) / <alpha-value>)',
+        },
+        muted: {
+          DEFAULT: 'rgb(var(--muted) / <alpha-value>)',
+          foreground: 'rgb(var(--muted-foreground) / <alpha-value>)',
+        },
+        accent: {
+          DEFAULT: 'rgb(var(--accent) / <alpha-value>)',
+          foreground: 'rgb(var(--accent-foreground) / <alpha-value>)',
+        },
+        popover: {
+          DEFAULT: 'rgb(var(--popover) / <alpha-value>)',
+          foreground: 'rgb(var(--popover-foreground) / <alpha-value>)',
+        },
+        card: {
+          DEFAULT: 'rgb(var(--card) / <alpha-value>)',
+          foreground: 'rgb(var(--card-foreground) / <alpha-value>)',
+        },
+        destructive: {
+          DEFAULT: 'rgb(var(--destructive) / <alpha-value>)',
+          foreground: 'rgb(var(--destructive-foreground) / <alpha-value>)',
+        },
       },
       keyframes: {
         'accordion-down': {
@@ -40,19 +64,10 @@ export default {
     },
   },
   plugins: [
-    formsPlugin,
     typographyPlugin,
     tailwindAnimatePlugin,
     plugin(({addComponents}) => {
       addComponents({
-        '.color-scheme': {
-          '@apply bg-color-scheme-bg': '',
-          '@apply text-color-scheme-text': '',
-        },
-        '.inverted-color-scheme': {
-          '@apply bg-color-scheme-text': '',
-          '@apply text-color-scheme-bg': '',
-        },
         '.section-padding': {
           paddingBottom: 'calc(var(--paddingBottom) * .75)',
           paddingTop: 'calc(var(--paddingTop) * .75)',

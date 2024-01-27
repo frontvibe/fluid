@@ -78,7 +78,7 @@ function CartSummary({
   layout: CartLayouts;
 }) {
   const summary = {
-    drawer: cx('grid gap-4 p-6 border-t md:px-12'),
+    drawer: cx('grid gap-4 p-6 border-t border-border md:px-12'),
     page: cx('sticky grid gap-6 p-4 md:px-6 md:translate-y-4 rounded w-full'),
   };
 

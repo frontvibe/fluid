@@ -92,7 +92,7 @@ export function CartLineItem({
               <Image
                 alt={merchandise.title}
                 aspectRatio="1/1"
-                className="size-24 rounded border object-cover object-center"
+                className="border-border size-24 rounded border object-cover object-center"
                 data={merchandise.image}
                 loading="eager"
                 sizes="96px"
@@ -150,7 +150,7 @@ function ItemRemoveButton({lineId}: {lineId: CartLine['id']}) {
       route="/cart"
     >
       <button
-        className="flex size-10 items-center justify-center rounded border"
+        className="border-border flex size-10 items-center justify-center rounded border"
         type="submit"
       >
         {/* Todo => add theme content string */}

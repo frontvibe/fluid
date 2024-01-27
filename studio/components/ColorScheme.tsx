@@ -1,13 +1,13 @@
 import {Flex, Text} from '@sanity/ui'
 
 export function ColorSchemeMedia({
-  text,
+  foreground,
   background,
 }: {
-  text?: {hex: string}
+  foreground?: {hex: string}
   background?: {hex: string}
 }) {
-  return background?.hex && text?.hex ? (
+  return background?.hex && foreground?.hex ? (
     <Flex
       align={'center'}
       justify={'center'}
@@ -21,15 +21,15 @@ export function ColorSchemeMedia({
         <Text
           align={'center'}
           style={{
-            color: text?.hex,
+            color: foreground?.hex,
           }}
           weight="bold"
         >
           Aa
         </Text>
         <Flex gap={1} align="center">
-          <Pill hex={text?.hex} full={true} />
-          <Pill hex={text?.hex} full={false} />
+          <Pill hex={foreground?.hex} full={true} />
+          <Pill hex={foreground?.hex} full={false} />
         </Flex>
       </Flex>
     </Flex>

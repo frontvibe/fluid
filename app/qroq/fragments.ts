@@ -71,12 +71,12 @@ export const COLOR_FRAGMENT = {
 
 export const COLOR_SCHEME_FRAGMENT = {
   background: q('background').grab(COLOR_FRAGMENT).nullable(),
-  outlineButton: q('outlineButton').grab(COLOR_FRAGMENT).nullable(),
-  primaryButtonBackground: q('primaryButtonBackground')
-    .grab(COLOR_FRAGMENT)
-    .nullable(),
-  primaryButtonLabel: q('primaryButtonLabel').grab(COLOR_FRAGMENT).nullable(),
-  text: q('text').grab(COLOR_FRAGMENT).nullable(),
+  border: q('border').grab(COLOR_FRAGMENT).nullable(),
+  card: q('card').grab(COLOR_FRAGMENT).nullable(),
+  cardForeground: q('cardForeground').grab(COLOR_FRAGMENT).nullable(),
+  foreground: q('foreground').grab(COLOR_FRAGMENT).nullable(),
+  primary: q('primary').grab(COLOR_FRAGMENT).nullable(),
+  primaryForeground: q('primaryForeground').grab(COLOR_FRAGMENT).nullable(),
 } satisfies Selection;
 
 /*

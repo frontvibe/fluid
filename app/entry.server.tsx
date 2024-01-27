@@ -15,7 +15,7 @@ export default async function handleRequest(
     connectSrc: ['*'],
     fontSrc: ['*.sanity.io', "'self'"],
     frameAncestors: ['localhost:*', '*.sanity.studio'],
-    imgSrc: ['*.sanity.io', 'https://cdn.shopify.com', "'self'"],
+    imgSrc: ['*.sanity.io', 'https://cdn.shopify.com', "'self'", 'localhost:*'],
   });
 
   const body = await renderToReadableStream(

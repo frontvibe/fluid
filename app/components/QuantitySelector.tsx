@@ -2,7 +2,9 @@ import {cx} from 'class-variance-authority';
 
 export function QuantitySelector(props: {children: React.ReactNode}) {
   return (
-    <div className="flex items-center rounded border">{props.children}</div>
+    <div className="border-border flex items-center rounded border">
+      {props.children}
+    </div>
   );
 }
 

@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 @layer base {
+  * {
+    @apply border-border;
+    @apply focus-visible:outline-ring;
+  }
+
   body {
     font-family: var(--body-font-family), var(--body-font-type);
     font-size: calc(var(--body-base-size) * 1px);

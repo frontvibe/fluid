@@ -71,7 +71,7 @@ function Badge(props: {cart?: CartType | null; count: number}) {
           <div
             className={cx([
               'absolute right-[-8px] top-0 flex items-center justify-center',
-              'inverted-color-scheme',
+              'bg-foreground text-background',
               'aspect-square h-auto min-w-[1.35rem] rounded-full p-1',
               'text-center text-[.7rem] leading-[0] subpixel-antialiased',
             ])}
@@ -84,15 +84,13 @@ function Badge(props: {cart?: CartType | null; count: number}) {
     [count, isHydrated],
   );
 
-  const buttonClass = cx([
-    'relative flex size-8 items-center justify-center focus:ring-primary/5',
-  ]);
+  const buttonClass = cx(['relative flex size-8 items-center justify-center']);
 
   return isHydrated ? (
     <Sheet onOpenChange={setCartOpen} open={cartOpen}>
       <SheetTrigger className={buttonClass}>{BadgeCounter}</SheetTrigger>
-      <SheetContent className="color-scheme flex max-h-screen min-h-full w-screen flex-col gap-0 p-0 sm:max-w-lg">
-        <SheetHeader className="px-6 py-5 shadow-sm">
+      <SheetContent className="bg-background text-foreground flex max-h-screen min-h-full w-screen flex-col gap-0 p-0 sm:max-w-lg">
+        <SheetHeader className="shadow-foreground/10 px-6 py-5 shadow-sm">
           <SheetTitle className="flex items-center gap-4">
             <span>{themeContent?.cart.heading}</span>
             {cartIsLoading && <IconLoader className="animate-spin" />}

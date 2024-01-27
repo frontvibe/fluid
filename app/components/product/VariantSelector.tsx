@@ -57,15 +57,14 @@ export function VariantSelector(props: {
               return selectedOption;
             });
 
-            const matchedVariant = props.variants?.find(
-              (variant) =>
-                variant?.selectedOptions?.every((selectedOption) => {
-                  return newOptions?.find(
-                    (newOption) =>
-                      newOption.name === selectedOption.name &&
-                      newOption.value === selectedOption.value,
-                  );
-                }),
+            const matchedVariant = props.variants?.find((variant) =>
+              variant?.selectedOptions?.every((selectedOption) => {
+                return newOptions?.find(
+                  (newOption) =>
+                    newOption.name === selectedOption.name &&
+                    newOption.value === selectedOption.value,
+                );
+              }),
             );
 
             const matchedVariantId = parseGid(matchedVariant?.id)?.id;
@@ -97,7 +96,7 @@ export function VariantSelector(props: {
             className={cx(!isAvailable && 'opacity-50')}
             key={option.name + value}
             size="sm"
-            variant={isActive ? 'secondary' : 'secondaryOutline'}
+            variant={isActive ? 'secondary' : 'outline'}
           >
             <Link prefetch="intent" preventScrollReset replace to={search}>
               {value}

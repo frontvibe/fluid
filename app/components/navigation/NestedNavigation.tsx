@@ -27,7 +27,7 @@ export function NestedNavigation(props: {data?: SanityNestedNavigationProps}) {
       <NestedNavigationContent>
         <ul
           className={cx([
-            'color-scheme',
+            'bg-background text-foreground',
             'relative z-10 flex w-auto min-w-[10rem] flex-col gap-1 rounded p-2 shadow',
           ])}
         >
@@ -36,7 +36,7 @@ export function NestedNavigation(props: {data?: SanityNestedNavigationProps}) {
               <li
                 className={cx([
                   'rounded px-2 py-1 transition-colors duration-100',
-                  'hover:bg-color-scheme-text/10',
+                  'hover:bg-foreground/10',
                   '[&>*]:flex',
                 ])}
               >

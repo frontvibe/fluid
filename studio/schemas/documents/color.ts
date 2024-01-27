@@ -14,13 +14,13 @@ export default defineType({
       title: 'name',
       subtitle: 'default',
       background: 'background',
-      text: 'text',
+      foreground: 'foreground',
     },
-    prepare({title, subtitle, background, text}: any) {
+    prepare({title, subtitle, background, foreground}: any) {
       return {
         title,
         subtitle: subtitle ? 'Default template' : undefined,
-        media: ColorSchemeMedia({background, text}),
+        media: ColorSchemeMedia({background, foreground}),
       };
     },
   },
@@ -43,24 +43,32 @@ export default defineType({
     }),
     defineField({
       name: 'background',
-      title: 'Background',
       type: 'colorPicker',
     }),
     defineField({
-      name: 'text',
-      title: 'Text',
+      name: 'foreground',
       type: 'colorPicker',
     }),
     defineField({
-      name: 'primaryButtonBackground',
+      name: 'primary',
       type: 'colorPicker',
     }),
     defineField({
-      name: 'primaryButtonLabel',
+      name: 'primaryForeground',
       type: 'colorPicker',
     }),
     defineField({
-      name: 'outlineButton',
+      name: 'border',
+      title: 'Lines, borders and inputs',
+      type: 'colorPicker',
+    }),
+    defineField({
+      name: 'card',
+      title: 'Card background',
+      type: 'colorPicker',
+    }),
+    defineField({
+      name: 'cardForeground',
       type: 'colorPicker',
     }),
   ],

@@ -68,8 +68,6 @@ export default defineField({
               media: 'image',
             },
             prepare(context) {
-              console.log(context);
-
               return {
                 title: 'Slide',
                 media: context.media,

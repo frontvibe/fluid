@@ -2,6 +2,8 @@ import type {TypeFromSelection} from 'groqd';
 
 import type {EXTERNAL_LINK_FRAGMENT} from '~/qroq/links';
 
+import {cn} from '~/lib/utils';
+
 type SanityExternalLinkProps = TypeFromSelection<typeof EXTERNAL_LINK_FRAGMENT>;
 
 export function SanityExternalLink(props: {
@@ -17,7 +19,10 @@ export function SanityExternalLink(props: {
 
   return link ? (
     <a
-      className={className}
+      className={cn([
+        'focus-visible:ring-ring focus-visible:rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
+        className,
+      ])}
       href={link}
       rel="noopener noreferrer"
       target={openInNewTab ? '_blank' : '_self'}

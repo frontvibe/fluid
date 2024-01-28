@@ -10,7 +10,9 @@ import {cx} from 'class-variance-authority';
 import {useMemo} from 'react';
 
 import {useSelectedVariant} from '~/hooks/useSelectedVariant';
+import {cn} from '~/lib/utils';
 
+import {badgeVariants} from '../ui/Badge';
 import {Button} from '../ui/Button';
 
 export type VariantOptionValue = {
@@ -89,19 +91,23 @@ export function VariantSelector(props: {
   return options?.map((option) => (
     <div key={option.name}>
       <div>{option.name}</div>
-      <div className="mt-1 flex gap-3">
+      <div className="mt-1 flex gap-2">
         {option.values?.map(({isActive, isAvailable, search, value}) => (
-          <Button
-            asChild
-            className={cx(!isAvailable && 'opacity-50')}
+          <Link
+            className={cn([
+              !isAvailable && 'opacity-50',
+              badgeVariants({
+                variant: isActive ? 'secondary' : 'outline',
+              }),
+            ])}
             key={option.name + value}
-            size="sm"
-            variant={isActive ? 'secondary' : 'outline'}
+            prefetch="intent"
+            preventScrollReset
+            replace
+            to={search}
           >
-            <Link prefetch="intent" preventScrollReset replace to={search}>
-              {value}
-            </Link>
-          </Button>
+            {value}
+          </Link>
         ))}
       </div>
     </div>

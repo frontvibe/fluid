@@ -31,6 +31,7 @@ export const countries: Localizations = {
 export const DEFAULT_LOCALE: I18nLocale = Object.freeze({
   ...countries.default,
   pathPrefix: '',
+  default: true,
 });
 
 export function getAllLanguages() {
@@ -61,10 +62,12 @@ export function getLocaleFromRequest(request: Request): I18nLocale {
     ? {
         ...countries[firstPathPart],
         pathPrefix: firstPathPart,
+        default: false,
       }
     : {
         ...countries['default'],
         pathPrefix: '',
+        default: true,
       };
 }
 
@@ -74,12 +77,14 @@ export function getAllLocales() {
       return {
         ...countries[key],
         pathPrefix: '',
+        default: true,
       };
     }
 
     return {
       ...countries[key],
       pathPrefix: key,
+      default: false,
     };
   });
 }

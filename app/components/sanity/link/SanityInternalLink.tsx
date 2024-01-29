@@ -5,7 +5,6 @@ import {vercelStegaCleanAll} from '@sanity/client/stega';
 
 import type {INTERNAL_LINK_FRAGMENT} from '~/qroq/links';
 
-import {Button} from '~/components/ui/Button';
 import {useLocale} from '~/hooks/useLocale';
 import {cn} from '~/lib/utils';
 
@@ -51,7 +50,7 @@ export function SanityInternalLink(props: {
   return (
     <Link
       className={cn([
-        'focus-visible:ring-ring focus-visible:rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
+        'focus-visible:rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
         className,
       ])}
       prefetch="intent"

@@ -3,6 +3,7 @@ import type {CSSProperties} from 'react';
 import {Link} from '@remix-run/react';
 import {cx} from 'class-variance-authority';
 
+import {useLocalePath} from '~/hooks/useLocalePath';
 import {useSanityRoot} from '~/hooks/useSanityRoot';
 import {useSettingsCssVars} from '~/hooks/useSettingsCssVars';
 
@@ -27,10 +28,12 @@ function DesktopHeader() {
     selector: 'header',
     settings: header,
   });
+  const homePath = useLocalePath({path: '/'});
+
   return (
     <header
       className={cx([
-        'bg-background text-foreground section-padding relative',
+        'section-padding relative bg-background text-foreground',
         headerVariants({
           optional: showSeparatorLine ? 'separator-line' : null,
         }),
@@ -40,7 +43,7 @@ function DesktopHeader() {
       <div className="container">
         <div className="flex items-center justify-between">
           <Button asChild variant="primitive">
-            <Link prefetch="intent" to="/">
+            <Link prefetch="intent" to={homePath}>
               <Logo
                 className="h-auto w-[var(--logoWidth)]"
                 sizes={logoWidth}

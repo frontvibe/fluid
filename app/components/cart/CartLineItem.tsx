@@ -92,7 +92,7 @@ export function CartLineItem({
               <Image
                 alt={merchandise.title}
                 aspectRatio="1/1"
-                className="border-border size-24 rounded border object-cover object-center"
+                className="size-24 rounded border border-border object-cover object-center"
                 data={merchandise.image}
                 loading="eager"
                 sizes="96px"
@@ -141,16 +141,18 @@ export function CartLineItem({
 }
 
 function ItemRemoveButton({lineId}: {lineId: CartLine['id']}) {
+  const cartPath = useLocalePath({path: '/cart'});
+
   return (
     <CartForm
       action={CartForm.ACTIONS.LinesRemove}
       inputs={{
         lineIds: [lineId],
       }}
-      route="/cart"
+      route={cartPath}
     >
       <button
-        className="border-border flex size-10 items-center justify-center rounded border"
+        className="flex size-10 items-center justify-center rounded border border-border"
         type="submit"
       >
         {/* Todo => add theme content string */}
@@ -192,13 +194,15 @@ function UpdateCartForm({
   children: React.ReactNode;
   lines: CartLineUpdateInput[];
 }) {
+  const cartPath = useLocalePath({path: '/cart'});
+
   return (
     <CartForm
       action={CartForm.ACTIONS.LinesUpdate}
       inputs={{
         lines,
       }}
-      route="/cart"
+      route={cartPath}
     >
       {children}
     </CartForm>

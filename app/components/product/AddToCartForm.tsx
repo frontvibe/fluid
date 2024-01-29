@@ -5,6 +5,7 @@ import {cx} from 'class-variance-authority';
 import {useState} from 'react';
 
 import {useEnvironmentVariables} from '~/hooks/useEnvironmentVariables';
+import {useLocalePath} from '~/hooks/useLocalePath';
 import {useSanityThemeContent} from '~/hooks/useSanityThemeContent';
 import {useSelectedVariant} from '~/hooks/useSelectedVariant';
 
@@ -23,6 +24,7 @@ export function AddToCartForm(props: {
   const selectedVariant = useSelectedVariant({variants});
   const isOutOfStock = !selectedVariant?.availableForSale;
   const [quantity, setQuantity] = useState(1);
+  const cartPath = useLocalePath({path: '/cart'});
 
   return (
     selectedVariant && (
@@ -54,7 +56,7 @@ export function AddToCartForm(props: {
               },
             ],
           }}
-          route="/cart"
+          route={cartPath}
         >
           {(fetcher) => (
             <div className="grid gap-3">

@@ -6,24 +6,24 @@ import type {
 
 import {useLoaderData} from '@remix-run/react';
 import {CartForm} from '@shopify/hydrogen';
-import {defer, json} from '@shopify/remix-oxygen';
+import {defer, json, redirectDocument} from '@shopify/remix-oxygen';
 import invariant from 'tiny-invariant';
 
 import {Cart} from '~/components/cart/Cart';
 import {isLocalPath} from '~/lib/utils';
 
 export async function action({context, request}: ActionFunctionArgs) {
-  const {cart, session} = context;
+  const {cart} = context;
 
-  const [formData, customerAccessToken] = await Promise.all([
+  const [formData] = await Promise.all([
     request.formData(),
-    session.get('customerAccessToken'),
+    // context.customerAccount.getAccessToken(),
   ]);
 
   const {action, inputs} = CartForm.getFormInput(formData);
   invariant(action, 'No cartAction defined');
 
-  let status = 200;
+  const status = 200;
   let result: CartQueryDataReturn;
 
   switch (action) {
@@ -49,13 +49,13 @@ export async function action({context, request}: ActionFunctionArgs) {
 
       result = await cart.updateDiscountCodes(discountCodes);
       break;
-    // Todo => Add support for updating buyer identity
-    // case CartForm.ACTIONS.BuyerIdentityUpdate:
-    //   result = await cart.updateBuyerIdentity({
-    //     ...inputs.buyerIdentity,
-    //     customerAccessToken,
-    //   });
-    //   break;
+    // Todo => Customer Access Token
+    case CartForm.ACTIONS.BuyerIdentityUpdate:
+      result = await cart.updateBuyerIdentity({
+        ...inputs.buyerIdentity,
+        // customerAccessToken,
+      });
+      break;
     default:
       invariant(false, `${action} cart action is not defined`);
   }
@@ -68,11 +68,13 @@ export async function action({context, request}: ActionFunctionArgs) {
 
   const redirectTo = formData.get('redirectTo') ?? null;
   if (typeof redirectTo === 'string' && isLocalPath(redirectTo)) {
-    status = 303;
-    headers.set('Location', redirectTo);
+    return redirectDocument(redirectTo, 303);
   }
 
   const {cart: cartResult, errors} = result;
+
+  headers.append('Set-Cookie', await context.session.commit());
+
   return json(
     {
       analytics: {

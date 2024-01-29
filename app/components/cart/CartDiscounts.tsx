@@ -3,6 +3,8 @@ import type {Cart as CartType} from '@shopify/hydrogen/storefront-api-types';
 import {CartForm} from '@shopify/hydrogen';
 import {cx} from 'class-variance-authority';
 
+import {useLocalePath} from '~/hooks/useLocalePath';
+
 import {IconRemove} from '../icons/IconRemove';
 import {Button} from '../ui/Button';
 import {Input} from '../ui/Input';
@@ -65,13 +67,15 @@ function UpdateDiscountForm({
   children: React.ReactNode;
   discountCodes?: string[];
 }) {
+  const cartPath = useLocalePath({path: '/cart'});
+
   return (
     <CartForm
       action={CartForm.ACTIONS.DiscountCodesUpdate}
       inputs={{
         discountCodes: discountCodes || [],
       }}
-      route="/cart"
+      route={cartPath}
     >
       {children}
     </CartForm>

@@ -4,6 +4,8 @@ import {Link} from '@remix-run/react';
 import {Image, Money, flattenConnection} from '@shopify/hydrogen';
 import {cx} from 'class-variance-authority';
 
+import {useLocalePath} from '~/hooks/useLocalePath';
+
 import {Card, CardContent} from '../ui/Card';
 
 export function ProductCard(props: {
@@ -27,10 +29,12 @@ export function ProductCard(props: {
     columns?.mobile ? `${100 / columns.mobile}vw` : '100vw',
   ]);
 
+  const path = useLocalePath({path: `/products/${product?.handle}`});
+
   return (
     <>
       {!skeleton && product && firstVariant ? (
-        <Link prefetch="intent" to={`/products/${product.handle}`}>
+        <Link prefetch="intent" to={path}>
           <Card className="overflow-hidden">
             {firstVariant?.image && (
               <Image

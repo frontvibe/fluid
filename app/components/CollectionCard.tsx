@@ -4,6 +4,8 @@ import {Link} from '@remix-run/react';
 import {Image} from '@shopify/hydrogen';
 import {cx} from 'class-variance-authority';
 
+import {useLocalePath} from '~/hooks/useLocalePath';
+
 import {Card, CardContent} from './ui/Card';
 
 export function CollectionCard(props: {
@@ -18,8 +20,10 @@ export function CollectionCard(props: {
     '100vw',
   ]);
 
+  const path = useLocalePath({path: `/collections/${collection?.handle}`});
+
   return (
-    <Link prefetch="intent" to={`/collections/${collection.handle}`}>
+    <Link prefetch="intent" to={path}>
       <Card className="overflow-hidden">
         {collection.image && (
           <Image

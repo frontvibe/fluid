@@ -65,8 +65,8 @@ export const sections: {
     })),
   ),
   socialLinksOnly: lazy(() =>
-    import('../components/footers/SocialLinksOnly').then((module) => ({
-      default: module.SocialLinksOnly,
+    import('../components/footers/FooterSocialLinksOnly').then((module) => ({
+      default: module.FooterSocialLinksOnly,
     })),
   ),
 };

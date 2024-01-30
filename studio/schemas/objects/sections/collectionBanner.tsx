@@ -1,5 +1,5 @@
 import {defineField} from 'sanity';
-import {Image} from 'lucide-react';
+import {EyeOff, Image} from 'lucide-react';
 
 export default defineField({
   name: 'collectionBannerSection',
@@ -23,10 +23,13 @@ export default defineField({
     }),
   ],
   preview: {
-    prepare() {
+    select: {
+      settings: 'settings',
+    },
+    prepare({settings}:any) {
       return {
         title: 'Collection Banner',
-        media: () => <Image />,
+        media: () => settings.hide ? <EyeOff/> : <Image />,
       };
     },
   },

@@ -1,4 +1,4 @@
-import {LayoutGrid} from 'lucide-react';
+import {EyeOff, LayoutGrid} from 'lucide-react';
 import {defineField} from 'sanity';
 
 export default defineField({
@@ -40,10 +40,13 @@ export default defineField({
     }),
   ],
   preview: {
-    prepare() {
+    select: {
+      settings: 'settings',
+    },
+    prepare({settings}: any) {
       return {
         title: 'Collection List',
-        media: () => <LayoutGrid />,
+        media: () => settings.hide ? <EyeOff/> : <LayoutGrid />,
       };
     },
   },

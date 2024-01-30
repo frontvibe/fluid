@@ -1,3 +1,4 @@
+import { EyeOff } from 'lucide-react';
 import {defineField} from 'sanity';
 
 export default defineField({
@@ -19,12 +20,13 @@ export default defineField({
   preview: {
     select: {
       product: 'product.store',
+      settings: 'settings',
     },
-    prepare({product}: any) {
+    prepare({product, settings}: any) {
       return {
         title: product.title,
         subtitle: 'Featured Product',
-        media: () => <img src={product.previewImageUrl} alt={product.title} />,
+        media: () => settings.hide ? <EyeOff/> : <img src={product.previewImageUrl} alt={product.title} />,
       };
     },
   },

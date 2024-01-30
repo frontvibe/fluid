@@ -1,5 +1,5 @@
 import {defineField} from 'sanity';
-import {LayoutGrid} from 'lucide-react';
+import {EyeOff, LayoutGrid} from 'lucide-react';
 
 export default defineField({
   name: 'collectionProductGridSection',
@@ -57,10 +57,13 @@ export default defineField({
     enableSorting: true,
   },
   preview: {
-    prepare() {
+    select: {
+      settings: 'settings',
+    },
+    prepare({settings}: any) {
       return {
         title: 'Collection Product Grid',
-        media: () => <LayoutGrid />,
+        media: () => settings.hide ? <EyeOff/> : <LayoutGrid />,
       };
     },
   },

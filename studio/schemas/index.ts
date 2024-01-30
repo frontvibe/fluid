@@ -4,7 +4,6 @@ import header from './singletons/header';
 import page from './documents/page';
 import settings from './singletons/settings';
 import themeContent from './singletons/themeContent';
-import ctaSection from './objects/sections/ctaSection';
 import imageBannerSection from './objects/sections/imageBannerSection';
 import home from './singletons/home';
 import collection from './documents/collection';
@@ -63,7 +62,6 @@ const sections = [
   featuredProductSection,
   collectionListSection,
   productInformationSection,
-  ctaSection,
   relatedProductsSection,
   carouselSection,
   richtextSection,

@@ -1,5 +1,6 @@
 import {defineField} from 'sanity';
 import {IconTag} from '../../../components/icons/Tag';
+import { EyeOff } from 'lucide-react';
 
 export default defineField({
   name: 'productInformationSection',
@@ -16,10 +17,13 @@ export default defineField({
     }),
   ],
   preview: {
-    prepare() {
+    select: {
+      settings: 'settings',
+    },
+    prepare({ settings }: any) {
       return {
         title: 'Product Information',
-        media: () => <IconTag />,
+        media: () => settings.hide ? <EyeOff/> : <IconTag />,
       };
     },
   },

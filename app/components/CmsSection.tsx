@@ -32,6 +32,8 @@ export function CmsSection(props: {
   const type = data._type;
   const Section = useMemo(() => sections[type], [type]);
 
+  if (data.settings.hide) return null;
+
   return Section ? (
     <SectionWrapper data={data} type={props.type}>
       <Suspense
@@ -71,7 +73,7 @@ function SectionWrapper(props: {
 
   return props.type === 'footer' ? (
     <footer
-      className="bg-background text-foreground section-padding relative"
+      className="section-padding relative bg-background text-foreground"
       data-footer-type={isDev ? sectionType : null}
     >
       <style dangerouslySetInnerHTML={{__html: cssVars}} />
@@ -82,7 +84,7 @@ function SectionWrapper(props: {
     </footer>
   ) : (
     <section
-      className="bg-background text-foreground section-padding relative"
+      className="section-padding relative bg-background text-foreground"
       data-section-type={isDev ? sectionType : null}
       id={`section-${data._key}`}
     >

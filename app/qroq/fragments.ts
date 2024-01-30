@@ -2,7 +2,7 @@ import type {Selection} from 'groqd';
 
 import {q} from 'groqd';
 
-import {LINKS_LIST_SELECTION} from './links';
+import {LINK_REFERENCE_FRAGMENT, LINKS_LIST_SELECTION} from './links';
 
 /*
 |--------------------------------------------------------------------------
@@ -78,6 +78,29 @@ export const COLOR_SCHEME_FRAGMENT = {
   primary: q('primary').grab(COLOR_FRAGMENT).nullable(),
   primaryForeground: q('primaryForeground').grab(COLOR_FRAGMENT).nullable(),
 } satisfies Selection;
+
+/*
+|--------------------------------------------------------------------------
+| Annoucement Bar Fragment
+|--------------------------------------------------------------------------
+*/
+export const ANNOUCEMENT_BAR_FRAGMENT = {
+  _key: q.string(),
+  link: LINK_REFERENCE_FRAGMENT,
+  text: q.string().nullable(),
+} satisfies Selection;
+
+export const ANNOUCEMENT_BAR_ARRAY_FRAGMENT = q(
+  `coalesce(
+    annoucementBar[_key == $language][0].value[],
+    annoucementBar[_key == $defaultLanguage][0].value[],
+  )[]`,
+  {isArray: true},
+)
+  .select({
+    '_type == "announcementBar"': ANNOUCEMENT_BAR_FRAGMENT,
+  })
+  .nullable();
 
 /*
 |--------------------------------------------------------------------------

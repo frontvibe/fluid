@@ -7,6 +7,7 @@ import {useSanityPreviewMode} from '~/hooks/useSanityPreviewMode';
 
 import {TailwindIndicator} from '../TailwindIndicator';
 import {TogglePreviewMode} from '../sanity/TogglePreviewMode';
+import {AnnouncementBar} from './AnnoucementBar';
 import {Footer} from './Footer';
 import {Header} from './Header';
 
@@ -33,6 +34,7 @@ export function Layout({children = null}: LayoutProps) {
       storefrontApiVersion={env?.PUBLIC_STOREFRONT_API_VERSION!}
       storefrontToken={env?.PUBLIC_STOREFRONT_API_TOKEN!}
     >
+      <AnnouncementBar />
       <Header />
       <main>{children}</main>
       <Footer />

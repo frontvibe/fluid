@@ -60,6 +60,7 @@ export default defineConfig({
         'text',
         'slug',
         'headerNavigation',
+        'announcementBar',
         'productRichtext',
         'richtext',
       ],

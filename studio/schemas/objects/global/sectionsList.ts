@@ -16,9 +16,6 @@ const globalSections = [
     type: 'collectionListSection',
   },
   {
-    type: 'ctaSection',
-  },
-  {
     type: 'carouselSection',
   },
   {

@@ -17,6 +17,7 @@ export const FOOTER_SETTINGS_FRAGMENT = q('settings').grab({
       code: q.string().optional(),
     })
     .nullable(),
+  hide: q.boolean().nullable(),
   padding: q
     .object({
       bottom: q.number().nullable(),

@@ -5,6 +5,12 @@ export default defineField({
   name: 'sectionSettings',
   fields: [
     defineField({
+      name: 'hide',
+      title: 'Hide section',
+      type: 'boolean',
+      initialValue: false,
+    }),
+    defineField({
       name: 'colorScheme',
       title: 'Color scheme',
       type: 'reference',

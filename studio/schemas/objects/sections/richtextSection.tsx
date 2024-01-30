@@ -1,4 +1,4 @@
-import {TextSelect} from 'lucide-react';
+import {EyeOff, TextSelect} from 'lucide-react';
 import {defineField} from 'sanity';
 
 export default defineField({
@@ -73,10 +73,13 @@ export default defineField({
     maxWidth: 900,
   },
   preview: {
-    prepare() {
+    select: {
+      settings: 'settings',
+    },
+    prepare({ settings }: any) {
       return {
         title: 'Richtext',
-        media: () => <TextSelect />,
+        media: () =>  settings.hide ? <EyeOff/> : <TextSelect />,
       };
     },
   },

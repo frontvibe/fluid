@@ -1,4 +1,4 @@
-import {GalleryHorizontal} from 'lucide-react';
+import {EyeOff, GalleryHorizontal} from 'lucide-react';
 import {defineField} from 'sanity';
 
 export default defineField({
@@ -8,11 +8,12 @@ export default defineField({
   preview: {
     select: {
       title: 'title',
+      settings: 'settings',
     },
-    prepare({title}: any) {
+    prepare({title, settings}: any) {
       return {
         title: title?.[0]?.value || 'Missing title',
-        media: GalleryHorizontal,
+        media: settings.hide ? EyeOff : GalleryHorizontal,
       };
     },
   },

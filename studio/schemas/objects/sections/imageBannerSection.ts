@@ -1,3 +1,4 @@
+import { EyeOff } from 'lucide-react';
 import {defineField} from 'sanity';
 
 export default defineField({
@@ -54,12 +55,13 @@ export default defineField({
     select: {
       title: 'title',
       media: 'backgroundImage',
+      settings: 'settings',
     },
-    prepare({title, media}: any) {
+    prepare({title, media, settings}: any) {
       return {
         title: title?.[0]?.value || 'Missing title',
         subtitle: 'Image Banner',
-        media: media,
+        media: settings.hide ? EyeOff : media,
       };
     },
   },

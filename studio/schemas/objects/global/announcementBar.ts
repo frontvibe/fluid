@@ -8,7 +8,7 @@ export default defineField({
   of: [
     {
       type: 'object',
-      name: 'announcementBar',
+      name: 'announcement',
       icon: Megaphone,
       fields: [
         defineField({

@@ -1,1 +1,5 @@
 pnpm-lock.yaml
+dist
+node_modules
+.sanity
+.cache

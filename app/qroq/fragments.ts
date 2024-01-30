@@ -98,7 +98,7 @@ export const ANNOUCEMENT_BAR_ARRAY_FRAGMENT = q(
   {isArray: true},
 )
   .select({
-    '_type == "announcementBar"': ANNOUCEMENT_BAR_FRAGMENT,
+    '_type == "announcement"': ANNOUCEMENT_BAR_FRAGMENT,
   })
   .nullable();
 

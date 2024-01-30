@@ -57,9 +57,10 @@ function AwaitCollectionList(props: {
     console.warn(
       '[CollectionListSection] No collectionListPromise found in loader data.',
     );
+    return null;
   }
 
-  return collectionListPromise ? (
+  return (
     <Suspense fallback={props.fallback}>
       <Await
         // Todo => Add an error component
@@ -68,25 +69,29 @@ function AwaitCollectionList(props: {
       >
         {(data) => {
           // Resolve the collection list data from Shopify with the gids from Sanity
-          const collections = data.map((result) => {
-            // Check if the promise is fulfilled
+          let collections:
+            | NonNullable<CollectionsQuery['collections']>
+            | null
+            | undefined;
+
+          for (const result of data) {
             if (result.status === 'fulfilled') {
-              const {collections} = result.value;
-              const shopifyCollectionListGids = collections.nodes
+              const {collections: resultCollections} = result.value;
+              const shopifyCollectionListGids = resultCollections.nodes
                 .map((collection) => collection.id)
                 .join(',');
               // Compare the Sanity gids with the Shopify gids
-              return sanityCollectionListGids === shopifyCollectionListGids
-                ? collections
-                : null;
+              if (sanityCollectionListGids === shopifyCollectionListGids) {
+                collections = resultCollections;
+                break;
+              }
             }
             // Todo => Return error component if the promise is rejected
-            return null;
-          })[0];
+          }
 
           return <>{collections && props.children(collections)}</>;
         }}
       </Await>
     </Suspense>
-  ) : null;
+  );
 }

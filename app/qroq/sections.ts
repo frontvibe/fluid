@@ -101,6 +101,16 @@ export const FEATURED_PRODUCT_SECTION_FRAGMENT = {
       }),
     })
     .nullable(),
+  richtext: q(
+    `coalesce(
+        richtext[_key == $language][0].value[],
+        richtext[_key == $defaultLanguage][0].value[],
+      )[]`,
+    {isArray: true},
+  )
+    .filter()
+    .select(PRODUCT_RICHTEXT_BLOCKS)
+    .nullable(),
   settings: SECTION_SETTINGS_FRAGMENT,
 } satisfies Selection;
 

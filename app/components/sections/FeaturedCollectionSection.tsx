@@ -1,5 +1,8 @@
 import type {TypeFromSelection} from 'groqd';
-import type {ProductCardFragment} from 'storefrontapi.generated';
+import type {
+  FeaturedCollectionQuery,
+  ProductCardFragment,
+} from 'storefrontapi.generated';
 
 import {Await, useLoaderData} from '@remix-run/react';
 import {flattenConnection} from '@shopify/hydrogen';
@@ -78,9 +81,10 @@ function AwaitFeaturedCollection(props: {
     console.warn(
       '[FeaturedCollectionSection] No featuredCollectionPromise found in loader data.',
     );
+    return null;
   }
 
-  return featuredCollectionPromise ? (
+  return (
     <Suspense fallback={props.fallback}>
       <Await
         // Todo => Add an error component
@@ -89,18 +93,22 @@ function AwaitFeaturedCollection(props: {
       >
         {(data) => {
           // Resolve the collection data from Shopify with the gid from Sanity
-          const collection = data.map((result) => {
-            // Check if the promise is fulfilled
+          let collection:
+            | NonNullable<FeaturedCollectionQuery['collection']>
+            | null
+            | undefined;
+
+          for (const result of data) {
             if (result.status === 'fulfilled') {
-              const {collection} = result.value;
+              const {collection: resultCollection} = result.value;
               // Check if the gid from Sanity is the same as the gid from Shopify
-              if (sanityCollectionGid?.includes(collection?.id!)) {
-                return collection;
+              if (sanityCollectionGid === resultCollection?.id!) {
+                collection = resultCollection;
+                break;
               }
             }
             // Todo => Return error component if the promise is rejected
-            return null;
-          })[0];
+          }
 
           const products =
             collection?.products?.nodes && collection?.products?.nodes?.length
@@ -111,5 +119,5 @@ function AwaitFeaturedCollection(props: {
         }}
       </Await>
     </Suspense>
-  ) : null;
+  );
 }

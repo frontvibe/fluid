@@ -89,7 +89,10 @@ function Badge(props: {cart?: CartType | null; count: number}) {
   return isHydrated ? (
     <Sheet onOpenChange={setCartOpen} open={cartOpen}>
       <SheetTrigger className={buttonClass}>{BadgeCounter}</SheetTrigger>
-      <SheetContent className="flex max-h-screen min-h-full w-screen flex-col gap-0 bg-background p-0 text-foreground sm:max-w-lg">
+      <SheetContent
+        className="flex max-h-screen min-h-full w-screen flex-col gap-0 bg-background p-0 text-foreground sm:max-w-lg"
+        onCloseAutoFocus={(e) => e.preventDefault()}
+      >
         <SheetHeader className="px-6 py-5 shadow-sm shadow-foreground/10">
           <SheetTitle className="flex items-center gap-4">
             <span>{themeContent?.cart.heading}</span>

@@ -31,9 +31,14 @@ export function IconCollectionTag() {
       </g>
       <defs>
         <clipPath id="clip0_2_9">
-          <rect width="18" height="18" fill="white" transform="matrix(0 1 -1 0 18.25 1.25)" />
+          <rect
+            width="18"
+            height="18"
+            fill="white"
+            transform="matrix(0 1 -1 0 18.25 1.25)"
+          />
         </clipPath>
       </defs>
     </svg>
-  )
+  );
 }

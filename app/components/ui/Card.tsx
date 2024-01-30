@@ -5,7 +5,7 @@ const Card = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({className, ...props}, ref) => (
     <div
       className={cn(
-        'bg-card text-card-foreground rounded-lg border shadow-sm',
+        'rounded-lg border bg-card text-card-foreground shadow-sm',
         className,
       )}
       data-type="card"
@@ -48,7 +48,7 @@ const CardDescription = forwardRef<
   React.HTMLAttributes<HTMLParagraphElement>
 >(({className, ...props}, ref) => (
   <p
-    className={cn('text-muted-foreground text-sm', className)}
+    className={cn('text-sm text-muted-foreground', className)}
     ref={ref}
     {...props}
   />

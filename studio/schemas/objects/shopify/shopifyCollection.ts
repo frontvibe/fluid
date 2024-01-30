@@ -1,4 +1,4 @@
-import {defineField} from 'sanity'
+import {defineField} from 'sanity';
 
 export default defineField({
   name: 'shopifyCollection',
@@ -93,7 +93,8 @@ export default defineField({
     defineField({
       name: 'disjunctive',
       title: 'Disjunctive rules?',
-      description: 'Require any condition if true, otherwise require all conditions',
+      description:
+        'Require any condition if true, otherwise require all conditions',
       type: 'boolean',
     }),
     // Sort order
@@ -103,4 +104,4 @@ export default defineField({
       type: 'string',
     }),
   ],
-})
+});

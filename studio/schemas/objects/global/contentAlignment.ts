@@ -1,4 +1,4 @@
-import {defineField} from 'sanity'
+import {defineField} from 'sanity';
 
 export default defineField({
   name: 'contentAlignment',
@@ -45,4 +45,4 @@ export default defineField({
     ],
   },
   initialValue: 'middle_center',
-})
+});

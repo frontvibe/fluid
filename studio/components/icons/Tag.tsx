@@ -22,5 +22,5 @@ export function IconTag() {
         strokeLinejoin="round"
       />
     </svg>
-  )
+  );
 }

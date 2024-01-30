@@ -1,4 +1,4 @@
-import {defineField} from 'sanity'
+import {defineField} from 'sanity';
 
 export default defineField({
   name: 'priceRange',
@@ -19,4 +19,4 @@ export default defineField({
       type: 'number',
     },
   ],
-})
+});

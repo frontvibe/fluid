@@ -46,7 +46,7 @@ export default defineField({
     prepare({settings}: any) {
       return {
         title: 'Collection List',
-        media: () => settings.hide ? <EyeOff/> : <LayoutGrid />,
+        media: () => (settings.hide ? <EyeOff /> : <LayoutGrid />),
       };
     },
   },

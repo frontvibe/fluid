@@ -1,13 +1,13 @@
-import {TagIcon} from '@sanity/icons'
-import pluralize from 'pluralize-esm'
-import React from 'react'
-import {defineField} from 'sanity'
+import {TagIcon} from '@sanity/icons';
+import pluralize from 'pluralize-esm';
+import React from 'react';
+import {defineField} from 'sanity';
 
-import {getPriceRange} from '../../../utils/getPriceRange'
-import {projectDetails} from '../../../project.details'
-import {ShopifyDocumentStatus} from '../../../components/shopify/ShopifyDocumentStatus'
+import {getPriceRange} from '../../../utils/getPriceRange';
+import {projectDetails} from '../../../project.details';
+import {ShopifyDocumentStatus} from '../../../components/shopify/ShopifyDocumentStatus';
 
-const apiVersion = projectDetails.apiVersion
+const apiVersion = projectDetails.apiVersion;
 
 export default defineField({
   name: 'productWithVariant',
@@ -30,11 +30,13 @@ export default defineField({
       options: {
         filter: ({parent}) => {
           // @ts-ignore
-          const productId = parent?.product?._ref
-          const shopifyProductId = Number(productId?.replace('shopifyProduct-', ''))
+          const productId = parent?.product?._ref;
+          const shopifyProductId = Number(
+            productId?.replace('shopifyProduct-', ''),
+          );
 
           if (!shopifyProductId) {
-            return {filter: '', params: {}}
+            return {filter: '', params: {}};
           }
 
           // TODO: once variants are correctly marked as deleted, this could be made a little more efficient
@@ -44,24 +46,24 @@ export default defineField({
             params: {
               shopifyProductId: productId,
             },
-          }
+          };
         },
       },
       hidden: ({parent}) => {
-        const productSelected = parent?.product
-        return !productSelected
+        const productSelected = parent?.product;
+        return !productSelected;
       },
       validation: (Rule) =>
         Rule.custom(async (value, {parent, getClient}) => {
           // Selected product in adjacent `product` field
           // @ts-ignore
-          const productId = parent?.product?._ref
+          const productId = parent?.product?._ref;
 
           // Selected product variant
-          const productVariantId = value?._ref
+          const productVariantId = value?._ref;
 
           if (!productId || !productVariantId) {
-            return true
+            return true;
           }
 
           // If both product + product variant are specified,
@@ -71,10 +73,10 @@ export default defineField({
             {
               productId,
               productVariantId,
-            }
-          )
+            },
+          );
 
-          return result ? true : 'Invalid product variant'
+          return result ? true : 'Invalid product variant';
         }),
     }),
   ],
@@ -103,26 +105,26 @@ export default defineField({
         variantCount,
         variantPreviewImageUrl,
         variantTitle,
-      } = selection
+      } = selection;
 
-      const productVariantTitle = variantTitle || defaultVariantTitle
+      const productVariantTitle = variantTitle || defaultVariantTitle;
 
-      let previewTitle = [title]
+      let previewTitle = [title];
       if (productVariantTitle) {
-        previewTitle.push(`[${productVariantTitle}]`)
+        previewTitle.push(`[${productVariantTitle}]`);
       }
 
       let description = [
         variantCount ? pluralize('variant', variantCount, true) : 'No variants',
         optionCount ? pluralize('option', optionCount, true) : 'No options',
-      ]
+      ];
 
-      let subtitle = getPriceRange(priceRange)
+      let subtitle = getPriceRange(priceRange);
       if (status !== 'active') {
-        subtitle = '(Unavailable in Shopify)'
+        subtitle = '(Unavailable in Shopify)';
       }
       if (isDeleted) {
-        subtitle = '(Deleted from Shopify)'
+        subtitle = '(Deleted from Shopify)';
       }
 
       return {
@@ -138,7 +140,7 @@ export default defineField({
         description: description.join(' / '),
         subtitle,
         title: previewTitle.join(' '),
-      }
+      };
     },
   },
-})
+});

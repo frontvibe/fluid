@@ -1,34 +1,34 @@
-import {WarningOutlineIcon} from '@sanity/icons'
-import {StringFieldProps, useFormValue} from 'sanity'
-import {Box, Card, Flex, Stack, Text} from '@sanity/ui'
-import {productUrl} from '../../utils/shopifyUrls'
+import {WarningOutlineIcon} from '@sanity/icons';
+import {StringFieldProps, useFormValue} from 'sanity';
+import {Box, Card, Flex, Stack, Text} from '@sanity/ui';
+import {productUrl} from '../../utils/shopifyUrls';
 
 type Store = {
-  id: number
-  status: string
-  isDeleted: boolean
-}
+  id: number;
+  status: string;
+  isDeleted: boolean;
+};
 
 export function ProductHiddenInput(props: StringFieldProps) {
-  const store: Store = useFormValue(['store']) as Store
+  const store: Store = useFormValue(['store']) as Store;
 
-  let message
+  let message;
   if (!store) {
-    return <></>
+    return <></>;
   } else {
-    const shopifyProductUrl = productUrl(store?.id)
-    const isActive = store?.status === 'active'
-    const isDeleted = store?.isDeleted
+    const shopifyProductUrl = productUrl(store?.id);
+    const isActive = store?.status === 'active';
+    const isDeleted = store?.isDeleted;
 
     if (!isActive) {
       message = (
         <>
           It does not have an <code>active</code> status in Shopify.
         </>
-      )
+      );
     }
     if (isDeleted) {
-      message = 'It has been deleted from Shopify.'
+      message = 'It has been deleted from Shopify.';
     }
 
     return (
@@ -59,6 +59,6 @@ export function ProductHiddenInput(props: StringFieldProps) {
           </Box>
         </Flex>
       </Card>
-    )
+    );
   }
 }

@@ -1,11 +1,11 @@
-import {Flex, Text} from '@sanity/ui'
+import {Flex, Text} from '@sanity/ui';
 
 export function ColorSchemeMedia({
   foreground,
   background,
 }: {
-  foreground?: {hex: string}
-  background?: {hex: string}
+  foreground?: {hex: string};
+  background?: {hex: string};
 }) {
   return background?.hex && foreground?.hex ? (
     <Flex
@@ -33,7 +33,7 @@ export function ColorSchemeMedia({
         </Flex>
       </Flex>
     </Flex>
-  ) : null
+  ) : null;
 }
 
 function Pill({full, hex}: {full?: boolean; hex: string}) {
@@ -48,5 +48,5 @@ function Pill({full, hex}: {full?: boolean; hex: string}) {
         borderColor: hex,
       }}
     ></div>
-  )
+  );
 }

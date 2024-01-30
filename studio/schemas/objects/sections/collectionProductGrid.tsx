@@ -63,7 +63,7 @@ export default defineField({
     prepare({settings}: any) {
       return {
         title: 'Collection Product Grid',
-        media: () => settings.hide ? <EyeOff/> : <LayoutGrid />,
+        media: () => (settings.hide ? <EyeOff /> : <LayoutGrid />),
       };
     },
   },

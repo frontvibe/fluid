@@ -70,7 +70,7 @@ export function SortFilter({
       <div className="flex w-full items-center justify-between">
         <button
           className={
-            'focus:ring-primary/5 relative flex size-8 items-center justify-center'
+            'relative flex size-8 items-center justify-center focus:ring-primary/5'
           }
           onClick={() => setIsOpen(!isOpen)}
         >

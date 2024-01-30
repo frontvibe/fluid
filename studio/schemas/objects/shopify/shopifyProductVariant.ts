@@ -1,4 +1,4 @@
-import {defineField} from 'sanity'
+import {defineField} from 'sanity';
 
 export default defineField({
   name: 'shopifyProductVariant',
@@ -144,4 +144,4 @@ export default defineField({
     }),
   ],
   readOnly: true,
-})
+});

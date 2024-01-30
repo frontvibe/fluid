@@ -1,4 +1,4 @@
-import { EyeOff } from 'lucide-react';
+import {EyeOff} from 'lucide-react';
 import {defineField} from 'sanity';
 
 export default defineField({
@@ -48,7 +48,12 @@ export default defineField({
       return {
         title: collection.title,
         subtitle: 'Featured Collection',
-        media: () => settings.hide ? <EyeOff/> : <img src={collection.imageUrl} alt={collection.title} />,
+        media: () =>
+          settings.hide ? (
+            <EyeOff />
+          ) : (
+            <img src={collection.imageUrl} alt={collection.title} />
+          ),
       };
     },
   },

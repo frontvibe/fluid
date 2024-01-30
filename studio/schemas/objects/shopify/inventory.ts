@@ -1,4 +1,4 @@
-import {defineField} from 'sanity'
+import {defineField} from 'sanity';
 
 export default defineField({
   name: 'inventory',
@@ -27,4 +27,4 @@ export default defineField({
       type: 'string',
     },
   ],
-})
+});

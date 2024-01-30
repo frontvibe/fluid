@@ -1,4 +1,4 @@
-import {defineField} from 'sanity'
+import {defineField} from 'sanity';
 
 export default defineField({
   type: 'object',
@@ -40,4 +40,4 @@ export default defineField({
       },
     }),
   ],
-})
+});

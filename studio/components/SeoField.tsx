@@ -1,10 +1,10 @@
-import {Badge, Card, Flex, Text} from '@sanity/ui'
+import {Badge, Card, Flex, Text} from '@sanity/ui';
 
-import {StringFieldProps} from 'sanity'
+import {StringFieldProps} from 'sanity';
 
 export const SeoTitle = (props: StringFieldProps) => {
-  const {children, title, description, value = ''} = props
-  const maxLength = 70
+  const {children, title, description, value = ''} = props;
+  const maxLength = 70;
 
   return (
     <Card>
@@ -20,10 +20,14 @@ export const SeoTitle = (props: StringFieldProps) => {
       </Card>
       <Card>{children}</Card>
       <Flex paddingTop={1} justify={'flex-end'}>
-        <Badge mode="outline" tone={value.length > maxLength ? 'critical' : 'primary'} size={1}>
+        <Badge
+          mode="outline"
+          tone={value.length > maxLength ? 'critical' : 'primary'}
+          size={1}
+        >
           {value?.length} / {maxLength}
         </Badge>
       </Flex>
     </Card>
-  )
-}
+  );
+};

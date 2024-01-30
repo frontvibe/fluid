@@ -24,8 +24,8 @@ dependencies:
     specifier: ^3.2.2
     version: 3.2.2(@sanity/ui@2.0.1)(react-dom@18.2.0)(react@18.2.0)(sanity@3.26.1)(styled-components@6.1.8)
   '@sanity/presentation':
-    specifier: ^1.7.1
-    version: 1.7.1(@sanity/client@6.12.3)(react-dom@18.2.0)(react@18.2.0)
+    specifier: ^1.7.2
+    version: 1.7.2(@sanity/client@6.12.3)(react-dom@18.2.0)(react@18.2.0)
   '@sanity/ui':
     specifier: 2.0.1
     version: 2.0.1(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@6.1.8)
@@ -39,11 +39,11 @@ dependencies:
     specifier: ^3.26.1
     version: 3.26.1(@babel/runtime@7.23.9)(@codemirror/lint@6.4.2)(@codemirror/state@6.4.0)(@codemirror/theme-one-dark@6.1.2)(@lezer/common@1.2.1)(codemirror@6.0.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@6.1.8)
   '@shopify/polaris':
-    specifier: ^12.11.1
-    version: 12.11.1(react-dom@18.2.0)(react@18.2.0)
+    specifier: ^12.11.2
+    version: 12.11.2(react-dom@18.2.0)(react@18.2.0)
   '@shopify/polaris-icons':
-    specifier: ^8.1.0
-    version: 8.1.0
+    specifier: ^8.2.0
+    version: 8.2.0
   groq:
     specifier: ^3.26.1
     version: 3.26.1
@@ -54,8 +54,8 @@ dependencies:
     specifier: ^4.4.2
     version: 4.4.2
   lucide-react:
-    specifier: ^0.317.0
-    version: 0.317.0(react@18.2.0)
+    specifier: ^0.319.0
+    version: 0.319.0(react@18.2.0)
   pluralize-esm:
     specifier: ^9.0.5
     version: 9.0.5
@@ -2204,7 +2204,7 @@ packages:
       '@sanity/icons': 2.10.0(react@18.2.0)
       '@sanity/incompatible-plugin': 1.0.4(react-dom@18.2.0)(react@18.2.0)
       '@sanity/ui': 1.9.3(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@6.1.8)
-      '@shopify/polaris': 12.11.1(react-dom@18.2.0)(react@18.2.0)
+      '@shopify/polaris': 12.11.2(react-dom@18.2.0)(react@18.2.0)
       lodash: 4.17.21
       react: 18.2.0
       sanity: 3.26.1(@types/react@18.2.48)(react-dom@18.2.0)(react@18.2.0)(styled-components@6.1.8)
@@ -2245,7 +2245,7 @@ packages:
       '@sanity/icons': 2.10.0(react@18.2.0)
       '@sanity/incompatible-plugin': 1.0.4(react-dom@18.2.0)(react@18.2.0)
       '@sanity/ui': 1.9.3(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@6.1.8)
-      '@shopify/polaris': 12.11.1(react-dom@18.2.0)(react@18.2.0)
+      '@shopify/polaris': 12.11.2(react-dom@18.2.0)(react@18.2.0)
       lodash: 4.17.21
       react: 18.2.0
       sanity: 3.26.1(@types/react@18.2.48)(react-dom@18.2.0)(react@18.2.0)(styled-components@6.1.8)
@@ -2775,7 +2775,7 @@ packages:
     dependencies:
       '@sanity/client': 6.12.3
       '@sanity/icons': 2.10.0(react@18.2.0)
-      '@sanity/preview-url-secret': 1.5.4(@sanity/client@6.12.3)
+      '@sanity/preview-url-secret': 1.5.5(@sanity/client@6.12.3)
       '@sanity/uuid': 3.0.2
       '@types/lodash.isequal': 4.5.8
       fast-deep-equal: 3.1.3
@@ -2790,15 +2790,15 @@ packages:
       - react-dom
     dev: false
 
-  /@sanity/presentation@1.7.1(@sanity/client@6.12.3)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-lMmLvbSg8YEsdw4RrMAfBIgu5wErUp60GsKwzd1h38XDJTvuDcIddIIx3VVXZD69k33vRJVWhmcGw89Cq+GTPA==}
+  /@sanity/presentation@1.7.2(@sanity/client@6.12.3)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-K3SbHT5NMyhPF4NYp4VTLGdD87PNe0eH6lOkkMJzE8x7CMpAU1s9aKAdOT8bolunP0/hYsNS90/Hb1su+ugy7w==}
     engines: {node: '>=16.14'}
     peerDependencies:
-      '@sanity/client': ^6.12.1
+      '@sanity/client': ^6.12.3
     dependencies:
       '@sanity/client': 6.12.3
       '@sanity/icons': 2.10.0(react@18.2.0)
-      '@sanity/preview-url-secret': 1.5.4(@sanity/client@6.12.3)
+      '@sanity/preview-url-secret': 1.5.5(@sanity/client@6.12.3)
       '@sanity/uuid': 3.0.2
       '@types/lodash.isequal': 4.5.8
       fast-deep-equal: 3.1.3
@@ -2813,11 +2813,11 @@ packages:
       - react-dom
     dev: false
 
-  /@sanity/preview-url-secret@1.5.4(@sanity/client@6.12.3):
-    resolution: {integrity: sha512-yRmqcOXLC5sVrSBSA2SJDuUwa0x7M+6Fgog8zs7b+ITJHYzYodKpPpF98jyxqAo0tJ411N1CO2v2IYfOjrEsfQ==}
+  /@sanity/preview-url-secret@1.5.5(@sanity/client@6.12.3):
+    resolution: {integrity: sha512-NZVRAVt4tS427SLa702Cw7H0mOb/oE73xcTA1+UQ/0pJ9V4GAqCZICKDn0wIN7vhkadl1j5pCSo7y6V7yi1d0A==}
     engines: {node: '>=18'}
     peerDependencies:
-      '@sanity/client': ^6.12.1
+      '@sanity/client': ^6.12.3
     dependencies:
       '@sanity/client': 6.12.3
       '@sanity/uuid': 3.0.2
@@ -2954,8 +2954,8 @@ packages:
       - react-is
     dev: false
 
-  /@shopify/polaris-icons@8.1.0:
-    resolution: {integrity: sha512-H9tXgoOq0ZsL72V831g2g5nlyqkDJIBGF9lwtdF/5JemBdSce+LU+9GAOXI/JvhkM4Ytkzaugc10Er3c1TgFOg==}
+  /@shopify/polaris-icons@8.2.0:
+    resolution: {integrity: sha512-Lb8ij+kGfOUNpYTFZE22Scb+JtykmspZOr6FilxFENzotj/9OcsUbO2/qv3ov8G4XBHUdK1UbrnjFTEes0uzQA==}
     engines: {node: ^16.17.0 || >=18.12.0}
     dev: false
 
@@ -2966,14 +2966,14 @@ packages:
       deepmerge: 4.3.1
     dev: false
 
-  /@shopify/polaris@12.11.1(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-hvlh4m6TaCELRmuaBQJy/jIKjX52OIwnXJg3+ZmRiZDUld5QoVJ3Fgsad9lfOw2DCf9e93QeeZ/g/UUUZr6/Pw==}
+  /@shopify/polaris@12.11.2(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-TR9wThEEBjhaUpY/wD9nN2PqwnWHcWkmHKjvc9WXz8srt/EKTEDqhH/dlrxyXoLRVbmIRTYLPqXDI9c/IKQaOA==}
     engines: {node: ^16.17.0 || >=18.12.0}
     peerDependencies:
       react: ^18.0.0
       react-dom: ^18.0.0
     dependencies:
-      '@shopify/polaris-icons': 8.1.0
+      '@shopify/polaris-icons': 8.2.0
       '@shopify/polaris-tokens': 8.6.0
       '@types/react': 18.2.48
       '@types/react-dom': 18.2.18
@@ -3720,7 +3720,7 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001581
-      electron-to-chromium: 1.4.649
+      electron-to-chromium: 1.4.650
       node-releases: 2.0.14
       update-browserslist-db: 1.0.13(browserslist@4.22.3)
 
@@ -4227,8 +4227,8 @@ packages:
       stream-shift: 1.0.3
     dev: false
 
-  /electron-to-chromium@1.4.649:
-    resolution: {integrity: sha512-dq/owIaALxZGqWm5RXpKQ4baX6aDC19e2Z16c8SXYN+I71PyEKjbVqQUgm7kcuk8CRqljTKXbolo0XXDjxnh2w==}
+  /electron-to-chromium@1.4.650:
+    resolution: {integrity: sha512-sYSQhJCJa4aGA1wYol5cMQgekDBlbVfTRavlGZVr3WZpDdOPcp6a6xUnFfrt8TqZhsBYYbDxJZCjGfHuGupCRQ==}
 
   /emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
@@ -5689,8 +5689,8 @@ packages:
     dependencies:
       yallist: 4.0.0
 
-  /lucide-react@0.317.0(react@18.2.0):
-    resolution: {integrity: sha512-8J8fIim0Sc+AYn8skgVau+hRGXaqjErRNzuW0vIGt4QA/f3UvY8g8o2A/OL9deCBKxZjVD1zuoidyMCiq8rfFQ==}
+  /lucide-react@0.319.0(react@18.2.0):
+    resolution: {integrity: sha512-IIbu4TfVI3yPI3ba/Li53mKeOd+WwcWI6+WcyoVdFLtrBfH88m2uQ/uTmtzBWt523HyxCFjWy3RFs0OxDFYm8w==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0
     dependencies:

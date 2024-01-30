@@ -10,6 +10,7 @@ import type {ShopifyDescriptionBlockProps} from '../blocks/ShopifyDescriptionBlo
 import type {ShopifyTitleBlockProps} from '../blocks/ShopifyTitleBlock';
 import type {ExternalLinkAnnotationProps} from '../sanity/richtext/components/ExternalLinkAnnotation';
 import type {InternalLinkAnnotationProps} from '../sanity/richtext/components/InternalLinkAnnotation';
+import type {FeaturedProductSectionProps} from '../sections/FeaturedProductSection';
 import type {ProductInformationSectionProps} from '../sections/ProductInformationSection';
 
 import {AddToCartButtonBlock} from '../blocks/AddToCartButtonBlock';
@@ -19,7 +20,9 @@ import {ShopifyTitleBlock} from '../blocks/ShopifyTitleBlock';
 import {ExternalLinkAnnotation} from '../sanity/richtext/components/ExternalLinkAnnotation';
 import {InternalLinkAnnotation} from '../sanity/richtext/components/InternalLinkAnnotation';
 
-export function ProductDetails(props: {data: ProductInformationSectionProps}) {
+export function ProductDetails(props: {
+  data: FeaturedProductSectionProps | ProductInformationSectionProps;
+}) {
   const components = useMemo(
     () => ({
       marks: {

@@ -13,6 +13,10 @@ export default defineField({
       validation: (Rule: any) => Rule.required(),
     }),
     defineField({
+      name: 'richtext',
+      type: 'internationalizedArrayProductRichtext',
+    }),
+    defineField({
       type: 'sectionSettings',
       name: 'settings',
     }),

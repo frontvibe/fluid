@@ -2,7 +2,8 @@ import type {TypeFromSelection} from 'groqd';
 import type {FeaturedProductQuery} from 'storefrontapi.generated';
 
 import {Await, useLoaderData} from '@remix-run/react';
-import {Image, Money, flattenConnection} from '@shopify/hydrogen';
+import {Image, flattenConnection} from '@shopify/hydrogen';
+import {ProductProvider} from '@shopify/hydrogen-react';
 import {Suspense} from 'react';
 
 import type {SectionDefaultProps} from '~/lib/type';
@@ -10,7 +11,9 @@ import type {FEATURED_PRODUCT_SECTION_FRAGMENT} from '~/qroq/sections';
 
 import type {loader as indexLoader} from '../../routes/_index';
 
-type FeaturedProductSectionProps = TypeFromSelection<
+import {ProductDetails} from '../product/ProductDetails';
+
+export type FeaturedProductSectionProps = TypeFromSelection<
   typeof FEATURED_PRODUCT_SECTION_FRAGMENT
 >;
 
@@ -41,26 +44,23 @@ export function FeaturedProductSection(
           );
 
           return (
-            <div className="grid gap-10 lg:grid-cols-2">
-              <div>
-                {firstAvailableVariant?.image && (
-                  <Image
-                    aspectRatio="1/1"
-                    className="h-full w-full rounded object-cover"
-                    data={firstAvailableVariant.image}
-                    sizes="(min-width: 1024px) 50vw, 100vw"
-                  />
-                )}
-              </div>
-              <div>
-                <h2>{product.title}</h2>
+            <ProductProvider data={product}>
+              <div className="grid gap-10 lg:grid-cols-2">
                 <div>
-                  {firstAvailableVariant?.price && (
-                    <Money data={firstAvailableVariant.price} />
+                  {firstAvailableVariant?.image && (
+                    <Image
+                      aspectRatio="1/1"
+                      className="h-full w-full rounded object-cover"
+                      data={firstAvailableVariant.image}
+                      sizes="(min-width: 1024px) 50vw, 100vw"
+                    />
                   )}
                 </div>
+                <div>
+                  <ProductDetails data={props.data} />
+                </div>
               </div>
-            </div>
+            </ProductProvider>
           );
         }}
       </AwaitFeaturedProduct>
@@ -83,9 +83,10 @@ function AwaitFeaturedProduct(props: {
     console.warn(
       '[FeaturedProductSection] No featuredProductPromise found in loader data.',
     );
+    return null;
   }
 
-  return featuredProductPromise ? (
+  return (
     <Suspense fallback={props.fallback}>
       <Await
         // Todo => Add an error component
@@ -94,22 +95,26 @@ function AwaitFeaturedProduct(props: {
       >
         {(data) => {
           // Resolve the collection data from Shopify with the gid from Sanity
-          const product = data.map((result) => {
-            // Check if the promise is fulfilled
+          let product:
+            | NonNullable<FeaturedProductQuery['product']>
+            | null
+            | undefined;
+
+          for (const result of data) {
             if (result.status === 'fulfilled') {
-              const {product} = result.value;
+              const {product: resultProduct} = result.value;
               // Check if the gid from Sanity is the same as the gid from Shopify
-              if (sanityProductGid?.includes(product?.id!)) {
-                return product;
+              if (resultProduct?.id === sanityProductGid) {
+                product = resultProduct;
+                break;
               }
             }
             // Todo => Return error component if the promise is rejected
-            return null;
-          })[0];
+          }
 
           return <>{product && props.children(product)}</>;
         }}
       </Await>
     </Suspense>
-  ) : null;
+  );
 }

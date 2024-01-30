@@ -1,7 +1,9 @@
 import type {TypeFromSelection} from 'groqd';
+import type {ProductVariantFragmentFragment} from 'storefrontapi.generated';
 
 import {Await, useLoaderData} from '@remix-run/react';
 import {flattenConnection} from '@shopify/hydrogen';
+import {useProduct} from '@shopify/hydrogen-react';
 import {Suspense} from 'react';
 
 import type {PRICE_BLOCK_FRAGMENT} from '~/qroq/blocks';
@@ -14,21 +16,32 @@ export type PriceBlockProps = TypeFromSelection<typeof PRICE_BLOCK_FRAGMENT>;
 export function PriceBlock(props: PriceBlockProps) {
   const loaderData = useLoaderData<typeof loader>();
   const variantsPromise = loaderData.variants;
+  const {product} = useProduct();
 
-  return (
-    <>
-      {/* Todo => Add skeleton and errorElement */}
-      <Suspense>
-        <Await resolve={variantsPromise}>
-          {({product}) => {
-            const variants = product?.variants?.nodes.length
-              ? flattenConnection(product.variants)
-              : [];
+  if (variantsPromise) {
+    return (
+      <>
+        {/* Todo => Add skeleton and errorElement */}
+        <Suspense>
+          <Await resolve={variantsPromise}>
+            {({product}) => {
+              const variants = product?.variants?.nodes.length
+                ? flattenConnection(product.variants)
+                : [];
 
-            return <VariantPrice variants={variants} />;
-          }}
-        </Await>
-      </Suspense>
-    </>
-  );
+              return <VariantPrice variants={variants} />;
+            }}
+          </Await>
+        </Suspense>
+      </>
+    );
+  }
+
+  if (!product) return null;
+
+  const variants = product?.variants?.nodes?.length
+    ? (flattenConnection(product.variants) as ProductVariantFragmentFragment[])
+    : [];
+
+  return <VariantPrice variants={variants} />;
 }

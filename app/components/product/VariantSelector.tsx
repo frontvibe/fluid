@@ -3,17 +3,16 @@ import type {
   ProductVariant,
 } from '@shopify/hydrogen/storefront-api-types';
 import type {PartialDeep} from 'type-fest';
+import type {PartialObjectDeep} from 'type-fest/source/partial-deep';
 
 import {Link} from '@remix-run/react';
 import {parseGid} from '@shopify/hydrogen';
-import {cx} from 'class-variance-authority';
 import {useMemo} from 'react';
 
 import {useSelectedVariant} from '~/hooks/useSelectedVariant';
 import {cn} from '~/lib/utils';
 
 import {badgeVariants} from '../ui/Badge';
-import {Button} from '../ui/Button';
 
 export type VariantOptionValue = {
   isActive: boolean;
@@ -23,7 +22,17 @@ export type VariantOptionValue = {
 };
 
 export function VariantSelector(props: {
-  options: Array<PartialDeep<ProductOption>> | undefined;
+  options:
+    | (
+        | PartialObjectDeep<
+            ProductOption,
+            {
+              recurseIntoArrays: true;
+            }
+          >
+        | undefined
+      )[]
+    | undefined;
   variants?: Array<PartialDeep<ProductVariant>>;
 }) {
   const selectedVariant = useSelectedVariant({variants: props.variants});
@@ -31,17 +40,17 @@ export function VariantSelector(props: {
   const options = useMemo(
     () =>
       props.options
-        ?.filter((option) => option.values && option.values?.length > 1)
+        ?.filter((option) => option?.values && option.values?.length > 1)
         .map((option) => {
           let activeValue;
           const optionValues: VariantOptionValue[] = [];
           const variantSelectedOptions = selectedVariant?.selectedOptions;
 
-          for (const value of option.values ?? []) {
+          for (const value of option?.values ?? []) {
             const valueIsActive =
               value ===
               variantSelectedOptions?.find(
-                (selectedOption) => selectedOption.name === option.name,
+                (selectedOption) => selectedOption.name === option?.name,
               )?.value;
 
             if (valueIsActive) {
@@ -49,7 +58,7 @@ export function VariantSelector(props: {
             }
 
             const newOptions = variantSelectedOptions?.map((selectedOption) => {
-              if (selectedOption.name === option.name) {
+              if (selectedOption.name === option?.name) {
                 return {
                   ...selectedOption,
                   value,
@@ -71,16 +80,18 @@ export function VariantSelector(props: {
 
             const matchedVariantId = parseGid(matchedVariant?.id)?.id;
 
-            optionValues.push({
-              isActive: valueIsActive,
-              isAvailable: matchedVariant?.availableForSale ?? true,
-              search: `?variant=${matchedVariantId}`,
-              value,
-            });
+            if (value) {
+              optionValues.push({
+                isActive: valueIsActive,
+                isAvailable: matchedVariant?.availableForSale ?? true,
+                search: `?variant=${matchedVariantId}`,
+                value,
+              });
+            }
           }
 
           return {
-            name: option.name,
+            name: option?.name,
             value: activeValue,
             values: optionValues,
           };

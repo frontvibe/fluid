@@ -1,16 +1,23 @@
 import type {TypeFromSelection} from 'groqd';
 
-import {useLoaderData} from '@remix-run/react';
+import {useParams} from '@remix-run/react';
+import {useProduct} from '@shopify/hydrogen-react';
 
 import type {SHOPIFY_TITLE_BLOCK_FRAGMENT} from '~/qroq/blocks';
-import type {loader} from '~/routes/($locale).products.$productHandle';
 
 export type ShopifyTitleBlockProps = TypeFromSelection<
   typeof SHOPIFY_TITLE_BLOCK_FRAGMENT
 >;
 
 export function ShopifyTitleBlock(props: ShopifyTitleBlockProps) {
-  const {product} = useLoaderData<typeof loader>();
+  const {product} = useProduct();
+  const params = useParams();
 
-  return <h1>{product?.title}</h1>;
+  if (!product) return null;
+
+  return params.productHandle ? (
+    <h1>{product?.title}</h1>
+  ) : (
+    <h2>{product?.title}</h2>
+  );
 }

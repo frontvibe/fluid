@@ -3,6 +3,7 @@ import type {ProductQuery} from 'storefrontapi.generated';
 
 import {useLoaderData} from '@remix-run/react';
 import {getSelectedProductOptions} from '@shopify/hydrogen';
+import {ProductProvider} from '@shopify/hydrogen-react';
 import {defer} from '@shopify/remix-oxygen';
 import {DEFAULT_LOCALE} from 'countries';
 import invariant from 'tiny-invariant';
@@ -10,7 +11,6 @@ import invariant from 'tiny-invariant';
 import {CmsSection} from '~/components/CmsSection';
 import {PRODUCT_QUERY, VARIANTS_QUERY} from '~/graphql/queries';
 import {useSanityData} from '~/hooks/useSanityData';
-import {useSanityRoot} from '~/hooks/useSanityRoot';
 import {resolveShopifyPromises} from '~/lib/resolveShopifyPromises';
 import {sanityPreviewPayload} from '~/lib/sanity/sanity.payload.server';
 import {PRODUCT_QUERY as CMS_PRODUCT_QUERY} from '~/qroq/queries';
@@ -92,17 +92,23 @@ export async function loader({context, params, request}: LoaderFunctionArgs) {
 }
 
 export default function Product() {
-  const {cmsProduct} = useLoaderData<typeof loader>();
+  const {cmsProduct, product} = useLoaderData<typeof loader>();
   const {data, encodeDataAttribute} = useSanityData(cmsProduct);
   const template = data?.product?.template || data?.defaultProductTemplate;
 
-  return template?.sections && template.sections.length > 0
-    ? template.sections.map((section) => (
-        <CmsSection
-          data={section}
-          encodeDataAttribute={encodeDataAttribute}
-          key={section._key}
-        />
-      ))
-    : null;
+  if (!data?.product) return null;
+
+  return (
+    <ProductProvider data={product}>
+      {template?.sections &&
+        template.sections.length > 0 &&
+        template.sections.map((section) => (
+          <CmsSection
+            data={section}
+            encodeDataAttribute={encodeDataAttribute}
+            key={section._key}
+          />
+        ))}
+    </ProductProvider>
+  );
 }

@@ -45,6 +45,8 @@ export function AnnouncementBar() {
 
   const isActive = annoucementBar?.length! > 1;
 
+  if (!annoucementBar) return null;
+
   return (
     <section className="bg-background text-foreground" id="announcement-bar">
       <div className="container">

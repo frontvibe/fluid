@@ -29,7 +29,7 @@ export default defineField({
     prepare({settings}: any) {
       return {
         title: 'Collection Banner',
-        media: () => settings.hide ? <EyeOff/> : <Image />,
+        media: () => (settings.hide ? <EyeOff /> : <Image />),
       };
     },
   },

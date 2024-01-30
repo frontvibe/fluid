@@ -1,4 +1,4 @@
-import type {MouseEventHandler} from 'react'
+import type {MouseEventHandler} from 'react';
 import {
   ArrayOfPrimitivesFunctions,
   type ArrayOfObjectsInputProps,
@@ -8,12 +8,12 @@ import {
   type ObjectSchemaType,
   type ReferenceSchemaType,
   type StringSchemaType,
-} from 'sanity'
+} from 'sanity';
 
-import {useCallback, useState} from 'react'
-import {Grid, Stack, Button, Dialog, Box, Card, Heading} from '@sanity/ui'
-import {AddIcon} from '@sanity/icons'
-import {randomKey} from '@sanity/util/content'
+import {useCallback, useState} from 'react';
+import {Grid, Stack, Button, Dialog, Box, Card, Heading} from '@sanity/ui';
+import {AddIcon} from '@sanity/icons';
+import {randomKey} from '@sanity/util/content';
 
 type Schema =
   | BooleanSchemaType
@@ -21,21 +21,21 @@ type Schema =
   | NumberSchemaType
   | ObjectSchemaType
   | StringSchemaType
-  | ReferenceSchemaType
+  | ReferenceSchemaType;
 
 const SectionsListInput = (
   props: ArrayOfObjectsInputProps & {
-    type?: 'section' | 'footer'
-  }
+    type?: 'section' | 'footer';
+  },
 ) => {
-  const {onInsert} = props
-  const [open, setOpen] = useState(false)
-  const onClose = useCallback(() => setOpen(false), [])
-  const onOpen = useCallback(() => setOpen(true), [])
-  const type = props.type || 'section'
+  const {onInsert} = props;
+  const [open, setOpen] = useState(false);
+  const onClose = useCallback(() => setOpen(false), []);
+  const onOpen = useCallback(() => setOpen(true), []);
+  const type = props.type || 'section';
 
   const onSelectItem = useCallback((schema: Schema) => {
-    const key = randomKey(12)
+    const key = randomKey(12);
     onInsert({
       items: [
         {
@@ -46,9 +46,9 @@ const SectionsListInput = (
       position: 'after',
       referenceItem: -1,
       open: true,
-    })
-    onClose()
-  }, [])
+    });
+    onClose();
+  }, []);
 
   return (
     <>
@@ -56,7 +56,7 @@ const SectionsListInput = (
         {props.renderDefault({
           ...props,
           arrayFunctions: (props: any) => {
-            return <ArrayFunctions type={type} onOpen={onOpen} {...props} />
+            return <ArrayFunctions type={type} onOpen={onOpen} {...props} />;
           },
         })}
       </Stack>
@@ -79,39 +79,56 @@ const SectionsListInput = (
             >
               {props.schemaType.of.map((schema, index) => {
                 return (
-                  <PreviewCard key={index} schema={schema} onClick={() => onSelectItem(schema)} />
-                )
+                  <PreviewCard
+                    key={index}
+                    schema={schema}
+                    onClick={() => onSelectItem(schema)}
+                  />
+                );
               })}
             </Grid>
           </Box>
         </Dialog>
       )}
     </>
-  )
-}
+  );
+};
 
 function ArrayFunctions(props: any) {
-  const valRules = props?.schemaType?.validation?.[0]?._rules || []
-  const max = valRules.find((r: any) => r.flag === 'max')?.constraint
-  const total = props?.value?.length || 0
+  const valRules = props?.schemaType?.validation?.[0]?._rules || [];
+  const max = valRules.find((r: any) => r.flag === 'max')?.constraint;
+  const total = props?.value?.length || 0;
 
   if (!isNaN(max) && total >= max) {
-    return null
+    return null;
   }
 
-  return <Button onClick={props.onOpen} icon={AddIcon} mode="ghost" text={`Add ${props.type}`} />
+  return (
+    <Button
+      onClick={props.onOpen}
+      icon={AddIcon}
+      mode="ghost"
+      text={`Add ${props.type}`}
+    />
+  );
 }
 
 type PreviewProps = {
-  onClick: MouseEventHandler<HTMLDivElement> | undefined
-  schema: Schema
-}
+  onClick: MouseEventHandler<HTMLDivElement> | undefined;
+  schema: Schema;
+};
 
 function PreviewCard(props: PreviewProps) {
-  const {onClick, schema} = props
+  const {onClick, schema} = props;
 
   return (
-    <Card role="button" shadow={1} padding={3} onClick={onClick} style={{cursor: 'pointer'}}>
+    <Card
+      role="button"
+      shadow={1}
+      padding={3}
+      onClick={onClick}
+      style={{cursor: 'pointer'}}
+    >
       <Stack padding={2} space={[3]}>
         <Heading as="h5" size={1}>
           {schema.title}
@@ -134,7 +151,7 @@ function PreviewCard(props: PreviewProps) {
         </div>
       </Stack>
     </Card>
-  )
+  );
 }
 
-export default SectionsListInput
+export default SectionsListInput;

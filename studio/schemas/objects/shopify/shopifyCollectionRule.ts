@@ -1,5 +1,5 @@
-import {FilterIcon} from '@sanity/icons'
-import {defineField} from 'sanity'
+import {FilterIcon} from '@sanity/icons';
+import {defineField} from 'sanity';
 
 export default defineField({
   title: 'Collection rule',
@@ -34,12 +34,12 @@ export default defineField({
       relation: 'relation',
     },
     prepare(selection) {
-      const {condition, name, relation} = selection
+      const {condition, name, relation} = selection;
 
       return {
         subtitle: `${relation} ${condition}`,
         title: name,
-      }
+      };
     },
   },
-})
+});

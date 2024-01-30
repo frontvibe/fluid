@@ -1,6 +1,6 @@
 import {defineField} from 'sanity';
 import {IconCollectionTag} from '../../../components/icons/CollectionTag';
-import { EyeOff } from 'lucide-react';
+import {EyeOff} from 'lucide-react';
 
 export default defineField({
   name: 'relatedProductsSection',
@@ -44,10 +44,10 @@ export default defineField({
     select: {
       settings: 'settings',
     },
-    prepare({ settings }: any) {
+    prepare({settings}: any) {
       return {
         title: 'Related Products',
-        media: () =>  settings.hide ? <EyeOff/> : <IconCollectionTag />,
+        media: () => (settings.hide ? <EyeOff /> : <IconCollectionTag />),
       };
     },
   },

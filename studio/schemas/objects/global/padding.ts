@@ -1,4 +1,4 @@
-import {defineField} from 'sanity'
+import {defineField} from 'sanity';
 
 export default defineField({
   name: 'padding',
@@ -36,4 +36,4 @@ export default defineField({
     top: 80,
     bottom: 80,
   },
-})
+});

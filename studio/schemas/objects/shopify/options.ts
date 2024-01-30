@@ -1,5 +1,5 @@
-import {SunIcon} from '@sanity/icons'
-import {defineField} from 'sanity'
+import {SunIcon} from '@sanity/icons';
+import {defineField} from 'sanity';
 
 export default defineField({
   title: 'Product option',
@@ -27,11 +27,11 @@ export default defineField({
       name: 'name',
     },
     prepare(selection) {
-      const {name} = selection
+      const {name} = selection;
 
       return {
         title: name,
-      }
+      };
     },
   },
-})
+});

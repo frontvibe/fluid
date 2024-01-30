@@ -1,4 +1,4 @@
-import {defineField} from 'sanity'
+import {defineField} from 'sanity';
 
 export default defineField({
   name: 'socialLinksOnly',
@@ -22,7 +22,7 @@ export default defineField({
     prepare({title}: any) {
       return {
         title: title?.[0]?.value || 'Missing title',
-      }
+      };
     },
   },
-})
+});

@@ -1,11 +1,17 @@
-import {defineField} from 'sanity'
-import {ExternalLink, Link, MenuSquare} from 'lucide-react'
+import {defineField} from 'sanity';
+import {ExternalLink, Link, MenuSquare} from 'lucide-react';
 
 export const internalLinkField = defineField({
   name: 'link',
   type: 'reference',
-  to: [{type: 'home'}, {type: 'page'}, {type: 'product'}, {type: 'collection'}, {type: 'blogPost'}],
-})
+  to: [
+    {type: 'home'},
+    {type: 'page'},
+    {type: 'product'},
+    {type: 'collection'},
+    {type: 'blogPost'},
+  ],
+});
 
 export const internalLinkObject = {
   type: 'object',
@@ -23,7 +29,7 @@ export const internalLinkObject = {
       type: 'string',
     }),
   ],
-}
+};
 
 export const externalLinkObject = {
   type: 'object',
@@ -43,7 +49,7 @@ export const externalLinkObject = {
       type: 'boolean',
     }),
   ],
-}
+};
 
 export const nestedNav = {
   type: 'object',
@@ -61,10 +67,10 @@ export const nestedNav = {
       of: [internalLinkObject, externalLinkObject],
     }),
   ],
-}
+};
 
 export default defineField({
   name: 'headerNavigation',
   type: 'array',
   of: [internalLinkObject, externalLinkObject, nestedNav],
-})
+});

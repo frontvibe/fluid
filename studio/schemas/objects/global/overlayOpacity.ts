@@ -1,4 +1,4 @@
-import {defineField} from 'sanity'
+import {defineField} from 'sanity';
 
 export default defineField({
   name: 'overlayOpacity',
@@ -9,4 +9,4 @@ export default defineField({
     suffix: '%',
   },
   validation: (Rule: any) => Rule.min(0).max(100),
-})
+});

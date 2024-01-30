@@ -1,5 +1,5 @@
-import {StringRule, defineField} from 'sanity'
-import {SeoTitle} from '../../../components/SeoField'
+import {StringRule, defineField} from 'sanity';
+import {SeoTitle} from '../../../components/SeoField';
 
 export default defineField({
   name: 'seo',
@@ -35,4 +35,4 @@ export default defineField({
       title: 'Image',
     }),
   ],
-})
+});

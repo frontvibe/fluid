@@ -1,14 +1,14 @@
-import type {DocumentActionProps, SanityDocument} from 'sanity'
+import type {DocumentActionProps, SanityDocument} from 'sanity';
 
 export type ShopifyDocument = SanityDocument & {
   store: {
-    id: number
-    productId: number
-    isDeleted: boolean
-  }
-}
+    id: number;
+    productId: number;
+    isDeleted: boolean;
+  };
+};
 
 export interface ShopifyDocumentActionProps extends DocumentActionProps {
-  published: ShopifyDocument
-  draft: ShopifyDocument
+  published: ShopifyDocument;
+  draft: ShopifyDocument;
 }

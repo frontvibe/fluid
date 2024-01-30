@@ -2,6 +2,7 @@ import {q} from 'groqd';
 
 import {FOOTERS_FRAGMENT} from './footers';
 import {
+  ANNOUCEMENT_BAR_ARRAY_FRAGMENT,
   COLOR_SCHEME_FRAGMENT,
   FONT_FRAGMENT,
   MENU_FRAGMENT,
@@ -137,6 +138,11 @@ export const SETTINGS_QUERY = q('*')
 export const HEADER_QUERY = q('*')
   .filter("_type == 'header'")
   .grab({
+    annoucementBar: ANNOUCEMENT_BAR_ARRAY_FRAGMENT,
+    annoucementBarColorScheme: q('annoucementBarColorScheme')
+      .deref()
+      .grab(COLOR_SCHEME_FRAGMENT),
+    autoRotateAnnoucements: q.boolean().nullable(),
     colorScheme: q('colorScheme').deref().grab(COLOR_SCHEME_FRAGMENT),
     desktopLogoWidth: q.number().nullable(),
     menu: MENU_FRAGMENT,

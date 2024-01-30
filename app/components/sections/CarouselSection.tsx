@@ -39,6 +39,7 @@ export function CarouselSection(
         100 / slidesPerViewDesktop
       }vw, (min-width: 768px) 50vw, 100vw`
     : '(min-width: 768px) 50vw, 100vw';
+  const isActive = slides?.length! > 1;
 
   return (
     <div className="container">
@@ -53,6 +54,7 @@ export function CarouselSection(
         {slides && slides?.length > 0 && (
           <Carousel
             opts={{
+              active: isActive,
               loop: loop || false,
             }}
             plugins={plugins}
@@ -68,7 +70,7 @@ export function CarouselSection(
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              {arrows && (
+              {arrows && isActive && (
                 <div className="hidden md:block">
                   <CarouselPrevious />
                   <CarouselNext />

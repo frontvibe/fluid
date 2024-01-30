@@ -7,6 +7,10 @@ const GROUPS = [
     default: true,
   },
   {
+    name: 'announcementBar',
+    title: 'Announcement Bar',
+  },
+  {
     name: 'settings',
     title: 'Settings',
   },
@@ -18,6 +22,23 @@ export default defineType({
   __experimental_formPreviewTitle: false,
   groups: GROUPS,
   fields: [
+    defineField({
+      name: 'annoucementBar',
+      group: 'announcementBar',
+      type: 'internationalizedArrayAnnouncementBar',
+    }),
+    defineField({
+      name: 'annoucementBarColorScheme',
+      type: 'reference',
+      group: 'announcementBar',
+      to: [{type: 'colorScheme'}],
+    }),
+    defineField({
+      name: 'autoRotateAnnoucements',
+      type: 'boolean',
+      group: 'announcementBar',
+      initialValue: false,
+    }),
     defineField({
       name: 'menu',
       group: 'navigation',

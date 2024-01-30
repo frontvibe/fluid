@@ -44,6 +44,7 @@ import productTemplate from './documents/productTemplate';
 import collectionTemplate from './documents/collectionTemplate';
 import collectionBanner from './objects/sections/collectionBanner';
 import collectionProductGrid from './objects/sections/collectionProductGrid';
+import announcementBar from './objects/global/announcementBar';
 
 const singletons = [home, header, footer, settings, themeContent];
 const documents = [
@@ -78,6 +79,7 @@ const objects = [
   seo,
   sectionSettings,
   headerNavigation,
+  announcementBar,
   inventory,
   options,
   placeholderString,

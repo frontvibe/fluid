@@ -151,7 +151,7 @@ export default function App() {
         <Links />
         <style dangerouslySetInnerHTML={{__html: cssVars}} />
       </head>
-      <body className="bg-background text-foreground flex min-h-screen flex-col [&_main]:grow">
+      <body className="flex min-h-screen flex-col bg-background text-foreground [&_main]:grow">
         <Layout>
           <Outlet />
         </Layout>

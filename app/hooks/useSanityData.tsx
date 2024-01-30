@@ -11,6 +11,7 @@ import {useEncodeDataAttribute} from '@sanity/react-loader';
 import {useQuery} from '~/lib/sanity/sanity.loader';
 
 import {useEnvironmentVariables} from './useEnvironmentVariables';
+import {useRootLoaderData} from './useRootLoaderData';
 
 type Initial = {
   data: unknown;
@@ -22,16 +23,19 @@ type InitialData<U> = U extends {data: infer V} ? V : never;
  * The `useSanityData` hook is needed to preview live data from Sanity Studio.
  * It must be used within a route that has a loader that returns a `sanityPreviewPayload` object.
  */
-export function useSanityData<T extends Initial>(initial: T) {
+export function useSanityData<T extends Initial>(initial: T, routeId?: string) {
   const loaderData = useLoaderData<{
     sanity?: {
       params?: QueryParams;
       query?: string;
     };
   }>();
-  const sanity = loaderData?.sanity;
+  const rootLoaderData = useRootLoaderData();
   const env = useEnvironmentVariables();
   const studioUrl = env?.SANITY_STUDIO_URL!;
+
+  const sanity =
+    routeId && routeId === 'root' ? rootLoaderData?.sanity : loaderData?.sanity;
 
   if (sanity === undefined) {
     // eslint-disable-next-line no-console

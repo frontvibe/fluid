@@ -26,7 +26,7 @@ export default defineField({
     select: {
       settings: 'settings',
     },
-    prepare({settings}:any) {
+    prepare({settings}: any) {
       return {
         title: 'Collection Banner',
         media: () => settings.hide ? <EyeOff/> : <Image />,

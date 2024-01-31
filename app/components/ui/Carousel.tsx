@@ -18,7 +18,7 @@ import {
 
 import {cn} from '~/lib/utils';
 
-import {IconArrow} from '../icons/IconArrow';
+import {IconChevron} from '../icons/IconChevron';
 import {Button} from './Button';
 
 type CarouselProps = {
@@ -274,7 +274,7 @@ const CarouselPrevious = forwardRef<
       variant={variant}
       {...props}
     >
-      <IconArrow className="size-3" direction="left" />
+      <IconChevron className="size-4" direction="left" />
       <span className="sr-only">Previous slide</span>
     </Button>
   );
@@ -303,7 +303,7 @@ const CarouselNext = forwardRef<
       variant={variant}
       {...props}
     >
-      <IconArrow className="size-3" direction="right" />
+      <IconChevron className="size-4" direction="right" />
       <span className="sr-only">Next slide</span>
     </Button>
   );

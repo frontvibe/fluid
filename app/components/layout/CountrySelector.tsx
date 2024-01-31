@@ -10,8 +10,8 @@ import type {I18nLocale} from '~/lib/type';
 import {useLocale} from '~/hooks/useLocale';
 import {useLocalePath} from '~/hooks/useLocalePath';
 
-import {IconArrow} from '../icons/IconArrow';
 import {IconCheck} from '../icons/IconCheck';
+import {IconChevron} from '../icons/IconChevron';
 import {Button} from '../ui/Button';
 import {
   DropdownMenu,
@@ -28,7 +28,7 @@ export function CountrySelector() {
       <DropdownMenuTrigger asChild>
         <Button className="flex max-w-fit gap-2" variant="outline">
           {currentLocale?.label}
-          <IconArrow className="size-3" direction="down" />
+          <IconChevron className="size-3" direction="down" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>

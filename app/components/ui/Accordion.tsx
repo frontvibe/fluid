@@ -3,7 +3,7 @@ import {forwardRef} from 'react';
 
 import {cn} from '~/lib/utils';
 
-import {IconArrow} from '../icons/IconArrow';
+import {IconChevron} from '../icons/IconChevron';
 
 const Accordion = AccordionPrimitive.Root;
 
@@ -34,8 +34,8 @@ const AccordionTrigger = forwardRef<
         {...props}
       >
         {children}
-        <IconArrow
-          className="size-3 shrink-0 transition-transform duration-200 group-[[data-state='open']]:rotate-[270deg]"
+        <IconChevron
+          className="size-3 shrink-0 transition-transform duration-200 group-[[data-state='open']]:rotate-[180deg]"
           direction="down"
         />
       </AccordionPrimitive.Trigger>

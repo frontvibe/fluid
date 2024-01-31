@@ -2,8 +2,8 @@ import * as SelectPrimitive from '@radix-ui/react-select';
 import {cn} from 'app/lib/utils';
 import {forwardRef} from 'react';
 
-import {IconArrow} from '../icons/IconArrow';
 import {IconCheck} from '../icons/IconCheck';
+import {IconChevron} from '../icons/IconChevron';
 
 const Select = SelectPrimitive.Root;
 
@@ -25,7 +25,7 @@ const SelectTrigger = forwardRef<
   >
     {children}
     <SelectPrimitive.Icon asChild>
-      <IconArrow className="size-3 opacity-50" direction="down" />
+      <IconChevron className="size-3 opacity-50" direction="down" />
     </SelectPrimitive.Icon>
   </SelectPrimitive.Trigger>
 ));
@@ -43,7 +43,7 @@ const SelectScrollUpButton = forwardRef<
     ref={ref}
     {...props}
   >
-    <IconArrow className="size-3" direction="up" />
+    <IconChevron className="size-3" direction="up" />
   </SelectPrimitive.ScrollUpButton>
 ));
 SelectScrollUpButton.displayName = SelectPrimitive.ScrollUpButton.displayName;
@@ -60,7 +60,7 @@ const SelectScrollDownButton = forwardRef<
     ref={ref}
     {...props}
   >
-    <IconArrow className="size-3" direction="down" />
+    <IconChevron className="size-3" direction="down" />
   </SelectPrimitive.ScrollDownButton>
 ));
 SelectScrollDownButton.displayName =

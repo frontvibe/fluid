@@ -9,7 +9,6 @@ import {useSettingsCssVars} from '~/hooks/useSettingsCssVars';
 
 import {headerVariants} from '../cva/header';
 import {Navigation} from '../navigation/Navigation';
-import {Button} from '../ui/Button';
 import {CartCount} from './CartCount';
 import {Logo} from './Logo';
 
@@ -33,7 +32,7 @@ function DesktopHeader() {
   return (
     <header
       className={cx([
-        'section-padding relative bg-background text-foreground',
+        'section-padding relative hidden bg-background text-foreground md:block',
         headerVariants({
           optional: showSeparatorLine ? 'separator-line' : null,
         }),
@@ -42,19 +41,17 @@ function DesktopHeader() {
       <style dangerouslySetInnerHTML={{__html: cssVars}} />
       <div className="container">
         <div className="flex items-center justify-between">
-          <Button asChild variant="primitive">
-            <Link prefetch="intent" to={homePath}>
-              <Logo
-                className="h-auto w-[var(--logoWidth)]"
-                sizes={logoWidth}
-                style={
-                  {
-                    '--logoWidth': logoWidth || 'auto',
-                  } as CSSProperties
-                }
-              />
-            </Link>
-          </Button>
+          <Link prefetch="intent" to={homePath}>
+            <Logo
+              className="h-auto w-[var(--logoWidth)]"
+              sizes={logoWidth}
+              style={
+                {
+                  '--logoWidth': logoWidth || 'auto',
+                } as CSSProperties
+              }
+            />
+          </Link>
           <div className="flex items-center gap-3">
             <Navigation data={header?.menu} />
             <CartCount />

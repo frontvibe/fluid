@@ -19,7 +19,9 @@ export function CartLines({
   lines: CartType['lines'] | undefined;
   onClose?: () => void;
 }) {
-  const currentLines = cartLines ? flattenConnection(cartLines) : [];
+  const currentLines = cartLines?.nodes.length
+    ? flattenConnection(cartLines)
+    : [];
 
   const className = cx([
     layout === 'page'

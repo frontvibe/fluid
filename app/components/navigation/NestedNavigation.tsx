@@ -1,21 +1,32 @@
 import type {TypeFromSelection} from 'groqd';
 
-import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 import {cx} from 'class-variance-authority';
+import {useCallback} from 'react';
 
 import type {NESTED_NAVIGATION_FRAGMENT} from '~/qroq/links';
 
 import {SanityExternalLink} from '../sanity/link/SanityExternalLink';
 import {SanityInternalLink} from '../sanity/link/SanityInternalLink';
-import {NestedNavigationContent} from './NestedNavigationContent';
-import {NavigationTrigger} from './NestedNavigationTrigger';
+import {
+  NavigationMenuContent,
+  NavigationMenuLink,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
+} from '../ui/NavigationMenu';
 
 type SanityNestedNavigationProps = TypeFromSelection<
   typeof NESTED_NAVIGATION_FRAGMENT
 >;
 
-export function NestedNavigation(props: {data?: SanityNestedNavigationProps}) {
-  const {data} = props;
+export function NestedNavigation(props: {
+  data?: SanityNestedNavigationProps;
+  setActiveItem: (item: string) => void;
+}) {
+  const {data, setActiveItem} = props;
+
+  const handleOpen = useCallback(() => {
+    setActiveItem(data?._key || '');
+  }, [data, setActiveItem]);
 
   if (!data) return null;
 
@@ -23,37 +34,37 @@ export function NestedNavigation(props: {data?: SanityNestedNavigationProps}) {
 
   return data.name && childLinks && childLinks.length > 0 ? (
     <>
-      <NavigationTrigger link={data.link}>{data.name}</NavigationTrigger>
-      <NestedNavigationContent>
-        <ul
-          className={cx([
-            'bg-background text-foreground',
-            'relative z-10 flex w-auto min-w-[10rem] flex-col gap-1 rounded p-2 shadow',
-          ])}
-        >
+      <NavigationMenuTrigger onClick={handleOpen} onMouseEnter={handleOpen}>
+        {data.link ? (
+          <SanityInternalLink
+            data={{
+              _key: null,
+              _type: 'internalLink',
+              anchor: null,
+              link: data.link,
+              name: null,
+            }}
+          >
+            {data.name}
+          </SanityInternalLink>
+        ) : (
+          data.name
+        )}
+      </NavigationMenuTrigger>
+      <NavigationMenuContent>
+        <ul className="m-0 grid w-full gap-1 p-2 md:w-[var(--dropdown-width)]">
           {childLinks.map((child) => (
-            <NavigationMenu.Link asChild key={child._key}>
-              <li
-                className={cx([
-                  'rounded px-2 py-1 transition-colors duration-100',
-                  'hover:bg-foreground/10',
-                  '[&>*]:flex',
-                ])}
-              >
-                {child._type === 'internalLink' ? (
-                  <SanityInternalLink data={child} />
-                ) : child._type === 'externalLink' ? (
-                  <SanityExternalLink data={child} />
-                ) : null}
-              </li>
-            </NavigationMenu.Link>
+            <li key={child._key}>
+              <ListItem {...child} />
+            </li>
           ))}
         </ul>
-      </NestedNavigationContent>
+      </NavigationMenuContent>
     </>
   ) : data.link && data.name && (!childLinks || childLinks.length === 0) ? (
     // Render internal link if no child links
     <SanityInternalLink
+      className={navigationMenuTriggerStyle()}
       data={{
         _key: data._key,
         _type: 'internalLink',
@@ -61,6 +72,26 @@ export function NestedNavigation(props: {data?: SanityNestedNavigationProps}) {
         link: data.link,
         name: data.name,
       }}
-    />
+    >
+      {data.name}
+    </SanityInternalLink>
   ) : null;
+}
+
+function ListItem(props: SanityNestedNavigationProps['childLinks'][0]) {
+  const className = cx(
+    'block select-none space-y-1 text-sm font-medium rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
+  );
+
+  return (
+    <NavigationMenuLink asChild>
+      <div>
+        {props._type === 'internalLink' ? (
+          <SanityInternalLink className={className} data={props} />
+        ) : props._type === 'externalLink' ? (
+          <SanityExternalLink className={className} data={props} />
+        ) : null}
+      </div>
+    </NavigationMenuLink>
+  );
 }

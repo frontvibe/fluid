@@ -3,8 +3,8 @@ import {forwardRef} from 'react';
 
 import {cn} from '~/lib/utils';
 
-import {IconArrow} from '../icons/IconArrow';
 import {IconCheck} from '../icons/IconCheck';
+import {IconChevron} from '../icons/IconChevron';
 import {IconCircle} from '../icons/IconCircle';
 
 const DropdownMenu = DropdownMenuPrimitive.Root;
@@ -35,7 +35,7 @@ const DropdownMenuSubTrigger = forwardRef<
     {...props}
   >
     {children}
-    <IconArrow direction="right" />
+    <IconChevron direction="right" />
   </DropdownMenuPrimitive.SubTrigger>
 ));
 DropdownMenuSubTrigger.displayName =

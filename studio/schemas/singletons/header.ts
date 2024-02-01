@@ -52,6 +52,27 @@ export default defineType({
       to: [{type: 'colorScheme'}],
     }),
     defineField({
+      name: 'blur',
+      title: 'Background blur',
+      type: 'boolean',
+      group: 'settings',
+      initialValue: false,
+    }),
+    defineField({
+      name: 'sticky',
+      title: 'Sticky header',
+      type: 'string',
+      group: 'settings',
+      options: {
+        list: [
+          {title: 'None', value: 'none'},
+          {title: 'On scroll up', value: 'onScrollUp'},
+          {title: 'Always', value: 'always'},
+        ],
+      },
+      initialValue: 'none',
+    }),
+    defineField({
       name: 'showSeparatorLine',
       title: 'Show separator line',
       type: 'boolean',

@@ -1,4 +1,4 @@
-import {q} from 'groqd';
+import {q, z} from 'groqd';
 
 import {FOOTERS_FRAGMENT} from './footers';
 import {
@@ -143,6 +143,7 @@ export const HEADER_QUERY = q('*')
       .deref()
       .grab(COLOR_SCHEME_FRAGMENT),
     autoRotateAnnoucements: q.boolean().nullable(),
+    blur: q.boolean().nullable(),
     colorScheme: q('colorScheme').deref().grab(COLOR_SCHEME_FRAGMENT),
     desktopLogoWidth: q.number().nullable(),
     menu: MENU_FRAGMENT,
@@ -153,6 +154,7 @@ export const HEADER_QUERY = q('*')
       })
       .nullable(),
     showSeparatorLine: q.boolean().nullable(),
+    sticky: z.enum(['none', 'always', 'onScrollUp']).nullable(),
   })
   .slice(0)
   .nullable();

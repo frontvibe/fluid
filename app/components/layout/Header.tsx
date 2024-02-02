@@ -33,14 +33,7 @@ export function Header() {
   return (
     <HeaderWrapper>
       <style dangerouslySetInnerHTML={{__html: cssVars}} />
-      <div
-        className="md:container"
-        style={
-          {
-            '--mobileHeaderXPadding': '0.75rem',
-          } as React.CSSProperties
-        }
-      >
+      <div className="[--mobileHeaderXPadding:.75rem] md:container">
         <div className="flex items-center justify-between">
           <Link prefetch="intent" to={homePath}>
             <Logo

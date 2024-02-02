@@ -93,7 +93,7 @@ function Badge(props: {cart?: CartType | null; count: number}) {
     <Sheet onOpenChange={setCartOpen} open={cartOpen}>
       <SheetTrigger className={buttonClass}>{BadgeCounter}</SheetTrigger>
       <SheetContent
-        className="flex max-h-screen min-h-full w-screen flex-col gap-0 bg-background p-0 text-foreground sm:max-w-lg"
+        className="flex h-[90%] max-h-screen w-screen flex-col gap-0 bg-background p-0 text-foreground sm:max-w-lg"
         onCloseAutoFocus={(e) => e.preventDefault()}
       >
         <SheetHeader className="px-6 py-5 shadow-sm shadow-foreground/10">

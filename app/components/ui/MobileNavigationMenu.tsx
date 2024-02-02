@@ -10,14 +10,12 @@ const MobileNavigationMenu = forwardRef<
   React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Root>
 >(({children, className, ...props}, ref) => (
   <NavigationMenuPrimitive.Root
-    className={cn('relative px-6 py-[var(--viewport-top)]', className)}
+    className={cn(
+      'relative px-6 py-[var(--viewport-top)] [--viewport-top:4rem]',
+      className,
+    )}
     ref={ref}
     {...props}
-    style={
-      {
-        '--viewport-top': '4rem',
-      } as React.CSSProperties
-    }
   >
     {children}
     <MobileNavigationMenuViewport />
@@ -49,7 +47,8 @@ const MobileNavigationMenuTrigger = forwardRef<
 >(({children, className, ...props}, ref) => (
   <NavigationMenuPrimitive.Trigger
     className={cn(
-      'group w-full data-[state=open]:absolute data-[state=open]:top-0 data-[state=open]:translate-y-[-120%] data-[state=open]:transition-transform data-[state=open]:delay-300',
+      'data-[state=open]:animate-mobile-menu-trigger group w-full',
+      '[--trigger-translate-y:-120%] data-[state=open]:delay-300 data-[state=open]:duration-500',
       className,
     )}
     ref={ref}
@@ -57,13 +56,13 @@ const MobileNavigationMenuTrigger = forwardRef<
   >
     <span
       className={cn(
-        'flex items-center gap-2 group-data-[state=open]:bg-background',
+        'flex items-center gap-2 group-data-[state=open]:bg-background group-data-[state=open]:text-foreground',
         mobileNavigationMenuTriggerStyle(),
       )}
     >
-      <span className="group-data-[state=open]:hidden">{children}</span>
+      <span className="group-data-[state=open]:order-last">{children}</span>
       <IconChevron
-        className="group-data-[state=open]:size-7 group-data-[state=open]:rotate-180 group-data-[state=open]:text-foreground"
+        className="group-data-[state=open]:size-7 group-data-[state=open]:rotate-180"
         direction="right"
       />
     </span>
@@ -83,7 +82,7 @@ const MobileNavigationMenuContent = forwardRef<
         'rounded-t-3xl border-t border-border shadow-[0_0_5px_0] shadow-foreground/20',
         'group-data-[state=open]:duration-300',
         'group-data-[state=open]:animate-in',
-        'group-data-[state=open]:slide-in-from-bottom-1/2',
+        'group-data-[state=open]:slide-in-from-bottom',
       ],
       className,
     )}

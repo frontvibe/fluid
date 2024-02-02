@@ -152,7 +152,7 @@ function ItemRemoveButton({lineId}: {lineId: CartLine['id']}) {
       route={cartPath}
     >
       <button
-        className="flex size-10 items-center justify-center rounded border border-border"
+        className="flex size-10 items-center justify-center overflow-hidden rounded border border-border hover:bg-muted"
         type="submit"
       >
         {/* Todo => add theme content string */}

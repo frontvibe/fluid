@@ -106,6 +106,7 @@ export function VariantSelector(props: {
         {option.values?.map(({isActive, isAvailable, search, value}) => (
           <Link
             className={cn([
+              'hover:bg-muted',
               !isAvailable && 'opacity-50',
               badgeVariants({
                 variant: isActive ? 'secondary' : 'outline',

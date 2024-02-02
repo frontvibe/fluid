@@ -2,7 +2,7 @@ import {cx} from 'class-variance-authority';
 
 export function QuantitySelector(props: {children: React.ReactNode}) {
   return (
-    <div className="flex items-center rounded border border-border">
+    <div className="flex items-center overflow-hidden rounded border border-border">
       {props.children}
     </div>
   );
@@ -26,7 +26,7 @@ function Button(
         variant === 'increase' && 'Increase quantity',
       ])}
       className={cx([
-        'size-10 transition',
+        'size-10 transition hover:bg-muted',
         variant === 'decrease' && 'disabled:opacity-30',
       ])}
       name={cx([

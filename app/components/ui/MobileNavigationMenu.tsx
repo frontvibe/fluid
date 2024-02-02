@@ -1,5 +1,6 @@
 import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu';
 import {cn} from 'app/lib/utils';
+import {cva} from 'class-variance-authority';
 import React, {forwardRef} from 'react';
 
 import {IconChevron} from '../icons/IconChevron';
@@ -38,22 +39,31 @@ MobileNavigationMenuList.displayName = NavigationMenuPrimitive.List.displayName;
 
 const MobileNavigationMenuItem = NavigationMenuPrimitive.Item;
 
+const mobileNavigationMenuTriggerStyle = cva(
+  'rounded-md px-2 py-2 transition-colors hover:bg-accent hover:text-accent-foreground',
+);
+
 const MobileNavigationMenuTrigger = forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Trigger>
 >(({children, className, ...props}, ref) => (
   <NavigationMenuPrimitive.Trigger
     className={cn(
-      'group data-[state=open]:absolute data-[state=open]:top-0 data-[state=open]:w-full data-[state=open]:translate-y-[-150%]',
+      'group w-full data-[state=open]:absolute data-[state=open]:top-0 data-[state=open]:translate-y-[-120%] data-[state=open]:transition-transform data-[state=open]:delay-300',
       className,
     )}
     ref={ref}
     {...props}
   >
-    <span className="flex items-center gap-2">
+    <span
+      className={cn(
+        'flex items-center gap-2 group-data-[state=open]:bg-background',
+        mobileNavigationMenuTriggerStyle(),
+      )}
+    >
       <span className="group-data-[state=open]:hidden">{children}</span>
       <IconChevron
-        className="group-data-[state=open]:size-7 group-data-[state=open]:rotate-180"
+        className="group-data-[state=open]:size-7 group-data-[state=open]:rotate-180 group-data-[state=open]:text-foreground"
         direction="right"
       />
     </span>
@@ -91,7 +101,17 @@ const MobileNavigationMenuContent = forwardRef<
 MobileNavigationMenuContent.displayName =
   NavigationMenuPrimitive.Content.displayName;
 
-const MobileNavigationMenuLink = NavigationMenuPrimitive.Link;
+const MobileNavigationMenuLink = forwardRef<
+  React.ElementRef<typeof NavigationMenuPrimitive.Link>,
+  React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Link>
+>(({className, ...props}, ref) => (
+  <NavigationMenuPrimitive.Link
+    className={cn(mobileNavigationMenuTriggerStyle(), className)}
+    ref={ref}
+    {...props}
+  />
+));
+MobileNavigationMenuLink.displayName = NavigationMenuPrimitive.Link.displayName;
 
 const MobileNavigationMenuViewport = forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Viewport>,

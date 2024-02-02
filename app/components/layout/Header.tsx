@@ -10,6 +10,7 @@ import {useLocalePath} from '~/hooks/useLocalePath';
 import {useSanityRoot} from '~/hooks/useSanityRoot';
 import {useScrollDirection} from '~/hooks/useScrollDirection';
 import {useSettingsCssVars} from '~/hooks/useSettingsCssVars';
+import {cn} from '~/lib/utils';
 
 import {headerVariants} from '../cva/header';
 import {DesktopNavigation} from '../navigation/DesktopNavigation';
@@ -72,7 +73,7 @@ function HeaderWrapper(props: {children: React.ReactNode}) {
 
   const headerClassName = cx([
     'section-padding bg-background text-foreground',
-    (sticky === 'onScrollUp' || sticky === 'always') && 'sticky top-0 z-50',
+    sticky === 'always' && 'sticky top-0 z-50',
     blur &&
       'bg-opacity-95 backdrop-blur supports-[backdrop-filter]:bg-opacity-85',
     headerVariants({
@@ -97,13 +98,19 @@ function HeaderAnimation(props: {
     await import('../../lib/framerMotionFeatures').then((res) => res.default);
   const {direction} = useScrollDirection();
 
+  // Todo => Remove framer motion and use Top + Bottom position
   return (
     <LazyMotion features={loadFeatures} strict>
       <m.header
         animate={{
+          opacity: direction === 'up' || !direction ? 1 : 0,
           y: direction === 'up' || !direction ? 0 : '-100%',
         }}
-        className={props.className}
+        className={cn([
+          props.className,
+          direction === 'up' && 'sticky top-0 z-50',
+        ])}
+        data-direction={direction}
         transition={{
           duration: 0.1,
           ease: 'linear',

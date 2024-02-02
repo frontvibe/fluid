@@ -1,8 +1,7 @@
-import {useMotionValue, useScroll, useTransform} from 'framer-motion';
-import {useCallback, useEffect, useRef, useState} from 'react';
+import {useScroll} from 'framer-motion';
+import {useCallback, useEffect, useState} from 'react';
 
 export function useScrollDirection() {
-  const threshold = 400;
   const {scrollY, scrollYProgress} = useScroll();
   const [direction, setDirection] = useState<'down' | 'up' | null>(null);
 

@@ -14,7 +14,7 @@ import {
   navigationMenuTriggerStyle,
 } from '../ui/NavigationMenu';
 
-type SanityNestedNavigationProps = TypeFromSelection<
+export type SanityNestedNavigationProps = TypeFromSelection<
   typeof NESTED_NAVIGATION_FRAGMENT
 >;
 

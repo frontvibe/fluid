@@ -84,7 +84,10 @@ function Badge(props: {cart?: CartType | null; count: number}) {
     [count, isHydrated],
   );
 
-  const buttonClass = cx(['relative flex size-8 items-center justify-center']);
+  const buttonClass = cx([
+    'relative flex size-8 items-center justify-center',
+    count > 0 && 'mr-3 md:mr-0',
+  ]);
 
   return isHydrated ? (
     <Sheet onOpenChange={setCartOpen} open={cartOpen}>

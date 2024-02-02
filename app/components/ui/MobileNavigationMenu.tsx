@@ -60,11 +60,20 @@ const MobileNavigationMenuTrigger = forwardRef<
         mobileNavigationMenuTriggerStyle(),
       )}
     >
-      <span className="group-data-[state=open]:order-last">{children}</span>
-      <IconChevron
-        className="group-data-[state=open]:size-7 group-data-[state=open]:rotate-180"
-        direction="right"
-      />
+      <span
+        className={cn(
+          'text-left group-data-[state=open]:overflow-hidden group-data-[state=open]:text-ellipsis',
+          'group-data-[state=open]:order-last group-data-[state=open]:text-nowrap',
+        )}
+      >
+        {children}
+      </span>
+      <span>
+        <IconChevron
+          className="group-data-[state=open]:size-7 group-data-[state=open]:rotate-180"
+          direction="right"
+        />
+      </span>
     </span>
   </NavigationMenuPrimitive.Trigger>
 ));

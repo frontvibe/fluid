@@ -3,15 +3,17 @@ import type {CSSProperties} from 'react';
 import {Link} from '@remix-run/react';
 import {vercelStegaCleanAll} from '@sanity/client/stega';
 import {cx} from 'class-variance-authority';
-import {LazyMotion, m, useTransform} from 'framer-motion';
+import {LazyMotion, m} from 'framer-motion';
+import React from 'react';
 
-import {useBoundedScroll} from '~/hooks/useBoundedScroll';
 import {useLocalePath} from '~/hooks/useLocalePath';
 import {useSanityRoot} from '~/hooks/useSanityRoot';
+import {useScrollDirection} from '~/hooks/useScrollDirection';
 import {useSettingsCssVars} from '~/hooks/useSettingsCssVars';
 
 import {headerVariants} from '../cva/header';
-import {Navigation} from '../navigation/Navigation';
+import {DesktopNavigation} from '../navigation/DesktopNavigation';
+import {MobileNavigation} from '../navigation/MobileNavigation';
 import {CartCount} from './CartCount';
 import {Logo} from './Logo';
 
@@ -30,11 +32,18 @@ export function Header() {
   return (
     <HeaderWrapper>
       <style dangerouslySetInnerHTML={{__html: cssVars}} />
-      <div className="container">
+      <div
+        className="md:container"
+        style={
+          {
+            '--mobileHeaderXPadding': '0.75rem',
+          } as React.CSSProperties
+        }
+      >
         <div className="flex items-center justify-between">
           <Link prefetch="intent" to={homePath}>
             <Logo
-              className="h-auto w-[var(--logoWidth)]"
+              className="h-auto w-[var(--logoWidth)] pl-[var(--mobileHeaderXPadding)] md:pl-0"
               sizes={logoWidth}
               style={
                 {
@@ -43,12 +52,10 @@ export function Header() {
               }
             />
           </Link>
-          <div className="flex items-center gap-3">
-            {/* Desktop navigation */}
-            <div className="hidden md:block">
-              <Navigation data={header?.menu} />
-            </div>
+          <div className="flex items-center gap-0 md:gap-2">
+            <DesktopNavigation data={header?.menu} />
             <CartCount />
+            <MobileNavigation data={header?.menu} />
           </div>
         </div>
       </div>
@@ -86,27 +93,22 @@ function HeaderAnimation(props: {
   children: React.ReactNode;
   className: string;
 }) {
-  // See Animated Sticky Header from Build UI (https://buildui.com/recipes/fixed-header)
   const loadFeatures = async () =>
     await import('../../lib/framerMotionFeatures').then((res) => res.default);
-  const {scrollYBoundedProgress} = useBoundedScroll(400);
-  const scrollYBoundedProgressDelayed = useTransform(
-    scrollYBoundedProgress,
-    [0, 0.75, 1],
-    [0, 0, 1],
-  );
-
-  const style = {
-    transform: useTransform(
-      scrollYBoundedProgressDelayed,
-      [0, 1],
-      ['translateY(0)', 'translateY(-100%)'],
-    ),
-  };
+  const {direction} = useScrollDirection();
 
   return (
     <LazyMotion features={loadFeatures} strict>
-      <m.header className={props.className} style={style}>
+      <m.header
+        animate={{
+          y: direction === 'up' || !direction ? 0 : '-100%',
+        }}
+        className={props.className}
+        transition={{
+          duration: 0.1,
+          ease: 'linear',
+        }}
+      >
         {props.children}
       </m.header>
     </LazyMotion>

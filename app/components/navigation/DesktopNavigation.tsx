@@ -15,9 +15,9 @@ import {
 import {NestedNavigation} from './NestedNavigation';
 
 type HeaderQuery = InferType<typeof HEADER_QUERY>;
-type NavigationProps = NonNullable<HeaderQuery>['menu'];
+export type NavigationProps = NonNullable<HeaderQuery>['menu'];
 
-export function Navigation(props: {data?: NavigationProps}) {
+export function DesktopNavigation(props: {data?: NavigationProps}) {
   const menuRef = useRef<HTMLUListElement>(null);
   const [activeItem, setActiveItem] = useState<null | string | undefined>(null);
   const dropdownWidth = 200;
@@ -28,7 +28,7 @@ export function Navigation(props: {data?: NavigationProps}) {
   );
 
   return (
-    <NavigationMenu id="header-nav">
+    <NavigationMenu className="hidden md:block" id="header-nav">
       <CssVars
         dropdownWidth={dropdownWidth}
         viewportPosition={viewportPosition}

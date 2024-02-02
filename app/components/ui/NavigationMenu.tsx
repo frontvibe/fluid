@@ -1,7 +1,7 @@
 import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu';
 import {cn} from 'app/lib/utils';
 import {cva} from 'class-variance-authority';
-import {forwardRef, useEffect, useRef} from 'react';
+import {forwardRef} from 'react';
 
 import {IconChevron} from '../icons/IconChevron';
 

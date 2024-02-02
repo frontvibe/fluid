@@ -9,12 +9,12 @@ const MobileNavigationMenu = forwardRef<
   React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Root>
 >(({children, className, ...props}, ref) => (
   <NavigationMenuPrimitive.Root
-    className={cn('container relative py-[var(--viewport-top)]', className)}
+    className={cn('relative px-6 py-[var(--viewport-top)]', className)}
     ref={ref}
     {...props}
     style={
       {
-        '--viewport-top': '3.5rem',
+        '--viewport-top': '4rem',
       } as React.CSSProperties
     }
   >
@@ -44,7 +44,7 @@ const MobileNavigationMenuTrigger = forwardRef<
 >(({children, className, ...props}, ref) => (
   <NavigationMenuPrimitive.Trigger
     className={cn(
-      'group data-[state=open]:fixed data-[state=open]:top-4 data-[state=open]:duration-300 data-[state=open]:animate-in data-[state=open]:fade-in',
+      'group data-[state=open]:absolute data-[state=open]:top-0 data-[state=open]:w-full data-[state=open]:translate-y-[-150%]',
       className,
     )}
     ref={ref}
@@ -69,10 +69,11 @@ const MobileNavigationMenuContent = forwardRef<
   <NavigationMenuPrimitive.Content
     className={cn(
       [
-        'h-[calc(100dvh-var(--viewport-top))] w-screen transition ease-in-out',
-        'group-data-[state=open]:duration-500',
+        'h-[calc(var(--dialog-content-height)-var(--viewport-top)-2px)] w-screen transition ease-in-out',
+        'rounded-t-3xl border-t border-border shadow-[0_0_5px_0] shadow-foreground/20',
+        'group-data-[state=open]:duration-300',
         'group-data-[state=open]:animate-in',
-        'group-data-[state=open]:fade-in',
+        'group-data-[state=open]:slide-in-from-bottom-1/2',
       ],
       className,
     )}
@@ -81,7 +82,7 @@ const MobileNavigationMenuContent = forwardRef<
     {...props}
   >
     <div className="flex h-full max-h-screen min-h-full w-screen flex-col gap-0">
-      <div className="container flex h-full flex-1 flex-col gap-3 overflow-y-scroll pb-[var(--viewport-top)] pt-4">
+      <div className="flex h-full flex-1 flex-col gap-3 overflow-y-scroll px-6 pb-[var(--viewport-top)] pt-6">
         {props.children}
       </div>
     </div>
@@ -98,12 +99,12 @@ const MobileNavigationMenuViewport = forwardRef<
 >(({className, ...props}, ref) => (
   <NavigationMenuPrimitive.Viewport
     className={cn([
-      'group fixed left-0 top-[var(--viewport-top)] z-50',
+      'group absolute left-0 top-[var(--viewport-top)] z-50',
       'h-[var(--radix-navigation-menu-viewport-height)] w-[var(--radix-navigation-menu-viewport-width)]',
       'bg-background text-foreground transition ease-in-out',
       'data-[state=closed]:duration-300',
       'data-[state=closed]:animate-out',
-      'data-[state=closed]:fade-out',
+      'data-[state=closed]:slide-out-to-bottom',
       className,
     ])}
     ref={ref}

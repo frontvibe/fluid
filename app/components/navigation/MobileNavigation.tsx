@@ -30,11 +30,16 @@ export function MobileNavigation(props: {data?: NavigationProps}) {
           <IconMenu className="size-7" strokeWidth={1.5} />
         </SheetTrigger>
         <SheetContent
-          className="flex max-h-screen min-h-full w-screen flex-col gap-0 bg-background p-0 text-foreground sm:max-w-lg"
+          className="flex h-[var(--dialog-content-height)] max-h-screen w-screen flex-col gap-0 bg-background p-0 text-foreground sm:max-w-lg"
           onCloseAutoFocus={(e) => e.preventDefault()}
           onOpenAutoFocus={(e) => e.preventDefault()}
+          style={
+            {
+              '--dialog-content-height': 'calc(100dvh * .75)',
+            } as React.CSSProperties
+          }
         >
-          <MobileNavigationMenu className="flex-1 overflow-y-scroll text-xl font-medium">
+          <MobileNavigationMenu className="flex-1 overflow-x-hidden overflow-y-scroll text-xl font-medium">
             <MobileNavigationMenuList>
               {props.data &&
                 props.data?.length > 0 &&

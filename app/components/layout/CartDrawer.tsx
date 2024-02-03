@@ -99,7 +99,7 @@ function Badge(props: {cart?: CartType | null; count: number}) {
     >
       <DrawerTrigger className={buttonClass}>{BadgeCounter}</DrawerTrigger>
       <DrawerContent
-        className="flex h-[90%] max-h-screen w-screen flex-col gap-0 bg-background p-0 text-foreground md:left-auto md:right-0 md:h-screen md:max-w-lg"
+        className="flex h-[95dvh] max-h-screen w-screen flex-col gap-0 bg-background p-0 text-foreground md:left-auto md:right-0 md:h-screen md:max-w-lg"
         onCloseAutoFocus={(e) => e.preventDefault()}
         onOpenAutoFocus={(e) => e.preventDefault()}
       >

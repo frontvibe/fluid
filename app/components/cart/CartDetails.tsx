@@ -58,7 +58,7 @@ function CartCheckoutActions({checkoutUrl}: {checkoutUrl: string}) {
   return (
     <div className="mt-2 flex flex-col">
       <Button asChild>
-        <a href={checkoutUrl} target="_self">
+        <a data-vaul-no-drag href={checkoutUrl} target="_self">
           {/* Todo => add theme content string */}
           Continue to Checkout
         </a>

@@ -33,7 +33,7 @@ export function CartDiscounts({
           <span>Discount(s)</span>
           <div className="flex items-center justify-between">
             <UpdateDiscountForm>
-              <button>
+              <button className="[&>*]:pointer-events-none" data-vaul-no-drag>
                 <IconRemove
                   aria-hidden="true"
                   style={{height: 18, marginRight: 4}}
@@ -49,8 +49,13 @@ export function CartDiscounts({
       <UpdateDiscountForm discountCodes={codes}>
         <div className={cx('flex', 'items-center justify-between gap-4')}>
           {/* Todo => add theme content string */}
-          <Input name="discountCode" placeholder="Discount code" type="text" />
-          <Button variant="outline">
+          <Input
+            data-vaul-no-drag
+            name="discountCode"
+            placeholder="Discount code"
+            type="text"
+          />
+          <Button data-vaul-no-drag variant="outline">
             {/* Todo => add theme content string */}
             Apply Discount
           </Button>

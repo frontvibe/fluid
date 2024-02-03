@@ -15,7 +15,7 @@ import {cn} from '~/lib/utils';
 import {headerVariants} from '../cva/header';
 import {DesktopNavigation} from '../navigation/DesktopNavigation';
 import {MobileNavigation} from '../navigation/MobileNavigation';
-import {CartCount} from './CartCount';
+import {CartDrawer} from './CartDrawer';
 import {Logo} from './Logo';
 
 export function Header() {
@@ -48,7 +48,7 @@ export function Header() {
           </Link>
           <div className="flex items-center gap-0 md:gap-2">
             <DesktopNavigation data={header?.menu} />
-            <CartCount />
+            <CartDrawer />
             <MobileNavigation data={header?.menu} />
           </div>
         </div>

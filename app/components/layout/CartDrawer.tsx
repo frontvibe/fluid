@@ -4,6 +4,7 @@ import {Await, Link} from '@remix-run/react';
 import {CartForm} from '@shopify/hydrogen';
 import {cx} from 'class-variance-authority';
 import {Suspense, useCallback, useEffect, useMemo, useState} from 'react';
+import {useWindowSize} from 'react-use';
 
 import {useCartFetchers} from '~/hooks/useCartFetchers';
 import {useIsHydrated} from '~/hooks/useIsHydrated';
@@ -15,14 +16,14 @@ import {Cart} from '../cart/Cart';
 import {IconBag} from '../icons/IconBag';
 import {IconLoader} from '../icons/IconLoader';
 import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '../ui/Sheet';
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from '../ui/Drawer';
 
-export function CartCount() {
+export function CartDrawer() {
   const rootData = useRootLoaderData();
 
   return (
@@ -42,6 +43,7 @@ function Badge(props: {cart?: CartType | null; count: number}) {
   const [cartOpen, setCartOpen] = useState(false);
   const [cartIsLoading, setCartIsLoading] = useState(false);
   const addToCartFetchers = useCartFetchers(CartForm.ACTIONS.LinesAdd);
+  const device = useDevice();
 
   const handleOpen = useCallback(() => {
     if (cartOpen || !addToCartFetchers.length) return;
@@ -90,24 +92,43 @@ function Badge(props: {cart?: CartType | null; count: number}) {
   ]);
 
   return isHydrated ? (
-    <Sheet onOpenChange={setCartOpen} open={cartOpen}>
-      <SheetTrigger className={buttonClass}>{BadgeCounter}</SheetTrigger>
-      <SheetContent
-        className="flex h-[90%] max-h-screen w-screen flex-col gap-0 bg-background p-0 text-foreground sm:max-w-lg"
+    <Drawer
+      direction={device === 'desktop' ? 'right' : 'bottom'}
+      onOpenChange={setCartOpen}
+      open={cartOpen}
+    >
+      <DrawerTrigger className={buttonClass}>{BadgeCounter}</DrawerTrigger>
+      <DrawerContent
+        className="flex h-[90%] max-h-screen w-screen flex-col gap-0 bg-background p-0 text-foreground md:left-auto md:right-0 md:h-screen md:max-w-lg"
         onCloseAutoFocus={(e) => e.preventDefault()}
+        onOpenAutoFocus={(e) => e.preventDefault()}
       >
-        <SheetHeader className="px-6 py-5 shadow-sm shadow-foreground/10">
-          <SheetTitle className="flex items-center gap-4">
+        <DrawerHeader className="px-6 py-5 shadow-sm shadow-foreground/10">
+          <DrawerTitle className="flex items-center gap-4">
             <span>{themeContent?.cart.heading}</span>
             {cartIsLoading && <IconLoader className="animate-spin" />}
-          </SheetTitle>
-        </SheetHeader>
+          </DrawerTitle>
+        </DrawerHeader>
         <Cart cart={props.cart} layout="drawer" onClose={handleClose} />
-      </SheetContent>
-    </Sheet>
+      </DrawerContent>
+    </Drawer>
   ) : (
     <Link className={buttonClass} prefetch="intent" to={path}>
       {BadgeCounter}
     </Link>
   );
+}
+
+function useDevice() {
+  const windowSize = useWindowSize();
+  const device = useMemo(() => {
+    if (windowSize.width < 640) {
+      return 'mobile';
+    } else if (windowSize.width < 728) {
+      return 'tablet';
+    }
+    return 'desktop';
+  }, [windowSize]);
+
+  return device;
 }

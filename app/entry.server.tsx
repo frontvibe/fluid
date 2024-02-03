@@ -11,12 +11,8 @@ export default async function handleRequest(
   responseHeaders: Headers,
   remixContext: EntryContext,
 ) {
-  const {NonceProvider, header, nonce} = createContentSecurityPolicy({
-    connectSrc: ['*'],
-    fontSrc: ['*.sanity.io', "'self'"],
-    frameAncestors: ['localhost:*', '*.sanity.studio'],
-    imgSrc: ['*.sanity.io', 'https://cdn.shopify.com', "'self'", 'localhost:*'],
-  });
+  const {NonceProvider, header, nonce} =
+    createContentSecurityPolicy(createCspHeaders());
 
   const body = await renderToReadableStream(
     <NonceProvider>
@@ -38,8 +34,11 @@ export default async function handleRequest(
   }
 
   responseHeaders.set('Content-Type', 'text/html');
-  if (!isVercelPreview({remixContext})) {
-    // Disable CSP in Vercel preview environments to allow Vercel live feedback tool
+
+  // Set CSP headers only for non-preview environments
+  // to allow vercel preview feedback/comments feature
+  const VERCEL_ENV = getVercelEnv();
+  if (!VERCEL_ENV || VERCEL_ENV !== 'preview') {
     responseHeaders.set('Content-Security-Policy', header);
   }
 
@@ -49,16 +48,30 @@ export default async function handleRequest(
   });
 }
 
-function isVercelPreview({remixContext}: {remixContext: EntryContext}) {
-  // Parse remix context to check if we're in a Vercel preview environment
-  const context: any =
-    remixContext.serverHandoffString &&
-    JSON.parse(remixContext.serverHandoffString);
-  const isDev =
-    context?.state?.loaderData?.root?.env?.NODE_ENV === 'development';
+export const createCspHeaders = () => {
+  // Default CSP headers, will be used as a base for all environments
+  const defaultsCSPHeaders = {
+    connectSrc: ['*', 'self'],
+    fontSrc: ['*.sanity.io', "'self'", 'localhost:*'],
+    frameAncestors: ['localhost:*', '*.sanity.studio'],
+    frameSrc: ['self'],
+    imgSrc: ['*.sanity.io', 'https://cdn.shopify.com', "'self'", 'localhost:*'],
+    scriptSrc: ["'self'", 'localhost:*', 'https://cdn.shopify.com'],
+  };
 
-  if (!isDev) {
-    return process.env.VERCEL_ENV === 'preview';
+  // For Vercel production environment white-list vitals.vercel-insights
+  const VERCEL_ENV = getVercelEnv();
+  if (VERCEL_ENV === 'production') {
+    defaultsCSPHeaders.connectSrc.push('https://vitals.vercel-insights.com');
+    defaultsCSPHeaders.imgSrc.push('blob:', 'data:');
   }
-  return false;
-}
+
+  return defaultsCSPHeaders;
+};
+
+const getVercelEnv = () => {
+  if (typeof process !== 'undefined') {
+    return process.env.VERCEL_ENV;
+  }
+  return null;
+};

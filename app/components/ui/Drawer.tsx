@@ -6,10 +6,12 @@ import {Drawer as DrawerPrimitive} from 'vaul';
 import {IconClose} from '../icons/IconClose';
 
 const Drawer = ({
-  shouldScaleBackground = true,
+  preventScrollRestoration = false,
+  shouldScaleBackground = false,
   ...props
 }: React.ComponentProps<typeof DrawerPrimitive.Root>) => (
   <DrawerPrimitive.Root
+    preventScrollRestoration={preventScrollRestoration}
     shouldScaleBackground={shouldScaleBackground}
     {...props}
   />

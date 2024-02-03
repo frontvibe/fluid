@@ -26,7 +26,7 @@ export function CartDetails({
 
   return (
     <CartDetailsLayout layout={layout}>
-      <div className={cx([layout === 'drawer' && 'flex-1 overflow-y-scroll'])}>
+      <div className={cx([layout === 'drawer' && 'flex-1 overflow-y-auto'])}>
         <CartLines layout={layout} lines={cart?.lines} onClose={onClose} />
       </div>
       {cartHasItems && (

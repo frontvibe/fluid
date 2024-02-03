@@ -3,7 +3,7 @@ import type {
   ContentSourceMap,
   FilteredResponseQueryOptions,
   QueryParams,
-  SanityStegaClient,
+  SanityClient,
   UnfilteredResponseQueryOptions,
 } from '@sanity/client/stega';
 import type {BaseQuery, InferType, z} from 'groqd';
@@ -31,7 +31,7 @@ type BaseType<T = any> = z.ZodType<T>;
 type GroqdQuery = BaseQuery<BaseType<any>>;
 
 export type Sanity = {
-  client: SanityStegaClient;
+  client: SanityClient;
   query<T extends GroqdQuery>(options: {
     cache?: CachingStrategy;
     groqdQuery: T;
@@ -56,9 +56,7 @@ export function createSanityClient(options: CreateSanityClientOptions) {
     typeof projectId === 'undefined' ||
     typeof apiVersion === 'undefined' ||
     typeof dataset === 'undefined' ||
-    typeof studioUrl === 'undefined' ||
-    typeof useCdn === 'undefined' ||
-    typeof useStega === 'undefined'
+    typeof studioUrl === 'undefined'
   ) {
     throw new Error('Missing required configuration for Sanity client');
   }
@@ -68,8 +66,8 @@ export function createSanityClient(options: CreateSanityClientOptions) {
     dataset,
     projectId,
     studioUrl,
-    useCdn,
-    useStega,
+    useCdn: useCdn ?? true,
+    useStega: useStega ?? 'true',
   });
 
   if (!sanityServerClientHasBeenInitialized) {

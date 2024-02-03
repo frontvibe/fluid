@@ -4,13 +4,11 @@
  */
 
 export function envVariables(contextEnv: Env) {
-  let env: Env | NodeJS.ProcessEnv;
+  let env: Env | NodeJS.ProcessEnv = contextEnv;
 
   if (typeof process !== 'undefined') {
     // Process is accessible in Vercel environment
     env = process.env;
-  } else {
-    env = contextEnv;
   }
 
   return {

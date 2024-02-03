@@ -16,12 +16,12 @@ import {loadQuery, queryStore} from './sanity.loader';
 type CreateSanityClientOptions = {
   cache: Cache;
   config: {
-    apiVersion: string;
-    dataset: string;
-    projectId: string;
-    studioUrl: string;
-    useCdn: boolean;
-    useStega: string;
+    apiVersion: string | undefined;
+    dataset: string | undefined;
+    projectId: string | undefined;
+    studioUrl: string | undefined;
+    useCdn: boolean | undefined;
+    useStega: string | undefined;
   };
   waitUntil: ExecutionContext['waitUntil'];
 };
@@ -51,6 +51,17 @@ let sanityServerClientHasBeenInitialized = false;
 export function createSanityClient(options: CreateSanityClientOptions) {
   const {cache, config, waitUntil} = options;
   const {apiVersion, dataset, projectId, studioUrl, useCdn, useStega} = config;
+
+  if (
+    typeof projectId === 'undefined' ||
+    typeof apiVersion === 'undefined' ||
+    typeof dataset === 'undefined' ||
+    typeof studioUrl === 'undefined' ||
+    typeof useCdn === 'undefined' ||
+    typeof useStega === 'undefined'
+  ) {
+    throw new Error('Missing required configuration for Sanity client');
+  }
 
   const {client} = getSanityClient({
     apiVersion,

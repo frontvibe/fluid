@@ -1,6 +1,6 @@
 import type {HTMLMotionProps} from 'framer-motion';
 
-import {LazyMotion, m} from 'framer-motion';
+import {m} from 'framer-motion';
 
 export function Animation(
   props: HTMLMotionProps<'div'> & {
@@ -9,15 +9,10 @@ export function Animation(
     enabled?: boolean | null;
   },
 ) {
-  const loadFeatures = async () =>
-    await import('../lib/framerMotionFeatures').then((res) => res.default);
-
   return props.enabled ? (
-    <LazyMotion features={loadFeatures} strict>
-      <m.div className={props.className} {...props}>
-        {props.children}
-      </m.div>
-    </LazyMotion>
+    <m.div className={props.className} {...props}>
+      {props.children}
+    </m.div>
   ) : (
     <div className={props.className}>{props.children}</div>
   );

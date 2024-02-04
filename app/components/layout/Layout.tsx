@@ -9,6 +9,7 @@ import {TailwindIndicator} from '../TailwindIndicator';
 import {TogglePreviewMode} from '../sanity/TogglePreviewMode';
 import {AnnouncementBar} from './AnnoucementBar';
 import {Footer} from './Footer';
+import {FramerMotion} from './FramerMotion';
 import {Header} from './Header';
 
 const VisualEditing = lazy(() =>
@@ -34,18 +35,20 @@ export function Layout({children = null}: LayoutProps) {
       storefrontApiVersion={env?.PUBLIC_STOREFRONT_API_VERSION!}
       storefrontToken={env?.PUBLIC_STOREFRONT_API_TOKEN!}
     >
-      <AnnouncementBar />
-      <Header />
-      <main>{children}</main>
-      <Footer />
-      <TailwindIndicator />
-      {previewMode ? (
-        <Suspense>
-          <VisualEditing />
-        </Suspense>
-      ) : (
-        <TogglePreviewMode />
-      )}
+      <FramerMotion>
+        <AnnouncementBar />
+        <Header />
+        <main>{children}</main>
+        <Footer />
+        <TailwindIndicator />
+        {previewMode ? (
+          <Suspense>
+            <VisualEditing />
+          </Suspense>
+        ) : (
+          <TogglePreviewMode />
+        )}
+      </FramerMotion>
     </ShopifyProvider>
   );
 }

@@ -3,12 +3,12 @@ import type {CSSProperties} from 'react';
 import {Link} from '@remix-run/react';
 import {vercelStegaCleanAll} from '@sanity/client/stega';
 import {cx} from 'class-variance-authority';
-import {LazyMotion, m} from 'framer-motion';
+import {m, useTransform} from 'framer-motion';
 import React from 'react';
 
+import {useBoundedScroll} from '~/hooks/useBoundedScroll';
 import {useLocalePath} from '~/hooks/useLocalePath';
 import {useSanityRoot} from '~/hooks/useSanityRoot';
-import {useScrollDirection} from '~/hooks/useScrollDirection';
 import {useSettingsCssVars} from '~/hooks/useSettingsCssVars';
 import {cn} from '~/lib/utils';
 
@@ -66,7 +66,7 @@ function HeaderWrapper(props: {children: React.ReactNode}) {
 
   const headerClassName = cx([
     'section-padding bg-background text-foreground',
-    sticky === 'always' && 'sticky top-0 z-50',
+    sticky !== 'none' && 'sticky top-0 z-50',
     blur &&
       'bg-opacity-95 backdrop-blur supports-[backdrop-filter]:bg-opacity-85',
     headerVariants({
@@ -87,30 +87,30 @@ function HeaderAnimation(props: {
   children: React.ReactNode;
   className: string;
 }) {
-  const loadFeatures = async () =>
-    await import('../../lib/framerMotionFeatures').then((res) => res.default);
-  const {direction} = useScrollDirection();
+  const {scrollYBoundedProgress} = useBoundedScroll(400);
+  const scrollYBoundedProgressDelayed = useTransform(
+    scrollYBoundedProgress,
+    [0, 0.75, 1],
+    [0, 0, 1],
+  );
 
-  // Todo => Remove framer motion and use Top + Bottom position
   return (
-    <LazyMotion features={loadFeatures} strict>
-      <m.header
-        animate={{
-          opacity: direction === 'up' || !direction ? 1 : 0,
-          y: direction === 'up' || !direction ? 0 : '-100%',
-        }}
-        className={cn([
-          props.className,
-          direction === 'up' && 'sticky top-0 z-50',
-        ])}
-        data-direction={direction}
-        transition={{
-          duration: 0.1,
-          ease: 'linear',
-        }}
-      >
-        {props.children}
-      </m.header>
-    </LazyMotion>
+    <m.header
+      className={cn(props.className)}
+      style={{
+        opacity: useTransform(
+          scrollYBoundedProgressDelayed,
+          [0, 0.4, 1],
+          [1, 0, 0],
+        ),
+        transform: useTransform(
+          scrollYBoundedProgressDelayed,
+          [0, 1],
+          ['translateY(0)', 'translateY(-100%)'],
+        ),
+      }}
+    >
+      {props.children}
+    </m.header>
   );
 }

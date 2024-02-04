@@ -50,12 +50,12 @@ export function CartDiscounts({
         <div className={cx('flex', 'items-center justify-between gap-4')}>
           {/* Todo => add theme content string */}
           <Input
-            data-vaul-no-drag
+            data-vaul-no-drag={true}
             name="discountCode"
             placeholder="Discount code"
             type="text"
           />
-          <Button data-vaul-no-drag variant="outline">
+          <Button data-vaul-no-drag={true} variant="outline">
             {/* Todo => add theme content string */}
             Apply Discount
           </Button>

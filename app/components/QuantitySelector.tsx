@@ -29,7 +29,7 @@ function Button(
         'size-10 transition hover:bg-muted [&>*]:pointer-events-none',
         variant === 'decrease' && 'disabled:opacity-30',
       ])}
-      data-vaul-no-drag
+      data-vaul-no-drag={true}
       name={cx([
         variant === 'decrease' && 'decrease-quantity',
         variant === 'increase' && 'increase-quantity',

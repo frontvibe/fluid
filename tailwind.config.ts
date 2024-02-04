@@ -57,23 +57,8 @@ export default {
           from: {height: 'var(--radix-accordion-content-height)'},
           to: {height: '0'},
         },
-        'mobile-menu-trigger': {
-          '0%, 1%': {
-            transform: 'translateY(-120%)',
-            opacity: '0',
-            position: 'absolute',
-            top: '0',
-          },
-          '100%': {
-            transform: 'translateY(-120%)',
-            opacity: '1',
-            position: 'absolute',
-            top: '0',
-          },
-        },
       },
       animation: {
-        'mobile-menu-trigger': 'mobile-menu-trigger 0.2s 1 forwards',
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
       },

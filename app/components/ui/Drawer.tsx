@@ -6,16 +6,40 @@ import {Drawer as DrawerPrimitive} from 'vaul';
 import {IconClose} from '../icons/IconClose';
 
 const Drawer = ({
+  open,
   preventScrollRestoration = false,
   shouldScaleBackground = false,
   ...props
-}: React.ComponentProps<typeof DrawerPrimitive.Root>) => (
-  <DrawerPrimitive.Root
-    preventScrollRestoration={preventScrollRestoration}
-    shouldScaleBackground={shouldScaleBackground}
-    {...props}
-  />
-);
+}: React.ComponentProps<typeof DrawerPrimitive.Root>) => {
+  const handleOpen = React.useCallback((open: boolean) => {
+    if (!document) return;
+    const body = document.body;
+
+    if (!open) {
+      const timeout = setTimeout(() => {
+        body.removeAttribute('data-drawer-open');
+        clearTimeout(timeout);
+      }, 500);
+      return;
+    }
+
+    body.setAttribute('data-drawer-open', String(open));
+  }, []);
+
+  React.useEffect(() => {
+    if (open !== undefined) handleOpen(open);
+  }, [open, handleOpen]);
+
+  return (
+    <DrawerPrimitive.Root
+      onOpenChange={handleOpen}
+      open={open}
+      preventScrollRestoration={preventScrollRestoration}
+      shouldScaleBackground={shouldScaleBackground}
+      {...props}
+    />
+  );
+};
 Drawer.displayName = 'Drawer';
 
 const DrawerTrigger = DrawerPrimitive.Trigger;

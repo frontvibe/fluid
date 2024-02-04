@@ -12,7 +12,7 @@ import {
   parseGid,
   useOptimisticData,
 } from '@shopify/hydrogen';
-import {LazyMotion, m} from 'framer-motion';
+import {m} from 'framer-motion';
 
 import {useLocalePath} from '~/hooks/useLocalePath';
 
@@ -44,9 +44,6 @@ export function CartLineItem({
   if (!line?.id) return null;
   if (typeof quantity === 'undefined' || !merchandise?.product) return null;
 
-  const loadFeatures = async () =>
-    await import('../../lib/framerMotionFeatures').then((res) => res.default);
-
   const variants = {
     hidden: {
       height: 0,
@@ -68,75 +65,79 @@ export function CartLineItem({
       marginTop: '1.25rem',
       opacity: 1,
       transition: {
-        bounce: 0.3,
+        bounce: 0.1,
         type: 'spring',
       },
     },
   };
 
   return (
-    <LazyMotion features={loadFeatures} strict>
-      <m.li
-        animate={
-          // Hide the line item if the optimistic data action is remove
-          // Do not remove the form from the DOM
-          optimisticData?.action === 'remove' ? 'hidden' : 'visible'
-        }
-        initial={{height: 0, marginBottom: 0, marginTop: 0, opacity: 0}}
-        key={id}
-        variants={variants}
-      >
-        <div className="flex gap-4">
-          <div className="flex-shrink">
-            {merchandise.image && (
-              <Image
-                alt={merchandise.title}
-                aspectRatio="1/1"
-                className="size-24 rounded border border-border object-cover object-center"
-                data={merchandise.image}
-                loading="eager"
-                sizes="96px"
-              />
-            )}
-          </div>
-
-          <div className="flex flex-grow justify-between">
-            <div className="grid gap-2">
-              <h3 className="text-2xl">
-                {merchandise?.product?.handle ? (
-                  <Link onClick={onClose} to={productPath}>
-                    {merchandise?.product?.title || ''}
-                  </Link>
-                ) : (
-                  <p>{merchandise?.product?.title || ''}</p>
-                )}
-              </h3>
-              {merchandise?.selectedOptions.find(
-                (option) => option.value !== 'Default Title',
-              ) && (
-                <div className="grid pb-2">
-                  {(merchandise?.selectedOptions || []).map((option) => (
-                    <span className="opacity-80" key={option.name}>
-                      {option.name}: {option.value}
-                    </span>
-                  ))}
-                </div>
-              )}
-
-              <div className="flex items-center gap-2">
-                <div className="flex justify-start">
-                  <CartLineQuantityAdjust line={line} />
-                </div>
-                <ItemRemoveButton lineId={id} />
-              </div>
-            </div>
-            <span>
-              <CartLinePrice as="span" line={line} />
-            </span>
-          </div>
+    <m.li
+      animate={
+        // Hide the line item if the optimistic data action is remove
+        // Do not remove the form from the DOM
+        optimisticData?.action === 'remove' ? 'hidden' : 'visible'
+      }
+      initial={{height: 'auto', marginBottom: 0, marginTop: 0, opacity: 0}}
+      key={id}
+      variants={variants}
+    >
+      <div className="flex gap-4">
+        <div className="size-16">
+          {merchandise.image && (
+            <Image
+              alt={merchandise.title}
+              aspectRatio="1/1"
+              className="h-auto w-full rounded border border-border object-cover object-center"
+              data={merchandise.image}
+              data-vaul-no-drag={true}
+              draggable={false}
+              loading="eager"
+              sizes="64px"
+            />
+          )}
         </div>
-      </m.li>
-    </LazyMotion>
+
+        <div className="flex flex-grow justify-between">
+          <div className="grid gap-2">
+            <h3 className="text-2xl" data-vaul-no-drag={true}>
+              {merchandise?.product?.handle ? (
+                <Link
+                  data-vaul-no-drag={true}
+                  onClick={onClose}
+                  to={productPath}
+                >
+                  {merchandise?.product?.title || ''}
+                </Link>
+              ) : (
+                <p>{merchandise?.product?.title || ''}</p>
+              )}
+            </h3>
+            {merchandise?.selectedOptions.find(
+              (option) => option.value !== 'Default Title',
+            ) && (
+              <div className="grid pb-2">
+                {(merchandise?.selectedOptions || []).map((option) => (
+                  <span className="opacity-80" key={option.name}>
+                    {option.name}: {option.value}
+                  </span>
+                ))}
+              </div>
+            )}
+
+            <div className="flex items-center gap-2">
+              <div className="flex justify-start">
+                <CartLineQuantityAdjust line={line} />
+              </div>
+              <ItemRemoveButton lineId={id} />
+            </div>
+          </div>
+          <span>
+            <CartLinePrice as="span" line={line} />
+          </span>
+        </div>
+      </div>
+    </m.li>
   );
 }
 
@@ -152,8 +153,8 @@ function ItemRemoveButton({lineId}: {lineId: CartLine['id']}) {
       route={cartPath}
     >
       <button
-        className="flex size-10 items-center justify-center overflow-hidden rounded border border-border hover:bg-muted [&>*]:pointer-events-none"
-        data-vaul-no-drag
+        className="flex size-10 items-center justify-center overflow-hidden rounded border border-border hover:bg-muted"
+        data-vaul-no-drag={true}
         type="submit"
       >
         {/* Todo => add theme content string */}

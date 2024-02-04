@@ -106,14 +106,14 @@ export function VariantSelector(props: {
         {option.values?.map(({isActive, isAvailable, search, value}) => (
           <Link
             className={cn([
-              'hover:bg-muted',
-              !isAvailable && 'opacity-50',
               badgeVariants({
                 variant: isActive ? 'secondary' : 'outline',
               }),
+              !isAvailable && 'opacity-50',
+              'px-3 py-[.35rem] hover:bg-muted',
             ])}
             key={option.name + value}
-            prefetch="intent"
+            prefetch="viewport"
             preventScrollReset
             replace
             to={search}

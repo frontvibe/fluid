@@ -85,7 +85,7 @@ export default {
           dataset: envVars.SANITY_STUDIO_DATASET,
           projectId: envVars.SANITY_STUDIO_PROJECT_ID,
           studioUrl: envVars.SANITY_STUDIO_URL,
-          useCdn: envVars.NODE_ENV === 'production',
+          useCdn: !envVars.NODE_ENV || envVars.NODE_ENV === 'production',
           useStega: envVars.SANITY_STUDIO_USE_STEGA,
         },
         waitUntil,

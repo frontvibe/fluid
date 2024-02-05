@@ -1,5 +1,6 @@
 import {useCallback, useState} from 'react';
 
+import {useDevice} from '~/hooks/useDevice';
 import {cn} from '~/lib/utils';
 
 import type {NavigationProps} from './DesktopNavigation';
@@ -18,15 +19,20 @@ import {
 
 export function MobileNavigation(props: {data?: NavigationProps}) {
   const [open, setOpen] = useState(false);
+  const device = useDevice();
   const handleClose = useCallback(() => setOpen(false), []);
 
   if (!props.data) return null;
 
   // Todo => Add <Navlink /> support
   return (
-    <div className="md:hidden">
-      <Drawer onOpenChange={setOpen} open={open}>
-        <DrawerTrigger className="flex items-center justify-center p-2 pr-[var(--mobileHeaderXPadding)] md:pr-0">
+    <div className="lg:hidden [@media(pointer:coarse)]:block">
+      <Drawer
+        direction={device === 'desktop' ? 'right' : 'bottom'}
+        onOpenChange={setOpen}
+        open={open}
+      >
+        <DrawerTrigger className="flex items-center justify-center p-2 pr-[var(--mobileHeaderXPadding)] lg:pr-0">
           <IconMenu className="size-7" strokeWidth={1.5} />
         </DrawerTrigger>
         <MobileNavigationContent>
@@ -61,10 +67,12 @@ function MobileNavigationContent(props: {
 }) {
   return (
     <DrawerContent
-      className={cn(
-        'h-[var(--dialog-content-height)] max-h-screen w-screen bg-background p-0 text-foreground [--dialog-content-height:calc(100dvh_*_.75)]',
+      className={cn([
+        'h-[--dialog-content-height] max-h-screen w-screen bg-background p-0 text-foreground',
+        '[--dialog-content-height:calc(100dvh_*_.75)] [--dialog-content-max-width:calc(32rem)]',
+        'lg:left-auto lg:right-0 lg:max-w-[--dialog-content-max-width] lg:[--dialog-content-height:100dvh]',
         props.className,
-      )}
+      ])}
       onCloseAutoFocus={(e) => e.preventDefault()}
       onOpenAutoFocus={(e) => e.preventDefault()}
     >
@@ -83,7 +91,7 @@ function MobileNavigationNested(props: {
 }) {
   const {data, onClose} = props;
   const [open, setOpen] = useState(false);
-
+  const device = useDevice();
   const handleClose = useCallback(() => {
     onClose();
     setOpen(false);
@@ -94,14 +102,23 @@ function MobileNavigationNested(props: {
   const {childLinks} = data;
 
   return data.name && childLinks && childLinks.length > 0 ? (
-    <DrawerNestedRoot onOpenChange={setOpen} open={open}>
+    <DrawerNestedRoot
+      direction={device === 'desktop' ? 'right' : 'bottom'}
+      onOpenChange={setOpen}
+      open={open}
+    >
       <DrawerTrigger className="flex items-center gap-2">
         {data.name}
         <span>
           <IconChevron className="size-5" direction="right" />
         </span>
       </DrawerTrigger>
-      <MobileNavigationContent className="h-[calc(var(--dialog-content-height)*.95)]">
+      <MobileNavigationContent
+        className={cn([
+          'h-[calc(var(--dialog-content-height)*.95)]',
+          'lg:h-[--dialog-content-height] lg:max-w-[calc(var(--dialog-content-max-width)*.95)]',
+        ])}
+      >
         {childLinks &&
           childLinks.length > 0 &&
           childLinks.map((child) => (

@@ -33,11 +33,11 @@ export function Header() {
   return (
     <HeaderWrapper>
       <style dangerouslySetInnerHTML={{__html: cssVars}} />
-      <div className="[--mobileHeaderXPadding:.75rem] md:container">
+      <div className="[--mobileHeaderXPadding:.75rem] lg:container">
         <div className="flex items-center justify-between">
           <Link prefetch="intent" to={homePath}>
             <Logo
-              className="h-auto w-[var(--logoWidth)] pl-[var(--mobileHeaderXPadding)] md:pl-0"
+              className="h-auto w-[var(--logoWidth)] pl-[var(--mobileHeaderXPadding)] lg:pl-0"
               sizes={logoWidth}
               style={
                 {

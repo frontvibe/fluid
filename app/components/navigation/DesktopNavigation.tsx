@@ -28,7 +28,10 @@ export function DesktopNavigation(props: {data?: NavigationProps}) {
   );
 
   return (
-    <NavigationMenu className="hidden md:block" id="header-nav">
+    <NavigationMenu
+      className="hidden lg:block [@media(pointer:coarse)]:hidden"
+      id="header-nav"
+    >
       <CssVars
         dropdownWidth={dropdownWidth}
         viewportPosition={viewportPosition}

@@ -4,7 +4,6 @@ import {Await, Link} from '@remix-run/react';
 import {CartForm} from '@shopify/hydrogen';
 import {cx} from 'class-variance-authority';
 import {Suspense, useCallback, useEffect, useMemo, useState} from 'react';
-import {useWindowSize} from 'react-use';
 
 import {useCartFetchers} from '~/hooks/useCartFetchers';
 import {useIsHydrated} from '~/hooks/useIsHydrated';
@@ -12,6 +11,7 @@ import {useLocalePath} from '~/hooks/useLocalePath';
 import {useRootLoaderData} from '~/hooks/useRootLoaderData';
 import {useSanityThemeContent} from '~/hooks/useSanityThemeContent';
 
+import {useDevice} from '../../hooks/useDevice';
 import {Cart} from '../cart/Cart';
 import {IconBag} from '../icons/IconBag';
 import {IconLoader} from '../icons/IconLoader';
@@ -88,7 +88,7 @@ function Badge(props: {cart?: CartType | null; count: number}) {
 
   const buttonClass = cx([
     'relative flex size-8 items-center justify-center',
-    count > 0 && 'mr-3 md:mr-0',
+    count > 0 && 'mr-3 lg:mr-0',
   ]);
 
   return isHydrated ? (
@@ -99,7 +99,7 @@ function Badge(props: {cart?: CartType | null; count: number}) {
     >
       <DrawerTrigger className={buttonClass}>{BadgeCounter}</DrawerTrigger>
       <DrawerContent
-        className="flex h-[95dvh] max-h-screen w-screen flex-col gap-0 bg-background p-0 text-foreground md:left-auto md:right-0 md:h-screen md:max-w-lg"
+        className="flex h-[95dvh] max-h-screen w-screen flex-col gap-0 bg-background p-0 text-foreground lg:left-auto lg:right-0 lg:h-[100dvh] lg:max-w-lg"
         onCloseAutoFocus={(e) => e.preventDefault()}
         onOpenAutoFocus={(e) => e.preventDefault()}
       >
@@ -117,18 +117,4 @@ function Badge(props: {cart?: CartType | null; count: number}) {
       {BadgeCounter}
     </Link>
   );
-}
-
-function useDevice() {
-  const windowSize = useWindowSize();
-  const device = useMemo(() => {
-    if (windowSize.width < 640) {
-      return 'mobile';
-    } else if (windowSize.width < 728) {
-      return 'tablet';
-    }
-    return 'desktop';
-  }, [windowSize]);
-
-  return device;
 }

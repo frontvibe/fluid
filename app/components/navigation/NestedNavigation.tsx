@@ -52,7 +52,7 @@ export function NestedNavigation(props: {
         )}
       </NavigationMenuTrigger>
       <NavigationMenuContent>
-        <ul className="m-0 grid w-full gap-1 p-2 md:w-[var(--dropdown-width)]">
+        <ul className="m-0 grid w-full gap-1 p-2 lg:w-[var(--dropdown-width)]">
           {childLinks.map((child) => (
             <li key={child._key}>
               <ListItem {...child} />

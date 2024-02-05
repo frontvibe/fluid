@@ -70,7 +70,7 @@ const DrawerContent = forwardRef<
     <DrawerOverlay />
     <DrawerPrimitive.Content
       className={cn(
-        'fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-3xl border bg-background md:rounded-none',
+        'fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-3xl border bg-background lg:rounded-none',
         className,
       )}
       ref={ref}
@@ -78,7 +78,7 @@ const DrawerContent = forwardRef<
     >
       <div className="mx-auto mt-4 h-2 w-[100px] rounded-full bg-muted md:hidden" />
       {children}
-      <DrawerClose className="absolute right-4 top-4 hidden rounded-sm ring-offset-background transition-opacity hover:opacity-70 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary md:block">
+      <DrawerClose className="absolute right-4 top-4 hidden rounded-sm ring-offset-background transition-opacity hover:opacity-70 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary lg:block">
         <IconClose className="size-6" strokeWidth={2} />
         <span className="sr-only">Close</span>
       </DrawerClose>

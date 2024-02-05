@@ -13,7 +13,7 @@ export function useSanityClient() {
         dataset: env?.SANITY_STUDIO_DATASET!,
         projectId: env?.SANITY_STUDIO_PROJECT_ID!,
         studioUrl: env?.SANITY_STUDIO_URL!,
-        useCdn: env?.NODE_ENV === 'production',
+        useCdn: !env?.NODE_ENV || env?.NODE_ENV === 'production',
         useStega: env?.SANITY_STUDIO_USE_STEGA!,
       }),
     [env],

@@ -71,6 +71,9 @@ export function CartLineItem({
     },
   };
 
+  // Animated list implmentation inspired by the fantastic Build UI recipes
+  // (Check out the original at: https://buildui.com/recipes/animated-list)
+  // Credit to the Build UI team for the awesome List animation.
   return (
     <m.li
       animate={

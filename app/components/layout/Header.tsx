@@ -94,6 +94,9 @@ function HeaderAnimation(props: {
     [0, 0, 1],
   );
 
+  // Header animation inspired by the fantastic Build UI recipes
+  // (Check out the original at: https://buildui.com/recipes/fixed-header)
+  // Credit to the Build UI team for the awesome Header animation.
   return (
     <m.header
       className={cn(props.className)}

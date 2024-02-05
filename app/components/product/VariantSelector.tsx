@@ -5,14 +5,13 @@ import type {
 import type {PartialDeep} from 'type-fest';
 import type {PartialObjectDeep} from 'type-fest/source/partial-deep';
 
-import {Link} from '@remix-run/react';
+import {useNavigate} from '@remix-run/react';
 import {parseGid} from '@shopify/hydrogen';
-import {useMemo} from 'react';
+import {m} from 'framer-motion';
+import {useCallback, useMemo, useState} from 'react';
 
 import {useSelectedVariant} from '~/hooks/useSelectedVariant';
 import {cn} from '~/lib/utils';
-
-import {badgeVariants} from '../ui/Badge';
 
 export type VariantOptionValue = {
   isActive: boolean;
@@ -102,26 +101,75 @@ export function VariantSelector(props: {
   return options?.map((option) => (
     <div key={option.name}>
       <div>{option.name}</div>
-      <div className="mt-1 flex gap-2">
-        {option.values?.map(({isActive, isAvailable, search, value}) => (
-          <Link
-            className={cn([
-              badgeVariants({
-                variant: isActive ? 'secondary' : 'outline',
-              }),
-              !isAvailable && 'opacity-50',
-              'px-3 py-[.35rem] hover:bg-muted',
-            ])}
-            key={option.name + value}
-            prefetch="viewport"
-            preventScrollReset
-            replace
-            to={search}
-          >
-            {value}
-          </Link>
-        ))}
-      </div>
+      <Pills option={option} />
     </div>
   ));
+}
+
+function Pills(props: {
+  option: {
+    name: string | undefined;
+    value: string | undefined;
+    values: VariantOptionValue[];
+  };
+}) {
+  const navigate = useNavigate();
+  const {values} = props.option;
+  const [activePill, setActivePill] = useState(values[0]);
+
+  const handleOnClick = useCallback(
+    (value: string, search: string) => {
+      const newActivePill = values.find((option) => option.value === value);
+
+      if (newActivePill) {
+        setActivePill(newActivePill);
+        navigate(search, {
+          preventScrollReset: true,
+          replace: true,
+        });
+      }
+    },
+    [setActivePill, values, navigate],
+  );
+
+  // Animated tabs implementation inspired by the fantastic Build UI recipes
+  // (Check out the original at: https://buildui.com/recipes/animated-tabs)
+  // Credit to the Build UI team for the awesome Pills animation.
+  return (
+    <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-3">
+      {props.option.values.map(({isAvailable, search, value}) => (
+        <m.button
+          className={cn([
+            'relative rounded-full text-sm font-medium transition',
+            'focus-visible:outline-none focus-visible:outline-2 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
+            'hover:text-accent-foreground',
+            activePill.value === value && 'text-accent-foreground',
+            !isAvailable && 'opacity-50',
+          ])}
+          key={value}
+          layout
+          layoutRoot
+          onClick={() => handleOnClick(value, search)}
+          style={{
+            WebkitTapHighlightColor: 'transparent',
+          }}
+        >
+          {activePill.value === value && (
+            <m.span
+              className="absolute inset-0 z-10 bg-accent mix-blend-multiply"
+              layoutId={props.option.name}
+              style={{borderRadius: 9999}}
+              transition={{bounce: 0.2, duration: 0.6, type: 'spring'}}
+            />
+          )}
+          <m.span
+            className="inline-flex h-8 select-none items-center justify-center whitespace-nowrap px-3 py-1.5"
+            whileTap={{scale: 0.9}}
+          >
+            {value}
+          </m.span>
+        </m.button>
+      ))}
+    </div>
+  );
 }

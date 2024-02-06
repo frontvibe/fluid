@@ -6,7 +6,7 @@ import {cx} from 'class-variance-authority';
 
 import {useLocalePath} from '~/hooks/useLocalePath';
 
-import {Card, CardContent} from '../ui/Card';
+import {Card, CardContent, CardMedia} from '../ui/Card';
 
 export function ProductCard(props: {
   className?: string;
@@ -37,16 +37,25 @@ export function ProductCard(props: {
         <Link prefetch="intent" to={path}>
           <Card className="overflow-hidden">
             {firstVariant?.image && (
-              <Image
-                aspectRatio="16/9"
-                className="h-auto w-full object-cover"
-                data={firstVariant.image}
-                sizes={sizes}
-              />
+              <CardMedia>
+                <Image
+                  aspectRatio="16/9"
+                  data={firstVariant.image}
+                  sizes={sizes}
+                />
+              </CardMedia>
             )}
-            <CardContent className="py-3">
-              <div className="text-lg">{product.title}</div>
-              <div>
+            <CardContent className="py-4">
+              <div className="text-lg underline-offset-4 group-hover/card:underline">
+                {product.title}
+              </div>
+              <div className="mt-1 flex items-center gap-3">
+                {firstVariant.compareAtPrice && (
+                  <Money
+                    className="text-sm line-through opacity-50"
+                    data={firstVariant.compareAtPrice}
+                  />
+                )}
                 <Money data={firstVariant.price} />
               </div>
             </CardContent>

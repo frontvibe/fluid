@@ -9,7 +9,7 @@ import type {ANNOUCEMENT_BAR_FRAGMENT} from '~/qroq/fragments';
 import {useSanityRoot} from '~/hooks/useSanityRoot';
 import {useSettingsCssVars} from '~/hooks/useSettingsCssVars';
 
-import {Icon} from '../icons/Icon';
+import {IconArrowRight} from '../icons/IconArrowRight';
 import {SanityInternalLink} from '../sanity/link/SanityInternalLink';
 import {
   Carousel,
@@ -91,26 +91,12 @@ function Item(props: AnnoucementBarProps) {
         <span className="relative z-[2] block bg-background pr-2">
           {props.text}
         </span>
-        <span className="-translate-x-[2px] transition-transform group-hover:translate-x-0">
-          <ArrowRight />
+        <span className="-translate-x-[2px] transition-transform group-hover:translate-x-[-0.15px]">
+          <IconArrowRight />
         </span>
       </p>
     </SanityInternalLink>
   ) : (
     <p className={className}>{props.text}</p>
-  );
-}
-
-function ArrowRight() {
-  return (
-    <Icon className="size-4" fill="none" viewBox="0 0 14 10">
-      <title>Arrow Right</title>
-      <path
-        clipRule="evenodd"
-        d="M8.537.808a.5.5 0 01.817-.162l4 4a.5.5 0 010 .708l-4 4a.5.5 0 11-.708-.708L11.793 5.5H1a.5.5 0 010-1h10.793L8.646 1.354a.5.5 0 01-.109-.546z"
-        fill="currentColor"
-        fillRule="evenodd"
-      ></path>
-    </Icon>
   );
 }

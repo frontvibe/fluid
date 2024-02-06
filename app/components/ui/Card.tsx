@@ -5,7 +5,7 @@ const Card = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({className, ...props}, ref) => (
     <div
       className={cn(
-        'rounded-lg border bg-card text-card-foreground shadow-sm',
+        'group/card rounded-lg border bg-card text-card-foreground shadow-sm shadow-foreground/10',
         className,
       )}
       data-type="card"
@@ -27,6 +27,32 @@ const CardHeader = forwardRef<
   />
 ));
 CardHeader.displayName = 'CardHeader';
+
+const CardMedia = forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement> & {
+    aspectRatio?: 'auto' | 'square' | 'video';
+  }
+>(({aspectRatio = 'video', className, ...props}, ref) => {
+  const ratios = {
+    auto: 'aspect-none',
+    square: 'aspect-square',
+    video: 'aspect-video',
+  };
+
+  return (
+    <div
+      className={cn('relative overflow-hidden', ratios[aspectRatio], className)}
+      ref={ref}
+      {...props}
+    >
+      <div className="origin-center scale-[1.005] [transition:transform_0.5s_ease] group-hover/card:scale-[1.03] [&>*]:size-full [&>*]:object-cover">
+        {props.children}
+      </div>
+    </div>
+  );
+});
+CardMedia.displayName = 'CardMedia';
 
 const CardTitle = forwardRef<
   HTMLParagraphElement,
@@ -75,4 +101,12 @@ const CardFooter = forwardRef<
 ));
 CardFooter.displayName = 'CardFooter';
 
-export {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle};
+export {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardMedia,
+  CardTitle,
+};

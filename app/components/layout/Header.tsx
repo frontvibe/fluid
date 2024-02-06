@@ -87,7 +87,7 @@ function HeaderAnimation(props: {
   children: React.ReactNode;
   className: string;
 }) {
-  const {scrollYBoundedProgress} = useBoundedScroll(400);
+  const {scrollYBoundedProgress} = useBoundedScroll(250);
   const scrollYBoundedProgressDelayed = useTransform(
     scrollYBoundedProgress,
     [0, 0.75, 1],
@@ -103,7 +103,7 @@ function HeaderAnimation(props: {
       style={{
         opacity: useTransform(
           scrollYBoundedProgressDelayed,
-          [0, 0.4, 1],
+          [0, 0.75, 1],
           [1, 0, 0],
         ),
         transform: useTransform(

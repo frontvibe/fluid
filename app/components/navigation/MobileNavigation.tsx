@@ -17,6 +17,10 @@ import {
   DrawerTrigger,
 } from '../ui/Drawer';
 
+const mobileMenuLinkClass = cn(
+  'flex rounded-md px-3 py-2 items-center gap-2 w-full transition-colors hover:bg-accent hover:text-accent-foreground',
+);
+
 export function MobileNavigation(props: {data?: NavigationProps}) {
   const [open, setOpen] = useState(false);
   const device = useDevice();
@@ -41,9 +45,11 @@ export function MobileNavigation(props: {data?: NavigationProps}) {
             props.data?.map((item) => (
               <li key={item._key}>
                 {item._type === 'internalLink' && (
-                  <div onClick={handleClose}>
-                    <SanityInternalLink data={item} />
-                  </div>
+                  <SanityInternalLink
+                    className={mobileMenuLinkClass}
+                    data={item}
+                    onClick={handleClose}
+                  />
                 )}
                 {item._type === 'externalLink' && (
                   <div onClick={handleClose}>
@@ -77,7 +83,7 @@ function MobileNavigationContent(props: {
       onOpenAutoFocus={(e) => e.preventDefault()}
     >
       <nav className="mt-4 flex h-full flex-col gap-0 p-6">
-        <ul className="flex flex-1 flex-col gap-4 overflow-x-hidden overflow-y-scroll pb-6 text-xl font-medium">
+        <ul className="flex flex-1 flex-col gap-2 overflow-x-hidden overflow-y-scroll pb-6 text-xl font-medium">
           {props.children}
         </ul>
       </nav>
@@ -107,7 +113,7 @@ function MobileNavigationNested(props: {
       onOpenChange={setOpen}
       open={open}
     >
-      <DrawerTrigger className="flex items-center gap-2">
+      <DrawerTrigger className={mobileMenuLinkClass}>
         {data.name}
         <span>
           <IconChevron className="size-5" direction="right" />
@@ -122,11 +128,18 @@ function MobileNavigationNested(props: {
         {childLinks &&
           childLinks.length > 0 &&
           childLinks.map((child) => (
-            <li key={child._key} onClick={handleClose}>
+            <li key={child._key}>
               {child._type === 'internalLink' ? (
-                <SanityInternalLink data={child} />
+                <SanityInternalLink
+                  className={mobileMenuLinkClass}
+                  data={child}
+                  onClick={handleClose}
+                />
               ) : child._type === 'externalLink' ? (
-                <SanityExternalLink data={child} />
+                <SanityExternalLink
+                  className={mobileMenuLinkClass}
+                  data={child}
+                />
               ) : null}
             </li>
           ))}
@@ -135,6 +148,7 @@ function MobileNavigationNested(props: {
   ) : data.link && data.name && (!childLinks || childLinks.length === 0) ? (
     // Render internal link if no child links
     <SanityInternalLink
+      className={mobileMenuLinkClass}
       data={{
         _key: data._key,
         _type: 'internalLink',
@@ -142,6 +156,7 @@ function MobileNavigationNested(props: {
         link: data.link,
         name: data.name,
       }}
+      onClick={handleClose}
     >
       {data.name}
     </SanityInternalLink>

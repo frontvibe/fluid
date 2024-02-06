@@ -16,11 +16,6 @@ export default defineField({
       name: 'contentAlignment',
     }),
     defineField({
-      type: 'boolean',
-      name: 'animateContent',
-      initialValue: false,
-    }),
-    defineField({
       type: 'image',
       name: 'backgroundImage',
       options: {

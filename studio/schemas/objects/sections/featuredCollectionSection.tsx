@@ -49,7 +49,7 @@ export default defineField({
         title: collection.title,
         subtitle: 'Featured Collection',
         media: () =>
-          settings.hide ? (
+          settings?.hide ? (
             <EyeOff />
           ) : (
             <img src={collection.imageUrl} alt={collection.title} />

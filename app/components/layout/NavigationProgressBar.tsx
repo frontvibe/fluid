@@ -58,6 +58,7 @@ function Bar(props: {animationDuration: number; progress: number}) {
 
   return (
     <m.div
+      aria-hidden
       className="fixed left-0 top-0 z-[1041] h-[3px] w-full rounded-r-full bg-primary"
       style={{
         marginLeft,

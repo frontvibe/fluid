@@ -53,7 +53,6 @@ export const SECTION_SETTINGS_FRAGMENT = q('settings').grab({
 export const IMAGE_BANNER_SECTION_FRAGMENT = {
   _key: q.string().nullable(),
   _type: q.literal('imageBannerSection'),
-  animateContent: q.boolean().nullable(),
   backgroundImage: q('backgroundImage').grab(IMAGE_FRAGMENT).nullable(),
   bannerHeight: q.number().nullable(),
   contentAlignment: z.enum(contentAlignmentValues).nullable(),
@@ -236,6 +235,9 @@ export const RICHTEXT_SECTION_FRAGMENT = {
 export const COLLECTION_BANNER_SECTION_FRAGMENT = {
   _key: q.string().nullable(),
   _type: q.literal('collectionBannerSection'),
+  bannerHeight: q.number().nullable(),
+  contentAlignment: z.enum(contentAlignmentValues).nullable(),
+  overlayOpacity: q.number().nullable(),
   settings: SECTION_SETTINGS_FRAGMENT,
   showDescription: q.boolean().nullable(),
   showImage: q.boolean().nullable(),

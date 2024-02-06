@@ -47,7 +47,7 @@ export default defineField({
     prepare({settings}: any) {
       return {
         title: 'Related Products',
-        media: () => (settings.hide ? <EyeOff /> : <IconCollectionTag />),
+        media: () => (settings?.hide ? <EyeOff /> : <IconCollectionTag />),
       };
     },
   },

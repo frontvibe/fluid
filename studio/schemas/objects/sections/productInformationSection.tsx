@@ -23,7 +23,7 @@ export default defineField({
     prepare({settings}: any) {
       return {
         title: 'Product Information',
-        media: () => (settings.hide ? <EyeOff /> : <IconTag />),
+        media: () => (settings?.hide ? <EyeOff /> : <IconTag />),
       };
     },
   },

@@ -8,7 +8,7 @@ import type {PartialObjectDeep} from 'type-fest/source/partial-deep';
 import {useNavigate} from '@remix-run/react';
 import {parseGid} from '@shopify/hydrogen';
 import {m} from 'framer-motion';
-import {useCallback, useMemo, useState} from 'react';
+import {useCallback, useMemo, useRef, useState} from 'react';
 
 import {useSelectedVariant} from '~/hooks/useSelectedVariant';
 import {cn} from '~/lib/utils';
@@ -114,8 +114,14 @@ function Pills(props: {
   };
 }) {
   const navigate = useNavigate();
-  const {values} = props.option;
+  const {name, values} = props.option;
   const [activePill, setActivePill] = useState(values[0]);
+  const layoutId = useRef(
+    name +
+      '-' +
+      Math.random().toString(36).substring(2, 15) +
+      Math.random().toString(36).substring(2, 15),
+  );
 
   const handleOnClick = useCallback(
     (value: string, search: string) => {
@@ -157,7 +163,7 @@ function Pills(props: {
           {activePill.value === value && (
             <m.span
               className="absolute inset-0 z-10 bg-accent mix-blend-multiply"
-              layoutId={props.option.name}
+              layoutId={layoutId.current}
               style={{borderRadius: 9999}}
               transition={{bounce: 0.2, duration: 0.6, type: 'spring'}}
             />

@@ -37,6 +37,7 @@
     "@shopify/hydrogen": "^2024.1.0",
     "@shopify/hydrogen-react": "^2024.1.0",
     "@shopify/remix-oxygen": "^2.0.3",
+    "@tanem/react-nprogress": "^5.0.51",
     "@vercel/stega": "^0.1.0",
     "class-variance-authority": "^0.7.0",
     "color2k": "^2.0.3",

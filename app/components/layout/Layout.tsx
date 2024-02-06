@@ -11,6 +11,7 @@ import {AnnouncementBar} from './AnnoucementBar';
 import {Footer} from './Footer';
 import {FramerMotion} from './FramerMotion';
 import {Header} from './Header';
+import {NavigationProgressBar} from './NavigationProgressBar';
 
 const VisualEditing = lazy(() =>
   import('~/components/sanity/VisualEditing').then((mod) => ({
@@ -36,6 +37,7 @@ export function Layout({children = null}: LayoutProps) {
       storefrontToken={env?.PUBLIC_STOREFRONT_API_TOKEN!}
     >
       <FramerMotion>
+        <NavigationProgressBar />
         <AnnouncementBar />
         <Header />
         <main>{children}</main>

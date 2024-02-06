@@ -1,3 +1,4 @@
+import type {LinkProps} from '@remix-run/react';
 import type {TypeFromSelection} from 'groqd';
 
 import {Link} from '@remix-run/react';
@@ -14,6 +15,7 @@ export function SanityInternalLink(props: {
   children?: React.ReactNode;
   className?: string;
   data?: SanityInternalLinkProps;
+  onClick?: () => void;
 }) {
   const locale = useLocale();
   const {children, className, data} = props;
@@ -53,6 +55,7 @@ export function SanityInternalLink(props: {
         'focus-visible:rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
         className,
       ])}
+      onClick={props.onClick}
       prefetch="intent"
       to={url}
     >

@@ -170,6 +170,7 @@ function Pills(props: {
           )}
           <m.span
             className="inline-flex h-8 select-none items-center justify-center whitespace-nowrap px-3 py-1.5"
+            tabIndex={-1}
             whileTap={{scale: 0.9}}
           >
             {value}

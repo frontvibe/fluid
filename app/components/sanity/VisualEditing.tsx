@@ -1,7 +1,7 @@
-import type {HistoryAdapterNavigate} from '@sanity/overlays';
+import type {HistoryAdapterNavigate} from '@sanity/visual-editing';
 
 import {useFetcher, useLocation, useNavigate} from '@remix-run/react';
-import {enableOverlays} from '@sanity/overlays';
+import {enableVisualEditing} from '@sanity/visual-editing';
 import {cx} from 'class-variance-authority';
 import {useEffect, useRef} from 'react';
 
@@ -17,7 +17,7 @@ export function VisualEditing() {
   const client = useSanityClient();
 
   useEffect(() => {
-    const disable = enableOverlays({
+    const disable = enableVisualEditing({
       history: {
         subscribe: (navigate) => {
           navigateComposerRef.current = navigate;

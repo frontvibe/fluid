@@ -67,7 +67,7 @@ export default {
   plugins: [
     typographyPlugin,
     tailwindAnimatePlugin,
-    plugin(({addComponents}) => {
+    plugin(({addComponents, addVariant}) => {
       addComponents({
         '.section-padding': {
           paddingBottom: 'calc(var(--paddingBottom) * .75)',
@@ -78,6 +78,7 @@ export default {
           },
         },
       });
+      addVariant('touchdevice', '@media (pointer: coarse)');
     }),
   ],
 } satisfies Config;

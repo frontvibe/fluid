@@ -29,7 +29,7 @@ export function DesktopNavigation(props: {data?: NavigationProps}) {
 
   return (
     <NavigationMenu
-      className="hidden lg:block [@media(pointer:coarse)]:hidden"
+      className="touchdevice:hidden hidden lg:block"
       id="header-nav"
     >
       <CssVars

@@ -16,6 +16,7 @@ import {
   DrawerNestedRoot,
   DrawerTrigger,
 } from '../ui/Drawer';
+import {ScrollArea} from '../ui/ScrollArea';
 
 const mobileMenuLinkClass = cn(
   'flex rounded-md px-3 py-2 items-center gap-2 w-full transition-colors hover:bg-accent hover:text-accent-foreground',
@@ -30,7 +31,7 @@ export function MobileNavigation(props: {data?: NavigationProps}) {
 
   // Todo => Add <Navlink /> support
   return (
-    <div className="lg:hidden [@media(pointer:coarse)]:block">
+    <div className="touchdevice:block lg:hidden">
       <Drawer
         direction={device === 'desktop' ? 'right' : 'bottom'}
         onOpenChange={setOpen}
@@ -80,11 +81,15 @@ function MobileNavigationContent(props: {
       onCloseAutoFocus={(e) => e.preventDefault()}
       onOpenAutoFocus={(e) => e.preventDefault()}
     >
-      <nav className="mt-4 flex h-full flex-col gap-0 p-6">
-        <ul className="flex flex-1 flex-col gap-2 overflow-x-hidden overflow-y-scroll pb-6 text-xl font-medium">
-          {props.children}
-        </ul>
-      </nav>
+      <div className="mt-4 size-full overflow-hidden p-6">
+        <ScrollArea className="size-full pr-4">
+          <nav>
+            <ul className="flex flex-col gap-2 pb-6 text-xl font-medium">
+              {props.children}
+            </ul>
+          </nav>
+        </ScrollArea>
+      </div>
     </DrawerContent>
   );
 }

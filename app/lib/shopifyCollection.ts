@@ -8,7 +8,7 @@ import type {ShopifyCollection} from '~/components/sections/CollectionProductGri
 import {
   FILTER_URL_PREFIX,
   type SortParam,
-} from '~/components/collection/SortFilter';
+} from '~/components/collection/SortFilterLayout';
 
 import type {I18nLocale} from './type';
 

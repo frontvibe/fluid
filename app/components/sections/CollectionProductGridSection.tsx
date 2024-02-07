@@ -21,7 +21,7 @@ import type {loader} from '~/routes/($locale).collections.$collectionHandle';
 import {useLocale} from '~/hooks/useLocale';
 import {getAppliedFilters} from '~/lib/shopifyCollection';
 
-import {SortFilter} from '../collection/SortFilter';
+import {SortFilter} from '../collection/SortFilterLayout';
 import {ProductCardGrid} from '../product/ProductCardGrid';
 
 type CollectionProductGridSectionProps = TypeFromSelection<
@@ -66,6 +66,7 @@ export function CollectionProductGridSection(
               <SortFilter
                 appliedFilters={appliedFilters}
                 filters={collection?.products.filters as Filter[]}
+                productsCount={collection?.products.nodes.length}
                 sectionSettings={props.data.settings}
               >
                 <Pagination connection={collection?.products}>
@@ -81,6 +82,7 @@ export function CollectionProductGridSection(
                     <>
                       <div className="mb-6 flex items-center justify-center">
                         <PreviousLink>
+                          {/* Todo => Add theme content strings */}
                           {isLoading ? 'Loading...' : 'Load previous'}
                         </PreviousLink>
                       </div>
@@ -97,6 +99,7 @@ export function CollectionProductGridSection(
                       />
                       <div className="mt-6 flex items-center justify-center">
                         <NextLink>
+                          {/* Todo => Add theme content strings */}
                           {isLoading ? 'Loading...' : 'Load more products'}
                         </NextLink>
                       </div>

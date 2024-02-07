@@ -18,7 +18,7 @@ export function CartEmpty({
 }) {
   const container = {
     drawer: cx([
-      'p-5 content-start gap-4 pb-8 transition flex-1 overflow-y-scroll md:gap-12 md:pb-12',
+      'p-5 content-start gap-4 pb-8 transition flex-1 md:gap-12 md:pb-12',
     ]),
     page: cx([
       !hidden && 'grid',

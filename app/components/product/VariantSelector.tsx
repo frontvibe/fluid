@@ -8,7 +8,7 @@ import type {PartialObjectDeep} from 'type-fest/source/partial-deep';
 import {useNavigate} from '@remix-run/react';
 import {parseGid} from '@shopify/hydrogen';
 import {m} from 'framer-motion';
-import {useCallback, useMemo, useRef, useState} from 'react';
+import {useMemo, useRef, useState} from 'react';
 
 import {useSelectedVariant} from '~/hooks/useSelectedVariant';
 import {cn} from '~/lib/utils';
@@ -123,20 +123,17 @@ function Pills(props: {
       Math.random().toString(36).substring(2, 15),
   );
 
-  const handleOnClick = useCallback(
-    (value: string, search: string) => {
-      const newActivePill = values.find((option) => option.value === value);
+  const handleSelectVariant = (value: string, search: string) => {
+    const newActivePill = values.find((option) => option.value === value);
 
-      if (newActivePill) {
-        setActivePill(newActivePill);
-        navigate(search, {
-          preventScrollReset: true,
-          replace: true,
-        });
-      }
-    },
-    [setActivePill, values, navigate],
-  );
+    if (newActivePill) {
+      setActivePill(newActivePill);
+      navigate(search, {
+        preventScrollReset: true,
+        replace: true,
+      });
+    }
+  };
 
   // Animated tabs implementation inspired by the fantastic Build UI recipes
   // (Check out the original at: https://buildui.com/recipes/animated-tabs)
@@ -155,7 +152,7 @@ function Pills(props: {
           key={value}
           layout
           layoutRoot
-          onClick={() => handleOnClick(value, search)}
+          onClick={() => handleSelectVariant(value, search)}
           style={{
             WebkitTapHighlightColor: 'transparent',
           }}

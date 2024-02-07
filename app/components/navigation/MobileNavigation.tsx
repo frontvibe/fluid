@@ -52,9 +52,7 @@ export function MobileNavigation(props: {data?: NavigationProps}) {
                   />
                 )}
                 {item._type === 'externalLink' && (
-                  <div onClick={handleClose}>
-                    <SanityExternalLink data={item} />
-                  </div>
+                  <SanityExternalLink data={item} />
                 )}
                 {item._type === 'nestedNavigation' && (
                   <MobileNavigationNested data={item} onClose={handleClose} />

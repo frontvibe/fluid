@@ -14,24 +14,21 @@ export function TogglePreviewMode() {
   const fetcher = useFetcher<{success?: boolean}>();
   const {pathname} = useLocation();
 
-  const handleShortcut = useCallback(() => {
-    fetcher.load(`/sanity/preview?slug=${pathname}`);
-  }, [fetcher, pathname]);
-
-  const keyDownHandler = useCallback(
+  const handleTogglePreviewMode = useCallback(
     (event: KeyboardEvent) => {
       if (event.metaKey && event.ctrlKey && event.key === 'p') {
-        handleShortcut();
+        fetcher.load(`/sanity/preview?slug=${pathname}`);
       }
     },
-    [handleShortcut],
+    [fetcher, pathname],
   );
 
   useEffect(() => {
-    document.addEventListener('keydown', keyDownHandler);
+    document.addEventListener('keydown', handleTogglePreviewMode);
 
-    return () => document.removeEventListener('keydown', keyDownHandler);
-  }, [keyDownHandler]);
+    return () =>
+      document.removeEventListener('keydown', handleTogglePreviewMode);
+  }, [handleTogglePreviewMode]);
 
   return null;
 }

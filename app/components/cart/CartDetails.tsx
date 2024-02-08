@@ -7,10 +7,12 @@ import {Money} from '@shopify/hydrogen';
 import {cx} from 'class-variance-authority';
 import {AnimatePresence, m} from 'framer-motion';
 
+import {cn} from '~/lib/utils';
+
 import type {CartLayouts} from './Cart';
 
 import {Button} from '../ui/Button';
-import {DrawerFooter} from '../ui/Drawer';
+import {Card, CardContent} from '../ui/Card';
 import {CartDiscounts} from './CartDiscounts';
 import {CartLines} from './CartLines';
 
@@ -26,29 +28,56 @@ export function CartDetails({
   // @todo: get optimistic cart cost
   const cartHasItems = !!cart && cart.totalQuantity > 0;
 
+  const drawerMotionVariants = {
+    hide: {
+      height: 0,
+    },
+    show: {
+      height: 'auto',
+    },
+  };
+
+  const pageMotionVariants = {
+    hide: {
+      opacity: 0,
+      transition: {
+        duration: 0,
+      },
+    },
+    show: {
+      opacity: 1,
+    },
+  };
+
   return (
     <CartDetailsLayout layout={layout}>
       <CartLines layout={layout} lines={cart?.lines} onClose={onClose} />
-      <AnimatePresence>
-        {cartHasItems && (
-          <m.div
-            animate={{
-              height: 'auto',
-            }}
-            exit={{
-              height: 0,
-            }}
-            initial={{
-              height: 0,
-            }}
-          >
-            <CartSummary cost={cart.cost} layout={layout}>
-              <CartDiscounts discountCodes={cart.discountCodes} />
-              <CartCheckoutActions checkoutUrl={cart.checkoutUrl} />
-            </CartSummary>
-          </m.div>
-        )}
-      </AnimatePresence>
+      <div>
+        <AnimatePresence>
+          {cartHasItems && (
+            <m.div
+              animate={'show'}
+              className={cn([
+                layout === 'page' &&
+                  'lg:sticky lg:top-[var(--desktopHeaderHeight)]',
+              ])}
+              exit={'hide'}
+              initial={'hide'}
+              variants={
+                layout === 'drawer' ? drawerMotionVariants : pageMotionVariants
+              }
+            >
+              <CartSummary cost={cart.cost} layout={layout}>
+                <CartDiscounts
+                  discountCodes={cart.discountCodes}
+                  layout={layout}
+                />
+                <CartCheckoutActions checkoutUrl={cart.checkoutUrl} />
+              </CartSummary>
+            </m.div>
+          )}
+        </AnimatePresence>
+      </div>
     </CartDetailsLayout>
   );
 }
@@ -60,7 +89,7 @@ function CartDetailsLayout(props: {
   return props.layout === 'drawer' ? (
     <>{props.children}</>
   ) : (
-    <div className="container grid w-full gap-8 pb-12 md:grid-cols-2 md:items-start md:gap-8 lg:gap-12">
+    <div className="container grid w-full gap-8 pb-12 md:grid-cols-2 md:items-start md:gap-8 lg:gap-16">
       {props.children}
     </div>
   );
@@ -93,10 +122,10 @@ function CartSummary({
 }) {
   const summary = {
     drawer: cx('grid gap-4 p-6 border-t border-border md:px-12'),
-    page: cx('sticky grid gap-6 p-4 md:px-6 md:translate-y-4 rounded w-full'),
+    page: cx('grid gap-6'),
   };
 
-  return (
+  const Content = () => (
     <div aria-labelledby="summary-heading" className={summary[layout]}>
       <h2 className="sr-only">
         {/* Todo => add theme content string */}
@@ -117,5 +146,17 @@ function CartSummary({
       </dl>
       {children}
     </div>
+  );
+
+  if (layout === 'drawer') {
+    return <Content />;
+  }
+
+  return (
+    <Card className="mt-5">
+      <CardContent className="px-5 py-6 lg:p-8">
+        <Content />
+      </CardContent>
+    </Card>
   );
 }

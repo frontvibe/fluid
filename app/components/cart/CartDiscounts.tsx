@@ -4,6 +4,7 @@ import {CartForm} from '@shopify/hydrogen';
 import {cx} from 'class-variance-authority';
 
 import {useLocalePath} from '~/hooks/useLocalePath';
+import {cn} from '~/lib/utils';
 
 import {IconRemove} from '../icons/IconRemove';
 import {Button} from '../ui/Button';
@@ -16,8 +17,10 @@ import {Input} from '../ui/Input';
  */
 export function CartDiscounts({
   discountCodes,
+  layout,
 }: {
   discountCodes: CartType['discountCodes'];
+  layout: 'drawer' | 'page';
 }) {
   const codes: string[] =
     discountCodes
@@ -47,7 +50,13 @@ export function CartDiscounts({
 
       {/* Show an input to apply a discount */}
       <UpdateDiscountForm discountCodes={codes}>
-        <div className={cx('flex', 'items-center justify-between gap-4')}>
+        <div
+          className={cn(
+            'flex',
+            layout === 'page' && 'flex-col lg:flex-row',
+            'items-center justify-between gap-4',
+          )}
+        >
           {/* Todo => add theme content string */}
           <Input
             data-vaul-no-drag={true}
@@ -55,7 +64,11 @@ export function CartDiscounts({
             placeholder="Discount code"
             type="text"
           />
-          <Button data-vaul-no-drag={true} variant="outline">
+          <Button
+            className={cn(layout === 'page' && 'w-full lg:w-auto')}
+            data-vaul-no-drag={true}
+            variant="outline"
+          >
             {/* Todo => add theme content string */}
             Apply Discount
           </Button>

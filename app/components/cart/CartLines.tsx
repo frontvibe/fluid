@@ -30,8 +30,6 @@ export function CartLines({
       : 'pl-4 pr-2 overflow-auto transition md:px-12',
   ]);
 
-  if (currentLines?.length === 0) return null;
-
   return (
     <Layout layout={layout}>
       <section aria-labelledby="cart-contents" className={className}>

@@ -3,10 +3,11 @@ import type {
   ProductFilter,
 } from '@shopify/hydrogen/storefront-api-types';
 
-import {useLocation, useNavigate, useSearchParams} from '@remix-run/react';
+import {useLocation, useNavigate} from '@remix-run/react';
 import {AnimatePresence, m} from 'framer-motion';
 import {useCallback, useState} from 'react';
 
+import {useOptimisticNavigationData} from '~/hooks/useOptimisticNavigationData';
 import {type CmsSectionSettings} from '~/hooks/useSettingsCssVars';
 import {cn} from '~/lib/utils';
 
@@ -27,7 +28,7 @@ import {
 } from '../ui/Drawer';
 import {ScrollArea} from '../ui/ScrollArea';
 import {DefaultFilter, PriceRangeFilter} from './Filter';
-import {SortMenu, SortRadioGroup} from './Sort';
+import {DesktopSort, MobileSort} from './Sort';
 
 export type AppliedFilter = {
   filter: ProductFilter;
@@ -71,9 +72,12 @@ export function SortFilter({
           {/*
             // Todo => add strings to themeContent
           */}
-          <small>{productsCount} products</small>
+          <small className="flex items-center gap-1">
+            <span className="[font-variant:tabular-nums]">{productsCount}</span>
+            <span>products</span>
+          </small>
         </div>
-        <SortMenu sectionSettings={sectionSettings} />
+        <DesktopSort sectionSettings={sectionSettings} />
       </div>
       <div className="relative lg:flex lg:flex-row lg:flex-wrap">
         <div className="mt-6">
@@ -99,19 +103,36 @@ export function SortFilter({
   );
 }
 
-function MobileDrawer(props: {
+function MobileDrawer({
+  appliedFilters,
+  filters,
+}: {
   appliedFilters: AppliedFilter[];
   filters: Filter[];
 }) {
-  const {appliedFilters, filters} = props;
   const [open, setOpen] = useState(false);
   // Todo => add strings to themeContent
   const heading = 'Filter and Sort';
   const navigate = useNavigate();
   const {pathname} = useLocation();
+  const {optimisticData, pending} =
+    useOptimisticNavigationData<boolean>('clear-all-filters');
+
+  // Here we can optimistically clear all filters and close DrawerFooter
+  if (optimisticData) {
+    appliedFilters = [];
+  }
 
   const handleClearFilters = useCallback(() => {
-    navigate(pathname, {preventScrollReset: true, replace: true});
+    navigate(pathname, {
+      preventScrollReset: true,
+      replace: true,
+      // Set optimistic data to clear all filters
+      state: {
+        optimisticData: true,
+        optimisticId: 'clear-all-filters',
+      },
+    });
   }, [navigate, pathname]);
 
   return (
@@ -133,10 +154,10 @@ function MobileDrawer(props: {
           <DrawerHeader className="border-b text-xl font-medium">
             {heading}
           </DrawerHeader>
-          <div className="size-full overflow-hidden px-6">
-            <ScrollArea className="size-full pr-2">
+          <div className="size-full overflow-hidden">
+            <ScrollArea className="size-full px-6">
               <div className="pt-6">
-                <SortRadioGroup />
+                <MobileSort />
               </div>
               <div className="pr-1">
                 {filters.map((filter: Filter) => (
@@ -145,7 +166,7 @@ function MobileDrawer(props: {
                     <ul className="mt-3" key={filter.id}>
                       {filter.values?.map((option) => {
                         return (
-                          <li className="py-3" key={option.id}>
+                          <li className="[&_label]:py-3" key={option.id}>
                             {filterMarkup(filter, option, appliedFilters)}
                           </li>
                         );
@@ -172,9 +193,20 @@ function MobileDrawer(props: {
                   }}
                 >
                   <DrawerFooter className="grid grid-flow-col grid-cols-2 items-center justify-center gap-5 border-t py-6">
-                    <Button onClick={handleClearFilters} variant="ghost">
+                    <Button
+                      className={cn([
+                        'flex items-center gap-1',
+                        pending &&
+                          'pointer-events-none animate-pulse delay-500',
+                      ])}
+                      onClick={handleClearFilters}
+                      variant="ghost"
+                    >
                       {/* // Todo => add strings to themeContent */}
-                      Clear ({appliedFilters.length})
+                      <span>Clear</span>
+                      <span className="[font-variant:tabular-nums]">
+                        ({appliedFilters.length})
+                      </span>
                     </Button>
                     <Button onClick={() => setOpen(false)}>
                       {/* // Todo => add strings to themeContent */}

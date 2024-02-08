@@ -9,18 +9,20 @@ import {
   PrefetchPageLinks,
   useLocation,
   useNavigate,
-  useNavigation,
   useSearchParams,
 } from '@remix-run/react';
 import {useCallback, useMemo, useState} from 'react';
 import useDebounce from 'react-use/lib/useDebounce';
 
+import {useOptimisticNavigationData} from '~/hooks/useOptimisticNavigationData';
 import {cn} from '~/lib/utils';
+
+import type {AppliedFilter} from './SortFilterLayout';
 
 import {Checkbox} from '../ui/Checkbox';
 import {Input} from '../ui/Input';
 import {Label} from '../ui/Label';
-import {type AppliedFilter, FILTER_URL_PREFIX} from './SortFilterLayout';
+import {FILTER_URL_PREFIX} from './SortFilterLayout';
 
 export function DefaultFilter(props: {
   appliedFilters: AppliedFilter[];
@@ -29,70 +31,106 @@ export function DefaultFilter(props: {
   const {appliedFilters, option} = props;
   const [params] = useSearchParams();
   const [prefetchPage, setPrefetchPage] = useState<null | string>(null);
-  const navigate = useNavigate();
-  const navigation = useNavigation();
   const location = useLocation();
   const addFilterLink = getFilterLink(option.input as string, params, location);
   const appliedFilter = getAppliedFilter(option, appliedFilters);
-  const isNavigationPending = navigation.state !== 'idle';
 
-  const getRemoveFilterLink = useCallback(() => {
+  const removeFilterLink = useMemo(() => {
     if (!appliedFilter) {
-      return null;
+      return location.pathname;
     }
     return getAppliedFilterLink(appliedFilter, params, location);
   }, [appliedFilter, params, location]);
 
-  const handleToggleFilter = useCallback(() => {
-    if (appliedFilter) {
-      const removeFilterLink = getRemoveFilterLink();
-      if (removeFilterLink) {
-        navigate(removeFilterLink, {
-          preventScrollReset: true,
-          replace: true,
-        });
-      }
-      return;
-    }
-
-    navigate(addFilterLink, {
-      preventScrollReset: true,
-      replace: true,
-    });
-  }, [addFilterLink, appliedFilter, navigate, getRemoveFilterLink]);
-
   // Prefetch the page that will be navigated to when the user hovers or touches the filter
   const handleSetPrefetch = useCallback(() => {
-    const removeFilterLink = getRemoveFilterLink();
     if (appliedFilter) {
       setPrefetchPage(removeFilterLink);
       return;
     }
 
     setPrefetchPage(addFilterLink);
-  }, [getRemoveFilterLink, addFilterLink, appliedFilter]);
+  }, [removeFilterLink, addFilterLink, appliedFilter]);
+
+  return (
+    <div onMouseEnter={handleSetPrefetch} onTouchStart={handleSetPrefetch}>
+      <FilterCheckbox
+        addFilterLink={addFilterLink}
+        filterIsApplied={Boolean(appliedFilter)}
+        option={option}
+        removeFilterLink={removeFilterLink}
+      />
+      {prefetchPage && <PrefetchPageLinks page={prefetchPage} />}
+    </div>
+  );
+}
+
+function FilterCheckbox({
+  addFilterLink,
+  filterIsApplied,
+  option,
+  removeFilterLink,
+}: {
+  addFilterLink: string;
+  filterIsApplied: boolean;
+  option: Filter['values'][0];
+  removeFilterLink: string;
+}) {
+  const navigate = useNavigate();
+  const optionId = option.id;
+  const {optimisticData, pending} = useOptimisticNavigationData<{
+    isFilterChecked: boolean;
+  }>(optionId);
+  const {optimisticData: clearFilters} =
+    useOptimisticNavigationData<boolean>('clear-all-filters');
+
+  // Use optimistic checked state while the navigation is pending
+  if (optimisticData) {
+    filterIsApplied = optimisticData.isFilterChecked;
+  }
+  // Here we can optimistically clear all filters
+  else if (clearFilters) {
+    filterIsApplied = false;
+  }
+
+  const handleToggleFilter = useCallback(() => {
+    const navigateTo = filterIsApplied ? removeFilterLink : addFilterLink;
+    const optimisticChecked = !filterIsApplied;
+
+    navigate(navigateTo, {
+      preventScrollReset: true,
+      replace: true,
+      state: {
+        optimisticData: {
+          isFilterChecked: optimisticChecked,
+        },
+        optimisticId: optionId,
+      },
+    });
+  }, [filterIsApplied, removeFilterLink, addFilterLink, navigate, optionId]);
 
   return (
     <div
       className={cn([
         'flex items-center gap-2',
-        isNavigationPending && 'lg:animate-pulse',
+        // If the navigation is pending, animate after a delay
+        // to avoid flickering when navigation is fast
+        pending && 'pointer-events-none animate-pulse delay-500',
       ])}
-      onMouseEnter={handleSetPrefetch}
-      onTouchStart={handleSetPrefetch}
     >
       <Checkbox
-        checked={Boolean(appliedFilter)}
-        id={option.id}
+        checked={filterIsApplied}
+        id={optionId}
         onCheckedChange={handleToggleFilter}
       />
       <Label
-        className="w-full cursor-pointer lg:transition-opacity lg:hover:opacity-70"
-        htmlFor={option.id}
+        className={cn([
+          'w-full cursor-pointer lg:transition-opacity lg:hover:opacity-70',
+        ])}
+        htmlFor={optionId}
       >
         {option.label}
       </Label>
-      {prefetchPage && <PrefetchPageLinks page={prefetchPage} />}
     </div>
   );
 }

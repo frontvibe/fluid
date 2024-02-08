@@ -1,17 +1,16 @@
 import type {Location} from '@remix-run/react';
 
 import {
-  Link,
   PrefetchPageLinks,
   useLocation,
   useNavigate,
-  useNavigation,
   useSearchParams,
 } from '@remix-run/react';
 import {useCallback, useMemo, useState} from 'react';
 
 import type {CmsSectionSettings} from '~/hooks/useSettingsCssVars';
 
+import {useOptimisticNavigationData} from '~/hooks/useOptimisticNavigationData';
 import {useSettingsCssVars} from '~/hooks/useSettingsCssVars';
 import {cn} from '~/lib/utils';
 
@@ -21,17 +20,26 @@ import {IconSort} from '../icons/IconSort';
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from '../ui/DropdownMenu';
 import {Label} from '../ui/Label';
 import {RadioGroup, RadioGroupItem} from '../ui/RadioGroup';
 
+type SortItem = {
+  key: SortParam;
+  label: string;
+};
+
 function useSortItems() {
-  const location = useLocation();
-  const search = location.search;
+  const {search} = useLocation();
+  const {optimisticData: clearFilters} =
+    useOptimisticNavigationData<boolean>('clear-all-filters');
+  const {optimisticData} = useOptimisticNavigationData<SortParam>('sort-radio');
+
   // Todo => add strings to themeContent
-  const items: {key: SortParam; label: string}[] = useMemo(
+  const items: SortItem[] = useMemo(
     () => [
       {key: 'featured', label: 'Featured'},
       {
@@ -54,15 +62,30 @@ function useSortItems() {
     [],
   );
 
-  const activeItem = items.find((item) => search.includes(`?sort=${item.key}`));
-  return {activeItem, items};
+  if (optimisticData) {
+    return {
+      activeItem: items.find((item) => item.key === optimisticData),
+      items,
+    };
+  }
+  // Optimistically reset to default sort item when clearing all filters
+  else if (clearFilters) {
+    return {
+      activeItem: items[0],
+      items,
+    };
+  }
+
+  return {
+    activeItem:
+      items.find((item) => search.includes(`?sort=${item.key}`)) || items[0],
+    items,
+  };
 }
 
-export function SortMenu(props: {sectionSettings?: CmsSectionSettings}) {
-  const {activeItem, items} = useSortItems();
-  const location = useLocation();
-  const [params] = useSearchParams();
+export function DesktopSort(props: {sectionSettings?: CmsSectionSettings}) {
   const cssVars = useSettingsCssVars({settings: props.sectionSettings});
+  const {activeItem, items} = useSortItems();
 
   return (
     <DropdownMenu>
@@ -78,44 +101,20 @@ export function SortMenu(props: {sectionSettings?: CmsSectionSettings}) {
           <span>{(activeItem || items[0]).label}</span>
         </span>
       </DropdownMenuTrigger>
-      <DropdownMenuContent asChild>
-        <nav>
-          <style dangerouslySetInnerHTML={{__html: cssVars}} />
+      <DropdownMenuContent onCloseAutoFocus={(e) => e.preventDefault()}>
+        <style dangerouslySetInnerHTML={{__html: cssVars}} />
+        <SortRadioGroup layout="desktop">
           {items.map((item) => (
-            <DropdownMenuItem asChild key={item.label}>
-              <Link
-                className={`block cursor-pointer px-3 pb-2 text-sm ${
-                  activeItem?.key === item.key ? 'font-bold' : 'font-normal'
-                }`}
-                preventScrollReset
-                replace
-                to={getSortLink(item.key, params, location)}
-              >
-                {item.label}
-              </Link>
-            </DropdownMenuItem>
+            <SortRadioItem item={item} key={item.label} layout="desktop" />
           ))}
-        </nav>
+        </SortRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>
   );
 }
 
-export function SortRadioGroup() {
-  const {activeItem, items} = useSortItems();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const [params] = useSearchParams();
-
-  const handleToggleSort = useCallback(
-    (value: string) => {
-      navigate(getSortLink(value as SortParam, params, location), {
-        preventScrollReset: true,
-        replace: true,
-      });
-    },
-    [navigate, params, location],
-  );
+export function MobileSort() {
+  const {items} = useSortItems();
 
   return (
     <div>
@@ -130,29 +129,73 @@ export function SortRadioGroup() {
           </span>
         </span>
       </div>
-      <RadioGroup
-        className={cn(['mt-3 flex flex-col gap-0'])}
-        defaultValue={activeItem?.key || items[0].key}
-        onValueChange={handleToggleSort}
-      >
+      <SortRadioGroup className="mt-3 flex flex-col gap-0" layout="mobile">
         {items.map((item) => (
-          <SortRadioItem item={item} key={item.key} />
+          <SortRadioItem item={item} key={item.key} layout="mobile" />
         ))}
-      </RadioGroup>
+      </SortRadioGroup>
     </div>
   );
 }
 
-function SortRadioItem(props: {
-  item: {
-    key: SortParam;
-    label: string;
-  };
+function SortRadioGroup(props: {
+  children: React.ReactNode;
+  className?: string;
+  layout: 'desktop' | 'mobile';
 }) {
-  const {item} = props;
+  const {activeItem, items} = useSortItems();
+  const [params] = useSearchParams();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleToggleSort = useCallback(
+    (value: SortParam) => {
+      const to = getSortLink(value, params, location);
+      navigate(to, {
+        preventScrollReset: true,
+        replace: true,
+        state: {
+          optimisticData: value,
+          optimisticId: 'sort-radio',
+        },
+      });
+    },
+    [params, location, navigate],
+  );
+
+  if (props.layout === 'desktop') {
+    return (
+      <DropdownMenuRadioGroup
+        className={cn([props.className])}
+        onValueChange={(value) => handleToggleSort(value as SortParam)}
+        value={activeItem?.key || items[0].key}
+      >
+        {props.children}
+      </DropdownMenuRadioGroup>
+    );
+  }
+
+  return (
+    <RadioGroup
+      className={cn([props.className])}
+      onValueChange={handleToggleSort}
+      value={activeItem?.key || items[0].key}
+    >
+      {props.children}
+    </RadioGroup>
+  );
+}
+
+function SortRadioItem(props: {
+  className?: string;
+  item: SortItem;
+  layout: 'desktop' | 'mobile';
+}) {
+  const {item, layout} = props;
   const [prefetchPage, setPrefetchPage] = useState<null | string>(null);
   const location = useLocation();
   const [params] = useSearchParams();
+  const {pending} = useOptimisticNavigationData<SortParam>('sort-radio');
 
   // Prefetch the page that will be navigated to when the user hovers or touches
   const handleSetPrefetch = useCallback(() => {
@@ -160,9 +203,36 @@ function SortRadioItem(props: {
     setPrefetchPage(sortLink);
   }, [item.key, params, location]);
 
+  if (layout === 'desktop') {
+    return (
+      <>
+        <DropdownMenuRadioItem
+          className={cn([
+            // If the navigation is pending, animate after a delay
+            // to avoid flickering when navigation is fast
+            pending && 'pointer-events-none animate-pulse delay-500',
+            props.className,
+          ])}
+          onMouseEnter={handleSetPrefetch}
+          onTouchStart={handleSetPrefetch}
+          value={item.key}
+        >
+          {item.label}
+        </DropdownMenuRadioItem>
+        {prefetchPage && <PrefetchPageLinks page={prefetchPage} />}
+      </>
+    );
+  }
+
   return (
     <div
-      className="flex items-center gap-x-3 py-3"
+      className={cn([
+        'flex items-center gap-x-3 py-3',
+        // If the navigation is pending, animate after a delay
+        // to avoid flickering when navigation is fast
+        pending && 'pointer-events-none animate-pulse delay-500',
+        props.className,
+      ])}
       key={item.key}
       onMouseEnter={handleSetPrefetch}
       onTouchStart={handleSetPrefetch}

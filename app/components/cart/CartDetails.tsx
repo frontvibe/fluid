@@ -5,10 +5,12 @@ import type {
 
 import {Money} from '@shopify/hydrogen';
 import {cx} from 'class-variance-authority';
+import {AnimatePresence, m} from 'framer-motion';
 
 import type {CartLayouts} from './Cart';
 
 import {Button} from '../ui/Button';
+import {DrawerFooter} from '../ui/Drawer';
 import {CartDiscounts} from './CartDiscounts';
 import {CartLines} from './CartLines';
 
@@ -27,12 +29,26 @@ export function CartDetails({
   return (
     <CartDetailsLayout layout={layout}>
       <CartLines layout={layout} lines={cart?.lines} onClose={onClose} />
-      {cartHasItems && (
-        <CartSummary cost={cart.cost} layout={layout}>
-          <CartDiscounts discountCodes={cart.discountCodes} />
-          <CartCheckoutActions checkoutUrl={cart.checkoutUrl} />
-        </CartSummary>
-      )}
+      <AnimatePresence>
+        {cartHasItems && (
+          <m.div
+            animate={{
+              height: 'auto',
+            }}
+            exit={{
+              height: 0,
+            }}
+            initial={{
+              height: 0,
+            }}
+          >
+            <CartSummary cost={cart.cost} layout={layout}>
+              <CartDiscounts discountCodes={cart.discountCodes} />
+              <CartCheckoutActions checkoutUrl={cart.checkoutUrl} />
+            </CartSummary>
+          </m.div>
+        )}
+      </AnimatePresence>
     </CartDetailsLayout>
   );
 }
@@ -81,8 +97,8 @@ function CartSummary({
   };
 
   return (
-    <section aria-labelledby="summary-heading" className={summary[layout]}>
-      <h2 className="sr-only" id="summary-heading">
+    <div aria-labelledby="summary-heading" className={summary[layout]}>
+      <h2 className="sr-only">
         {/* Todo => add theme content string */}
         Order summary
       </h2>
@@ -100,6 +116,6 @@ function CartSummary({
         </div>
       </dl>
       {children}
-    </section>
+    </div>
   );
 }

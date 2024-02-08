@@ -41,9 +41,9 @@ function Badge(props: {cart?: CartType | null; count: number}) {
   const path = useLocalePath({path: '/cart'});
   const {themeContent} = useSanityThemeContent();
   const [cartOpen, setCartOpen] = useState(false);
-  const [cartIsLoading, setCartIsLoading] = useState(false);
   const addToCartFetchers = useCartFetchers(CartForm.ACTIONS.LinesAdd);
   const device = useDevice();
+  const cartIsLoading = Boolean(addToCartFetchers.length);
 
   const handleOpen = useCallback(() => {
     if (cartOpen || !addToCartFetchers.length) return;
@@ -54,15 +54,9 @@ function Badge(props: {cart?: CartType | null; count: number}) {
     setCartOpen(false);
   }, []);
 
-  // toggle cart drawer when adding to cart
+  // Toggle cart drawer when adding to cart
   useEffect(() => {
     handleOpen();
-
-    if (addToCartFetchers.length) {
-      setCartIsLoading(true);
-    } else if (!addToCartFetchers.length) {
-      setCartIsLoading(false);
-    }
   }, [addToCartFetchers, handleOpen]);
 
   const BadgeCounter = useMemo(
@@ -109,7 +103,12 @@ function Badge(props: {cart?: CartType | null; count: number}) {
             {cartIsLoading && <IconLoader className="animate-spin" />}
           </DrawerTitle>
         </DrawerHeader>
-        <Cart cart={props.cart} layout="drawer" onClose={handleClose} />
+        <Cart
+          cart={props.cart}
+          layout="drawer"
+          loading={cartIsLoading}
+          onClose={handleClose}
+        />
       </DrawerContent>
     </Drawer>
   ) : (

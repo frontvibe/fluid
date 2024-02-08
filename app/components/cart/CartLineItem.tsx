@@ -47,25 +47,24 @@ export function CartLineItem({
   const variants = {
     hidden: {
       height: 0,
-      marginBottom: 0,
-      marginTop: 0,
       opacity: 0,
       transition: {
         bounce: 0,
         duration: t(0.15),
         opacity: {
-          duration: t(0.03),
+          delay: t(0.03),
         },
         type: 'spring',
       },
     },
     visible: {
       height: 'auto',
-      marginBottom: '1.25rem',
-      marginTop: '1.25rem',
       opacity: 1,
       transition: {
-        bounce: 0.1,
+        bounce: 0.3,
+        opacity: {
+          delay: t(0.025),
+        },
         type: 'spring',
       },
     },
@@ -81,11 +80,12 @@ export function CartLineItem({
         // Do not remove the form from the DOM
         optimisticData?.action === 'remove' ? 'hidden' : 'visible'
       }
-      initial={{height: 'auto', marginBottom: 0, marginTop: 0, opacity: 0}}
+      className="overflow-hidden"
+      initial="hidden"
       key={id}
       variants={variants}
     >
-      <div className="flex gap-4">
+      <div className="flex gap-4 py-5">
         <div className="size-16">
           {merchandise.image && (
             <Image

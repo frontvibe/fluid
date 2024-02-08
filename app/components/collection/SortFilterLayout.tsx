@@ -63,7 +63,7 @@ export function SortFilter({
   return (
     <>
       {/* Desktop layout */}
-      <div className="touchdevice:hidden hidden w-full lg:flex lg:items-center lg:justify-between">
+      <div className="hidden w-full touchdevice:hidden lg:flex lg:items-center lg:justify-between">
         <div className="flex items-center">
           <button className="py-2 pr-2" onClick={() => setIsOpen(!isOpen)}>
             <IconFilters />
@@ -79,7 +79,7 @@ export function SortFilter({
         <div className="mt-6">
           <div
             className={cn([
-              'touchdevice:hidden hidden lg:block',
+              'hidden touchdevice:hidden lg:block',
               'transition-all duration-200',
               isOpen
                 ? 'sticky top-[calc(var(--desktopHeaderHeight)_+_1rem)] opacity-100 md:w-[240px] md:min-w-[240px] md:pr-8'
@@ -158,31 +158,31 @@ function MobileDrawer(props: {
           </div>
           <AnimatePresence>
             {appliedFilters.length > 0 && (
-              <m.div
-                animate={{
-                  opacity: 1,
-                  transform: 'translateY(0)',
-                }}
-                exit={{
-                  opacity: 0,
-                  transform: 'translateY(100%)',
-                }}
-                initial={{
-                  opacity: 0,
-                  transform: 'translateY(100%)',
-                }}
-              >
-                <DrawerFooter className="grid grid-flow-col grid-cols-2 items-center justify-center gap-5 border-t py-6">
-                  <Button onClick={handleClearFilters} variant="ghost">
-                    {/* // Todo => add strings to themeContent */}
-                    Clear ({appliedFilters.length})
-                  </Button>
-                  <Button onClick={() => setOpen(false)}>
-                    {/* // Todo => add strings to themeContent */}
-                    Apply
-                  </Button>
-                </DrawerFooter>
-              </m.div>
+              <div>
+                <m.div
+                  animate={{
+                    height: 'auto',
+                  }}
+                  className="overflow-hidden"
+                  exit={{
+                    height: 0,
+                  }}
+                  initial={{
+                    height: 0,
+                  }}
+                >
+                  <DrawerFooter className="grid grid-flow-col grid-cols-2 items-center justify-center gap-5 border-t py-6">
+                    <Button onClick={handleClearFilters} variant="ghost">
+                      {/* // Todo => add strings to themeContent */}
+                      Clear ({appliedFilters.length})
+                    </Button>
+                    <Button onClick={() => setOpen(false)}>
+                      {/* // Todo => add strings to themeContent */}
+                      Apply
+                    </Button>
+                  </DrawerFooter>
+                </m.div>
+              </div>
             )}
           </AnimatePresence>
         </DrawerContent>

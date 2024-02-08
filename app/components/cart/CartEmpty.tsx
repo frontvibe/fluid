@@ -20,10 +20,10 @@ export function CartEmpty({
 }) {
   const container = {
     drawer: cx([
-      'p-5 content-start gap-4 pb-8 flex-1 flex justify-center items-center md:gap-12 md:pb-12',
+      'p-5 content-start gap-4 h-full pb-8 flex justify-center items-center md:gap-12 md:pb-12',
     ]),
     page: cx([
-      `container pb-12 w-full md:items-start gap-4 md:gap-8 lg:gap-12`,
+      `container py-12 w-full flex-1 flex text-center md:text-left items-center justify-center md:justify-start md:items-start gap-4 md:gap-8 lg:gap-12`,
     ]),
   };
 
@@ -39,7 +39,7 @@ export function CartEmpty({
           animate={{
             opacity: 1,
           }}
-          className={container[layout]}
+          className={cn(container[layout])}
           exit={{
             opacity: 0,
           }}
@@ -60,9 +60,11 @@ export function CartEmpty({
             </span>
             <div>
               {layout === 'page' ? (
-                <Link prefetch="intent" to={collectionsPath}>
-                  {label}
-                </Link>
+                <Button asChild>
+                  <Link prefetch="intent" to={collectionsPath}>
+                    {label}
+                  </Link>
+                </Button>
               ) : (
                 <Button onClick={onClose}>{label}</Button>
               )}

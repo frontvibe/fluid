@@ -8,8 +8,9 @@ import type {PartialObjectDeep} from 'type-fest/source/partial-deep';
 import {useNavigate} from '@remix-run/react';
 import {parseGid} from '@shopify/hydrogen';
 import {m} from 'framer-motion';
-import {useMemo, useRef, useState} from 'react';
+import {useMemo, useRef} from 'react';
 
+import {useOptimisticNavigationData} from '~/hooks/useOptimisticNavigationData';
 import {useSelectedVariant} from '~/hooks/useSelectedVariant';
 import {cn} from '~/lib/utils';
 
@@ -114,25 +115,46 @@ function Pills(props: {
   };
 }) {
   const navigate = useNavigate();
-  const {name, values} = props.option;
-  const [activePill, setActivePill] = useState(values[0]);
   const layoutId = useRef(
-    name +
+    props.option.name +
       '-' +
       Math.random().toString(36).substring(2, 15) +
       Math.random().toString(36).substring(2, 15),
   );
+  const optimisticId = `${props.option.name}-selected-variant`;
+  const {optimisticData, pending} =
+    useOptimisticNavigationData<string>(optimisticId);
+
+  let values = props.option.values;
+
+  if (optimisticData) {
+    // Replace the active value with the optimistic value
+    const optimisticValues = values.map((value) => {
+      if (value.value === optimisticData) {
+        return {
+          ...value,
+          isActive: true,
+        };
+      }
+
+      return {
+        ...value,
+        isActive: false,
+      };
+    }, []);
+
+    values = optimisticValues;
+  }
 
   const handleSelectVariant = (value: string, search: string) => {
-    const newActivePill = values.find((option) => option.value === value);
-
-    if (newActivePill) {
-      setActivePill(newActivePill);
-      navigate(search, {
-        preventScrollReset: true,
-        replace: true,
-      });
-    }
+    navigate(search, {
+      preventScrollReset: true,
+      replace: true,
+      state: {
+        optimisticData: value,
+        optimisticId,
+      },
+    });
   };
 
   // Animated tabs implementation inspired by the fantastic Build UI recipes
@@ -140,15 +162,14 @@ function Pills(props: {
   // Credit to the Build UI team for the awesome Pills animation.
   return (
     <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-3">
-      {props.option.values.map(({isAvailable, search, value}) => (
+      {values.map(({isActive, isAvailable, search, value}) => (
         <m.button
           className={cn([
-            'relative rounded-full text-sm font-medium transition',
+            'relative rounded-full text-sm font-medium',
             'focus-visible:outline-none focus-visible:outline-2 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
-            'hover:text-accent-foreground',
-            activePill.value === value && 'text-accent-foreground',
             !isAvailable && 'opacity-50',
           ])}
+          disabled={pending}
           key={value}
           layout
           layoutRoot
@@ -157,16 +178,19 @@ function Pills(props: {
             WebkitTapHighlightColor: 'transparent',
           }}
         >
-          {activePill.value === value && (
+          {isActive && (
             <m.span
               className="absolute inset-0 z-10 bg-accent mix-blend-multiply"
               layoutId={layoutId.current}
               style={{borderRadius: 9999}}
-              transition={{bounce: 0.2, duration: 0.6, type: 'spring'}}
+              transition={{bounce: 0.2, duration: 0.5, type: 'spring'}}
             />
           )}
           <m.span
-            className="inline-flex h-8 select-none items-center justify-center whitespace-nowrap px-3 py-1.5"
+            className={cn([
+              'inline-flex h-8 select-none items-center justify-center whitespace-nowrap px-3 py-1.5 transition-colors hover:text-accent-foreground',
+              isActive && 'text-accent-foreground',
+            ])}
             tabIndex={-1}
             whileTap={{scale: 0.9}}
           >

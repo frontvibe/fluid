@@ -23,17 +23,17 @@ const buttonVariants = cva(
       },
       variant: {
         default:
-          'bg-primary text-primary-foreground notouch:hover:bg-primary/90 touch:active:bg-primary/90',
+          'bg-primary text-primary-foreground notouch:hover:bg-primary/90 hover:active:bg-primary/80',
         destructive:
-          'bg-destructive text-destructive-foreground notouch:hover:bg-destructive/90 touch:active:bg-destructive/90',
+          'bg-destructive text-destructive-foreground notouch:hover:bg-destructive/90 hover:active:bg-destructive/80',
         ghost:
-          'notouch:hover:bg-accent notouch:hover:text-accent-foreground touch:active:bg-accent touch:active:text-accent-foreground',
+          'notouch:hover:bg-accent/55 notouch:hover:text-accent-foreground hover:active:bg-accent active:text-accent-foreground',
         link: 'text-primary underline-offset-4 notouch:hover:underline touch:active:underline',
         outline:
-          'border border-input bg-background notouch:hover:bg-accent touch:active:bg-accent notouch:hover:text-accent-foreground touch:active:text-accent-foreground',
+          'border border-input bg-background notouch:hover:bg-accent/55 hover:active:bg-accent notouch:hover:text-accent-foreground active:text-accent-foreground',
         primitive: '',
         secondary:
-          'bg-secondary text-secondary-foreground notouch:hover:bg-secondary/80 touch:active:bg-secondary/80',
+          'bg-secondary text-secondary-foreground notouch:hover:bg-secondary/55 hover:active:bg-secondary/30',
       },
     },
   },

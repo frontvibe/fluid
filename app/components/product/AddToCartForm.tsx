@@ -38,13 +38,13 @@ export function AddToCartForm(props: {
               <QuantitySelector.Button
                 disabled={isOutOfStock || quantity === 1}
                 onClick={() => setQuantity(quantity - 1)}
-                variant="decrease"
+                symbol="decrease"
               />
               <QuantitySelector.Value>{quantity}</QuantitySelector.Value>
               <QuantitySelector.Button
                 disabled={isOutOfStock}
                 onClick={() => setQuantity(quantity + 1)}
-                variant="increase"
+                symbol="increase"
               />
             </QuantitySelector>
           </div>

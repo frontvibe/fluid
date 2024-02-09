@@ -1,7 +1,5 @@
-import type {
-  ProductOption,
-  ProductVariant,
-} from '@shopify/hydrogen/storefront-api-types';
+import type {ProductOption} from '@shopify/hydrogen/storefront-api-types';
+import type {ProductVariantFragmentFragment} from 'storefrontapi.generated';
 import type {PartialDeep} from 'type-fest';
 import type {PartialObjectDeep} from 'type-fest/source/partial-deep';
 
@@ -33,7 +31,7 @@ export function VariantSelector(props: {
         | undefined
       )[]
     | undefined;
-  variants?: Array<PartialDeep<ProductVariant>>;
+  variants?: Array<PartialDeep<ProductVariantFragmentFragment>>;
 }) {
   const selectedVariant = useSelectedVariant({variants: props.variants});
 
@@ -102,12 +100,13 @@ export function VariantSelector(props: {
   return options?.map((option) => (
     <div key={option.name}>
       <div>{option.name}</div>
-      <Pills option={option} />
+      <Pills handle={selectedVariant?.product?.handle} option={option} />
     </div>
   ));
 }
 
 function Pills(props: {
+  handle: string | undefined;
   option: {
     name: string | undefined;
     value: string | undefined;
@@ -116,11 +115,13 @@ function Pills(props: {
 }) {
   const navigate = useNavigate();
   const layoutId = useRef(
-    props.option.name +
+    props.handle! +
+      props.option.name +
       '-' +
       Math.random().toString(36).substring(2, 15) +
       Math.random().toString(36).substring(2, 15),
   );
+
   const optimisticId = `${props.option.name}-selected-variant`;
   const {optimisticData, pending} =
     useOptimisticNavigationData<string>(optimisticId);
@@ -188,7 +189,7 @@ function Pills(props: {
           )}
           <m.span
             className={cn([
-              'notouch:hover:text-accent-foreground inline-flex h-8 items-center justify-center whitespace-nowrap px-3 py-1.5 transition-colors',
+              'inline-flex h-8 items-center justify-center whitespace-nowrap px-3 py-1.5 transition-colors notouch:hover:text-accent-foreground',
               isActive && 'text-accent-foreground',
             ])}
             tabIndex={-1}

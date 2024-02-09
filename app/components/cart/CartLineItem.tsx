@@ -18,6 +18,7 @@ import {useLocalePath} from '~/hooks/useLocalePath';
 
 import {QuantitySelector} from '../QuantitySelector';
 import {IconRemove} from '../icons/IconRemove';
+import {Button} from '../ui/Button';
 
 type OptimisticData = {
   action?: string;
@@ -150,14 +151,17 @@ function ItemRemoveButton({lineId}: {lineId: CartLine['id']}) {
       }}
       route={cartPath}
     >
-      <button
-        className="notouch:hover:bg-muted touch:active:bg-muted inline-flex size-10 select-none items-center justify-center overflow-hidden rounded border border-border"
-        type="submit"
-      >
-        {/* Todo => add theme content string */}
-        <span className="sr-only">Remove</span>
-        <IconRemove aria-hidden="true" />
-      </button>
+      <div className="overflow-hidden rounded border">
+        <Button
+          className="size-10 rounded-none p-2"
+          type="submit"
+          variant="ghost"
+        >
+          {/* Todo => add theme content string */}
+          <span className="sr-only">Remove</span>
+          <IconRemove aria-hidden="true" />
+        </Button>
+      </div>
       <OptimisticInput data={{action: 'remove'}} id={lineId} />
     </CartForm>
   );
@@ -230,8 +234,8 @@ function CartLineQuantityAdjust({line}: {line: CartLine}) {
         <UpdateCartForm lines={[{id: lineId, quantity: prevQuantity}]}>
           <QuantitySelector.Button
             disabled={optimisticQuantity <= 1}
+            symbol="decrease"
             value={prevQuantity}
-            variant="decrease"
           >
             <OptimisticInput
               data={{quantity: prevQuantity}}
@@ -241,7 +245,7 @@ function CartLineQuantityAdjust({line}: {line: CartLine}) {
         </UpdateCartForm>
         <QuantitySelector.Value>{optimisticQuantity}</QuantitySelector.Value>
         <UpdateCartForm lines={[{id: lineId, quantity: nextQuantity}]}>
-          <QuantitySelector.Button value={nextQuantity} variant="increase">
+          <QuantitySelector.Button symbol="increase" value={nextQuantity}>
             <OptimisticInput
               data={{quantity: nextQuantity}}
               id={optimisticId}

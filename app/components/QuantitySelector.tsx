@@ -1,5 +1,11 @@
 import {cx} from 'class-variance-authority';
+import {forwardRef} from 'react';
 
+import {cn} from '~/lib/utils';
+
+import type {ButtonProps} from './ui/Button';
+
+import {Button} from './ui/Button';
 export function QuantitySelector(props: {children: React.ReactNode}) {
   return (
     <div className="flex items-center overflow-hidden rounded border border-border">
@@ -8,45 +14,40 @@ export function QuantitySelector(props: {children: React.ReactNode}) {
   );
 }
 
-function Button(
-  props: {
-    children?: React.ReactNode;
-    variant: 'decrease' | 'increase';
-  } & React.DetailedHTMLProps<
-    React.ButtonHTMLAttributes<HTMLButtonElement>,
-    HTMLButtonElement
-  >,
-) {
-  const {children, variant, ...passthroughProps} = props;
-
+const QuantityButton = forwardRef<
+  HTMLButtonElement,
+  ButtonProps & {
+    symbol: 'decrease' | 'increase';
+  }
+>(({className, symbol, variant, ...props}, ref) => {
   return (
-    <button
+    <Button
       aria-label={cx([
-        variant === 'decrease' && 'Decrease quantity',
-        variant === 'increase' && 'Increase quantity',
+        symbol === 'decrease' && 'Decrease quantity',
+        symbol === 'increase' && 'Increase quantity',
       ])}
-      className={cx([
-        'notouch:hover:bg-muted touch:active:bg-muted inline-flex size-10 select-none items-center justify-center transition',
-        variant === 'decrease' && 'disabled:opacity-30',
-      ])}
+      className={cn(['rounded-none disabled:opacity-30', className])}
       name={cx([
-        variant === 'decrease' && 'decrease-quantity',
-        variant === 'increase' && 'increase-quantity',
+        symbol === 'decrease' && 'decrease-quantity',
+        symbol === 'increase' && 'increase-quantity',
       ])}
-      {...passthroughProps}
+      ref={ref}
+      variant="ghost"
+      {...props}
     >
       <span>
         {
           {
             decrease: <>&#8722;</>,
             increase: <>&#43;</>,
-          }[variant]
+          }[symbol]
         }
       </span>
-      {children}
-    </button>
+      {props.children}
+    </Button>
   );
-}
+});
+QuantityButton.displayName = 'QuantityButton';
 
 function Value(props: {children: React.ReactNode}) {
   return (
@@ -56,5 +57,5 @@ function Value(props: {children: React.ReactNode}) {
   );
 }
 
-QuantitySelector.Button = Button;
+QuantitySelector.Button = QuantityButton;
 QuantitySelector.Value = Value;

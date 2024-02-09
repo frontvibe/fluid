@@ -1,11 +1,12 @@
 import imageUrlBuilder from '@sanity/image-url';
-import {cx} from 'class-variance-authority';
 
 import type {SanityImageFragment} from '~/lib/type';
 
 import {useEnvironmentVariables} from '~/hooks/useEnvironmentVariables';
+import {cn} from '~/lib/utils';
 
 export function SanityImage(props: {
+  aspectRatio?: string;
   className?: string;
   data?: SanityImageFragment | null;
   loading?: 'eager' | 'lazy';
@@ -15,6 +16,21 @@ export function SanityImage(props: {
 }) {
   const {className, data, loading, sanityEncodeData, sizes, style} = props;
   const env = useEnvironmentVariables();
+
+  const aspectRatioValues = props.aspectRatio?.split('/');
+
+  if (props.aspectRatio && aspectRatioValues?.length !== 2) {
+    console.warn(
+      `Invalid aspect ratio: ${props.aspectRatio}. Using the original aspect ratio. The aspect ratio should be in the format "width/height".`,
+    );
+  }
+
+  const aspectRatioWidth = aspectRatioValues
+    ? parseFloat(aspectRatioValues[0])
+    : undefined;
+  const aspectRatioHeight = aspectRatioValues
+    ? parseFloat(aspectRatioValues[1])
+    : undefined;
 
   if (!data) {
     return null;
@@ -45,8 +61,17 @@ export function SanityImage(props: {
   const srcSet = srcSetValues
     .filter((value) => value < data.width)
     .map((value) => {
+      let imageUrl = urlBuilder.width(value);
+      const height =
+        aspectRatioHeight && aspectRatioWidth
+          ? Math.round((value / aspectRatioWidth) * aspectRatioHeight)
+          : undefined;
+
+      if (height) {
+        imageUrl = imageUrl.height(height);
+      }
       if (data.width >= value) {
-        return `${urlBuilder.width(value)} ${value}w`;
+        return `${imageUrl} ${value}w`;
       }
       return '';
     })
@@ -56,10 +81,10 @@ export function SanityImage(props: {
   return (
     <img
       alt={data.altText || ''}
-      className={cx([className, 'object-[var(--focalX)_var(--focalY)]'])}
+      className={cn(['object-[var(--focalX)_var(--focalY)]', className])}
       // Adding this attribute makes sure the image is always clickable in the Presentation tool
       data-sanity={sanityEncodeData}
-      height={data.height}
+      height={aspectRatioHeight || data.height}
       loading={loading}
       sizes={sizes || undefined}
       src={urlDefault}
@@ -68,10 +93,11 @@ export function SanityImage(props: {
         {
           '--focalX': focalCoords.x + '%',
           '--focalY': focalCoords.y + '%',
+          aspectRatio: `${aspectRatioWidth || data.width}/${aspectRatioHeight || data.height}`,
           ...style,
         } as React.CSSProperties
       }
-      width={data.width}
+      width={aspectRatioWidth || data.width}
     />
   );
 }

@@ -16,7 +16,7 @@ const Banner = forwardRef<
   const bannerHeight = `${height}px` || '200px';
   return (
     <div
-      className={cn('h-[var(--banner-height)]', className)}
+      className={cn('relative h-[var(--banner-height)]', className)}
       ref={ref}
       style={
         {
@@ -34,14 +34,13 @@ const BannerMedia = forwardRef<
   React.HTMLAttributes<HTMLDivElement>
 >(({className, ...props}, ref) => (
   <div
-    className={cn(
-      'absolute inset-0 overflow-hidden [&_img]:size-full [&_img]:object-cover',
-      className,
-    )}
+    className={cn('absolute inset-0 overflow-hidden', className)}
     ref={ref}
     {...props}
   >
-    {props.children}
+    <div className="[&_img]:h-[--banner-height] [&_img]:w-screen [&_img]:object-cover">
+      {props.children}
+    </div>
   </div>
 ));
 BannerMedia.displayName = 'BannerMedia';
@@ -80,7 +79,7 @@ const BannerContent = forwardRef<
   const cleanContentAlignment = vercelStegaCleanAll(contentAlignment);
   return (
     <div
-      className={cn('container relative h-full', className)}
+      className={cn('container relative h-full py-4', className)}
       ref={ref}
       {...props}
     >

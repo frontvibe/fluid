@@ -28,7 +28,12 @@ export function CollectionCard(props: {
       <Card className="overflow-hidden">
         {collection.image && (
           <CardMedia>
-            <Image aspectRatio="16/9" data={collection.image} sizes={sizes} />
+            <Image
+              aspectRatio="16/9"
+              crop="center"
+              data={collection.image}
+              sizes={sizes}
+            />
           </CardMedia>
         )}
         <CardContent className="py-4">

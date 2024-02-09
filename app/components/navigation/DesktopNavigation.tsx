@@ -28,10 +28,7 @@ export function DesktopNavigation(props: {data?: NavigationProps}) {
   );
 
   return (
-    <NavigationMenu
-      className="touchdevice:hidden hidden lg:block"
-      id="header-nav"
-    >
+    <NavigationMenu className="touch:hidden hidden lg:block" id="header-nav">
       <CssVars
         dropdownWidth={dropdownWidth}
         viewportPosition={viewportPosition}

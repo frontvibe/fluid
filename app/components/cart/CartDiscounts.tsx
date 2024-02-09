@@ -57,15 +57,9 @@ export function CartDiscounts({
           )}
         >
           {/* Todo => add theme content string */}
-          <Input
-            // data-vaul-no-drag={true}
-            name="discountCode"
-            placeholder="Discount code"
-            type="text"
-          />
+          <Input name="discountCode" placeholder="Discount code" type="text" />
           <Button
             className={cn(layout === 'page' && 'w-full lg:w-auto')}
-            // data-vaul-no-drag={true}
             variant="outline"
           >
             {/* Todo => add theme content string */}

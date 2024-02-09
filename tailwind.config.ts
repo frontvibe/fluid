@@ -78,7 +78,9 @@ export default {
           },
         },
       });
-      addVariant('touchdevice', '@media (pointer: coarse)');
+      // Target touch and non-touch devices
+      addVariant('touch', '@media (pointer: coarse)');
+      addVariant('notouch', '@media (hover: hover)');
     }),
   ],
 } satisfies Config;

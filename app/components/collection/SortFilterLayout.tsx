@@ -228,7 +228,7 @@ export function DesktopFiltersDrawer({
   filters = [],
 }: Omit<Props, 'children' | 'productsCount'>) {
   return (
-    <ScrollArea className="h-[calc(100dvh_-_var(--desktopHeaderHeight)_-2rem)] w-full rounded-md border p-4 pt-0 transition-all">
+    <ScrollArea className="h-[calc(100dvh_-_var(--desktopHeaderHeight)_-2rem)] w-full rounded-md border px-4 transition-all">
       <nav>
         <Accordion
           // Open filters by default
@@ -236,7 +236,11 @@ export function DesktopFiltersDrawer({
           type="multiple"
         >
           {filters.map((filter: Filter) => (
-            <AccordionItem key={filter.id} value={filter.id}>
+            <AccordionItem
+              className="last:border-b-0"
+              key={filter.id}
+              value={filter.id}
+            >
               <AccordionTrigger>{filter.label}</AccordionTrigger>
               <AccordionContent>
                 <ul className="py-2" key={filter.id}>

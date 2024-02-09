@@ -29,7 +29,7 @@ function Button(
         'size-10 transition hover:bg-muted [&>*]:pointer-events-none',
         variant === 'decrease' && 'disabled:opacity-30',
       ])}
-      data-vaul-no-drag={true}
+      // data-vaul-no-drag={true}
       name={cx([
         variant === 'decrease' && 'decrease-quantity',
         variant === 'increase' && 'increase-quantity',
@@ -51,9 +51,7 @@ function Button(
 
 function Value(props: {children: React.ReactNode}) {
   return (
-    <div className="min-w-[2.5rem] px-2 text-center" data-vaul-no-drag>
-      {props.children}
-    </div>
+    <div className="min-w-[2.5rem] px-2 text-center">{props.children}</div>
   );
 }
 

@@ -93,7 +93,6 @@ export function CartLineItem({
               aspectRatio="1/1"
               className="h-auto w-full rounded border border-border object-cover object-center"
               data={merchandise.image}
-              data-vaul-no-drag={true}
               draggable={false}
               loading="eager"
               sizes="64px"
@@ -103,13 +102,9 @@ export function CartLineItem({
 
         <div className="flex flex-grow justify-between">
           <div className="grid gap-2">
-            <h3 className="text-2xl" data-vaul-no-drag={true}>
+            <h3 className="text-2xl">
               {merchandise?.product?.handle ? (
-                <Link
-                  data-vaul-no-drag={true}
-                  onClick={onClose}
-                  to={productPath}
-                >
+                <Link onClick={onClose} to={productPath}>
                   {merchandise?.product?.title || ''}
                 </Link>
               ) : (
@@ -157,7 +152,6 @@ function ItemRemoveButton({lineId}: {lineId: CartLine['id']}) {
     >
       <button
         className="flex size-10 items-center justify-center overflow-hidden rounded border border-border hover:bg-muted"
-        data-vaul-no-drag={true}
         type="submit"
       >
         {/* Todo => add theme content string */}

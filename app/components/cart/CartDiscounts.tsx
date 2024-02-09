@@ -1,7 +1,6 @@
 import type {Cart as CartType} from '@shopify/hydrogen/storefront-api-types';
 
 import {CartForm} from '@shopify/hydrogen';
-import {cx} from 'class-variance-authority';
 
 import {useLocalePath} from '~/hooks/useLocalePath';
 import {cn} from '~/lib/utils';
@@ -36,7 +35,7 @@ export function CartDiscounts({
           <span>Discount(s)</span>
           <div className="flex items-center justify-between">
             <UpdateDiscountForm>
-              <button className="[&>*]:pointer-events-none" data-vaul-no-drag>
+              <button className="[&>*]:pointer-events-none">
                 <IconRemove
                   aria-hidden="true"
                   style={{height: 18, marginRight: 4}}
@@ -59,14 +58,14 @@ export function CartDiscounts({
         >
           {/* Todo => add theme content string */}
           <Input
-            data-vaul-no-drag={true}
+            // data-vaul-no-drag={true}
             name="discountCode"
             placeholder="Discount code"
             type="text"
           />
           <Button
             className={cn(layout === 'page' && 'w-full lg:w-auto')}
-            data-vaul-no-drag={true}
+            // data-vaul-no-drag={true}
             variant="outline"
           >
             {/* Todo => add theme content string */}

@@ -4,8 +4,8 @@ import type {
 } from '@shopify/hydrogen/storefront-api-types';
 
 import {Money} from '@shopify/hydrogen';
-import {cx} from 'class-variance-authority';
 import {AnimatePresence, m} from 'framer-motion';
+import {useMemo} from 'react';
 
 import {cn} from '~/lib/utils';
 
@@ -56,7 +56,7 @@ export function CartDetails({
         <AnimatePresence>
           {cartHasItems && (
             <m.div
-              animate={'show'}
+              animate="show"
               className={cn([
                 layout === 'page' &&
                   'lg:sticky lg:top-[var(--desktopHeaderHeight)]',
@@ -101,7 +101,7 @@ function CartCheckoutActions({checkoutUrl}: {checkoutUrl: string}) {
   return (
     <div className="mt-2 flex flex-col">
       <Button asChild>
-        <a data-vaul-no-drag={true} href={checkoutUrl} target="_self">
+        <a href={checkoutUrl} target="_self">
           {/* Todo => add theme content string */}
           Continue to Checkout
         </a>
@@ -120,43 +120,46 @@ function CartSummary({
   cost: CartCost;
   layout: CartLayouts;
 }) {
-  const summary = {
-    drawer: cx('grid gap-4 p-6 border-t border-border md:px-12'),
-    page: cx('grid gap-6'),
-  };
-
-  const Content = () => (
-    <div aria-labelledby="summary-heading" className={summary[layout]}>
-      <h2 className="sr-only">
-        {/* Todo => add theme content string */}
-        Order summary
-      </h2>
-      <dl className="grid">
-        <div className="flex items-center justify-between font-medium">
+  const Content = useMemo(
+    () => (
+      <div
+        aria-labelledby="summary-heading"
+        className={cn([
+          layout === 'drawer' &&
+            'grid gap-4 border-t border-border p-6 md:px-12',
+          layout === 'page' && 'grid gap-6',
+        ])}
+      >
+        <h2 className="sr-only">
           {/* Todo => add theme content string */}
-          <span>Subtotal</span>
-          <span>
-            {cost?.subtotalAmount?.amount ? (
-              <Money data={cost?.subtotalAmount} />
-            ) : (
-              '-'
-            )}
-          </span>
-        </div>
-      </dl>
-      {children}
-    </div>
+          Order summary
+        </h2>
+        <dl className="grid">
+          <div className="flex items-center justify-between font-medium">
+            {/* Todo => add theme content string */}
+            <span>Subtotal</span>
+            <span>
+              {cost?.subtotalAmount?.amount ? (
+                <Money data={cost?.subtotalAmount} />
+              ) : (
+                '-'
+              )}
+            </span>
+          </div>
+        </dl>
+        {children}
+      </div>
+    ),
+    [children, cost?.subtotalAmount, layout],
   );
 
   if (layout === 'drawer') {
-    return <Content />;
+    return Content;
   }
 
   return (
     <Card className="mt-5">
-      <CardContent className="px-5 py-6 lg:p-8">
-        <Content />
-      </CardContent>
+      <CardContent className="px-5 py-6 lg:p-8">{Content}</CardContent>
     </Card>
   );
 }

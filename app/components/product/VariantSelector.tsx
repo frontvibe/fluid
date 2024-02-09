@@ -165,7 +165,7 @@ function Pills(props: {
       {values.map(({isActive, isAvailable, search, value}) => (
         <m.button
           className={cn([
-            'relative rounded-full text-sm font-medium',
+            'relative select-none rounded-full text-sm font-medium',
             'focus-visible:outline-none focus-visible:outline-2 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
             !isAvailable && 'opacity-50',
           ])}
@@ -188,7 +188,7 @@ function Pills(props: {
           )}
           <m.span
             className={cn([
-              'inline-flex h-8 select-none items-center justify-center whitespace-nowrap px-3 py-1.5 transition-colors hover:text-accent-foreground',
+              'notouch:hover:text-accent-foreground inline-flex h-8 items-center justify-center whitespace-nowrap px-3 py-1.5 transition-colors',
               isActive && 'text-accent-foreground',
             ])}
             tabIndex={-1}

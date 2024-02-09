@@ -64,7 +64,7 @@ export function SortFilter({
   return (
     <>
       {/* Desktop layout */}
-      <div className="hidden w-full touchdevice:hidden lg:flex lg:items-center lg:justify-between">
+      <div className="touch:hidden hidden w-full lg:flex lg:items-center lg:justify-between">
         <div className="flex items-center">
           <button className="py-2 pr-2" onClick={() => setIsOpen(!isOpen)}>
             <IconFilters />
@@ -83,7 +83,7 @@ export function SortFilter({
         <div className="mt-6">
           <div
             className={cn([
-              'hidden touchdevice:hidden lg:block',
+              'touch:hidden hidden lg:block',
               'transition-all duration-200',
               isOpen
                 ? 'sticky top-[calc(var(--desktopHeaderHeight)_+_1rem)] opacity-100 md:w-[240px] md:min-w-[240px] md:pr-8'
@@ -136,7 +136,7 @@ function MobileDrawer({
   }, [navigate, pathname]);
 
   return (
-    <div className="touchdevice:block lg:hidden">
+    <div className="touch:block lg:hidden">
       <Drawer onOpenChange={setOpen} open={open}>
         <DrawerTrigger className="flex items-center gap-2">
           <IconFilters />

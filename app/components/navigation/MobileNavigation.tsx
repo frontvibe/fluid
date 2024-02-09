@@ -19,7 +19,7 @@ import {
 import {ScrollArea} from '../ui/ScrollArea';
 
 const mobileMenuLinkClass = cn(
-  'flex rounded-md px-3 py-2 items-center gap-2 w-full transition-colors hover:bg-accent hover:text-accent-foreground',
+  'flex rounded-md px-3 py-2 items-center gap-2 w-full transition-colors notouch:hover:bg-accent notouch:hover:text-accent-foreground touch:active:bg-accent touch:active:text-accent-foreground',
 );
 
 export function MobileNavigation(props: {data?: NavigationProps}) {
@@ -31,7 +31,7 @@ export function MobileNavigation(props: {data?: NavigationProps}) {
 
   // Todo => Add <Navlink /> support
   return (
-    <div className="touchdevice:block lg:hidden">
+    <div className="touch:block lg:hidden">
       <Drawer
         direction={device === 'desktop' ? 'right' : 'bottom'}
         onOpenChange={setOpen}

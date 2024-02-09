@@ -1,7 +1,5 @@
 import type {Cart as CartType} from '@shopify/hydrogen/storefront-api-types';
 
-import {AnimatePresence, m} from 'framer-motion';
-
 import {CartDetails} from './CartDetails';
 import {CartEmpty} from './CartEmpty';
 

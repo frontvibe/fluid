@@ -6,7 +6,7 @@ import type {
 
 import {useLoaderData} from '@remix-run/react';
 import {CartForm} from '@shopify/hydrogen';
-import {defer, json, redirectDocument} from '@shopify/remix-oxygen';
+import {json, redirectDocument} from '@shopify/remix-oxygen';
 import invariant from 'tiny-invariant';
 
 import {Cart} from '~/components/cart/Cart';
@@ -90,7 +90,7 @@ export async function action({context, request}: ActionFunctionArgs) {
 export async function loader({context}: LoaderFunctionArgs) {
   const cart = await context.cart.get();
 
-  return defer({cart});
+  return json({cart});
 }
 
 export default function CartRoute() {

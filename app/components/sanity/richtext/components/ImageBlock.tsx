@@ -28,7 +28,7 @@ export function ImageBlock(
     ? vercelStegaCleanAll(props.alignment)
     : 'center';
 
-  const alignmentVariants = cva('w-[var(--maxWidth)] max-w-full', {
+  const alignmentVariants = cva('w-[var(--maxWidth)] max-w-full h-auto', {
     variants: {
       required: {
         center: 'mx-auto',

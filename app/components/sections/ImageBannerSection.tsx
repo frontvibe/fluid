@@ -27,7 +27,11 @@ export function ImageBannerSection(
   return (
     <Banner height={data.bannerHeight}>
       <BannerMedia>
-        <SanityImage data={data.backgroundImage} sizes="100vw" />
+        <SanityImage
+          aspectRatio="16/9"
+          data={data.backgroundImage}
+          sizes="100vw"
+        />
       </BannerMedia>
       <BannerMediaOverlay opacity={overlayOpacity} />
       <BannerContent contentAlignment={contentAlignment}>

@@ -40,6 +40,7 @@ export function ProductCard(props: {
               <CardMedia>
                 <Image
                   aspectRatio="16/9"
+                  crop="center"
                   data={firstVariant.image}
                   sizes={sizes}
                 />

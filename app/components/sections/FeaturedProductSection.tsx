@@ -42,16 +42,17 @@ export function FeaturedProductSection(
           const firstAvailableVariant = variants.find(
             (variant) => variant.availableForSale,
           );
+          const image = firstAvailableVariant?.image;
 
+          // Todo => Add section settings to choose the aspect ratio (16/9, 1/1, are the original aspect ratio)
           return (
             <ProductProvider data={product}>
               <div className="grid gap-10 lg:grid-cols-2">
                 <div>
-                  {firstAvailableVariant?.image && (
+                  {image && (
                     <Image
-                      aspectRatio="1/1"
-                      className="h-full w-full rounded object-cover"
-                      data={firstAvailableVariant.image}
+                      className="h-auto w-full rounded object-cover"
+                      data={image}
                       sizes="(min-width: 1024px) 50vw, 100vw"
                     />
                   )}

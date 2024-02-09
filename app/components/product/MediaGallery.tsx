@@ -12,10 +12,12 @@ export function MediaGallery() {
   return (
     <ul className="grid">
       {medias.map((media) => {
+        // Todo => Add section settings to choose the aspect ratio (16/9, 1/1, are the original aspect ratio)
+        // Todo => Add useOriginalAspectRatio hook
         return (
           <li key={media.id}>
             <MediaFile
-              className="rounded"
+              className="h-auto w-full rounded"
               data={media}
               mediaOptions={{
                 image: {

@@ -1,7 +1,8 @@
 import type {TypeFromSelection} from 'groqd';
 
 import Autoplay from 'embla-carousel-autoplay';
-import {useMemo} from 'react';
+import {useInView} from 'framer-motion';
+import {useMemo, useRef} from 'react';
 
 import type {SectionDefaultProps} from '~/lib/type';
 import type {CAROUSEL_SECTION_FRAGMENT} from '~/qroq/sections';
@@ -31,7 +32,8 @@ export function CarouselSection(
     slidesPerViewDesktop,
     title,
   } = data;
-
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref);
   const slidesPerView = slidesPerViewDesktop ? 100 / slidesPerViewDesktop : 100;
   const plugins = useMemo(() => (autoplay ? [Autoplay()] : []), [autoplay]);
   const imageSizes = slidesPerViewDesktop
@@ -42,7 +44,7 @@ export function CarouselSection(
   const isActive = slides?.length! > 1;
 
   return (
-    <div className="container">
+    <div className="container" ref={ref}>
       <h2>{title}</h2>
       <div
         style={
@@ -66,7 +68,11 @@ export function CarouselSection(
                     className="p-0 md:basis-1/2 md:pl-4 lg:basis-[var(--slidesPerView)]"
                     key={slide._key}
                   >
-                    <SanityImage data={slide.image} sizes={imageSizes} />
+                    <SanityImage
+                      data={slide.image}
+                      loading={inView ? 'eager' : 'lazy'}
+                      sizes={imageSizes}
+                    />
                   </CarouselItem>
                 ))}
               </CarouselContent>

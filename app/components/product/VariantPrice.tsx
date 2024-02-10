@@ -21,11 +21,19 @@ export function VariantPrice({
 
   // Todo => Add sale and sold out badges
   return (
-    <div className="flex items-center gap-3">
+    <>
       {compareAtPrice && (
         <Money className="line-through opacity-50" data={compareAtPrice} />
       )}
       {price && <Money className="text-lg" data={price} />}
+    </>
+  );
+}
+
+export function VariantPriceSkeleton() {
+  return (
+    <div aria-hidden className="text-lg">
+      <span className="opacity-0">Skeleton</span>
     </div>
   );
 }

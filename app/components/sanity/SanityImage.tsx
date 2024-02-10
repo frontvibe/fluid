@@ -14,14 +14,26 @@ export function SanityImage(props: {
   sizes?: null | string;
   style?: React.CSSProperties;
 }) {
-  const {className, data, loading, sanityEncodeData, sizes, style} = props;
   const env = useEnvironmentVariables();
+  const {
+    aspectRatio,
+    className,
+    data,
+    loading,
+    sanityEncodeData,
+    sizes,
+    style,
+  } = props;
 
-  const aspectRatioValues = props.aspectRatio?.split('/');
+  if (!data) {
+    return null;
+  }
 
-  if (props.aspectRatio && aspectRatioValues?.length !== 2) {
+  const aspectRatioValues = aspectRatio?.split('/');
+
+  if (aspectRatio && aspectRatioValues?.length !== 2) {
     console.warn(
-      `Invalid aspect ratio: ${props.aspectRatio}. Using the original aspect ratio. The aspect ratio should be in the format "width/height".`,
+      `Invalid aspect ratio: ${aspectRatio}. Using the original aspect ratio. The aspect ratio should be in the format "width/height".`,
     );
   }
 
@@ -31,10 +43,6 @@ export function SanityImage(props: {
   const aspectRatioHeight = aspectRatioValues
     ? parseFloat(aspectRatioValues[1])
     : undefined;
-
-  if (!data) {
-    return null;
-  }
 
   const urlBuilder = imageUrlBuilder({
     dataset: env?.SANITY_STUDIO_DATASET!,
@@ -47,6 +55,7 @@ export function SanityImage(props: {
     })
     .auto('format');
 
+  const urlPreview = urlBuilder.width(30).url();
   const urlDefault = urlBuilder.url();
   // Values used for srcset attribute of image tag (in pixels)
   const srcSetValues = [
@@ -79,25 +88,51 @@ export function SanityImage(props: {
     .concat(`, ${urlDefault} ${data.width}w`);
 
   return (
-    <img
-      alt={data.altText || ''}
-      className={cn(['object-[var(--focalX)_var(--focalY)]', className])}
-      // Adding this attribute makes sure the image is always clickable in the Presentation tool
-      data-sanity={sanityEncodeData}
-      height={aspectRatioHeight || data.height}
-      loading={loading}
-      sizes={sizes || undefined}
-      src={urlDefault}
-      srcSet={srcSet}
-      style={
-        {
-          '--focalX': focalCoords.x + '%',
-          '--focalY': focalCoords.y + '%',
-          aspectRatio: `${aspectRatioWidth || data.width}/${aspectRatioHeight || data.height}`,
-          ...style,
-        } as React.CSSProperties
-      }
-      width={aspectRatioWidth || data.width}
-    />
+    <span className="relative block overflow-hidden">
+      <img
+        alt={data.altText || ''}
+        className={cn([
+          'relative z-[1] object-[var(--focalX)_var(--focalY)]',
+          className,
+        ])}
+        // Adding this attribute makes sure the image is always clickable in the Presentation tool
+        data-sanity={sanityEncodeData}
+        height={aspectRatioHeight || data.height}
+        loading={loading}
+        sizes={sizes || undefined}
+        src={urlDefault}
+        srcSet={srcSet}
+        style={
+          {
+            '--focalX': focalCoords.x + '%',
+            '--focalY': focalCoords.y + '%',
+            aspectRatio: `${aspectRatioWidth || data.width}/${aspectRatioHeight || data.height}`,
+            ...style,
+          } as React.CSSProperties
+        }
+        width={aspectRatioWidth || data.width}
+      />
+      {/* Preview blurry image (30px) that will load before the highres image */}
+      <img
+        alt={data.altText || ''}
+        className={cn([
+          'absolute inset-0 object-[var(--focalX)_var(--focalY)] blur-2xl transition-opacity',
+          className,
+        ])}
+        height={aspectRatioHeight || data.height}
+        loading="eager"
+        sizes={sizes || undefined}
+        src={urlPreview}
+        srcSet={urlPreview}
+        style={
+          {
+            '--focalX': focalCoords.x + '%',
+            '--focalY': focalCoords.y + '%',
+            aspectRatio: `${aspectRatioWidth || data.width}/${aspectRatioHeight || data.height}`,
+          } as React.CSSProperties
+        }
+        width={aspectRatioWidth || data.width}
+      />
+    </span>
   );
 }

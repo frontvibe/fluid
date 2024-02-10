@@ -60,7 +60,7 @@ const BannerMediaOverlay = forwardRef<
   return (
     <div
       aria-hidden
-      className={cn('absolute inset-0 bg-black', className)}
+      className={cn('absolute inset-0 z-[2] bg-black', className)}
       ref={ref}
       style={style}
       {...props}
@@ -79,7 +79,7 @@ const BannerContent = forwardRef<
   const cleanContentAlignment = vercelStegaCleanAll(contentAlignment);
   return (
     <div
-      className={cn('container relative h-full py-4', className)}
+      className={cn('container relative z-[3] h-full py-4', className)}
       ref={ref}
       {...props}
     >

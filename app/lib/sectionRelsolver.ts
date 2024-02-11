@@ -25,11 +25,6 @@ export const sections: {
       }),
     ),
   ),
-  ctaSection: lazy(() =>
-    import('../components/sections/CtaSection').then((module) => ({
-      default: module.CtaSection,
-    })),
-  ),
   featuredCollectionSection: lazy(() =>
     import('../components/sections/FeaturedCollectionSection').then(
       (module) => ({

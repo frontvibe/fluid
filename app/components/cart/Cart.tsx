@@ -1,4 +1,4 @@
-import type {Cart as CartType} from '@shopify/hydrogen/storefront-api-types';
+import type {CartApiQueryFragment} from 'storefrontapi.generated';
 
 import {CartDetails} from './CartDetails';
 import {CartEmpty} from './CartEmpty';
@@ -11,7 +11,7 @@ export function Cart({
   loading,
   onClose,
 }: {
-  cart?: CartType | null;
+  cart?: CartApiQueryFragment;
   layout: CartLayouts;
   loading?: boolean;
   onClose?: () => void;

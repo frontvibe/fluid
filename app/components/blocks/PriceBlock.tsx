@@ -9,6 +9,8 @@ import {Suspense} from 'react';
 import type {PRICE_BLOCK_FRAGMENT} from '~/qroq/blocks';
 import type {loader} from '~/routes/($locale).products.$productHandle';
 
+import { cn } from '~/lib/utils';
+
 import {VariantPrice, VariantPriceSkeleton} from '../product/VariantPrice';
 
 export type PriceBlockProps = TypeFromSelection<typeof PRICE_BLOCK_FRAGMENT>;
@@ -18,9 +20,11 @@ export function PriceBlock(props: PriceBlockProps) {
   const variantsPromise = loaderData.variants;
   const {product} = useProduct();
 
+  const wrapperClassName = cn('flex items-center gap-3');
+
   if (variantsPromise) {
     return (
-      <div className="flex items-center gap-3">
+      <div className={wrapperClassName}>
         {/* Todo => Add errorElement */}
         <Suspense fallback={<VariantPriceSkeleton />}>
           <Await resolve={variantsPromise}>
@@ -43,5 +47,9 @@ export function PriceBlock(props: PriceBlockProps) {
     ? (flattenConnection(product.variants) as ProductVariantFragmentFragment[])
     : [];
 
-  return <VariantPrice variants={variants} />;
+  return (
+    <div className={wrapperClassName}>
+      <VariantPrice variants={variants} />
+    </div>
+  );
 }

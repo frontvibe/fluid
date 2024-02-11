@@ -1,12 +1,8 @@
-import type {
-  CartLine,
-  CartLineUpdateInput,
-} from '@shopify/hydrogen/storefront-api-types';
+import type {CartLineFragment} from 'storefrontapi.generated';
 
 import {Link} from '@remix-run/react';
 import {
   CartForm,
-  Image,
   Money,
   OptimisticInput,
   parseGid,
@@ -17,6 +13,7 @@ import {m} from 'framer-motion';
 import {useLocalePath} from '~/hooks/useLocalePath';
 
 import {QuantitySelector} from '../QuantitySelector';
+import {ShopifyImage} from '../ShopifyImage';
 import {IconRemove} from '../icons/IconRemove';
 import {Button} from '../ui/Button';
 
@@ -32,7 +29,7 @@ export function CartLineItem({
   line,
   onClose,
 }: {
-  line: CartLine;
+  line: CartLineFragment;
   onClose?: () => void;
 }) {
   const optimisticData = useOptimisticData<OptimisticData>(line?.id);
@@ -89,7 +86,7 @@ export function CartLineItem({
       <div className="flex gap-4 py-5">
         <div className="size-16">
           {merchandise.image && (
-            <Image
+            <ShopifyImage
               alt={merchandise.title}
               aspectRatio="1/1"
               className="h-auto w-full rounded border border-border object-cover object-center"
@@ -140,7 +137,7 @@ export function CartLineItem({
   );
 }
 
-function ItemRemoveButton({lineId}: {lineId: CartLine['id']}) {
+function ItemRemoveButton({lineId}: {lineId: CartLineFragment['id']}) {
   const cartPath = useLocalePath({path: '/cart'});
 
   return (
@@ -173,7 +170,7 @@ function CartLinePrice({
   ...passthroughProps
 }: {
   [key: string]: any;
-  line: CartLine;
+  line: CartLineFragment;
   priceType?: 'compareAt' | 'regular';
 }) {
   if (!line?.cost?.amountPerQuantity || !line?.cost?.totalAmount) return null;
@@ -195,7 +192,7 @@ function UpdateCartForm({
   lines,
 }: {
   children: React.ReactNode;
-  lines: CartLineUpdateInput[];
+  lines: CartLineFragment[];
 }) {
   const cartPath = useLocalePath({path: '/cart'});
 
@@ -212,7 +209,7 @@ function UpdateCartForm({
   );
 }
 
-function CartLineQuantityAdjust({line}: {line: CartLine}) {
+function CartLineQuantityAdjust({line}: {line: CartLineFragment}) {
   const optimisticId = line?.id;
   const optimisticData = useOptimisticData<OptimisticData>(optimisticId);
 

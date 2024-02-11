@@ -3,6 +3,7 @@ import type {
   ActionFunctionArgs,
   LoaderFunctionArgs,
 } from '@shopify/remix-oxygen';
+import type {CartApiQueryFragment} from 'storefrontapi.generated';
 
 import {useLoaderData} from '@remix-run/react';
 import {CartForm} from '@shopify/hydrogen';
@@ -88,7 +89,7 @@ export async function action({context, request}: ActionFunctionArgs) {
 }
 
 export async function loader({context}: LoaderFunctionArgs) {
-  const cart = await context.cart.get();
+  const cart = (await context.cart.get()) as CartApiQueryFragment;
 
   return json({cart});
 }

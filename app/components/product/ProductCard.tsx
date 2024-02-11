@@ -1,11 +1,12 @@
 import type {ProductCardFragment} from 'storefrontapi.generated';
 
 import {Link} from '@remix-run/react';
-import {Image, Money, flattenConnection} from '@shopify/hydrogen';
+import {Money, flattenConnection} from '@shopify/hydrogen';
 import {cx} from 'class-variance-authority';
 
 import {useLocalePath} from '~/hooks/useLocalePath';
 
+import {ShopifyImage} from '../ShopifyImage';
 import {Card, CardContent, CardMedia} from '../ui/Card';
 
 export function ProductCard(props: {
@@ -38,7 +39,7 @@ export function ProductCard(props: {
           <Card className="overflow-hidden">
             {firstVariant?.image && (
               <CardMedia>
-                <Image
+                <ShopifyImage
                   aspectRatio="16/9"
                   crop="center"
                   data={firstVariant.image}

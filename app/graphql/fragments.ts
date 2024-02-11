@@ -1,3 +1,33 @@
+export const IMAGE_FRAGMENT = `#graphql
+  fragment ImageFragment on Image {
+    altText
+    width
+    height
+    url
+    thumbnail: url(transform: { maxWidth: 30 })
+  }
+` as const;
+
+export const PRODUCT_VARIANT_IMAGE_FRAGMENT = `#graphql
+  fragment ProductVariantImageFragment on Image {
+    altText
+    width
+    height
+    url
+    thumbnail: url(transform: { maxWidth: 30 })
+  }
+`;
+
+export const PRODUCT_CARD_IMAGE_FRAGMENT = `#graphql
+  fragment ProductCardImageFragment on Image {
+    altText
+    width
+    height
+    url
+    thumbnail: url(transform: { maxWidth: 30 })
+  }
+`;
+
 export const MEDIA_FRAGMENT = `#graphql
   fragment Media on Media {
     __typename
@@ -9,10 +39,7 @@ export const MEDIA_FRAGMENT = `#graphql
     ... on MediaImage {
       id
       image {
-        id
-        url
-        width
-        height
+        ...ImageFragment
       }
     }
     ... on Video {
@@ -35,6 +62,7 @@ export const MEDIA_FRAGMENT = `#graphql
       host
     }
   }
+  ${IMAGE_FRAGMENT}
 `;
 
 export const PRODUCT_VARIANT_FRAGMENT = `#graphql
@@ -46,11 +74,7 @@ export const PRODUCT_VARIANT_FRAGMENT = `#graphql
       value
     }
     image {
-      id
-      url
-      altText
-      width
-      height
+      ...ProductVariantImageFragment
     }
     price {
       amount
@@ -71,6 +95,7 @@ export const PRODUCT_VARIANT_FRAGMENT = `#graphql
       handle
     }
   }
+  ${PRODUCT_VARIANT_IMAGE_FRAGMENT}
 `;
 
 export const PRODUCT_CARD_FRAGMENT = `#graphql
@@ -85,10 +110,7 @@ export const PRODUCT_CARD_FRAGMENT = `#graphql
         id
         availableForSale
         image {
-          url
-          altText
-          width
-          height
+          ...ProductCardImageFragment
         }
         price {
           amount
@@ -109,6 +131,7 @@ export const PRODUCT_CARD_FRAGMENT = `#graphql
       }
     }
   }
+  ${PRODUCT_CARD_IMAGE_FRAGMENT}
 `;
 
 export const CART_QUERY_FRAGMENT = `#graphql
@@ -147,12 +170,7 @@ export const CART_QUERY_FRAGMENT = `#graphql
         requiresShipping
         title
         image {
-          id
-          url
-          altText
-          width
-          height
-
+          ...ImageFragment
         }
         product {
           handle
@@ -211,6 +229,7 @@ export const CART_QUERY_FRAGMENT = `#graphql
       applicable
     }
   }
+  ${IMAGE_FRAGMENT}
 ` as const;
 
 export const FEATURED_COLLECTION_FRAGMENT = `#graphql
@@ -219,10 +238,8 @@ export const FEATURED_COLLECTION_FRAGMENT = `#graphql
     title
     handle
     image {
-      altText
-      width
-      height
-      url
+      ...ImageFragment
     }
   }
+  ${IMAGE_FRAGMENT}
 `;

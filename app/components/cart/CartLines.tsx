@@ -1,7 +1,4 @@
-import type {
-  CartLine,
-  Cart as CartType,
-} from '@shopify/hydrogen/storefront-api-types';
+import type {CartApiQueryFragment} from 'storefrontapi.generated';
 
 import {flattenConnection} from '@shopify/hydrogen';
 import {cx} from 'class-variance-authority';
@@ -17,7 +14,7 @@ export function CartLines({
   onClose,
 }: {
   layout: CartLayouts;
-  lines: CartType['lines'] | undefined;
+  lines?: CartApiQueryFragment['lines'];
   onClose?: () => void;
 }) {
   const currentLines = cartLines?.nodes.length
@@ -35,11 +32,7 @@ export function CartLines({
       <section aria-labelledby="cart-contents" className={className}>
         <ul className="grid">
           {currentLines.map((line) => (
-            <CartLineItem
-              key={line.id}
-              line={line as CartLine}
-              onClose={onClose}
-            />
+            <CartLineItem key={line.id} line={line} onClose={onClose} />
           ))}
         </ul>
       </section>

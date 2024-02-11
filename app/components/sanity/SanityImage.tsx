@@ -87,6 +87,7 @@ export function SanityImage(props: {
     .join(', ')
     .concat(`, ${urlDefault} ${data.width}w`);
 
+  // Todo => Global image border-radius setting should apply to the wrapper <span/>
   return (
     <span className="relative block overflow-hidden">
       <img
@@ -116,7 +117,7 @@ export function SanityImage(props: {
       <img
         alt={data.altText || ''}
         className={cn([
-          'absolute inset-0 object-[var(--focalX)_var(--focalY)] blur-2xl transition-opacity',
+          'absolute inset-0 object-[var(--focalX)_var(--focalY)] blur-2xl',
           className,
         ])}
         height={aspectRatioHeight || data.height}

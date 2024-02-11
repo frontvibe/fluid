@@ -1,7 +1,6 @@
 import type {TypeFromSelection} from 'groqd';
 
 import {useLoaderData} from '@remix-run/react';
-import {Image} from '@shopify/hydrogen';
 
 import type {SectionDefaultProps} from '~/lib/type';
 import type {COLLECTION_BANNER_SECTION_FRAGMENT} from '~/qroq/sections';
@@ -13,6 +12,7 @@ import {
   BannerMedia,
   BannerMediaOverlay,
 } from '../Banner';
+import {ShopifyImage} from '../ShopifyImage';
 
 type CollectionBannerSectionProps = TypeFromSelection<
   typeof COLLECTION_BANNER_SECTION_FRAGMENT
@@ -30,7 +30,7 @@ export function CollectionBannerSection(
     <Banner height={props.data.bannerHeight}>
       <BannerMedia>
         {props.data.showImage && collection.image && (
-          <Image
+          <ShopifyImage
             aspectRatio="16/9"
             crop="center"
             data={collection.image}

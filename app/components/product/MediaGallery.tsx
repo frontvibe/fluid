@@ -3,6 +3,8 @@ import {MediaFile, flattenConnection} from '@shopify/hydrogen';
 
 import type {loader} from '~/routes/($locale).products.$productHandle';
 
+import {ShopifyImage} from '../ShopifyImage';
+
 export function MediaGallery() {
   const {product} = useLoaderData<typeof loader>();
   const medias = product?.media?.nodes.length
@@ -16,16 +18,14 @@ export function MediaGallery() {
         // Todo => Add useOriginalAspectRatio hook
         return (
           <li key={media.id}>
-            <MediaFile
-              className="h-auto w-full rounded"
-              data={media}
-              mediaOptions={{
-                image: {
-                  loading: 'eager',
-                  sizes: '(min-width: 1024px) 50vw, 100vw',
-                },
-              }}
-            />
+            {media.__typename === 'MediaImage' && media.image && (
+              <ShopifyImage
+                className="h-auto w-full"
+                data={media.image}
+                loading="eager"
+                sizes="(min-width: 1024px) 50vw, 100vw"
+              />
+            )}
           </li>
         );
       })}

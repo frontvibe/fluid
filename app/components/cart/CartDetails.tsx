@@ -1,7 +1,4 @@
-import type {
-  CartCost,
-  Cart as CartType,
-} from '@shopify/hydrogen/storefront-api-types';
+import type {CartApiQueryFragment} from 'storefrontapi.generated';
 
 import {Money} from '@shopify/hydrogen';
 import {AnimatePresence, m} from 'framer-motion';
@@ -21,7 +18,7 @@ export function CartDetails({
   layout,
   onClose,
 }: {
-  cart?: CartType | null;
+  cart?: CartApiQueryFragment;
   layout: CartLayouts;
   onClose?: () => void;
 }) {
@@ -117,7 +114,7 @@ function CartSummary({
   layout,
 }: {
   children?: React.ReactNode;
-  cost: CartCost;
+  cost: CartApiQueryFragment['cost'];
   layout: CartLayouts;
 }) {
   const Content = useMemo(

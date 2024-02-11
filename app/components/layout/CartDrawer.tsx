@@ -1,4 +1,4 @@
-import type {Cart as CartType} from '@shopify/hydrogen/storefront-api-types';
+import type {CartApiQueryFragment} from 'storefrontapi.generated';
 
 import {Await, Link} from '@remix-run/react';
 import {CartForm} from '@shopify/hydrogen';
@@ -29,13 +29,18 @@ export function CartDrawer() {
   return (
     <Suspense fallback={<Badge count={0} />}>
       <Await resolve={rootData?.cart}>
-        {(cart) => <Badge cart={cart} count={cart?.totalQuantity || 0} />}
+        {(cart) => (
+          <Badge
+            cart={cart as CartApiQueryFragment}
+            count={cart?.totalQuantity || 0}
+          />
+        )}
       </Await>
     </Suspense>
   );
 }
 
-function Badge(props: {cart?: CartType | null; count: number}) {
+function Badge(props: {cart?: CartApiQueryFragment; count: number}) {
   const {count} = props;
   const isHydrated = useIsHydrated();
   const path = useLocalePath({path: '/cart'});

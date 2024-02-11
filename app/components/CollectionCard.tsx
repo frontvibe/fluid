@@ -1,11 +1,11 @@
 import type {CollectionsQuery} from 'storefrontapi.generated';
 
 import {Link} from '@remix-run/react';
-import {Image} from '@shopify/hydrogen';
 import {cx} from 'class-variance-authority';
 
 import {useLocalePath} from '~/hooks/useLocalePath';
 
+import {ShopifyImage} from './ShopifyImage';
 import {IconArrowRight} from './icons/IconArrowRight';
 import {Card, CardContent, CardMedia} from './ui/Card';
 
@@ -28,7 +28,7 @@ export function CollectionCard(props: {
       <Card className="overflow-hidden">
         {collection.image && (
           <CardMedia>
-            <Image
+            <ShopifyImage
               aspectRatio="16/9"
               crop="center"
               data={collection.image}

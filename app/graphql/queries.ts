@@ -1,4 +1,5 @@
 import {
+  IMAGE_FRAGMENT,
   MEDIA_FRAGMENT,
   PRODUCT_CARD_FRAGMENT,
   PRODUCT_VARIANT_FRAGMENT,
@@ -164,11 +165,7 @@ export const COLLECTIONS_QUERY = `#graphql
           title
         }
         image {
-          id
-          url
-          width
-          height
-          altText
+          ...ImageFragment
         }
       }
       pageInfo {
@@ -179,6 +176,7 @@ export const COLLECTIONS_QUERY = `#graphql
       }
     }
   }
+  ${IMAGE_FRAGMENT}
 `;
 
 export const COLLECTION_QUERY = `#graphql
@@ -193,14 +191,11 @@ export const COLLECTION_QUERY = `#graphql
       title
       description
       image {
-        id
-        url
-        width
-        height
-        altText
+        ...ImageFragment
       }
     }
   }
+  ${IMAGE_FRAGMENT}
 ` as const;
 
 export const COLLECTION_PRODUCT_GRID_QUERY = `#graphql
@@ -267,11 +262,7 @@ export const FEATURED_COLLECTION_QUERY = `#graphql
       title
       description
       image {
-        id
-        url
-        width
-        height
-        altText
+        ...ImageFragment
       }
       products(
         first: $first,
@@ -282,5 +273,6 @@ export const FEATURED_COLLECTION_QUERY = `#graphql
       }
     }
   }
+  ${IMAGE_FRAGMENT}
   ${PRODUCT_CARD_FRAGMENT}
 ` as const;

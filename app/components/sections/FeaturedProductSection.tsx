@@ -2,7 +2,7 @@ import type {TypeFromSelection} from 'groqd';
 import type {FeaturedProductQuery} from 'storefrontapi.generated';
 
 import {Await, useLoaderData} from '@remix-run/react';
-import {Image, flattenConnection} from '@shopify/hydrogen';
+import {flattenConnection} from '@shopify/hydrogen';
 import {ProductProvider} from '@shopify/hydrogen-react';
 import {Suspense} from 'react';
 
@@ -11,6 +11,7 @@ import type {FEATURED_PRODUCT_SECTION_FRAGMENT} from '~/qroq/sections';
 
 import type {loader as indexLoader} from '../../routes/_index';
 
+import {ShopifyImage} from '../ShopifyImage';
 import {ProductDetails} from '../product/ProductDetails';
 
 export type FeaturedProductSectionProps = TypeFromSelection<
@@ -50,8 +51,8 @@ export function FeaturedProductSection(
               <div className="grid gap-10 lg:grid-cols-2">
                 <div>
                   {image && (
-                    <Image
-                      className="h-auto w-full rounded object-cover"
+                    <ShopifyImage
+                      className="h-auto w-full object-cover"
                       data={image}
                       sizes="(min-width: 1024px) 50vw, 100vw"
                     />

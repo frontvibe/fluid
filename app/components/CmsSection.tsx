@@ -73,7 +73,7 @@ function SectionWrapper(props: {
 
   return props.type === 'footer' ? (
     <footer
-      className="section-padding relative bg-background text-foreground"
+      className="section-padding relative bg-background text-foreground [content-visibility:auto]"
       data-footer-type={isDev ? sectionType : null}
     >
       <style dangerouslySetInnerHTML={{__html: cssVars}} />
@@ -84,7 +84,7 @@ function SectionWrapper(props: {
     </footer>
   ) : (
     <section
-      className="section-padding relative bg-background text-foreground"
+      className="section-padding relative bg-background text-foreground [content-visibility:auto]"
       data-section-type={isDev ? sectionType : null}
       id={`section-${data._key}`}
     >

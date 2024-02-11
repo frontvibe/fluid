@@ -22,6 +22,8 @@ export function MediaGallery() {
               <ShopifyImage
                 className="h-auto w-full"
                 data={media.image}
+                decoding="sync"
+                fetchpriority="high"
                 loading="eager"
                 sizes="(min-width: 1024px) 50vw, 100vw"
               />

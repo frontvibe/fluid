@@ -34,6 +34,8 @@ export function CollectionBannerSection(
             aspectRatio="16/9"
             crop="center"
             data={collection.image}
+            decoding="sync"
+            fetchpriority="high"
             loading="eager"
             sizes="100vw"
           />

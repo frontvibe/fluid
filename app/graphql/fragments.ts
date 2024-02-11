@@ -1,5 +1,6 @@
 export const IMAGE_FRAGMENT = `#graphql
   fragment ImageFragment on Image {
+    id
     altText
     width
     height
@@ -10,6 +11,7 @@ export const IMAGE_FRAGMENT = `#graphql
 
 export const PRODUCT_VARIANT_IMAGE_FRAGMENT = `#graphql
   fragment ProductVariantImageFragment on Image {
+    id
     altText
     width
     height
@@ -20,6 +22,7 @@ export const PRODUCT_VARIANT_IMAGE_FRAGMENT = `#graphql
 
 export const PRODUCT_CARD_IMAGE_FRAGMENT = `#graphql
   fragment ProductCardImageFragment on Image {
+    id
     altText
     width
     height

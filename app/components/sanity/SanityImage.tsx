@@ -1,29 +1,33 @@
 import imageUrlBuilder from '@sanity/image-url';
+import React from 'react';
 
 import type {SanityImageFragment} from '~/lib/type';
 
 import {useEnvironmentVariables} from '~/hooks/useEnvironmentVariables';
 import {cn} from '~/lib/utils';
 
-export function SanityImage(props: {
+export function SanityImage({
+  aspectRatio,
+  className,
+  data,
+  decoding = 'async',
+  fetchpriority,
+  loading,
+  sanityEncodeData,
+  sizes,
+  style,
+}: {
   aspectRatio?: string;
   className?: string;
   data?: SanityImageFragment | null;
+  decoding?: 'async' | 'auto' | 'sync';
+  fetchpriority?: 'auto' | 'high' | 'low';
   loading?: 'eager' | 'lazy';
   sanityEncodeData?: string;
   sizes?: null | string;
   style?: React.CSSProperties;
 }) {
   const env = useEnvironmentVariables();
-  const {
-    aspectRatio,
-    className,
-    data,
-    loading,
-    sanityEncodeData,
-    sizes,
-    style,
-  } = props;
 
   if (!data) {
     return null;
@@ -88,52 +92,65 @@ export function SanityImage(props: {
     .concat(`, ${urlDefault} ${data.width}w`);
 
   // Todo => Global image border-radius setting should apply to the wrapper <span/>
+  // No padding should be applied to the wrapper <span/> or the <img/> tag to avoid blurry LQIP becoming visible
   return (
-    <span className="relative block overflow-hidden">
+    <span
+      className="relative block overflow-hidden !p-0"
+      id={data._ref ? `img-${data._ref}` : undefined}
+      style={
+        {
+          '--focalX': focalCoords.x + '%',
+          '--focalY': focalCoords.y + '%',
+        } as React.CSSProperties
+      }
+    >
       <img
         alt={data.altText || ''}
-        className={cn([
+        className={cn(
           'relative z-[1] object-[var(--focalX)_var(--focalY)]',
           className,
-        ])}
+          '!p-0',
+        )}
         // Adding this attribute makes sure the image is always clickable in the Presentation tool
         data-sanity={sanityEncodeData}
+        decoding={decoding}
+        fetchpriority={fetchpriority}
         height={aspectRatioHeight || data.height}
         loading={loading}
-        sizes={sizes || undefined}
+        sizes={sizes!}
         src={urlDefault}
         srcSet={srcSet}
         style={
           {
-            '--focalX': focalCoords.x + '%',
-            '--focalY': focalCoords.y + '%',
-            aspectRatio: `${aspectRatioWidth || data.width}/${aspectRatioHeight || data.height}`,
             ...style,
-          } as React.CSSProperties
-        }
-        width={aspectRatioWidth || data.width}
-      />
-      {/* Preview blurry image (30px) that will load before the highres image */}
-      <img
-        alt={data.altText || ''}
-        className={cn([
-          'absolute inset-0 object-[var(--focalX)_var(--focalY)] blur-2xl',
-          className,
-        ])}
-        height={aspectRatioHeight || data.height}
-        loading="eager"
-        sizes={sizes || undefined}
-        src={urlPreview}
-        srcSet={urlPreview}
-        style={
-          {
-            '--focalX': focalCoords.x + '%',
-            '--focalY': focalCoords.y + '%',
             aspectRatio: `${aspectRatioWidth || data.width}/${aspectRatioHeight || data.height}`,
           } as React.CSSProperties
         }
         width={aspectRatioWidth || data.width}
       />
+      {data._ref && (
+        <style
+          // Blurry bg image used as LQIP (Low Quality Image Placeholder)
+          // while high quality image is loading.
+          dangerouslySetInnerHTML={{
+            __html: `
+              #img-${data._ref}::before {
+                content: "";
+                position: absolute;
+                background: url(${urlPreview});
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                filter: blur(10px);
+              }
+            `.trim(),
+          }}
+        />
+      )}
     </span>
   );
 }

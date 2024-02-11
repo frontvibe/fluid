@@ -30,6 +30,8 @@ export function ImageBannerSection(
         <SanityImage
           aspectRatio="16/9"
           data={data.backgroundImage}
+          decoding="sync"
+          fetchpriority="high"
           sizes="100vw"
         />
       </BannerMedia>

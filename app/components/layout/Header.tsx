@@ -35,9 +35,13 @@ export function Header() {
       <style dangerouslySetInnerHTML={{__html: colorPaletteCssVars}} />
       <div className="[--mobileHeaderXPadding:.75rem] lg:container">
         <div className="flex items-center justify-between">
-          <Link prefetch="intent" to={homePath}>
+          <Link
+            className="pl-[var(--mobileHeaderXPadding)] lg:pl-0"
+            prefetch="intent"
+            to={homePath}
+          >
             <Logo
-              className="h-auto w-[var(--logoWidth)] pl-[var(--mobileHeaderXPadding)] lg:pl-0"
+              className="h-auto w-[var(--logoWidth)]"
               sizes={logoWidth}
               style={
                 {

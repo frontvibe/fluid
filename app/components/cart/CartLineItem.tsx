@@ -1,3 +1,4 @@
+import type {CartLineUpdateInput} from '@shopify/hydrogen-react/storefront-api-types';
 import type {CartLineFragment} from 'storefrontapi.generated';
 
 import {Link} from '@remix-run/react';
@@ -184,7 +185,14 @@ function CartLinePrice({
     return null;
   }
 
-  return <Money withoutTrailingZeros {...passthroughProps} data={moneyV2} />;
+  return (
+    <Money
+      className="tabular-nums"
+      withoutTrailingZeros
+      {...passthroughProps}
+      data={moneyV2}
+    />
+  );
 }
 
 function UpdateCartForm({
@@ -192,7 +200,7 @@ function UpdateCartForm({
   lines,
 }: {
   children: React.ReactNode;
-  lines: CartLineFragment[];
+  lines: CartLineUpdateInput[];
 }) {
   const cartPath = useLocalePath({path: '/cart'});
 

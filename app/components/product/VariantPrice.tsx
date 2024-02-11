@@ -23,9 +23,12 @@ export function VariantPrice({
   return (
     <>
       {compareAtPrice && (
-        <Money className="line-through opacity-50" data={compareAtPrice} />
+        <Money
+          className="tabular-nums line-through opacity-50"
+          data={compareAtPrice}
+        />
       )}
-      {price && <Money className="text-lg" data={price} />}
+      {price && <Money className="text-lg tabular-nums" data={price} />}
     </>
   );
 }

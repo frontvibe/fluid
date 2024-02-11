@@ -137,7 +137,7 @@ function CartSummary({
             <span>Subtotal</span>
             <span>
               {cost?.subtotalAmount?.amount ? (
-                <Money data={cost?.subtotalAmount} />
+                <Money className="tabular-nums" data={cost?.subtotalAmount} />
               ) : (
                 '-'
               )}

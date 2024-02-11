@@ -64,7 +64,7 @@ export function SortFilter({
   return (
     <>
       {/* Desktop layout */}
-      <div className="touch:hidden hidden w-full lg:flex lg:items-center lg:justify-between">
+      <div className="hidden w-full touch:hidden lg:flex lg:items-center lg:justify-between">
         <div className="flex items-center">
           <button className="py-2 pr-2" onClick={() => setIsOpen(!isOpen)}>
             <IconFilters />
@@ -73,7 +73,7 @@ export function SortFilter({
             // Todo => add strings to themeContent
           */}
           <small className="flex items-center gap-1">
-            <span className="[font-variant:tabular-nums]">{productsCount}</span>
+            <span className="tabular-nums">{productsCount}</span>
             <span>products</span>
           </small>
         </div>
@@ -83,7 +83,7 @@ export function SortFilter({
         <div className="mt-6">
           <div
             className={cn([
-              'touch:hidden hidden lg:block',
+              'hidden touch:hidden lg:block',
               'transition-all duration-200',
               isOpen
                 ? 'sticky top-[calc(var(--desktopHeaderHeight)_+_1rem)] opacity-100 md:w-[240px] md:min-w-[240px] md:pr-8'
@@ -204,7 +204,7 @@ function MobileDrawer({
                     >
                       {/* // Todo => add strings to themeContent */}
                       <span>Clear</span>
-                      <span className="[font-variant:tabular-nums]">
+                      <span className="tabular-nums">
                         ({appliedFilters.length})
                       </span>
                     </Button>

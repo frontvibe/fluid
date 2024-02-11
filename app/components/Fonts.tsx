@@ -1,5 +1,7 @@
 import type {InferType} from 'groqd';
 
+import {vercelStegaCleanAll} from '@sanity/client/stega';
+
 import type {FONT_CATEGORY_FRAGMENT} from '~/qroq/fragments';
 import type {FONTS_QUERY} from '~/qroq/queries';
 
@@ -10,7 +12,7 @@ type FontAssetsFragment = InferType<typeof FONT_CATEGORY_FRAGMENT.fontAssets>;
 
 export function Fonts() {
   const {data} = useSanityRoot();
-  const fontsData = data?.fonts;
+  const fontsData = vercelStegaCleanAll(data?.fonts);
 
   if (!fontsData) {
     return null;

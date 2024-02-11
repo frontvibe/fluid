@@ -170,18 +170,6 @@ export const COLLECTION_LIST_SECTION_FRAGMENT = {
 
 /*
 |--------------------------------------------------------------------------
-| CTA Section
-|--------------------------------------------------------------------------
-*/
-export const CTA_SECTION_FRAGMENT = {
-  _key: q.string().nullable(),
-  _type: q.literal('ctaSection'),
-  settings: SECTION_SETTINGS_FRAGMENT,
-  title: [getIntValue('title'), q.string()],
-} satisfies Selection;
-
-/*
-|--------------------------------------------------------------------------
 | Carousel Section
 |--------------------------------------------------------------------------
 */
@@ -267,7 +255,6 @@ export const COLLECTION_PRODUCT_GRID_SECTION_FRAGMENT = {
 export const SECTIONS_LIST_SELECTION = {
   "_type == 'carouselSection'": CAROUSEL_SECTION_FRAGMENT,
   "_type == 'collectionListSection'": COLLECTION_LIST_SECTION_FRAGMENT,
-  "_type == 'ctaSection'": CTA_SECTION_FRAGMENT,
   "_type == 'featuredCollectionSection'": FEATURED_COLLECTION_SECTION_FRAGMENT,
   "_type == 'featuredProductSection'": FEATURED_PRODUCT_SECTION_FRAGMENT,
   "_type == 'imageBannerSection'": IMAGE_BANNER_SECTION_FRAGMENT,

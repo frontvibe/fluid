@@ -46,7 +46,7 @@ const CardMedia = forwardRef<
       ref={ref}
       {...props}
     >
-      <div className="origin-center scale-[1.005] [transition:transform_0.5s_ease] group-hover/card:scale-[1.03] [&>*]:size-full [&>*]:object-cover">
+      <div className="origin-center scale-[1.005] [transition:transform_0.5s_ease] group-hover/card:scale-[1.03] [&_img]:size-full [&_img]:object-cover">
         {props.children}
       </div>
     </div>

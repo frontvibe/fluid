@@ -5,6 +5,7 @@ import {Money, flattenConnection} from '@shopify/hydrogen';
 import {cx} from 'class-variance-authority';
 
 import {useLocalePath} from '~/hooks/useLocalePath';
+import {cn} from '~/lib/utils';
 
 import {ShopifyImage} from '../ShopifyImage';
 import {Card, CardContent, CardMedia} from '../ui/Card';
@@ -31,6 +32,7 @@ export function ProductCard(props: {
   ]);
 
   const path = useLocalePath({path: `/products/${product?.handle}`});
+  const cardMediaAspectRatio = 'aspect-video';
 
   return (
     <>
@@ -40,48 +42,53 @@ export function ProductCard(props: {
             {firstVariant?.image && (
               <CardMedia>
                 <ShopifyImage
-                  aspectRatio="16/9"
+                  aspectRatio={
+                    cardMediaAspectRatio === 'aspect-video' ? '16/9' : '1/1'
+                  }
                   crop="center"
                   data={firstVariant.image}
                   sizes={sizes}
                 />
               </CardMedia>
             )}
-            <CardContent className="py-4">
-              <div className="text-lg underline-offset-4 group-hover/card:underline">
+            <CardContent className="p-3 md:px-6 md:py-4">
+              <div className="overflow-hidden text-ellipsis whitespace-nowrap underline-offset-4 group-hover/card:underline md:text-lg">
                 {product.title}
               </div>
-              <div className="mt-1 flex items-center gap-3">
+              <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 md:gap-3 [&>*]:overflow-hidden [&>*]:text-ellipsis [&>*]:whitespace-nowrap">
                 {firstVariant.compareAtPrice && (
                   <Money
-                    className="text-sm line-through opacity-50"
+                    className="text-xs text-muted-foreground line-through md:text-sm"
                     data={firstVariant.compareAtPrice}
                   />
                 )}
-                <Money data={firstVariant.price} />
+                <Money
+                  className="text-sm md:text-base"
+                  data={firstVariant.price}
+                />
               </div>
             </CardContent>
           </Card>
         </Link>
       ) : skeleton ? (
-        <Card className="overflow-hidden">
-          <Skeleton />
+        <Card className="animate-pulse overflow-hidden">
+          <Skeleton aspectRatio={cardMediaAspectRatio} />
         </Card>
       ) : null}
     </>
   );
 }
 
-function Skeleton() {
+function Skeleton({aspectRatio}: {aspectRatio: string}) {
   return (
     <>
-      <div className="aspect-video w-full bg-slate-200" />
-      <div className="p-3 text-black/0">
+      <div className={cn('w-full bg-muted', aspectRatio)} />
+      <div className="p-3 text-muted-foreground/0">
         <div className="text-lg">
-          <span className="rounded bg-slate-100">Skeleton product title</span>
+          <span className="rounded bg-muted">Skeleton product title</span>
         </div>
         <div>
-          <span className="rounded bg-slate-100">Skeleton price</span>
+          <span className="rounded bg-muted">Skeleton price</span>
         </div>
       </div>
     </>

@@ -4,6 +4,7 @@ import {forwardRef} from 'react';
 import {Drawer as DrawerPrimitive} from 'vaul';
 
 import {IconClose} from '../icons/IconClose';
+import {iconButtonClass} from './Button';
 
 const Drawer = ({
   open,
@@ -78,7 +79,12 @@ const DrawerContent = forwardRef<
     >
       <div className="mx-auto mt-4 h-2 w-[100px] rounded-full bg-muted md:hidden" />
       {children}
-      <DrawerClose className="absolute right-4 top-4 hidden rounded-sm ring-offset-background transition-opacity hover:opacity-70 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary lg:block">
+      <DrawerClose
+        className={cn(
+          iconButtonClass,
+          'absolute right-2 top-2 hidden lg:inline-flex',
+        )}
+      >
         <IconClose className="size-6" strokeWidth={2} />
         <span className="sr-only">Close</span>
       </DrawerClose>

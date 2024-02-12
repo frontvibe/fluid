@@ -10,6 +10,7 @@ import {IconChevron} from '../icons/IconChevron';
 import {IconMenu} from '../icons/IconMenu';
 import {SanityExternalLink} from '../sanity/link/SanityExternalLink';
 import {SanityInternalLink} from '../sanity/link/SanityInternalLink';
+import {iconButtonClass} from '../ui/Button';
 import {
   Drawer,
   DrawerContent,
@@ -37,7 +38,12 @@ export function MobileNavigation(props: {data?: NavigationProps}) {
         onOpenChange={setOpen}
         open={open}
       >
-        <DrawerTrigger className="flex items-center justify-center p-2 pr-[var(--mobileHeaderXPadding)] lg:pr-0">
+        <DrawerTrigger
+          className={cn(
+            iconButtonClass,
+            'mr-[var(--mobileHeaderXPadding)] lg:mr-0',
+          )}
+        >
           <IconMenu className="size-7" strokeWidth={1.5} />
         </DrawerTrigger>
         <MobileNavigationContent>

@@ -16,7 +16,7 @@ import {useLocalePath} from '~/hooks/useLocalePath';
 import {QuantitySelector} from '../QuantitySelector';
 import {ShopifyImage} from '../ShopifyImage';
 import {IconRemove} from '../icons/IconRemove';
-import {Button} from '../ui/Button';
+import {IconButton} from '../ui/Button';
 
 type OptimisticData = {
   action?: string;
@@ -150,15 +150,11 @@ function ItemRemoveButton({lineId}: {lineId: CartLineFragment['id']}) {
       route={cartPath}
     >
       <div className="overflow-hidden rounded border">
-        <Button
-          className="size-10 rounded-none p-2"
-          type="submit"
-          variant="ghost"
-        >
+        <IconButton className="rounded-none" type="submit">
           {/* Todo => add theme content string */}
           <span className="sr-only">Remove</span>
           <IconRemove aria-hidden="true" />
-        </Button>
+        </IconButton>
       </div>
       <OptimisticInput data={{action: 'remove'}} id={lineId} />
     </CartForm>

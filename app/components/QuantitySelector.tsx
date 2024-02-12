@@ -5,7 +5,7 @@ import {cn} from '~/lib/utils';
 
 import type {ButtonProps} from './ui/Button';
 
-import {Button} from './ui/Button';
+import {IconButton} from './ui/Button';
 export function QuantitySelector(props: {children: React.ReactNode}) {
   return (
     <div className="flex items-center overflow-hidden rounded border border-border">
@@ -21,18 +21,17 @@ const QuantityButton = forwardRef<
   }
 >(({className, symbol, variant, ...props}, ref) => {
   return (
-    <Button
+    <IconButton
       aria-label={cx([
         symbol === 'decrease' && 'Decrease quantity',
         symbol === 'increase' && 'Increase quantity',
       ])}
-      className={cn(['rounded-none disabled:opacity-30', className])}
+      className={cn(['rounded-none disabled:text-muted-foreground', className])}
       name={cx([
         symbol === 'decrease' && 'decrease-quantity',
         symbol === 'increase' && 'increase-quantity',
       ])}
       ref={ref}
-      variant="ghost"
       {...props}
     >
       <span>
@@ -44,7 +43,7 @@ const QuantityButton = forwardRef<
         }
       </span>
       {props.children}
-    </Button>
+    </IconButton>
   );
 });
 QuantityButton.displayName = 'QuantityButton';

@@ -16,9 +16,11 @@ export function FooterSocialLinksOnly(
 
   return (
     <div className="container">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-wrap items-center gap-y-4 sm:justify-between">
         <p>{data.copyright}</p>
-        <CountrySelector />
+        <div className="order-first sm:order-last">
+          <CountrySelector />
+        </div>
       </div>
     </div>
   );

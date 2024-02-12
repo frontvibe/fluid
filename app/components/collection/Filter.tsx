@@ -11,7 +11,7 @@ import {
   useNavigate,
   useSearchParams,
 } from '@remix-run/react';
-import {useCallback, useMemo, useState} from 'react';
+import {useCallback, useEffect, useMemo, useState} from 'react';
 import useDebounce from 'react-use/lib/useDebounce';
 
 import {useOptimisticNavigationData} from '~/hooks/useOptimisticNavigationData';
@@ -137,7 +137,11 @@ function FilterCheckbox({
 
 const PRICE_RANGE_FILTER_DEBOUNCE = 500;
 
-export function PriceRangeFilter() {
+export function PriceRangeFilter({
+  appliedFilters,
+}: {
+  appliedFilters: AppliedFilter[];
+}) {
   const location = useLocation();
   const params = useMemo(
     () => new URLSearchParams(location.search),
@@ -150,9 +154,18 @@ export function PriceRangeFilter() {
   const min = isNaN(Number(price?.min)) ? undefined : Number(price?.min);
   const max = isNaN(Number(price?.max)) ? undefined : Number(price?.max);
   const navigate = useNavigate();
-
+  const {optimisticData} =
+    useOptimisticNavigationData<boolean>('clear-all-filters');
   const [minPrice, setMinPrice] = useState(min);
   const [maxPrice, setMaxPrice] = useState(max);
+
+  useEffect(() => {
+    // Reset prices when the user clears all filters
+    if (optimisticData) {
+      setMinPrice(undefined);
+      setMaxPrice(undefined);
+    }
+  }, [optimisticData]);
 
   useDebounce(
     () => {
@@ -201,6 +214,7 @@ export function PriceRangeFilter() {
         <span>from</span>
         <Input
           className="mt-1"
+          min={0}
           name="minPrice"
           onChange={onChangeMin}
           placeholder={'$'}
@@ -212,6 +226,7 @@ export function PriceRangeFilter() {
         <span>to</span>
         <Input
           className="mt-1"
+          min={0}
           name="maxPrice"
           onChange={onChangeMax}
           placeholder={'$'}

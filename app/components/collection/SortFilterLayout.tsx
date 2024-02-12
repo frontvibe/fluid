@@ -46,6 +46,7 @@ type Props = {
   appliedFilters?: AppliedFilter[];
   children: React.ReactNode;
   filters: Filter[];
+  onClearAllFilters: () => void;
   productsCount: number;
   sectionSettings?: CmsSectionSettings;
 };
@@ -56,10 +57,18 @@ export function SortFilter({
   appliedFilters = [],
   children,
   filters,
+  onClearAllFilters,
   productsCount,
   sectionSettings,
 }: Props) {
   const [isOpen, setIsOpen] = useState(false);
+  const {optimisticData} =
+    useOptimisticNavigationData<boolean>('clear-all-filters');
+
+  // Here we can optimistically clear all filters and close DrawerFooter
+  if (optimisticData) {
+    appliedFilters = [];
+  }
 
   return (
     <>
@@ -96,7 +105,12 @@ export function SortFilter({
             />
           </div>
         </div>
-        <MobileDrawer appliedFilters={appliedFilters} filters={filters} />
+        <MobileDrawer
+          appliedFilters={appliedFilters}
+          filters={filters}
+          onClearAllFilters={onClearAllFilters}
+          productsCount={productsCount}
+        />
         <div className="lg:flex-1">{children}</div>
       </div>
     </>
@@ -106,34 +120,18 @@ export function SortFilter({
 function MobileDrawer({
   appliedFilters,
   filters,
+  onClearAllFilters,
+  productsCount,
 }: {
   appliedFilters: AppliedFilter[];
   filters: Filter[];
+  onClearAllFilters: () => void;
+  productsCount: number;
 }) {
   const [open, setOpen] = useState(false);
   // Todo => add strings to themeContent
   const heading = 'Filter and Sort';
-  const navigate = useNavigate();
-  const {pathname} = useLocation();
-  const {optimisticData, pending} =
-    useOptimisticNavigationData<boolean>('clear-all-filters');
-
-  // Here we can optimistically clear all filters and close DrawerFooter
-  if (optimisticData) {
-    appliedFilters = [];
-  }
-
-  const handleClearFilters = useCallback(() => {
-    navigate(pathname, {
-      preventScrollReset: true,
-      replace: true,
-      // Set optimistic data to clear all filters
-      state: {
-        optimisticData: true,
-        optimisticId: 'clear-all-filters',
-      },
-    });
-  }, [navigate, pathname]);
+  const {pending} = useOptimisticNavigationData<boolean>('clear-all-filters');
 
   return (
     <div className="touch:block lg:hidden">
@@ -151,8 +149,9 @@ function MobileDrawer({
           onCloseAutoFocus={(e) => e.preventDefault()}
           onOpenAutoFocus={(e) => e.preventDefault()}
         >
-          <DrawerHeader className="border-b text-xl font-medium">
+          <DrawerHeader className="flex items-center justify-center border-b text-xl font-medium">
             {heading}
+            <span>({productsCount})</span>
           </DrawerHeader>
           <div className="size-full overflow-hidden">
             <ScrollArea className="size-full px-6">
@@ -199,7 +198,7 @@ function MobileDrawer({
                         pending &&
                           'pointer-events-none animate-pulse delay-500',
                       ])}
-                      onClick={handleClearFilters}
+                      onClick={onClearAllFilters}
                       variant="ghost"
                     >
                       {/* // Todo => add strings to themeContent */}
@@ -226,7 +225,7 @@ function MobileDrawer({
 export function DesktopFiltersDrawer({
   appliedFilters = [],
   filters = [],
-}: Omit<Props, 'children' | 'productsCount'>) {
+}: Omit<Props, 'children' | 'onClearAllFilters' | 'productsCount'>) {
   return (
     <ScrollArea className="h-[calc(100dvh_-_var(--desktopHeaderHeight)_-2rem)] w-full rounded-md border px-4 transition-all">
       <nav>
@@ -268,7 +267,7 @@ const filterMarkup = (
 ) => {
   switch (filter.type) {
     case 'PRICE_RANGE':
-      return <PriceRangeFilter />;
+      return <PriceRangeFilter appliedFilters={appliedFilters} />;
 
     default:
       return <DefaultFilter appliedFilters={appliedFilters} option={option} />;

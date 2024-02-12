@@ -26,7 +26,10 @@ export function CountrySelector() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button className="flex max-w-fit gap-2" variant="outline">
+        <Button
+          className="flex w-full gap-2 sm:w-auto sm:max-w-fit"
+          variant="outline"
+        >
           {currentLocale?.label}
           <IconChevron className="size-3" direction="down" />
         </Button>

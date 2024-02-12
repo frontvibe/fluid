@@ -1,3 +1,4 @@
+import type {Variants} from 'framer-motion';
 import type {CartApiQueryFragment} from 'storefrontapi.generated';
 
 import {Money} from '@shopify/hydrogen';
@@ -25,7 +26,7 @@ export function CartDetails({
   // @todo: get optimistic cart cost
   const cartHasItems = !!cart && cart.totalQuantity > 0;
 
-  const drawerMotionVariants = {
+  const drawerMotionVariants: Variants = {
     hide: {
       height: 0,
     },
@@ -34,7 +35,7 @@ export function CartDetails({
     },
   };
 
-  const pageMotionVariants = {
+  const pageMotionVariants: Variants = {
     hide: {
       opacity: 0,
       transition: {

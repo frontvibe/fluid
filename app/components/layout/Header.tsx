@@ -1,10 +1,11 @@
+import type {Variants} from 'framer-motion';
 import type {CSSProperties} from 'react';
 
-import {Link} from '@remix-run/react';
+import {Link, useLocation} from '@remix-run/react';
 import {vercelStegaCleanAll} from '@sanity/client/stega';
 import {cx} from 'class-variance-authority';
 import {m, transform, useMotionValueEvent, useTransform} from 'framer-motion';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
 import {useBoundedScroll} from '~/hooks/useBoundedScroll';
 import {useLocalePath} from '~/hooks/useLocalePath';
@@ -96,6 +97,10 @@ function HeaderAnimation(props: {
   children: React.ReactNode;
   className: string;
 }) {
+  const {pathname} = useLocation();
+  const [activeVariant, setActiveVariant] = useState<
+    'hidden' | 'initial' | 'visible'
+  >('initial');
   const desktopHeaderHeight = useHeaderHeigth()?.desktopHeaderHeight || 0;
   const {scrollYBoundedProgress} = useBoundedScroll(250);
   const scrollYBoundedProgressDelayed = useTransform(
@@ -104,19 +109,47 @@ function HeaderAnimation(props: {
     [0, 0, 1],
   );
 
-  // Reassign the header height css var on scroll
+  useEffect(() => {
+    // Reset the header position on route change
+    setActiveVariant('initial');
+  }, [pathname]);
+
   useMotionValueEvent(scrollYBoundedProgressDelayed, 'change', (latest) => {
+    if (latest === 0) {
+      setActiveVariant('visible');
+    } else if (latest > 0.5) {
+      setActiveVariant('hidden');
+    } else {
+      setActiveVariant('visible');
+    }
+
     const newDesktopHeaderHeight = transform(
       latest,
       [0, 1],
       [`${desktopHeaderHeight}px`, '0px'],
     );
 
+    // Reassign header height css var on scroll
     document.documentElement.style.setProperty(
       '--desktopHeaderHeight',
       newDesktopHeaderHeight,
     );
   });
+
+  const variants: Variants = {
+    hidden: {
+      transform: 'translateY(-100%)',
+    },
+    initial: {
+      transform: 'translateY(0)',
+      transition: {
+        duration: 0,
+      },
+    },
+    visible: {
+      transform: 'translateY(0)',
+    },
+  };
 
   // Header animation inspired by the fantastic Build UI recipes
   // (Check out the original at: https://buildui.com/recipes/fixed-header)
@@ -124,19 +157,13 @@ function HeaderAnimation(props: {
   return (
     <>
       <m.header
+        animate={activeVariant}
         className={cn(props.className)}
-        style={{
-          opacity: useTransform(
-            scrollYBoundedProgressDelayed,
-            [0, 0.75, 1],
-            [1, 0, 0],
-          ),
-          transform: useTransform(
-            scrollYBoundedProgressDelayed,
-            [0, 1],
-            ['translateY(0)', 'translateY(-100%)'],
-          ),
+        initial="visible"
+        transition={{
+          duration: 0.2,
         }}
+        variants={variants}
       >
         {props.children}
       </m.header>

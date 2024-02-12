@@ -114,13 +114,7 @@ function Pills(props: {
   };
 }) {
   const navigate = useNavigate();
-  const layoutId = useRef(
-    props.handle! +
-      props.option.name +
-      '-' +
-      Math.random().toString(36).substring(2, 15) +
-      Math.random().toString(36).substring(2, 15),
-  );
+  const layoutId = props.handle! + props.option.name;
 
   const optimisticId = `${props.option.name}-selected-variant`;
   const {optimisticData, pending} =
@@ -182,7 +176,7 @@ function Pills(props: {
           {isActive && (
             <m.span
               className="absolute inset-0 z-10 bg-accent mix-blend-multiply"
-              layoutId={layoutId.current}
+              layoutId={layoutId}
               style={{borderRadius: 9999}}
               transition={{bounce: 0.2, duration: 0.5, type: 'spring'}}
             />

@@ -3,7 +3,7 @@ import type {ProductVariantFragmentFragment} from 'storefrontapi.generated';
 import {useNavigation} from '@remix-run/react';
 import {CartForm, ShopPayButton} from '@shopify/hydrogen';
 import {useEffect, useState} from 'react';
-import {useIdle} from 'react-use';
+import {useIdle, useSessionStorage} from 'react-use';
 
 import {useEnvironmentVariables} from '~/hooks/useEnvironmentVariables';
 import {useLocalePath} from '~/hooks/useLocalePath';
@@ -113,19 +113,28 @@ function ShopPay(props: {
   const env = useEnvironmentVariables();
   const userIsIdle = useIdle(1000, true);
   const [show, setShow] = useState<boolean>(false);
+  const [shopPayLoadState, setShopPayLoadState] = useSessionStorage(
+    'shop-pay-state',
+    false,
+  );
 
   useEffect(() => {
-    if (!userIsIdle && !show) {
+    // LazyLoad ShopPay until user isn't idle
+    // Save state to sessionStorage to prevent placeholder from being active on page refresh/change
+    if (!userIsIdle && !shopPayLoadState) {
+      setShow(true);
+      setShopPayLoadState(true);
+    } else if (shopPayLoadState) {
       setShow(true);
     }
-  }, [userIsIdle, show]);
+  }, [userIsIdle, shopPayLoadState, setShopPayLoadState]);
 
   return (
     <div className="relative h-[42px] overflow-hidden rounded">
+      {/* Plaholder */}
       <div className="flex size-full items-center justify-center bg-[#5a31f4] [&_svg]:h-[21px] [&_svg]:w-[88px]">
         <ShopPayLogo />
       </div>
-      {/* LazyLoad ShopPay until user isn't idle */}
       {show && (
         <div className="absolute inset-0 z-[2]">
           <ShopPayButton

@@ -149,13 +149,12 @@ function ItemRemoveButton({lineId}: {lineId: CartLineFragment['id']}) {
       }}
       route={cartPath}
     >
-      <div className="overflow-hidden rounded border">
-        <IconButton className="rounded-none" type="submit">
-          {/* Todo => add theme content string */}
-          <span className="sr-only">Remove</span>
-          <IconRemove aria-hidden="true" />
-        </IconButton>
-      </div>
+      <IconButton className="overflow-hidden rounded border" type="submit">
+        {/* Todo => add theme content string */}
+        <span className="sr-only">Remove</span>
+        <IconRemove aria-hidden="true" />
+      </IconButton>
+
       <OptimisticInput data={{action: 'remove'}} id={lineId} />
     </CartForm>
   );

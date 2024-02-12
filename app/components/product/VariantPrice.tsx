@@ -24,7 +24,7 @@ export function VariantPrice({
     <>
       {compareAtPrice && (
         <Money
-          className="tabular-nums line-through opacity-50"
+          className="tabular-nums text-muted-foreground line-through"
           data={compareAtPrice}
         />
       )}

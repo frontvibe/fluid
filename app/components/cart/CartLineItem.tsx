@@ -1,4 +1,5 @@
 import type {CartLineUpdateInput} from '@shopify/hydrogen-react/storefront-api-types';
+import type {Variants} from 'framer-motion';
 import type {CartLineFragment} from 'storefrontapi.generated';
 
 import {Link} from '@remix-run/react';
@@ -43,7 +44,7 @@ export function CartLineItem({
   if (!line?.id) return null;
   if (typeof quantity === 'undefined' || !merchandise?.product) return null;
 
-  const variants = {
+  const variants: Variants = {
     hidden: {
       height: 0,
       opacity: 0,

@@ -85,6 +85,7 @@ export function CartLineItem({
         optimisticData?.action === 'remove' ? 'hidden' : 'visible'
       }
       className="overflow-hidden"
+      forceMotion={layout === 'drawer'}
       initial={layout === 'page' ? 'visible' : 'hidden'}
       key={id}
       variants={variants}

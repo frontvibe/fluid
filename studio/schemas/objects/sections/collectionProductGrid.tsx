@@ -10,9 +10,9 @@ export default defineField({
       name: 'productsPerPage',
       type: 'rangeSlider',
       options: {
-        min: 8,
-        max: 14,
-        step: 4,
+        min: 6,
+        max: 20,
+        step: 1,
       },
     }),
     defineField({

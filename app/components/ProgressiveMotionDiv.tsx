@@ -9,9 +9,22 @@ import {useIsHydrated} from '~/hooks/useIsHydrated';
 export function ProgressiveMotionDiv({
   children,
   className,
+  forceMotion,
   ...props
-}: {children: React.ReactNode} & HTMLMotionProps<'div'>) {
+}: {
+  children: React.ReactNode;
+  forceMotion?: boolean;
+} & HTMLMotionProps<'div'>) {
   const isHydrated = useIsHydrated();
+
+  if (forceMotion) {
+    return (
+      <m.div className={className} {...props}>
+        {children}
+      </m.div>
+    );
+  }
+
   return isHydrated ? (
     <m.div className={className} {...props}>
       {children}

@@ -130,7 +130,7 @@ function ShopPay(props: {
   }, [userIsIdle, shopPayLoadState, setShopPayLoadState]);
 
   return (
-    <div className="relative h-[42px] overflow-hidden rounded">
+    <div className="relative h-[--shop-pay-button-height] overflow-hidden rounded [--shop-pay-button-height:44px]">
       {/* Plaholder */}
       <div className="flex size-full items-center justify-center bg-[#5a31f4] [&_svg]:h-[21px] [&_svg]:w-[88px]">
         <ShopPayLogo />
@@ -139,7 +139,6 @@ function ShopPay(props: {
         <div className="absolute inset-0 z-[2]">
           <ShopPayButton
             className={cn([
-              'h-full',
               (isLoading || isOutOfStock) &&
                 'pointer-events-none cursor-default',
               isOutOfStock && 'opacity-50',

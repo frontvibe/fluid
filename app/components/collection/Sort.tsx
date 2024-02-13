@@ -17,6 +17,7 @@ import {cn} from '~/lib/utils';
 import type {SortParam} from './SortFilterLayout';
 
 import {IconSort} from '../icons/IconSort';
+import {iconButtonClass} from '../ui/Button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -89,7 +90,7 @@ export function DesktopSort(props: {sectionSettings?: CmsSectionSettings}) {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="flex items-center gap-1">
+      <DropdownMenuTrigger className={cn(iconButtonClass, 'w-auto gap-1 px-2')}>
         <IconSort strokeWidth={1} />
         <span>
           <span className="px-2 font-medium">

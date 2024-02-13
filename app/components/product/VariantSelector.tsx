@@ -195,13 +195,13 @@ function Pill(props: {
   const layoutId = handle! + option.name;
 
   const buttonClass = cx([
-    'relative select-none rounded-full text-sm font-medium',
+    'select-none rounded-full py-[.375rem] text-sm font-medium',
     'focus-visible:outline-none focus-visible:outline-2 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
     !isAvailable && 'opacity-50',
   ]);
   const bubbleClass = cx('absolute inset-0 z-10 bg-accent mix-blend-multiply');
   const foregroundClass = cx([
-    'inline-flex h-8 items-center justify-center whitespace-nowrap px-3 py-1.5 transition-colors notouch:hover:text-accent-foreground',
+    'inline-flex items-center justify-center whitespace-nowrap px-3 py-1.5 transition-colors notouch:hover:text-accent-foreground',
     isActive && 'text-accent-foreground',
   ]);
 
@@ -219,25 +219,33 @@ function Pill(props: {
         WebkitTapHighlightColor: 'transparent',
       }}
     >
-      {isActive && (
+      <span className="relative block h-8">
+        {isActive && (
+          <m.span
+            className={bubbleClass}
+            layoutId={layoutId}
+            style={{borderRadius: 9999}}
+            transition={{bounce: 0.2, duration: 0.5, type: 'spring'}}
+          />
+        )}
         <m.span
-          className={bubbleClass}
-          layoutId={layoutId}
-          style={{borderRadius: 9999}}
-          transition={{bounce: 0.2, duration: 0.5, type: 'spring'}}
-        />
-      )}
-      <m.span className={foregroundClass} tabIndex={-1} whileTap={{scale: 0.9}}>
-        {value}
-      </m.span>
+          className={foregroundClass}
+          tabIndex={-1}
+          whileTap={{scale: 0.9}}
+        >
+          {value}
+        </m.span>
+      </span>
     </m.button>
   ) : (
     <Link className={buttonClass} to={search}>
-      {isActive && (
-        <span className={bubbleClass} style={{borderRadius: 9999}} />
-      )}
-      <span className={foregroundClass} tabIndex={-1}>
-        {value}
+      <span className="relative block h-8">
+        {isActive && (
+          <span className={bubbleClass} style={{borderRadius: 9999}} />
+        )}
+        <span className={foregroundClass} tabIndex={-1}>
+          {value}
+        </span>
       </span>
     </Link>
   );

@@ -7,33 +7,30 @@ import {IconClose} from '../icons/IconClose';
 import {iconButtonClass} from './Button';
 
 const Drawer = ({
+  onOpenChange,
   open,
   preventScrollRestoration = false,
   shouldScaleBackground = false,
   ...props
 }: React.ComponentProps<typeof DrawerPrimitive.Root>) => {
-  const handleOpen = React.useCallback((open: boolean) => {
+  const handleOpen = React.useCallback(($open: boolean) => {
     if (!document) return;
     const body = document.body;
 
-    if (!open) {
-      const timeout = setTimeout(() => {
-        body.removeAttribute('data-drawer-open');
-        clearTimeout(timeout);
-      }, 500);
+    if (!$open) {
+      body.removeAttribute('data-drawer-open');
       return;
     }
 
-    body.setAttribute('data-drawer-open', String(open));
+    body.setAttribute('data-drawer-open', String($open));
   }, []);
-
-  React.useEffect(() => {
-    if (open !== undefined) handleOpen(open);
-  }, [open, handleOpen]);
 
   return (
     <DrawerPrimitive.Root
-      onOpenChange={handleOpen}
+      onOpenChange={($open) => {
+        onOpenChange?.($open);
+        handleOpen($open);
+      }}
       open={open}
       preventScrollRestoration={preventScrollRestoration}
       shouldScaleBackground={shouldScaleBackground}

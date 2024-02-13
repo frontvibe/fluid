@@ -32,7 +32,9 @@ export function CartLines({
       <section aria-labelledby="cart-contents" className={className}>
         <ul className="grid">
           {currentLines.map((line) => (
-            <CartLineItem key={line.id} line={line} onClose={onClose} />
+            <li key={line.id}>
+              <CartLineItem layout={layout} line={line} onClose={onClose} />
+            </li>
           ))}
         </ul>
       </section>

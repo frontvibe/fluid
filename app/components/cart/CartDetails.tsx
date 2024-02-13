@@ -2,13 +2,14 @@ import type {Variants} from 'framer-motion';
 import type {CartApiQueryFragment} from 'storefrontapi.generated';
 
 import {Money} from '@shopify/hydrogen';
-import {AnimatePresence, m} from 'framer-motion';
+import {AnimatePresence} from 'framer-motion';
 import {useMemo} from 'react';
 
 import {cn} from '~/lib/utils';
 
 import type {CartLayouts} from './Cart';
 
+import {ProgressiveMotionDiv} from '../ProgressiveMotionDiv';
 import {Button} from '../ui/Button';
 import {Card, CardContent} from '../ui/Card';
 import {CartDiscounts} from './CartDiscounts';
@@ -53,14 +54,14 @@ export function CartDetails({
       <div>
         <AnimatePresence>
           {cartHasItems && (
-            <m.div
+            <ProgressiveMotionDiv
               animate="show"
               className={cn([
                 layout === 'page' &&
                   'lg:sticky lg:top-[var(--desktopHeaderHeight)]',
               ])}
               exit={'hide'}
-              initial={'hide'}
+              initial={layout === 'drawer' ? 'hide' : 'show'}
               variants={
                 layout === 'drawer' ? drawerMotionVariants : pageMotionVariants
               }
@@ -72,7 +73,7 @@ export function CartDetails({
                 />
                 <CartCheckoutActions checkoutUrl={cart.checkoutUrl} />
               </CartSummary>
-            </m.div>
+            </ProgressiveMotionDiv>
           )}
         </AnimatePresence>
       </div>

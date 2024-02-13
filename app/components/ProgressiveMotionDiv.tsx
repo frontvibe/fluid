@@ -17,15 +17,7 @@ export function ProgressiveMotionDiv({
 } & HTMLMotionProps<'div'>) {
   const isHydrated = useIsHydrated();
 
-  if (forceMotion) {
-    return (
-      <m.div className={className} {...props}>
-        {children}
-      </m.div>
-    );
-  }
-
-  return isHydrated ? (
+  return forceMotion || isHydrated ? (
     <m.div className={className} {...props}>
       {children}
     </m.div>

@@ -61,7 +61,7 @@ export function SortFilter({
   sectionSettings,
 }: Props) {
   const [isOpen, setIsOpen] = useState(false);
-  const {optimisticData} =
+  const {optimisticData, pending} =
     useOptimisticNavigationData<boolean>('clear-all-filters');
 
   // Here we can optimistically clear all filters and close DrawerFooter
@@ -73,20 +73,34 @@ export function SortFilter({
     <>
       {/* Desktop layout */}
       <div className="hidden w-full touch:hidden lg:flex lg:items-center lg:justify-between">
-        <div className="flex items-center">
-          <IconButton
-            className="w-auto gap-3 px-2"
-            onClick={() => setIsOpen(!isOpen)}
-          >
+        <div className="flex items-center gap-2">
+          <IconButton onClick={() => setIsOpen(!isOpen)}>
             <IconFilters className="size-4" />
-            {/*
-            // Todo => add strings to themeContent
-          */}
-            <small className="flex items-center gap-1">
-              <span className="tabular-nums">{productsCount}</span>
-              <span>products</span>
-            </small>
           </IconButton>
+          <AnimatePresence>
+            {appliedFilters.length > 0 && (
+              <m.div
+                animate={{opacity: 1}}
+                exit={{opacity: 0}}
+                initial={{opacity: 0}}
+              >
+                <Button
+                  className={cn([
+                    'flex items-center gap-1',
+                    pending && 'pointer-events-none animate-pulse delay-500',
+                  ])}
+                  onClick={onClearAllFilters}
+                  variant="ghost"
+                >
+                  {/* // Todo => add strings to themeContent */}
+                  <span>Clear all filters</span>
+                  <span className="tabular-nums">
+                    ({appliedFilters.length})
+                  </span>
+                </Button>
+              </m.div>
+            )}
+          </AnimatePresence>
         </div>
         <DesktopSort sectionSettings={sectionSettings} />
       </div>

@@ -15,10 +15,8 @@ export function useBoundedScroll(threshold: number) {
       const body = document.body;
       if (body.getAttribute('data-drawer-open') === 'true') return;
 
-      if (scrollYProgress.get() >= 0.95) {
-        // Reached the bottom of the page, so we don't want to bound the scroll
-        return;
-      }
+      // Reached the bottom of the page, so we don't want to bound the scroll
+      if (scrollYProgress.get() >= 0.95) return;
 
       const previous = scrollY.getPrevious() ?? 0;
       const diff = current - previous;

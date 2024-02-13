@@ -7,6 +7,7 @@ import {cn} from '~/lib/utils';
 
 import type {CartLayouts} from './Cart';
 
+import {ProgressiveMotionDiv} from '../ProgressiveMotionDiv';
 import {Button} from '../ui/Button';
 
 export function CartEmpty({
@@ -35,7 +36,7 @@ export function CartEmpty({
   return (
     <AnimatePresence>
       {show && (
-        <m.div
+        <ProgressiveMotionDiv
           animate={{
             opacity: 1,
           }}
@@ -44,7 +45,7 @@ export function CartEmpty({
             opacity: 0,
           }}
           initial={{
-            opacity: 0,
+            opacity: layout === 'page' ? 1 : 0,
           }}
         >
           <section
@@ -69,20 +70,20 @@ export function CartEmpty({
                 <Button onClick={onClose}>{label}</Button>
               )}
             </div>
+            {/* Todo => add FeaturedProducts */}
+            {/* 
+              <section className="grid gap-8 pt-16">
+                <FeaturedProducts
+                  count={4}
+                  heading="Shop Best Sellers"
+                  layout={layout}
+                  onClose={onClose}
+                  sortKey="BEST_SELLING"
+                />
+              </section>
+            */}
           </section>
-          {/* Todo => add FeaturedProducts */}
-          {/* 
-            <section className="grid gap-8 pt-16">
-              <FeaturedProducts
-                count={4}
-                heading="Shop Best Sellers"
-                layout={layout}
-                onClose={onClose}
-                sortKey="BEST_SELLING"
-              />
-            </section>
-          */}
-        </m.div>
+        </ProgressiveMotionDiv>
       )}
     </AnimatePresence>
   );

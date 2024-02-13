@@ -10,10 +10,12 @@ import {
   parseGid,
   useOptimisticData,
 } from '@shopify/hydrogen';
-import {m} from 'framer-motion';
 
 import {useLocalePath} from '~/hooks/useLocalePath';
 
+import type {CartLayouts} from './Cart';
+
+import {ProgressiveMotionDiv} from '../ProgressiveMotionDiv';
 import {QuantitySelector} from '../QuantitySelector';
 import {ShopifyImage} from '../ShopifyImage';
 import {IconRemove} from '../icons/IconRemove';
@@ -28,9 +30,11 @@ const base = 4;
 const t = (n: number) => base * n;
 
 export function CartLineItem({
+  layout,
   line,
   onClose,
 }: {
+  layout: CartLayouts;
   line: CartLineFragment;
   onClose?: () => void;
 }) {
@@ -70,18 +74,18 @@ export function CartLineItem({
     },
   };
 
-  // Animated list implmentation inspired by the fantastic Build UI recipes
+  // Animated list implementation inspired by the fantastic Build UI recipes
   // (Check out the original at: https://buildui.com/recipes/animated-list)
   // Credit to the Build UI team for the awesome List animation.
   return (
-    <m.li
+    <ProgressiveMotionDiv
       animate={
         // Hide the line item if the optimistic data action is remove
         // Do not remove the form from the DOM
         optimisticData?.action === 'remove' ? 'hidden' : 'visible'
       }
       className="overflow-hidden"
-      initial="hidden"
+      initial={layout === 'page' ? 'visible' : 'hidden'}
       key={id}
       variants={variants}
     >
@@ -135,7 +139,7 @@ export function CartLineItem({
           </span>
         </div>
       </div>
-    </m.li>
+    </ProgressiveMotionDiv>
   );
 }
 

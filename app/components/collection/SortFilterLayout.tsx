@@ -3,9 +3,8 @@ import type {
   ProductFilter,
 } from '@shopify/hydrogen/storefront-api-types';
 
-import {useLocation, useNavigate} from '@remix-run/react';
 import {AnimatePresence, m} from 'framer-motion';
-import {useCallback, useState} from 'react';
+import {useState} from 'react';
 
 import {useOptimisticNavigationData} from '~/hooks/useOptimisticNavigationData';
 import {type CmsSectionSettings} from '~/hooks/useSettingsCssVars';
@@ -18,7 +17,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '../ui/Accordion';
-import {Button} from '../ui/Button';
+import {Button, IconButton, iconButtonClass} from '../ui/Button';
 import {
   Drawer,
   DrawerContent,
@@ -75,16 +74,19 @@ export function SortFilter({
       {/* Desktop layout */}
       <div className="hidden w-full touch:hidden lg:flex lg:items-center lg:justify-between">
         <div className="flex items-center">
-          <button className="py-2 pr-2" onClick={() => setIsOpen(!isOpen)}>
-            <IconFilters />
-          </button>
-          {/*
+          <IconButton
+            className="w-auto gap-3 px-2"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            <IconFilters className="size-4" />
+            {/*
             // Todo => add strings to themeContent
           */}
-          <small className="flex items-center gap-1">
-            <span className="tabular-nums">{productsCount}</span>
-            <span>products</span>
-          </small>
+            <small className="flex items-center gap-1">
+              <span className="tabular-nums">{productsCount}</span>
+              <span>products</span>
+            </small>
+          </IconButton>
         </div>
         <DesktopSort sectionSettings={sectionSettings} />
       </div>
@@ -136,7 +138,7 @@ function MobileDrawer({
   return (
     <div className="touch:block lg:hidden">
       <Drawer onOpenChange={setOpen} open={open}>
-        <DrawerTrigger className="flex items-center gap-2">
+        <DrawerTrigger className={cn(iconButtonClass, 'w-auto gap-2 px-2')}>
           <IconFilters />
           <span>{heading}</span>
         </DrawerTrigger>

@@ -12,7 +12,6 @@ export default defineField({
       options: {
         min: 6,
         max: 20,
-        step: 1,
       },
     }),
     defineField({

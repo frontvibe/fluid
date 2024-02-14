@@ -18,14 +18,30 @@ export function Logo(props: {
   const {data, encodeDataAttribute} = useSanityRoot();
   const sanitySettings = data?.settings;
   const logo = sanitySettings?.logo;
+  const siteName = sanitySettings?.siteName;
 
-  const encodeData = encodeDataAttribute([
-    // Path to the logo image in Sanity Studio
-    'settings',
-    'logo',
-    '_ref',
-    data?.settings?.logo?._ref!,
-  ]);
+  const encodeData = data?.settings?.logo?._ref
+    ? encodeDataAttribute([
+        // Path to the logo image in Sanity Studio
+        'settings',
+        'logo',
+        '_ref',
+        data?.settings?.logo?._ref,
+      ])
+    : undefined;
 
-  return <SanityImage data={logo} sanityEncodeData={encodeData} {...props} />;
+  return logo ? (
+    <SanityImage
+      data={{
+        ...logo,
+        altText: siteName || '',
+      }}
+      sanityEncodeData={encodeData}
+      {...props}
+    />
+  ) : (
+    <div className="font-heading flex h-11 items-center justify-center text-2xl notouch:group-hover:text-accent-foreground">
+      {siteName}
+    </div>
+  );
 }

@@ -34,13 +34,9 @@ export function Header() {
   return (
     <HeaderWrapper>
       <style dangerouslySetInnerHTML={{__html: colorPaletteCssVars}} />
-      <div className="[--mobileHeaderXPadding:.75rem] lg:container">
+      <div className="container">
         <div className="flex items-center justify-between">
-          <Link
-            className="pl-[var(--mobileHeaderXPadding)] lg:pl-0"
-            prefetch="intent"
-            to={homePath}
-          >
+          <Link className="group" prefetch="intent" to={homePath}>
             <Logo
               className="h-auto w-[var(--logoWidth)]"
               sizes={logoWidth}
@@ -185,22 +181,18 @@ function HeaderHeightCssVars() {
 
 function useHeaderHeigth() {
   const {data} = useSanityRoot();
-  const headerPadding = data?.header?.padding;
-  const desktopLogoWidth = data?.header?.desktopLogoWidth;
+  const headerPadding = {
+    bottom: data?.header?.padding?.bottom || 0,
+    top: data?.header?.padding?.top || 0,
+  };
+  const desktopLogoWidth = data?.header?.desktopLogoWidth || 1;
   const headerBorder = data?.header?.showSeparatorLine ? 1 : 0;
   const sanitySettings = data?.settings;
   const logo = sanitySettings?.logo;
 
-  if (
-    !headerPadding?.top ||
-    !headerPadding?.bottom ||
-    !logo?.height ||
-    !desktopLogoWidth
-  ) {
-    return null;
-  }
-
-  const desktopLogoHeight = (desktopLogoWidth * logo?.height) / logo?.width;
+  const desktopLogoHeight = logo
+    ? (desktopLogoWidth * logo?.height) / logo?.width
+    : 44;
   const desktopHeaderHeight = (
     desktopLogoHeight +
     headerPadding.top +

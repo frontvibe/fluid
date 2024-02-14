@@ -8,11 +8,21 @@ import tailwindAnimatePlugin from 'tailwindcss-animate';
 export default {
   content: ['./app/**/*.{js,ts,jsx,tsx}'],
   theme: {
-    container: {
-      center: true,
-      padding: '1rem',
-    },
     extend: {
+      container: {
+        center: true,
+        padding: {
+          DEFAULT: '1rem',
+          md: '1.5rem',
+          xl: '2rem',
+          '2xl': '12rem',
+        },
+      },
+      fontFamily: {
+        heading: 'var(--heading-font-family)',
+        body: 'var(--heading-body-family)',
+        extra: 'var(--heading-extra-family)',
+      },
       colors: {
         background: 'rgb(var(--background) / <alpha-value>)',
         foreground: 'rgb(var(--foreground) / <alpha-value>)',

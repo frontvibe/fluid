@@ -20,7 +20,7 @@ import {Layout} from '~/components/layout/Layout';
 
 import type {HydrogenSession} from './lib/hydrogen.session.server';
 
-import favicon from '../public/favicon.svg';
+import favicon from '../public/favicon.ico';
 import {Fonts} from './components/Fonts';
 import {useLocale} from './hooks/useLocale';
 import {useSettingsCssVars} from './hooks/useSettingsCssVars';
@@ -59,7 +59,7 @@ export function links() {
       rel: 'preconnect',
     },
     {href: tailwindCss, rel: 'stylesheet'},
-    {href: favicon, rel: 'icon', type: 'image/svg+xml'},
+    {href: favicon, rel: 'icon', type: 'image/x-icon'},
   ];
 }
 

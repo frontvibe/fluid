@@ -110,12 +110,7 @@ export const ANNOUCEMENT_BAR_ARRAY_FRAGMENT = q(
 export const SETTINGS_FRAGMENT = {
   favicon: q('favicon').grab(IMAGE_FRAGMENT).nullable(),
   logo: q('logo').grab(IMAGE_FRAGMENT).nullable(),
-  socialMedia: q('socialMedia').grab({
-    facebook: q.string().nullable(),
-    instagram: q.string().nullable(),
-    twitter: q.string().nullable(),
-    youtube: q.string().nullable(),
-  }),
+  siteName: q.string().nullable(),
 } satisfies Selection;
 
 /*

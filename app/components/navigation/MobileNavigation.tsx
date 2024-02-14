@@ -38,12 +38,7 @@ export function MobileNavigation(props: {data?: NavigationProps}) {
         onOpenChange={setOpen}
         open={open}
       >
-        <DrawerTrigger
-          className={cn(
-            iconButtonClass,
-            'mr-[var(--mobileHeaderXPadding)] lg:mr-0',
-          )}
-        >
+        <DrawerTrigger className={cn(iconButtonClass, '-mr-2 lg:mr-0')}>
           <IconMenu className="size-7" strokeWidth={1.5} />
         </DrawerTrigger>
         <MobileNavigationContent>

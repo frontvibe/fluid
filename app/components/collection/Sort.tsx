@@ -13,6 +13,7 @@ import {
   useColorsCssVars,
 } from '~/hooks/useColorsCssVars';
 import {useOptimisticNavigationData} from '~/hooks/useOptimisticNavigationData';
+import {useSanityThemeContent} from '~/hooks/useSanityThemeContent';
 import {cn} from '~/lib/utils';
 
 import type {SortParam} from './SortFilterLayout';
@@ -39,29 +40,32 @@ function useSortItems() {
   const {optimisticData: clearFilters} =
     useOptimisticNavigationData<boolean>('clear-all-filters');
   const {optimisticData} = useOptimisticNavigationData<SortParam>('sort-radio');
+  const {themeContent} = useSanityThemeContent();
 
-  // Todo => add strings to themeContent
   const items: SortItem[] = useMemo(
     () => [
-      {key: 'featured', label: 'Featured'},
+      {
+        key: 'featured',
+        label: themeContent?.collection?.sortFeatured || 'Featured',
+      },
       {
         key: 'price-low-high',
-        label: 'Price: Low - High',
+        label: themeContent?.collection?.sortLowHigh || 'Price: Low - High',
       },
       {
         key: 'price-high-low',
-        label: 'Price: High - Low',
+        label: themeContent?.collection?.sortHighLow || 'Price: High - Low',
       },
       {
         key: 'best-selling',
-        label: 'Best Selling',
+        label: themeContent?.collection?.sortBestSelling || 'Best Selling',
       },
       {
         key: 'newest',
-        label: 'Newest',
+        label: themeContent?.collection?.sortNewest || 'Newest',
       },
     ],
-    [],
+    [themeContent],
   );
 
   if (optimisticData) {
@@ -88,6 +92,7 @@ function useSortItems() {
 export function DesktopSort(props: {sectionSettings?: CmsSectionSettings}) {
   const colorsCssVars = useColorsCssVars({settings: props.sectionSettings});
   const {activeItem, items} = useSortItems();
+  const {themeContent} = useSanityThemeContent();
 
   return (
     <DropdownMenu>
@@ -95,10 +100,7 @@ export function DesktopSort(props: {sectionSettings?: CmsSectionSettings}) {
         <IconSort strokeWidth={1} />
         <span>
           <span className="px-2 font-medium">
-            {/*
-              // Todo => add strings to themeContent 
-            */}
-            Sort by:
+            {themeContent?.collection?.sortBy}
           </span>
           <span>{(activeItem || items[0]).label}</span>
         </span>
@@ -117,6 +119,7 @@ export function DesktopSort(props: {sectionSettings?: CmsSectionSettings}) {
 
 export function MobileSort() {
   const {items} = useSortItems();
+  const {themeContent} = useSanityThemeContent();
 
   return (
     <div>
@@ -124,10 +127,7 @@ export function MobileSort() {
         <IconSort strokeWidth={1} />
         <span>
           <span className="px-2 text-xl font-medium">
-            {/*
-              // Todo => add strings to themeContent 
-            */}
-            Sort by:
+            {themeContent?.collection?.sortBy}
           </span>
         </span>
       </div>

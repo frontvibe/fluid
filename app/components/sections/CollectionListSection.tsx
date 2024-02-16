@@ -86,11 +86,7 @@ function AwaitCollectionList(props: {
 
   return (
     <Suspense fallback={props.fallback}>
-      <Await
-        // Todo => Add an error component
-        errorElement={props.error}
-        resolve={collectionListPromise}
-      >
+      <Await errorElement={props.error} resolve={collectionListPromise}>
         {(data) => {
           // Resolve the collection list data from Shopify with the gids from Sanity
           let collections:

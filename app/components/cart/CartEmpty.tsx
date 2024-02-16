@@ -3,6 +3,7 @@ import {cx} from 'class-variance-authority';
 import {AnimatePresence, m} from 'framer-motion';
 
 import {useLocalePath} from '~/hooks/useLocalePath';
+import {useSanityThemeContent} from '~/hooks/useSanityThemeContent';
 import {cn} from '~/lib/utils';
 
 import type {CartLayouts} from './Cart';
@@ -19,6 +20,7 @@ export function CartEmpty({
   onClose?: () => void;
   show: boolean;
 }) {
+  const {themeContent} = useSanityThemeContent();
   const container = {
     drawer: cx([
       'p-5 content-start gap-4 h-full pb-8 flex justify-center items-center md:gap-12 md:pb-12',
@@ -29,9 +31,6 @@ export function CartEmpty({
   };
 
   const collectionsPath = useLocalePath({path: '/collections'});
-
-  // Todo => add theme content string
-  const label = 'Continue shopping';
 
   return (
     <AnimatePresence>
@@ -54,20 +53,18 @@ export function CartEmpty({
               layout === 'drawer' && 'justify-center text-center',
             ])}
           >
-            <span>
-              {/* Todo => add theme content string */}
-              Looks like you haven&rsquo;t added anything yet, let&rsquo;s get
-              you started!
-            </span>
+            <span>{themeContent?.cart.emptyMessage}</span>
             <div>
               {layout === 'page' ? (
                 <Button asChild>
                   <Link prefetch="intent" to={collectionsPath}>
-                    {label}
+                    {themeContent?.cart.continueShopping}
                   </Link>
                 </Button>
               ) : (
-                <Button onClick={onClose}>{label}</Button>
+                <Button onClick={onClose}>
+                  {themeContent?.cart.continueShopping}
+                </Button>
               )}
             </div>
             {/* Todo => add FeaturedProducts */}

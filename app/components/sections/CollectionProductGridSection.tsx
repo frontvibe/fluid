@@ -21,6 +21,7 @@ import type {loader} from '~/routes/($locale).collections.$collectionHandle';
 
 import {useLocale} from '~/hooks/useLocale';
 import {useOptimisticNavigationData} from '~/hooks/useOptimisticNavigationData';
+import {useSanityThemeContent} from '~/hooks/useSanityThemeContent';
 import {getAppliedFilters} from '~/lib/shopifyCollection';
 import {cn} from '~/lib/utils';
 
@@ -48,6 +49,7 @@ export function CollectionProductGridSection(
   const collectionProductGridPromise = loaderData?.collectionProductGridPromise;
   const columns = props.data.desktopColumns;
   const mobileColumns = props.data.mobileColumns;
+  const {themeContent} = useSanityThemeContent();
 
   const handleClearFilters = useCallback(() => {
     navigate(pathname, {
@@ -136,8 +138,9 @@ export function CollectionProductGridSection(
                     <>
                       <div className="mb-6 flex items-center justify-center">
                         <PreviousLink>
-                          {/* Todo => Add theme content strings */}
-                          {isLoading ? 'Loading...' : 'Load previous'}
+                          {isLoading
+                            ? themeContent?.collection?.loading
+                            : themeContent?.collection?.loadPrevious}
                         </PreviousLink>
                       </div>
                       <ProductsLoadedOnScroll
@@ -155,8 +158,9 @@ export function CollectionProductGridSection(
                       />
                       <div className="mt-6 flex items-center justify-center">
                         <NextLink>
-                          {/* Todo => Add theme content strings */}
-                          {isLoading ? 'Loading...' : 'Load more products'}
+                          {isLoading
+                            ? themeContent?.collection?.loading
+                            : themeContent?.collection?.loadMoreProducts}
                         </NextLink>
                       </div>
                     </>
@@ -195,6 +199,7 @@ function ProductsLoadedOnScroll({
 }) {
   const navigate = useNavigate();
   const {pending} = useOptimisticNavigationData<boolean>('clear-all-filters');
+  const {themeContent} = useSanityThemeContent();
 
   useEffect(() => {
     if (inView && hasNextPage) {
@@ -207,10 +212,9 @@ function ProductsLoadedOnScroll({
   }, [inView, navigate, state, nextPageUrl, hasNextPage]);
 
   if (!nodes || nodes.length === 0) {
-    // Todo => Add theme content strings
     return (
       <div className="flex min-h-[200px] flex-col justify-center text-center">
-        <p>No product found.</p>
+        <p>{themeContent?.collection?.noProductFound}</p>
         {appliedFilters && appliedFilters.length > 0 && (
           <Button
             className={cn([
@@ -220,8 +224,7 @@ function ProductsLoadedOnScroll({
             onClick={onClearAllFilters}
             variant="secondary"
           >
-            {/* // Todo => add strings to themeContent */}
-            <span>Clear all filters</span>
+            <span>{themeContent?.collection?.clearFilters}</span>
           </Button>
         )}
       </div>

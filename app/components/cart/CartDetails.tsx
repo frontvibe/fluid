@@ -5,6 +5,7 @@ import {Money} from '@shopify/hydrogen';
 import {AnimatePresence} from 'framer-motion';
 import {useMemo} from 'react';
 
+import {useSanityThemeContent} from '~/hooks/useSanityThemeContent';
 import {cn} from '~/lib/utils';
 
 import type {CartLayouts} from './Cart';
@@ -95,14 +96,14 @@ function CartDetailsLayout(props: {
 }
 
 function CartCheckoutActions({checkoutUrl}: {checkoutUrl: string}) {
+  const {themeContent} = useSanityThemeContent();
   if (!checkoutUrl) return null;
 
   return (
     <div className="mt-2 flex flex-col">
       <Button asChild>
         <a href={checkoutUrl} target="_self">
-          {/* Todo => add theme content string */}
-          Continue to Checkout
+          {themeContent?.cart.proceedToCheckout}
         </a>
       </Button>
       {/* @todo: <CartShopPayButton cart={cart} /> */}
@@ -119,6 +120,8 @@ function CartSummary({
   cost: CartApiQueryFragment['cost'];
   layout: CartLayouts;
 }) {
+  const {themeContent} = useSanityThemeContent();
+
   const Content = useMemo(
     () => (
       <div
@@ -128,14 +131,10 @@ function CartSummary({
           layout === 'page' && 'grid gap-6',
         ])}
       >
-        <h2 className="sr-only">
-          {/* Todo => add theme content string */}
-          Order summary
-        </h2>
+        <h2 className="sr-only">{themeContent?.cart.orderSummary}</h2>
         <dl className="grid">
           <div className="flex items-center justify-between font-medium">
-            {/* Todo => add theme content string */}
-            <span>Subtotal</span>
+            <span>{themeContent?.cart.subtotal}</span>
             <span>
               {cost?.subtotalAmount?.amount ? (
                 <Money className="tabular-nums" data={cost?.subtotalAmount} />
@@ -148,7 +147,7 @@ function CartSummary({
         {children}
       </div>
     ),
-    [children, cost?.subtotalAmount, layout],
+    [children, cost?.subtotalAmount, layout, themeContent],
   );
 
   if (layout === 'drawer') {

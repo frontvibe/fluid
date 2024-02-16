@@ -95,7 +95,6 @@ export function SanityImage({
     .join(', ')
     .concat(`, ${urlDefault} ${data.width}w`);
 
-  // Todo => Global image border-radius setting should apply to the wrapper <span/>
   // No padding should be applied to the wrapper <span/> or the <img/> tag to avoid blurry LQIP becoming visible
   return (
     <span

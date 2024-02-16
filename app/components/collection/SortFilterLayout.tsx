@@ -9,6 +9,7 @@ import {useState} from 'react';
 import type {CmsSectionSettings} from '~/hooks/useColorsCssVars';
 
 import {useOptimisticNavigationData} from '~/hooks/useOptimisticNavigationData';
+import {useSanityThemeContent} from '~/hooks/useSanityThemeContent';
 import {cn} from '~/lib/utils';
 
 import {IconFilters} from '../icons/IconFilters';
@@ -64,6 +65,7 @@ export function SortFilter({
   const [isOpen, setIsOpen] = useState(false);
   const {optimisticData, pending} =
     useOptimisticNavigationData<boolean>('clear-all-filters');
+  const {themeContent} = useSanityThemeContent();
 
   // Here we can optimistically clear all filters and close DrawerFooter
   if (optimisticData) {
@@ -93,8 +95,7 @@ export function SortFilter({
                   onClick={onClearAllFilters}
                   variant="ghost"
                 >
-                  {/* // Todo => add strings to themeContent */}
-                  <span>Clear all filters</span>
+                  <span>{themeContent?.collection?.clearFilters}</span>
                   <span className="tabular-nums">
                     ({appliedFilters.length})
                   </span>
@@ -146,8 +147,8 @@ function MobileDrawer({
   productsCount: number;
 }) {
   const [open, setOpen] = useState(false);
-  // Todo => add strings to themeContent
-  const heading = 'Filter and Sort';
+  const {themeContent} = useSanityThemeContent();
+  const heading = themeContent?.collection?.filterAndSort;
   const {pending} = useOptimisticNavigationData<boolean>('clear-all-filters');
 
   return (
@@ -218,15 +219,13 @@ function MobileDrawer({
                       onClick={onClearAllFilters}
                       variant="ghost"
                     >
-                      {/* // Todo => add strings to themeContent */}
-                      <span>Clear</span>
+                      <span>{themeContent?.collection?.clear}</span>
                       <span className="tabular-nums">
                         ({appliedFilters.length})
                       </span>
                     </Button>
                     <Button onClick={() => setOpen(false)}>
-                      {/* // Todo => add strings to themeContent */}
-                      Apply
+                      {themeContent?.collection?.apply}
                     </Button>
                   </DrawerFooter>
                 </m.div>

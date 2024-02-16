@@ -38,7 +38,7 @@ export function CollectionCard(props: {
       ? 'border-[rgb(var(--border)_/_var(--collection-card-border-opacity))] [border-width:--collection-card-border-thickness]'
       : 'border-0',
     style === 'card'
-      ? '[box-shadow:rgb(var(--foreground)_/_var(--collection-card-shadow-opacity))_var(--collection-card-shadow-horizontal-offset)_var(--collection-card-shadow-vertical-offset)_var(--collection-card-shadow-blur-radius)_0px]'
+      ? '[box-shadow:rgb(var(--shadow)_/_var(--collection-card-shadow-opacity))_var(--collection-card-shadow-horizontal-offset)_var(--collection-card-shadow-vertical-offset)_var(--collection-card-shadow-blur-radius)_0px]'
       : 'shadow-none',
     textAlignment === 'center'
       ? 'text-center'
@@ -58,7 +58,7 @@ export function CollectionCard(props: {
               style === 'standard' &&
                 'border-[rgb(var(--border)_/_var(--collection-card-border-opacity))] [border-width:--collection-card-border-thickness]',
               style === 'standard' &&
-                '[box-shadow:rgb(var(--foreground)_/_var(--collection-card-shadow-opacity))_var(--collection-card-shadow-horizontal-offset)_var(--collection-card-shadow-vertical-offset)_var(--collection-card-shadow-blur-radius)_0px]',
+                '[box-shadow:rgb(var(--shadow)_/_var(--collection-card-shadow-opacity))_var(--collection-card-shadow-horizontal-offset)_var(--collection-card-shadow-vertical-offset)_var(--collection-card-shadow-blur-radius)_0px]',
             )}
           >
             <ShopifyImage
@@ -84,7 +84,7 @@ export function CollectionCard(props: {
           )}
         >
           <div className="flex items-center text-lg">
-            <span className="relative z-[2] block bg-background pr-2">
+            <span className="relative z-[2] block bg-card pr-2">
               {collection.title}
             </span>
             <span className="-translate-x-[2px] transition-transform group-hover/card:translate-x-[-0.15px]">

@@ -12,7 +12,7 @@ export function QuantitySelector(props: {children: React.ReactNode}) {
       className={cn(
         'flex items-center',
         'rounded-[--input-border-corner-radius]',
-        '[box-shadow:rgb(var(--foreground)_/_var(--input-shadow-opacity))_var(--input-shadow-horizontal-offset)_var(--input-shadow-vertical-offset)_var(--input-shadow-blur-radius)_0px]',
+        '[box-shadow:rgb(var(--shadow)_/_var(--input-shadow-opacity))_var(--input-shadow-horizontal-offset)_var(--input-shadow-vertical-offset)_var(--input-shadow-blur-radius)_0px]',
       )}
     >
       {props.children}

@@ -1,6 +1,6 @@
 import type {InferType} from 'groqd';
 
-import {mix, readableColor} from 'color2k';
+import {darken, mix, readableColor, toRgba} from 'color2k';
 
 import type {SETTINGS_FRAGMENT} from '~/qroq/fragments';
 import type {HEADER_QUERY} from '~/qroq/queries';
@@ -62,6 +62,7 @@ export function useColorsCssVars(props: {
       --paddingTop: ${paddingTop};
       --destructive: 220 38 38;
       --destructive-foreground: 250 250 250;
+      --shadow: ${getDarkenColor(colorScheme.background?.rgb)};
     }
   ` as const;
 }
@@ -77,59 +78,36 @@ export function useCardColorsCssVars(props: {
   // Color scheme
   const colorScheme =
     settings?.colorScheme || defaultColorScheme || fallbackScheme;
-
-  const accent =
+  let primary = colorScheme.primary;
+  let primaryForeground = colorScheme.primaryForeground;
+  // Invert primary colors if primary is equal to card color
+  if (
     toRgbString(colorScheme.primary?.rgb) === toRgbString(colorScheme.card?.rgb)
-      ? getMutedColor(
-          colorScheme.cardForeground?.rgb,
-          colorScheme.card?.rgb,
-          0.85,
-        )
-      : getMutedColor(colorScheme.primary?.rgb, colorScheme.card?.rgb, 0.85);
-
-  const accentForeground =
-    toRgbString(colorScheme.primary?.rgb) === toRgbString(colorScheme.card?.rgb)
-      ? toRgbString(colorScheme.cardForeground?.rgb)
-      : toRgbString(colorScheme.primary?.rgb);
+  ) {
+    primary = colorScheme.cardForeground;
+    primaryForeground = colorScheme.card;
+  }
 
   return `
     ${props.selector} {
-      --accent: ${accent};
-      --accent-foreground: ${accentForeground};
+      --accent: ${getMutedColor(primary?.rgb, colorScheme.card?.rgb, 0.85)};
+      --accent-foreground: ${toRgbString(primary?.rgb)};
       --background: ${toRgbString(colorScheme.card?.rgb)};
       --border: ${getMutedColor(colorScheme.border?.rgb, colorScheme.card?.rgb, 0.45)};
       --card: ${toRgbString(colorScheme.card?.rgb)};
       --card-foreground: ${toRgbString(colorScheme.cardForeground?.rgb)};
       --foreground: ${toRgbString(colorScheme.cardForeground?.rgb)};
-      --input: ${getMutedColor(colorScheme.border?.rgb, colorScheme.card?.rgb, 0.45)};
+      --input:  ${getMutedColor(colorScheme.border?.rgb, colorScheme.card?.rgb, 0.45)};
       --muted: ${getMutedColor(colorScheme.cardForeground?.rgb, colorScheme.card?.rgb, 0.95)};
-      --muted-foreground: ${getMutedColor(colorScheme.cardForeground?.rgb, colorScheme.card?.rgb, 0.3)};
+      --muted-foreground:  ${getMutedColor(colorScheme.cardForeground?.rgb, colorScheme.card?.rgb, 0.3)};
       --popover: ${toRgbString(colorScheme.card?.rgb)};
       --popover-foreground: ${toRgbString(colorScheme.cardForeground?.rgb)};
-      --primary: ${
-        toRgbString(colorScheme.primary?.rgb) ===
-        toRgbString(colorScheme.card?.rgb)
-          ? toRgbString(colorScheme.cardForeground?.rgb)
-          : toRgbString(colorScheme.primary?.rgb)
-      };
-      --primary-foreground: ${
-        toRgbString(colorScheme.primary?.rgb) ===
-        toRgbString(colorScheme.card?.rgb)
-          ? toRgbString(colorScheme.card?.rgb)
-          : toRgbString(colorScheme.primaryForeground?.rgb)
-      };
-      --ring: ${
-        toRgbString(colorScheme.primary?.rgb) ===
-        toRgbString(colorScheme.card?.rgb)
-          ? getMutedColor(
-              colorScheme.cardForeground?.rgb,
-              colorScheme.card?.rgb,
-              0.2,
-            )
-          : getMutedColor(colorScheme.primary?.rgb, colorScheme.card?.rgb, 0.2)
-      };
-      --secondary: ${accent};
-      --secondary-foreground: ${accentForeground};
+      --primary: ${toRgbString(primary?.rgb)};
+      --primary-foreground: ${toRgbString(primaryForeground?.rgb)};
+      --ring: ${getMutedColor(primary?.rgb, colorScheme.card?.rgb, 0.2)};
+      --secondary: ${getMutedColor(primary?.rgb, colorScheme.card?.rgb, 0.85)};
+      --secondary-foreground: ${toRgbString(primary?.rgb)};
+      --shadow: ${getDarkenColor(colorScheme.card?.rgb)};
     }
   ` as const;
 }
@@ -154,6 +132,18 @@ function getMutedColor(color: Rgb, background: Rgb, weight: number) {
   const mixedColor = mix(colorString, bgString, weight);
 
   return mixedColor
+    .replace('rgba(', '')
+    .replace(', 1)', '')
+    .replaceAll(',', '');
+}
+
+function getDarkenColor(color: Rgb) {
+  if (!color) return 'null';
+
+  const colorString = `rgb(${color.r}, ${color.g}, ${color.b})`;
+  const darkenColor = toRgba(darken(colorString, 1));
+
+  return darkenColor
     .replace('rgba(', '')
     .replace(', 1)', '')
     .replaceAll(',', '');

@@ -62,6 +62,7 @@ export function CartDetails({
                   'lg:sticky lg:top-[var(--desktopHeaderHeight)]',
               ])}
               exit={'hide'}
+              forceMotion={layout === 'drawer'}
               initial={layout === 'drawer' ? 'hide' : 'show'}
               variants={
                 layout === 'drawer' ? drawerMotionVariants : pageMotionVariants

@@ -5,6 +5,8 @@ import {useCallback} from 'react';
 
 import type {NESTED_NAVIGATION_FRAGMENT} from '~/qroq/links';
 
+import {cn} from '~/lib/utils';
+
 import {SanityExternalLink} from '../sanity/link/SanityExternalLink';
 import {SanityInternalLink} from '../sanity/link/SanityInternalLink';
 import {
@@ -79,17 +81,25 @@ export function NestedNavigation(props: {
 }
 
 function ListItem(props: SanityNestedNavigationProps['childLinks'][0]) {
-  const className = cx(
-    'block select-none space-y-1 text-sm font-medium rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
-  );
-
   return (
     <NavigationMenuLink asChild>
       <div>
         {props._type === 'internalLink' ? (
-          <SanityInternalLink className={className} data={props} />
+          <SanityInternalLink
+            className={cn(
+              navigationMenuTriggerStyle(),
+              'w-full justify-start rounded-sm hover:bg-accent',
+            )}
+            data={props}
+          />
         ) : props._type === 'externalLink' ? (
-          <SanityExternalLink className={className} data={props} />
+          <SanityExternalLink
+            className={cn(
+              navigationMenuTriggerStyle(),
+              'w-full justify-start rounded-sm hover:bg-accent',
+            )}
+            data={props}
+          />
         ) : null}
       </div>
     </NavigationMenuLink>

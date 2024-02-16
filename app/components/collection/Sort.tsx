@@ -8,10 +8,11 @@ import {
 } from '@remix-run/react';
 import {useCallback, useMemo, useState} from 'react';
 
-import type {CmsSectionSettings} from '~/hooks/useSettingsCssVars';
-
+import {
+  type CmsSectionSettings,
+  useColorsCssVars,
+} from '~/hooks/useColorsCssVars';
 import {useOptimisticNavigationData} from '~/hooks/useOptimisticNavigationData';
-import {useSettingsCssVars} from '~/hooks/useSettingsCssVars';
 import {cn} from '~/lib/utils';
 
 import type {SortParam} from './SortFilterLayout';
@@ -85,7 +86,7 @@ function useSortItems() {
 }
 
 export function DesktopSort(props: {sectionSettings?: CmsSectionSettings}) {
-  const cssVars = useSettingsCssVars({settings: props.sectionSettings});
+  const colorsCssVars = useColorsCssVars({settings: props.sectionSettings});
   const {activeItem, items} = useSortItems();
 
   return (
@@ -103,7 +104,7 @@ export function DesktopSort(props: {sectionSettings?: CmsSectionSettings}) {
         </span>
       </DropdownMenuTrigger>
       <DropdownMenuContent onCloseAutoFocus={(e) => e.preventDefault()}>
-        <style dangerouslySetInnerHTML={{__html: cssVars}} />
+        <style dangerouslySetInnerHTML={{__html: colorsCssVars}} />
         <SortRadioGroup layout="desktop">
           {items.map((item) => (
             <SortRadioItem item={item} key={item.label} layout="desktop" />

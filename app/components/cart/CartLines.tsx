@@ -24,7 +24,7 @@ export function CartLines({
   const className = cx([
     layout === 'page'
       ? 'flex-grow md:translate-y-4'
-      : 'pl-4 pr-2 overflow-auto transition md:px-12',
+      : 'overflow-auto transition',
   ]);
 
   return (

@@ -6,8 +6,9 @@ import type {
 import {AnimatePresence, m} from 'framer-motion';
 import {useState} from 'react';
 
+import type {CmsSectionSettings} from '~/hooks/useColorsCssVars';
+
 import {useOptimisticNavigationData} from '~/hooks/useOptimisticNavigationData';
-import {type CmsSectionSettings} from '~/hooks/useSettingsCssVars';
 import {cn} from '~/lib/utils';
 
 import {IconFilters} from '../icons/IconFilters';
@@ -243,7 +244,14 @@ export function DesktopFiltersDrawer({
   filters = [],
 }: Omit<Props, 'children' | 'onClearAllFilters' | 'productsCount'>) {
   return (
-    <ScrollArea className="h-[calc(100dvh_-_var(--desktopHeaderHeight)_-2rem)] w-full rounded-md border px-4 transition-all">
+    <ScrollArea
+      className={cn(
+        'h-[calc(100dvh_-_var(--desktopHeaderHeight)_-2rem)] w-full px-4 transition-all',
+        'rounded-[--product-card-border-corner-radius]',
+        'border-[rgb(var(--border)_/_var(--product-card-border-opacity))] [border-width:--product-card-border-thickness]',
+        '[box-shadow:rgb(var(--foreground)_/_var(--product-card-shadow-opacity))_var(--product-card-shadow-horizontal-offset)_var(--product-card-shadow-vertical-offset)_var(--product-card-shadow-blur-radius)_0px]',
+      )}
+    >
       <nav>
         <Accordion
           // Open filters by default

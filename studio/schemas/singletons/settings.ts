@@ -64,9 +64,6 @@ export default defineType({
       description: 'Will be scaled down to 32 x 32 px',
       group: 'brand',
       type: 'image',
-      options: {
-        hotspot: true,
-      },
     }),
     defineField({
       name: 'socialSharingImagePreview',
@@ -123,6 +120,7 @@ export default defineType({
         collapsed: true,
       },
       fields: [
+        ...cardFields(),
         defineField({
           name: 'border',
           type: 'object',
@@ -144,6 +142,7 @@ export default defineType({
         collapsed: true,
       },
       fields: [
+        ...cardFields(),
         defineField({
           name: 'border',
           type: 'object',
@@ -165,6 +164,7 @@ export default defineType({
         collapsed: true,
       },
       fields: [
+        ...cardFields(),
         defineField({
           name: 'border',
           type: 'object',
@@ -451,4 +451,45 @@ function shadowFields() {
       },
     },
   ] as const;
+}
+
+function cardFields() {
+  return [
+    defineField({
+      name: 'style',
+      type: 'string',
+      options: {
+        list: [
+          {
+            title: 'Standard',
+            value: 'standard',
+          },
+          {
+            title: 'Card',
+            value: 'card',
+          },
+        ],
+      },
+    }),
+    defineField({
+      name: 'textAlignment',
+      type: 'string',
+      options: {
+        list: [
+          {
+            title: 'Left',
+            value: 'left',
+          },
+          {
+            title: 'Center',
+            value: 'center',
+          },
+          {
+            title: 'Right',
+            value: 'right',
+          },
+        ],
+      },
+    }),
+  ];
 }

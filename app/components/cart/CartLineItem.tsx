@@ -12,6 +12,7 @@ import {
 } from '@shopify/hydrogen';
 
 import {useLocalePath} from '~/hooks/useLocalePath';
+import {cn} from '~/lib/utils';
 
 import type {CartLayouts} from './Cart';
 
@@ -84,30 +85,30 @@ export function CartLineItem({
         // Do not remove the form from the DOM
         optimisticData?.action === 'remove' ? 'hidden' : 'visible'
       }
-      className="overflow-hidden"
+      className="overflow-hidden px-6"
       forceMotion={layout === 'drawer'}
       initial={layout === 'page' ? 'visible' : 'hidden'}
       key={id}
       variants={variants}
     >
       <div className="flex gap-4 py-5">
-        <div className="size-16">
+        <div className="size-14">
           {merchandise.image && (
             <ShopifyImage
               alt={merchandise.title}
               aspectRatio="1/1"
-              className="h-auto w-full rounded border border-border object-cover object-center"
+              className="h-auto w-full object-cover object-center"
               data={merchandise.image}
               draggable={false}
               loading="eager"
-              sizes="64px"
+              sizes="56px"
             />
           )}
         </div>
 
-        <div className="flex flex-grow justify-between">
-          <div className="grid gap-2">
-            <h3 className="text-2xl">
+        <div className="flex flex-1 justify-between">
+          <div className="grid gap-1">
+            <h3 className="font-body text-xl font-medium">
               {merchandise?.product?.handle ? (
                 <Link onClick={onClose} to={productPath}>
                   {merchandise?.product?.title || ''}
@@ -121,9 +122,9 @@ export function CartLineItem({
             ) && (
               <div className="grid pb-2">
                 {(merchandise?.selectedOptions || []).map((option) => (
-                  <span className="opacity-80" key={option.name}>
+                  <small className="text-sm opacity-80" key={option.name}>
                     {option.name}: {option.value}
-                  </span>
+                  </small>
                 ))}
               </div>
             )}
@@ -155,7 +156,15 @@ function ItemRemoveButton({lineId}: {lineId: CartLineFragment['id']}) {
       }}
       route={cartPath}
     >
-      <IconButton className="overflow-hidden rounded border" type="submit">
+      <IconButton
+        className={cn(
+          'overflow-hidden rounded-[--input-border-corner-radius]',
+          'rounded-[--input-border-corner-radius]',
+          'border-[rgb(var(--input)_/_var(--input-border-opacity))] [border-width:--input-border-thickness]',
+          '[box-shadow:rgb(var(--foreground)_/_var(--input-shadow-opacity))_var(--input-shadow-horizontal-offset)_var(--input-shadow-vertical-offset)_var(--input-shadow-blur-radius)_0px]',
+        )}
+        type="submit"
+      >
         {/* Todo => add theme content string */}
         <span className="sr-only">Remove</span>
         <IconRemove aria-hidden="true" />

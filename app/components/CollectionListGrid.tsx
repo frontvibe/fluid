@@ -20,7 +20,7 @@ export function CollectionListGrid(props: {
   return collections?.length > 0 ? (
     <ul
       className={cx([
-        'grid gap-6',
+        'grid gap-x-[--grid-horizontal-space] gap-y-[--grid-vertical-space]',
         'lg:grid-cols-[repeat(var(--columns),_minmax(0,_1fr))]',
       ])}
       style={columnsVar}

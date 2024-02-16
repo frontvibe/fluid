@@ -6,11 +6,11 @@ settings:
 
 dependencies:
   '@headless.build/sanity-color-picker':
-    specifier: ^1.1.0
-    version: 1.1.0(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(sanity@3.29.1)(styled-components@6.1.8)
+    specifier: ^1.1.1
+    version: 1.1.1(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(sanity@3.29.1)(styled-components@6.1.8)
   '@headless.build/sanity-font-picker':
-    specifier: ^3.0.0
-    version: 3.0.0(@headless.build/sanity-plugin-range-slider@1.1.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(sanity@3.29.1)(styled-components@6.1.8)
+    specifier: ^3.0.1
+    version: 3.0.1(@headless.build/sanity-plugin-range-slider@1.1.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(sanity@3.29.1)(styled-components@6.1.8)
   '@headless.build/sanity-plugin-range-slider':
     specifier: ^1.1.1
     version: 1.1.1(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(sanity@3.29.1)(styled-components@6.1.8)
@@ -2203,8 +2203,8 @@ packages:
     resolution: {integrity: sha512-9TANp6GPoMtYzQdt54kfAyMmz1+osLlXdg2ENroU7zzrtflTLrrC/lgrIfaSe+Wu0b89GKccT7vxXA0MoAIO+Q==}
     dev: false
 
-  /@headless.build/sanity-color-picker@1.1.0(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(sanity@3.29.1)(styled-components@6.1.8):
-    resolution: {integrity: sha512-YNlC4Dupk/IkILP9a1wrF/aX1qvGYaDsYVo2f6vX8mZyfXRSIJCK4RO5HwSn+Y1qJ8kfkUHyGCFi7u2yU+NVpw==}
+  /@headless.build/sanity-color-picker@1.1.1(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(sanity@3.29.1)(styled-components@6.1.8):
+    resolution: {integrity: sha512-XYih2nZgJ2M+15WWezW8D1FOE/vbTejKjDEkXyWxTQXQMqgHXHsoOozf2jcjiqIfkgbfuydIMoOHhw24b/DvPg==}
     engines: {node: '>=14'}
     peerDependencies:
       react: ^18
@@ -2224,8 +2224,8 @@ packages:
       - styled-components
     dev: false
 
-  /@headless.build/sanity-font-picker@3.0.0(@headless.build/sanity-plugin-range-slider@1.1.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(sanity@3.29.1)(styled-components@6.1.8):
-    resolution: {integrity: sha512-R+wSe9ZtFCiB6FK3p/3gn9de6BVUICZiQgKXIC0JXvqz2+ZuB0b2OMFuEnGl7SdKvoAd932Hiw2ATijk3yDdPA==}
+  /@headless.build/sanity-font-picker@3.0.1(@headless.build/sanity-plugin-range-slider@1.1.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(sanity@3.29.1)(styled-components@6.1.8):
+    resolution: {integrity: sha512-0fRD3nPjx/DfCEqs3klg4mJcelhYY5PwVsW7ze5Q3LZZc1VUkhQB4ro2ZwBzfpsHoaOvPyuAUavRcHem7IZndg==}
     engines: {node: '>=14'}
     peerDependencies:
       '@headless.build/sanity-plugin-range-slider': ^1.1.1

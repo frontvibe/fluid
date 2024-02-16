@@ -8,7 +8,15 @@ import type {ButtonProps} from './ui/Button';
 import {IconButton} from './ui/Button';
 export function QuantitySelector(props: {children: React.ReactNode}) {
   return (
-    <div className="flex items-center border-border">{props.children}</div>
+    <div
+      className={cn(
+        'flex items-center',
+        'rounded-[--input-border-corner-radius]',
+        '[box-shadow:rgb(var(--foreground)_/_var(--input-shadow-opacity))_var(--input-shadow-horizontal-offset)_var(--input-shadow-vertical-offset)_var(--input-shadow-blur-radius)_0px]',
+      )}
+    >
+      {props.children}
+    </div>
   );
 }
 
@@ -25,10 +33,12 @@ const QuantityButton = forwardRef<
         symbol === 'increase' && 'Increase quantity',
       ])}
       className={cn([
-        'group rounded border disabled:opacity-100',
+        'group rounded-[--input-border-corner-radius] disabled:opacity-100',
+        'border-[rgb(var(--input)_/_var(--input-border-opacity))]',
+        '[border-width:var(--input-border-thickness)]',
         symbol === 'decrease'
-          ? 'rounded-br-none rounded-tr-none border-r-0'
-          : 'rounded-bl-none rounded-tl-none border-l-0',
+          ? 'rounded-br-none rounded-tr-none !border-r-0'
+          : 'rounded-bl-none rounded-tl-none !border-l-0',
         className,
       ])}
       name={cx([
@@ -54,7 +64,12 @@ QuantityButton.displayName = 'QuantityButton';
 
 function Value(props: {children: React.ReactNode}) {
   return (
-    <div className="flex h-full min-w-[2.5rem] select-none items-center justify-center border-y px-2 text-center">
+    <div
+      className={cn(
+        'flex h-full min-w-[2.5rem] select-none items-center justify-center px-2 text-center',
+        'border-[rgb(var(--input)_/_var(--input-border-opacity))] [border-width:var(--input-border-thickness)_0]',
+      )}
+    >
       {props.children}
     </div>
   );

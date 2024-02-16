@@ -20,17 +20,23 @@ export function Logo(props: {
   const logo = sanitySettings?.logo;
   const siteName = sanitySettings?.siteName;
 
-  const encodeData = data?.settings?.logo?._ref
-    ? encodeDataAttribute([
-        // Path to the logo image in Sanity Studio
-        'settings',
-        'logo',
-        '_ref',
-        data?.settings?.logo?._ref,
-      ])
-    : undefined;
+  if (!logo?._ref) {
+    return (
+      <div className="flex h-11 items-center justify-center font-heading text-2xl notouch:group-hover:text-accent-foreground">
+        {siteName}
+      </div>
+    );
+  }
 
-  return logo ? (
+  const encodeData = encodeDataAttribute([
+    // Path to the logo image in Sanity Studio
+    'settings',
+    'logo',
+    '_ref',
+    logo._ref,
+  ]);
+
+  return (
     <SanityImage
       data={{
         ...logo,
@@ -39,9 +45,5 @@ export function Logo(props: {
       sanityEncodeData={encodeData}
       {...props}
     />
-  ) : (
-    <div className="font-heading flex h-11 items-center justify-center text-2xl notouch:group-hover:text-accent-foreground">
-      {siteName}
-    </div>
   );
 }

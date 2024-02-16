@@ -10,6 +10,7 @@ import {
   BannerMediaOverlay,
 } from '../Banner';
 import {SanityImage} from '../sanity/SanityImage';
+import {Button} from '../ui/Button';
 
 type ImageBannerSectionProps = TypeFromSelection<
   typeof IMAGE_BANNER_SECTION_FRAGMENT
@@ -32,6 +33,8 @@ export function ImageBannerSection(
           data={data.backgroundImage}
           decoding="sync"
           fetchpriority="high"
+          showBorder={false}
+          showShadow={false}
           sizes="100vw"
         />
       </BannerMedia>

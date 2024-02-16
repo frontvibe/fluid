@@ -97,5 +97,9 @@ export async function loader({context}: LoaderFunctionArgs) {
 export default function CartRoute() {
   const {cart} = useLoaderData<typeof loader>();
 
-  return <Cart cart={cart} layout="page" />;
+  return (
+    <div className="cart flex-grow bg-background text-foreground">
+      <Cart cart={cart} layout="page" />
+    </div>
+  );
 }

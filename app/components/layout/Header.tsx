@@ -8,9 +8,9 @@ import {m, transform, useMotionValueEvent, useTransform} from 'framer-motion';
 import React, {useEffect, useState} from 'react';
 
 import {useBoundedScroll} from '~/hooks/useBoundedScroll';
+import {useColorsCssVars} from '~/hooks/useColorsCssVars';
 import {useLocalePath} from '~/hooks/useLocalePath';
 import {useSanityRoot} from '~/hooks/useSanityRoot';
-import {useSettingsCssVars} from '~/hooks/useSettingsCssVars';
 import {cn} from '~/lib/utils';
 
 import {headerVariants} from '../cva/header';
@@ -26,14 +26,14 @@ export function Header() {
     ? `${header?.desktopLogoWidth}px`
     : null;
   const homePath = useLocalePath({path: '/'});
-  const colorPaletteCssVars = useSettingsCssVars({
+  const colorsCssVars = useColorsCssVars({
     selector: 'header',
     settings: header,
   });
 
   return (
     <HeaderWrapper>
-      <style dangerouslySetInnerHTML={{__html: colorPaletteCssVars}} />
+      <style dangerouslySetInnerHTML={{__html: colorsCssVars}} />
       <div className="container">
         <div className="flex items-center justify-between">
           <Link className="group" prefetch="intent" to={homePath}>
@@ -189,10 +189,11 @@ function useHeaderHeigth() {
   const headerBorder = data?.header?.showSeparatorLine ? 1 : 0;
   const sanitySettings = data?.settings;
   const logo = sanitySettings?.logo;
+  const desktopLogoHeight =
+    logo?._ref && logo?.width && logo?.height
+      ? (desktopLogoWidth * logo?.height) / logo?.width
+      : 44;
 
-  const desktopLogoHeight = logo
-    ? (desktopLogoWidth * logo?.height) / logo?.width
-    : 44;
   const desktopHeaderHeight = (
     desktopLogoHeight +
     headerPadding.top +

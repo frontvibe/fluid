@@ -12,6 +12,7 @@ import {
 } from '@shopify/hydrogen';
 
 import {useLocalePath} from '~/hooks/useLocalePath';
+import {useSanityThemeContent} from '~/hooks/useSanityThemeContent';
 import {cn} from '~/lib/utils';
 
 import type {CartLayouts} from './Cart';
@@ -147,6 +148,7 @@ export function CartLineItem({
 
 function ItemRemoveButton({lineId}: {lineId: CartLineFragment['id']}) {
   const cartPath = useLocalePath({path: '/cart'});
+  const {themeContent} = useSanityThemeContent();
 
   return (
     <CartForm
@@ -165,8 +167,7 @@ function ItemRemoveButton({lineId}: {lineId: CartLineFragment['id']}) {
         )}
         type="submit"
       >
-        {/* Todo => add theme content string */}
-        <span className="sr-only">Remove</span>
+        <span className="sr-only">{themeContent?.cart.remove}</span>
         <IconRemove aria-hidden="true" />
       </IconButton>
 
@@ -230,6 +231,7 @@ function UpdateCartForm({
 function CartLineQuantityAdjust({line}: {line: CartLineFragment}) {
   const optimisticId = line?.id;
   const optimisticData = useOptimisticData<OptimisticData>(optimisticId);
+  const {themeContent} = useSanityThemeContent();
 
   if (!line || typeof line?.quantity === 'undefined') return null;
 
@@ -242,8 +244,7 @@ function CartLineQuantityAdjust({line}: {line: CartLineFragment}) {
   return (
     <>
       <label className="sr-only" htmlFor={`quantity-${lineId}`}>
-        {/* Todo => add theme content string */}
-        Quantity, {optimisticQuantity}
+        {themeContent?.cart.quantity}, {optimisticQuantity}
       </label>
       <QuantitySelector>
         <UpdateCartForm lines={[{id: lineId, quantity: prevQuantity}]}>

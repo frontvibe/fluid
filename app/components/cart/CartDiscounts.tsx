@@ -3,6 +3,7 @@ import type {Cart as CartType} from '@shopify/hydrogen/storefront-api-types';
 import {CartForm} from '@shopify/hydrogen';
 
 import {useLocalePath} from '~/hooks/useLocalePath';
+import {useSanityThemeContent} from '~/hooks/useSanityThemeContent';
 import {cn} from '~/lib/utils';
 
 import {IconRemove} from '../icons/IconRemove';
@@ -21,6 +22,7 @@ export function CartDiscounts({
   discountCodes: CartType['discountCodes'];
   layout: 'drawer' | 'page';
 }) {
+  const {themeContent} = useSanityThemeContent();
   const codes: string[] =
     discountCodes
       ?.filter((discount) => discount.applicable)
@@ -31,8 +33,7 @@ export function CartDiscounts({
       {/* Have existing discount, display it with a remove option */}
       <dl className={codes && codes.length !== 0 ? 'grid' : 'hidden'}>
         <div className="flex items-center justify-between font-medium">
-          {/* Todo => add theme content string */}
-          <span>Discount(s)</span>
+          <span>{themeContent?.cart.discounts}</span>
           <div className="flex items-center justify-between">
             <UpdateDiscountForm>
               <button className="[&>*]:pointer-events-none">
@@ -56,14 +57,16 @@ export function CartDiscounts({
             'items-center justify-between gap-4',
           )}
         >
-          {/* Todo => add theme content string */}
-          <Input name="discountCode" placeholder="Discount code" type="text" />
+          <Input
+            name="discountCode"
+            placeholder={themeContent?.cart.discountCode || ''}
+            type="text"
+          />
           <Button
             className={cn(layout === 'page' && 'w-full lg:w-auto')}
             variant="outline"
           >
-            {/* Todo => add theme content string */}
-            Apply Discount
+            {themeContent?.cart.applyDiscount}
           </Button>
         </div>
       </UpdateDiscountForm>

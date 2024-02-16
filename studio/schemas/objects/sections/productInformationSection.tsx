@@ -12,6 +12,10 @@ export default defineField({
       type: 'internationalizedArrayProductRichtext',
     }),
     defineField({
+      type: 'aspectRatios',
+      name: 'mediaAspectRatio',
+    }),
+    defineField({
       type: 'sectionSettings',
       name: 'settings',
     }),

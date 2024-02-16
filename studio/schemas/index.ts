@@ -45,6 +45,7 @@ import collectionTemplate from './documents/collectionTemplate';
 import collectionBanner from './objects/sections/collectionBanner';
 import collectionProductGrid from './objects/sections/collectionProductGrid';
 import announcementBar from './objects/global/announcementBar';
+import aspectRatios from './objects/global/aspectRatios';
 
 const singletons = [home, header, footer, settings, themeContent];
 const documents = [
@@ -93,6 +94,7 @@ const objects = [
   overlayOpacity,
   contentAlignment,
   richtext,
+  aspectRatios,
 ];
 
 export const schemaTypes = [

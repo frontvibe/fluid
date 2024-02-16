@@ -2,10 +2,12 @@ import type {SelectedOption} from '@shopify/hydrogen/storefront-api-types';
 import type {ClassValue} from 'class-variance-authority/types';
 
 import {useLocation} from '@remix-run/react';
+import {vercelStegaCleanAll} from '@sanity/client/stega';
 import {cx} from 'class-variance-authority';
 import {useMemo} from 'react';
 import {twMerge} from 'tailwind-merge';
 
+import type {aspectRatioValues} from '../qroq/sections';
 import type {I18nLocale} from './type';
 
 export function useVariantUrl(
@@ -89,4 +91,39 @@ export function parseAsCurrency(value: number, locale: I18nLocale) {
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(cx(inputs));
+}
+
+export type AspectRatioData = ReturnType<typeof getAspectRatioData>;
+export const getAspectRatioData = (
+  aspectRatio: (typeof aspectRatioValues)[number] | null,
+) => {
+  const cleanAspectRatio = vercelStegaCleanAll(aspectRatio);
+  return cleanAspectRatio === 'video'
+    ? ({
+        className: 'aspect-video',
+        value: '16/9',
+      } as const)
+    : cleanAspectRatio === 'square'
+      ? ({
+          className: 'aspect-square',
+          value: '1/1',
+        } as const)
+      : ({
+          className: 'aspect-auto',
+          value: undefined,
+        } as const);
+};
+
+export function generateShopifyImageThumbnail(url?: null | string) {
+  if (!url) return null;
+
+  const imageUrl = new URL(url);
+
+  if (imageUrl.hostname !== 'cdn.shopify.com') return null;
+
+  const size = '_30x.jpg';
+  const thumbnailUrl =
+    imageUrl.origin + imageUrl.pathname.replace('.jpg', size);
+
+  return thumbnailUrl;
 }

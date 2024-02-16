@@ -1,10 +1,12 @@
 import type {PortableTextComponents} from '@portabletext/react';
 import type {PortableTextBlock} from '@portabletext/types';
+import type {TypeFromSelection} from 'groqd';
 
 import {PortableText} from '@portabletext/react';
 import {useMemo} from 'react';
 
-import type {AddToCartButtonBlockProps} from '../blocks/AddToCartButtonBlock';
+import type {ADD_TO_CART_BUTTON_BLOCK_FRAGMENT} from '~/qroq/blocks';
+
 import type {PriceBlockProps} from '../blocks/PriceBlock';
 import type {ShopifyDescriptionBlockProps} from '../blocks/ShopifyDescriptionBlock';
 import type {ShopifyTitleBlockProps} from '../blocks/ShopifyTitleBlock';
@@ -13,17 +15,19 @@ import type {InternalLinkAnnotationProps} from '../sanity/richtext/components/In
 import type {FeaturedProductSectionProps} from '../sections/FeaturedProductSection';
 import type {ProductInformationSectionProps} from '../sections/ProductInformationSection';
 
-import {AddToCartButtonBlock} from '../blocks/AddToCartButtonBlock';
 import {PriceBlock} from '../blocks/PriceBlock';
 import {ShopifyDescriptionBlock} from '../blocks/ShopifyDescriptionBlock';
 import {ShopifyTitleBlock} from '../blocks/ShopifyTitleBlock';
 import {ExternalLinkAnnotation} from '../sanity/richtext/components/ExternalLinkAnnotation';
 import {InternalLinkAnnotation} from '../sanity/richtext/components/InternalLinkAnnotation';
+import {ProductForm} from './ProductForm';
 
-export function ProductDetails(props: {
+export function ProductDetails({
+  data,
+}: {
   data: FeaturedProductSectionProps | ProductInformationSectionProps;
 }) {
-  const components = useMemo(
+  const Components = useMemo(
     () => ({
       marks: {
         externalLink: (props: {
@@ -48,9 +52,9 @@ export function ProductDetails(props: {
         },
       },
       types: {
-        addToCartButton: (props: {value: AddToCartButtonBlockProps}) => {
-          return <AddToCartButtonBlock {...props.value} />;
-        },
+        addToCartButton: (props: {
+          value: TypeFromSelection<typeof ADD_TO_CART_BUTTON_BLOCK_FRAGMENT>;
+        }) => <ProductForm {...props.value} />,
         price: (props: {value: PriceBlockProps}) => (
           <PriceBlock {...props.value} />
         ),
@@ -67,10 +71,10 @@ export function ProductDetails(props: {
 
   return (
     <div className="space-y-4">
-      {props.data.richtext && (
+      {data.richtext && (
         <PortableText
-          components={components as PortableTextComponents}
-          value={props.data.richtext as PortableTextBlock[]}
+          components={Components as PortableTextComponents}
+          value={data.richtext as PortableTextBlock[]}
         />
       )}
     </div>

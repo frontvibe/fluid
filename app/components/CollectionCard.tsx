@@ -14,10 +14,13 @@ import {Card, CardContent, CardMedia} from './ui/Card';
 
 export function CollectionCard(props: {
   className?: string;
-  collection: CollectionsQuery['collections']['nodes'][0];
+  collection?: CollectionsQuery['collections']['nodes'][0];
   columns?: null | number;
+  skeleton?: {
+    cardsNumber?: number;
+  };
 }) {
-  const {collection} = props;
+  const {collection, skeleton} = props;
   const {data} = vercelStegaCleanAll(useSanityRoot());
   const style = data?.settings?.collectionCards.style;
   const textAlignment = data?.settings?.collectionCards.textAlignment || 'left';
@@ -47,7 +50,16 @@ export function CollectionCard(props: {
         : 'text-left',
   );
 
-  return (
+  const cardContentClass = cn(
+    'flex flex-wrap items-center py-4',
+    textAlignment === 'center'
+      ? 'justify-center'
+      : textAlignment === 'right'
+        ? 'justify-end'
+        : 'justify-start',
+  );
+
+  return !skeleton && collection ? (
     <Link prefetch="intent" to={path}>
       <Card className={cardClass}>
         {collection.image && (
@@ -73,16 +85,7 @@ export function CollectionCard(props: {
             />
           </CardMedia>
         )}
-        <CardContent
-          className={cn(
-            'flex flex-wrap items-center py-4',
-            textAlignment === 'center'
-              ? 'justify-center'
-              : textAlignment === 'right'
-                ? 'justify-end'
-                : 'justify-start',
-          )}
-        >
+        <CardContent className={cardContentClass}>
           <div className="flex items-center text-lg">
             <span className="relative z-[2] block bg-card pr-2">
               {collection.title}
@@ -94,5 +97,18 @@ export function CollectionCard(props: {
         </CardContent>
       </Card>
     </Link>
-  );
+  ) : skeleton ? (
+    <Card className={cn('animate-pulse', cardClass)}>
+      <CardMedia>
+        <div className={cn('h-auto w-full bg-muted', cardMediaAspectRatio)} />
+      </CardMedia>
+      <CardContent className={cardContentClass}>
+        <div className="flex items-center text-lg">
+          <span className="rounded text-muted-foreground/0">
+            Skeleton collection title
+          </span>
+        </div>
+      </CardContent>
+    </Card>
+  ) : null;
 }

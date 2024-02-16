@@ -9,6 +9,9 @@ import {CollectionCard} from './CollectionCard';
 export function CollectionListGrid(props: {
   collections?: CollectionsQuery['collections'];
   columns?: null | number;
+  skeleton?: {
+    cardsNumber?: number;
+  };
 }) {
   const collections = props.collections?.nodes.length
     ? flattenConnection(props.collections)
@@ -17,7 +20,7 @@ export function CollectionListGrid(props: {
     '--columns': props.columns ?? 3,
   } as CSSProperties;
 
-  return collections?.length > 0 ? (
+  return (
     <ul
       className={cx([
         'grid gap-x-[--grid-horizontal-space] gap-y-[--grid-vertical-space]',
@@ -25,11 +28,24 @@ export function CollectionListGrid(props: {
       ])}
       style={columnsVar}
     >
-      {collections.map((collection) => (
-        <li key={collection.id}>
-          <CollectionCard collection={collection} columns={props.columns} />
-        </li>
-      ))}
+      {!props.skeleton && collections && collections.length > 0
+        ? collections.map((collection) => (
+            <li key={collection.id}>
+              <CollectionCard collection={collection} columns={props.columns} />
+            </li>
+          ))
+        : props.skeleton
+          ? [...Array(props.skeleton.cardsNumber ?? 3)].map((_, i) => (
+              <li key={i}>
+                <CollectionCard
+                  columns={props.columns}
+                  skeleton={{
+                    cardsNumber: props.skeleton?.cardsNumber,
+                  }}
+                />
+              </li>
+            ))
+          : null}
     </ul>
-  ) : null;
+  );
 }

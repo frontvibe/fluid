@@ -13,6 +13,7 @@ import type {FEATURED_COLLECTION_SECTION_FRAGMENT} from '~/qroq/sections';
 
 import type {loader as indexLoader} from '../../routes/_index';
 
+import {Skeleton} from '../Skeleton';
 import {ProductCardGrid} from '../product/ProductCardGrid';
 
 type FeaturedCollectionSectionProps = TypeFromSelection<
@@ -32,11 +33,33 @@ export function FeaturedCollectionSection(
     <div className="container">
       <h2>{props.data.collection?.store.title}</h2>
       <AwaitFeaturedCollection
+        error={
+          <Skeleton isError>
+            <div aria-hidden className="animate-pulse">
+              <ProductCardGrid
+                columns={{
+                  desktop: props.data.maxProducts || 3,
+                }}
+                skeleton={{
+                  cardsNumber: props.data.desktopColumns || 3,
+                }}
+              />
+            </div>
+          </Skeleton>
+        }
         fallback={
-          <Skeleton
-            cardsNumber={props.data.maxProducts || 3}
-            columns={props.data.desktopColumns || 3}
-          />
+          <Skeleton>
+            <div aria-hidden className="animate-pulse">
+              <ProductCardGrid
+                columns={{
+                  desktop: props.data.maxProducts || 3,
+                }}
+                skeleton={{
+                  cardsNumber: props.data.desktopColumns || 3,
+                }}
+              />
+            </div>
+          </Skeleton>
         }
         sanityData={props.data}
       >
@@ -53,23 +76,9 @@ export function FeaturedCollectionSection(
   );
 }
 
-function Skeleton(props: {cardsNumber: number; columns: number}) {
-  return (
-    <div aria-hidden className="animate-pulse">
-      <ProductCardGrid
-        columns={{
-          desktop: props.columns,
-        }}
-        skeleton={{
-          cardsNumber: props.cardsNumber,
-        }}
-      />
-    </div>
-  );
-}
-
 function AwaitFeaturedCollection(props: {
   children: (products: ProductCardFragment[]) => React.ReactNode;
+  error: React.ReactNode;
   fallback: React.ReactNode;
   sanityData: FeaturedCollectionSectionProps;
 }) {
@@ -86,11 +95,7 @@ function AwaitFeaturedCollection(props: {
 
   return (
     <Suspense fallback={props.fallback}>
-      <Await
-        // Todo => Add an error component
-        errorElement={<div>Error</div>}
-        resolve={featuredCollectionPromise}
-      >
+      <Await errorElement={props.error} resolve={featuredCollectionPromise}>
         {(data) => {
           // Resolve the collection data from Shopify with the gid from Sanity
           let collection:
@@ -106,8 +111,9 @@ function AwaitFeaturedCollection(props: {
                 collection = resultCollection;
                 break;
               }
+            } else if (result.status === 'rejected') {
+              return props.error;
             }
-            // Todo => Return error component if the promise is rejected
           }
 
           const products =

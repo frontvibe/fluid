@@ -24,6 +24,8 @@ export const simpleContentAlignmentValues = [
   'right',
 ] as const;
 
+export const aspectRatioValues = ['square', 'video', 'auto'] as const;
+
 /*
 |--------------------------------------------------------------------------
 | Section Settings
@@ -91,11 +93,31 @@ export const FEATURED_COLLECTION_SECTION_FRAGMENT = {
 export const FEATURED_PRODUCT_SECTION_FRAGMENT = {
   _key: q.string().nullable(),
   _type: q.literal('featuredProductSection'),
+  mediaAspectRatio: z.enum(aspectRatioValues).nullable(),
   product: q('product')
     .deref()
     .grab({
       store: q('store').grab({
+        descriptionHtml: q.string(),
+        firstVariant: q('variants[]', {isArray: true})
+          .slice(0)
+          .deref()
+          .grab({
+            store: q('store').grab({
+              gid: q.string(),
+              previewImageUrl: q.string().nullable(),
+              price: q.number(),
+            }),
+          })
+          .nullable(),
         gid: q.string(),
+        options: q('options[]', {isArray: true})
+          .grab({
+            name: q.string(),
+            values: q.array(q.string()),
+          })
+          .nullable(),
+        previewImageUrl: q.string().nullable(),
         title: q.string(),
       }),
     })
@@ -121,6 +143,7 @@ export const FEATURED_PRODUCT_SECTION_FRAGMENT = {
 export const PRODUCT_INFORMATION_SECTION_FRAGMENT = {
   _key: q.string().nullable(),
   _type: q.literal('productInformationSection'),
+  mediaAspectRatio: z.enum(aspectRatioValues).nullable(),
   richtext: q(
     `coalesce(
       richtext[_key == $language][0].value[],

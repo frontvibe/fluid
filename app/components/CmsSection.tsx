@@ -36,12 +36,7 @@ export function CmsSection(props: {
 
   return Section ? (
     <SectionWrapper data={data} type={props.type}>
-      <Suspense
-        fallback={
-          // Todo: add skeleton component for each section type
-          <div className="h-96" />
-        }
-      >
+      <Suspense>
         <Section data={data} encodeDataAttribute={encodeDataAttribute} />
       </Suspense>
     </SectionWrapper>

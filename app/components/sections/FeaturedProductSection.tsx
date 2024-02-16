@@ -1,17 +1,29 @@
+import type {ProductVariantConnection} from '@shopify/hydrogen/storefront-api-types';
 import type {TypeFromSelection} from 'groqd';
 import type {FeaturedProductQuery} from 'storefrontapi.generated';
+import type {PartialObjectDeep} from 'type-fest/source/partial-deep';
 
 import {Await, useLoaderData} from '@remix-run/react';
+import {vercelStegaCleanAll} from '@sanity/client/stega';
 import {flattenConnection} from '@shopify/hydrogen';
 import {ProductProvider} from '@shopify/hydrogen-react';
 import {Suspense} from 'react';
 
 import type {SectionDefaultProps} from '~/lib/type';
+import type {AspectRatioData} from '~/lib/utils';
 import type {FEATURED_PRODUCT_SECTION_FRAGMENT} from '~/qroq/sections';
+
+import {useLocale} from '~/hooks/useLocale';
+import {
+  cn,
+  generateShopifyImageThumbnail,
+  getAspectRatioData,
+} from '~/lib/utils';
 
 import type {loader as indexLoader} from '../../routes/_index';
 
 import {ShopifyImage} from '../ShopifyImage';
+import {Skeleton} from '../Skeleton';
 import {ProductDetails} from '../product/ProductDetails';
 
 export type FeaturedProductSectionProps = TypeFromSelection<
@@ -27,12 +39,22 @@ export type FeaturedProductSectionProps = TypeFromSelection<
 export function FeaturedProductSection(
   props: SectionDefaultProps & {data: FeaturedProductSectionProps},
 ) {
+  const aspectRatio = getAspectRatioData(props.data.mediaAspectRatio);
   return (
     <div className="container">
       <AwaitFeaturedProduct
+        error={
+          <FeaturedProductSkeleton
+            data={props.data}
+            imageAspectRatio={aspectRatio}
+            isError
+          />
+        }
         fallback={
-          // Todo => Add a skeleton
-          <div className="h-96" />
+          <FeaturedProductSkeleton
+            data={props.data}
+            imageAspectRatio={aspectRatio}
+          />
         }
         sanityData={props.data}
       >
@@ -45,14 +67,17 @@ export function FeaturedProductSection(
           );
           const image = firstAvailableVariant?.image;
 
-          // Todo => Add section settings to choose the aspect ratio (16/9, 1/1, are the original aspect ratio)
           return (
             <ProductProvider data={product}>
-              <div className="grid gap-10 lg:grid-cols-2">
+              <Grid>
                 <div>
                   {image && (
                     <ShopifyImage
-                      className="h-auto w-full object-cover"
+                      aspectRatio={aspectRatio.value}
+                      className={cn(
+                        'h-auto object-cover',
+                        aspectRatio.className,
+                      )}
                       data={image}
                       sizes="(min-width: 1024px) 50vw, 100vw"
                     />
@@ -61,7 +86,7 @@ export function FeaturedProductSection(
                 <div>
                   <ProductDetails data={props.data} />
                 </div>
-              </div>
+              </Grid>
             </ProductProvider>
           );
         }}
@@ -70,10 +95,94 @@ export function FeaturedProductSection(
   );
 }
 
+function Grid({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <div className={cn('grid gap-10 lg:grid-cols-2', className)}>
+      {children}
+    </div>
+  );
+}
+
+function FeaturedProductSkeleton({
+  data,
+  imageAspectRatio,
+  isError,
+}: {
+  data: FeaturedProductSectionProps;
+  imageAspectRatio: AspectRatioData;
+  isError?: true;
+}) {
+  const locale = useLocale();
+  const sanityProduct = vercelStegaCleanAll(data.product?.store);
+  const variants: PartialObjectDeep<
+    ProductVariantConnection,
+    {recurseIntoArrays: true}
+  > = {
+    nodes: [],
+  };
+  const imageUrl =
+    sanityProduct?.firstVariant?.store.previewImageUrl ||
+    sanityProduct?.previewImageUrl;
+  const thumbnailUrl = generateShopifyImageThumbnail(imageUrl);
+
+  // While waiting for Shopify data, we render a skeleton filled with sanity data
+  if (sanityProduct) {
+    variants.nodes?.push({
+      id: sanityProduct.firstVariant?.store.gid,
+      price: {
+        amount: sanityProduct?.firstVariant?.store.price.toString() || '0',
+        currencyCode: locale?.currency,
+      },
+      selectedOptions: [],
+    });
+  }
+
+  return (
+    <Skeleton isError={isError}>
+      <Grid>
+        <div>
+          {imageUrl && thumbnailUrl && (
+            <ShopifyImage
+              aspectRatio={imageAspectRatio.value}
+              className={cn('h-auto object-cover', imageAspectRatio.className)}
+              data={{
+                id: data.product?.store.gid,
+                thumbnail: thumbnailUrl,
+                url: imageUrl,
+              }}
+              sizes="(min-width: 1024px) 50vw, 100vw"
+            />
+          )}
+        </div>
+        <div>
+          <ProductProvider
+            data={{
+              descriptionHtml: sanityProduct?.descriptionHtml,
+              id: sanityProduct?.gid,
+              options: sanityProduct?.options || [],
+              title: sanityProduct?.title,
+              variants,
+            }}
+          >
+            <ProductDetails data={data} />
+          </ProductProvider>
+        </div>
+      </Grid>
+    </Skeleton>
+  );
+}
+
 function AwaitFeaturedProduct(props: {
   children: (
     product: NonNullable<FeaturedProductQuery['product']>,
   ) => React.ReactNode;
+  error: React.ReactNode;
   fallback: React.ReactNode;
   sanityData: FeaturedProductSectionProps;
 }) {
@@ -90,11 +199,7 @@ function AwaitFeaturedProduct(props: {
 
   return (
     <Suspense fallback={props.fallback}>
-      <Await
-        // Todo => Add an error component
-        errorElement={<div>Error</div>}
-        resolve={featuredProductPromise}
-      >
+      <Await errorElement={props.error} resolve={featuredProductPromise}>
         {(data) => {
           // Resolve the collection data from Shopify with the gid from Sanity
           let product:
@@ -110,8 +215,9 @@ function AwaitFeaturedProduct(props: {
                 product = resultProduct;
                 break;
               }
+            } else if (result.status === 'rejected') {
+              return props.error;
             }
-            // Todo => Return error component if the promise is rejected
           }
 
           return <>{product && props.children(product)}</>;

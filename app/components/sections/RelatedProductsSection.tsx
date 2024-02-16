@@ -7,6 +7,8 @@ import type {SectionDefaultProps} from '~/lib/type';
 import type {RELATED_PRODUCTS_SECTION_FRAGMENT} from '~/qroq/sections';
 import type {loader} from '~/routes/($locale).products.$productHandle';
 
+import {Skeleton} from '../Skeleton';
+import {ProductCardGrid} from '../product/ProductCardGrid';
 import {RelatedProducts} from '../product/RelatedProducts';
 
 export type RelatedProductsSectionProps = TypeFromSelection<
@@ -20,14 +22,38 @@ export function RelatedProductsSection(
   const loaderData = useLoaderData<typeof loader>();
   const relatedProductsPromise = loaderData?.relatedProductsPromise;
 
-  // Todo => Add skeleton and errorElement
+  // Todo => Add carousel
   return (
     <div className="container">
-      <h2>{data.heading}</h2>
+      {data.heading && <h2>{data.heading}</h2>}
       <div className="mt-4">
-        <Suspense fallback="loading...">
+        <Suspense
+          fallback={
+            <Skeleton>
+              <ProductCardGrid
+                columns={{
+                  desktop: props.data.desktopColumns,
+                }}
+                skeleton={{
+                  cardsNumber: props.data.maxProducts || 3,
+                }}
+              />
+            </Skeleton>
+          }
+        >
           <Await
-            errorElement={<div>Error</div>}
+            errorElement={
+              <Skeleton isError>
+                <ProductCardGrid
+                  columns={{
+                    desktop: props.data.desktopColumns,
+                  }}
+                  skeleton={{
+                    cardsNumber: props.data.maxProducts || 3,
+                  }}
+                />
+              </Skeleton>
+            }
             resolve={relatedProductsPromise}
           >
             {(result) => <RelatedProducts data={result} />}

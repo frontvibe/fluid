@@ -56,6 +56,15 @@ export function ProductCard(props: {
         : 'text-left',
   );
 
+  const priceClass = cn(
+    'mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 md:gap-3 [&>*]:overflow-hidden [&>*]:text-ellipsis [&>*]:whitespace-nowrap',
+    textAlignment === 'center'
+      ? 'justify-center'
+      : textAlignment === 'right'
+        ? 'justify-end'
+        : 'justify-start',
+  );
+
   return (
     <>
       {!skeleton && product && firstVariant ? (
@@ -88,16 +97,7 @@ export function ProductCard(props: {
               <div className="overflow-hidden text-ellipsis whitespace-nowrap underline-offset-4 group-hover/card:underline md:text-lg">
                 {product.title}
               </div>
-              <div
-                className={cn(
-                  'mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 md:gap-3 [&>*]:overflow-hidden [&>*]:text-ellipsis [&>*]:whitespace-nowrap',
-                  textAlignment === 'center'
-                    ? 'justify-center'
-                    : textAlignment === 'right'
-                      ? 'justify-end'
-                      : 'justify-start',
-                )}
-              >
+              <div className={priceClass}>
                 {firstVariant.compareAtPrice && (
                   <Money
                     className="text-xs text-muted-foreground line-through md:text-sm"
@@ -114,25 +114,21 @@ export function ProductCard(props: {
         </Link>
       ) : skeleton ? (
         <Card className={cn('animate-pulse', cardClass)}>
-          <Skeleton aspectRatio={cardMediaAspectRatio} />
+          <CardMedia>
+            <div className={cn('w-full bg-muted', cardMediaAspectRatio)} />
+          </CardMedia>
+          <CardContent className="p-3 text-muted-foreground/0 md:px-6 md:py-4">
+            <div className="text-lg">
+              <span className="rounded">Skeleton product title</span>
+            </div>
+            <div className={priceClass}>
+              <span className="rounded text-sm md:text-base">
+                Skeleton price
+              </span>
+            </div>
+          </CardContent>
         </Card>
       ) : null}
-    </>
-  );
-}
-
-function Skeleton({aspectRatio}: {aspectRatio: string}) {
-  return (
-    <>
-      <div className={cn('w-full bg-muted', aspectRatio)} />
-      <div className="p-3 text-muted-foreground/0">
-        <div className="text-lg">
-          <span className="rounded bg-muted">Skeleton product title</span>
-        </div>
-        <div>
-          <span className="rounded bg-muted">Skeleton price</span>
-        </div>
-      </div>
     </>
   );
 }

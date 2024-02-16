@@ -13,7 +13,7 @@ import {
   useSearchParams,
 } from '@remix-run/react';
 import {Pagination} from '@shopify/hydrogen';
-import {Suspense, useCallback, useEffect} from 'react';
+import {Suspense, useCallback, useEffect, useMemo} from 'react';
 
 import type {SectionDefaultProps} from '~/lib/type';
 import type {COLLECTION_PRODUCT_GRID_SECTION_FRAGMENT} from '~/qroq/sections';
@@ -26,6 +26,7 @@ import {cn} from '~/lib/utils';
 
 import type {AppliedFilter} from '../collection/SortFilterLayout';
 
+import {Skeleton} from '../Skeleton';
 import {SortFilter} from '../collection/SortFilterLayout';
 import {ProductCardGrid} from '../product/ProductCardGrid';
 import {Button} from '../ui/Button';
@@ -60,11 +61,43 @@ export function CollectionProductGridSection(
     });
   }, [navigate, pathname]);
 
-  // Todo => Add skeleton and errorElement
+  const CollectionProductGridSkeleton = useMemo(() => {
+    return (
+      <div className="container">
+        <SortFilter
+          filters={[]}
+          onClearAllFilters={handleClearFilters}
+          productsCount={0}
+          sectionSettings={props.data.settings}
+        >
+          <div className="mt-6">
+            <ProductCardGrid
+              columns={{
+                desktop: columns,
+                mobile: mobileColumns,
+              }}
+              skeleton={{
+                cardsNumber: props.data.productsPerPage || 3,
+              }}
+            />
+          </div>
+        </SortFilter>
+      </div>
+    );
+  }, [
+    columns,
+    handleClearFilters,
+    mobileColumns,
+    props.data.productsPerPage,
+    props.data.settings,
+  ]);
+
   return (
-    <Suspense fallback="loading...">
+    <Suspense fallback={<Skeleton>{CollectionProductGridSkeleton}</Skeleton>}>
       <Await
-        errorElement={<div>Error</div>}
+        errorElement={
+          <Skeleton isError>{CollectionProductGridSkeleton}</Skeleton>
+        }
         resolve={collectionProductGridPromise}
       >
         {(result) => {

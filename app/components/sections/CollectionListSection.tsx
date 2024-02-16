@@ -10,6 +10,7 @@ import type {COLLECTION_LIST_SECTION_FRAGMENT} from '~/qroq/sections';
 import type {loader as indexLoader} from '../../routes/_index';
 
 import {CollectionListGrid} from '../CollectionListGrid';
+import {Skeleton} from '../Skeleton';
 
 type CollectionListSectionProps = TypeFromSelection<
   typeof COLLECTION_LIST_SECTION_FRAGMENT
@@ -24,10 +25,32 @@ type CollectionListSectionProps = TypeFromSelection<
 export function CollectionListSection(
   props: SectionDefaultProps & {data: CollectionListSectionProps},
 ) {
-  // Todo => Add a skeleton
   return (
     <AwaitCollectionList
-      fallback={<div className="container">Loading...</div>}
+      error={
+        <Skeleton isError>
+          <div className="container">
+            <CollectionListGrid
+              columns={props.data.collections?.length || 2}
+              skeleton={{
+                cardsNumber: props.data.desktopColumns || 2,
+              }}
+            />
+          </div>
+        </Skeleton>
+      }
+      fallback={
+        <Skeleton>
+          <div className="container">
+            <CollectionListGrid
+              columns={props.data.collections?.length || 2}
+              skeleton={{
+                cardsNumber: props.data.desktopColumns || 2,
+              }}
+            />
+          </div>
+        </Skeleton>
+      }
       sanityData={props.data}
     >
       {(collections) => (
@@ -44,6 +67,7 @@ export function CollectionListSection(
 
 function AwaitCollectionList(props: {
   children: (collections: CollectionsQuery['collections']) => React.ReactNode;
+  error?: React.ReactNode;
   fallback: React.ReactNode;
   sanityData: CollectionListSectionProps;
 }) {
@@ -64,7 +88,7 @@ function AwaitCollectionList(props: {
     <Suspense fallback={props.fallback}>
       <Await
         // Todo => Add an error component
-        errorElement={<div>Error</div>}
+        errorElement={props.error}
         resolve={collectionListPromise}
       >
         {(data) => {
@@ -85,8 +109,9 @@ function AwaitCollectionList(props: {
                 collections = resultCollections;
                 break;
               }
+            } else if (result.status === 'rejected') {
+              return props.error;
             }
-            // Todo => Return error component if the promise is rejected
           }
 
           return <>{collections && props.children(collections)}</>;

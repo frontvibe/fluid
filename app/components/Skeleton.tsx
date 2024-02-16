@@ -1,0 +1,27 @@
+import {useNavigate} from '@remix-run/react';
+
+import {Button} from './ui/Button';
+
+/**
+ * Skeleton wrapper to conditionnaly render an error message and a button to reload the page.
+ */
+export function Skeleton(props: {children: React.ReactNode; isError?: true}) {
+  const navigate = useNavigate();
+  return (
+    <>
+      {props.children}
+      {props.isError && (
+        <div className="absolute inset-0 z-30 bg-black/40 backdrop-blur">
+          <div className="flex size-full items-center justify-center">
+            <div className="mx-auto flex h-auto w-72 max-w-full flex-col justify-center rounded-lg bg-background p-7 text-center text-foreground">
+              An error occured while loading this section.
+              <Button className="mt-4" onClick={() => navigate(0)}>
+                Reload page
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}

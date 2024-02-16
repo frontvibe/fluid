@@ -34,7 +34,7 @@ const SANITY_STUDIO_PREVIEW_URL = isDev
 
 export default defineConfig({
   name: 'default',
-  title: 'Sanity x Hydrogen',
+  title: 'Fluid',
   projectId,
   dataset,
   plugins: [

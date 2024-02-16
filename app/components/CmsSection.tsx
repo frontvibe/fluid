@@ -10,8 +10,8 @@ import type {
   SECTIONS_FRAGMENT,
 } from '~/qroq/sections';
 
+import {useCardColorsCssVars, useColorsCssVars} from '~/hooks/useColorsCssVars';
 import {useIsDev} from '~/hooks/useIsDev';
-import {useCardCssVars, useSettingsCssVars} from '~/hooks/useSettingsCssVars';
 import {sections} from '~/lib/sectionRelsolver';
 
 type CmsSectionsProps =
@@ -57,11 +57,11 @@ function SectionWrapper(props: {
 }) {
   const {children, data} = props;
   const isDev = useIsDev();
-  const cssVars = useSettingsCssVars({
+  const colorsCssVars = useColorsCssVars({
     selector: props.type === 'footer' ? 'footer' : `#section-${data._key}`,
     settings: data?.settings,
   });
-  const cardCssVars = useCardCssVars({
+  const cardColorsCssVars = useCardColorsCssVars({
     selector: `#section-${data._key} [data-type="card"]`,
     settings: props.data.settings,
   });
@@ -76,7 +76,7 @@ function SectionWrapper(props: {
       className="section-padding relative bg-background text-foreground [content-visibility:auto]"
       data-footer-type={isDev ? sectionType : null}
     >
-      <style dangerouslySetInnerHTML={{__html: cssVars}} />
+      <style dangerouslySetInnerHTML={{__html: colorsCssVars}} />
       {children}
       {data.settings?.customCss && (
         <style dangerouslySetInnerHTML={{__html: customCss}} />
@@ -88,8 +88,8 @@ function SectionWrapper(props: {
       data-section-type={isDev ? sectionType : null}
       id={`section-${data._key}`}
     >
-      <style dangerouslySetInnerHTML={{__html: cssVars}} />
-      <style dangerouslySetInnerHTML={{__html: cardCssVars}} />
+      <style dangerouslySetInnerHTML={{__html: colorsCssVars}} />
+      <style dangerouslySetInnerHTML={{__html: cardColorsCssVars}} />
       {children}
       {data.settings?.customCss && (
         <style dangerouslySetInnerHTML={{__html: customCss}} />

@@ -197,12 +197,12 @@ function Pill(props: {
   const buttonClass = cx([
     'select-none rounded-full py-[.375rem] text-sm font-medium',
     'focus-visible:outline-none focus-visible:outline-2 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
-    !isAvailable && 'opacity-50',
   ]);
-  const bubbleClass = cx('absolute inset-0 z-10 bg-accent mix-blend-multiply');
+  const bubbleClass = cx(['absolute inset-0 z-0 bg-accent']);
   const foregroundClass = cx([
-    'inline-flex items-center justify-center whitespace-nowrap px-3 py-1.5 transition-colors notouch:hover:text-accent-foreground',
+    'inline-flex items-center relative z-[2] justify-center whitespace-nowrap px-3 py-1.5 transition-colors notouch:hover:text-accent-foreground',
     isActive && 'text-accent-foreground',
+    !isAvailable && 'opacity-50',
   ]);
 
   // Animated tabs implementation inspired by the fantastic Build UI recipes

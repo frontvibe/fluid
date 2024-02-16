@@ -22,7 +22,9 @@ import type {HydrogenSession} from './lib/hydrogen.session.server';
 
 import favicon from '../public/favicon.ico';
 import {Fonts} from './components/Fonts';
+import {useCardColorsCssVars, useColorsCssVars} from './hooks/useColorsCssVars';
 import {useLocale} from './hooks/useLocale';
+import {useSanityRoot} from './hooks/useSanityRoot';
 import {useSettingsCssVars} from './hooks/useSettingsCssVars';
 import {generateFontsPreloadLinks} from './lib/fonts';
 import {sanityPreviewPayload} from './lib/sanity/sanity.payload.server';
@@ -139,7 +141,6 @@ export async function loader({context}: LoaderFunctionArgs) {
 export default function App() {
   const nonce = useNonce();
   const locale = useLocale();
-  const cssVars = useSettingsCssVars({});
 
   return (
     <html lang={locale?.language}>
@@ -149,9 +150,9 @@ export default function App() {
         <Meta />
         <Fonts />
         <Links />
-        <style dangerouslySetInnerHTML={{__html: cssVars}} />
+        <CssVars />
       </head>
-      <body className="flex min-h-screen flex-col overflow-x-hidden bg-background text-foreground [&_main]:flex [&_main]:grow [&_main]:flex-col">
+      <body className="flex min-h-screen flex-col overflow-x-hidden bg-background text-foreground">
         <Layout>
           <Outlet />
         </Layout>
@@ -160,6 +161,34 @@ export default function App() {
         <LiveReload nonce={nonce} />
       </body>
     </html>
+  );
+}
+
+export function CssVars() {
+  const settingsCssVars = useSettingsCssVars();
+  const colorsCssVars = useColorsCssVars({});
+  const {data} = useSanityRoot();
+  const cartColorsCssVars = useColorsCssVars({
+    selector: '.cart',
+    settings: {
+      colorScheme: data?.settings?.cartColorScheme,
+    },
+  });
+
+  const cardCartColorsCssVars = useCardColorsCssVars({
+    selector: `.cart [data-type="card"]`,
+    settings: {
+      colorScheme: data?.settings?.cartColorScheme,
+    },
+  });
+
+  return (
+    <>
+      <style dangerouslySetInnerHTML={{__html: colorsCssVars}} />
+      <style dangerouslySetInnerHTML={{__html: settingsCssVars}} />
+      <style dangerouslySetInnerHTML={{__html: cartColorsCssVars}} />
+      <style dangerouslySetInnerHTML={{__html: cardCartColorsCssVars}} />
+    </>
   );
 }
 
@@ -186,7 +215,7 @@ export function ErrorBoundary() {
         <Fonts />
         <Links />
       </head>
-      <body className="flex min-h-screen flex-col [&_main]:grow">
+      <body className="flex min-h-screen flex-col">
         <Layout>
           <section>
             <div className="container">

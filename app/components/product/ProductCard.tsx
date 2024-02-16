@@ -1,10 +1,12 @@
 import type {ProductCardFragment} from 'storefrontapi.generated';
 
 import {Link} from '@remix-run/react';
+import {vercelStegaCleanAll} from '@sanity/client/stega';
 import {Money, flattenConnection} from '@shopify/hydrogen';
 import {cx} from 'class-variance-authority';
 
 import {useLocalePath} from '~/hooks/useLocalePath';
+import {useSanityRoot} from '~/hooks/useSanityRoot';
 import {cn} from '~/lib/utils';
 
 import {ShopifyImage} from '../ShopifyImage';
@@ -22,6 +24,9 @@ export function ProductCard(props: {
   };
 }) {
   const {columns, product, skeleton} = props;
+  const {data} = vercelStegaCleanAll(useSanityRoot());
+  const style = data?.settings?.productCards.style;
+  const textAlignment = data?.settings?.productCards.textAlignment || 'left';
   const firstVariant = product?.variants?.nodes.length
     ? flattenConnection(product?.variants)[0]
     : null;
@@ -34,19 +39,47 @@ export function ProductCard(props: {
   const path = useLocalePath({path: `/products/${product?.handle}`});
   const cardMediaAspectRatio = 'aspect-video';
 
+  const cardClass = cn(
+    style === 'card'
+      ? 'overflow-hidden rounded-[--product-card-border-corner-radius]'
+      : 'rounded-t-[calc(var(--product-card-border-corner-radius)*1.2)]',
+    style === 'card'
+      ? 'border-[rgb(var(--border)_/_var(--product-card-border-opacity))] [border-width:--product-card-border-thickness]'
+      : 'border-0',
+    style === 'card'
+      ? '[box-shadow:rgb(var(--foreground)_/_var(--product-card-shadow-opacity))_var(--product-card-shadow-horizontal-offset)_var(--product-card-shadow-vertical-offset)_var(--product-card-shadow-blur-radius)_0px]'
+      : 'shadow-none',
+    textAlignment === 'center'
+      ? 'text-center'
+      : textAlignment === 'right'
+        ? 'text-right'
+        : 'text-left',
+  );
+
   return (
     <>
       {!skeleton && product && firstVariant ? (
         <Link prefetch="intent" to={path}>
-          <Card className="overflow-hidden">
+          <Card className={cardClass}>
             {firstVariant?.image && (
-              <CardMedia>
+              <CardMedia
+                className={cn(
+                  style === 'standard' &&
+                    'rounded-[--product-card-border-corner-radius]',
+                  style === 'standard' &&
+                    'border-[rgb(var(--border)_/_var(--product-card-border-opacity))] [border-width:--product-card-border-thickness]',
+                  style === 'standard' &&
+                    '[box-shadow:rgb(var(--foreground)_/_var(--product-card-shadow-opacity))_var(--product-card-shadow-horizontal-offset)_var(--product-card-shadow-vertical-offset)_var(--product-card-shadow-blur-radius)_0px]',
+                )}
+              >
                 <ShopifyImage
                   aspectRatio={
                     cardMediaAspectRatio === 'aspect-video' ? '16/9' : '1/1'
                   }
                   crop="center"
                   data={firstVariant.image}
+                  showBorder={false}
+                  showShadow={false}
                   sizes={sizes}
                 />
               </CardMedia>
@@ -55,7 +88,16 @@ export function ProductCard(props: {
               <div className="overflow-hidden text-ellipsis whitespace-nowrap underline-offset-4 group-hover/card:underline md:text-lg">
                 {product.title}
               </div>
-              <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 md:gap-3 [&>*]:overflow-hidden [&>*]:text-ellipsis [&>*]:whitespace-nowrap">
+              <div
+                className={cn(
+                  'mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 md:gap-3 [&>*]:overflow-hidden [&>*]:text-ellipsis [&>*]:whitespace-nowrap',
+                  textAlignment === 'center'
+                    ? 'justify-center'
+                    : textAlignment === 'right'
+                      ? 'justify-end'
+                      : 'justify-start',
+                )}
+              >
                 {firstVariant.compareAtPrice && (
                   <Money
                     className="text-xs text-muted-foreground line-through md:text-sm"
@@ -71,7 +113,7 @@ export function ProductCard(props: {
           </Card>
         </Link>
       ) : skeleton ? (
-        <Card className="animate-pulse overflow-hidden">
+        <Card className={cn('animate-pulse', cardClass)}>
           <Skeleton aspectRatio={cardMediaAspectRatio} />
         </Card>
       ) : null}

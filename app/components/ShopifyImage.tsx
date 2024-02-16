@@ -12,17 +12,26 @@ import {cn} from '~/lib/utils';
 export function ShopifyImage({
   className,
   data,
+  showBorder = true,
+  showShadow = true,
   ...props
 }: {
   className?: string;
   data: ImageFragmentFragment;
+  showBorder?: boolean;
+  showShadow?: boolean;
 } & HydrogenImageProps) {
   const id = parseGid(data.id || undefined).id;
-  // Todo => Global image border-radius setting should apply to the wrapper <span/>
   // No padding should be applied to the wrapper <span/> or the <img/> tag to avoid blurry LQIP becoming visible
   return (
     <span
-      className="relative block overflow-hidden !p-0"
+      className={cn(
+        'relative block overflow-hidden !p-0',
+        showBorder &&
+          'rounded-[--media-border-corner-radius] border-[rgb(var(--border)_/_var(--media-border-opacity))] [border-width:--media-border-thickness]',
+        showShadow &&
+          '[box-shadow:rgb(var(--foreground)_/_var(--media-shadow-opacity))_var(--media-shadow-horizontal-offset)_var(--media-shadow-vertical-offset)_var(--media-shadow-blur-radius)_0px]',
+      )}
       id={id ? `img-${id}` : undefined}
     >
       <Image
@@ -47,7 +56,7 @@ export function ShopifyImage({
                 left: 0;
                 right: 0;
                 bottom: 0;
-                filter: blur(10px);
+                filter: blur(6px);
               }
             `.trim(),
           }}

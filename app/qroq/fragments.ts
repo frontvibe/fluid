@@ -1,6 +1,6 @@
 import type {Selection} from 'groqd';
 
-import {q} from 'groqd';
+import {q, z} from 'groqd';
 
 import {LINK_REFERENCE_FRAGMENT, LINKS_LIST_SELECTION} from './links';
 
@@ -32,7 +32,33 @@ export const IMAGE_FRAGMENT = {
     .nullable(),
   url: q('asset').deref().grabOne('url', q.string()),
   width: q('asset').deref().grabOne('metadata.dimensions.width', q.number()),
-};
+} as const;
+
+export const SIMPLE_IMAGE_FRAGMENT = {
+  _ref: q('asset').grabOne('_ref', q.string()),
+  altText: q('asset').deref().grabOne('altText', q.string()).nullable(),
+  height: q('asset').deref().grabOne('metadata.dimensions.height', q.number()),
+  url: q('asset').deref().grabOne('url', q.string()),
+  width: q('asset').deref().grabOne('metadata.dimensions.width', q.number()),
+} as const;
+
+/*
+|--------------------------------------------------------------------------
+| Border and Shadow Fragment
+|--------------------------------------------------------------------------
+*/
+export const BORDER_FRAGMENT = {
+  cornerRadius: q.number().nullable(),
+  opacity: q.number().nullable(),
+  thickness: q.number().nullable(),
+} as const;
+
+export const SHADOW_FRAGMENT = {
+  blur: q.number().nullable(),
+  horizontalOffset: q.number().nullable(),
+  opacity: q.number().nullable(),
+  verticalOffset: q.number().nullable(),
+} as const;
 
 /*
 |--------------------------------------------------------------------------
@@ -108,9 +134,73 @@ export const ANNOUCEMENT_BAR_ARRAY_FRAGMENT = q(
 |--------------------------------------------------------------------------
 */
 export const SETTINGS_FRAGMENT = {
-  favicon: q('favicon').grab(IMAGE_FRAGMENT).nullable(),
-  logo: q('logo').grab(IMAGE_FRAGMENT).nullable(),
+  badgesCornerRadius: q.number().nullable(),
+  badgesPosition: q.string().nullable(),
+  badgesSaleColorScheme: q('badgesSaleColorScheme')
+    .grab(COLOR_FRAGMENT)
+    .nullable(),
+  badgesSoldOutColorScheme: q('badgesSoldOutColorScheme')
+    .grab(COLOR_FRAGMENT)
+    .nullable(),
+  blogCards: q.object({
+    border: q.object(BORDER_FRAGMENT).nullable(),
+    shadow: q.object(SHADOW_FRAGMENT).nullable(),
+    style: z.enum(['standard', 'card']).nullable(),
+    textAlignment: z.enum(['left', 'center', 'right']).nullable(),
+  }),
+  buttonsBorder: q.object(BORDER_FRAGMENT),
+  buttonsShadow: q.object(SHADOW_FRAGMENT),
+  cartCollection: q('cartCollection')
+    .deref()
+    .grab({
+      store: q('store').grab({
+        gid: q.string(),
+        title: q.string(),
+      }),
+    })
+    .nullable(),
+  cartColorScheme: q('cartColorScheme').deref().grab(COLOR_SCHEME_FRAGMENT),
+  collectionCards: q.object({
+    border: q.object(BORDER_FRAGMENT).nullable(),
+    shadow: q.object(SHADOW_FRAGMENT).nullable(),
+    style: z.enum(['standard', 'card']).nullable(),
+    textAlignment: z.enum(['left', 'center', 'right']).nullable(),
+  }),
+  dropdownsAndPopupsBorder: q.object(BORDER_FRAGMENT),
+  dropdownsAndPopupsShadow: q.object(SHADOW_FRAGMENT),
+  facebook: q.string().nullable(),
+  favicon: q('favicon').grab(SIMPLE_IMAGE_FRAGMENT).nullable(),
+  grid: q.object({
+    horizontalSpace: q.number(),
+    verticalSpace: q.number(),
+  }),
+  inputsBorder: q.object(BORDER_FRAGMENT),
+  inputsShadow: q.object(SHADOW_FRAGMENT),
+  instagram: q.string().nullable(),
+  linkedin: q.string().nullable(),
+  logo: q('logo').grab(IMAGE_FRAGMENT),
+  mediaBorder: q.object(BORDER_FRAGMENT),
+  mediaShadow: q.object(SHADOW_FRAGMENT),
+  pinterest: q.string().nullable(),
+  productCards: q.object({
+    border: q.object(BORDER_FRAGMENT).nullable(),
+    shadow: q.object(SHADOW_FRAGMENT).nullable(),
+    style: z.enum(['standard', 'card']).nullable(),
+    textAlignment: z.enum(['left', 'center', 'right']).nullable(),
+  }),
+  showCurrencyCodes: q.boolean().nullable(),
+  showTrailingZeros: q.string().nullable(),
   siteName: q.string().nullable(),
+  snapchat: q.string().nullable(),
+  socialSharingImagePreview: q('socialSharingImagePreview')
+    .grab(SIMPLE_IMAGE_FRAGMENT)
+    .nullable(),
+  spaceBetweenTemplateSections: q.number().nullable(),
+  tiktok: q.string().nullable(),
+  tumblr: q.string().nullable(),
+  twitter: q.string().nullable(),
+  vimeo: q.string().nullable(),
+  youtube: q.string().nullable(),
 } satisfies Selection;
 
 /*

@@ -88,7 +88,7 @@ function CartDetailsLayout(props: {
   return props.layout === 'drawer' ? (
     <>{props.children}</>
   ) : (
-    <div className="container grid w-full gap-8 pb-12 md:grid-cols-2 md:items-start md:gap-8 lg:gap-16">
+    <div className="container w-full gap-8 pb-12 md:grid md:grid-cols-2 md:items-start md:gap-8 lg:gap-16">
       {props.children}
     </div>
   );
@@ -124,8 +124,7 @@ function CartSummary({
       <div
         aria-labelledby="summary-heading"
         className={cn([
-          layout === 'drawer' &&
-            'grid gap-4 border-t border-border p-6 md:px-12',
+          layout === 'drawer' && 'grid gap-4 border-t border-border p-6',
           layout === 'page' && 'grid gap-6',
         ])}
       >

@@ -16,8 +16,8 @@
     "sanity"
   ],
   "dependencies": {
-    "@headless.build/sanity-color-picker": "^1.1.0",
-    "@headless.build/sanity-font-picker": "^3.0.0",
+    "@headless.build/sanity-color-picker": "^1.1.1",
+    "@headless.build/sanity-font-picker": "^3.0.1",
     "@headless.build/sanity-plugin-range-slider": "^1.1.1",
     "@sanity/code-input": "^4.1.2",
     "@sanity/icons": "^2.10.2",

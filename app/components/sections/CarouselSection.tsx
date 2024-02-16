@@ -71,6 +71,8 @@ export function CarouselSection(
                     <SanityImage
                       data={slide.image}
                       loading={inView ? 'eager' : 'lazy'}
+                      showBorder={false}
+                      showShadow={false}
                       sizes={imageSizes}
                     />
                   </CarouselItem>

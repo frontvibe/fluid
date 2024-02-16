@@ -6,8 +6,8 @@ import {useMemo} from 'react';
 
 import type {ANNOUCEMENT_BAR_FRAGMENT} from '~/qroq/fragments';
 
+import {useColorsCssVars} from '~/hooks/useColorsCssVars';
 import {useSanityRoot} from '~/hooks/useSanityRoot';
-import {useSettingsCssVars} from '~/hooks/useSettingsCssVars';
 
 import {IconArrowRight} from '../icons/IconArrowRight';
 import {SanityInternalLink} from '../sanity/link/SanityInternalLink';
@@ -33,7 +33,7 @@ export function AnnouncementBar() {
     [header],
   );
 
-  const cssVars = useSettingsCssVars({
+  const colorsCssVars = useColorsCssVars({
     selector: `#announcement-bar`,
     settings: {
       colorScheme: header?.annoucementBarColorScheme!,
@@ -50,7 +50,7 @@ export function AnnouncementBar() {
   return (
     <section className="bg-background text-foreground" id="announcement-bar">
       <div className="container">
-        <style dangerouslySetInnerHTML={{__html: cssVars}} />
+        <style dangerouslySetInnerHTML={{__html: colorsCssVars}} />
         <Carousel opts={{active: isActive}} plugins={plugins}>
           <CarouselContent className="relative">
             {annoucementBar?.map((item) => (

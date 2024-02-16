@@ -20,7 +20,7 @@ import {
 import {ScrollArea} from '../ui/ScrollArea';
 
 const mobileMenuLinkClass = cn(
-  'flex rounded-md px-3 py-2 items-center gap-2 w-full transition-colors notouch:hover:bg-accent notouch:hover:text-accent-foreground touch:active:bg-accent touch:active:text-accent-foreground',
+  'flex rounded-sm px-4 py-2 items-center gap-2 w-full transition-colors notouch:hover:bg-accent notouch:hover:text-accent-foreground touch:active:bg-accent touch:active:text-accent-foreground',
 );
 
 export function MobileNavigation(props: {data?: NavigationProps}) {

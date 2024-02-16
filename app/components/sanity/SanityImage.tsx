@@ -14,6 +14,8 @@ export function SanityImage({
   fetchpriority,
   loading,
   sanityEncodeData,
+  showBorder = true,
+  showShadow = true,
   sizes,
   style,
 }: {
@@ -24,6 +26,8 @@ export function SanityImage({
   fetchpriority?: 'auto' | 'high' | 'low';
   loading?: 'eager' | 'lazy';
   sanityEncodeData?: string;
+  showBorder?: boolean;
+  showShadow?: boolean;
   sizes?: null | string;
   style?: React.CSSProperties;
 }) {
@@ -95,7 +99,13 @@ export function SanityImage({
   // No padding should be applied to the wrapper <span/> or the <img/> tag to avoid blurry LQIP becoming visible
   return (
     <span
-      className="relative block overflow-hidden !p-0"
+      className={cn(
+        'relative block overflow-hidden !p-0',
+        showBorder &&
+          'rounded-[--media-border-corner-radius] border-[rgb(var(--border)_/_var(--media-border-opacity))] [border-width:--media-border-thickness]',
+        showShadow &&
+          '[box-shadow:rgb(var(--foreground)_/_var(--media-shadow-opacity))_var(--media-shadow-horizontal-offset)_var(--media-shadow-vertical-offset)_var(--media-shadow-blur-radius)_0px]',
+      )}
       id={data._ref ? `img-${data._ref}` : undefined}
       style={
         {
@@ -145,7 +155,7 @@ export function SanityImage({
                 left: 0;
                 right: 0;
                 bottom: 0;
-                filter: blur(10px);
+                filter: blur(6px);
               }
             `.trim(),
           }}

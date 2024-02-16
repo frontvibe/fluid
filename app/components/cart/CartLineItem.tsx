@@ -161,7 +161,7 @@ function ItemRemoveButton({lineId}: {lineId: CartLineFragment['id']}) {
           'overflow-hidden rounded-[--input-border-corner-radius]',
           'rounded-[--input-border-corner-radius]',
           'border-[rgb(var(--input)_/_var(--input-border-opacity))] [border-width:--input-border-thickness]',
-          '[box-shadow:rgb(var(--foreground)_/_var(--input-shadow-opacity))_var(--input-shadow-horizontal-offset)_var(--input-shadow-vertical-offset)_var(--input-shadow-blur-radius)_0px]',
+          '[box-shadow:rgb(var(--shadow)_/_var(--input-shadow-opacity))_var(--input-shadow-horizontal-offset)_var(--input-shadow-vertical-offset)_var(--input-shadow-blur-radius)_0px]',
         )}
         type="submit"
       >

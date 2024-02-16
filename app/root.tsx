@@ -21,11 +21,9 @@ import {Layout} from '~/components/layout/Layout';
 import type {HydrogenSession} from './lib/hydrogen.session.server';
 
 import favicon from '../public/favicon.ico';
+import {CssVars} from './components/CssVars';
 import {Fonts} from './components/Fonts';
-import {useCardColorsCssVars, useColorsCssVars} from './hooks/useColorsCssVars';
 import {useLocale} from './hooks/useLocale';
-import {useSanityRoot} from './hooks/useSanityRoot';
-import {useSettingsCssVars} from './hooks/useSettingsCssVars';
 import {generateFontsPreloadLinks} from './lib/fonts';
 import {sanityPreviewPayload} from './lib/sanity/sanity.payload.server';
 import {ROOT_QUERY} from './qroq/queries';
@@ -161,34 +159,6 @@ export default function App() {
         <LiveReload nonce={nonce} />
       </body>
     </html>
-  );
-}
-
-export function CssVars() {
-  const settingsCssVars = useSettingsCssVars();
-  const colorsCssVars = useColorsCssVars({});
-  const {data} = useSanityRoot();
-  const cartColorsCssVars = useColorsCssVars({
-    selector: '.cart',
-    settings: {
-      colorScheme: data?.settings?.cartColorScheme,
-    },
-  });
-
-  const cardCartColorsCssVars = useCardColorsCssVars({
-    selector: `.cart [data-type="card"]`,
-    settings: {
-      colorScheme: data?.settings?.cartColorScheme,
-    },
-  });
-
-  return (
-    <>
-      <style dangerouslySetInnerHTML={{__html: colorsCssVars}} />
-      <style dangerouslySetInnerHTML={{__html: settingsCssVars}} />
-      <style dangerouslySetInnerHTML={{__html: cartColorsCssVars}} />
-      <style dangerouslySetInnerHTML={{__html: cardCartColorsCssVars}} />
-    </>
   );
 }
 

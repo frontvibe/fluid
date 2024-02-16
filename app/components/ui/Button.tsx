@@ -10,7 +10,7 @@ const buttonVariants = cva(
   [
     'inline-flex items-center select-none justify-center whitespace-nowrap font-medium ring-offset-background transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
     'rounded-[--button-border-corner-radius]',
-    '[box-shadow:rgb(var(--foreground)_/_var(--button-shadow-opacity))_var(--button-shadow-horizontal-offset)_var(--button-shadow-vertical-offset)_var(--button-shadow-blur-radius)_0px]',
+    '[box-shadow:rgb(var(--shadow)_/_var(--button-shadow-opacity))_var(--button-shadow-horizontal-offset)_var(--button-shadow-vertical-offset)_var(--button-shadow-blur-radius)_0px]',
   ],
   {
     defaultVariants: {

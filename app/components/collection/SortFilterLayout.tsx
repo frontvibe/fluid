@@ -249,7 +249,7 @@ export function DesktopFiltersDrawer({
         'h-[calc(100dvh_-_var(--desktopHeaderHeight)_-2rem)] w-full px-4 transition-all',
         'rounded-[--product-card-border-corner-radius]',
         'border-[rgb(var(--border)_/_var(--product-card-border-opacity))] [border-width:--product-card-border-thickness]',
-        '[box-shadow:rgb(var(--foreground)_/_var(--product-card-shadow-opacity))_var(--product-card-shadow-horizontal-offset)_var(--product-card-shadow-vertical-offset)_var(--product-card-shadow-blur-radius)_0px]',
+        '[box-shadow:rgb(var(--shadow)_/_var(--product-card-shadow-opacity))_var(--product-card-shadow-horizontal-offset)_var(--product-card-shadow-vertical-offset)_var(--product-card-shadow-blur-radius)_0px]',
       )}
     >
       <nav>

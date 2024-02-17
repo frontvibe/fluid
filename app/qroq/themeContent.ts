@@ -47,6 +47,14 @@ export const THEME_CONTENT_FRAGMENT = {
       sortNewest: [getIntValue('sortNewest'), q.string().nullable()],
     })
     .nullable(),
+  error: q('error')
+    .grab({
+      pageNotFound: [getIntValue('pageNotFound'), q.string().nullable()],
+      reloadPage: [getIntValue('reloadPage'), q.string().nullable()],
+      sectionError: [getIntValue('sectionError'), q.string().nullable()],
+      serverError: [getIntValue('serverError'), q.string().nullable()],
+    })
+    .nullable(),
   product: q('product')
     .grab({
       addToCart: [getIntValue('addToCart'), q.string().nullable()],

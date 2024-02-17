@@ -15,7 +15,6 @@ import {cn} from '~/lib/utils';
 import {useDevice} from '../../hooks/useDevice';
 import {Cart} from '../cart/Cart';
 import {IconBag} from '../icons/IconBag';
-import {IconLoader} from '../icons/IconLoader';
 import {iconButtonClass} from '../ui/Button';
 import {
   Drawer,
@@ -106,7 +105,6 @@ function Badge(props: {cart?: CartApiQueryFragment; count: number}) {
         <DrawerHeader className="px-6 py-5 shadow-sm shadow-foreground/10">
           <DrawerTitle className="flex items-center gap-4 font-body font-bold">
             <span>{themeContent?.cart.heading}</span>
-            {cartIsLoading && <IconLoader className="size-4 animate-spin" />}
           </DrawerTitle>
         </DrawerHeader>
         <Cart

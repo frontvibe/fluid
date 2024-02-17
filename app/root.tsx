@@ -3,6 +3,7 @@ import type {CustomerAccessToken} from '@shopify/hydrogen/storefront-api-types';
 import type {LoaderFunctionArgs, MetaFunction} from '@shopify/remix-oxygen';
 
 import {
+  Link,
   Links,
   LiveReload,
   Meta,
@@ -10,6 +11,7 @@ import {
   Scripts,
   ScrollRestoration,
   isRouteErrorResponse,
+  useNavigate,
   useRouteError,
 } from '@remix-run/react';
 import {useNonce} from '@shopify/hydrogen';
@@ -23,7 +25,10 @@ import type {HydrogenSession} from './lib/hydrogen.session.server';
 import favicon from '../public/favicon.ico';
 import {CssVars} from './components/CssVars';
 import {Fonts} from './components/Fonts';
+import {Button} from './components/ui/Button';
 import {useLocale} from './hooks/useLocale';
+import {useLocalePath} from './hooks/useLocalePath';
+import {useSanityThemeContent} from './hooks/useSanityThemeContent';
 import {generateFontsPreloadLinks} from './lib/fonts';
 import {sanityPreviewPayload} from './lib/sanity/sanity.payload.server';
 import {ROOT_QUERY} from './qroq/queries';
@@ -141,7 +146,7 @@ export default function App() {
   const locale = useLocale();
 
   return (
-    <html lang={locale?.language}>
+    <html lang={locale?.language.toLowerCase()}>
       <head>
         <meta charSet="utf-8" />
         <meta content="width=device-width,initial-scale=1" name="viewport" />
@@ -167,29 +172,50 @@ export function ErrorBoundary() {
   const routeError = useRouteError();
   const locale = useLocale();
   const isRouteError = isRouteErrorResponse(routeError);
+  const {themeContent} = useSanityThemeContent();
+  const errorStatus = isRouteError ? routeError.status : 500;
+  const collectionsPath = useLocalePath({path: '/collections'});
+  const navigate = useNavigate();
 
-  let title = 'Error';
+  let title = themeContent?.error?.serverError;
   let pageType = 'page';
 
   if (isRouteError) {
-    title = 'Not found';
-    if (routeError.status === 404) pageType = routeError.data || pageType;
+    title = themeContent?.error?.pageNotFound;
+    if (errorStatus === 404) pageType = routeError.data || pageType;
   }
 
   return (
-    <html lang={locale?.language}>
+    <html lang={locale?.language.toLowerCase()}>
       <head>
         <meta charSet="utf-8" />
         <meta content="width=device-width,initial-scale=1" name="viewport" />
         <Meta />
         <Fonts />
         <Links />
+        <CssVars />
       </head>
-      <body className="flex min-h-screen flex-col">
+      <body className="flex min-h-screen flex-col overflow-x-hidden bg-background text-foreground">
         <Layout>
           <section>
-            <div className="container">
-              <h1>{title}</h1>
+            <div className="container flex flex-col items-center justify-center py-20 text-center">
+              <span>{errorStatus}</span>
+              <h1 className="mt-5">{title}</h1>
+              {errorStatus === 404 ? (
+                <Button asChild className="mt-6" variant="secondary">
+                  <Link to={collectionsPath}>
+                    {themeContent?.cart.continueShopping}
+                  </Link>
+                </Button>
+              ) : (
+                <Button
+                  className="mt-6"
+                  onClick={() => navigate(0)}
+                  variant="secondary"
+                >
+                  {themeContent?.error?.reloadPage}
+                </Button>
+              )}
             </div>
           </section>
         </Layout>

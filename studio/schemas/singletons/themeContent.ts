@@ -9,6 +9,7 @@ export default defineType({
     {name: 'cart'},
     {name: 'product'},
     {name: 'collection'},
+    {name: 'error'},
   ],
   fields: [
     defineField({
@@ -154,6 +155,33 @@ export default defineType({
         defineField({
           title: 'Quantity Selector Label',
           name: 'quantitySelector',
+          type: 'internationalizedArrayString',
+        }),
+      ],
+    }),
+    defineField({
+      name: 'error',
+      type: 'object',
+      group: 'error',
+      fields: [
+        defineField({
+          title: 'Page not found',
+          name: 'pageNotFound',
+          type: 'internationalizedArrayString',
+        }),
+        defineField({
+          title: 'Server error',
+          name: 'serverError',
+          type: 'internationalizedArrayString',
+        }),
+        defineField({
+          title: 'Section error',
+          name: 'sectionError',
+          type: 'internationalizedArrayString',
+        }),
+        defineField({
+          title: 'reloadPage',
+          name: 'reloadPage',
           type: 'internationalizedArrayString',
         }),
       ],

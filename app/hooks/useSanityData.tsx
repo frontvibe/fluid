@@ -5,7 +5,7 @@ import type {
 } from '@sanity/client';
 import type {EncodeDataAttributeCallback} from '@sanity/react-loader';
 
-import {useLoaderData} from '@remix-run/react';
+import {useMatches} from '@remix-run/react';
 import {useEncodeDataAttribute} from '@sanity/react-loader';
 
 import {useQuery} from '~/lib/sanity/sanity.loader';
@@ -24,12 +24,13 @@ type InitialData<U> = U extends {data: infer V} ? V : never;
  * It must be used within a route that has a loader that returns a `sanityPreviewPayload` object.
  */
 export function useSanityData<T extends Initial>(initial: T, routeId?: string) {
-  const loaderData = useLoaderData<{
+  const matches = useMatches();
+  const loaderData = matches.pop() as {
     sanity?: {
       params?: QueryParams;
       query?: string;
     };
-  }>();
+  };
   const rootLoaderData = useRootLoaderData();
   const env = useEnvironmentVariables();
   const studioUrl = env?.SANITY_STUDIO_URL!;
@@ -37,7 +38,7 @@ export function useSanityData<T extends Initial>(initial: T, routeId?: string) {
   const sanity =
     routeId && routeId === 'root' ? rootLoaderData?.sanity : loaderData?.sanity;
 
-  if (sanity === undefined) {
+  if (matches.length > 1 && sanity === undefined) {
     // eslint-disable-next-line no-console
     console.warn(
       'warn - The useSanityData hook must be used within a route that has a loader that returns a sanityPreviewPayload object.',

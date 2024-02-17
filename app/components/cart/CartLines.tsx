@@ -1,6 +1,9 @@
-import type {CartApiQueryFragment} from 'storefrontapi.generated';
+import type {
+  CartApiQueryFragment,
+  CartLineFragment,
+} from 'storefrontapi.generated';
 
-import {flattenConnection} from '@shopify/hydrogen';
+import {flattenConnection, useOptimisticData} from '@shopify/hydrogen';
 import {cx} from 'class-variance-authority';
 
 import type {CartLayouts} from './Cart';
@@ -17,9 +20,25 @@ export function CartLines({
   lines?: CartApiQueryFragment['lines'];
   onClose?: () => void;
 }) {
-  const currentLines = cartLines?.nodes.length
+  let currentLines = cartLines?.nodes.length
     ? flattenConnection(cartLines)
     : [];
+
+  const optimisticData = useOptimisticData<{
+    action?: string;
+    line?: CartLineFragment;
+  }>('cart-line-item');
+
+  if (optimisticData?.action === 'add' && optimisticData.line) {
+    const index = currentLines.findIndex(
+      (line) => line?.merchandise.id === optimisticData.line?.id,
+    );
+
+    if (index === -1) {
+      // If the line doesn't exist, add it to the beginning of the array
+      currentLines = [optimisticData.line, ...currentLines];
+    }
+  }
 
   const className = cx([
     layout === 'page'

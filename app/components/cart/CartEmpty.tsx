@@ -43,6 +43,7 @@ export function CartEmpty({
           exit={{
             opacity: 0,
           }}
+          forceMotion={layout === 'drawer'}
           initial={{
             opacity: layout === 'page' ? 1 : 0,
           }}

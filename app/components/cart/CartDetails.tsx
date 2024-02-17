@@ -1,7 +1,7 @@
 import type {Variants} from 'framer-motion';
 import type {CartApiQueryFragment} from 'storefrontapi.generated';
 
-import {Money} from '@shopify/hydrogen';
+import {Money, useOptimisticData} from '@shopify/hydrogen';
 import {AnimatePresence} from 'framer-motion';
 import {useMemo} from 'react';
 
@@ -26,7 +26,22 @@ export function CartDetails({
   onClose?: () => void;
 }) {
   // @todo: get optimistic cart cost
-  const cartHasItems = !!cart && cart.totalQuantity > 0;
+  let totalQuantity = cart?.totalQuantity;
+  const optimisticData = useOptimisticData<{action?: string; lineId?: string}>(
+    'cart-line-item',
+  );
+
+  if (optimisticData?.action === 'remove' && optimisticData?.lineId) {
+    const nextCartLines = cart?.lines?.nodes.filter(
+      (line) => line.id !== optimisticData.lineId,
+    );
+
+    if (nextCartLines?.length === 0) {
+      totalQuantity = 0;
+    }
+  }
+
+  const cartHasItems = !!cart && totalQuantity && totalQuantity > 0;
 
   const drawerMotionVariants: Variants = {
     hide: {

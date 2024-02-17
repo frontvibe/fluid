@@ -111,6 +111,7 @@ export const PRODUCT_CARD_FRAGMENT = `#graphql
     variants(first: 1) {
       nodes {
         id
+        title
         availableForSale
         image {
           ...ProductCardImageFragment

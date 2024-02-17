@@ -13,6 +13,8 @@ import {useIsHydrated} from '~/hooks/useIsHydrated';
 import {useOptimisticNavigationData} from '~/hooks/useOptimisticNavigationData';
 import {useSelectedVariant} from '~/hooks/useSelectedVariant';
 
+import {useSection} from '../CmsSection';
+
 export type VariantOptionValue = {
   isActive: boolean;
   isAvailable: boolean;
@@ -192,7 +194,8 @@ function Pill(props: {
     value,
   } = props;
   const isHydrated = useIsHydrated();
-  const layoutId = handle! + option.name;
+  const section = useSection();
+  const layoutId = handle! + option.name + section?.id;
 
   const buttonClass = cx([
     'select-none rounded-full py-[.375rem] text-sm font-medium',

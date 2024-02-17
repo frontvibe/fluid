@@ -12,12 +12,6 @@ export function VariantPrice({
   const selectedVariant = useSelectedVariant({variants});
   const price = selectedVariant?.price;
   const compareAtPrice = selectedVariant?.compareAtPrice;
-  const isOutOfStock = !selectedVariant?.availableForSale;
-
-  const isOnSale =
-    selectedVariant?.price?.amount &&
-    selectedVariant?.compareAtPrice?.amount &&
-    selectedVariant?.price?.amount < selectedVariant?.compareAtPrice?.amount;
 
   // Todo => Add sale and sold out badges
   return (

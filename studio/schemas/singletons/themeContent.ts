@@ -143,6 +143,10 @@ export default defineType({
           type: 'internationalizedArrayString',
         }),
         defineField({
+          name: 'sale',
+          type: 'internationalizedArrayString',
+        }),
+        defineField({
           title: 'Sold out',
           name: 'soldOut',
           type: 'internationalizedArrayString',

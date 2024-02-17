@@ -1,7 +1,7 @@
 import type {EncodeDataAttributeCallback} from '@sanity/react-loader';
 import type {InferType} from 'groqd';
 
-import {Suspense, useMemo} from 'react';
+import {Suspense, createContext, useContext, useMemo} from 'react';
 
 import type {FOOTERS_FRAGMENT} from '~/qroq/footers';
 import type {
@@ -78,19 +78,29 @@ function SectionWrapper(props: {
       )}
     </footer>
   ) : (
-    <section
-      className="section-padding relative bg-background text-foreground [content-visibility:auto]"
-      data-section-type={isDev ? sectionType : null}
-      id={`section-${data._key}`}
-    >
-      <style dangerouslySetInnerHTML={{__html: colorsCssVars}} />
-      <style dangerouslySetInnerHTML={{__html: cardColorsCssVars}} />
-      {children}
-      {data.settings?.customCss && (
-        <style dangerouslySetInnerHTML={{__html: customCss}} />
-      )}
-    </section>
+    <SectionContext.Provider value={{id: data._key}}>
+      <section
+        className="section-padding relative bg-background text-foreground [content-visibility:auto]"
+        data-section-type={isDev ? sectionType : null}
+        id={`section-${data._key}`}
+      >
+        <style dangerouslySetInnerHTML={{__html: colorsCssVars}} />
+        <style dangerouslySetInnerHTML={{__html: cardColorsCssVars}} />
+        {children}
+        {data.settings?.customCss && (
+          <style dangerouslySetInnerHTML={{__html: customCss}} />
+        )}
+      </section>
+    </SectionContext.Provider>
   );
+}
+
+export const SectionContext = createContext<{
+  id: null | string;
+} | null>(null);
+
+export function useSection() {
+  return useContext(SectionContext);
 }
 
 function MissingSection(props: {type?: string}) {

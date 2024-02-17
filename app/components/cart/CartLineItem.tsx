@@ -42,14 +42,14 @@ export function CartLineItem({
   onClose?: () => void;
 }) {
   const optimisticData = useOptimisticData<OptimisticData>('cart-line-item');
-  const {id, merchandise, quantity} = line;
+  const {id, merchandise} = line;
   const variantId = parseGid(merchandise?.id)?.id;
   const productPath = useLocalePath({
     path: `/products/${merchandise.product.handle}?variant=${variantId}`,
   });
 
-  if (!line?.id) return null;
-  if (typeof quantity === 'undefined' || !merchandise?.product) return null;
+  const remove =
+    optimisticData?.action === 'remove' && optimisticData?.lineId === id;
 
   const variants: Variants = {
     hidden: {
@@ -67,13 +67,6 @@ export function CartLineItem({
     visible: {
       height: 'auto',
       opacity: 1,
-      transition: {
-        bounce: 0.3,
-        opacity: {
-          delay: t(0.025),
-        },
-        type: 'spring',
-      },
     },
   };
 
@@ -85,14 +78,11 @@ export function CartLineItem({
       animate={
         // Hide the line item if the optimistic data action is remove
         // Do not remove the form from the DOM
-        optimisticData?.action === 'remove' &&
-        optimisticData?.lineId === line?.id
-          ? 'hidden'
-          : 'visible'
+        remove && 'hidden'
       }
       className="overflow-hidden px-6"
       forceMotion={layout === 'drawer'}
-      initial={'visible'}
+      initial="visible"
       key={id}
       variants={variants}
     >

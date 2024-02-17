@@ -1,16 +1,21 @@
 import type {Variants} from 'framer-motion';
-import type {CartApiQueryFragment} from 'storefrontapi.generated';
+import type {
+  CartApiQueryFragment,
+  CartLineFragment,
+} from 'storefrontapi.generated';
 
-import {Money, useOptimisticData} from '@shopify/hydrogen';
+import {CartForm, Money, useOptimisticData} from '@shopify/hydrogen';
 import {AnimatePresence} from 'framer-motion';
 import {useMemo} from 'react';
 
+import {useCartFetchers} from '~/hooks/useCartFetchers';
 import {useSanityThemeContent} from '~/hooks/useSanityThemeContent';
 import {cn} from '~/lib/utils';
 
 import type {CartLayouts} from './Cart';
 
 import {ProgressiveMotionDiv} from '../ProgressiveMotionDiv';
+import {IconLoader} from '../icons/IconLoader';
 import {Button} from '../ui/Button';
 import {Card, CardContent} from '../ui/Card';
 import {CartDiscounts} from './CartDiscounts';
@@ -27,18 +32,21 @@ export function CartDetails({
 }) {
   // @todo: get optimistic cart cost
   let totalQuantity = cart?.totalQuantity;
-  const optimisticData = useOptimisticData<{action?: string; lineId?: string}>(
-    'cart-line-item',
-  );
+  const optimisticData = useOptimisticData<{
+    action?: string;
+    line?: CartLineFragment;
+    lineId?: string;
+  }>('cart-line-item');
 
   if (optimisticData?.action === 'remove' && optimisticData?.lineId) {
     const nextCartLines = cart?.lines?.nodes.filter(
       (line) => line.id !== optimisticData.lineId,
     );
-
     if (nextCartLines?.length === 0) {
       totalQuantity = 0;
     }
+  } else if (optimisticData?.action === 'add') {
+    totalQuantity = optimisticData?.line?.quantity;
   }
 
   const cartHasItems = !!cart && totalQuantity && totalQuantity > 0;
@@ -76,9 +84,9 @@ export function CartDetails({
                 layout === 'page' &&
                   'lg:sticky lg:top-[var(--desktopHeaderHeight)]',
               ])}
-              exit={'hide'}
+              exit="hide"
               forceMotion={layout === 'drawer'}
-              initial={layout === 'drawer' ? 'hide' : 'show'}
+              initial="show"
               variants={
                 layout === 'drawer' ? drawerMotionVariants : pageMotionVariants
               }
@@ -113,13 +121,23 @@ function CartDetailsLayout(props: {
 
 function CartCheckoutActions({checkoutUrl}: {checkoutUrl: string}) {
   const {themeContent} = useSanityThemeContent();
+  const addToCartFetchers = useCartFetchers(CartForm.ACTIONS.LinesAdd);
+  const cartIsLoading = Boolean(addToCartFetchers.length);
   if (!checkoutUrl) return null;
 
   return (
     <div className="mt-2 flex flex-col">
       <Button asChild>
-        <a href={checkoutUrl} target="_self">
-          {themeContent?.cart.proceedToCheckout}
+        <a
+          className={cn(cartIsLoading && 'pointer-events-none cursor-pointer')}
+          href={checkoutUrl}
+          target="_self"
+        >
+          {cartIsLoading ? (
+            <IconLoader className="size-5 animate-spin" />
+          ) : (
+            <span>{themeContent?.cart.proceedToCheckout}</span>
+          )}
         </a>
       </Button>
       {/* @todo: <CartShopPayButton cart={cart} /> */}

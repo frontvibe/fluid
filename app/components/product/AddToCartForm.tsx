@@ -1,7 +1,7 @@
 import type {ProductVariantFragmentFragment} from 'storefrontapi.generated';
 
 import {useNavigation} from '@remix-run/react';
-import {CartForm, ShopPayButton} from '@shopify/hydrogen';
+import {CartForm, OptimisticInput, ShopPayButton} from '@shopify/hydrogen';
 import {useEffect, useState} from 'react';
 import {useIdle, useSessionStorage} from 'react-use';
 
@@ -69,6 +69,28 @@ export function AddToCartForm(props: {
             // to prevent adding the wrong variant to the cart.
             return (
               <div className="grid gap-3">
+                <OptimisticInput
+                  data={{
+                    action: 'add',
+                    line: {
+                      cost: {
+                        amountPerQuantity: selectedVariant.price,
+                        totalAmount: selectedVariant.price,
+                      },
+                      id: selectedVariant.id,
+                      merchandise: {
+                        image: selectedVariant.image,
+                        product: {
+                          handle: selectedVariant.product?.handle,
+                          title: selectedVariant.product?.title,
+                        },
+                        selectedOptions: selectedVariant.selectedOptions,
+                      },
+                      quantity,
+                    },
+                  }}
+                  id="cart-line-item"
+                />
                 <Button
                   className={cn([
                     isOutOfStock && 'opacity-50',

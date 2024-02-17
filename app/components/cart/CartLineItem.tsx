@@ -25,6 +25,7 @@ import {IconButton} from '../ui/Button';
 
 type OptimisticData = {
   action?: string;
+  lineId?: string;
   quantity?: number;
 };
 
@@ -40,7 +41,7 @@ export function CartLineItem({
   line: CartLineFragment;
   onClose?: () => void;
 }) {
-  const optimisticData = useOptimisticData<OptimisticData>(line?.id);
+  const optimisticData = useOptimisticData<OptimisticData>('cart-line-item');
   const {id, merchandise, quantity} = line;
   const variantId = parseGid(merchandise?.id)?.id;
   const productPath = useLocalePath({
@@ -84,11 +85,14 @@ export function CartLineItem({
       animate={
         // Hide the line item if the optimistic data action is remove
         // Do not remove the form from the DOM
-        optimisticData?.action === 'remove' ? 'hidden' : 'visible'
+        optimisticData?.action === 'remove' &&
+        optimisticData?.lineId === line?.id
+          ? 'hidden'
+          : 'visible'
       }
       className="overflow-hidden px-6"
       forceMotion={layout === 'drawer'}
-      initial={layout === 'page' ? 'visible' : 'hidden'}
+      initial={'visible'}
       key={id}
       variants={variants}
     >
@@ -170,8 +174,7 @@ function ItemRemoveButton({lineId}: {lineId: CartLineFragment['id']}) {
         <span className="sr-only">{themeContent?.cart.remove}</span>
         <IconRemove aria-hidden="true" />
       </IconButton>
-
-      <OptimisticInput data={{action: 'remove'}} id={lineId} />
+      <OptimisticInput data={{action: 'remove', lineId}} id="cart-line-item" />
     </CartForm>
   );
 }

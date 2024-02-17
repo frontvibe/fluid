@@ -54,6 +54,7 @@ export const THEME_CONTENT_FRAGMENT = {
         getIntValue('quantitySelector'),
         q.boolean().nullable(),
       ],
+      sale: [getIntValue('sale'), q.string().nullable()],
       soldOut: [getIntValue('soldOut'), q.string().nullable()],
     })
     .nullable(),

@@ -135,13 +135,15 @@ export const ANNOUCEMENT_BAR_ARRAY_FRAGMENT = q(
 */
 export const SETTINGS_FRAGMENT = {
   badgesCornerRadius: q.number().nullable(),
-  badgesPosition: q.string().nullable(),
+  badgesPosition: z
+    .enum(['bottom_left', 'bottom_right', 'top_left', 'top_right'])
+    .nullable(),
   badgesSaleColorScheme: q('badgesSaleColorScheme')
-    .grab(COLOR_FRAGMENT)
-    .nullable(),
+    .deref()
+    .grab(COLOR_SCHEME_FRAGMENT),
   badgesSoldOutColorScheme: q('badgesSoldOutColorScheme')
-    .grab(COLOR_FRAGMENT)
-    .nullable(),
+    .deref()
+    .grab(COLOR_SCHEME_FRAGMENT),
   blogCards: q.object({
     border: q.object(BORDER_FRAGMENT).nullable(),
     shadow: q.object(SHADOW_FRAGMENT).nullable(),

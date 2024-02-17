@@ -24,6 +24,18 @@ export function CssVars() {
       colorScheme: data?.settings?.cartColorScheme,
     },
   });
+  const saleBadgeColorsCssVars = useColorsCssVars({
+    selector: `[data-type="sale-badge"]`,
+    settings: {
+      colorScheme: data?.settings?.badgesSaleColorScheme,
+    },
+  });
+  const soldOutBadgeColorsCssVars = useColorsCssVars({
+    selector: `[data-type="sold-out-badge"]`,
+    settings: {
+      colorScheme: data?.settings?.badgesSoldOutColorScheme,
+    },
+  });
 
   return (
     <>
@@ -32,6 +44,8 @@ export function CssVars() {
       <style dangerouslySetInnerHTML={{__html: cardsColorsCssVars}} />
       <style dangerouslySetInnerHTML={{__html: cartColorsCssVars}} />
       <style dangerouslySetInnerHTML={{__html: cartCardsColorsCssVars}} />
+      <style dangerouslySetInnerHTML={{__html: saleBadgeColorsCssVars}} />
+      <style dangerouslySetInnerHTML={{__html: soldOutBadgeColorsCssVars}} />
     </>
   );
 }

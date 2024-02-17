@@ -10,6 +10,7 @@ import {useSanityRoot} from '~/hooks/useSanityRoot';
 import {cn} from '~/lib/utils';
 
 import {ShopifyImage} from '../ShopifyImage';
+import {ProductBadges} from '../blocks/PriceBlock';
 import {Card, CardContent, CardMedia} from '../ui/Card';
 
 export function ProductCard(props: {
@@ -27,9 +28,10 @@ export function ProductCard(props: {
   const {data} = vercelStegaCleanAll(useSanityRoot());
   const style = data?.settings?.productCards.style;
   const textAlignment = data?.settings?.productCards.textAlignment || 'left';
-  const firstVariant = product?.variants?.nodes.length
-    ? flattenConnection(product?.variants)[0]
+  const variants = product?.variants?.nodes.length
+    ? flattenConnection(product?.variants)
     : null;
+  const firstVariant = variants?.[0];
   const sizes = cx([
     '(min-width: 1024px)',
     columns?.desktop ? `${100 / columns.desktop}vw,` : '33vw,',
@@ -73,6 +75,7 @@ export function ProductCard(props: {
             {firstVariant?.image && (
               <CardMedia
                 className={cn(
+                  'relative',
                   style === 'standard' &&
                     'rounded-[--product-card-border-corner-radius]',
                   style === 'standard' &&
@@ -90,6 +93,10 @@ export function ProductCard(props: {
                   showBorder={false}
                   showShadow={false}
                   sizes={sizes}
+                />
+                <ProductBadges
+                  layout="card"
+                  variants={product?.variants.nodes}
                 />
               </CardMedia>
             )}

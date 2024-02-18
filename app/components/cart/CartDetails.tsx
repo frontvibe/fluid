@@ -4,7 +4,7 @@ import type {
   CartLineFragment,
 } from 'storefrontapi.generated';
 
-import {CartForm, Money, useOptimisticData} from '@shopify/hydrogen';
+import {CartForm, useOptimisticData} from '@shopify/hydrogen';
 import {AnimatePresence} from 'framer-motion';
 import {useMemo} from 'react';
 
@@ -15,6 +15,7 @@ import {cn} from '~/lib/utils';
 import type {CartLayouts} from './Cart';
 
 import {ProgressiveMotionDiv} from '../ProgressiveMotionDiv';
+import {ShopifyMoney} from '../ShopifyMoney';
 import {IconLoader} from '../icons/IconLoader';
 import {Button} from '../ui/Button';
 import {Card, CardContent} from '../ui/Card';
@@ -171,7 +172,7 @@ function CartSummary({
             <span>{themeContent?.cart.subtotal}</span>
             <span>
               {cost?.subtotalAmount?.amount ? (
-                <Money className="tabular-nums" data={cost?.subtotalAmount} />
+                <ShopifyMoney data={cost?.subtotalAmount} />
               ) : (
                 '-'
               )}

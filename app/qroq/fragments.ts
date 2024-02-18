@@ -191,7 +191,7 @@ export const SETTINGS_FRAGMENT = {
     textAlignment: z.enum(['left', 'center', 'right']).nullable(),
   }),
   showCurrencyCodes: q.boolean().nullable(),
-  showTrailingZeros: q.string().nullable(),
+  showTrailingZeros: q.array(q.string()).nullable(),
   siteName: q.string().nullable(),
   snapchat: q.string().nullable(),
   socialSharingImagePreview: q('socialSharingImagePreview')

@@ -1,8 +1,8 @@
 import type {ProductVariantFragmentFragment} from 'storefrontapi.generated';
 
-import {Money} from '@shopify/hydrogen';
-
 import {useSelectedVariant} from '~/hooks/useSelectedVariant';
+
+import {ShopifyMoney} from '../ShopifyMoney';
 
 export function VariantPrice({
   variants,
@@ -13,16 +13,15 @@ export function VariantPrice({
   const price = selectedVariant?.price;
   const compareAtPrice = selectedVariant?.compareAtPrice;
 
-  // Todo => Add sale and sold out badges
   return (
     <>
       {compareAtPrice && (
-        <Money
-          className="tabular-nums text-muted-foreground line-through"
+        <ShopifyMoney
+          className=" text-muted-foreground line-through"
           data={compareAtPrice}
         />
       )}
-      {price && <Money className="text-lg tabular-nums" data={price} />}
+      {price && <ShopifyMoney className="text-lg" data={price} />}
     </>
   );
 }

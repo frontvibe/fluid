@@ -102,7 +102,7 @@ function ProductInformationGrid({
   const desktopMediaPosition = data?.desktopMediaPosition;
   const desktopMediaWidth = data?.desktopMediaWidth;
   return (
-    <div className="container">
+    <div className="lg:container">
       <div className={cn('grid gap-10 lg:grid-cols-12')}>
         <div
           className={cn(

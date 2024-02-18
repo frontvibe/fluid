@@ -90,7 +90,7 @@ function MobileCarousel({
 
   if (!isActive) {
     return (
-      <div className="lg:hidden">
+      <div className="container lg:hidden">
         <MainMedia aspectRatio={aspectRatio} media={medias[0]} />
       </div>
     );
@@ -105,7 +105,7 @@ function MobileCarousel({
       style={{'--slidesPerView': 1} as React.CSSProperties}
     >
       <div className="relative">
-        <CarouselContent className="px-3" overflow>
+        <CarouselContent className="px-8 md:px-12">
           {medias.map((media, index) => {
             return (
               <CarouselItem className="pl-3 last:pr-3" key={media.id}>

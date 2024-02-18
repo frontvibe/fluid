@@ -70,7 +70,7 @@ export function ProductDetails({
   );
 
   return (
-    <div className="space-y-4">
+    <div className="container space-y-4 lg:max-w-none lg:px-0">
       {data.richtext && (
         <PortableText
           components={Components as PortableTextComponents}

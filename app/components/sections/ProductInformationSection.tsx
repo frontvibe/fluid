@@ -2,6 +2,7 @@ import type {TypeFromSelection} from 'groqd';
 import type {ProductVariantFragmentFragment} from 'storefrontapi.generated';
 
 import {Await, useLoaderData} from '@remix-run/react';
+import {vercelStegaCleanAll} from '@sanity/client/stega';
 import {flattenConnection} from '@shopify/hydrogen-react';
 import {Suspense, createContext, useContext} from 'react';
 
@@ -9,7 +10,7 @@ import type {SectionDefaultProps} from '~/lib/type';
 import type {PRODUCT_INFORMATION_SECTION_FRAGMENT} from '~/qroq/sections';
 import type {loader} from '~/routes/($locale).products.$productHandle';
 
-import {getAspectRatioData} from '~/lib/utils';
+import {cn, getAspectRatioData} from '~/lib/utils';
 
 import {Skeleton} from '../Skeleton';
 import {MediaGallery} from '../product/MediaGallery';
@@ -39,20 +40,22 @@ export function ProductInformationSection(
         <Suspense
           fallback={
             <Skeleton>
-              <ProductInformationGrid>
-                <MediaGallery aspectRatio={aspectRatio} />
-                <ProductDetails data={data} />
-              </ProductInformationGrid>
+              <ProductInformationGrid
+                data={vercelStegaCleanAll(data)}
+                mediaGallery={<MediaGallery aspectRatio={aspectRatio} />}
+                productDetails={<ProductDetails data={data} />}
+              />
             </Skeleton>
           }
         >
           <Await
             errorElement={
               <Skeleton isError>
-                <ProductInformationGrid>
-                  <MediaGallery aspectRatio={aspectRatio} />
-                  <ProductDetails data={data} />
-                </ProductInformationGrid>
+                <ProductInformationGrid
+                  data={vercelStegaCleanAll(data)}
+                  mediaGallery={<MediaGallery aspectRatio={aspectRatio} />}
+                  productDetails={<ProductDetails data={data} />}
+                />
               </Skeleton>
             }
             resolve={variantsPromise}
@@ -64,10 +67,11 @@ export function ProductInformationSection(
 
               return (
                 <ProductVariantsContext.Provider value={{variants}}>
-                  <ProductInformationGrid>
-                    <MediaGallery aspectRatio={aspectRatio} />
-                    <ProductDetails data={data} />
-                  </ProductInformationGrid>
+                  <ProductInformationGrid
+                    data={vercelStegaCleanAll(data)}
+                    mediaGallery={<MediaGallery aspectRatio={aspectRatio} />}
+                    productDetails={<ProductDetails data={data} />}
+                  />
                 </ProductVariantsContext.Provider>
               );
             }}
@@ -78,17 +82,48 @@ export function ProductInformationSection(
   }
 
   return (
-    <ProductInformationGrid>
-      <MediaGallery aspectRatio={aspectRatio} />
-      <ProductDetails data={data} />
-    </ProductInformationGrid>
+    <ProductInformationGrid
+      data={vercelStegaCleanAll(data)}
+      mediaGallery={<MediaGallery aspectRatio={aspectRatio} />}
+      productDetails={<ProductDetails data={data} />}
+    />
   );
 }
 
-function ProductInformationGrid({children}: {children: React.ReactNode}) {
+function ProductInformationGrid({
+  data,
+  mediaGallery,
+  productDetails,
+}: {
+  data: ProductInformationSectionProps;
+  mediaGallery: React.ReactNode;
+  productDetails: React.ReactNode;
+}) {
+  const desktopMediaPosition = data?.desktopMediaPosition;
+  const desktopMediaWidth = data?.desktopMediaWidth;
   return (
     <div className="container">
-      <div className="grid gap-10 lg:grid-cols-2">{children}</div>
+      <div className={cn('grid gap-10 lg:grid-cols-12')}>
+        <div
+          className={cn(
+            'lg:col-span-6',
+            desktopMediaPosition === 'right' && 'lg:order-last',
+            desktopMediaWidth === 'small' && 'lg:col-span-5',
+            desktopMediaWidth === 'large' && 'lg:col-span-7',
+          )}
+        >
+          {mediaGallery}
+        </div>
+        <div
+          className={cn(
+            'lg:col-span-6',
+            desktopMediaWidth === 'small' && 'lg:col-span-7',
+            desktopMediaWidth === 'large' && 'lg:col-span-5',
+          )}
+        >
+          {productDetails}
+        </div>
+      </div>
     </div>
   );
 }

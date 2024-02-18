@@ -179,12 +179,12 @@ Carousel.displayName = 'Carousel';
 
 const CarouselContent = forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({className, ...props}, ref) => {
+  React.HTMLAttributes<HTMLDivElement> & {overflow?: boolean}
+>(({className, overflow = false, ...props}, ref) => {
   const {carouselRef, orientation} = useCarousel();
 
   return (
-    <div className="overflow-hidden" ref={carouselRef}>
+    <div className={cn(!overflow && 'overflow-hidden')} ref={carouselRef}>
       <div
         className={cn(
           'flex select-none',
@@ -318,4 +318,5 @@ export {
   CarouselNext,
   CarouselPagination,
   CarouselPrevious,
+  useCarousel,
 };

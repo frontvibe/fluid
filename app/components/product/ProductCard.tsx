@@ -2,7 +2,7 @@ import type {ProductCardFragment} from 'storefrontapi.generated';
 
 import {Link} from '@remix-run/react';
 import {vercelStegaCleanAll} from '@sanity/client/stega';
-import {Money, flattenConnection} from '@shopify/hydrogen';
+import {flattenConnection} from '@shopify/hydrogen';
 import {cx} from 'class-variance-authority';
 
 import {useLocalePath} from '~/hooks/useLocalePath';
@@ -10,6 +10,7 @@ import {useSanityRoot} from '~/hooks/useSanityRoot';
 import {cn} from '~/lib/utils';
 
 import {ShopifyImage} from '../ShopifyImage';
+import {ShopifyMoney} from '../ShopifyMoney';
 import {ProductBadges} from '../blocks/PriceBlock';
 import {Card, CardContent, CardMedia} from '../ui/Card';
 
@@ -106,12 +107,12 @@ export function ProductCard(props: {
               </div>
               <div className={priceClass}>
                 {firstVariant.compareAtPrice && (
-                  <Money
+                  <ShopifyMoney
                     className="text-xs text-muted-foreground line-through md:text-sm"
                     data={firstVariant.compareAtPrice}
                   />
                 )}
-                <Money
+                <ShopifyMoney
                   className="text-sm md:text-base"
                   data={firstVariant.price}
                 />

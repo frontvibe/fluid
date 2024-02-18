@@ -20,6 +20,7 @@ import type {CartLayouts} from './Cart';
 import {ProgressiveMotionDiv} from '../ProgressiveMotionDiv';
 import {QuantitySelector} from '../QuantitySelector';
 import {ShopifyImage} from '../ShopifyImage';
+import {ShopifyMoney} from '../ShopifyMoney';
 import {IconRemove} from '../icons/IconRemove';
 import {IconButton} from '../ui/Button';
 
@@ -189,14 +190,7 @@ function CartLinePrice({
     return null;
   }
 
-  return (
-    <Money
-      className="tabular-nums"
-      withoutTrailingZeros
-      {...passthroughProps}
-      data={moneyV2}
-    />
-  );
+  return <ShopifyMoney {...passthroughProps} data={moneyV2} />;
 }
 
 function UpdateCartForm({

@@ -106,7 +106,7 @@ function MobileCarousel({
     >
       <div className="relative">
         <CarouselContent className="px-3" overflow>
-          {medias.map((media) => {
+          {medias.map((media, index) => {
             return (
               <CarouselItem className="pl-3 last:pr-3" key={media.id}>
                 {media.__typename === 'MediaImage' && media.image && (
@@ -115,7 +115,7 @@ function MobileCarousel({
                     className={cn('h-auto w-full', aspectRatio?.className)}
                     data={media.image}
                     decoding="sync"
-                    fetchpriority="high"
+                    fetchpriority={index === 0 ? 'high' : 'low'}
                     loading="eager"
                     sizes="100vw"
                   />

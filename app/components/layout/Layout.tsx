@@ -40,7 +40,7 @@ export function Layout({children = null}: LayoutProps) {
         <NavigationProgressBar />
         <AnnouncementBar />
         <Header />
-        <main className="flex grow flex-col gap-y-[calc(var(--space-between-template-sections)*.75)] sm:gap-y-[--space-between-template-sections]">
+        <main className="flex min-h-[90vh] grow flex-col gap-y-[calc(var(--space-between-template-sections)*.75)] sm:gap-y-[--space-between-template-sections]">
           {children}
         </main>
         <Footer />

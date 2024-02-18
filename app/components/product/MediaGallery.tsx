@@ -11,6 +11,7 @@ import React, {useState} from 'react';
 
 import type {loader} from '~/routes/($locale).products.$productHandle';
 
+import {useDevice} from '~/hooks/useDevice';
 import {type AspectRatioData, cn} from '~/lib/utils';
 
 import {ShopifyImage} from '../ShopifyImage';
@@ -86,6 +87,7 @@ function MobileCarousel({
   aspectRatio?: AspectRatioData;
   medias: Media[];
 }) {
+  const device = useDevice();
   const isActive = medias.length > 1;
 
   if (!isActive) {
@@ -100,7 +102,7 @@ function MobileCarousel({
     <Carousel
       className="lg:hidden"
       opts={{
-        active: isActive,
+        active: isActive && device !== 'desktop',
       }}
       style={{'--slidesPerView': 1} as React.CSSProperties}
     >
@@ -155,12 +157,15 @@ function ThumbnailCarousel({
   selectedImage: Media;
   setActiveMediaId: React.Dispatch<React.SetStateAction<null | string>>;
 }) {
+  const device = useDevice();
+
   if (medias.length <= 1) return null;
 
   return (
     <div className="mt-6 hidden lg:block">
       <Carousel
         opts={{
+          active: device === 'desktop',
           container: '.thumbnails-container',
         }}
         style={{'--slidesPerView': 5} as React.CSSProperties}

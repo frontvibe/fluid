@@ -116,7 +116,7 @@ function MobileCarousel({
                     data={media.image}
                     decoding={index === 0 ? 'sync' : 'async'}
                     fetchpriority={index === 0 ? 'high' : 'low'}
-                    loading="eager"
+                    loading={index === 0 ? 'eager' : 'lazy'}
                     sizes="100vw"
                   />
                 )}

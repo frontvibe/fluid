@@ -168,7 +168,7 @@ function ThumbnailCarousel({
         <div className="flex items-center justify-center gap-2">
           <CarouselPrevious className="relative left-0 top-0 aspect-square size-11 translate-x-0 translate-y-0" />
           <div className="thumbnails-container relative">
-            <CarouselContent className="px-3">
+            <CarouselContent className="px-3 py-1">
               {medias.map((media) => {
                 return (
                   <CarouselItem
@@ -179,6 +179,7 @@ function ThumbnailCarousel({
                       <button
                         className={cn(
                           'overflow-hidden rounded-[--media-border-corner-radius] border-2 border-foreground border-opacity-0 transition-opacity hover:border-opacity-100',
+                          'ring-offset-background transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
                           media.id === selectedImage.id && 'border-opacity-100',
                         )}
                         onClick={() => setActiveMediaId(media.id)}

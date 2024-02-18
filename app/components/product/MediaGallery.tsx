@@ -114,7 +114,7 @@ function MobileCarousel({
                     aspectRatio={aspectRatio?.value}
                     className={cn('h-auto w-full', aspectRatio?.className)}
                     data={media.image}
-                    decoding="sync"
+                    decoding={index === 0 ? 'sync' : 'async'}
                     fetchpriority={index === 0 ? 'high' : 'low'}
                     loading="eager"
                     sizes="100vw"
@@ -187,8 +187,6 @@ function ThumbnailCarousel({
                           aspectRatio="1/1"
                           className="aspect-square w-24 object-cover"
                           data={media.image}
-                          decoding="sync"
-                          fetchpriority="high"
                           loading="eager"
                           showBorder={false}
                           showShadow={false}

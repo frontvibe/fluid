@@ -12,6 +12,44 @@ export default defineField({
       type: 'internationalizedArrayProductRichtext',
     }),
     defineField({
+      type: 'string',
+      name: 'desktopMediaWidth',
+      options: {
+        list: [
+          {
+            title: 'Small',
+            value: 'small',
+          },
+          {
+            title: 'Medium',
+            value: 'medium',
+          },
+          {
+            title: 'Large',
+            value: 'large',
+          },
+        ],
+        layout: 'radio',
+      },
+    }),
+    defineField({
+      type: 'string',
+      name: 'desktopMediaPosition',
+      options: {
+        list: [
+          {
+            title: 'Left',
+            value: 'left',
+          },
+          {
+            title: 'Right',
+            value: 'right',
+          },
+        ],
+        layout: 'radio',
+      },
+    }),
+    defineField({
       type: 'aspectRatios',
       name: 'mediaAspectRatio',
     }),

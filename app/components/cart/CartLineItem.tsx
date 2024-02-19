@@ -5,12 +5,12 @@ import type {CartLineFragment} from 'storefrontapi.generated';
 import {Link} from '@remix-run/react';
 import {
   CartForm,
-  Money,
   OptimisticInput,
   parseGid,
   useOptimisticData,
 } from '@shopify/hydrogen';
 
+import {useCartFetchers} from '~/hooks/useCartFetchers';
 import {useLocalePath} from '~/hooks/useLocalePath';
 import {useSanityThemeContent} from '~/hooks/useSanityThemeContent';
 import {cn} from '~/lib/utils';
@@ -48,6 +48,8 @@ export function CartLineItem({
   const productPath = useLocalePath({
     path: `/products/${merchandise.product.handle}?variant=${variantId}`,
   });
+  const addToCartFetchers = useCartFetchers(CartForm.ACTIONS.LinesAdd);
+  const cartIsLoading = Boolean(addToCartFetchers.length);
 
   const remove =
     optimisticData?.action === 'remove' && optimisticData?.lineId === id;
@@ -127,9 +129,9 @@ export function CartLineItem({
 
             <div className="flex items-center gap-2">
               <div className="flex justify-start">
-                <CartLineQuantityAdjust line={line} />
+                <CartLineQuantityAdjust line={line} loading={cartIsLoading} />
               </div>
-              <ItemRemoveButton lineId={id} />
+              <ItemRemoveButton lineId={id} loading={cartIsLoading} />
             </div>
           </div>
           <span>
@@ -141,7 +143,13 @@ export function CartLineItem({
   );
 }
 
-function ItemRemoveButton({lineId}: {lineId: CartLineFragment['id']}) {
+function ItemRemoveButton({
+  lineId,
+  loading,
+}: {
+  lineId: CartLineFragment['id'];
+  loading: boolean;
+}) {
   const cartPath = useLocalePath({path: '/cart'});
   const {themeContent} = useSanityThemeContent();
 
@@ -160,6 +168,7 @@ function ItemRemoveButton({lineId}: {lineId: CartLineFragment['id']}) {
           'border-[rgb(var(--input)_/_var(--input-border-opacity))] [border-width:--input-border-thickness]',
           '[box-shadow:rgb(var(--shadow)_/_var(--input-shadow-opacity))_var(--input-shadow-horizontal-offset)_var(--input-shadow-vertical-offset)_var(--input-shadow-blur-radius)_0px]',
         )}
+        disabled={loading}
         type="submit"
       >
         <span className="sr-only">{themeContent?.cart.remove}</span>
@@ -215,7 +224,13 @@ function UpdateCartForm({
   );
 }
 
-function CartLineQuantityAdjust({line}: {line: CartLineFragment}) {
+function CartLineQuantityAdjust({
+  line,
+  loading,
+}: {
+  line: CartLineFragment;
+  loading: boolean;
+}) {
   const optimisticId = line?.id;
   const optimisticData = useOptimisticData<OptimisticData>(optimisticId);
   const {themeContent} = useSanityThemeContent();
@@ -236,7 +251,7 @@ function CartLineQuantityAdjust({line}: {line: CartLineFragment}) {
       <QuantitySelector>
         <UpdateCartForm lines={[{id: lineId, quantity: prevQuantity}]}>
           <QuantitySelector.Button
-            disabled={optimisticQuantity <= 1}
+            disabled={optimisticQuantity <= 1 || loading}
             symbol="decrease"
             value={prevQuantity}
           >
@@ -248,7 +263,11 @@ function CartLineQuantityAdjust({line}: {line: CartLineFragment}) {
         </UpdateCartForm>
         <QuantitySelector.Value>{optimisticQuantity}</QuantitySelector.Value>
         <UpdateCartForm lines={[{id: lineId, quantity: nextQuantity}]}>
-          <QuantitySelector.Button symbol="increase" value={nextQuantity}>
+          <QuantitySelector.Button
+            disabled={loading}
+            symbol="increase"
+            value={nextQuantity}
+          >
             <OptimisticInput
               data={{quantity: nextQuantity}}
               id={optimisticId}

@@ -1,10 +1,8 @@
+import type {Cart as CartType} from '@shopify/hydrogen/storefront-api-types';
 import type {Variants} from 'framer-motion';
-import type {
-  CartApiQueryFragment,
-  CartLineFragment,
-} from 'storefrontapi.generated';
+import type {CartApiQueryFragment} from 'storefrontapi.generated';
 
-import {CartForm, useOptimisticData} from '@shopify/hydrogen';
+import {CartForm} from '@shopify/hydrogen';
 import {AnimatePresence} from 'framer-motion';
 import {useMemo} from 'react';
 
@@ -23,34 +21,24 @@ import {CartDiscounts} from './CartDiscounts';
 import {CartLines} from './CartLines';
 
 export function CartDetails({
-  cart,
+  checkoutUrl,
+  cost,
+  discountCodes,
   layout,
+  lines,
   onClose,
+  totalQuantity,
 }: {
-  cart?: CartApiQueryFragment;
+  checkoutUrl?: string;
+  cost?: CartApiQueryFragment['cost'];
+  discountCodes: CartType['discountCodes'];
   layout: CartLayouts;
+  lines?: CartApiQueryFragment['lines'];
   onClose?: () => void;
+  totalQuantity?: number;
 }) {
   // @todo: get optimistic cart cost
-  let totalQuantity = cart?.totalQuantity;
-  const optimisticData = useOptimisticData<{
-    action?: string;
-    line?: CartLineFragment;
-    lineId?: string;
-  }>('cart-line-item');
-
-  if (optimisticData?.action === 'remove' && optimisticData?.lineId) {
-    const nextCartLines = cart?.lines?.nodes.filter(
-      (line) => line.id !== optimisticData.lineId,
-    );
-    if (nextCartLines?.length === 0) {
-      totalQuantity = 0;
-    }
-  } else if (optimisticData?.action === 'add') {
-    totalQuantity = optimisticData?.line?.quantity;
-  }
-
-  const cartHasItems = !!cart && totalQuantity && totalQuantity > 0;
+  const cartHasItems = totalQuantity && totalQuantity > 0;
 
   const drawerMotionVariants: Variants = {
     hide: {
@@ -75,7 +63,7 @@ export function CartDetails({
 
   return (
     <CartDetailsLayout layout={layout}>
-      <CartLines layout={layout} lines={cart?.lines} onClose={onClose} />
+      <CartLines layout={layout} lines={lines} onClose={onClose} />
       <div>
         <AnimatePresence>
           {cartHasItems && (
@@ -92,12 +80,9 @@ export function CartDetails({
                 layout === 'drawer' ? drawerMotionVariants : pageMotionVariants
               }
             >
-              <CartSummary cost={cart.cost} layout={layout}>
-                <CartDiscounts
-                  discountCodes={cart.discountCodes}
-                  layout={layout}
-                />
-                <CartCheckoutActions checkoutUrl={cart.checkoutUrl} />
+              <CartSummary cost={cost} layout={layout}>
+                <CartDiscounts discountCodes={discountCodes} layout={layout} />
+                <CartCheckoutActions checkoutUrl={checkoutUrl} />
               </CartSummary>
             </ProgressiveMotionDiv>
           )}
@@ -120,17 +105,19 @@ function CartDetailsLayout(props: {
   );
 }
 
-function CartCheckoutActions({checkoutUrl}: {checkoutUrl: string}) {
+function CartCheckoutActions({checkoutUrl}: {checkoutUrl?: string}) {
   const {themeContent} = useSanityThemeContent();
   const addToCartFetchers = useCartFetchers(CartForm.ACTIONS.LinesAdd);
   const cartIsLoading = Boolean(addToCartFetchers.length);
-  if (!checkoutUrl) return null;
 
   return (
     <div className="mt-2 flex flex-col">
       <Button asChild>
         <a
-          className={cn(cartIsLoading && 'pointer-events-none cursor-pointer')}
+          className={cn(
+            (cartIsLoading || !checkoutUrl) &&
+              'pointer-events-none cursor-pointer',
+          )}
           href={checkoutUrl}
           target="_self"
         >
@@ -152,7 +139,7 @@ function CartSummary({
   layout,
 }: {
   children?: React.ReactNode;
-  cost: CartApiQueryFragment['cost'];
+  cost?: CartApiQueryFragment['cost'];
   layout: CartLayouts;
 }) {
   const {themeContent} = useSanityThemeContent();
@@ -170,13 +157,12 @@ function CartSummary({
         <dl className="grid">
           <div className="flex items-center justify-between font-medium">
             <span>{themeContent?.cart.subtotal}</span>
-            <span>
-              {cost?.subtotalAmount?.amount ? (
-                <ShopifyMoney data={cost?.subtotalAmount} />
-              ) : (
-                '-'
+            {cost?.subtotalAmount &&
+              parseFloat(cost.subtotalAmount.amount) > 0 && (
+                <span>
+                  <ShopifyMoney data={cost?.subtotalAmount} />
+                </span>
               )}
-            </span>
           </div>
         </dl>
         {children}

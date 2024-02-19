@@ -2,6 +2,7 @@ import type {Cart as CartType} from '@shopify/hydrogen/storefront-api-types';
 
 import {CartForm} from '@shopify/hydrogen';
 
+import {useCartFetchers} from '~/hooks/useCartFetchers';
 import {useLocalePath} from '~/hooks/useLocalePath';
 import {useSanityThemeContent} from '~/hooks/useSanityThemeContent';
 import {cn} from '~/lib/utils';
@@ -23,6 +24,8 @@ export function CartDiscounts({
   layout: 'drawer' | 'page';
 }) {
   const {themeContent} = useSanityThemeContent();
+  const addToCartFetchers = useCartFetchers(CartForm.ACTIONS.LinesAdd);
+  const cartIsLoading = Boolean(addToCartFetchers.length);
   const codes: string[] =
     discountCodes
       ?.filter((discount) => discount.applicable)
@@ -36,7 +39,10 @@ export function CartDiscounts({
           <span>{themeContent?.cart.discounts}</span>
           <div className="flex items-center justify-between">
             <UpdateDiscountForm>
-              <button className="[&>*]:pointer-events-none">
+              <button
+                className="[&>*]:pointer-events-none"
+                disabled={cartIsLoading}
+              >
                 <IconRemove
                   aria-hidden="true"
                   style={{height: 18, marginRight: 4}}
@@ -64,6 +70,7 @@ export function CartDiscounts({
           />
           <Button
             className={cn(layout === 'page' && 'w-full lg:w-auto')}
+            disabled={cartIsLoading}
             variant="outline"
           >
             {themeContent?.cart.applyDiscount}

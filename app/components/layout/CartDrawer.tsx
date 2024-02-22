@@ -8,9 +8,9 @@ import {Suspense, useCallback, useEffect, useMemo, useState} from 'react';
 import {useCartFetchers} from '~/hooks/useCartFetchers';
 import {useIsHydrated} from '~/hooks/useIsHydrated';
 import {useLocalePath} from '~/hooks/useLocalePath';
-import {useRootLoaderData} from '~/hooks/useRootLoaderData';
 import {useSanityThemeContent} from '~/hooks/useSanityThemeContent';
 import {cn} from '~/lib/utils';
+import {useRootLoaderData} from '~/root';
 
 import {useDevice} from '../../hooks/useDevice';
 import {Cart} from '../cart/Cart';

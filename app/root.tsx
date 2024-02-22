@@ -1,6 +1,10 @@
 import type {ShouldRevalidateFunction} from '@remix-run/react';
 import type {CustomerAccessToken} from '@shopify/hydrogen/storefront-api-types';
-import type {LoaderFunctionArgs, MetaFunction} from '@shopify/remix-oxygen';
+import type {
+  LoaderFunctionArgs,
+  MetaFunction,
+  SerializeFrom,
+} from '@shopify/remix-oxygen';
 
 import {
   Link,
@@ -11,6 +15,7 @@ import {
   Scripts,
   ScrollRestoration,
   isRouteErrorResponse,
+  useMatches,
   useNavigate,
   useRouteError,
 } from '@remix-run/react';
@@ -26,7 +31,6 @@ import favicon from '../public/favicon.ico';
 import {CssVars} from './components/CssVars';
 import {Fonts} from './components/Fonts';
 import {Button} from './components/ui/Button';
-import {useLocale} from './hooks/useLocale';
 import {useLocalePath} from './hooks/useLocalePath';
 import {useSanityThemeContent} from './hooks/useSanityThemeContent';
 import {generateFontsPreloadLinks} from './lib/fonts';
@@ -143,10 +147,10 @@ export async function loader({context}: LoaderFunctionArgs) {
 
 export default function App() {
   const nonce = useNonce();
-  const locale = useLocale();
+  const {locale} = useRootLoaderData();
 
   return (
-    <html lang={locale?.language.toLowerCase()}>
+    <html lang={locale.language.toLowerCase()}>
       <head>
         <meta charSet="utf-8" />
         <meta content="width=device-width,initial-scale=1" name="viewport" />
@@ -170,7 +174,7 @@ export default function App() {
 export function ErrorBoundary() {
   const nonce = useNonce();
   const routeError = useRouteError();
-  const locale = useLocale();
+  const {locale} = useRootLoaderData();
   const isRouteError = isRouteErrorResponse(routeError);
   const {themeContent} = useSanityThemeContent();
   const errorStatus = isRouteError ? routeError.status : 500;
@@ -186,7 +190,7 @@ export function ErrorBoundary() {
   }
 
   return (
-    <html lang={locale?.language.toLowerCase()}>
+    <html lang={locale.language.toLowerCase()}>
       <head>
         <meta charSet="utf-8" />
         <meta content="width=device-width,initial-scale=1" name="viewport" />
@@ -226,6 +230,11 @@ export function ErrorBoundary() {
     </html>
   );
 }
+
+export const useRootLoaderData = () => {
+  const [root] = useMatches();
+  return root?.data as SerializeFrom<typeof loader>;
+};
 
 /**
  * Validates the customer access token and returns a boolean and headers

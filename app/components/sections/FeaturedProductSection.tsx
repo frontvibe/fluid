@@ -13,12 +13,12 @@ import type {SectionDefaultProps} from '~/lib/type';
 import type {AspectRatioData} from '~/lib/utils';
 import type {FEATURED_PRODUCT_SECTION_FRAGMENT} from '~/qroq/sections';
 
-import {useLocale} from '~/hooks/useLocale';
 import {
   cn,
   generateShopifyImageThumbnail,
   getAspectRatioData,
 } from '~/lib/utils';
+import {useRootLoaderData} from '~/root';
 
 import type {loader as indexLoader} from '../../routes/_index';
 
@@ -118,7 +118,7 @@ function FeaturedProductSkeleton({
   imageAspectRatio: AspectRatioData;
   isError?: true;
 }) {
-  const locale = useLocale();
+  const {locale} = useRootLoaderData();
   const sanityProduct = vercelStegaCleanAll(data.product?.store);
   const variants: PartialObjectDeep<
     ProductVariantConnection,
@@ -137,7 +137,7 @@ function FeaturedProductSkeleton({
       id: sanityProduct.firstVariant?.store.gid,
       price: {
         amount: sanityProduct?.firstVariant?.store.price.toString() || '0',
-        currencyCode: locale?.currency,
+        currencyCode: locale.currency,
       },
       selectedOptions: [],
     });

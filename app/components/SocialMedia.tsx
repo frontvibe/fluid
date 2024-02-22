@@ -18,8 +18,8 @@ export function SocialMediaButtons() {
 }
 
 export function SocialButton({media}: {media: Socials}) {
-  const sanityRoot = useSanityRoot();
-  const settings = sanityRoot.data?.settings;
+  const {data} = useSanityRoot();
+  const settings = data?.settings;
   const mediaUrl = settings?.[media];
 
   if (!mediaUrl) return null;

@@ -5,11 +5,11 @@ import {CartForm, OptimisticInput, ShopPayButton} from '@shopify/hydrogen';
 import {useEffect, useState} from 'react';
 import {useIdle, useSessionStorage} from 'react-use';
 
-import {useEnvironmentVariables} from '~/hooks/useEnvironmentVariables';
 import {useLocalePath} from '~/hooks/useLocalePath';
 import {useSanityThemeContent} from '~/hooks/useSanityThemeContent';
 import {useSelectedVariant} from '~/hooks/useSelectedVariant';
 import {cn} from '~/lib/utils';
+import {useRootLoaderData} from '~/root';
 
 import {QuantitySelector} from '../QuantitySelector';
 import CleanString from '../sanity/CleanString';
@@ -132,7 +132,7 @@ function ShopPay(props: {
   variantId: string;
 }) {
   const {isLoading, isOutOfStock, quantity, variantId} = props;
-  const env = useEnvironmentVariables();
+  const {env} = useRootLoaderData();
   const userIsIdle = useIdle(1000, true);
   const [show, setShow] = useState<boolean>(false);
   const [shopPayLoadState, setShopPayLoadState] = useSessionStorage(

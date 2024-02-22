@@ -1,20 +1,19 @@
 import {useMemo} from 'react';
 
 import {getSanityClient} from '~/lib/sanity/client';
-
-import {useEnvironmentVariables} from './useEnvironmentVariables';
+import {useRootLoaderData} from '~/root';
 
 export function useSanityClient() {
-  const env = useEnvironmentVariables();
+  const {env} = useRootLoaderData();
   const {client} = useMemo(
     () =>
       getSanityClient({
-        apiVersion: env?.SANITY_STUDIO_API_VERSION!,
-        dataset: env?.SANITY_STUDIO_DATASET!,
-        projectId: env?.SANITY_STUDIO_PROJECT_ID!,
-        studioUrl: env?.SANITY_STUDIO_URL!,
-        useCdn: !env?.NODE_ENV || env?.NODE_ENV === 'production',
-        useStega: env?.SANITY_STUDIO_USE_STEGA!,
+        apiVersion: env.SANITY_STUDIO_API_VERSION,
+        dataset: env.SANITY_STUDIO_DATASET,
+        projectId: env.SANITY_STUDIO_PROJECT_ID,
+        studioUrl: env.SANITY_STUDIO_URL,
+        useCdn: !env.NODE_ENV || env.NODE_ENV === 'production',
+        useStega: env.SANITY_STUDIO_USE_STEGA,
       }),
     [env],
   );

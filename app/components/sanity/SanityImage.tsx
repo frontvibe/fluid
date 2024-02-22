@@ -3,8 +3,8 @@ import React from 'react';
 
 import type {SanityImageFragment} from '~/lib/type';
 
-import {useEnvironmentVariables} from '~/hooks/useEnvironmentVariables';
 import {cn} from '~/lib/utils';
+import {useRootLoaderData} from '~/root';
 
 export function SanityImage({
   aspectRatio,
@@ -31,7 +31,7 @@ export function SanityImage({
   sizes?: null | string;
   style?: React.CSSProperties;
 }) {
-  const env = useEnvironmentVariables();
+  const {env} = useRootLoaderData();
 
   if (!data) {
     return null;

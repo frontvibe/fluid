@@ -56,7 +56,7 @@ export function ProductBadges({
   layout?: 'card';
   variants: ProductVariantFragmentFragment[];
 }) {
-  const sanityRootData = useSanityRoot();
+  const {data} = useSanityRoot();
   const {themeContent} = useSanityThemeContent();
   const selectedVariant = useSelectedVariant({variants});
   const isSoldOut = !selectedVariant?.availableForSale;
@@ -65,9 +65,7 @@ export function ProductBadges({
     selectedVariant?.compareAtPrice?.amount &&
     parseFloat(selectedVariant?.price?.amount) <
       parseFloat(selectedVariant?.compareAtPrice?.amount);
-  const badgesPosition = vercelStegaCleanAll(
-    sanityRootData?.data?.settings?.badgesPosition,
-  );
+  const badgesPosition = vercelStegaCleanAll(data?.settings?.badgesPosition);
 
   const badgeClass = cn(
     'bg-background text-foreground hover:bg-background rounded-[--badges-corner-radius]',

@@ -1,9 +1,7 @@
 import {ShopifyProvider} from '@shopify/hydrogen-react';
 import {Suspense, lazy} from 'react';
 
-import {useEnvironmentVariables} from '~/hooks/useEnvironmentVariables';
-import {useLocale} from '~/hooks/useLocale';
-import {useSanityPreviewMode} from '~/hooks/useSanityPreviewMode';
+import {useRootLoaderData} from '~/root';
 
 import {TailwindIndicator} from '../TailwindIndicator';
 import {TogglePreviewMode} from '../sanity/TogglePreviewMode';
@@ -24,17 +22,15 @@ export type LayoutProps = {
 };
 
 export function Layout({children = null}: LayoutProps) {
-  const previewMode = useSanityPreviewMode();
-  const env = useEnvironmentVariables();
-  const locale = useLocale();
+  const {env, locale, sanityPreviewMode} = useRootLoaderData();
 
   return (
     <ShopifyProvider
-      countryIsoCode={locale?.country || 'US'}
-      languageIsoCode={locale?.language || 'EN'}
-      storeDomain={env?.PUBLIC_STORE_DOMAIN!}
-      storefrontApiVersion={env?.PUBLIC_STOREFRONT_API_VERSION!}
-      storefrontToken={env?.PUBLIC_STOREFRONT_API_TOKEN!}
+      countryIsoCode={locale.country || 'US'}
+      languageIsoCode={locale.language || 'EN'}
+      storeDomain={env.PUBLIC_STORE_DOMAIN}
+      storefrontApiVersion={env.PUBLIC_STOREFRONT_API_VERSION}
+      storefrontToken={env.PUBLIC_STOREFRONT_API_TOKEN}
     >
       <FramerMotion>
         <NavigationProgressBar />
@@ -45,7 +41,7 @@ export function Layout({children = null}: LayoutProps) {
         </main>
         <Footer />
         <TailwindIndicator />
-        {previewMode ? (
+        {sanityPreviewMode ? (
           <Suspense>
             <VisualEditing />
           </Suspense>

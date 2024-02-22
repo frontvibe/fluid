@@ -21,7 +21,8 @@ export function CollectionCard(props: {
   };
 }) {
   const {collection, skeleton} = props;
-  const {data} = vercelStegaCleanAll(useSanityRoot());
+  const sanityRoot = useSanityRoot();
+  const {data} = vercelStegaCleanAll(sanityRoot);
   const style = data?.settings?.collectionCards.style;
   const textAlignment = data?.settings?.collectionCards.textAlignment || 'left';
   const sizes = cx([

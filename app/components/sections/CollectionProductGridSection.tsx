@@ -19,11 +19,11 @@ import type {SectionDefaultProps} from '~/lib/type';
 import type {COLLECTION_PRODUCT_GRID_SECTION_FRAGMENT} from '~/qroq/sections';
 import type {loader} from '~/routes/($locale).collections.$collectionHandle';
 
-import {useLocale} from '~/hooks/useLocale';
 import {useOptimisticNavigationData} from '~/hooks/useOptimisticNavigationData';
 import {useSanityThemeContent} from '~/hooks/useSanityThemeContent';
 import {getAppliedFilters} from '~/lib/shopifyCollection';
 import {cn} from '~/lib/utils';
+import {useRootLoaderData} from '~/root';
 
 import type {AppliedFilter} from '../collection/SortFilterLayout';
 
@@ -41,7 +41,7 @@ export type ShopifyCollection = CollectionProductGridQuery['collection'];
 export function CollectionProductGridSection(
   props: SectionDefaultProps & {data: CollectionProductGridSectionProps},
 ) {
-  const locale = useLocale();
+  const {locale} = useRootLoaderData();
   const [searchParams] = useSearchParams();
   const loaderData = useLoaderData<typeof loader>();
   const navigate = useNavigate();

@@ -1,12 +1,12 @@
-import {useRootLoaderData} from './useRootLoaderData';
+import {useRootLoaderData} from '~/root';
+
 import {useSanityData} from './useSanityData';
 
 export function useSanityRoot() {
-  const rootLoaderdata = useRootLoaderData();
+  const {sanityRoot} = useRootLoaderData();
 
-  const sanityGlobal = rootLoaderdata?.sanityRoot!;
   const {data, encodeDataAttribute, loading, sourceMap} = useSanityData(
-    sanityGlobal,
+    sanityRoot,
     'root',
   );
 

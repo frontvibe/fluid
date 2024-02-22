@@ -20,8 +20,8 @@ export function useColorsCssVars(props: {
   settings?: CartColorScheme | CmsSectionSettings | HeaderQuery;
 }) {
   const {settings} = props;
-  const sanityRoot = useSanityRoot();
-  const defaultColorScheme = sanityRoot?.data?.defaultColorScheme;
+  const {data} = useSanityRoot();
+  const defaultColorScheme = data?.defaultColorScheme;
   const fallbackScheme = useFallbackColorScheme();
   const selector = props.selector || ':root';
 
@@ -72,8 +72,8 @@ export function useCardColorsCssVars(props: {
   settings?: CartColorScheme | CmsSectionSettings;
 }) {
   const {settings} = props;
-  const sanityRoot = useSanityRoot();
-  const defaultColorScheme = sanityRoot?.data?.defaultColorScheme;
+  const {data} = useSanityRoot();
+  const defaultColorScheme = data?.defaultColorScheme;
   const fallbackScheme = useFallbackColorScheme();
   // Color scheme
   const colorScheme =

@@ -9,9 +9,7 @@ import {useMatches} from '@remix-run/react';
 import {useEncodeDataAttribute} from '@sanity/react-loader';
 
 import {useQuery} from '~/lib/sanity/sanity.loader';
-
-import {useEnvironmentVariables} from './useEnvironmentVariables';
-import {useRootLoaderData} from './useRootLoaderData';
+import {useRootLoaderData} from '~/root';
 
 type Initial = {
   data: unknown;
@@ -32,8 +30,8 @@ export function useSanityData<T extends Initial>(initial: T, routeId?: string) {
     };
   };
   const rootLoaderData = useRootLoaderData();
-  const env = useEnvironmentVariables();
-  const studioUrl = env?.SANITY_STUDIO_URL!;
+  const {env} = rootLoaderData;
+  const studioUrl = env.SANITY_STUDIO_URL;
 
   const sanity =
     routeId && routeId === 'root' ? rootLoaderData?.sanity : loaderData?.sanity;

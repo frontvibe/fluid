@@ -6,8 +6,8 @@ import {vercelStegaCleanAll} from '@sanity/client/stega';
 
 import type {INTERNAL_LINK_FRAGMENT} from '~/qroq/links';
 
-import {useLocale} from '~/hooks/useLocale';
 import {cn} from '~/lib/utils';
+import {useRootLoaderData} from '~/root';
 
 type SanityInternalLinkProps = TypeFromSelection<typeof INTERNAL_LINK_FRAGMENT>;
 
@@ -17,7 +17,7 @@ export function SanityInternalLink(props: {
   data?: SanityInternalLinkProps;
   onClick?: () => void;
 }) {
-  const locale = useLocale();
+  const {locale} = useRootLoaderData();
   const {children, className, data} = props;
 
   if (!data) return null;
@@ -31,15 +31,15 @@ export function SanityInternalLink(props: {
   const path: () => string = () => {
     switch (documentType) {
       case 'page':
-        return `${locale?.pathPrefix}/${slug}`;
+        return `${locale.pathPrefix}/${slug}`;
       case 'product':
-        return `${locale?.pathPrefix}/products/${slug}`;
+        return `${locale.pathPrefix}/products/${slug}`;
       case 'collection':
-        return `${locale?.pathPrefix}/collections/${slug}`;
+        return `${locale.pathPrefix}/collections/${slug}`;
       case 'home':
-        return locale?.pathPrefix || '/';
+        return locale.pathPrefix || '/';
       case 'blogPost':
-        return `${locale?.pathPrefix}/blog/${slug}`;
+        return `${locale.pathPrefix}/blog/${slug}`;
       default:
         return '';
     }

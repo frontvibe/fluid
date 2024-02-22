@@ -7,8 +7,8 @@ import {useMemo} from 'react';
 
 import type {I18nLocale} from '~/lib/type';
 
-import {useLocale} from '~/hooks/useLocale';
 import {useLocalePath} from '~/hooks/useLocalePath';
+import {useRootLoaderData} from '~/root';
 
 import {IconCheck} from '../icons/IconCheck';
 import {IconChevron} from '../icons/IconChevron';
@@ -21,7 +21,7 @@ import {
 
 export function CountrySelector() {
   const locales = getAllLocales();
-  const currentLocale = useLocale();
+  const {locale: currentLocale} = useRootLoaderData();
 
   return (
     <DropdownMenu>
@@ -30,7 +30,7 @@ export function CountrySelector() {
           className="flex w-full gap-2 sm:w-auto sm:max-w-fit"
           variant="outline"
         >
-          {currentLocale?.label}
+          {currentLocale.label}
           <IconChevron className="size-3" direction="down" />
         </Button>
       </DropdownMenuTrigger>
@@ -50,7 +50,7 @@ export function CountrySelector() {
 }
 
 function ChangeLocaleForm(props: {locale: I18nLocale}) {
-  const currentLocale = useLocale();
+  const {locale: currentLocale} = useRootLoaderData();
   const location = useLocation();
   const isActive = currentLocale?.country === props.locale.country;
 
@@ -59,7 +59,7 @@ function ChangeLocaleForm(props: {locale: I18nLocale}) {
 
     if (!currentLocale) return props.locale?.pathPrefix || '/';
 
-    if (!currentLocale?.default) {
+    if (!currentLocale.default) {
       newPathname = location.pathname.replace(
         currentLocale?.pathPrefix,
         props.locale?.pathPrefix || '',

@@ -165,7 +165,7 @@ function ShopPay(props: {
                 'pointer-events-none cursor-default',
               isOutOfStock && 'opacity-50',
             ])}
-            storeDomain={`https://${env?.PUBLIC_STORE_DOMAIN!}`}
+            storeDomain={`https://${env.PUBLIC_STORE_DOMAIN}`}
             variantIdsAndQuantities={[
               {
                 id: variantId,

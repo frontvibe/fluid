@@ -53,8 +53,8 @@ export function SanityImage({
     : undefined;
 
   const urlBuilder = imageUrlBuilder({
-    dataset: env?.SANITY_STUDIO_DATASET!,
-    projectId: env?.SANITY_STUDIO_PROJECT_ID!,
+    dataset: env.SANITY_STUDIO_DATASET,
+    projectId: env.SANITY_STUDIO_PROJECT_ID,
   })
     .image({
       _ref: data._ref,

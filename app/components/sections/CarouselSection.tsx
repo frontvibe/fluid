@@ -34,7 +34,6 @@ export function CarouselSection(
   } = data;
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref);
-  const slidesPerView = slidesPerViewDesktop ? 100 / slidesPerViewDesktop : 100;
   const plugins = useMemo(() => (autoplay ? [Autoplay()] : []), [autoplay]);
   const imageSizes = slidesPerViewDesktop
     ? `(min-width: 1024px) ${
@@ -46,49 +45,45 @@ export function CarouselSection(
   return (
     <div className="container" ref={ref}>
       <h2>{title}</h2>
-      <div
-        style={
-          {
-            '--slidesPerView': `${slidesPerView}%`,
-          } as React.CSSProperties
-        }
-      >
-        {slides && slides?.length > 0 && (
-          <Carousel
-            opts={{
-              active: isActive,
-              loop: loop || false,
-            }}
-            plugins={plugins}
-          >
-            <div className="relative">
-              <CarouselContent>
-                {slides.map((slide) => (
-                  <CarouselItem
-                    className="p-0 md:basis-1/2 md:pl-4 lg:basis-[var(--slidesPerView)]"
-                    key={slide._key}
-                  >
-                    <SanityImage
-                      data={slide.image}
-                      loading={inView ? 'eager' : 'lazy'}
-                      showBorder={false}
-                      showShadow={false}
-                      sizes={imageSizes}
-                    />
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              {arrows && isActive && (
-                <div className="hidden md:block">
-                  <CarouselPrevious />
-                  <CarouselNext />
-                </div>
-              )}
-            </div>
-            {pagination && <CarouselPagination />}
-          </Carousel>
-        )}
-      </div>
+      {slides && slides?.length > 0 && (
+        <Carousel
+          className="[--slide-spacing:1rem]"
+          opts={{
+            active: isActive,
+            loop: loop || false,
+          }}
+          plugins={plugins}
+          style={
+            {
+              '--slides-per-view': slidesPerViewDesktop,
+            } as React.CSSProperties
+          }
+        >
+          <div className="relative">
+            <CarouselContent>
+              {slides.map((slide) => (
+                <CarouselItem className="[&>span]:h-full" key={slide._key}>
+                  <SanityImage
+                    className="size-full object-cover"
+                    data={slide.image}
+                    loading={inView ? 'eager' : 'lazy'}
+                    showBorder={false}
+                    showShadow={false}
+                    sizes={imageSizes}
+                  />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            {arrows && isActive && (
+              <div className="hidden md:block">
+                <CarouselPrevious />
+                <CarouselNext />
+              </div>
+            )}
+          </div>
+          {pagination && <CarouselPagination />}
+        </Carousel>
+      )}
     </div>
   );
 }

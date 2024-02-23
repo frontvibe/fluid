@@ -7,22 +7,22 @@ import type {
 
 import {useLoaderData} from '@remix-run/react';
 import {flattenConnection} from '@shopify/hydrogen';
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 
 import type {loader} from '~/routes/($locale).products.$productHandle';
 
 import {useDevice} from '~/hooks/useDevice';
 import {type AspectRatioData, cn} from '~/lib/utils';
 
+import type {CarouselApi} from '../ui/Carousel';
+
 import {ShopifyImage} from '../ShopifyImage';
 import {Badge} from '../ui/Badge';
 import {
   Carousel,
   CarouselContent,
+  CarouselCounter,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-  useCarousel,
 } from '../ui/Carousel';
 
 type Media =
@@ -100,21 +100,26 @@ function MobileCarousel({
 
   return (
     <Carousel
-      className="lg:hidden"
+      className="[--slide-size:100%] [--slide-spacing:1rem] lg:hidden"
       opts={{
         active: isActive && device !== 'desktop',
       }}
-      style={{'--slidesPerView': 1} as React.CSSProperties}
     >
       <div className="relative">
-        <CarouselContent className="px-8 md:px-12">
+        <CarouselContent className="px-[--slide-spacing]">
           {medias.map((media, index) => {
             return (
-              <CarouselItem className="pl-3 last:pr-3" key={media.id}>
+              <CarouselItem
+                className="last:pr-[--slide-spacing] [&>span]:h-full"
+                key={media.id}
+              >
                 {media.__typename === 'MediaImage' && media.image && (
                   <ShopifyImage
                     aspectRatio={aspectRatio?.value}
-                    className={cn('h-auto w-full', aspectRatio?.className)}
+                    className={cn(
+                      'size-full object-cover',
+                      aspectRatio?.className,
+                    )}
                     data={media.image}
                     decoding={index === 0 ? 'sync' : 'async'}
                     fetchpriority={index === 0 ? 'high' : 'low'}
@@ -126,25 +131,15 @@ function MobileCarousel({
             );
           })}
         </CarouselContent>
-        <MobileCarouselCounter mediaLength={medias.length} />
+        <div className="mt-3 flex items-center justify-center">
+          <Badge variant="outline">
+            <CarouselCounter>
+              <span>{medias.length}</span>
+            </CarouselCounter>
+          </Badge>
+        </div>
       </div>
     </Carousel>
-  );
-}
-
-function MobileCarouselCounter({mediaLength}: {mediaLength: number}) {
-  const {selectedIndex} = useCarousel();
-  return (
-    <div className="mt-3 flex items-center justify-center">
-      <Badge
-        className="flex items-center gap-1 tabular-nums text-muted-foreground"
-        variant="outline"
-      >
-        <span>{selectedIndex + 1}</span>
-        <span>/</span>
-        <span>{mediaLength}</span>
-      </Badge>
-    </div>
   );
 }
 
@@ -158,54 +153,68 @@ function ThumbnailCarousel({
   setActiveMediaId: React.Dispatch<React.SetStateAction<null | string>>;
 }) {
   const device = useDevice();
+  const slidesPerView = 6;
+  const [api, setApi] = useState<CarouselApi>();
+
+  const handleSelect = useCallback(
+    (index: number, mediaId: string) => {
+      api?.scrollTo(index);
+      setActiveMediaId(mediaId);
+    },
+    [api, setActiveMediaId],
+  );
 
   if (medias.length <= 1) return null;
 
   return (
-    <div className="mt-6 hidden lg:block">
+    <div className="mt-3 hidden lg:block">
       <Carousel
+        className="[--slide-spacing:.5rem]"
         opts={{
-          active: device === 'desktop',
-          container: '.thumbnails-container',
+          active: device === 'desktop' && slidesPerView < medias.length,
+          containScroll: 'keepSnaps',
+          dragFree: true,
         }}
-        style={{'--slidesPerView': 5} as React.CSSProperties}
+        setApi={setApi}
+        style={
+          {
+            '--slides-per-view': slidesPerView,
+          } as React.CSSProperties
+        }
       >
         <div className="flex items-center justify-center gap-2">
-          <CarouselPrevious className="relative left-0 top-0 aspect-square size-11 translate-x-0 translate-y-0" />
-          <div className="thumbnails-container relative">
-            <CarouselContent className="px-3 py-1">
-              {medias.map((media) => {
-                return (
-                  <CarouselItem
-                    className="p-0 md:basis-1/2 md:pl-2 md:last:pr-2 lg:basis-[var(--slidesPerView)]"
-                    key={media.id}
-                  >
-                    {media.__typename === 'MediaImage' && media.image && (
-                      <button
-                        className={cn(
-                          'overflow-hidden rounded-[--media-border-corner-radius] border-2 border-foreground border-opacity-0 transition-opacity hover:border-opacity-100',
-                          'ring-offset-background transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
-                          media.id === selectedImage.id && 'border-opacity-100',
-                        )}
-                        onClick={() => setActiveMediaId(media.id)}
-                      >
-                        <ShopifyImage
-                          aspectRatio="1/1"
-                          className="aspect-square w-24 object-cover"
-                          data={media.image}
-                          loading="eager"
-                          showBorder={false}
-                          showShadow={false}
-                          sizes="96px"
-                        />
-                      </button>
-                    )}
-                  </CarouselItem>
-                );
-              })}
-            </CarouselContent>
-          </div>
-          <CarouselNext className="relative right-0 top-0 aspect-square size-11 translate-x-0 translate-y-0" />
+          <CarouselContent className="ml-0 py-1">
+            {medias.map((media, index) => {
+              return (
+                <CarouselItem
+                  className="px-[calc(var(--slide-spacing)/2)]"
+                  key={media.id}
+                >
+                  {media.__typename === 'MediaImage' && media.image && (
+                    <button
+                      className={cn(
+                        'overflow-hidden rounded-[--media-border-corner-radius] border-2 border-foreground border-opacity-0 transition-opacity hover:border-opacity-100',
+                        'ring-offset-background transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
+                        media.id === selectedImage.id && 'border-opacity-100',
+                      )}
+                      key={media.id}
+                      onClick={() => handleSelect(index, media.id)}
+                    >
+                      <ShopifyImage
+                        aspectRatio="1/1"
+                        className="size-full object-cover"
+                        data={media.image}
+                        loading="eager"
+                        showBorder={false}
+                        showShadow={false}
+                        sizes="96px"
+                      />
+                    </button>
+                  )}
+                </CarouselItem>
+              );
+            })}
+          </CarouselContent>
         </div>
       </Carousel>
     </div>

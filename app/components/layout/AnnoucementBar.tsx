@@ -52,7 +52,7 @@ export function AnnouncementBar() {
       <div className="container">
         <style dangerouslySetInnerHTML={{__html: colorsCssVars}} />
         <Carousel opts={{active: isActive}} plugins={plugins}>
-          <CarouselContent className="relative">
+          <CarouselContent className="relative ml-0">
             {annoucementBar?.map((item) => (
               <CarouselItem key={item._key}>
                 <Item _key={item._key} link={item.link} text={item.text} />

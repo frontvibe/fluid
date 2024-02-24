@@ -1,9 +1,9 @@
+import type {SanityClient} from '@sanity/client';
 import type {
   ClientPerspective,
   ContentSourceMap,
   FilteredResponseQueryOptions,
   QueryParams,
-  SanityClient,
   UnfilteredResponseQueryOptions,
 } from '@sanity/client/stega';
 import type {BaseQuery, InferType, z} from 'groqd';
@@ -11,7 +11,9 @@ import type {BaseQuery, InferType, z} from 'groqd';
 import {CacheShort, createWithCache} from '@shopify/hydrogen';
 
 import {getSanityClient} from './client';
-import {loadQuery, queryStore} from './sanity.loader';
+import {queryStore} from './sanity.loader';
+
+const {loadQuery} = queryStore;
 
 type CreateSanityClientOptions = {
   cache: Cache;

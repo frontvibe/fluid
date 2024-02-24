@@ -52,6 +52,7 @@ export async function loader({context, params, request}: LoaderFunctionArgs) {
     featuredCollectionPromise,
     featuredProductPromise,
   } = resolveShopifyPromises({
+    collectionId: collection.id,
     document: cmsCollection,
     request,
     storefront,

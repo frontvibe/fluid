@@ -10,22 +10,27 @@ import {getIntValue} from './utils';
 |--------------------------------------------------------------------------
 */
 export const THEME_CONTENT_FRAGMENT = {
-  cart: q('cart').grab({
-    applyDiscount: [getIntValue('applyDiscount'), q.string().nullable()],
-    continueShopping: [getIntValue('continueShopping'), q.string().nullable()],
-    discountCode: [getIntValue('discountCode'), q.string().nullable()],
-    discounts: [getIntValue('discounts'), q.string().nullable()],
-    emptyMessage: [getIntValue('emptyMessage'), q.string().nullable()],
-    heading: [getIntValue('heading'), q.string().nullable()],
-    orderSummary: [getIntValue('orderSummary'), q.string().nullable()],
-    proceedToCheckout: [
-      getIntValue('proceedToCheckout'),
-      q.string().nullable(),
-    ],
-    quantity: [getIntValue('quantity'), q.string().nullable()],
-    remove: [getIntValue('remove'), q.string().nullable()],
-    subtotal: [getIntValue('subtotal'), q.string().nullable()],
-  }),
+  cart: q('cart')
+    .grab({
+      applyDiscount: [getIntValue('applyDiscount'), q.string().nullable()],
+      continueShopping: [
+        getIntValue('continueShopping'),
+        q.string().nullable(),
+      ],
+      discountCode: [getIntValue('discountCode'), q.string().nullable()],
+      discounts: [getIntValue('discounts'), q.string().nullable()],
+      emptyMessage: [getIntValue('emptyMessage'), q.string().nullable()],
+      heading: [getIntValue('heading'), q.string().nullable()],
+      orderSummary: [getIntValue('orderSummary'), q.string().nullable()],
+      proceedToCheckout: [
+        getIntValue('proceedToCheckout'),
+        q.string().nullable(),
+      ],
+      quantity: [getIntValue('quantity'), q.string().nullable()],
+      remove: [getIntValue('remove'), q.string().nullable()],
+      subtotal: [getIntValue('subtotal'), q.string().nullable()],
+    })
+    .nullable(),
   collection: q('collection')
     .grab({
       apply: [getIntValue('apply'), q.string().nullable()],

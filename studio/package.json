@@ -5,12 +5,12 @@
   "main": "package.json",
   "license": "UNLICENSED",
   "scripts": {
-    "dev": "run-s create:singletons && sanity dev",
+    "dev": "run-s create:initial && sanity dev",
     "start": "sanity start",
     "build": "sanity build",
     "deploy": "sanity deploy",
     "deploy-graphql": "sanity graphql deploy",
-    "create:singletons": "npx sanity@latest exec ./scripts/createSingletons.ts --with-user-token"
+    "create:initial": "npx sanity@latest exec ./scripts/createInitialDocuments.ts --with-user-token"
   },
   "keywords": [
     "sanity"
@@ -33,6 +33,7 @@
     "lodash": "^4.17.21",
     "lodash.get": "^4.4.2",
     "lucide-react": "^0.338.0",
+    "nanoid": "^5.0.6",
     "pluralize-esm": "^9.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

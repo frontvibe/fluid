@@ -16,6 +16,16 @@ export default defineField({
           type: 'string',
         }),
         internalLinkField,
+        defineField({
+          name: 'externalLink',
+          description: "Will be used if internal link isn't provided.",
+          type: 'url',
+        }),
+        defineField({
+          name: 'openInNewTab',
+          title: 'Open external link in new tab',
+          type: 'boolean',
+        }),
       ],
     },
   ],

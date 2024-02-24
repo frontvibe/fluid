@@ -171,7 +171,7 @@ function ItemRemoveButton({
         disabled={loading}
         type="submit"
       >
-        <span className="sr-only">{themeContent?.cart.remove}</span>
+        <span className="sr-only">{themeContent?.cart?.remove}</span>
         <IconRemove aria-hidden="true" />
       </IconButton>
       <OptimisticInput data={{action: 'remove', lineId}} id="cart-line-item" />
@@ -246,7 +246,7 @@ function CartLineQuantityAdjust({
   return (
     <>
       <label className="sr-only" htmlFor={`quantity-${lineId}`}>
-        {themeContent?.cart.quantity}, {optimisticQuantity}
+        {themeContent?.cart?.quantity}, {optimisticQuantity}
       </label>
       <QuantitySelector>
         <UpdateCartForm lines={[{id: lineId, quantity: prevQuantity}]}>

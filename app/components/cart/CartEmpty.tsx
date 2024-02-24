@@ -54,17 +54,17 @@ export function CartEmpty({
               layout === 'drawer' && 'justify-center text-center',
             ])}
           >
-            <span>{themeContent?.cart.emptyMessage}</span>
+            <span>{themeContent?.cart?.emptyMessage}</span>
             <div>
               {layout === 'page' ? (
                 <Button asChild>
                   <Link prefetch="intent" to={collectionsPath}>
-                    {themeContent?.cart.continueShopping}
+                    {themeContent?.cart?.continueShopping}
                   </Link>
                 </Button>
               ) : (
                 <Button onClick={onClose}>
-                  {themeContent?.cart.continueShopping}
+                  {themeContent?.cart?.continueShopping}
                 </Button>
               )}
             </div>

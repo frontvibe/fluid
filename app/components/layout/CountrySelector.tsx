@@ -34,7 +34,7 @@ export function CountrySelector() {
           <IconChevron className="size-3" direction="down" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
+      <DropdownMenuContent id="country-selector">
         {locales.map((locale) => (
           <DropdownMenuItem
             className="flex [&>*]:flex-grow"

@@ -1,5 +1,6 @@
 import type {TypeFromSelection} from 'groqd';
 
+import {Link} from '@remix-run/react';
 import {cx} from 'class-variance-authority';
 import Autoplay from 'embla-carousel-autoplay';
 import {useMemo} from 'react';
@@ -55,7 +56,13 @@ export function AnnouncementBar() {
           <CarouselContent className="relative ml-0 justify-center">
             {annoucementBar?.map((item) => (
               <CarouselItem key={item._key}>
-                <Item _key={item._key} link={item.link} text={item.text} />
+                <Item
+                  _key={item._key}
+                  externalLink={item.externalLink}
+                  link={item.link}
+                  openInNewTab={item.openInNewTab}
+                  text={item.text}
+                />
               </CarouselItem>
             ))}
           </CarouselContent>
@@ -87,16 +94,31 @@ function Item(props: AnnoucementBarProps) {
         name: props.text,
       }}
     >
-      <p className="flex items-center text-sm underline-offset-4 group-hover:underline">
-        <span className="relative z-[2] block bg-background pr-2">
-          {props.text}
-        </span>
-        <span className="-translate-x-[2px] transition-transform group-hover:translate-x-[-0.15px]">
-          <IconArrowRight />
-        </span>
-      </p>
+      <LinkWrapper>{props.text}</LinkWrapper>
     </SanityInternalLink>
+  ) : props.externalLink ? (
+    <Link
+      className={cx(['group', className])}
+      rel={props.openInNewTab ? 'noopener noreferrer' : ''}
+      target={props.openInNewTab ? '_blank' : undefined}
+      to={props.externalLink}
+    >
+      <LinkWrapper>{props.text}</LinkWrapper>
+    </Link>
   ) : (
     <p className={className}>{props.text}</p>
+  );
+}
+
+function LinkWrapper({children}: {children: React.ReactNode}) {
+  return (
+    <p className="flex items-center text-sm underline-offset-4 group-hover:underline">
+      <span className="relative z-[2] block bg-background pr-2">
+        {children}
+      </span>
+      <span className="-translate-x-[2px] transition-transform group-hover:translate-x-[-0.15px]">
+        <IconArrowRight />
+      </span>
+    </p>
   );
 }

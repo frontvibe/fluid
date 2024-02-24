@@ -36,7 +36,7 @@ export function CartDiscounts({
       {/* Have existing discount, display it with a remove option */}
       <dl className={codes && codes.length !== 0 ? 'grid' : 'hidden'}>
         <div className="flex items-center justify-between font-medium">
-          <span>{themeContent?.cart.discounts}</span>
+          <span>{themeContent?.cart?.discounts}</span>
           <div className="flex items-center justify-between">
             <UpdateDiscountForm>
               <button
@@ -65,7 +65,7 @@ export function CartDiscounts({
         >
           <Input
             name="discountCode"
-            placeholder={themeContent?.cart.discountCode || ''}
+            placeholder={themeContent?.cart?.discountCode || ''}
             type="text"
           />
           <Button
@@ -73,7 +73,7 @@ export function CartDiscounts({
             disabled={cartIsLoading}
             variant="outline"
           >
-            {themeContent?.cart.applyDiscount}
+            {themeContent?.cart?.applyDiscount}
           </Button>
         </div>
       </UpdateDiscountForm>

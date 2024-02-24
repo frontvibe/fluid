@@ -46,23 +46,6 @@ export const SINGLETONS: {
     id: 'typography',
     _type: 'typography',
     title: 'Typography',
-    initialValue: {
-      heading: {
-        baseSize: 50,
-        lineHeight: 1.2,
-        letterSpacing: 0,
-      },
-      body: {
-        baseSize: 16,
-        lineHeight: 1.2,
-        letterSpacing: 0,
-      },
-      extra: {
-        baseSize: 16,
-        lineHeight: 1.2,
-        letterSpacing: 0,
-      },
-    },
   },
   settings: {
     id: 'settings',

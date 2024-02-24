@@ -208,7 +208,7 @@ export function ErrorBoundary() {
               {errorStatus === 404 ? (
                 <Button asChild className="mt-6" variant="secondary">
                   <Link to={collectionsPath}>
-                    {themeContent?.cart.continueShopping}
+                    {themeContent?.cart?.continueShopping}
                   </Link>
                 </Button>
               ) : (

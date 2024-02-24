@@ -1,4 +1,4 @@
-import {defineConfig, isDev} from 'sanity';
+import {defineConfig} from 'sanity';
 import {structureTool} from 'sanity/structure';
 import {visionTool} from '@sanity/vision';
 import {internationalizedArray} from 'sanity-plugin-internationalized-array';
@@ -19,7 +19,8 @@ import {singletonActions, singletonsTypes} from './structure/singletons';
 import {locate} from './presentation/locate';
 import {PreviewIcon} from './components/icons/Preview';
 
-const {projectId, dataset, apiVersion} = projectDetails;
+const isDev = process.env.MODE === 'development';
+const {projectId, dataset, apiVersion, previewUrl} = projectDetails;
 const localePreviewUrl = 'http://localhost:3000';
 const languages = getAllLanguages();
 const devOnlyPlugins = [
@@ -30,7 +31,9 @@ const devOnlyPlugins = [
 ];
 const SANITY_STUDIO_PREVIEW_URL = isDev
   ? localePreviewUrl
-  : projectDetails.previewUrl || localePreviewUrl;
+  : previewUrl
+    ? previewUrl
+    : localePreviewUrl;
 
 export default defineConfig({
   name: 'default',

@@ -24,7 +24,9 @@ type SanityPageData = InferType<typeof PAGE_QUERY>;
 type SanityProductData = InferType<typeof PRODUCT_QUERY>;
 type SanityCollectionData = InferType<typeof COLLECTION_QUERY>;
 type PromiseResolverArgs = {
+  collectionId?: string;
   document: {data: SanityCollectionData | SanityPageData | SanityProductData};
+  productId?: string;
   request: Request;
   storefront: Storefront;
 };
@@ -35,7 +37,9 @@ type PromiseResolverArgs = {
  * the `collection` data is needed. The promise will be resolved within the component.
  */
 export function resolveShopifyPromises({
+  collectionId,
   document,
+  productId,
   request,
   storefront,
 }: PromiseResolverArgs) {
@@ -59,11 +63,13 @@ export function resolveShopifyPromises({
 
   const relatedProductsPromise = resolveRelatedProductsPromise({
     document,
+    productId,
     request,
     storefront,
   });
 
   const collectionProductGridPromise = resolveCollectionProductGridPromise({
+    collectionId,
     document,
     request,
     storefront,
@@ -228,20 +234,16 @@ function resolveFeaturedProductPromise({
 
 async function resolveRelatedProductsPromise({
   document,
+  productId,
   storefront,
 }: PromiseResolverArgs) {
   let promise;
 
-  if (document.data?._type !== 'product') {
+  if (document.data?._type !== 'product' || !productId) {
     return null;
   }
 
-  const productId = document.data?.product?.store.gid;
   const sections = getSections(document);
-
-  if (!productId) {
-    return null;
-  }
 
   for (const section of sections || []) {
     if (section._type === 'relatedProductsSection') {
@@ -260,19 +262,14 @@ async function resolveRelatedProductsPromise({
 }
 
 async function resolveCollectionProductGridPromise({
+  collectionId,
   document,
   request,
   storefront,
 }: PromiseResolverArgs) {
   let promise;
 
-  if (document.data?._type !== 'collection') {
-    return null;
-  }
-
-  const collectionId = document.data?.collection?.store.gid;
-
-  if (!collectionId) {
+  if (document.data?._type !== 'collection' || !collectionId) {
     return null;
   }
 

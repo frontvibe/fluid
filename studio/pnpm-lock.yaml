@@ -56,6 +56,9 @@ dependencies:
   lucide-react:
     specifier: ^0.338.0
     version: 0.338.0(react@18.2.0)
+  nanoid:
+    specifier: ^5.0.6
+    version: 5.0.6
   pluralize-esm:
     specifier: ^9.0.5
     version: 9.0.5

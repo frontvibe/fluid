@@ -3,6 +3,7 @@ import {ExternalLink, Link, MenuSquare} from 'lucide-react';
 
 export const internalLinkField = defineField({
   name: 'link',
+  title: 'Internal link',
   type: 'reference',
   to: [
     {type: 'home'},

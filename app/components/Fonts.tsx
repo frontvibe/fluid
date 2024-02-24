@@ -10,6 +10,9 @@ import {useSanityRoot} from '~/hooks/useSanityRoot';
 type FontsQuery = InferType<typeof FONTS_QUERY>;
 type FontAssetsFragment = InferType<typeof FONT_CATEGORY_FRAGMENT.fontAssets>;
 
+const defaultFontFamily =
+  '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu, Helvetica Neue, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;';
+
 export function Fonts() {
   const {data} = useSanityRoot();
   const fontsData = vercelStegaCleanAll(data?.fonts);
@@ -87,46 +90,48 @@ function resolveFontAssetUrls(font: FontAssetsFragment[0]) {
 
 function generateCssFontVariables({fontsData}: {fontsData: FontsQuery}) {
   const fontCategories: Array<{
-    antialiased: boolean | null;
-    baseSize: null | number;
-    capitalize: boolean | null;
-    categoryName: string;
-    fontName: string;
-    fontType: string;
-    letterSpacing: null | number;
-    lineHeight: null | number;
+    antialiased?: boolean | null;
+    baseSize?: null | number;
+    capitalize?: boolean | null;
+    categoryName?: string;
+    fontName?: string;
+    fontType?: string;
+    letterSpacing?: null | number;
+    lineHeight?: null | number;
   }> = [];
 
-  fontsData?.heading.font &&
-    fontsData.heading.font?.length > 0 &&
-    fontCategories.push({
-      baseSize: fontsData.heading.baseSize,
-      capitalize: fontsData.heading.capitalize,
-      categoryName: 'heading',
-      letterSpacing: fontsData.heading.letterSpacing,
-      lineHeight: fontsData.heading.lineHeight,
-      ...fontsData.heading.font[0],
-    });
-  fontsData?.body.font &&
-    fontsData.body.font?.length > 0 &&
-    fontCategories.push({
-      baseSize: fontsData.body.baseSize,
-      capitalize: fontsData.body.capitalize,
-      categoryName: 'body',
-      letterSpacing: fontsData.body.letterSpacing,
-      lineHeight: fontsData.body.lineHeight,
-      ...fontsData.body.font[0],
-    });
-  fontsData?.extra.font &&
-    fontsData.extra.font?.length > 0 &&
-    fontCategories.push({
-      baseSize: fontsData.extra.baseSize,
-      capitalize: fontsData.extra.capitalize,
-      categoryName: 'extra',
-      letterSpacing: fontsData.extra.letterSpacing,
-      lineHeight: fontsData.extra.lineHeight,
-      ...fontsData.extra.font[0],
-    });
+  fontCategories.push({
+    baseSize: fontsData?.heading.baseSize,
+    capitalize: fontsData?.heading.capitalize,
+    categoryName: 'heading',
+    fontName: fontsData?.heading.font?.[0]?.fontName || defaultFontFamily,
+    fontType: fontsData?.heading.font?.[0]?.fontType || 'unset',
+    letterSpacing: fontsData?.heading.letterSpacing,
+    lineHeight: fontsData?.heading.lineHeight,
+    ...fontsData?.heading.font?.[0],
+  });
+
+  fontCategories.push({
+    baseSize: fontsData?.body.baseSize,
+    capitalize: fontsData?.body.capitalize,
+    categoryName: 'body',
+    fontName: fontsData?.body.font?.[0]?.fontName || defaultFontFamily,
+    fontType: fontsData?.body.font?.[0]?.fontType || 'unset',
+    letterSpacing: fontsData?.body.letterSpacing,
+    lineHeight: fontsData?.body.lineHeight,
+    ...fontsData?.body.font?.[0],
+  });
+
+  fontCategories.push({
+    baseSize: fontsData?.extra.baseSize,
+    capitalize: fontsData?.extra.capitalize,
+    categoryName: 'extra',
+    fontName: fontsData?.extra.font?.[0]?.fontName || defaultFontFamily,
+    fontType: fontsData?.extra.font?.[0]?.fontType || 'unset',
+    letterSpacing: fontsData?.extra.letterSpacing,
+    lineHeight: fontsData?.extra.lineHeight,
+    ...fontsData?.extra.font?.[0],
+  });
 
   if (fontCategories?.length > 0) {
     return `
@@ -140,7 +145,7 @@ function generateCssFontVariables({fontsData}: {fontsData: FontsQuery}) {
     return fontCategories
       .map((fontCategory) => {
         return `
-        --${fontCategory.categoryName}-font-family: "${fontCategory.fontName}";
+        --${fontCategory.categoryName}-font-family: ${fontCategory.fontName};
         --${fontCategory.categoryName}-font-type: ${fontCategory.fontType};
         --${fontCategory.categoryName}-line-height: ${
           fontCategory.lineHeight ? fontCategory.lineHeight : 'unset'

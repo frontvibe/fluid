@@ -32,7 +32,7 @@ export function CmsSection(props: {
   const type = data._type;
   const Section = useMemo(() => sections[type], [type]);
 
-  if (data.settings.hide) return null;
+  if (data.settings?.hide) return null;
 
   return Section ? (
     <SectionWrapper data={data} type={props.type}>

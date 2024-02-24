@@ -124,7 +124,7 @@ function CartCheckoutActions({checkoutUrl}: {checkoutUrl?: string}) {
           {cartIsLoading ? (
             <IconLoader className="size-5 animate-spin" />
           ) : (
-            <span>{themeContent?.cart.proceedToCheckout}</span>
+            <span>{themeContent?.cart?.proceedToCheckout}</span>
           )}
         </a>
       </Button>
@@ -153,10 +153,10 @@ function CartSummary({
           layout === 'page' && 'grid gap-6',
         ])}
       >
-        <h2 className="sr-only">{themeContent?.cart.orderSummary}</h2>
+        <h2 className="sr-only">{themeContent?.cart?.orderSummary}</h2>
         <dl className="grid">
           <div className="flex items-center justify-between font-medium">
-            <span>{themeContent?.cart.subtotal}</span>
+            <span>{themeContent?.cart?.subtotal}</span>
             {cost?.subtotalAmount &&
               parseFloat(cost.subtotalAmount.amount) > 0 && (
                 <span>

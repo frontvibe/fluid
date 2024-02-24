@@ -104,7 +104,7 @@ function Badge(props: {cart?: CartApiQueryFragment; count: number}) {
       >
         <DrawerHeader className="px-6 py-5 shadow-sm shadow-foreground/10">
           <DrawerTitle className="flex items-center gap-4 font-body font-bold">
-            <span>{themeContent?.cart.heading}</span>
+            <span>{themeContent?.cart?.heading}</span>
           </DrawerTitle>
         </DrawerHeader>
         <Cart

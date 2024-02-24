@@ -112,7 +112,9 @@ export const COLOR_SCHEME_FRAGMENT = {
 */
 export const ANNOUCEMENT_BAR_FRAGMENT = {
   _key: q.string(),
+  externalLink: q.string().nullable(),
   link: LINK_REFERENCE_FRAGMENT,
+  openInNewTab: q.boolean().nullable(),
   text: q.string().nullable(),
 } satisfies Selection;
 
@@ -140,18 +142,22 @@ export const SETTINGS_FRAGMENT = {
     .nullable(),
   badgesSaleColorScheme: q('badgesSaleColorScheme')
     .deref()
-    .grab(COLOR_SCHEME_FRAGMENT),
+    .grab(COLOR_SCHEME_FRAGMENT)
+    .nullable(),
   badgesSoldOutColorScheme: q('badgesSoldOutColorScheme')
     .deref()
-    .grab(COLOR_SCHEME_FRAGMENT),
-  blogCards: q.object({
-    border: q.object(BORDER_FRAGMENT).nullable(),
-    shadow: q.object(SHADOW_FRAGMENT).nullable(),
-    style: z.enum(['standard', 'card']).nullable(),
-    textAlignment: z.enum(['left', 'center', 'right']).nullable(),
-  }),
-  buttonsBorder: q.object(BORDER_FRAGMENT),
-  buttonsShadow: q.object(SHADOW_FRAGMENT),
+    .grab(COLOR_SCHEME_FRAGMENT)
+    .nullable(),
+  blogCards: q
+    .object({
+      border: q.object(BORDER_FRAGMENT).nullable(),
+      shadow: q.object(SHADOW_FRAGMENT).nullable(),
+      style: z.enum(['standard', 'card']).nullable(),
+      textAlignment: z.enum(['left', 'center', 'right']).nullable(),
+    })
+    .nullable(),
+  buttonsBorder: q.object(BORDER_FRAGMENT).nullable(),
+  buttonsShadow: q.object(SHADOW_FRAGMENT).nullable(),
   cartCollection: q('cartCollection')
     .deref()
     .grab({
@@ -161,35 +167,44 @@ export const SETTINGS_FRAGMENT = {
       }),
     })
     .nullable(),
-  cartColorScheme: q('cartColorScheme').deref().grab(COLOR_SCHEME_FRAGMENT),
-  collectionCards: q.object({
-    border: q.object(BORDER_FRAGMENT).nullable(),
-    shadow: q.object(SHADOW_FRAGMENT).nullable(),
-    style: z.enum(['standard', 'card']).nullable(),
-    textAlignment: z.enum(['left', 'center', 'right']).nullable(),
-  }),
-  dropdownsAndPopupsBorder: q.object(BORDER_FRAGMENT),
-  dropdownsAndPopupsShadow: q.object(SHADOW_FRAGMENT),
+  cartColorScheme: q('cartColorScheme')
+    .deref()
+    .grab(COLOR_SCHEME_FRAGMENT)
+    .nullable(),
+  collectionCards: q
+    .object({
+      border: q.object(BORDER_FRAGMENT).nullable(),
+      shadow: q.object(SHADOW_FRAGMENT).nullable(),
+      style: z.enum(['standard', 'card']).nullable(),
+      textAlignment: z.enum(['left', 'center', 'right']).nullable(),
+    })
+    .nullable(),
+  dropdownsAndPopupsBorder: q.object(BORDER_FRAGMENT).nullable(),
+  dropdownsAndPopupsShadow: q.object(SHADOW_FRAGMENT).nullable(),
   facebook: q.string().nullable(),
   favicon: q('favicon').grab(SIMPLE_IMAGE_FRAGMENT).nullable(),
-  grid: q.object({
-    horizontalSpace: q.number(),
-    verticalSpace: q.number(),
-  }),
-  inputsBorder: q.object(BORDER_FRAGMENT),
-  inputsShadow: q.object(SHADOW_FRAGMENT),
+  grid: q
+    .object({
+      horizontalSpace: q.number(),
+      verticalSpace: q.number(),
+    })
+    .nullable(),
+  inputsBorder: q.object(BORDER_FRAGMENT).nullable(),
+  inputsShadow: q.object(SHADOW_FRAGMENT).nullable(),
   instagram: q.string().nullable(),
   linkedin: q.string().nullable(),
-  logo: q('logo').grab(IMAGE_FRAGMENT),
-  mediaBorder: q.object(BORDER_FRAGMENT),
-  mediaShadow: q.object(SHADOW_FRAGMENT),
+  logo: q('logo').grab(IMAGE_FRAGMENT).nullable(),
+  mediaBorder: q.object(BORDER_FRAGMENT).nullable(),
+  mediaShadow: q.object(SHADOW_FRAGMENT).nullable(),
   pinterest: q.string().nullable(),
-  productCards: q.object({
-    border: q.object(BORDER_FRAGMENT).nullable(),
-    shadow: q.object(SHADOW_FRAGMENT).nullable(),
-    style: z.enum(['standard', 'card']).nullable(),
-    textAlignment: z.enum(['left', 'center', 'right']).nullable(),
-  }),
+  productCards: q
+    .object({
+      border: q.object(BORDER_FRAGMENT).nullable(),
+      shadow: q.object(SHADOW_FRAGMENT).nullable(),
+      style: z.enum(['standard', 'card']).nullable(),
+      textAlignment: z.enum(['left', 'center', 'right']).nullable(),
+    })
+    .nullable(),
   showCurrencyCodes: q.boolean().nullable(),
   showTrailingZeros: q.array(q.string()).nullable(),
   siteName: q.string().nullable(),

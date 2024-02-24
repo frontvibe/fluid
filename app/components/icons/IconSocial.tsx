@@ -4,14 +4,14 @@ import {Icon} from './Icon';
 export const socials = [
   'facebook',
   'instagram',
-  'linkedin',
-  'pinterest',
-  'snapchat',
-  'tiktok',
-  'tumblr',
   'twitter',
-  'vimeo',
+  'tiktok',
   'youtube',
+  'pinterest',
+  'linkedin',
+  'snapchat',
+  'vimeo',
+  'tumblr',
 ] as const;
 
 export type Socials = (typeof socials)[number];

@@ -28,4 +28,4 @@
 # Dotenv and similar local-only files
 *.local
 
-/scripts/flag.txt
+/scripts/cache.json

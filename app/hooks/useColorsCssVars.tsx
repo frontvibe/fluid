@@ -2,6 +2,7 @@ import type {InferType} from 'groqd';
 
 import {darken, mix, readableColor, toRgba} from 'color2k';
 
+import type {FOOTER_SETTINGS_FRAGMENT} from '~/qroq/footers';
 import type {SETTINGS_FRAGMENT} from '~/qroq/fragments';
 import type {HEADER_QUERY} from '~/qroq/queries';
 import type {SECTION_SETTINGS_FRAGMENT} from '~/qroq/sections';
@@ -9,6 +10,7 @@ import type {SECTION_SETTINGS_FRAGMENT} from '~/qroq/sections';
 import {useSanityRoot} from './useSanityRoot';
 
 export type CmsSectionSettings = InferType<typeof SECTION_SETTINGS_FRAGMENT>;
+export type FooterSettings = InferType<typeof FOOTER_SETTINGS_FRAGMENT>;
 type HeaderQuery = InferType<typeof HEADER_QUERY>;
 type CartColorScheme = {
   colorScheme?: InferType<typeof SETTINGS_FRAGMENT.cartColorScheme>;
@@ -17,7 +19,11 @@ type Rgb = {b: number; g: number; r: number} | undefined;
 
 export function useColorsCssVars(props: {
   selector?: string;
-  settings?: CartColorScheme | CmsSectionSettings | HeaderQuery;
+  settings?:
+    | CartColorScheme
+    | CmsSectionSettings
+    | FooterSettings
+    | HeaderQuery;
 }) {
   const {settings} = props;
   const {data} = useSanityRoot();

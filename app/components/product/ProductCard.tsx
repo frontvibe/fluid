@@ -27,8 +27,8 @@ export function ProductCard(props: {
 }) {
   const {columns, product, skeleton} = props;
   const {data} = vercelStegaCleanAll(useSanityRoot());
-  const style = data?.settings?.productCards.style;
-  const textAlignment = data?.settings?.productCards.textAlignment || 'left';
+  const style = data?.settings?.productCards?.style;
+  const textAlignment = data?.settings?.productCards?.textAlignment || 'left';
   const variants = product?.variants?.nodes.length
     ? flattenConnection(product?.variants)
     : null;

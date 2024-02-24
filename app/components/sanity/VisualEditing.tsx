@@ -1,57 +1,25 @@
-import type {HistoryAdapterNavigate} from '@sanity/visual-editing';
-
-import {useFetcher, useLocation, useNavigate} from '@remix-run/react';
-import {enableVisualEditing} from '@sanity/visual-editing';
+import {useFetcher, useLocation} from '@remix-run/react';
+import {useLiveMode} from '@sanity/react-loader';
+import {VisualEditing as SanityVisualEditing} from '@sanity/visual-editing/remix';
 import {cx} from 'class-variance-authority';
-import {useEffect, useRef} from 'react';
 
 import {useIsInIframe} from '~/hooks/useIsInIframe';
 import {useSanityClient} from '~/hooks/useSanityClient';
-import {useLiveMode} from '~/lib/sanity/sanity.loader';
 
 export function VisualEditing() {
   const isInIframe = useIsInIframe();
-  const navigateRemix = useNavigate();
-  const location = useLocation();
-  const navigateComposerRef = useRef<HistoryAdapterNavigate>();
   const client = useSanityClient();
-
-  useEffect(() => {
-    const disable = enableVisualEditing({
-      history: {
-        subscribe: (navigate) => {
-          navigateComposerRef.current = navigate;
-          return () => {
-            navigateComposerRef.current = undefined;
-          };
-        },
-        update: (update) => {
-          if (update.type === 'push' || update.type === 'replace') {
-            navigateRemix(update.url, {replace: update.type === 'replace'});
-          } else if (update.type === 'pop') {
-            navigateRemix(-1);
-          }
-        },
-      },
-      zIndex: 999999,
-    });
-
-    return () => disable();
-  }, [navigateRemix]);
-
-  useEffect(() => {
-    if (navigateComposerRef.current) {
-      navigateComposerRef.current?.({
-        type: 'push',
-        url: `${location.pathname}${location.search}${location.hash}`,
-      });
-    }
-  }, [location.hash, location.pathname, location.search]);
-
   // Enable live queries
   useLiveMode({client});
 
-  return !isInIframe ? <ExitBanner /> : null;
+  return !isInIframe ? (
+    <>
+      <SanityVisualEditing />
+      <ExitBanner />
+    </>
+  ) : (
+    <SanityVisualEditing />
+  );
 }
 
 function ExitBanner() {

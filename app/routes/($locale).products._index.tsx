@@ -6,6 +6,7 @@ import {json} from '@shopify/remix-oxygen';
 
 import {ProductCardGrid} from '~/components/product/ProductCardGrid';
 import {ALL_PRODUCTS_QUERY} from '~/graphql/queries';
+import {useSanityRoot} from '~/hooks/useSanityRoot';
 
 const PAGE_BY = 8;
 
@@ -28,13 +29,18 @@ export async function loader({
 
 export default function AllProducts() {
   const data = useLoaderData<typeof loader>();
+  const themeContent = useSanityRoot().data?.themeContent;
   const products = data.products?.nodes.length
     ? flattenConnection(data.products)
     : [];
 
   return (
     <div className="container py-20">
-      <ProductCardGrid products={products} />
+      {products.length > 0 ? (
+        <ProductCardGrid products={products} />
+      ) : (
+        <p>{themeContent?.collection?.noProductFound}</p>
+      )}
     </div>
   );
 }

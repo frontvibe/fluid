@@ -131,6 +131,10 @@ export default defineType({
           name: 'noProductFound',
           type: 'internationalizedArrayString',
         }),
+        defineField({
+          name: 'noCollectionFound',
+          type: 'internationalizedArrayString',
+        }),
       ],
     }),
     defineField({
@@ -187,42 +191,6 @@ export default defineType({
       ],
     }),
   ],
-  initialValue: {
-    cart: {
-      view: [
-        {
-          _key: 'en',
-          value: 'View cart',
-        },
-      ],
-      heading: [
-        {
-          _key: 'en',
-          value: 'Your Cart',
-        },
-      ],
-    },
-    product: {
-      addToCart: [
-        {
-          _key: 'en',
-          value: 'Add to cart',
-        },
-      ],
-      souldOut: [
-        {
-          _key: 'en',
-          value: 'Sold out',
-        },
-      ],
-      quantitySelector: [
-        {
-          _key: 'en',
-          value: 'Quantity selector',
-        },
-      ],
-    },
-  },
   preview: {
     prepare: () => ({title: 'Theme Content'}),
   },

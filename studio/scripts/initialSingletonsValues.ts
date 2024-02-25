@@ -289,6 +289,7 @@ export const initialSingletonsValues = {
       loadPrevious: generateIntString('Load previous'),
       loading: generateIntString('Loading...'),
       noProductFound: generateIntString('No product found'),
+      noCollectionFound: generateIntString('No collection found'),
       sortBestSelling: generateIntString('Best selling'),
       sortBy: generateIntString('Sort by:'),
       sortFeatured: generateIntString('Featured'),

@@ -4,11 +4,21 @@ import {ProductCardGrid} from './ProductCardGrid';
 
 export function RelatedProducts(props: {
   data: ProductRecommendationsQuery | null;
+  heading?: null | string;
 }) {
   const {data} = props;
   const products = data ? getRecommendedProducts(data) : [];
 
-  return <ProductCardGrid products={products} />;
+  if (products.length === 0) return null;
+
+  return (
+    <>
+      {props.heading && <h2>{props.heading}</h2>}
+      <div className="mt-4">
+        <ProductCardGrid products={products} />
+      </div>
+    </>
+  );
 }
 
 function getRecommendedProducts(data: ProductRecommendationsQuery) {

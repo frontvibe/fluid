@@ -43,6 +43,10 @@ export const THEME_CONTENT_FRAGMENT = {
       ],
       loadPrevious: [getIntValue('loadPrevious'), q.string().nullable()],
       loading: [getIntValue('loading'), q.string().nullable()],
+      noCollectionFound: [
+        getIntValue('noCollectionFound'),
+        q.string().nullable(),
+      ],
       noProductFound: [getIntValue('noProductFound'), q.string().nullable()],
       sortBestSelling: [getIntValue('sortBestSelling'), q.string().nullable()],
       sortBy: [getIntValue('sortBy'), q.string().nullable()],

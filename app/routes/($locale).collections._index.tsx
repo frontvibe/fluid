@@ -6,6 +6,7 @@ import {json} from '@shopify/remix-oxygen';
 
 import {CollectionListGrid} from '~/components/CollectionListGrid';
 import {COLLECTIONS_QUERY} from '~/graphql/queries';
+import {useSanityRoot} from '~/hooks/useSanityRoot';
 
 const PAGINATION_SIZE = 4;
 
@@ -29,10 +30,15 @@ export const loader = async ({
 
 export default function Collections() {
   const data = useLoaderData<typeof loader>();
+  const themeContent = useSanityRoot().data?.themeContent;
 
   return (
     <div className="container py-20">
-      <CollectionListGrid collections={data.collections} />
+      {data.collections?.nodes.length > 0 ? (
+        <CollectionListGrid collections={data.collections} />
+      ) : (
+        <p>{themeContent?.collection?.noCollectionFound}</p>
+      )}
     </div>
   );
 }

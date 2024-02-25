@@ -75,8 +75,7 @@ async function createSingletons() {
   });
 
   initialDocumentsValues.forEach((doc: any) => {
-    // transaction.createIfNotExists(doc);
-    transaction.createOrReplace(doc);
+    transaction.createIfNotExists(doc);
   });
 
   await transaction

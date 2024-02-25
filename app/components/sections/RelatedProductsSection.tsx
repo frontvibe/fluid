@@ -25,11 +25,11 @@ export function RelatedProductsSection(
   // Todo => Add carousel
   return (
     <div className="container">
-      {data.heading && <h2>{data.heading}</h2>}
-      <div className="mt-4">
-        <Suspense
-          fallback={
-            <Skeleton>
+      <Suspense
+        fallback={
+          <Skeleton>
+            {data.heading && <h2>{data.heading}</h2>}
+            <div className="mt-4">
               <ProductCardGrid
                 columns={{
                   desktop: props.data.desktopColumns,
@@ -38,12 +38,15 @@ export function RelatedProductsSection(
                   cardsNumber: props.data.maxProducts || 3,
                 }}
               />
-            </Skeleton>
-          }
-        >
-          <Await
-            errorElement={
-              <Skeleton isError>
+            </div>
+          </Skeleton>
+        }
+      >
+        <Await
+          errorElement={
+            <Skeleton isError>
+              {data.heading && <h2>{data.heading}</h2>}
+              <div className="mt-4">
                 <ProductCardGrid
                   columns={{
                     desktop: props.data.desktopColumns,
@@ -52,14 +55,14 @@ export function RelatedProductsSection(
                     cardsNumber: props.data.maxProducts || 3,
                   }}
                 />
-              </Skeleton>
-            }
-            resolve={relatedProductsPromise}
-          >
-            {(result) => <RelatedProducts data={result} />}
-          </Await>
-        </Suspense>
-      </div>
+              </div>
+            </Skeleton>
+          }
+          resolve={relatedProductsPromise}
+        >
+          {(result) => <RelatedProducts data={result} heading={data.heading} />}
+        </Await>
+      </Suspense>
     </div>
   );
 }

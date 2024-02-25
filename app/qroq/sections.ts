@@ -170,7 +170,7 @@ export const RELATED_PRODUCTS_SECTION_FRAGMENT = {
   _key: q.string().nullable(),
   _type: q.literal('relatedProductsSection'),
   desktopColumns: q.number().nullable(),
-  heading: [getIntValue('heading'), q.string()],
+  heading: [getIntValue('heading'), q.string().nullable()],
   maxProducts: q.number().nullable(),
   settings: SECTION_SETTINGS_FRAGMENT,
 } satisfies Selection;

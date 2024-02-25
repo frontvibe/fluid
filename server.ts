@@ -30,18 +30,14 @@ export default {
     executionContext: ExecutionContext,
   ): Promise<Response> {
     try {
+      const envVars = envVariables(env);
+      const isDev = envVars.NODE_ENV === 'development';
+      const locale = getLocaleFromRequest(request);
+      const waitUntil = executionContext.waitUntil.bind(executionContext);
+
       /*
        * Open a cache instance in the worker and a custom session instance.
        */
-      if (!env.SESSION_SECRET) {
-        throw new Error('SESSION_SECRET environment variable is not set');
-      }
-
-      const envVars = envVariables(env);
-      const isDev = envVars.NODE_ENV === 'development';
-      const origin = new URL(request.url).origin;
-      const locale = getLocaleFromRequest(request);
-      const waitUntil = executionContext.waitUntil.bind(executionContext);
       const [cache, session, sanitySession] = await Promise.all([
         caches.open('hydrogen'),
         HydrogenSession.init(request, [env.SESSION_SECRET]),
@@ -125,9 +121,16 @@ export default {
 
       return response;
     } catch (error) {
+      const errorString = error instanceof Error ? error.toString() : '';
+      let message = 'An unexpected error occurred';
+
+      if (errorString.includes('Missing environment variable')) {
+        message = 'Missing environment variable';
+      }
+
       // eslint-disable-next-line no-console
       console.error(error);
-      return new Response('An unexpected error occurred', {status: 500});
+      return new Response(message, {status: 500});
     }
   },
 };

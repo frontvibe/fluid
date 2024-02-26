@@ -1,10 +1,10 @@
 import {useFetcher, useLocation} from '@remix-run/react';
-import {useLiveMode} from '@sanity/react-loader';
 import {VisualEditing as SanityVisualEditing} from '@sanity/visual-editing/remix';
 import {cx} from 'class-variance-authority';
 
 import {useIsInIframe} from '~/hooks/useIsInIframe';
 import {useSanityClient} from '~/hooks/useSanityClient';
+import {useLiveMode} from '~/lib/sanity/sanity.loader';
 
 export function VisualEditing() {
   const isInIframe = useIsInIframe();

@@ -29,7 +29,6 @@ import shopifyCollectionRule from './objects/shopify/shopifyCollectionRule';
 import paddingObject from './objects/global/padding';
 import footersList from './objects/global/footersList';
 import socialLinksOnly from './objects/footers/socialLinksOnly';
-import overlayOpacity from './objects/global/overlayOpacity';
 import contentAlignment from './objects/global/contentAlignment';
 import featuredCollection from './objects/sections/featuredCollectionSection';
 import collectionListSection from './objects/sections/collectionListSection';
@@ -91,7 +90,6 @@ const objects = [
   shopifyCollection,
   shopifyCollectionRule,
   paddingObject,
-  overlayOpacity,
   contentAlignment,
   richtext,
   aspectRatios,

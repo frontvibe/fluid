@@ -33,7 +33,13 @@ export default defineField({
     }),
     defineField({
       name: 'overlayOpacity',
-      type: 'overlayOpacity',
+      type: 'rangeSlider',
+      options: {
+        min: 0,
+        max: 100,
+        suffix: '%',
+      },
+      validation: (Rule: any) => Rule.min(0).max(100),
     }),
     defineField({
       type: 'sectionSettings',

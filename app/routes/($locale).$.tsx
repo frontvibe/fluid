@@ -61,7 +61,9 @@ export async function loader({context, params, request}: LoaderFunctionArgs) {
 
 export default function PageRoute() {
   const {page} = useLoaderData<typeof loader>();
-  const {data, encodeDataAttribute} = useSanityData(page);
+  const {data, encodeDataAttribute} = useSanityData({
+    initial: page,
+  });
 
   return data?.sections && data.sections.length > 0
     ? data.sections.map((section) => (

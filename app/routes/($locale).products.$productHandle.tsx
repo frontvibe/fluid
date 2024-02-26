@@ -94,7 +94,7 @@ export async function loader({context, params, request}: LoaderFunctionArgs) {
 
 export default function Product() {
   const {cmsProduct, product} = useLoaderData<typeof loader>();
-  const {data, encodeDataAttribute} = useSanityData(cmsProduct);
+  const {data, encodeDataAttribute} = useSanityData({initial: cmsProduct});
   const template = data?.product?.template || data?.defaultProductTemplate;
 
   return (

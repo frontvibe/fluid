@@ -4,6 +4,11 @@ import fs from 'fs';
 import {initialSingletonsValues} from './initialSingletonsValues';
 import {initialDocumentsValues} from './initialDocumentsValues';
 
+type JsonCache = {
+  projectId: string;
+  description: string;
+};
+
 /**
  * This script will create one or many "singleton" documents for each language
  * It works by appending the language ID to the document ID
@@ -33,9 +38,18 @@ if (!projectId) {
 }
 
 // Read the JSON file
-const jsonCache = fs.existsSync(JSON_FILE_PATH)
-  ? JSON.parse(fs.readFileSync(JSON_FILE_PATH, 'utf8'))
-  : {};
+let jsonCache: JsonCache = {
+  projectId: '',
+  description: '',
+};
+
+if (fs.existsSync(JSON_FILE_PATH)) {
+  const data = JSON.parse(fs.readFileSync(JSON_FILE_PATH, 'utf8')) as JsonCache;
+
+  if (data.projectId) {
+    jsonCache = data;
+  }
+}
 
 // Check if the current projectId already exists in the JSON
 if (jsonCache.projectId === projectId) {

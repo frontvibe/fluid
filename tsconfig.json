@@ -1,6 +1,5 @@
 {
   "include": ["./**/*.d.ts", "./**/*.ts", "./**/*.tsx"],
-  "exclude": ["studio/*"],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2022"],
     "isolatedModules": true,
@@ -17,8 +16,8 @@
     "baseUrl": ".",
     "types": ["@shopify/oxygen-workers-types"],
     "paths": {
-      "~/*": ["app/*"],
+      "~/*": ["app/*"]
     },
-    "noEmit": true,
-  },
+    "noEmit": true
+  }
 }

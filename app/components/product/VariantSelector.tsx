@@ -7,7 +7,7 @@ import {Link, useNavigate} from '@remix-run/react';
 import {parseGid} from '@shopify/hydrogen';
 import {cx} from 'class-variance-authority';
 import {m} from 'framer-motion';
-import {useMemo} from 'react';
+import {useCallback, useMemo} from 'react';
 
 import {useIsHydrated} from '~/hooks/useIsHydrated';
 import {useOptimisticNavigationData} from '~/hooks/useOptimisticNavigationData';
@@ -142,16 +142,19 @@ function Pills(props: {
     values = optimisticValues;
   }
 
-  const handleSelectVariant = (value: string, search: string) => {
-    navigate(search, {
-      preventScrollReset: true,
-      replace: true,
-      state: {
-        optimisticData: value,
-        optimisticId,
-      },
-    });
-  };
+  const handleSelectVariant = useCallback(
+    (value: string, search: string) => {
+      navigate(search, {
+        preventScrollReset: true,
+        replace: true,
+        state: {
+          optimisticData: value,
+          optimisticId,
+        },
+      });
+    },
+    [navigate, optimisticId],
+  );
 
   return (
     <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-3">
@@ -198,7 +201,7 @@ function Pill(props: {
   const layoutId = handle! + option.name + section?.id;
 
   const buttonClass = cx([
-    'select-none rounded-full py-[.375rem] text-sm font-medium',
+    'select-none rounded-full py-[.375rem] text-sm font-medium disabled:cursor-pointer',
     'focus-visible:outline-none focus-visible:outline-2 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
   ]);
   const bubbleClass = cx(['absolute inset-0 z-0 bg-accent']);

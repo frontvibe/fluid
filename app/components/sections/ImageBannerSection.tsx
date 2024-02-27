@@ -10,7 +10,6 @@ import {
   BannerMediaOverlay,
 } from '../Banner';
 import {SanityImage} from '../sanity/SanityImage';
-import {Button} from '../ui/Button';
 
 type ImageBannerSectionProps = TypeFromSelection<
   typeof IMAGE_BANNER_SECTION_FRAGMENT
@@ -22,8 +21,6 @@ export function ImageBannerSection(
   const {data} = props;
   const {contentAlignment, overlayOpacity, title} = data;
 
-  if (!title) return null;
-
   // Todo: add encodeDataAttribute to SanityImage
   return (
     <Banner height={data.bannerHeight}>
@@ -32,6 +29,7 @@ export function ImageBannerSection(
           aspectRatio="16/9"
           data={data.backgroundImage}
           decoding="sync"
+          draggable={false}
           fetchpriority="high"
           showBorder={false}
           showShadow={false}
@@ -39,9 +37,11 @@ export function ImageBannerSection(
         />
       </BannerMedia>
       <BannerMediaOverlay opacity={overlayOpacity} />
-      <BannerContent contentAlignment={contentAlignment}>
-        <h1>{title}</h1>
-      </BannerContent>
+      {title && (
+        <BannerContent contentAlignment={contentAlignment}>
+          <h1>{title}</h1>
+        </BannerContent>
+      )}
     </Banner>
   );
 }

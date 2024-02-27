@@ -42,7 +42,7 @@ export function Logo(props: {
         ...logo,
         altText: siteName || '',
       }}
-      sanityEncodeData={encodeData}
+      dataSanity={encodeData}
       {...props}
     />
   );

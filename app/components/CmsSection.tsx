@@ -35,7 +35,11 @@ export function CmsSection(props: {
   if (data.settings?.hide) return null;
 
   return Section ? (
-    <SectionWrapper data={data} type={props.type}>
+    <SectionWrapper
+      data={data}
+      encodeDataAttribute={encodeDataAttribute}
+      type={props.type}
+    >
       <Suspense>
         <Section data={data} encodeDataAttribute={encodeDataAttribute} />
       </Suspense>
@@ -48,6 +52,7 @@ export function CmsSection(props: {
 function SectionWrapper(props: {
   children: React.ReactNode;
   data: CmsSectionsProps;
+  encodeDataAttribute?: EncodeDataAttributeCallback;
   type?: CmsSectionType;
 }) {
   const {children, data} = props;
@@ -78,7 +83,9 @@ function SectionWrapper(props: {
       )}
     </footer>
   ) : (
-    <SectionContext.Provider value={{id: data._key}}>
+    <SectionContext.Provider
+      value={{encodeDataAttribute: props.encodeDataAttribute, id: data._key}}
+    >
       <section
         className="section-padding relative bg-background text-foreground [content-visibility:auto]"
         data-section-type={isDev ? sectionType : null}
@@ -96,6 +103,7 @@ function SectionWrapper(props: {
 }
 
 export const SectionContext = createContext<{
+  encodeDataAttribute?: EncodeDataAttributeCallback;
   id: null | string;
 } | null>(null);
 

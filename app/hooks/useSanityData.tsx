@@ -6,7 +6,6 @@ import type {
 import type {EncodeDataAttributeCallback} from '@sanity/react-loader';
 
 import {useMatches, useRouteLoaderData} from '@remix-run/react';
-import {useEncodeDataAttribute} from '@sanity/react-loader';
 
 import {useQuery} from '~/lib/sanity/sanity.loader';
 import {useRootLoaderData} from '~/root';
@@ -52,15 +51,12 @@ export function useSanityData<T extends Initial>({
   const query = sanity?.query || '';
 
   // Todo: find a way to avoid using useQuery hook in production when STEGA is disabled
-  const {data, loading, sourceMap} = useQuery(query, params, {
-    initial: initial as any,
-  });
-
-  // `encodeDataAttribute` is a helpful utility for adding custom `data-sanity` attributes.
-  const encodeDataAttribute = useEncodeDataAttribute(
-    data,
-    sourceMap,
-    studioUrl,
+  const {data, encodeDataAttribute, loading, sourceMap} = useQuery(
+    query,
+    params,
+    {
+      initial: initial as any,
+    },
   );
 
   return {data, encodeDataAttribute, loading, sourceMap} as {

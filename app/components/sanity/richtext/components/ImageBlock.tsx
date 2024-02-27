@@ -38,6 +38,8 @@ export function ImageBlock(
     },
   });
 
+  if (!props._ref || !props.url || !props.width) return null;
+
   return (
     <SanityImage
       className={alignmentVariants({

@@ -1,4 +1,4 @@
-import {defineField, defineType} from 'sanity';
+import {defineArrayMember, defineField, defineType} from 'sanity';
 import {getAllCountries} from '../../../countries';
 
 const GROUPS = [
@@ -268,7 +268,7 @@ export default defineType({
       description:
         'Select which countries where you want to show trailing zeros ($15.00).',
       type: 'array',
-      of: [{type: 'string'}],
+      of: [defineArrayMember({type: 'string'})],
       options: {
         list: getAllCountries().map((country) => {
           return {

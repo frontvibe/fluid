@@ -1,12 +1,12 @@
 import {Megaphone} from 'lucide-react';
-import {defineField} from 'sanity';
+import {defineArrayMember, defineField} from 'sanity';
 import {internalLinkField} from './headerNavigation';
 
 export default defineField({
   type: 'array',
   name: 'announcementBar',
   of: [
-    {
+    defineArrayMember({
       type: 'object',
       name: 'announcement',
       icon: Megaphone,
@@ -27,6 +27,6 @@ export default defineField({
           type: 'boolean',
         }),
       ],
-    },
+    }),
   ],
 });

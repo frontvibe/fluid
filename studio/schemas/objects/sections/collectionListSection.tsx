@@ -1,5 +1,5 @@
 import {EyeOff, LayoutGrid} from 'lucide-react';
-import {defineField} from 'sanity';
+import {defineArrayMember, defineField} from 'sanity';
 
 export default defineField({
   name: 'collectionListSection',
@@ -13,7 +13,7 @@ export default defineField({
         layout: 'grid',
       },
       of: [
-        defineField({
+        defineArrayMember({
           name: 'collection',
           type: 'reference',
           to: [{type: 'collection'}],

@@ -6,14 +6,14 @@ import {
   Text,
   Type,
 } from 'lucide-react';
-import {defineField} from 'sanity';
+import {defineArrayMember, defineField} from 'sanity';
 import {internalLinkFields} from './richtext';
 
 export default defineField({
   name: 'productRichtext',
   type: 'array',
   of: [
-    {
+    defineArrayMember({
       type: 'block',
       marks: {
         decorators: [
@@ -48,8 +48,8 @@ export default defineField({
           },
         ],
       },
-    },
-    {
+    }),
+    defineArrayMember({
       name: 'shopifyTitle',
       title: 'Title',
       type: 'object',
@@ -69,8 +69,8 @@ export default defineField({
           };
         },
       },
-    },
-    {
+    }),
+    defineArrayMember({
       name: 'shopifyDescription',
       title: 'Description',
       type: 'object',
@@ -90,8 +90,8 @@ export default defineField({
           };
         },
       },
-    },
-    {
+    }),
+    defineArrayMember({
       name: 'price',
       type: 'object',
       fields: [
@@ -110,8 +110,8 @@ export default defineField({
           };
         },
       },
-    },
-    {
+    }),
+    defineArrayMember({
       name: 'addToCartButton',
       type: 'object',
       fields: [
@@ -132,6 +132,6 @@ export default defineField({
           };
         },
       },
-    },
+    }),
   ],
 });

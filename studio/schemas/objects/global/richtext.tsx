@@ -1,4 +1,4 @@
-import {defineField} from 'sanity';
+import {defineArrayMember, defineField} from 'sanity';
 import {internalLinkField} from './headerNavigation';
 import {ExternalLink, Link, MousePointerSquare} from 'lucide-react';
 
@@ -15,7 +15,7 @@ export default defineField({
   name: 'richtext',
   type: 'array',
   of: [
-    {
+    defineArrayMember({
       type: 'block',
       marks: {
         decorators: [
@@ -50,8 +50,8 @@ export default defineField({
           },
         ],
       },
-    },
-    {
+    }),
+    defineArrayMember({
       type: 'image',
       fields: [
         {
@@ -91,8 +91,8 @@ export default defineField({
         maxWidth: 900,
         alignment: 'center',
       },
-    },
-    {
+    }),
+    defineArrayMember({
       name: 'button',
       type: 'object',
       fields: [
@@ -113,6 +113,6 @@ export default defineField({
           };
         },
       },
-    },
+    }),
   ],
 });

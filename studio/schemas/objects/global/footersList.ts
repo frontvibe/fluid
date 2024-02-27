@@ -1,4 +1,4 @@
-import {ArrayOfObjectsInputProps, defineField} from 'sanity';
+import {ArrayOfObjectsInputProps, defineArrayMember, defineField} from 'sanity';
 
 import SectionsListInput from '../../../components/SectionsListInput';
 
@@ -8,9 +8,9 @@ export default defineField({
   type: 'array',
   group: 'pagebuilder',
   of: [
-    {
+    defineArrayMember({
       type: 'socialLinksOnly',
-    },
+    }),
   ],
   components: {
     input: (props: ArrayOfObjectsInputProps) =>

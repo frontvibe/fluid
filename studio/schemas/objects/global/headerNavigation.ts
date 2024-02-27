@@ -1,4 +1,4 @@
-import {defineField} from 'sanity';
+import {defineArrayMember, defineField} from 'sanity';
 import {ExternalLink, Link, MenuSquare} from 'lucide-react';
 
 export const internalLinkField = defineField({
@@ -65,7 +65,10 @@ export const nestedNav = {
     defineField({
       name: 'childLinks',
       type: 'array',
-      of: [internalLinkObject, externalLinkObject],
+      of: [
+        defineArrayMember(internalLinkObject),
+        defineArrayMember(externalLinkObject),
+      ],
     }),
   ],
 };
@@ -73,5 +76,9 @@ export const nestedNav = {
 export default defineField({
   name: 'headerNavigation',
   type: 'array',
-  of: [internalLinkObject, externalLinkObject, nestedNav],
+  of: [
+    defineArrayMember(internalLinkObject),
+    defineArrayMember(externalLinkObject),
+    defineArrayMember(nestedNav),
+  ],
 });

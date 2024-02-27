@@ -1,4 +1,4 @@
-import {defineField} from 'sanity';
+import {defineArrayMember, defineField} from 'sanity';
 
 export default defineField({
   name: 'shopifyProduct',
@@ -138,9 +138,9 @@ export default defineField({
       title: 'Options',
       type: 'array',
       of: [
-        {
+        defineArrayMember({
           type: 'option',
-        },
+        }),
       ],
     }),
     // Variants
@@ -150,12 +150,12 @@ export default defineField({
       title: 'Variants',
       type: 'array',
       of: [
-        {
+        defineArrayMember({
           title: 'Variant',
           type: 'reference',
           weak: true,
           to: [{type: 'productVariant'}],
-        },
+        }),
       ],
     }),
   ],

@@ -1,5 +1,5 @@
 import {EyeOff, GalleryHorizontal} from 'lucide-react';
-import {defineField} from 'sanity';
+import {defineArrayMember, defineField} from 'sanity';
 
 export default defineField({
   name: 'carouselSection',
@@ -55,7 +55,7 @@ export default defineField({
       name: 'slides',
       type: 'array',
       of: [
-        defineField({
+        defineArrayMember({
           name: 'slide',
           type: 'object',
           fields: [

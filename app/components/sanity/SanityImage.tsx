@@ -10,10 +10,11 @@ export function SanityImage({
   aspectRatio,
   className,
   data,
+  dataSanity,
   decoding = 'async',
+  draggable,
   fetchpriority,
   loading,
-  sanityEncodeData,
   showBorder = true,
   showShadow = true,
   sizes,
@@ -22,10 +23,11 @@ export function SanityImage({
   aspectRatio?: string;
   className?: string;
   data?: SanityImageFragment | null;
+  dataSanity?: string;
   decoding?: 'async' | 'auto' | 'sync';
+  draggable?: boolean;
   fetchpriority?: 'auto' | 'high' | 'low';
   loading?: 'eager' | 'lazy';
-  sanityEncodeData?: string;
   showBorder?: boolean;
   showShadow?: boolean;
   sizes?: null | string;
@@ -121,8 +123,9 @@ export function SanityImage({
           '!p-0',
         )}
         // Adding this attribute makes sure the image is always clickable in the Presentation tool
-        data-sanity={sanityEncodeData}
+        data-sanity={dataSanity}
         decoding={decoding}
+        draggable={draggable}
         fetchpriority={fetchpriority}
         height={aspectRatioHeight || data.height}
         loading={loading}

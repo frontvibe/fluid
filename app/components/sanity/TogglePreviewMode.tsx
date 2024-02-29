@@ -7,7 +7,7 @@ import {useCallback, useEffect} from 'react';
 |--------------------------------------------------------------------------
 | This component is used to toggle the Sanity preview mode.
 | A keyboard shortcut [cmd + ctrl + p] will toggle the preview mode.
-| The SANITY_STUDIO_USE_STEGA environment variable must be set to true.
+| The SANITY_STUDIO_USE_PREVIEW_MODE environment variable must be set to true.
 |
 */
 export function TogglePreviewMode() {

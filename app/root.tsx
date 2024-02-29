@@ -129,7 +129,7 @@ export async function loader({context}: LoaderFunctionArgs) {
         SANITY_STUDIO_DATASET: env.SANITY_STUDIO_DATASET,
         SANITY_STUDIO_PROJECT_ID: env.SANITY_STUDIO_PROJECT_ID,
         SANITY_STUDIO_URL: env.SANITY_STUDIO_URL,
-        SANITY_STUDIO_USE_STEGA: env.SANITY_STUDIO_USE_STEGA,
+        SANITY_STUDIO_USE_PREVIEW_MODE: env.SANITY_STUDIO_USE_PREVIEW_MODE,
       },
       isLoggedIn,
       locale,

@@ -82,7 +82,7 @@ export default {
           projectId: envVars.SANITY_STUDIO_PROJECT_ID,
           studioUrl: envVars.SANITY_STUDIO_URL,
           useCdn: !envVars.NODE_ENV || envVars.NODE_ENV === 'production',
-          useStega: envVars.SANITY_STUDIO_USE_STEGA,
+          useStega: envVars.SANITY_STUDIO_USE_PREVIEW_MODE,
         },
         waitUntil,
       });

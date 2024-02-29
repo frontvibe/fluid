@@ -29,7 +29,7 @@ export async function action({context, request}: ActionFunctionArgs) {
 
 export async function loader({context, request}: LoaderFunctionArgs) {
   const {env, sanitySession} = context;
-  const useStega = env.SANITY_STUDIO_USE_STEGA === 'true';
+  const useStega = env.SANITY_STUDIO_USE_PREVIEW_MODE === 'true';
 
   if (!sanitySession) {
     notFound();

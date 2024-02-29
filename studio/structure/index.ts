@@ -19,7 +19,7 @@ export const structure: StructureResolver = (S, context) => {
       S.documentTypeListItem('page').icon(PanelsTopLeft),
       products(S, context),
       collections(S, context),
-      S.documentTypeListItem('blogPost').icon(IconBlog),
+      // S.documentTypeListItem('blogPost').icon(IconBlog),
       S.divider(),
       singleton(S, SINGLETONS.header),
       singleton(S, SINGLETONS.footer),

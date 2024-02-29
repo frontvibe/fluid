@@ -5,15 +5,15 @@
   "version": "0.0.0",
   "scripts": {
     "build": "shopify hydrogen build",
-    "dev": "shopify hydrogen dev --codegen",
-    "dev:all": "run-p dev sanity:dev",
+    "dev": "run-p dev:app dev:studio",
+    "dev:app": "shopify hydrogen dev --codegen",
+    "dev:studio": "cd ./studio && run-s dev",
     "preview": "npm run build && shopify hydrogen preview",
     "lint": "eslint --no-error-on-unmatched-pattern --ext .js,.ts,.jsx,.tsx .",
     "lint:fix": "npm run lint -- --fix",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
     "typecheck": "tsc --noEmit",
-    "sanity:dev": "cd ./studio && run-s dev",
     "sanity:deploy": "cd ./studio && run-s deploy"
   },
   "dependencies": {

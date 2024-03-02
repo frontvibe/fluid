@@ -31,7 +31,7 @@ const devOnlyPlugins = [
   }),
   groqdPlaygroundTool(),
 ];
-const SANITY_STUDIO_PREVIEW_URL = isDev
+const SANITY_STUDIO_PRODUCTION_URL = isDev
   ? localePreviewUrl
   : previewUrl
     ? previewUrl
@@ -52,7 +52,7 @@ export default defineConfig({
     media(),
     presentationTool({
       // Required: set the base URL to the preview location in the front end
-      previewUrl: `${SANITY_STUDIO_PREVIEW_URL}/sanity/preview`,
+      previewUrl: `${SANITY_STUDIO_PRODUCTION_URL}/sanity/preview`,
       locate,
       icon: PreviewIcon,
       title: 'Preview',

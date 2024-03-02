@@ -84,6 +84,7 @@ export default {
           useCdn: !envVars.NODE_ENV || envVars.NODE_ENV === 'production',
           useStega: envVars.SANITY_STUDIO_USE_PREVIEW_MODE,
         },
+        isPreviewMode: sanityPreviewMode,
         waitUntil,
       });
 

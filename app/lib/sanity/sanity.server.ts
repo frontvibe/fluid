@@ -13,8 +13,6 @@ import {CacheShort, createWithCache} from '@shopify/hydrogen';
 import {getSanityClient} from './client';
 import {queryStore} from './sanity.loader';
 
-const {loadQuery} = queryStore;
-
 type CreateSanityClientOptions = {
   cache: Cache;
   config: {
@@ -25,6 +23,7 @@ type CreateSanityClientOptions = {
     useCdn: boolean | undefined;
     useStega: string | undefined;
   };
+  isPreviewMode: boolean;
   waitUntil: ExecutionContext['waitUntil'];
 };
 
@@ -48,10 +47,8 @@ export type Sanity = {
   }>;
 };
 
-let sanityServerClientHasBeenInitialized = false;
-
 export function createSanityClient(options: CreateSanityClientOptions) {
-  const {cache, config, waitUntil} = options;
+  const {cache, config, isPreviewMode, waitUntil} = options;
   const {apiVersion, dataset, projectId, studioUrl, useCdn, useStega} = config;
 
   if (
@@ -69,13 +66,11 @@ export function createSanityClient(options: CreateSanityClientOptions) {
     projectId,
     studioUrl,
     useCdn: useCdn ?? true,
-    useStega: useStega ?? 'true',
+    useStega: isPreviewMode && useStega === 'true' ? useStega : 'false',
   });
 
-  if (!sanityServerClientHasBeenInitialized) {
-    queryStore.setServerClient(client);
-    sanityServerClientHasBeenInitialized = true;
-  }
+  queryStore.setServerClient(client);
+  const {loadQuery} = queryStore;
 
   const sanity: Sanity = {
     client,

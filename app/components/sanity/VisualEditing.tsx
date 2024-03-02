@@ -1,10 +1,17 @@
-import {useFetcher, useLocation} from '@remix-run/react';
+import {
+  useFetcher,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from '@remix-run/react';
 import {VisualEditing as SanityVisualEditing} from '@sanity/visual-editing/remix';
 import {cx} from 'class-variance-authority';
+import {useCallback, useEffect} from 'react';
 
 import {useIsInIframe} from '~/hooks/useIsInIframe';
 import {useSanityClient} from '~/hooks/useSanityClient';
 import {useLiveMode} from '~/lib/sanity/sanity.loader';
+import {useRootLoaderData} from '~/root';
 
 export function VisualEditing() {
   const isInIframe = useIsInIframe();
@@ -25,6 +32,27 @@ export function VisualEditing() {
 function ExitBanner() {
   const fetcher = useFetcher({key: 'exit-sanity-preview'});
   const location = useLocation();
+  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const reload = searchParams.get('reload') === 'true';
+  const {env} = useRootLoaderData();
+  const isDev = env.NODE_ENV === 'development';
+
+  // Reload page to reset sanity loaders and enable preview mode
+  const handleReloadPage = useCallback(() => {
+    searchParams.delete('reload');
+    setSearchParams(searchParams);
+    if (isDev) {
+      setTimeout(() => {
+        navigate(0);
+      }, 1000);
+    }
+  }, [navigate, searchParams, isDev, setSearchParams]);
+
+  useEffect(() => {
+    if (!reload) return;
+    handleReloadPage();
+  }, [reload, handleReloadPage]);
 
   return (
     <section className="bg-[--background] text-[--foreground] [--background:#16120C] [--foreground:#FFE7B3]">

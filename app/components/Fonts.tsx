@@ -145,7 +145,9 @@ function generateCssFontVariables({fontsData}: {fontsData: FontsQuery}) {
     return fontCategories
       .map((fontCategory) => {
         return `
-        --${fontCategory.categoryName}-font-family: ${fontCategory.fontName};
+        --${fontCategory.categoryName}-font-family: ${
+          fontCategory.fontName ? fontCategory.fontName : 'unset'
+        };
         --${fontCategory.categoryName}-font-type: ${fontCategory.fontType};
         --${fontCategory.categoryName}-line-height: ${
           fontCategory.lineHeight ? fontCategory.lineHeight : 'unset'

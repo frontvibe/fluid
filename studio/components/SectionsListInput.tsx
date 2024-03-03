@@ -11,7 +11,7 @@ import {
 } from 'sanity';
 
 import {useCallback, useState} from 'react';
-import {Grid, Stack, Button, Dialog, Box, Card, Heading} from '@sanity/ui';
+import {Stack, Button, Dialog, Box, Card, Heading, Flex} from '@sanity/ui';
 import {AddIcon} from '@sanity/icons';
 import {randomKey} from '@sanity/util/content';
 
@@ -70,13 +70,7 @@ const SectionsListInput = (
           zOffset={1000}
         >
           <Box padding={1}>
-            <Grid
-              autoCols={'auto'}
-              columns={[1, 2, 3]}
-              autoFlow={'row dense'}
-              gap={[3]}
-              padding={4}
-            >
+            <Flex wrap={'wrap'} gap={[3]} padding={4} justify={'center'}>
               {props.schemaType.of.map((schema, index) => {
                 return (
                   <PreviewCard
@@ -86,7 +80,7 @@ const SectionsListInput = (
                   />
                 );
               })}
-            </Grid>
+            </Flex>
           </Box>
         </Dialog>
       )}
@@ -135,7 +129,7 @@ function PreviewCard(props: PreviewProps) {
         </Heading>
         <div
           style={{
-            height: '150px',
+            height: '125px',
           }}
         >
           <img

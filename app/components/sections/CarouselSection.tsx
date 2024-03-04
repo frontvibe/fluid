@@ -7,6 +7,8 @@ import {useMemo, useRef} from 'react';
 import type {SectionDefaultProps} from '~/lib/type';
 import type {CAROUSEL_SECTION_FRAGMENT} from '~/qroq/sections';
 
+import {useDevice} from '~/hooks/useDevice';
+
 import {SanityImage} from '../sanity/SanityImage';
 import {
   Carousel,
@@ -23,16 +25,9 @@ export function CarouselSection(
   props: SectionDefaultProps & {data: CarouselSectionProps},
 ) {
   const {data} = props;
-  const {
-    arrows,
-    autoplay,
-    loop,
-    pagination,
-    slides,
-    slidesPerViewDesktop,
-    title,
-  } = data;
+  const {arrows, autoplay, loop, pagination, slides, title} = data;
   const ref = useRef<HTMLDivElement>(null);
+  const slidesPerViewDesktop = data.slidesPerViewDesktop || 3;
   const inView = useInView(ref);
   const plugins = useMemo(() => (autoplay ? [Autoplay()] : []), [autoplay]);
   const imageSizes = slidesPerViewDesktop
@@ -40,7 +35,11 @@ export function CarouselSection(
         100 / slidesPerViewDesktop
       }vw, (min-width: 768px) 50vw, 100vw`
     : '(min-width: 768px) 50vw, 100vw';
-  const isActive = slides?.length! > 1;
+  const device = useDevice();
+  const isActive =
+    device === 'mobile'
+      ? slides?.length! > 1
+      : slides?.length! > slidesPerViewDesktop;
 
   return (
     <div className="container" ref={ref}>
@@ -81,7 +80,7 @@ export function CarouselSection(
               </div>
             )}
           </div>
-          {pagination && <CarouselPagination />}
+          {pagination && isActive && <CarouselPagination />}
         </Carousel>
       )}
     </div>

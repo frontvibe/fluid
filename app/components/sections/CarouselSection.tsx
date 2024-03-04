@@ -46,7 +46,7 @@ export function CarouselSection(
       <h2>{title}</h2>
       {slides && slides?.length > 0 && (
         <Carousel
-          className="[--slide-spacing:1rem]"
+          className="mt-4 [--slide-spacing:1rem]"
           opts={{
             active: isActive,
             loop: loop || false,

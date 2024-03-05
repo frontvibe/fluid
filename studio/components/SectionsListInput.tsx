@@ -138,7 +138,7 @@ function PreviewCard(props: PreviewProps) {
               height: '100%',
               objectFit: 'contain',
             }}
-            src={`/static/assets/${schema.name}.png`}
+            src={`/static/assets/${schema.name}.jpg`}
             alt={schema.title}
             onError={(i: any) => (i.target.style.display = 'none')}
           />

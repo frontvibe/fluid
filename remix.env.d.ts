@@ -6,6 +6,7 @@
 
 import type {HydrogenCart, Storefront} from '@shopify/hydrogen';
 import type {CustomerAccessToken} from '@shopify/hydrogen/storefront-api-types';
+import type {AriaAttributes, DOMAttributes} from 'react';
 
 import '@total-typescript/ts-reset';
 
@@ -62,5 +63,11 @@ declare module '@shopify/remix-oxygen' {
    */
   export interface SessionData {
     customerAccessToken: CustomerAccessToken;
+  }
+}
+
+declare module 'react' {
+  interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
+    fetchpriority?: 'high' | 'low' | 'auto';
   }
 }

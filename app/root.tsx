@@ -27,9 +27,10 @@ import {Layout} from '~/components/layout/Layout';
 
 import type {HydrogenSession} from './lib/hydrogen.session.server';
 
-import favicon from '../public/favicon.ico';
+import faviconAsset from '../public/favicon.ico';
 import {CssVars} from './components/CssVars';
 import {Fonts} from './components/Fonts';
+import {generateSanityImageUrl} from './components/sanity/SanityImage';
 import {Button} from './components/ui/Button';
 import {useLocalePath} from './hooks/useLocalePath';
 import {useSanityThemeContent} from './hooks/useSanityThemeContent';
@@ -68,7 +69,6 @@ export function links() {
       rel: 'preconnect',
     },
     {href: tailwindCss, rel: 'stylesheet'},
-    {href: favicon, rel: 'icon', type: 'image/x-icon'},
   ];
 }
 
@@ -86,6 +86,7 @@ export const meta: MetaFunction<typeof loader> = (loaderData) => {
       rel: 'preconnect',
       tagName: 'link',
     },
+    ...generateFaviconUrls(data as SerializeFrom<typeof loader>),
     ...fontsPreloadLinks,
   ];
 };
@@ -270,4 +271,55 @@ async function validateCustomerAccessToken(
   }
 
   return {headers, isLoggedIn};
+}
+
+function generateFaviconUrls(loaderData: SerializeFrom<typeof loader>) {
+  const {env, sanityRoot} = loaderData;
+  const favicon = sanityRoot.data?.settings?.favicon;
+
+  if (!favicon) {
+    return [
+      {
+        href: faviconAsset,
+        rel: 'icon',
+        tagName: 'link',
+        type: 'image/x-icon',
+      },
+    ];
+  }
+
+  const faviconUrl = generateSanityImageUrl({
+    dataset: env.SANITY_STUDIO_DATASET,
+    height: 32,
+    projectId: env.SANITY_STUDIO_PROJECT_ID,
+    ref: favicon?._ref,
+    width: 32,
+  });
+
+  const appleTouchIconUrl = generateSanityImageUrl({
+    dataset: env.SANITY_STUDIO_DATASET,
+    height: 180,
+    projectId: env.SANITY_STUDIO_PROJECT_ID,
+    ref: favicon?._ref,
+    width: 180,
+  });
+
+  return [
+    {
+      href: faviconUrl,
+      rel: 'icon',
+      tagName: 'link',
+      type: 'image/x-icon',
+    },
+    {
+      href: appleTouchIconUrl,
+      rel: 'apple-touch-icon',
+      tagName: 'link',
+    },
+    {
+      href: appleTouchIconUrl,
+      rel: 'apple-touch-icon-precomposed',
+      tagName: 'link',
+    },
+  ];
 }

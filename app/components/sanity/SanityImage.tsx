@@ -1,3 +1,5 @@
+import type {CropMode} from '@sanity/image-url/lib/types/types';
+
 import imageUrlBuilder from '@sanity/image-url';
 import React from 'react';
 
@@ -165,4 +167,42 @@ export function SanityImage({
       )}
     </span>
   );
+}
+
+export function generateSanityImageUrl({
+  crop,
+  dataset,
+  height,
+  projectId,
+  ref,
+  width,
+}: {
+  crop?: CropMode;
+  dataset: string;
+  height?: number;
+  projectId: string;
+  ref?: null | string;
+  width: number;
+}) {
+  const urlBuilder = imageUrlBuilder({
+    dataset,
+    projectId,
+  })
+    .image({
+      _ref: ref,
+    })
+    .auto('format')
+    .width(width);
+
+  let imageUrl = urlBuilder.url();
+
+  if (height) {
+    imageUrl = urlBuilder.height(height).url();
+  }
+
+  if (crop) {
+    imageUrl = urlBuilder.crop(crop).url();
+  }
+
+  return imageUrl;
 }

@@ -51,6 +51,12 @@ export default defineField({
     overlayOpacity: 0,
     contentAlignment: 'middle_center',
     bannerHeight: 450,
+    settings: {
+      padding: {
+        top: 0,
+        bottom: 0,
+      },
+    },
   },
   preview: {
     select: {

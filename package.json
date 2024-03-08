@@ -91,5 +91,13 @@
   },
   "browserslist": [
     "defaults"
+  ],
+  "eslintIgnore": [
+    "build",
+    "node_modules",
+    "bin",
+    "*.d.ts",
+    "dist",
+    "studio/*"
   ]
 }

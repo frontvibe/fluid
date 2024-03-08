@@ -2,11 +2,12 @@
   "name": "fluid",
   "private": true,
   "sideEffects": false,
+  "type": "module",
   "version": "0.0.0",
   "scripts": {
-    "build": "shopify hydrogen build",
+    "build": "shopify hydrogen build-vite --codegen",
     "dev": "run-p dev:app dev:studio",
-    "dev:app": "shopify hydrogen dev --codegen",
+    "dev:app": "shopify hydrogen dev-vite --codegen",
     "dev:studio": "cd ./studio && run-s dev",
     "preview": "npm run build && shopify hydrogen preview",
     "lint": "eslint --no-error-on-unmatched-pattern --ext .js,.ts,.jsx,.tsx .",
@@ -30,6 +31,7 @@
     "@radix-ui/react-scroll-area": "^1.0.5",
     "@radix-ui/react-select": "^2.0.0",
     "@radix-ui/react-slot": "^1.0.2",
+    "@remix-run/node": "2.8.1",
     "@remix-run/react": "2.8.1",
     "@sanity/client": "^6.15.7",
     "@sanity/core-loader": "^1.6.2",
@@ -45,6 +47,9 @@
     "@vercel/stega": "^0.1.0",
     "class-variance-authority": "^0.7.0",
     "color2k": "^2.0.3",
+    "content-security-policy-builder": "^2.1.1",
+    "cookie": "^0.6.0",
+    "debug": "^4.3.4",
     "embla-carousel": "8.0.0",
     "embla-carousel-autoplay": "8.0.0",
     "embla-carousel-react": "8.0.0",
@@ -86,6 +91,11 @@
     "tailwindcss-animate": "^1.0.7",
     "type-fest": "^4.14.0",
     "typescript": "^5.4.3"
+    "vite": "^5.1.0",
+    "vite-env-only": "^2.2.0",
+    "vite-plugin-cjs-interop": "^2.0.6",
+    "vite-plugin-commonjs": "^0.10.1",
+    "vite-tsconfig-paths": "^4.3.1"
   },
   "engines": {
     "node": ">=16.13"

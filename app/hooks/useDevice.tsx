@@ -1,5 +1,5 @@
 import {useMemo} from 'react';
-import {useMedia} from 'react-use';
+import useMedia from 'react-use/esm/useMedia';
 
 export function useDevice() {
   const isMobile = useMedia('(max-width: 640px)', false);

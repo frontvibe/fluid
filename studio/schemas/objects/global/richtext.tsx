@@ -1,6 +1,6 @@
 import {defineArrayMember, defineField} from 'sanity';
 import {internalLinkField} from './headerNavigation';
-import {ExternalLink, Link, MousePointerSquare} from 'lucide-react';
+import {ExternalLink, Link, SquareMousePointer} from 'lucide-react';
 
 export const internalLinkFields = [
   internalLinkField,
@@ -102,7 +102,7 @@ export default defineField({
         }),
         ...internalLinkFields,
       ],
-      icon: () => <MousePointerSquare size="1em" />,
+      icon: () => <SquareMousePointer size="1em" />,
       preview: {
         select: {
           title: 'label',

@@ -38,6 +38,7 @@ import {generateFontsPreloadLinks} from './lib/fonts';
 import {sanityPreviewPayload} from './lib/sanity/sanity.payload.server';
 import {ROOT_QUERY} from './qroq/queries';
 import tailwindCss from './styles/tailwind.css';
+import {vercelStegaCleanAll} from '@sanity/client/stega';
 
 // This is important to avoid re-fetching root queries on sub-navigations
 export const shouldRevalidate: ShouldRevalidateFunction = ({
@@ -87,6 +88,7 @@ export const meta: MetaFunction<typeof loader> = (loaderData) => {
       tagName: 'link',
     },
     ...generateFaviconUrls(data as SerializeFrom<typeof loader>),
+    ...generateSocialImagePreview(data as SerializeFrom<typeof loader>),
     ...fontsPreloadLinks,
   ];
 };
@@ -321,5 +323,45 @@ function generateFaviconUrls(loaderData: SerializeFrom<typeof loader>) {
       rel: 'apple-touch-icon-precomposed',
       tagName: 'link',
     },
+  ];
+}
+
+function generateSocialImagePreview(loaderData: SerializeFrom<typeof loader>) {
+  const {sanityRoot, env} = loaderData;
+  const socialImage = vercelStegaCleanAll(
+    sanityRoot.data?.settings?.socialSharingImagePreview,
+  );
+
+  const size = {
+    height: 628,
+    width: 1200,
+  };
+
+  if (!socialImage) {
+    return [];
+  }
+
+  const socialImageUrl = generateSanityImageUrl({
+    dataset: env.SANITY_STUDIO_DATASET,
+    height: size.height,
+    projectId: env.SANITY_STUDIO_PROJECT_ID,
+    ref: socialImage?._ref,
+    width: size.width,
+  });
+
+  return [
+    {
+      content: socialImageUrl,
+      property: 'og:image:url',
+    },
+    {
+      content: socialImageUrl,
+      property: 'og:image:secure_url',
+    },
+    {property: 'og:image:width', content: size.width},
+    {property: 'og:image:height', content: size.height},
+    {property: 'og:image:type', content: socialImage.mimeType},
+    {property: 'twitter:image', content: socialImageUrl},
+    {property: 'twitter:card', content: 'summary_large_image'},
   ];
 }

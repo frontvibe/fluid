@@ -33,7 +33,7 @@
     "groqd-playground": "^0.0.18",
     "lodash": "^4.17.21",
     "lodash.get": "^4.4.2",
-    "lucide-react": "^0.350.0",
+    "lucide-react": "^0.352.0",
     "nanoid": "^5.0.6",
     "pluralize-esm": "^9.0.5",
     "react": "^18.2.0",

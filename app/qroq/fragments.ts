@@ -40,6 +40,7 @@ export const SIMPLE_IMAGE_FRAGMENT = {
   height: q('asset').deref().grabOne('metadata.dimensions.height', q.number()),
   url: q('asset').deref().grabOne('url', q.string()),
   width: q('asset').deref().grabOne('metadata.dimensions.width', q.number()),
+  mimeType: q('asset').deref().grabOne('mimeType', q.string()),
 } as const;
 
 /*

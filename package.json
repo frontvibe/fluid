@@ -14,7 +14,7 @@
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
     "typecheck": "tsc --noEmit",
-    "sanity:deploy": "cd ./studio && run-s deploy"
+    "deploy:studio": "cd ./studio && run-s deploy"
   },
   "dependencies": {
     "@portabletext/react": "^3.0.11",

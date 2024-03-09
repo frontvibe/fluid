@@ -182,7 +182,7 @@ function ThumbnailCarousel({
           } as React.CSSProperties
         }
       >
-        <div className="flex items-center justify-center gap-2">
+        <div className="flex items-center gap-2">
           <CarouselContent className="ml-0 py-1">
             {medias.map((media, index) => {
               return (
@@ -204,6 +204,7 @@ function ThumbnailCarousel({
                         aspectRatio="1/1"
                         className="size-full object-cover"
                         data={media.image}
+                        draggable="false"
                         loading="eager"
                         showBorder={false}
                         showShadow={false}

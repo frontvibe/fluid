@@ -26,6 +26,8 @@ export function CollectionCard(props: {
   const style = data?.settings?.collectionCards?.style;
   const textAlignment =
     data?.settings?.collectionCards?.textAlignment || 'left';
+  const aspectRatio =
+    data?.settings?.collectionCards?.imageAspectRatio || 'video';
   const sizes = cx([
     '(min-width: 1024px)',
     props.columns ? `${100 / props.columns}vw,` : '33vw,',
@@ -33,7 +35,6 @@ export function CollectionCard(props: {
   ]);
 
   const path = useLocalePath({path: `/collections/${collection?.handle}`});
-  const cardMediaAspectRatio = 'aspect-video';
 
   const cardClass = cn(
     style === 'card'
@@ -66,6 +67,7 @@ export function CollectionCard(props: {
       <Card className={cardClass}>
         {collection.image && (
           <CardMedia
+            aspectRatio={aspectRatio}
             className={cn(
               style === 'standard' &&
                 'rounded-[--collection-card-border-corner-radius]',
@@ -76,9 +78,12 @@ export function CollectionCard(props: {
             )}
           >
             <ShopifyImage
-              aspectRatio={
-                cardMediaAspectRatio === 'aspect-video' ? '16/9' : '1/1'
-              }
+              aspectRatio={cn(
+                aspectRatio === 'square' && '1/1',
+                aspectRatio === 'video' && '16/9',
+                aspectRatio === 'auto' &&
+                  `${collection.image.width}/${collection.image.height}`,
+              )}
               crop="center"
               data={collection.image}
               showBorder={false}
@@ -102,7 +107,14 @@ export function CollectionCard(props: {
   ) : skeleton ? (
     <Card className={cn('animate-pulse', cardClass)}>
       <CardMedia>
-        <div className={cn('h-auto w-full bg-muted', cardMediaAspectRatio)} />
+        <div
+          className={cn(
+            'h-auto w-full bg-muted',
+            aspectRatio === 'square' && 'aspect-square',
+            aspectRatio === 'video' && 'aspect-video',
+            aspectRatio === 'auto' && 'aspect-none',
+          )}
+        />
       </CardMedia>
       <CardContent className={cardContentClass}>
         <div className="flex items-center text-lg">

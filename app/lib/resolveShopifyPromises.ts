@@ -249,7 +249,7 @@ async function resolveRelatedProductsPromise({
     if (section._type === 'relatedProductsSection') {
       promise = storefront.query(RECOMMENDED_PRODUCTS_QUERY, {
         variables: {
-          count: section.maxProducts || 4,
+          count: section.maxProducts || 6,
           country: storefront.i18n.country,
           language: storefront.i18n.language,
           productId,

@@ -30,7 +30,7 @@ export function FeaturedCollectionSection(
   props: SectionDefaultProps & {data: FeaturedCollectionSectionProps},
 ) {
   return (
-    <div className="container">
+    <div className="container space-y-4">
       <h2>{props.data.collection?.store.title}</h2>
       <AwaitFeaturedCollection
         error={

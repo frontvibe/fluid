@@ -84,8 +84,7 @@ async function createSingletons() {
   const transaction = client.transaction();
 
   singletons.forEach((doc: any) => {
-    // transaction.createIfNotExists(doc);
-    transaction.createOrReplace(doc);
+    transaction.createIfNotExists(doc);
   });
 
   initialDocumentsValues.forEach((doc: any) => {

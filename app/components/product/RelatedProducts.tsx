@@ -5,9 +5,10 @@ import {ProductCardGrid} from './ProductCardGrid';
 export function RelatedProducts(props: {
   data: ProductRecommendationsQuery | null;
   heading?: null | string;
+  maxProducts: number;
 }) {
   const {data} = props;
-  const products = data ? getRecommendedProducts(data) : [];
+  const products = data ? getRecommendedProducts(data, props.maxProducts) : [];
 
   if (products.length === 0) return null;
 
@@ -21,7 +22,10 @@ export function RelatedProducts(props: {
   );
 }
 
-function getRecommendedProducts(data: ProductRecommendationsQuery) {
+function getRecommendedProducts(
+  data: ProductRecommendationsQuery,
+  maxProducts: number,
+) {
   const mergedProducts = (data.recommended ?? [])
     .concat(data.additional.nodes)
     .filter(
@@ -34,6 +38,10 @@ function getRecommendedProducts(data: ProductRecommendationsQuery) {
   );
 
   mergedProducts.splice(originalProduct, 1);
+
+  if (mergedProducts.length > maxProducts) {
+    mergedProducts.splice(maxProducts);
+  }
 
   return mergedProducts;
 }

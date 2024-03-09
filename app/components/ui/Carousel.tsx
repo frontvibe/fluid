@@ -162,7 +162,7 @@ const CarouselContent = React.forwardRef<
   const {carouselRef, orientation} = useCarousel();
 
   return (
-    <div className="overflow-hidden" ref={carouselRef}>
+    <div className="w-full overflow-hidden" ref={carouselRef}>
       <div
         className={cn(
           'flex touch-pan-y [backface-visibility:hidden]',

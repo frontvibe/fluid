@@ -4,6 +4,8 @@ import {q, z} from 'groqd';
 
 import {LINK_REFERENCE_FRAGMENT, LINKS_LIST_SELECTION} from './links';
 
+export const aspectRatioValues = ['square', 'video', 'auto'] as const;
+
 /*
 |--------------------------------------------------------------------------
 | Image Fragment
@@ -38,9 +40,9 @@ export const SIMPLE_IMAGE_FRAGMENT = {
   _ref: q('asset').grabOne('_ref', q.string()),
   altText: q('asset').deref().grabOne('altText', q.string()).nullable(),
   height: q('asset').deref().grabOne('metadata.dimensions.height', q.number()),
+  mimeType: q('asset').deref().grabOne('mimeType', q.string()),
   url: q('asset').deref().grabOne('url', q.string()),
   width: q('asset').deref().grabOne('metadata.dimensions.width', q.number()),
-  mimeType: q('asset').deref().grabOne('mimeType', q.string()),
 } as const;
 
 /*
@@ -152,6 +154,7 @@ export const SETTINGS_FRAGMENT = {
   blogCards: q
     .object({
       border: q.object(BORDER_FRAGMENT).nullable(),
+      imageAspectRatio: z.enum(aspectRatioValues).nullable(),
       shadow: q.object(SHADOW_FRAGMENT).nullable(),
       style: z.enum(['standard', 'card']).nullable(),
       textAlignment: z.enum(['left', 'center', 'right']).nullable(),
@@ -175,6 +178,7 @@ export const SETTINGS_FRAGMENT = {
   collectionCards: q
     .object({
       border: q.object(BORDER_FRAGMENT).nullable(),
+      imageAspectRatio: z.enum(aspectRatioValues).nullable(),
       shadow: q.object(SHADOW_FRAGMENT).nullable(),
       style: z.enum(['standard', 'card']).nullable(),
       textAlignment: z.enum(['left', 'center', 'right']).nullable(),
@@ -201,6 +205,7 @@ export const SETTINGS_FRAGMENT = {
   productCards: q
     .object({
       border: q.object(BORDER_FRAGMENT).nullable(),
+      imageAspectRatio: z.enum(aspectRatioValues).nullable(),
       shadow: q.object(SHADOW_FRAGMENT).nullable(),
       style: z.enum(['standard', 'card']).nullable(),
       textAlignment: z.enum(['left', 'center', 'right']).nullable(),

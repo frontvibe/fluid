@@ -60,7 +60,13 @@ export function RelatedProductsSection(
           }
           resolve={relatedProductsPromise}
         >
-          {(result) => <RelatedProducts data={result} heading={data.heading} />}
+          {(result) => (
+            <RelatedProducts
+              data={result}
+              heading={data.heading}
+              maxProducts={data.maxProducts || 3}
+            />
+          )}
         </Await>
       </Suspense>
     </div>

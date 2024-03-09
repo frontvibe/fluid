@@ -29,6 +29,7 @@ export function ProductCard(props: {
   const {data} = vercelStegaCleanAll(useSanityRoot());
   const style = data?.settings?.productCards?.style;
   const textAlignment = data?.settings?.productCards?.textAlignment || 'left';
+  const aspectRatio = data?.settings?.productCards?.imageAspectRatio || 'video';
   const variants = product?.variants?.nodes.length
     ? flattenConnection(product?.variants)
     : null;
@@ -40,7 +41,6 @@ export function ProductCard(props: {
   ]);
 
   const path = useLocalePath({path: `/products/${product?.handle}`});
-  const cardMediaAspectRatio = 'aspect-video';
 
   const cardClass = cn(
     style === 'card'
@@ -75,6 +75,7 @@ export function ProductCard(props: {
           <Card className={cardClass}>
             {firstVariant?.image && (
               <CardMedia
+                aspectRatio={aspectRatio}
                 className={cn(
                   'relative',
                   style === 'standard' &&
@@ -86,9 +87,12 @@ export function ProductCard(props: {
                 )}
               >
                 <ShopifyImage
-                  aspectRatio={
-                    cardMediaAspectRatio === 'aspect-video' ? '16/9' : '1/1'
-                  }
+                  aspectRatio={cn(
+                    aspectRatio === 'square' && '1/1',
+                    aspectRatio === 'video' && '16/9',
+                    aspectRatio === 'auto' &&
+                      `${firstVariant.image.width}/${firstVariant.image.height}`,
+                  )}
                   crop="center"
                   data={firstVariant.image}
                   showBorder={false}
@@ -122,8 +126,15 @@ export function ProductCard(props: {
         </Link>
       ) : skeleton ? (
         <Card className={cn('animate-pulse', cardClass)}>
-          <CardMedia>
-            <div className={cn('w-full bg-muted', cardMediaAspectRatio)} />
+          <CardMedia aspectRatio={aspectRatio}>
+            <div
+              className={cn(
+                'w-full bg-muted',
+                aspectRatio === 'square' && 'aspect-square',
+                aspectRatio === 'video' && 'aspect-video',
+                aspectRatio === 'auto' && 'aspect-none',
+              )}
+            />
           </CardMedia>
           <CardContent className="p-3 text-muted-foreground/0 md:px-6 md:py-4">
             <div className="text-lg">

@@ -10,8 +10,6 @@ Using Sanity [Visual Editing](https://www.youtube.com/watch?v=0qheADLqhBs), cont
 
 Take a look at the demo [here](https://fluid-demo.frontvibe.com/).
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Ffrontvibe%2Ffluid)
-
 ## Documentation
 
 Visit [fluid.frontvibe.com](https://fluid.frontvibe.com/) to read the documentation.

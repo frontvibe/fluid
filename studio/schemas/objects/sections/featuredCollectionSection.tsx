@@ -38,6 +38,7 @@ export default defineField({
   ],
   initialValue: {
     maxProducts: 6,
+    desktopColumns: 3,
   },
   preview: {
     select: {

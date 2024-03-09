@@ -37,6 +37,7 @@ The project is heavily inspired by:
 
 - [Shopify Dawn](https://github.com/Shopify/dawn)
 - [Sanity Akva](https://github.com/sanity-io/demo-ecommerce)
+- [Hydrogen demo store](https://github.com/Shopify/hydrogen-demo-store)
 - [Build UI](https://buildui.com/recipes)
 
 ## License

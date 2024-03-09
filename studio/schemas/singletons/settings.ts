@@ -472,6 +472,11 @@ function cardFields() {
       },
     }),
     defineField({
+      name: 'imageAspectRatio',
+      title: 'Image aspect ratio',
+      type: 'aspectRatios',
+    }),
+    defineField({
       name: 'textAlignment',
       type: 'string',
       options: {

@@ -101,7 +101,7 @@ const BannerContent = forwardRef<
       ref={ref}
       {...props}
     >
-      <div className={cn('lg:max-w-[40rem]')}>{props.children}</div>
+      <div className={cn('max-w-[40rem]')}>{props.children}</div>
     </div>
   );
 });

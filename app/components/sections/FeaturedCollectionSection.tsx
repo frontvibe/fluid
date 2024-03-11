@@ -4,17 +4,21 @@ import type {
   ProductCardFragment,
 } from 'storefrontapi.generated';
 
-import {Await, useLoaderData} from '@remix-run/react';
+import {Await, Link, useLoaderData} from '@remix-run/react';
 import {flattenConnection} from '@shopify/hydrogen';
 import {Suspense} from 'react';
 
 import type {SectionDefaultProps} from '~/lib/type';
 import type {FEATURED_COLLECTION_SECTION_FRAGMENT} from '~/qroq/sections';
 
+import {useLocalePath} from '~/hooks/useLocalePath';
+import {useSanityThemeContent} from '~/hooks/useSanityThemeContent';
+
 import type {loader as indexLoader} from '../../routes/_index';
 
 import {Skeleton} from '../Skeleton';
 import {ProductCardGrid} from '../product/ProductCardGrid';
+import {Button} from '../ui/Button';
 
 type FeaturedCollectionSectionProps = TypeFromSelection<
   typeof FEATURED_COLLECTION_SECTION_FRAGMENT
@@ -29,9 +33,23 @@ type FeaturedCollectionSectionProps = TypeFromSelection<
 export function FeaturedCollectionSection(
   props: SectionDefaultProps & {data: FeaturedCollectionSectionProps},
 ) {
+  const collectionHandle = useLocalePath({
+    path: `/collections/${props.data.collection?.store.slug?.current}`,
+  });
+  const {themeContent} = useSanityThemeContent();
+
   return (
     <div className="container space-y-4">
-      <h2>{props.data.collection?.store.title}</h2>
+      <div className="flex justify-between">
+        <h2>{props.data.heading || props.data.collection?.store.title}</h2>
+        {props.data.viewAll && (
+          <Button asChild variant="ghost">
+            <Link to={collectionHandle}>
+              {themeContent?.collection?.viewAll}
+            </Link>
+          </Button>
+        )}
+      </div>
       <AwaitFeaturedCollection
         error={
           <Skeleton isError>

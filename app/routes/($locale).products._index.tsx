@@ -8,7 +8,7 @@ import {ProductCardGrid} from '~/components/product/ProductCardGrid';
 import {ALL_PRODUCTS_QUERY} from '~/graphql/queries';
 import {useSanityRoot} from '~/hooks/useSanityRoot';
 
-const PAGE_BY = 8;
+const PAGE_BY = 9;
 
 export async function loader({
   context: {storefront},

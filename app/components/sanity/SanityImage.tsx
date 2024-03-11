@@ -71,7 +71,8 @@ export function SanityImage({
   const urlDefault = urlBuilder.url();
   // Values used for srcset attribute of image tag (in pixels)
   const srcSetValues = [
-    50, 100, 200, 450, 600, 750, 900, 1000, 1250, 1500, 1750, 2000, 2500,
+    50, 100, 200, 450, 600, 750, 900, 1000, 1250, 1500, 1750, 2000, 2500, 3000,
+    3500, 4000, 5000,
   ];
   const focalCoords = {
     x: data.hotspot ? Math.ceil(data.hotspot.x * 100) : 0,

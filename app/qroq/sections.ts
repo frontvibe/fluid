@@ -88,13 +88,21 @@ export const FEATURED_COLLECTION_SECTION_FRAGMENT = {
     .grab({
       store: q('store').grab({
         gid: q.string(),
+        slug: q
+          .object({
+            _type: q.literal('slug'),
+            current: q.string(),
+          })
+          .nullable(),
         title: q.string(),
       }),
     })
     .nullable(),
   desktopColumns: q.number().nullable(),
+  heading: [getIntValue('heading'), q.string().nullable()],
   maxProducts: q.number().nullable(),
   settings: SECTION_SETTINGS_FRAGMENT,
+  viewAll: q.boolean().nullable(),
 } satisfies Selection;
 
 /*

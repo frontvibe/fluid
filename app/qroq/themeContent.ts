@@ -54,6 +54,7 @@ export const THEME_CONTENT_FRAGMENT = {
       sortHighLow: [getIntValue('sortHighLow'), q.string().nullable()],
       sortLowHigh: [getIntValue('sortLowHigh'), q.string().nullable()],
       sortNewest: [getIntValue('sortNewest'), q.string().nullable()],
+      viewAll: [getIntValue('viewAll'), q.string().nullable()],
     })
     .nullable(),
   error: q('error')

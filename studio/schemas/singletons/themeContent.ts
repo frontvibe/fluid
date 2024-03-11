@@ -104,6 +104,10 @@ export default defineType({
           type: 'internationalizedArrayString',
         }),
         defineField({
+          name: 'viewAll',
+          type: 'internationalizedArrayString',
+        }),
+        defineField({
           name: 'clearFilters',
           type: 'internationalizedArrayString',
         }),

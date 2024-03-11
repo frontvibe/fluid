@@ -7,6 +7,12 @@ export default defineField({
   type: 'object',
   fields: [
     defineField({
+      name: 'heading',
+      description:
+        'Collection title from Shopify will be used if no heading is provided.',
+      type: 'internationalizedArrayString',
+    }),
+    defineField({
       name: 'collection',
       type: 'reference',
       to: [{type: 'collection'}],
@@ -30,6 +36,12 @@ export default defineField({
         max: 5,
       },
       validation: (Rule: any) => Rule.required().min(1).max(5),
+    }),
+    defineField({
+      name: 'viewAll',
+      type: 'boolean',
+      title: 'View all button',
+      description: 'Show a button to view all products in the collection.',
     }),
     defineField({
       type: 'sectionSettings',

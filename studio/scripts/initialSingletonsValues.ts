@@ -198,7 +198,7 @@ export const initialSingletonsValues = {
           {
             _key: nanoid(),
             _type: 'announcement',
-            externalLink: 'https://github.com/thomaskn',
+            externalLink: 'https://github.com/frontvibe/fluid',
             openInNewTab: true,
             text: '🐙 Give us a star ⭐️',
           },
@@ -296,6 +296,7 @@ export const initialSingletonsValues = {
       sortHighLow: generateIntString('Price: High - Low'),
       sortLowHigh: generateIntString('Price: Low - High'),
       sortNewest: generateIntString('Newest'),
+      viewAll: generateIntString('View all'),
     },
     error: {
       pageNotFound: generateIntString('Page not found'),

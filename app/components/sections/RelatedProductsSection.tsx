@@ -32,10 +32,10 @@ export function RelatedProductsSection(
             <div className="mt-4">
               <ProductCardGrid
                 columns={{
-                  desktop: props.data.desktopColumns,
+                  desktop: data.desktopColumns,
                 }}
                 skeleton={{
-                  cardsNumber: props.data.maxProducts || 3,
+                  cardsNumber: data.maxProducts || 3,
                 }}
               />
             </div>
@@ -49,10 +49,10 @@ export function RelatedProductsSection(
               <div className="mt-4">
                 <ProductCardGrid
                   columns={{
-                    desktop: props.data.desktopColumns,
+                    desktop: data.desktopColumns,
                   }}
                   skeleton={{
-                    cardsNumber: props.data.maxProducts || 3,
+                    cardsNumber: data.maxProducts || 3,
                   }}
                 />
               </div>
@@ -62,6 +62,9 @@ export function RelatedProductsSection(
         >
           {(result) => (
             <RelatedProducts
+              columns={{
+                desktop: data.desktopColumns,
+              }}
               data={result}
               heading={data.heading}
               maxProducts={data.maxProducts || 3}

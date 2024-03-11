@@ -3,6 +3,10 @@ import type {ProductRecommendationsQuery} from 'storefrontapi.generated';
 import {ProductCardGrid} from './ProductCardGrid';
 
 export function RelatedProducts(props: {
+  columns?: {
+    desktop?: null | number;
+    mobile?: null | number;
+  };
   data: ProductRecommendationsQuery | null;
   heading?: null | string;
   maxProducts: number;
@@ -16,7 +20,12 @@ export function RelatedProducts(props: {
     <>
       {props.heading && <h2>{props.heading}</h2>}
       <div className="mt-4">
-        <ProductCardGrid products={products} />
+        <ProductCardGrid
+          columns={{
+            desktop: props.columns?.desktop,
+          }}
+          products={products}
+        />
       </div>
     </>
   );

@@ -2,11 +2,15 @@ import type {Selection} from 'groqd';
 
 import {q, z} from 'groqd';
 
-import {PRODUCT_RICHTEXT_BLOCKS, RICHTEXT_BLOCKS} from './blocks';
+import {
+  BANNER_RICHTEXT_BLOCKS,
+  PRODUCT_RICHTEXT_BLOCKS,
+  RICHTEXT_BLOCKS,
+} from './blocks';
 import {COLOR_SCHEME_FRAGMENT, IMAGE_FRAGMENT} from './fragments';
 import {getIntValue} from './utils';
 
-export const contentAlignmentValues = [
+export const contentPositionValues = [
   'top_left',
   'top_center',
   'top_right',
@@ -18,11 +22,7 @@ export const contentAlignmentValues = [
   'bottom_right',
 ] as const;
 
-export const simpleContentAlignmentValues = [
-  'left',
-  'center',
-  'right',
-] as const;
+export const contentAlignmentValues = ['left', 'center', 'right'] as const;
 
 export const aspectRatioValues = ['square', 'video', 'auto'] as const;
 
@@ -59,10 +59,20 @@ export const IMAGE_BANNER_SECTION_FRAGMENT = {
   _type: q.literal('imageBannerSection'),
   backgroundImage: q('backgroundImage').grab(IMAGE_FRAGMENT).nullable(),
   bannerHeight: q.number().nullable(),
+  content: q(
+    `coalesce(
+        content[_key == $language][0].value[],
+        content[_key == $defaultLanguage][0].value[],
+      )[]`,
+    {isArray: true},
+  )
+    .filter()
+    .select(BANNER_RICHTEXT_BLOCKS)
+    .nullable(),
   contentAlignment: z.enum(contentAlignmentValues).nullable(),
+  contentPosition: z.enum(contentPositionValues).nullable(),
   overlayOpacity: q.number().nullable(),
   settings: SECTION_SETTINGS_FRAGMENT,
-  title: [getIntValue('title'), q.string()],
 } satisfies Selection;
 
 /*
@@ -226,8 +236,8 @@ export const CAROUSEL_SECTION_FRAGMENT = {
 export const RICHTEXT_SECTION_FRAGMENT = {
   _key: q.string().nullable(),
   _type: q.literal('richtextSection'),
-  contentAlignment: z.enum(simpleContentAlignmentValues).nullable(),
-  desktopContentPosition: z.enum(simpleContentAlignmentValues).nullable(),
+  contentAlignment: z.enum(contentAlignmentValues).nullable(),
+  desktopContentPosition: z.enum(contentAlignmentValues).nullable(),
   maxWidth: q.number().nullable(),
   richtext: q(
     `coalesce(
@@ -252,6 +262,7 @@ export const COLLECTION_BANNER_SECTION_FRAGMENT = {
   _type: q.literal('collectionBannerSection'),
   bannerHeight: q.number().nullable(),
   contentAlignment: z.enum(contentAlignmentValues).nullable(),
+  contentPosition: z.enum(contentPositionValues).nullable(),
   overlayOpacity: q.number().nullable(),
   settings: SECTION_SETTINGS_FRAGMENT,
   showDescription: q.boolean().nullable(),

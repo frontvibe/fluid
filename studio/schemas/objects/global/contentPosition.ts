@@ -1,7 +1,7 @@
 import {defineField} from 'sanity';
 
 export default defineField({
-  name: 'contentAlignment',
+  name: 'contentPosition',
   type: 'string',
   options: {
     list: [

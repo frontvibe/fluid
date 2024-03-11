@@ -4,7 +4,7 @@ import {q, z} from 'groqd';
 
 import {IMAGE_FRAGMENT} from './fragments';
 import {LINK_REFERENCE_FRAGMENT} from './links';
-import {simpleContentAlignmentValues} from './sections';
+import {contentAlignmentValues} from './sections';
 
 /*
 |--------------------------------------------------------------------------
@@ -100,7 +100,7 @@ export const IMAGE_BLOCK_FRAGMENT = {
   _key: q.string(),
   _type: q.literal('image'),
   ...IMAGE_FRAGMENT,
-  alignment: z.enum(simpleContentAlignmentValues).nullable(),
+  alignment: z.enum(contentAlignmentValues).nullable(),
   maxWidth: q.number().nullable(),
 } satisfies Selection;
 
@@ -108,4 +108,14 @@ export const RICHTEXT_BLOCKS = q.select({
   '_type == "block"': BASE_BLOCK_FRAGMENT,
   '_type == "button"': BUTTON_BLOCK_FRAGMENT,
   '_type == "image"': IMAGE_BLOCK_FRAGMENT,
+});
+
+/*
+|--------------------------------------------------------------------------
+| Banner Richtext Blocks
+|--------------------------------------------------------------------------
+*/
+export const BANNER_RICHTEXT_BLOCKS = q.select({
+  '_type == "block"': BASE_BLOCK_FRAGMENT,
+  '_type == "button"': BUTTON_BLOCK_FRAGMENT,
 });

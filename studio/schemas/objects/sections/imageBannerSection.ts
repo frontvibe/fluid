@@ -7,13 +7,32 @@ export default defineField({
   type: 'object',
   fields: [
     defineField({
-      name: 'title',
-      title: 'Title',
-      type: 'internationalizedArrayString',
+      name: 'content',
+      type: 'internationalizedArrayBannerRichtext',
     }),
     defineField({
-      type: 'contentAlignment',
+      type: 'contentPosition',
+      name: 'contentPosition',
+    }),
+    defineField({
       name: 'contentAlignment',
+      type: 'string',
+      options: {
+        list: [
+          {
+            title: 'Left',
+            value: 'left',
+          },
+          {
+            title: 'Center',
+            value: 'center',
+          },
+          {
+            title: 'Right',
+            value: 'right',
+          },
+        ],
+      },
     }),
     defineField({
       type: 'image',
@@ -49,7 +68,7 @@ export default defineField({
   ],
   initialValue: {
     overlayOpacity: 0,
-    contentAlignment: 'middle_center',
+    contentPosition: 'middle_center',
     bannerHeight: 450,
     settings: {
       padding: {
@@ -60,14 +79,12 @@ export default defineField({
   },
   preview: {
     select: {
-      title: 'title',
       media: 'backgroundImage',
       settings: 'settings',
     },
-    prepare({title, media, settings}: any) {
+    prepare({media, settings}: any) {
       return {
-        title: title?.[0]?.value || 'Missing title',
-        subtitle: 'Image Banner',
+        title: 'Image Banner',
         media: settings.hide ? EyeOff : media,
       };
     },

@@ -29,7 +29,7 @@ import shopifyCollectionRule from './objects/shopify/shopifyCollectionRule';
 import paddingObject from './objects/global/padding';
 import footersList from './objects/global/footersList';
 import socialLinksOnly from './objects/footers/socialLinksOnly';
-import contentAlignment from './objects/global/contentAlignment';
+import contentPosition from './objects/global/contentPosition';
 import featuredCollection from './objects/sections/featuredCollectionSection';
 import collectionListSection from './objects/sections/collectionListSection';
 import featuredProductSection from './objects/sections/featuredProductSection';
@@ -45,6 +45,7 @@ import collectionBanner from './objects/sections/collectionBanner';
 import collectionProductGrid from './objects/sections/collectionProductGrid';
 import announcementBar from './objects/global/announcementBar';
 import aspectRatios from './objects/global/aspectRatios';
+import bannerRichtext from './objects/global/bannerRichtext';
 
 const singletons = [home, header, footer, settings, themeContent];
 const documents = [
@@ -76,6 +77,7 @@ const objects = [
   productSections,
   collectionSections,
   productRichtext,
+  bannerRichtext,
   seo,
   sectionSettings,
   headerNavigation,
@@ -90,7 +92,7 @@ const objects = [
   shopifyCollection,
   shopifyCollectionRule,
   paddingObject,
-  contentAlignment,
+  contentPosition,
   richtext,
   aspectRatios,
 ];

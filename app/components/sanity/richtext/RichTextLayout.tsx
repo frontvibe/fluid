@@ -1,14 +1,11 @@
 import {vercelStegaCleanAll} from '@sanity/client/stega';
 import {cx} from 'class-variance-authority';
 
-import type {simpleContentAlignmentValues} from '~/qroq/sections';
+import type {contentAlignmentValues} from '~/qroq/sections';
 
-import {
-  contentPosition,
-  textAlignment,
-} from '~/components/cva/contentAlignment';
+import {contentAlignment} from '~/components/cva/contentAlignment';
 
-type AlignmentValues = (typeof simpleContentAlignmentValues)[number];
+type AlignmentValues = (typeof contentAlignmentValues)[number];
 
 export function RichtextLayout(props: {
   children: React.ReactNode;
@@ -28,12 +25,12 @@ export function RichtextLayout(props: {
   return (
     <div
       className={cx([
-        textAlignment({
+        contentAlignment({
           required: cleanContentAlignement,
         }),
-        contentPosition({
-          required: cleanContentPosition,
-        }),
+        cleanContentPosition === 'left' && 'mr-auto',
+        cleanContentPosition === 'right' && 'ml-auto',
+        cleanContentPosition === 'center' && 'mx-auto',
         'max-w-[var(--maxWidth)] space-y-2',
         '[&_blockquote]:border-l-2 [&_blockquote]:border-border [&_blockquote]:pl-6 [&_blockquote]:italic',
         '[&_ul>li]:mt-2 [&_ul]:list-inside [&_ul]:list-disc',

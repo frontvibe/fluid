@@ -7,11 +7,9 @@ import {cva} from 'class-variance-authority';
 | Content Alignment
 |--------------------------------------------------------------------------
 */
-export type ContentAlignmentVariantProps = VariantProps<
-  typeof contentAlignment
->;
+export type ContentPositionVariantProps = VariantProps<typeof contentPosition>;
 
-export const contentAlignment = cva('flex h-full', {
+export const contentPosition = cva('flex h-full', {
   variants: {
     required: {
       bottom_center: 'items-end justify-center',
@@ -27,17 +25,19 @@ export const contentAlignment = cva('flex h-full', {
   },
 });
 
-export const contentAlignmentVariants = (props: ContentAlignmentVariantProps) =>
-  contentAlignment(props);
+export const contentPositionVariants = (props: ContentPositionVariantProps) =>
+  contentPosition(props);
 
 /*
 |--------------------------------------------------------------------------
 | Text Alignment
 |--------------------------------------------------------------------------
 */
-export type TextAlignmentVariantProps = VariantProps<typeof textAlignment>;
+export type ContentAlignmentVariantProps = VariantProps<
+  typeof contentAlignment
+>;
 
-export const textAlignment = cva('', {
+export const contentAlignment = cva('', {
   variants: {
     required: {
       center: 'text-center',
@@ -47,25 +47,5 @@ export const textAlignment = cva('', {
   },
 });
 
-export const textAlignmentVariants = (props: TextAlignmentVariantProps) =>
-  textAlignment(props);
-
-/*
-|--------------------------------------------------------------------------
-| Content Position
-|--------------------------------------------------------------------------
-*/
-export type ContentPositionVariantProps = VariantProps<typeof contentPosition>;
-
-export const contentPosition = cva('', {
-  variants: {
-    required: {
-      center: 'mx-auto',
-      left: 'mr-auto',
-      right: 'ml-auto',
-    },
-  },
-});
-
-export const contentPositionVariants = (props: ContentPositionVariantProps) =>
-  contentPosition(props);
+export const contentAlignmentVariants = (props: ContentAlignmentVariantProps) =>
+  contentAlignment(props);

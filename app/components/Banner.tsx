@@ -1,11 +1,17 @@
 import {vercelStegaCleanAll} from '@sanity/client/stega';
 import {forwardRef} from 'react';
 
-import type {contentAlignmentValues} from '~/qroq/sections';
+import type {
+  contentAlignmentValues,
+  contentPositionValues,
+} from '~/qroq/sections';
 
 import {cn} from '~/lib/utils';
 
-import {contentAlignmentVariants} from './cva/contentAlignment';
+import {
+  contentAlignmentVariants,
+  contentPositionVariants,
+} from './cva/contentAlignment';
 
 const Banner = forwardRef<
   HTMLDivElement,
@@ -73,23 +79,29 @@ const BannerContent = forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement> & {
     contentAlignment: (typeof contentAlignmentValues)[number] | null;
+    contentPosition: (typeof contentPositionValues)[number] | null;
   }
->(({className, contentAlignment, ...props}, ref) => {
+>(({className, contentAlignment, contentPosition, ...props}, ref) => {
   // Remove all stega encoded data
-  const cleanContentAlignment = vercelStegaCleanAll(contentAlignment);
+  const cleanContentPosition = vercelStegaCleanAll(contentPosition);
+  const cleanContentAlignement = vercelStegaCleanAll(contentAlignment);
+
   return (
     <div
-      className={cn('container relative z-[3] h-full py-4', className)}
+      className={cn(
+        'container relative z-[3] flex h-full py-4',
+        contentAlignmentVariants({
+          required: cleanContentAlignement,
+        }),
+        contentPositionVariants({
+          required: cleanContentPosition,
+        }),
+        className,
+      )}
       ref={ref}
       {...props}
     >
-      <div
-        className={contentAlignmentVariants({
-          required: cleanContentAlignment,
-        })}
-      >
-        {props.children}
-      </div>
+      <div className={cn('lg:max-w-[40rem]')}>{props.children}</div>
     </div>
   );
 });

@@ -44,7 +44,10 @@ export function CollectionBannerSection(
         )}
       </BannerMedia>
       <BannerMediaOverlay opacity={props.data.overlayOpacity} />
-      <BannerContent contentAlignment={props.data.contentAlignment}>
+      <BannerContent
+        contentAlignment={props.data.contentAlignment}
+        contentPosition={props.data.contentPosition}
+      >
         <div className="flex flex-col gap-2 text-center">
           <h1>{collection.title}</h1>
           {props.data.showDescription && collection.description && (

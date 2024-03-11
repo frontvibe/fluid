@@ -68,6 +68,7 @@ export default defineConfig({
         'announcementBar',
         'productRichtext',
         'richtext',
+        'bannerRichtext',
       ],
       buttonLocations: ['field'],
     }),

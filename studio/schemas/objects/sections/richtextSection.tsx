@@ -33,7 +33,6 @@ export default defineField({
     }),
     defineField({
       name: 'contentAlignment',
-      title: 'Content Alignment',
       type: 'string',
       options: {
         list: [

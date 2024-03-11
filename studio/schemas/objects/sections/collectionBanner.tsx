@@ -18,8 +18,28 @@ export default defineField({
       type: 'boolean',
     }),
     defineField({
-      type: 'contentAlignment',
+      type: 'contentPosition',
+      name: 'contentPosition',
+    }),
+    defineField({
       name: 'contentAlignment',
+      type: 'string',
+      options: {
+        list: [
+          {
+            title: 'Left',
+            value: 'left',
+          },
+          {
+            title: 'Center',
+            value: 'center',
+          },
+          {
+            title: 'Right',
+            value: 'right',
+          },
+        ],
+      },
     }),
     defineField({
       name: 'bannerHeight',
@@ -48,7 +68,7 @@ export default defineField({
   ],
   initialValue: {
     overlayOpacity: 0,
-    contentAlignment: 'middle_center',
+    contentPosition: 'middle_center',
     bannerHeight: 450,
     settings: {
       padding: {

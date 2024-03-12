@@ -1,7 +1,7 @@
 import type {EncodeDataAttributeCallback} from '@sanity/react-loader';
 import type {InferType} from 'groqd';
 
-import {Suspense, createContext, useContext, useMemo} from 'react';
+import {createContext, useContext, useMemo} from 'react';
 
 import type {FOOTERS_FRAGMENT} from '~/qroq/footers';
 import type {
@@ -40,9 +40,9 @@ export function CmsSection(props: {
       encodeDataAttribute={encodeDataAttribute}
       type={props.type}
     >
-      <Suspense>
-        <Section data={data} encodeDataAttribute={encodeDataAttribute} />
-      </Suspense>
+      {/* <Suspense> */}
+      <Section data={data} encodeDataAttribute={encodeDataAttribute} />
+      {/* </Suspense> */}
     </SectionWrapper>
   ) : isDev ? (
     <MissingSection type={type} />

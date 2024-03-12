@@ -43,7 +43,7 @@ export function FeaturedCollectionSection(
       <div className="flex justify-between">
         <h2>{props.data.heading || props.data.collection?.store.title}</h2>
         {props.data.viewAll && (
-          <Button asChild className="hidden md:block" variant="ghost">
+          <Button asChild className="" variant="ghost">
             <Link to={collectionHandle}>
               {themeContent?.collection?.viewAll}
             </Link>
@@ -91,13 +91,13 @@ export function FeaturedCollectionSection(
         )}
       </AwaitFeaturedCollection>
       {props.data.viewAll && (
-        <Button
-          asChild
-          className="flex justify-center md:hidden"
-          variant="ghost"
-        >
-          <Link to={collectionHandle}>{themeContent?.collection?.viewAll}</Link>
-        </Button>
+        <div className="flex justify-center md:hidden">
+          <Button asChild variant="ghost">
+            <Link to={collectionHandle}>
+              {themeContent?.collection?.viewAll}
+            </Link>
+          </Button>
+        </div>
       )}
     </div>
   );

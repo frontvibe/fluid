@@ -4,7 +4,7 @@
 
 > 🚧 **Work in Progress**
 >
-> Fluid is currently in active development and not usable for production yet.
+> Fluid is currently in active development.
 
 Fluid is a Hydrogen theme that let's you easily build Shopify headless storefronts by organizing your content with the Sanity CMS. Build your pages by assembling sections like you would do in a Shopify Liquid theme.
 

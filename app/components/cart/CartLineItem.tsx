@@ -68,7 +68,6 @@ export function CartLineItem({
       },
     },
     visible: {
-      height: 'auto',
       opacity: 1,
     },
   };

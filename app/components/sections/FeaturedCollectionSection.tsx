@@ -43,7 +43,7 @@ export function FeaturedCollectionSection(
       <div className="flex justify-between">
         <h2>{props.data.heading || props.data.collection?.store.title}</h2>
         {props.data.viewAll && (
-          <Button asChild className="" variant="ghost">
+          <Button asChild className="hidden md:inline-flex" variant="ghost">
             <Link to={collectionHandle}>
               {themeContent?.collection?.viewAll}
             </Link>

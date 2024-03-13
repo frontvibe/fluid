@@ -2,6 +2,7 @@ import type {LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import type {CollectionDetailsQuery} from 'storefrontapi.generated';
 
 import {useLoaderData} from '@remix-run/react';
+import {AnalyticsPageType} from '@shopify/hydrogen-react';
 import {defer} from '@shopify/remix-oxygen';
 import {DEFAULT_LOCALE} from 'countries';
 import invariant from 'tiny-invariant';
@@ -59,6 +60,11 @@ export async function loader({context, params, request}: LoaderFunctionArgs) {
   });
 
   return defer({
+    analytics: {
+      collectionHandle,
+      pageType: AnalyticsPageType.collection,
+      resourceId: collection.id,
+    },
     cmsCollection,
     collection,
     collectionListPromise,

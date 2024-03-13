@@ -1,8 +1,9 @@
+import type {ShopifyAnalyticsProduct} from '@shopify/hydrogen';
 import type {LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import type {ProductQuery} from 'storefrontapi.generated';
 
 import {useLoaderData} from '@remix-run/react';
-import {getSelectedProductOptions} from '@shopify/hydrogen';
+import {AnalyticsPageType, getSelectedProductOptions} from '@shopify/hydrogen';
 import {ProductProvider} from '@shopify/hydrogen-react';
 import {defer} from '@shopify/remix-oxygen';
 import {DEFAULT_LOCALE} from 'countries';
@@ -76,7 +77,20 @@ export async function loader({context, params, request}: LoaderFunctionArgs) {
     storefront,
   });
 
+  const productAnalytics: ShopifyAnalyticsProduct = {
+    brand: product.vendor,
+    name: product.title,
+    price: product.priceRange.minVariantPrice.amount,
+    productGid: product.id,
+  };
+
   return defer({
+    analytics: {
+      pageType: AnalyticsPageType.product,
+      products: [productAnalytics],
+      resourceId: product.id,
+      totalValue: parseFloat(product.priceRange.minVariantPrice.amount),
+    },
     cmsProduct,
     collectionListPromise,
     featuredCollectionPromise,

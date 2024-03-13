@@ -1,4 +1,5 @@
 import type {EncodeDataAttributeCallback} from '@sanity/react-loader';
+import type {ShopifySalesChannel} from '@shopify/hydrogen';
 import type {
   CountryCode,
   CurrencyCode,
@@ -20,6 +21,7 @@ export type Locale = {
   label: string;
   language: LanguageCode;
   languageLabel: string;
+  salesChannel: keyof typeof ShopifySalesChannel;
 };
 
 export type Localizations = Record<string, Locale>;

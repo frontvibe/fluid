@@ -1,10 +1,20 @@
+import type {FetcherWithComponents} from '@remix-run/react';
+import type {ShopifyAddToCartPayload} from '@shopify/hydrogen';
 import type {ProductVariantFragmentFragment} from 'storefrontapi.generated';
 
 import {useNavigation} from '@remix-run/react';
-import {CartForm, OptimisticInput, ShopPayButton} from '@shopify/hydrogen';
+import {
+  AnalyticsEventName,
+  CartForm,
+  OptimisticInput,
+  ShopPayButton,
+  getClientBrowserParameters,
+  sendShopifyAnalytics,
+} from '@shopify/hydrogen';
 import {useEffect, useState} from 'react';
 import {useIdle, useSessionStorage} from 'react-use';
 
+import {usePageAnalytics} from '~/hooks/useAnalytics';
 import {useLocalePath} from '~/hooks/useLocalePath';
 import {useSanityThemeContent} from '~/hooks/useSanityThemeContent';
 import {useSelectedVariant} from '~/hooks/useSelectedVariant';
@@ -68,55 +78,57 @@ export function AddToCartForm(props: {
             // Button is also disabled if navigation is loading (new variant is being fetched)
             // to prevent adding the wrong variant to the cart.
             return (
-              <div className="grid gap-3">
-                <OptimisticInput
-                  data={{
-                    action: 'add',
-                    line: {
-                      cost: {
-                        amountPerQuantity: selectedVariant.price,
-                        totalAmount: selectedVariant.price,
-                      },
-                      id: selectedVariant.id,
-                      merchandise: {
-                        image: selectedVariant.image,
-                        product: {
-                          handle: selectedVariant.product?.handle,
-                          title: selectedVariant.product?.title,
+              <AddToCartAnalytics fetcher={fetcher}>
+                <div className="grid gap-3">
+                  <OptimisticInput
+                    data={{
+                      action: 'add',
+                      line: {
+                        cost: {
+                          amountPerQuantity: selectedVariant.price,
+                          totalAmount: selectedVariant.price,
                         },
-                        selectedOptions: selectedVariant.selectedOptions,
+                        id: selectedVariant.id,
+                        merchandise: {
+                          image: selectedVariant.image,
+                          product: {
+                            handle: selectedVariant.product?.handle,
+                            title: selectedVariant.product?.title,
+                          },
+                          selectedOptions: selectedVariant.selectedOptions,
+                        },
+                        quantity,
                       },
-                      quantity,
-                    },
-                  }}
-                  id="cart-line-item"
-                />
-                <Button
-                  className={cn([
-                    isOutOfStock && 'opacity-50',
-                    // Opacity does not change when is loading to prevent flickering
-                    'data-[loading="true"]:disabled:opacity-100',
-                  ])}
-                  data-loading={isLoading}
-                  data-sanity-edit-target
-                  disabled={isOutOfStock || isLoading}
-                  type="submit"
-                >
-                  {isOutOfStock ? (
-                    <CleanString value={themeContent?.product?.soldOut} />
-                  ) : (
-                    <CleanString value={themeContent?.product?.addToCart} />
-                  )}
-                </Button>
-                {showShopPay && selectedVariant.id && (
-                  <ShopPay
-                    isLoading={isLoading}
-                    isOutOfStock={isOutOfStock}
-                    quantity={quantity}
-                    variantId={selectedVariant.id}
+                    }}
+                    id="cart-line-item"
                   />
-                )}
-              </div>
+                  <Button
+                    className={cn([
+                      isOutOfStock && 'opacity-50',
+                      // Opacity does not change when is loading to prevent flickering
+                      'data-[loading="true"]:disabled:opacity-100',
+                    ])}
+                    data-loading={isLoading}
+                    data-sanity-edit-target
+                    disabled={isOutOfStock || isLoading}
+                    type="submit"
+                  >
+                    {isOutOfStock ? (
+                      <CleanString value={themeContent?.product?.soldOut} />
+                    ) : (
+                      <CleanString value={themeContent?.product?.addToCart} />
+                    )}
+                  </Button>
+                  {showShopPay && selectedVariant.id && (
+                    <ShopPay
+                      isLoading={isLoading}
+                      isOutOfStock={isOutOfStock}
+                      quantity={quantity}
+                      variantId={selectedVariant.id}
+                    />
+                  )}
+                </div>
+              </AddToCartAnalytics>
             );
           }}
         </CartForm>
@@ -179,6 +191,51 @@ function ShopPay(props: {
       )}
     </div>
   );
+}
+
+function AddToCartAnalytics({
+  children,
+  fetcher,
+}: {
+  children: React.ReactNode;
+  fetcher: FetcherWithComponents<any>;
+}): JSX.Element {
+  const fetcherData = fetcher.data;
+  const formData = fetcher.formData;
+  const pageAnalytics = usePageAnalytics({hasUserConsent: true});
+
+  useEffect(() => {
+    if (formData) {
+      const cartData: Record<string, unknown> = {};
+      const cartInputs = CartForm.getFormInput(formData);
+
+      try {
+        if (cartInputs.inputs.analytics) {
+          const dataInForm: unknown = JSON.parse(
+            String(cartInputs.inputs.analytics),
+          );
+          Object.assign(cartData, dataInForm);
+        }
+      } catch {
+        // do nothing
+      }
+
+      if (Object.keys(cartData).length && fetcherData) {
+        const addToCartPayload: ShopifyAddToCartPayload = {
+          ...getClientBrowserParameters(),
+          ...pageAnalytics,
+          ...cartData,
+          cartId: fetcherData.cart.id,
+        };
+
+        sendShopifyAnalytics({
+          eventName: AnalyticsEventName.ADD_TO_CART,
+          payload: addToCartPayload,
+        });
+      }
+    }
+  }, [fetcherData, formData, pageAnalytics]);
+  return <>{children}</>;
 }
 
 function ShopPayLogo() {

@@ -235,6 +235,10 @@ export type ProductQuery = {
       StorefrontAPI.Product,
       'id' | 'title' | 'vendor' | 'handle' | 'descriptionHtml' | 'description'
     > & {
+      priceRange: {
+        minVariantPrice: Pick<StorefrontAPI.MoneyV2, 'amount' | 'currencyCode'>;
+        maxVariantPrice: Pick<StorefrontAPI.MoneyV2, 'amount' | 'currencyCode'>;
+      };
       options: Array<Pick<StorefrontAPI.ProductOption, 'name' | 'values'>>;
       media: {
         nodes: Array<
@@ -707,8 +711,12 @@ export type FeaturedCollectionQuery = {
   >;
 };
 
+export type LayoutQueryVariables = StorefrontAPI.Exact<{[key: string]: never}>;
+
+export type LayoutQuery = {shop: Pick<StorefrontAPI.Shop, 'id'>};
+
 interface GeneratedQueryTypes {
-  '#graphql\nquery Product(\n  $country: CountryCode\n  $language: LanguageCode\n  $handle: String!\n) @inContext(country: $country, language: $language) {\n  product(handle: $handle) {\n    id\n    title\n    vendor\n    handle\n    descriptionHtml\n    description\n    options {\n      name\n      values\n    }\n    media(first: 7) {\n      nodes {\n        ...Media\n      }\n    }\n    variants(first: 1) {\n      nodes {\n        ...ProductVariantFragment\n      }\n    }\n  }\n}\n#graphql\n  fragment Media on Media {\n    __typename\n    mediaContentType\n    alt\n    previewImage {\n      url\n    }\n    ... on MediaImage {\n      id\n      image {\n        ...ImageFragment\n      }\n    }\n    ... on Video {\n      id\n      sources {\n        mimeType\n        url\n      }\n    }\n    ... on Model3d {\n      id\n      sources {\n        mimeType\n        url\n      }\n    }\n    ... on ExternalVideo {\n      id\n      embedUrl\n      host\n    }\n  }\n  #graphql\n  fragment ImageFragment on Image {\n    id\n    altText\n    width\n    height\n    url\n    thumbnail: url(transform: { maxWidth: 30 })\n  }\n\n\n#graphql\n  fragment ProductVariantFragment on ProductVariant {\n    id\n    availableForSale\n    selectedOptions {\n      name\n      value\n    }\n    image {\n      ...ProductVariantImageFragment\n    }\n    price {\n      amount\n      currencyCode\n    }\n    compareAtPrice {\n      amount\n      currencyCode\n    }\n    sku\n    title\n    unitPrice {\n      amount\n      currencyCode\n    }\n    product {\n      title\n      handle\n    }\n  }\n  #graphql\n  fragment ProductVariantImageFragment on Image {\n    id\n    altText\n    width\n    height\n    url\n    thumbnail: url(transform: { maxWidth: 30 })\n  }\n\n\n': {
+  '#graphql\nquery Product(\n  $country: CountryCode\n  $language: LanguageCode\n  $handle: String!\n) @inContext(country: $country, language: $language) {\n  product(handle: $handle) {\n    id\n    title\n    vendor\n    handle\n    descriptionHtml\n    description\n    priceRange {\n      minVariantPrice {\n        amount\n        currencyCode\n      }\n      maxVariantPrice {\n        amount\n        currencyCode\n      }\n    }\n    options {\n      name\n      values\n    }\n    media(first: 7) {\n      nodes {\n        ...Media\n      }\n    }\n    variants(first: 1) {\n      nodes {\n        ...ProductVariantFragment\n      }\n    }\n  }\n}\n#graphql\n  fragment Media on Media {\n    __typename\n    mediaContentType\n    alt\n    previewImage {\n      url\n    }\n    ... on MediaImage {\n      id\n      image {\n        ...ImageFragment\n      }\n    }\n    ... on Video {\n      id\n      sources {\n        mimeType\n        url\n      }\n    }\n    ... on Model3d {\n      id\n      sources {\n        mimeType\n        url\n      }\n    }\n    ... on ExternalVideo {\n      id\n      embedUrl\n      host\n    }\n  }\n  #graphql\n  fragment ImageFragment on Image {\n    id\n    altText\n    width\n    height\n    url\n    thumbnail: url(transform: { maxWidth: 30 })\n  }\n\n\n#graphql\n  fragment ProductVariantFragment on ProductVariant {\n    id\n    availableForSale\n    selectedOptions {\n      name\n      value\n    }\n    image {\n      ...ProductVariantImageFragment\n    }\n    price {\n      amount\n      currencyCode\n    }\n    compareAtPrice {\n      amount\n      currencyCode\n    }\n    sku\n    title\n    unitPrice {\n      amount\n      currencyCode\n    }\n    product {\n      title\n      handle\n    }\n  }\n  #graphql\n  fragment ProductVariantImageFragment on Image {\n    id\n    altText\n    width\n    height\n    url\n    thumbnail: url(transform: { maxWidth: 30 })\n  }\n\n\n': {
     return: ProductQuery;
     variables: ProductQueryVariables;
   };
@@ -743,6 +751,10 @@ interface GeneratedQueryTypes {
   '#graphql\n  query FeaturedCollection(\n    $id: ID!\n    $country: CountryCode\n    $language: LanguageCode\n    $first: Int\n  ) @inContext(country: $country, language: $language) {\n    collection(id: $id) {\n      id\n      handle\n      title\n      description\n      image {\n        ...ImageFragment\n      }\n      products(\n        first: $first,\n      ) {\n        nodes {\n          ...ProductCard\n        }\n      }\n    }\n  }\n  #graphql\n  fragment ImageFragment on Image {\n    id\n    altText\n    width\n    height\n    url\n    thumbnail: url(transform: { maxWidth: 30 })\n  }\n\n  #graphql\n  fragment ProductCard on Product {\n    id\n    title\n    publishedAt\n    handle\n    vendor\n    variants(first: 1) {\n      nodes {\n        id\n        title\n        availableForSale\n        image {\n          ...ProductCardImageFragment\n        }\n        price {\n          amount\n          currencyCode\n        }\n        compareAtPrice {\n          amount\n          currencyCode\n        }\n        selectedOptions {\n          name\n          value\n        }\n        product {\n          handle\n          title\n        }\n      }\n    }\n  }\n  #graphql\n  fragment ProductCardImageFragment on Image {\n    id\n    altText\n    width\n    height\n    url\n    thumbnail: url(transform: { maxWidth: 30 })\n  }\n\n\n': {
     return: FeaturedCollectionQuery;
     variables: FeaturedCollectionQueryVariables;
+  };
+  '#graphql\n      query layout {\n        shop {\n          id\n        } \n      }\n    ': {
+    return: LayoutQuery;
+    variables: LayoutQueryVariables;
   };
 }
 

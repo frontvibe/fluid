@@ -23,6 +23,16 @@ query Product(
     handle
     descriptionHtml
     description
+    priceRange {
+      minVariantPrice {
+        amount
+        currencyCode
+      }
+      maxVariantPrice {
+        amount
+        currencyCode
+      }
+    }
     options {
       name
       values

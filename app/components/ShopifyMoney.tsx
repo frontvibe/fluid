@@ -4,8 +4,6 @@ import type {PartialObjectDeep} from 'type-fest/source/partial-deep';
 import {vercelStegaCleanAll} from '@sanity/client/stega';
 import {Money} from '@shopify/hydrogen';
 
-import type {I18nLocale} from '~/lib/type';
-
 import {useSanityRoot} from '~/hooks/useSanityRoot';
 import {cn, setShowTrailingZeroKeyValue} from '~/lib/utils';
 import {useRootLoaderData} from '~/root';

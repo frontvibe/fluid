@@ -127,3 +127,7 @@ export function generateShopifyImageThumbnail(url?: null | string) {
 
   return thumbnailUrl;
 }
+
+export function setShowTrailingZeroKeyValue(locale: I18nLocale) {
+  return locale.country + '_' + locale.language + +'_' + locale.pathPrefix;
+}

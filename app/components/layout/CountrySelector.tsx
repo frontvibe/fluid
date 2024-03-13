@@ -38,7 +38,7 @@ export function CountrySelector() {
         {locales.map((locale) => (
           <DropdownMenuItem
             className="flex [&>*]:flex-grow"
-            key={locale.country}
+            key={locale.country + locale.language + locale.pathPrefix}
             onSelect={(e) => e.preventDefault()}
           >
             <ChangeLocaleForm locale={locale} />
@@ -52,7 +52,13 @@ export function CountrySelector() {
 function ChangeLocaleForm(props: {locale: I18nLocale}) {
   const {locale: currentLocale} = useRootLoaderData();
   const location = useLocation();
-  const isActive = currentLocale?.country === props.locale.country;
+  const currentLocaleKey =
+    currentLocale?.country +
+    currentLocale?.language +
+    currentLocale?.pathPrefix;
+  const localeKey =
+    props.locale.country + props.locale.language + props.locale.pathPrefix;
+  const isActive = currentLocaleKey === localeKey;
 
   const redirectTo = useMemo(() => {
     let newPathname = `${props.locale?.pathPrefix}${location.pathname}`;

@@ -1,5 +1,6 @@
 import {nanoid} from 'nanoid';
 import {DEFAULT_LOCALE} from '../../countries';
+import {setShowTrailingZeroKeyValue} from '../../app/lib/utils';
 
 const initialBorderValues = {
   cornerRadius: 8,
@@ -170,7 +171,7 @@ export const initialSingletonsValues = {
       textAlignment: 'left',
     },
     showCurrencyCodes: true,
-    showTrailingZeros: [DEFAULT_LOCALE.country],
+    showTrailingZeros: [setShowTrailingZeroKeyValue(DEFAULT_LOCALE)],
     facebook: 'https://facebook.com/shopify',
     instagram: 'https://instagram.com/shopify',
     linkedin: 'https://linkedin.com/company/shopify',

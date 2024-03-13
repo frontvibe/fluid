@@ -4,8 +4,10 @@ import type {PartialObjectDeep} from 'type-fest/source/partial-deep';
 import {vercelStegaCleanAll} from '@sanity/client/stega';
 import {Money} from '@shopify/hydrogen';
 
+import type {I18nLocale} from '~/lib/type';
+
 import {useSanityRoot} from '~/hooks/useSanityRoot';
-import {cn} from '~/lib/utils';
+import {cn, setShowTrailingZeroKeyValue} from '~/lib/utils';
 import {useRootLoaderData} from '~/root';
 
 export function ShopifyMoney({
@@ -22,10 +24,10 @@ export function ShopifyMoney({
 }) {
   const {locale} = useRootLoaderData();
   const {data: sanityRootData} = useSanityRoot();
-  const countryCode = locale.country;
+  const key = setShowTrailingZeroKeyValue(locale);
   const showCurrencyCodes = sanityRootData?.settings?.showCurrencyCodes;
   const showTrailingZeros = sanityRootData?.settings?.showTrailingZeros?.find(
-    (c) => vercelStegaCleanAll(c) === countryCode,
+    (k) => vercelStegaCleanAll(k) === key,
   );
 
   return (

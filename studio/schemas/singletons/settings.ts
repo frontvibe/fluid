@@ -1,5 +1,6 @@
 import {defineArrayMember, defineField, defineType} from 'sanity';
-import {getAllCountries} from '../../../countries';
+import {getAllLocales} from '../../../countries';
+import {setShowTrailingZeroKeyValue} from '../../../app/lib/utils';
 
 const GROUPS = [
   {
@@ -270,10 +271,10 @@ export default defineType({
       type: 'array',
       of: [defineArrayMember({type: 'string'})],
       options: {
-        list: getAllCountries().map((country) => {
+        list: getAllLocales().map((locale) => {
           return {
-            title: country,
-            value: country,
+            title: locale.label,
+            value: setShowTrailingZeroKeyValue(locale),
           };
         }),
       },

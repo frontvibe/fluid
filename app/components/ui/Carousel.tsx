@@ -1,5 +1,6 @@
 import type {EmblaCarouselType} from 'embla-carousel';
 
+import {useLocation} from '@remix-run/react';
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from 'embla-carousel-react';
@@ -68,6 +69,7 @@ const Carousel = React.forwardRef<
     );
     const [canScrollPrev, setCanScrollPrev] = React.useState(false);
     const [canScrollNext, setCanScrollNext] = React.useState(false);
+    const {pathname} = useLocation();
 
     const onSelect = React.useCallback((api: CarouselApi) => {
       if (!api) {
@@ -106,6 +108,10 @@ const Carousel = React.forwardRef<
 
       setApi(api);
     }, [api, setApi]);
+
+    React.useEffect(() => {
+      api?.scrollTo(0);
+    }, [pathname, api]);
 
     React.useEffect(() => {
       if (!api) {

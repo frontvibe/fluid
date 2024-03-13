@@ -9,6 +9,7 @@ export const countries: Localizations = {
     label: 'United States (USD $)',
     language: 'EN',
     languageLabel: 'English',
+    salesChannel: 'hydrogen',
   },
   '/fr': {
     country: 'FR',
@@ -17,6 +18,7 @@ export const countries: Localizations = {
     label: 'France (EUR €)',
     language: 'FR',
     languageLabel: 'French',
+    salesChannel: 'hydrogen',
   },
   '/gb': {
     country: 'GB',
@@ -25,6 +27,7 @@ export const countries: Localizations = {
     label: 'United Kingdom (GBP £)',
     language: 'EN',
     languageLabel: 'English',
+    salesChannel: 'hydrogen',
   },
 };
 

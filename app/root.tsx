@@ -19,6 +19,7 @@ import {
   useNavigate,
   useRouteError,
 } from '@remix-run/react';
+import {vercelStegaCleanAll} from '@sanity/client/stega';
 import {useNonce} from '@shopify/hydrogen';
 import {defer} from '@shopify/remix-oxygen';
 import {DEFAULT_LOCALE} from 'countries';
@@ -32,13 +33,13 @@ import {CssVars} from './components/CssVars';
 import {Fonts} from './components/Fonts';
 import {generateSanityImageUrl} from './components/sanity/SanityImage';
 import {Button} from './components/ui/Button';
+import {useAnalytics} from './hooks/useAnalytics';
 import {useLocalePath} from './hooks/useLocalePath';
 import {useSanityThemeContent} from './hooks/useSanityThemeContent';
 import {generateFontsPreloadLinks} from './lib/fonts';
 import {sanityPreviewPayload} from './lib/sanity/sanity.payload.server';
 import {ROOT_QUERY} from './qroq/queries';
 import tailwindCss from './styles/tailwind.css';
-import {vercelStegaCleanAll} from '@sanity/client/stega';
 
 // This is important to avoid re-fetching root queries on sub-navigations
 export const shouldRevalidate: ShouldRevalidateFunction = ({
@@ -94,7 +95,8 @@ export const meta: MetaFunction<typeof loader> = (loaderData) => {
 };
 
 export async function loader({context}: LoaderFunctionArgs) {
-  const {cart, env, locale, sanity, sanityPreviewMode, session} = context;
+  const {cart, env, locale, sanity, sanityPreviewMode, session, storefront} =
+    context;
   const language = locale?.language.toLowerCase();
   const customerAccessToken = await session.get('customerAccessToken');
 
@@ -103,10 +105,21 @@ export async function loader({context}: LoaderFunctionArgs) {
     language,
   };
 
-  const sanityRoot = await sanity.query({
-    groqdQuery: ROOT_QUERY,
-    params: queryParams,
-  });
+  const rootData = Promise.all([
+    sanity.query({
+      groqdQuery: ROOT_QUERY,
+      params: queryParams,
+    }),
+    storefront.query(`#graphql
+      query layout {
+        shop {
+          id
+        } 
+      }
+    `),
+  ]);
+
+  const [sanityRoot, layout] = await rootData;
 
   // validate the customer access token is valid
   const {headers, isLoggedIn} = await validateCustomerAccessToken(
@@ -119,6 +132,10 @@ export async function loader({context}: LoaderFunctionArgs) {
 
   return defer(
     {
+      analytics: {
+        shopId: layout.shop.id,
+        shopifySalesChannel: locale.salesChannel,
+      },
       cart: cartPromise,
       env: {
         /*
@@ -151,6 +168,9 @@ export async function loader({context}: LoaderFunctionArgs) {
 export default function App() {
   const nonce = useNonce();
   const {locale} = useRootLoaderData();
+  const hasUserConsent = true;
+
+  useAnalytics(hasUserConsent);
 
   return (
     <html lang={locale.language.toLowerCase()}>
@@ -327,7 +347,7 @@ function generateFaviconUrls(loaderData: SerializeFrom<typeof loader>) {
 }
 
 function generateSocialImagePreview(loaderData: SerializeFrom<typeof loader>) {
-  const {sanityRoot, env} = loaderData;
+  const {env, sanityRoot} = loaderData;
   const socialImage = vercelStegaCleanAll(
     sanityRoot.data?.settings?.socialSharingImagePreview,
   );
@@ -358,10 +378,10 @@ function generateSocialImagePreview(loaderData: SerializeFrom<typeof loader>) {
       content: socialImageUrl,
       property: 'og:image:secure_url',
     },
-    {property: 'og:image:width', content: size.width},
-    {property: 'og:image:height', content: size.height},
-    {property: 'og:image:type', content: socialImage.mimeType},
-    {property: 'twitter:image', content: socialImageUrl},
-    {property: 'twitter:card', content: 'summary_large_image'},
+    {content: size.width, property: 'og:image:width'},
+    {content: size.height, property: 'og:image:height'},
+    {content: socialImage.mimeType, property: 'og:image:type'},
+    {content: socialImageUrl, property: 'twitter:image'},
+    {content: 'summary_large_image', property: 'twitter:card'},
   ];
 }

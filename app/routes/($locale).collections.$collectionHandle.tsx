@@ -12,6 +12,7 @@ import {COLLECTION_QUERY} from '~/graphql/queries';
 import {useSanityData} from '~/hooks/useSanityData';
 import {resolveShopifyPromises} from '~/lib/resolveShopifyPromises';
 import {sanityPreviewPayload} from '~/lib/sanity/sanity.payload.server';
+import {seoPayload} from '~/lib/seo.server';
 import {COLLECTION_QUERY as CMS_COLLECTION_QUERY} from '~/qroq/queries';
 
 export async function loader({context, params, request}: LoaderFunctionArgs) {
@@ -59,6 +60,8 @@ export async function loader({context, params, request}: LoaderFunctionArgs) {
     storefront,
   });
 
+  const seo = seoPayload.collection({collection, url: request.url});
+
   return defer({
     analytics: {
       collectionHandle,
@@ -71,6 +74,7 @@ export async function loader({context, params, request}: LoaderFunctionArgs) {
     collectionProductGridPromise,
     featuredCollectionPromise,
     featuredProductPromise,
+    seo,
     ...sanityPreviewPayload({
       context,
       params: queryParams,

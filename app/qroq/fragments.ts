@@ -184,6 +184,7 @@ export const SETTINGS_FRAGMENT = {
       textAlignment: z.enum(['left', 'center', 'right']).nullable(),
     })
     .nullable(),
+  description: q.string().nullable(),
   dropdownsAndPopupsBorder: q.object(BORDER_FRAGMENT).nullable(),
   dropdownsAndPopupsShadow: q.object(SHADOW_FRAGMENT).nullable(),
   facebook: q.string().nullable(),

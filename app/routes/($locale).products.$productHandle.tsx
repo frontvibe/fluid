@@ -14,6 +14,7 @@ import {PRODUCT_QUERY, VARIANTS_QUERY} from '~/graphql/queries';
 import {useSanityData} from '~/hooks/useSanityData';
 import {resolveShopifyPromises} from '~/lib/resolveShopifyPromises';
 import {sanityPreviewPayload} from '~/lib/sanity/sanity.payload.server';
+import {seoPayload} from '~/lib/seo.server';
 import {PRODUCT_QUERY as CMS_PRODUCT_QUERY} from '~/qroq/queries';
 
 export async function loader({context, params, request}: LoaderFunctionArgs) {
@@ -84,6 +85,12 @@ export async function loader({context, params, request}: LoaderFunctionArgs) {
     productGid: product.id,
   };
 
+  const seo = seoPayload.product({
+    product,
+    selectedVariant: product.variants.nodes[0],
+    url: request.url,
+  });
+
   return defer({
     analytics: {
       pageType: AnalyticsPageType.product,
@@ -97,6 +104,7 @@ export async function loader({context, params, request}: LoaderFunctionArgs) {
     featuredProductPromise,
     product,
     relatedProductsPromise,
+    seo,
     variants,
     ...sanityPreviewPayload({
       context,

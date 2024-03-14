@@ -314,6 +314,7 @@ export type ProductQuery = {
           }
         >;
       };
+      seo: Pick<StorefrontAPI.Seo, 'description' | 'title'>;
     }
   >;
 };
@@ -580,6 +581,8 @@ export type CollectionDetailsQuery = {
           'id' | 'altText' | 'width' | 'height' | 'url'
         > & {thumbnail: StorefrontAPI.Image['url']}
       >;
+      seo: Pick<StorefrontAPI.Seo, 'description' | 'title'>;
+      products: {nodes: Array<Pick<StorefrontAPI.Product, 'handle'>>};
     }
   >;
 };
@@ -716,7 +719,7 @@ export type LayoutQueryVariables = StorefrontAPI.Exact<{[key: string]: never}>;
 export type LayoutQuery = {shop: Pick<StorefrontAPI.Shop, 'id'>};
 
 interface GeneratedQueryTypes {
-  '#graphql\nquery Product(\n  $country: CountryCode\n  $language: LanguageCode\n  $handle: String!\n) @inContext(country: $country, language: $language) {\n  product(handle: $handle) {\n    id\n    title\n    vendor\n    handle\n    descriptionHtml\n    description\n    priceRange {\n      minVariantPrice {\n        amount\n        currencyCode\n      }\n      maxVariantPrice {\n        amount\n        currencyCode\n      }\n    }\n    options {\n      name\n      values\n    }\n    media(first: 7) {\n      nodes {\n        ...Media\n      }\n    }\n    variants(first: 1) {\n      nodes {\n        ...ProductVariantFragment\n      }\n    }\n  }\n}\n#graphql\n  fragment Media on Media {\n    __typename\n    mediaContentType\n    alt\n    previewImage {\n      url\n    }\n    ... on MediaImage {\n      id\n      image {\n        ...ImageFragment\n      }\n    }\n    ... on Video {\n      id\n      sources {\n        mimeType\n        url\n      }\n    }\n    ... on Model3d {\n      id\n      sources {\n        mimeType\n        url\n      }\n    }\n    ... on ExternalVideo {\n      id\n      embedUrl\n      host\n    }\n  }\n  #graphql\n  fragment ImageFragment on Image {\n    id\n    altText\n    width\n    height\n    url\n    thumbnail: url(transform: { maxWidth: 30 })\n  }\n\n\n#graphql\n  fragment ProductVariantFragment on ProductVariant {\n    id\n    availableForSale\n    selectedOptions {\n      name\n      value\n    }\n    image {\n      ...ProductVariantImageFragment\n    }\n    price {\n      amount\n      currencyCode\n    }\n    compareAtPrice {\n      amount\n      currencyCode\n    }\n    sku\n    title\n    unitPrice {\n      amount\n      currencyCode\n    }\n    product {\n      title\n      handle\n    }\n  }\n  #graphql\n  fragment ProductVariantImageFragment on Image {\n    id\n    altText\n    width\n    height\n    url\n    thumbnail: url(transform: { maxWidth: 30 })\n  }\n\n\n': {
+  '#graphql\nquery Product(\n  $country: CountryCode\n  $language: LanguageCode\n  $handle: String!\n) @inContext(country: $country, language: $language) {\n  product(handle: $handle) {\n    id\n    title\n    vendor\n    handle\n    descriptionHtml\n    description\n    priceRange {\n      minVariantPrice {\n        amount\n        currencyCode\n      }\n      maxVariantPrice {\n        amount\n        currencyCode\n      }\n    }\n    options {\n      name\n      values\n    }\n    media(first: 7) {\n      nodes {\n        ...Media\n      }\n    }\n    variants(first: 1) {\n      nodes {\n        ...ProductVariantFragment\n      }\n    }\n    seo {\n      description\n      title\n    }\n  }\n}\n#graphql\n  fragment Media on Media {\n    __typename\n    mediaContentType\n    alt\n    previewImage {\n      url\n    }\n    ... on MediaImage {\n      id\n      image {\n        ...ImageFragment\n      }\n    }\n    ... on Video {\n      id\n      sources {\n        mimeType\n        url\n      }\n    }\n    ... on Model3d {\n      id\n      sources {\n        mimeType\n        url\n      }\n    }\n    ... on ExternalVideo {\n      id\n      embedUrl\n      host\n    }\n  }\n  #graphql\n  fragment ImageFragment on Image {\n    id\n    altText\n    width\n    height\n    url\n    thumbnail: url(transform: { maxWidth: 30 })\n  }\n\n\n#graphql\n  fragment ProductVariantFragment on ProductVariant {\n    id\n    availableForSale\n    selectedOptions {\n      name\n      value\n    }\n    image {\n      ...ProductVariantImageFragment\n    }\n    price {\n      amount\n      currencyCode\n    }\n    compareAtPrice {\n      amount\n      currencyCode\n    }\n    sku\n    title\n    unitPrice {\n      amount\n      currencyCode\n    }\n    product {\n      title\n      handle\n    }\n  }\n  #graphql\n  fragment ProductVariantImageFragment on Image {\n    id\n    altText\n    width\n    height\n    url\n    thumbnail: url(transform: { maxWidth: 30 })\n  }\n\n\n': {
     return: ProductQuery;
     variables: ProductQueryVariables;
   };
@@ -740,7 +743,7 @@ interface GeneratedQueryTypes {
     return: CollectionsQuery;
     variables: CollectionsQueryVariables;
   };
-  '#graphql\n  query CollectionDetails(\n    $handle: String!\n    $country: CountryCode\n    $language: LanguageCode\n  ) @inContext(country: $country, language: $language) {\n    collection(handle: $handle) {\n      id\n      handle\n      title\n      description\n      image {\n        ...ImageFragment\n      }\n    }\n  }\n  #graphql\n  fragment ImageFragment on Image {\n    id\n    altText\n    width\n    height\n    url\n    thumbnail: url(transform: { maxWidth: 30 })\n  }\n\n': {
+  '#graphql\n  query CollectionDetails(\n    $handle: String!\n    $country: CountryCode\n    $language: LanguageCode\n  ) @inContext(country: $country, language: $language) {\n    collection(handle: $handle) {\n      id\n      handle\n      title\n      description\n      image {\n        ...ImageFragment\n      }\n      seo {\n        description\n        title\n      }\n      products(first: 10) {\n        nodes {\n          handle\n        }\n      }\n    }\n  }\n  #graphql\n  fragment ImageFragment on Image {\n    id\n    altText\n    width\n    height\n    url\n    thumbnail: url(transform: { maxWidth: 30 })\n  }\n\n': {
     return: CollectionDetailsQuery;
     variables: CollectionDetailsQueryVariables;
   };

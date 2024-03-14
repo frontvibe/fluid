@@ -47,6 +47,10 @@ query Product(
         ...ProductVariantFragment
       }
     }
+    seo {
+      description
+      title
+    }
   }
 }
 ${MEDIA_FRAGMENT}
@@ -202,6 +206,15 @@ export const COLLECTION_QUERY = `#graphql
       description
       image {
         ...ImageFragment
+      }
+      seo {
+        description
+        title
+      }
+      products(first: 10) {
+        nodes {
+          handle
+        }
       }
     }
   }

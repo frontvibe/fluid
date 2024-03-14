@@ -112,6 +112,14 @@ export default defineType({
           type: 'internationalizedArrayString',
         }),
         defineField({
+          name: 'filterInStock',
+          type: 'internationalizedArrayString',
+        }),
+        defineField({
+          name: 'filterOutOfStock',
+          type: 'internationalizedArrayString',
+        }),
+        defineField({
           name: 'viewAll',
           type: 'internationalizedArrayString',
         }),

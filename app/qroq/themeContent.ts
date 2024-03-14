@@ -37,6 +37,11 @@ export const THEME_CONTENT_FRAGMENT = {
       clear: [getIntValue('clear'), q.string().nullable()],
       clearFilters: [getIntValue('clearFilters'), q.string().nullable()],
       filterAndSort: [getIntValue('filterAndSort'), q.string().nullable()],
+      filterInStock: [getIntValue('filterInStock'), q.string().nullable()],
+      filterOutOfStock: [
+        getIntValue('filterOutOfStock'),
+        q.string().nullable(),
+      ],
       from: [getIntValue('from'), q.string().nullable()],
       loadMoreProducts: [
         getIntValue('loadMoreProducts'),

@@ -84,6 +84,21 @@ function FilterCheckbox({
   }>(optionId);
   const {optimisticData: clearFilters} =
     useOptimisticNavigationData<boolean>('clear-all-filters');
+  const {themeContent} = useSanityThemeContent();
+
+  let optionLabel = option.label;
+
+  if (
+    option.id === 'filter.v.availability.1' &&
+    themeContent?.collection?.filterInStock
+  ) {
+    optionLabel = themeContent?.collection?.filterInStock;
+  } else if (
+    option.id === 'filter.v.availability.0' &&
+    themeContent?.collection?.filterOutOfStock
+  ) {
+    optionLabel = themeContent?.collection?.filterOutOfStock;
+  }
 
   // Use optimistic checked state while the navigation is pending
   if (optimisticData) {
@@ -130,7 +145,7 @@ function FilterCheckbox({
         ])}
         htmlFor={optionId}
       >
-        {option.label}
+        {optionLabel}
       </Label>
     </div>
   );

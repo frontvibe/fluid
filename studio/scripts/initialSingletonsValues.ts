@@ -289,6 +289,8 @@ export const initialSingletonsValues = {
       loadMoreProducts: generateIntString('Load more products'),
       loadPrevious: generateIntString('Load previous'),
       loading: generateIntString('Loading...'),
+      filterInStock: generateIntString('In stock'),
+      filterOutOfStock: generateIntString('Out of stock'),
       noProductFound: generateIntString('No product found'),
       noCollectionFound: generateIntString('No collection found'),
       from: generateIntString('From'),

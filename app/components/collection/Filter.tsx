@@ -15,6 +15,7 @@ import {useCallback, useEffect, useMemo, useState} from 'react';
 import useDebounce from 'react-use/lib/useDebounce';
 
 import {useOptimisticNavigationData} from '~/hooks/useOptimisticNavigationData';
+import {useSanityThemeContent} from '~/hooks/useSanityThemeContent';
 import {cn} from '~/lib/utils';
 
 import type {AppliedFilter} from './SortFilterLayout';
@@ -158,6 +159,7 @@ export function PriceRangeFilter({
     useOptimisticNavigationData<boolean>('clear-all-filters');
   const [minPrice, setMinPrice] = useState(min);
   const [maxPrice, setMaxPrice] = useState(max);
+  const {themeContent} = useSanityThemeContent();
 
   useEffect(() => {
     // Reset prices when the user clears all filters
@@ -211,7 +213,7 @@ export function PriceRangeFilter({
   return (
     <div className="flex flex-col gap-4">
       <label className="px-2">
-        <span>from</span>
+        <span>{themeContent?.collection?.from}</span>
         <Input
           className="mt-1"
           min={0}
@@ -223,7 +225,7 @@ export function PriceRangeFilter({
         />
       </label>
       <label className="px-2">
-        <span>to</span>
+        <span>{themeContent?.collection?.to}</span>
         <Input
           className="mt-1"
           min={0}

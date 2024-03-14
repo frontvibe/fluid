@@ -291,6 +291,8 @@ export const initialSingletonsValues = {
       loading: generateIntString('Loading...'),
       noProductFound: generateIntString('No product found'),
       noCollectionFound: generateIntString('No collection found'),
+      from: generateIntString('From'),
+      to: generateIntString('To'),
       sortBestSelling: generateIntString('Best selling'),
       sortBy: generateIntString('Sort by:'),
       sortFeatured: generateIntString('Featured'),

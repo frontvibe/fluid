@@ -19,8 +19,7 @@ import {
   useNavigate,
   useRouteError,
 } from '@remix-run/react';
-import {vercelStegaCleanAll} from '@sanity/client/stega';
-import {useNonce} from '@shopify/hydrogen';
+import {Seo, useNonce} from '@shopify/hydrogen';
 import {defer} from '@shopify/remix-oxygen';
 import {DEFAULT_LOCALE} from 'countries';
 
@@ -38,6 +37,7 @@ import {useLocalePath} from './hooks/useLocalePath';
 import {useSanityThemeContent} from './hooks/useSanityThemeContent';
 import {generateFontsPreloadLinks} from './lib/fonts';
 import {sanityPreviewPayload} from './lib/sanity/sanity.payload.server';
+import {seoPayload} from './lib/seo.server';
 import {ROOT_QUERY} from './qroq/queries';
 import tailwindCss from './styles/tailwind.css';
 
@@ -89,12 +89,11 @@ export const meta: MetaFunction<typeof loader> = (loaderData) => {
       tagName: 'link',
     },
     ...generateFaviconUrls(data as SerializeFrom<typeof loader>),
-    ...generateSocialImagePreview(data as SerializeFrom<typeof loader>),
     ...fontsPreloadLinks,
   ];
 };
 
-export async function loader({context}: LoaderFunctionArgs) {
+export async function loader({context, request}: LoaderFunctionArgs) {
   const {cart, env, locale, sanity, sanityPreviewMode, session, storefront} =
     context;
   const language = locale?.language.toLowerCase();
@@ -120,6 +119,15 @@ export async function loader({context}: LoaderFunctionArgs) {
   ]);
 
   const [sanityRoot, layout] = await rootData;
+
+  const seo = seoPayload.root({
+    root: sanityRoot.data,
+    sanity: {
+      dataset: env.SANITY_STUDIO_DATASET,
+      projectId: env.SANITY_STUDIO_PROJECT_ID,
+    },
+    url: request.url,
+  });
 
   // validate the customer access token is valid
   const {headers, isLoggedIn} = await validateCustomerAccessToken(
@@ -155,6 +163,7 @@ export async function loader({context}: LoaderFunctionArgs) {
       locale,
       sanityPreviewMode,
       sanityRoot,
+      seo,
       ...sanityPreviewPayload({
         context,
         params: queryParams,
@@ -178,6 +187,7 @@ export default function App() {
         <meta charSet="utf-8" />
         <meta content="width=device-width,initial-scale=1" name="viewport" />
         <Meta />
+        <Seo />
         <Fonts />
         <Links />
         <CssVars />
@@ -343,45 +353,5 @@ function generateFaviconUrls(loaderData: SerializeFrom<typeof loader>) {
       rel: 'apple-touch-icon-precomposed',
       tagName: 'link',
     },
-  ];
-}
-
-function generateSocialImagePreview(loaderData: SerializeFrom<typeof loader>) {
-  const {env, sanityRoot} = loaderData;
-  const socialImage = vercelStegaCleanAll(
-    sanityRoot.data?.settings?.socialSharingImagePreview,
-  );
-
-  const size = {
-    height: 628,
-    width: 1200,
-  };
-
-  if (!socialImage) {
-    return [];
-  }
-
-  const socialImageUrl = generateSanityImageUrl({
-    dataset: env.SANITY_STUDIO_DATASET,
-    height: size.height,
-    projectId: env.SANITY_STUDIO_PROJECT_ID,
-    ref: socialImage?._ref,
-    width: size.width,
-  });
-
-  return [
-    {
-      content: socialImageUrl,
-      property: 'og:image:url',
-    },
-    {
-      content: socialImageUrl,
-      property: 'og:image:secure_url',
-    },
-    {content: size.width, property: 'og:image:width'},
-    {content: size.height, property: 'og:image:height'},
-    {content: socialImage.mimeType, property: 'og:image:type'},
-    {content: socialImageUrl, property: 'twitter:image'},
-    {content: 'summary_large_image', property: 'twitter:card'},
   ];
 }

@@ -11,10 +11,11 @@ import {CmsSection} from '~/components/CmsSection';
 import {useSanityData} from '~/hooks/useSanityData';
 import {resolveShopifyPromises} from '~/lib/resolveShopifyPromises';
 import {sanityPreviewPayload} from '~/lib/sanity/sanity.payload.server';
+import {seoPayload} from '~/lib/seo.server';
 import {PAGE_QUERY} from '~/qroq/queries';
 
 export async function loader({context, params, request}: LoaderFunctionArgs) {
-  const {locale, sanity, storefront} = context;
+  const {env, locale, sanity, storefront} = context;
   const pathname = new URL(request.url).pathname;
   const handle = getPageHandle({locale, params, pathname});
   const language = locale?.language.toLowerCase();
@@ -47,6 +48,14 @@ export async function loader({context, params, request}: LoaderFunctionArgs) {
     });
   }
 
+  const seo = seoPayload.home({
+    page: page.data,
+    sanity: {
+      dataset: env.SANITY_STUDIO_DATASET,
+      projectId: env.SANITY_STUDIO_PROJECT_ID,
+    },
+  });
+
   return defer({
     analytics: {
       pageType:
@@ -56,6 +65,7 @@ export async function loader({context, params, request}: LoaderFunctionArgs) {
     featuredCollectionPromise,
     featuredProductPromise,
     page,
+    seo,
     ...sanityPreviewPayload({
       context,
       params: queryParams,

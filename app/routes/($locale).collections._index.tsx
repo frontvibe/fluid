@@ -7,6 +7,7 @@ import {json} from '@shopify/remix-oxygen';
 import {CollectionListGrid} from '~/components/CollectionListGrid';
 import {COLLECTIONS_QUERY} from '~/graphql/queries';
 import {useSanityRoot} from '~/hooks/useSanityRoot';
+import {seoPayload} from '~/lib/seo.server';
 
 const PAGINATION_SIZE = 4;
 
@@ -25,7 +26,12 @@ export const loader = async ({
     },
   });
 
-  return json({collections});
+  const seo = seoPayload.listCollections({
+    collections,
+    url: request.url,
+  });
+
+  return json({collections, seo});
 };
 
 export default function Collections() {

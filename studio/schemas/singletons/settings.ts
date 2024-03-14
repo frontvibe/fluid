@@ -48,9 +48,17 @@ export default defineType({
   fields: [
     defineField({
       name: 'siteName',
+      title: 'Site name',
       type: 'string',
       group: 'brand',
       initialValue: 'Fluid',
+    }),
+    defineField({
+      name: 'siteDescription',
+      description: 'Short description of your store used for SEO purposes.',
+      title: 'Site description',
+      type: 'string',
+      group: 'brand',
     }),
     defineField({
       name: 'logo',

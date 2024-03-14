@@ -7,6 +7,7 @@ import {
   FONT_FRAGMENT,
   MENU_FRAGMENT,
   SETTINGS_FRAGMENT,
+  SIMPLE_IMAGE_FRAGMENT,
 } from './fragments';
 import {
   COLLECTION_SECTIONS_FRAGMENT,
@@ -14,6 +15,7 @@ import {
   SECTIONS_FRAGMENT,
 } from './sections';
 import {THEME_CONTENT_FRAGMENT} from './themeContent';
+import {getIntValue} from './utils';
 
 /*
 |--------------------------------------------------------------------------
@@ -59,6 +61,11 @@ export const PAGE_QUERY = q('*')
   .grab({
     _type: q.literal('page').or(q.literal('home')),
     sections: SECTIONS_FRAGMENT,
+    seo: q('seo').grab({
+      description: [getIntValue('description'), q.string().nullable()],
+      image: q('image').grab(SIMPLE_IMAGE_FRAGMENT).nullable(),
+      title: [getIntValue('title'), q.string().nullable()],
+    }),
   })
   .slice(0)
   .nullable();

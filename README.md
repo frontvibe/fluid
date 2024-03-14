@@ -2,6 +2,8 @@
   Fluid
 </h1>
 
+![Fluid](https://github.com/frontvibe/fluid/assets/10447155/0a6b881f-7034-4002-8246-240ea1138d4b)
+
 Fluid is a Hydrogen theme that let's you easily build Shopify headless storefronts by organizing your content with the Sanity CMS. Build your pages by assembling sections like you would do in a Shopify Liquid theme.
 
 Using Sanity [Visual Editing](https://www.youtube.com/watch?v=0qheADLqhBs), content editors can update content in real-time and live preview.

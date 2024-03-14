@@ -104,6 +104,14 @@ export default defineType({
           type: 'internationalizedArrayString',
         }),
         defineField({
+          name: 'from',
+          type: 'internationalizedArrayString',
+        }),
+        defineField({
+          name: 'to',
+          type: 'internationalizedArrayString',
+        }),
+        defineField({
           name: 'viewAll',
           type: 'internationalizedArrayString',
         }),

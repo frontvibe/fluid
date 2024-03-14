@@ -37,6 +37,7 @@ export const THEME_CONTENT_FRAGMENT = {
       clear: [getIntValue('clear'), q.string().nullable()],
       clearFilters: [getIntValue('clearFilters'), q.string().nullable()],
       filterAndSort: [getIntValue('filterAndSort'), q.string().nullable()],
+      from: [getIntValue('from'), q.string().nullable()],
       loadMoreProducts: [
         getIntValue('loadMoreProducts'),
         q.string().nullable(),
@@ -54,6 +55,7 @@ export const THEME_CONTENT_FRAGMENT = {
       sortHighLow: [getIntValue('sortHighLow'), q.string().nullable()],
       sortLowHigh: [getIntValue('sortLowHigh'), q.string().nullable()],
       sortNewest: [getIntValue('sortNewest'), q.string().nullable()],
+      to: [getIntValue('to'), q.string().nullable()],
       viewAll: [getIntValue('viewAll'), q.string().nullable()],
     })
     .nullable(),

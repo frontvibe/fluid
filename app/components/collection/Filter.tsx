@@ -135,6 +135,7 @@ function FilterCheckbox({
       ])}
     >
       <Checkbox
+        aria-label={optionLabel}
         checked={filterIsApplied}
         id={optionId}
         onCheckedChange={handleToggleFilter}

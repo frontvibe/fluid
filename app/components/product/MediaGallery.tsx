@@ -200,6 +200,7 @@ function ThumbnailCarousel({
                       key={media.id}
                       onClick={() => handleSelect(index, media.id)}
                     >
+                      <span className="sr-only">{`Thumbnail ${index + 1}`}</span>
                       <ShopifyImage
                         aspectRatio="1/1"
                         className="size-full object-cover"

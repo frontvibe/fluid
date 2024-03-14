@@ -27,6 +27,7 @@ export function SocialButton({media}: {media: Socials}) {
   return (
     <IconButton asChild>
       <Link rel="noopener noreferrer" target="_blank" to={mediaUrl}>
+        <span className="sr-only">{media}</span>
         <IconSocial media={media} />
       </Link>
     </IconButton>

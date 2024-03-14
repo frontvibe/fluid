@@ -78,6 +78,9 @@ export function SortFilter({
       <div className="hidden w-full touch:hidden lg:flex lg:items-center lg:justify-between">
         <div className="flex items-center gap-2">
           <IconButton onClick={() => setIsOpen(!isOpen)}>
+            <span className="sr-only">
+              {themeContent?.collection?.filterAndSort}
+            </span>
             <IconFilters className="size-4" />
           </IconButton>
           <AnimatePresence>

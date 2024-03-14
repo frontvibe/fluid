@@ -68,6 +68,7 @@ function Badge(props: {cart?: CartApiQueryFragment; count: number}) {
   const BadgeCounter = useMemo(
     () => (
       <span className="relative">
+        <span className="sr-only">{themeContent?.cart?.heading}</span>
         <IconBag className="size-6" />
         {count > 0 && (
           <div
@@ -85,7 +86,7 @@ function Badge(props: {cart?: CartApiQueryFragment; count: number}) {
         )}
       </span>
     ),
-    [count],
+    [count, themeContent?.cart?.heading],
   );
 
   const buttonClass = cn(iconButtonClass, 'group');

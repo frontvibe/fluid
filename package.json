@@ -17,7 +17,7 @@
     "deploy:studio": "cd ./studio && run-s deploy"
   },
   "dependencies": {
-    "@portabletext/react": "^3.0.12",
+    "@portabletext/react": "^3.0.13",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-checkbox": "^1.0.4",
     "@radix-ui/react-dialog": "^1.0.5",
@@ -34,8 +34,8 @@
     "@sanity/client": "^6.15.5",
     "@sanity/core-loader": "^1.6.1",
     "@sanity/image-url": "^1.0.2",
-    "@sanity/react-loader": "^1.9.3",
-    "@sanity/visual-editing": "^1.8.1",
+    "@sanity/react-loader": "^1.9.4",
+    "@sanity/visual-editing": "^1.8.2",
     "@shopify/cli": "3.53.0",
     "@shopify/cli-hydrogen": "^7.1.2",
     "@shopify/hydrogen": "^2024.1.4",
@@ -62,7 +62,7 @@
     "vaul": "^0.9.0"
   },
   "devDependencies": {
-    "@portabletext/types": "^2.0.9",
+    "@portabletext/types": "^2.0.10",
     "@remix-run/dev": "2.8.1",
     "@remix-run/eslint-config": "^2.8.1",
     "@shopify/oxygen-workers-types": "^3.17.3",

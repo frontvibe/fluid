@@ -36,6 +36,7 @@ import {useAnalytics} from './hooks/useAnalytics';
 import {useLocalePath} from './hooks/useLocalePath';
 import {useSanityThemeContent} from './hooks/useSanityThemeContent';
 import {generateFontsPreloadLinks} from './lib/fonts';
+import {resolveShopifyPromises} from './lib/resolveShopifyPromises';
 import {sanityPreviewPayload} from './lib/sanity/sanity.payload.server';
 import {seoPayload} from './lib/seo.server';
 import {ROOT_QUERY} from './qroq/queries';
@@ -135,6 +136,16 @@ export async function loader({context, request}: LoaderFunctionArgs) {
     customerAccessToken,
   );
 
+  const {
+    collectionListPromise,
+    featuredCollectionPromise,
+    featuredProductPromise,
+  } = resolveShopifyPromises({
+    document: sanityRoot,
+    request,
+    storefront,
+  });
+
   // defer the cart query by not awaiting it
   const cartPromise = cart.get();
 
@@ -145,6 +156,7 @@ export async function loader({context, request}: LoaderFunctionArgs) {
         shopifySalesChannel: locale.salesChannel,
       },
       cart: cartPromise,
+      collectionListPromise,
       env: {
         /*
          * Be careful not to expose any sensitive environment variables here.
@@ -159,6 +171,8 @@ export async function loader({context, request}: LoaderFunctionArgs) {
         SANITY_STUDIO_URL: env.SANITY_STUDIO_URL,
         SANITY_STUDIO_USE_PREVIEW_MODE: env.SANITY_STUDIO_USE_PREVIEW_MODE,
       },
+      featuredCollectionPromise,
+      featuredProductPromise,
       isLoggedIn,
       locale,
       sanityPreviewMode,

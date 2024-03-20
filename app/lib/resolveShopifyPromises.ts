@@ -8,7 +8,12 @@ import type {
 
 import {getPaginationVariables, parseGid} from '@shopify/hydrogen';
 
-import type {COLLECTION_QUERY, PAGE_QUERY, PRODUCT_QUERY} from '~/qroq/queries';
+import type {
+  COLLECTION_QUERY,
+  PAGE_QUERY,
+  PRODUCT_QUERY,
+  ROOT_QUERY,
+} from '~/qroq/queries';
 
 import {
   COLLECTION_PRODUCT_GRID_QUERY,
@@ -23,9 +28,16 @@ import {getFiltersFromParam} from './shopifyCollection';
 type SanityPageData = InferType<typeof PAGE_QUERY>;
 type SanityProductData = InferType<typeof PRODUCT_QUERY>;
 type SanityCollectionData = InferType<typeof COLLECTION_QUERY>;
+type SanityRootData = InferType<typeof ROOT_QUERY>;
 type PromiseResolverArgs = {
   collectionId?: string;
-  document: {data: SanityCollectionData | SanityPageData | SanityProductData};
+  document: {
+    data:
+      | SanityCollectionData
+      | SanityPageData
+      | SanityProductData
+      | SanityRootData;
+  };
   productId?: string;
   request: Request;
   storefront: Storefront;
@@ -85,8 +97,16 @@ export function resolveShopifyPromises({
 }
 
 function getSections(document: {
-  data: SanityCollectionData | SanityPageData | SanityProductData;
+  data:
+    | SanityCollectionData
+    | SanityPageData
+    | SanityProductData
+    | SanityRootData;
 }) {
+  if (document.data?._type === 'root') {
+    return document.data.footer?.sections;
+  }
+
   if (document?.data?._type === 'page' || document?.data?._type === 'home') {
     return document.data.sections;
   }

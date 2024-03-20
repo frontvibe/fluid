@@ -75,6 +75,7 @@ function AwaitCollectionList(props: {
   const collectionListPromise = loaderData?.collectionListPromise;
   const sanityCollectionListGids = props.sanityData.collections
     ?.map((collection) => collection.store.gid)
+    .sort()
     .join(',');
 
   if (!collectionListPromise) {
@@ -99,6 +100,7 @@ function AwaitCollectionList(props: {
               const {collections: resultCollections} = result.value;
               const shopifyCollectionListGids = resultCollections.nodes
                 .map((collection) => collection.id)
+                .sort()
                 .join(',');
               // Compare the Sanity gids with the Shopify gids
               if (sanityCollectionListGids === shopifyCollectionListGids) {

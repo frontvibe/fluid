@@ -52,6 +52,7 @@ export function ProductCard(props: {
     style === 'card'
       ? '[box-shadow:rgb(var(--shadow)_/_var(--product-card-shadow-opacity))_var(--product-card-shadow-horizontal-offset)_var(--product-card-shadow-vertical-offset)_var(--product-card-shadow-blur-radius)_0px]'
       : 'shadow-none',
+    style === 'standard' && 'bg-transparent',
     textAlignment === 'center'
       ? 'text-center'
       : textAlignment === 'right'

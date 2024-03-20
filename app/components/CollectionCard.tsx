@@ -46,6 +46,7 @@ export function CollectionCard(props: {
     style === 'card'
       ? '[box-shadow:rgb(var(--shadow)_/_var(--collection-card-shadow-opacity))_var(--collection-card-shadow-horizontal-offset)_var(--collection-card-shadow-vertical-offset)_var(--collection-card-shadow-blur-radius)_0px]'
       : 'shadow-none',
+    style === 'standard' && 'bg-transparent',
     textAlignment === 'center'
       ? 'text-center'
       : textAlignment === 'right'
@@ -94,7 +95,7 @@ export function CollectionCard(props: {
         )}
         <CardContent className={cardContentClass}>
           <div className="flex items-center text-lg">
-            <span className="relative z-[2] block bg-card pr-2">
+            <span className="relative z-[2] block pr-2">
               {collection.title}
             </span>
             <span className="-translate-x-[2px] transition-transform group-hover/card:translate-x-[-0.15px]">

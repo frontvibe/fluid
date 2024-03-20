@@ -186,6 +186,8 @@ export const initialSingletonsValues = {
   header: {
     showSeparatorLine: true,
     sticky: 'onScrollUp',
+    desktopLogoWidth: 90,
+    blur: true,
     padding: {
       _type: 'padding',
       top: 10,

@@ -61,11 +61,13 @@ export const PAGE_QUERY = q('*')
   .grab({
     _type: q.literal('page').or(q.literal('home')),
     sections: SECTIONS_FRAGMENT,
-    seo: q('seo').grab({
-      description: [getIntValue('description'), q.string().nullable()],
-      image: q('image').grab(SIMPLE_IMAGE_FRAGMENT).nullable(),
-      title: [getIntValue('title'), q.string().nullable()],
-    }),
+    seo: q('seo')
+      .grab({
+        description: [getIntValue('description'), q.string().nullable()],
+        image: q('image').grab(SIMPLE_IMAGE_FRAGMENT).nullable(),
+        title: [getIntValue('title'), q.string().nullable()],
+      })
+      .nullable(),
   })
   .slice(0)
   .nullable();

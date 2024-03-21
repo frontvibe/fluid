@@ -100,7 +100,7 @@ function home({
     sanity,
   });
   return {
-    description: page?.seo.description ?? '',
+    description: page?.seo?.description ?? '',
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'WebPage',
@@ -111,7 +111,7 @@ function home({
       noFollow: false,
       noIndex: false,
     },
-    title: page?.seo.title ?? '',
+    title: page?.seo?.title ?? '',
   };
 }
 

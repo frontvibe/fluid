@@ -44,6 +44,9 @@ dependencies:
   '@radix-ui/react-slot':
     specifier: ^1.0.2
     version: 1.0.2(@types/react@18.2.72)(react@18.2.0)
+  '@remix-run/node':
+    specifier: 2.8.1
+    version: 2.8.1(typescript@5.4.3)
   '@remix-run/react':
     specifier: 2.8.1
     version: 2.8.1(react-dom@18.2.0)(react@18.2.0)(typescript@5.4.3)
@@ -67,7 +70,7 @@ dependencies:
     version: 3.53.0(@types/node@20.11.30)(@types/react@18.2.72)(typescript@5.4.3)(zod@3.22.4)
   '@shopify/cli-hydrogen':
     specifier: ^7.1.2
-    version: 7.1.2(@remix-run/dev@2.8.1)(@types/node@20.11.30)(@types/react@18.2.72)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)(typescript@5.4.3)
+    version: 7.1.2(@remix-run/dev@2.8.1)(@types/node@20.11.30)(@types/react@18.2.72)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)(typescript@5.4.3)(vite@5.2.6)
   '@shopify/hydrogen':
     specifier: ^2024.1.6
     version: 2024.1.6(@remix-run/react@2.8.1)(@remix-run/server-runtime@2.8.1)(@types/react@18.2.72)(react-dom@18.2.0)(react@18.2.0)
@@ -125,6 +128,9 @@ dependencies:
   isbot:
     specifier: ^5.1.2
     version: 5.1.2
+  parse-headers:
+    specifier: ^2.0.5
+    version: 2.0.5
   react:
     specifier: ^18.2.0
     version: 18.2.0
@@ -153,7 +159,7 @@ devDependencies:
     version: 2.0.11
   '@remix-run/dev':
     specifier: 2.8.1
-    version: 2.8.1(@types/node@20.11.30)(typescript@5.4.3)
+    version: 2.8.1(@types/node@20.11.30)(typescript@5.4.3)(vite@5.2.6)
   '@remix-run/eslint-config':
     specifier: ^2.8.1
     version: 2.8.1(eslint@8.57.0)(react@18.2.0)(typescript@5.4.3)
@@ -220,6 +226,21 @@ devDependencies:
   typescript:
     specifier: ^5.4.3
     version: 5.4.3
+  vite:
+    specifier: ^5.1.0
+    version: 5.2.6(@types/node@20.11.30)
+  vite-env-only:
+    specifier: ^2.2.0
+    version: 2.2.0
+  vite-plugin-cjs-interop:
+    specifier: ^2.0.6
+    version: 2.1.0
+  vite-plugin-commonjs:
+    specifier: ^0.10.1
+    version: 0.10.1
+  vite-tsconfig-paths:
+    specifier: ^4.3.1
+    version: 4.3.2(typescript@5.4.3)(vite@5.2.6)
 
 packages:
 
@@ -4164,7 +4185,7 @@ packages:
       '@babel/runtime': 7.24.1
     dev: false
 
-  /@remix-run/dev@2.8.1(@types/node@20.11.30)(typescript@5.4.3):
+  /@remix-run/dev@2.8.1(@types/node@20.11.30)(typescript@5.4.3)(vite@5.2.6):
     resolution: {integrity: sha512-qFt4jAsAJeIOyg6ngeSnTG/9Z5N9QJfeThP/8wRHc1crqYgTiEtcI3DZ8WlAXjVSF5emgn/ZZKqzLAI02OgMfQ==}
     engines: {node: '>=18.0.0'}
     hasBin: true
@@ -4236,6 +4257,7 @@ packages:
       tar-fs: 2.1.1
       tsconfig-paths: 4.2.0
       typescript: 5.4.3
+      vite: 5.2.6(@types/node@20.11.30)
       ws: 7.5.9
     transitivePeerDependencies:
       - '@types/node'
@@ -4582,7 +4604,7 @@ packages:
       valibot: 0.30.0
     dev: false
 
-  /@shopify/cli-hydrogen@7.1.2(@remix-run/dev@2.8.1)(@types/node@20.11.30)(@types/react@18.2.72)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)(typescript@5.4.3):
+  /@shopify/cli-hydrogen@7.1.2(@remix-run/dev@2.8.1)(@types/node@20.11.30)(@types/react@18.2.72)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)(typescript@5.4.3)(vite@5.2.6):
     resolution: {integrity: sha512-UOIrrdHlO0cjZw9wXK7XBEDPBdjD4IL91MEC4H46vY3XAeDv4kRTJ4OleM6GpM9Da0e01ypl3KiJA8N2+HOswQ==}
     engines: {node: '>=18.0.0'}
     hasBin: true
@@ -4598,7 +4620,7 @@ packages:
       '@ast-grep/napi': 0.11.0
       '@graphql-codegen/cli': 5.0.1(@parcel/watcher@2.4.1)(@types/node@20.11.30)(graphql@16.8.1)(typescript@5.4.3)
       '@oclif/core': 3.15.1(typescript@5.4.3)
-      '@remix-run/dev': 2.8.1(@types/node@20.11.30)(typescript@5.4.3)
+      '@remix-run/dev': 2.8.1(@types/node@20.11.30)(typescript@5.4.3)(vite@5.2.6)
       '@shopify/cli-kit': 3.56.3(@types/react@18.2.72)(typescript@5.4.3)
       '@shopify/hydrogen-codegen': 0.2.2(graphql@16.8.1)
       '@shopify/mini-oxygen': 2.2.5
@@ -4619,7 +4641,7 @@ packages:
       tempy: 3.1.0
       ts-morph: 20.0.0
       use-resize-observer: 9.1.0(react-dom@18.2.0)(react@18.2.0)
-      vite: 5.1.5(@types/node@20.11.25)
+      vite: 5.2.6(@types/node@20.11.30)
       ws: 8.16.0
     optionalDependencies:
       '@parcel/watcher': 2.4.1
@@ -5440,7 +5462,7 @@ packages:
       '@babel/plugin-syntax-typescript': 7.24.1(@babel/core@7.24.3)
       '@vanilla-extract/babel-plugin-debug-ids': 1.0.5
       '@vanilla-extract/css': 1.14.1
-      esbuild: 0.19.12
+      esbuild: 0.17.6
       eval: 0.1.8
       find-up: 5.0.0
       javascript-stringify: 2.1.0
@@ -5562,6 +5584,14 @@ packages:
     dependencies:
       mime-types: 2.1.35
       negotiator: 0.6.3
+
+  /acorn-import-assertions@1.9.0(acorn@8.11.3):
+    resolution: {integrity: sha512-cmMwop9x+8KFhxvKrKfPYmN6/pKTYYHBqLa0DfvVZcKMJWNyWLnaqND7dx/qn66R7ewM1UX5XMaDVP5wlVTaVA==}
+    peerDependencies:
+      acorn: ^8
+    dependencies:
+      acorn: 8.11.3
+    dev: true
 
   /acorn-jsx@5.3.2(acorn@8.11.3):
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
@@ -13500,7 +13530,6 @@ packages:
         optional: true
     dependencies:
       typescript: 5.4.3
-    dev: false
 
   /tsconfig-paths@3.15.0:
     resolution: {integrity: sha512-2Ac2RgzDe/cn48GvOe3M+o82pEFewD3UPbyoUHHdKasHwJKjds4fLXWf/Ux5kATBKN20oaFGu+jbElp1pos0mg==}
@@ -13967,6 +13996,18 @@ packages:
       unist-util-stringify-position: 3.0.3
       vfile-message: 3.1.4
 
+  /vite-env-only@2.2.0:
+    resolution: {integrity: sha512-IgTS9TsA6sjvrS2XuC3mWsWwaRode4fi4bfnNAHdG48IZogPI/tZmNIhOdXZ+YZ+wcp/vDXTLvAjW3y1eXH6yg==}
+    dependencies:
+      '@babel/core': 7.24.3
+      '@babel/generator': 7.24.1
+      '@babel/parser': 7.24.1
+      '@babel/traverse': 7.24.1
+      '@babel/types': 7.24.0
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
   /vite-node@1.4.0(@types/node@20.11.30):
     resolution: {integrity: sha512-VZDAseqjrHgNd4Kh8icYHWzTKSCZMhia7GyHfhtzLW33fZlG9SwsB6CEhgyVOWkJfJ2pFLrp/Gj1FSfAiqH9Lw==}
     engines: {node: ^18.0.0 || >=20.0.0}
@@ -13986,6 +14027,51 @@ packages:
       - sugarss
       - supports-color
       - terser
+
+  /vite-plugin-cjs-interop@2.1.0:
+    resolution: {integrity: sha512-qp+54VPRKiiuqKZ4tToiEZz5d5uiZf33PrXOfyH5SInlVsYz4b6YoZMNxCrx+vKdAQVsZu03vDJK71Ri5oKMqg==}
+    dependencies:
+      acorn: 8.11.3
+      acorn-import-assertions: 1.9.0(acorn@8.11.3)
+      estree-walker: 3.0.3
+      magic-string: 0.30.8
+      minimatch: 9.0.3
+    dev: true
+
+  /vite-plugin-commonjs@0.10.1:
+    resolution: {integrity: sha512-taP8R9kYGlCW5OzkVR0UIWRCnG6rSxeWWuA7tnU5b9t5MniibOnDY219NhisTeDhJAeGT8cEnrhVWZ9A5yD+vg==}
+    dependencies:
+      acorn: 8.11.3
+      fast-glob: 3.3.2
+      magic-string: 0.30.8
+      vite-plugin-dynamic-import: 1.5.0
+    dev: true
+
+  /vite-plugin-dynamic-import@1.5.0:
+    resolution: {integrity: sha512-Qp85c+AVJmLa8MLni74U4BDiWpUeFNx7NJqbGZyR2XJOU7mgW0cb7nwlAMucFyM4arEd92Nfxp4j44xPi6Fu7g==}
+    dependencies:
+      acorn: 8.11.3
+      es-module-lexer: 1.5.0
+      fast-glob: 3.3.2
+      magic-string: 0.30.8
+    dev: true
+
+  /vite-tsconfig-paths@4.3.2(typescript@5.4.3)(vite@5.2.6):
+    resolution: {integrity: sha512-0Vd/a6po6Q+86rPlntHye7F31zA2URZMbH8M3saAZ/xR9QoGN/L21bxEGfXdWmFdNkqPpRdxFT7nmNe12e9/uA==}
+    peerDependencies:
+      vite: '*'
+    peerDependenciesMeta:
+      vite:
+        optional: true
+    dependencies:
+      debug: 4.3.4(supports-color@8.1.1)
+      globrex: 0.1.2
+      tsconfck: 3.0.3(typescript@5.4.3)
+      vite: 5.2.6(@types/node@20.11.30)
+    transitivePeerDependencies:
+      - supports-color
+      - typescript
+    dev: true
 
   /vite@5.2.6(@types/node@20.11.30):
     resolution: {integrity: sha512-FPtnxFlSIKYjZ2eosBQamz4CbyrTizbZ3hnGJlh/wMtCrlp1Hah6AzBLjGI5I2urTfNnpovpHdrL6YRuBOPnCA==}

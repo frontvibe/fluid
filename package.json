@@ -112,5 +112,10 @@
     "*.d.ts",
     "dist",
     "studio/*"
-  ]
+  ],
+  "pnpm": {
+    "patchedDependencies": {
+      "@sanity/react-loader@1.9.5": "patches/@sanity__react-loader@1.9.5.patch"
+    }
+  }
 }

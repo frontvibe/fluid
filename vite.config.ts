@@ -1,5 +1,6 @@
 import {vitePlugin as remix} from '@remix-run/dev';
 import {hydrogen, oxygen} from '@shopify/cli-hydrogen/experimental-vite';
+import {vercelPreset} from '@vercel/remix/vite';
 import {defineConfig} from 'vite';
 import envOnly from 'vite-env-only';
 import commonjs from 'vite-plugin-commonjs';
@@ -16,7 +17,7 @@ export default defineConfig({
     envOnly(),
     hydrogen(),
     oxygen(),
-    remix({buildDirectory: 'dist'}),
+    remix({buildDirectory: 'dist', presets: [vercelPreset()]}),
     tsconfigPaths(),
     commonjs({
       filter(id) {

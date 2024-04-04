@@ -1,0 +1,11 @@
+version: 2
+updates:
+  - package-ecosystem: 'pnpm'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+
+  - package-ecosystem: 'pnpm'
+    directory: '/studio'
+    schedule:
+      interval: 'daily'

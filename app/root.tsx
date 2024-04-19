@@ -19,7 +19,7 @@ import {
   useNavigate,
   useRouteError,
 } from '@remix-run/react';
-import {Seo, useNonce} from '@shopify/hydrogen';
+import {useNonce} from '@shopify/hydrogen';
 import {defer} from '@shopify/remix-oxygen';
 import {DEFAULT_LOCALE} from 'countries';
 
@@ -201,7 +201,6 @@ export default function App() {
         <meta charSet="utf-8" />
         <meta content="width=device-width,initial-scale=1" name="viewport" />
         <Meta />
-        <Seo />
         <Fonts />
         <Links />
         <CssVars />

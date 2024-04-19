@@ -1,7 +1,7 @@
-import type {LoaderFunctionArgs} from '@shopify/remix-oxygen';
+import type {LoaderFunctionArgs, MetaArgs} from '@shopify/remix-oxygen';
 
 import {useLoaderData} from '@remix-run/react';
-import {getPaginationVariables} from '@shopify/hydrogen';
+import {getPaginationVariables, getSeoMeta} from '@shopify/hydrogen';
 import {json} from '@shopify/remix-oxygen';
 
 import {CollectionListGrid} from '~/components/CollectionListGrid';
@@ -10,6 +10,10 @@ import {useSanityRoot} from '~/hooks/useSanityRoot';
 import {seoPayload} from '~/lib/seo.server';
 
 const PAGINATION_SIZE = 4;
+
+export const meta = ({matches}: MetaArgs<typeof loader>) => {
+  return getSeoMeta(...matches.map((match) => (match.data as any).seo));
+};
 
 export const loader = async ({
   context: {storefront},

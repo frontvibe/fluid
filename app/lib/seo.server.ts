@@ -41,7 +41,7 @@ function root({
   root: InferType<typeof ROOT_QUERY>;
   sanity: SanityConfig;
   url: Request['url'];
-}): SeoConfig<Organization> {
+}): SeoConfig {
   const settings = root?.settings;
 
   const media = generateOGImageData({
@@ -94,7 +94,7 @@ function home({
 }: {
   page: InferType<typeof PAGE_QUERY>;
   sanity: SanityConfig;
-}): SeoConfig<WebPage> {
+}): SeoConfig {
   const media = generateOGImageData({
     image: page?.seo?.image,
     sanity,
@@ -115,14 +115,11 @@ function home({
   };
 }
 
-type SelectedVariantRequiredFields = Pick<ProductVariant, 'sku'> & {
+type SelectedVariantRequiredFields = {
   image?: Partial<Image> | null;
-};
+} & Pick<ProductVariant, 'sku'>;
 
-type ProductRequiredFields = Pick<
-  Product,
-  'description' | 'seo' | 'title' | 'vendor'
-> & {
+type ProductRequiredFields = {
   variants: {
     nodes: Array<
       Pick<
@@ -131,7 +128,7 @@ type ProductRequiredFields = Pick<
       >
     >;
   };
-};
+} & Pick<Product, 'description' | 'seo' | 'title' | 'vendor'>;
 
 function productJsonLd({
   product,
@@ -141,7 +138,7 @@ function productJsonLd({
   product: ProductRequiredFields;
   selectedVariant: SelectedVariantRequiredFields;
   url: Request['url'];
-}): SeoConfig<BreadcrumbList | SeoProduct>['jsonLd'] {
+}): SeoConfig['jsonLd'] {
   const origin = new URL(url).origin;
   const variants = product.variants.nodes;
   const description = truncate(
@@ -208,7 +205,7 @@ function product({
   product: ProductRequiredFields;
   selectedVariant: SelectedVariantRequiredFields;
   url: Request['url'];
-}): SeoConfig<BreadcrumbList | SeoProduct> {
+}): SeoConfig {
   const description = truncate(
     product?.seo?.description ?? product?.description ?? '',
   );
@@ -220,16 +217,16 @@ function product({
   };
 }
 
-type CollectionRequiredFields = Omit<
-  Collection,
-  'descriptionHtml' | 'image' | 'metafields' | 'products' | 'updatedAt'
-> & {
+type CollectionRequiredFields = {
   descriptionHtml?: Collection['descriptionHtml'] | null;
   image?: Pick<Image, 'altText' | 'height' | 'url' | 'width'> | null;
   metafields?: Collection['metafields'] | null;
   products: {nodes: Pick<Product, 'handle'>[]};
   updatedAt?: Collection['updatedAt'] | null;
-};
+} & Omit<
+  Collection,
+  'descriptionHtml' | 'image' | 'metafields' | 'products' | 'updatedAt'
+>;
 
 function collectionJsonLd({
   collection,
@@ -237,7 +234,7 @@ function collectionJsonLd({
 }: {
   collection: CollectionRequiredFields;
   url: Request['url'];
-}): SeoConfig<BreadcrumbList | CollectionPage>['jsonLd'] {
+}): SeoConfig['jsonLd'] {
   const siteUrl = new URL(url);
   const itemListElement: CollectionPage['mainEntity'] =
     collection.products.nodes.map((product, index) => {
@@ -289,7 +286,7 @@ function collection({
 }: {
   collection: CollectionRequiredFields;
   url: Request['url'];
-}): SeoConfig<BreadcrumbList | CollectionPage> {
+}): SeoConfig {
   return {
     description: truncate(
       collection?.seo?.description ?? collection?.description ?? '',
@@ -317,7 +314,7 @@ function collectionsJsonLd({
 }: {
   collections: CollectionListRequiredFields;
   url: Request['url'];
-}): SeoConfig<CollectionPage>['jsonLd'] {
+}): SeoConfig['jsonLd'] {
   const itemListElement: CollectionPage['mainEntity'] = collections.nodes.map(
     (collection, index) => {
       return {
@@ -347,7 +344,7 @@ function listCollections({
 }: {
   collections: CollectionListRequiredFields;
   url: Request['url'];
-}): SeoConfig<CollectionPage> {
+}): SeoConfig {
   return {
     description: 'All hydrogen collections',
     jsonLd: collectionsJsonLd({collections, url}),
@@ -361,17 +358,17 @@ function article({
   article,
   url,
 }: {
-  article: Pick<
-    Article,
-    'contentHtml' | 'excerpt' | 'publishedAt' | 'seo' | 'title'
-  > & {
+  article: {
     image?: Pick<
       NonNullable<Article['image']>,
       'altText' | 'height' | 'url' | 'width'
     > | null;
-  };
+  } & Pick<
+    Article,
+    'contentHtml' | 'excerpt' | 'publishedAt' | 'seo' | 'title'
+  >;
   url: Request['url'];
-}): SeoConfig<SeoArticle> {
+}): SeoConfig {
   return {
     description: truncate(article?.seo?.description ?? ''),
     jsonLd: {
@@ -406,7 +403,7 @@ function blog({
 }: {
   blog: Pick<Blog, 'seo' | 'title'>;
   url: Request['url'];
-}): SeoConfig<SeoBlog> {
+}): SeoConfig {
   return {
     description: truncate(blog?.seo?.description || ''),
     jsonLd: {
@@ -428,7 +425,7 @@ function page({
 }: {
   page: Pick<Page, 'seo' | 'title'>;
   url: Request['url'];
-}): SeoConfig<WebPage> {
+}): SeoConfig {
   return {
     description: truncate(page?.seo?.description || ''),
     jsonLd: {
@@ -448,7 +445,7 @@ function policy({
 }: {
   policy: Pick<ShopPolicy, 'body' | 'title'>;
   url: Request['url'];
-}): SeoConfig<WebPage> {
+}): SeoConfig {
   return {
     description: truncate(policy?.body ?? ''),
     title: policy?.title,
@@ -463,7 +460,7 @@ function policies({
 }: {
   policies: Array<Pick<ShopPolicy, 'handle' | 'title'>>;
   url: Request['url'];
-}): SeoConfig<BreadcrumbList | WebPage> {
+}): SeoConfig {
   const origin = new URL(url).origin;
   const itemListElement: BreadcrumbList['itemListElement'] = policies
     .filter(Boolean)
@@ -533,7 +530,7 @@ function generateOGImageData({
 }: {
   image?: TypeFromSelection<typeof SIMPLE_IMAGE_FRAGMENT> | null;
   sanity: SanityConfig;
-}): SeoConfig<Organization>['media'] {
+}): SeoConfig['media'] {
   if (!image) {
     return undefined;
   }

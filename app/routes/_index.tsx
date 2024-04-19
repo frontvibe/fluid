@@ -1,6 +1,6 @@
-import type {LoaderFunctionArgs} from '@shopify/remix-oxygen';
+import type {LoaderFunctionArgs, MetaArgs} from '@shopify/remix-oxygen';
 
-import {AnalyticsPageType} from '@shopify/hydrogen';
+import {AnalyticsPageType, getSeoMeta} from '@shopify/hydrogen';
 import {defer} from '@shopify/remix-oxygen';
 import {DEFAULT_LOCALE} from 'countries';
 
@@ -10,6 +10,10 @@ import {seoPayload} from '~/lib/seo.server';
 import {PAGE_QUERY} from '~/qroq/queries';
 
 import PageRoute from './($locale).$';
+
+export const meta = ({matches}: MetaArgs<typeof loader>) => {
+  return getSeoMeta(...matches.map((match) => (match.data as any).seo));
+};
 
 export async function loader({context, request}: LoaderFunctionArgs) {
   const {env, locale, sanity, storefront} = context;

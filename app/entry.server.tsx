@@ -1,4 +1,4 @@
-import type {EntryContext} from '@shopify/remix-oxygen';
+import type {AppLoadContext, EntryContext} from '@shopify/remix-oxygen';
 
 import {RemixServer} from '@remix-run/react';
 import {createContentSecurityPolicy} from '@shopify/hydrogen';
@@ -10,9 +10,14 @@ export default async function handleRequest(
   responseStatusCode: number,
   responseHeaders: Headers,
   remixContext: EntryContext,
+  context: AppLoadContext,
 ) {
-  const {NonceProvider, header, nonce} =
-    createContentSecurityPolicy(createCspHeaders());
+  const {NonceProvider, header, nonce} = createContentSecurityPolicy({
+    shop: {
+      storeDomain: context.env.PUBLIC_STORE_DOMAIN,
+    },
+    ...createCspHeaders(),
+  });
 
   const body = await renderToReadableStream(
     <NonceProvider>

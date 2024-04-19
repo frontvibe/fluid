@@ -1,7 +1,8 @@
-import type {LoaderFunctionArgs} from '@shopify/remix-oxygen';
+import type {LoaderFunctionArgs, MetaArgs} from '@shopify/remix-oxygen';
 import type {CollectionDetailsQuery} from 'storefrontapi.generated';
 
 import {useLoaderData} from '@remix-run/react';
+import {getSeoMeta} from '@shopify/hydrogen';
 import {AnalyticsPageType} from '@shopify/hydrogen-react';
 import {defer} from '@shopify/remix-oxygen';
 import {DEFAULT_LOCALE} from 'countries';
@@ -14,6 +15,10 @@ import {resolveShopifyPromises} from '~/lib/resolveShopifyPromises';
 import {sanityPreviewPayload} from '~/lib/sanity/sanity.payload.server';
 import {seoPayload} from '~/lib/seo.server';
 import {COLLECTION_QUERY as CMS_COLLECTION_QUERY} from '~/qroq/queries';
+
+export const meta = ({matches}: MetaArgs<typeof loader>) => {
+  return getSeoMeta(...matches.map((match) => (match.data as any).seo));
+};
 
 export async function loader({context, params, request}: LoaderFunctionArgs) {
   const {collectionHandle} = params;

@@ -4,7 +4,11 @@
 
 // Enhance TypeScript's built-in typings.
 
-import type {HydrogenCart, Storefront} from '@shopify/hydrogen';
+import type {
+  HydrogenCart,
+  Storefront,
+  HydrogenSessionData,
+} from '@shopify/hydrogen';
 import type {CustomerAccessToken} from '@shopify/hydrogen/storefront-api-types';
 import type {AriaAttributes, DOMAttributes} from 'react';
 
@@ -61,7 +65,7 @@ declare module '@shopify/remix-oxygen' {
   /**
    * Declare the data we expect to access via `context.session`.
    */
-  export interface SessionData {
+  export interface SessionData extends HydrogenSessionData {
     customerAccessToken: CustomerAccessToken;
   }
 }

@@ -4,6 +4,13 @@ updates:
     directory: '/'
     schedule:
       interval: 'daily'
+    ignore:
+      - dependency-name: '@shopify/oxygen-workers-types'
+        update-types:
+          ['version-update:semver-minor', 'version-update:semver-major']
+      - dependency-name: '@shopify/cli'
+        update-types:
+          ['version-update:semver-minor', 'version-update:semver-major']
 
   - package-ecosystem: 'npm'
     directory: '/studio'

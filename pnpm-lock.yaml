@@ -67,7 +67,7 @@ dependencies:
     version: 3.53.0(@types/node@20.12.7)(@types/react@18.3.1)(typescript@5.4.5)(zod@3.22.5)
   '@shopify/cli-hydrogen':
     specifier: ^8.0.0
-    version: 8.0.0(@graphql-codegen/cli@5.0.2)(@remix-run/dev@2.8.1)(@shopify/hydrogen-codegen@0.3.0)(@shopify/mini-oxygen@3.0.0)(@types/react@18.3.1)(react-dom@18.2.0)(react@18.3.1)
+    version: 8.0.0(@graphql-codegen/cli@5.0.2)(@remix-run/dev@2.8.1)(@shopify/hydrogen-codegen@0.3.0)(@shopify/mini-oxygen@3.0.1)(@types/react@18.3.1)(react-dom@18.2.0)(react@18.3.1)
   '@shopify/hydrogen':
     specifier: ^2024.4.0
     version: 2024.4.0(@remix-run/react@2.8.1)(@remix-run/server-runtime@2.8.1)(@types/react@18.3.1)(react-dom@18.2.0)(react@18.3.1)
@@ -75,8 +75,8 @@ dependencies:
     specifier: ^2024.4.0
     version: 2024.4.0(@types/react@18.3.1)(react-dom@18.2.0)(react@18.3.1)
   '@shopify/mini-oxygen':
-    specifier: ^3.0.0
-    version: 3.0.0
+    specifier: ^3.0.1
+    version: 3.0.1
   '@shopify/remix-oxygen':
     specifier: ^2.0.4
     version: 2.0.4(@remix-run/server-runtime@2.8.1)(@shopify/oxygen-workers-types@3.17.3)
@@ -990,8 +990,8 @@ packages:
     resolution: {integrity: sha512-htzFO1Zc57S8kgdRK9mLcPVTW1BY2ijfH7Dk2CeZmspTWKdKqSo1iwmqrq2WtRjFlo8aRZYgLX0wFrDXF/9DLA==}
     dev: false
 
-  /@cloudflare/workerd-darwin-64@1.20240129.0:
-    resolution: {integrity: sha512-DfVVB5IsQLVcWPJwV019vY3nEtU88c2Qu2ST5SQxqcGivZ52imagLRK0RHCIP8PK4piSiq90qUC6ybppUsw8eg==}
+  /@cloudflare/workerd-darwin-64@1.20240304.0:
+    resolution: {integrity: sha512-rfHlvsWzkqEEQNvm14AOE/BYHYzB9wxQHCaZZEgwOuTl5KpDcs9La0N0LaDTR78ESumIWOcifVmko2VTrZb7TQ==}
     engines: {node: '>=16'}
     cpu: [x64]
     os: [darwin]
@@ -999,8 +999,8 @@ packages:
     dev: false
     optional: true
 
-  /@cloudflare/workerd-darwin-arm64@1.20240129.0:
-    resolution: {integrity: sha512-t0q8ABkmumG1zRM/MZ/vIv/Ysx0vTAXnQAPy/JW5aeQi/tqrypXkO9/NhPc0jbF/g/hIPrWEqpDgEp3CB7Da7Q==}
+  /@cloudflare/workerd-darwin-arm64@1.20240304.0:
+    resolution: {integrity: sha512-IXGOxHsPdRYfAzcY6IroI1PDvx3hhXf18qFCloHp8Iw5bzLgq/PTjcp10Z/2xedZ2hVlfpHy1eEptsTmi9YeNw==}
     engines: {node: '>=16'}
     cpu: [arm64]
     os: [darwin]
@@ -1008,8 +1008,8 @@ packages:
     dev: false
     optional: true
 
-  /@cloudflare/workerd-linux-64@1.20240129.0:
-    resolution: {integrity: sha512-sFV1uobHgDI+6CKBS/ZshQvOvajgwl6BtiYaH4PSFSpvXTmRx+A9bcug+6BnD+V4WgwxTiEO2iR97E1XuwDAVw==}
+  /@cloudflare/workerd-linux-64@1.20240304.0:
+    resolution: {integrity: sha512-G1BEzbw9TFIeMvc425F145IetC7fuH4KOkGhseLq9y/mt5PfDWkghwmXSK+q0BiMwm0XAobtzVlHcEr2u4WlRQ==}
     engines: {node: '>=16'}
     cpu: [x64]
     os: [linux]
@@ -1017,8 +1017,8 @@ packages:
     dev: false
     optional: true
 
-  /@cloudflare/workerd-linux-arm64@1.20240129.0:
-    resolution: {integrity: sha512-O7q7htHaFRp8PgTqNJx1/fYc3+LnvAo6kWWB9a14C5OWak6AAZk42PNpKPx+DXTmGvI+8S1+futBGUeJ8NPDXg==}
+  /@cloudflare/workerd-linux-arm64@1.20240304.0:
+    resolution: {integrity: sha512-LLk/d/y77TRu6QOG3CJUI2cD3Ff2lSg0ts6G83bsm9ZK+WKObWFFSPBy9l81m3EnlKFh7RZCzxN4J10kuDaO8w==}
     engines: {node: '>=16'}
     cpu: [arm64]
     os: [linux]
@@ -1026,8 +1026,8 @@ packages:
     dev: false
     optional: true
 
-  /@cloudflare/workerd-windows-64@1.20240129.0:
-    resolution: {integrity: sha512-YqGno0XSqqqkDmNoGEX6M8kJlI2lEfWntbTPVtHaZlaXVR9sWfoD7TEno0NKC95cXFz+ioyFLbgbOdnfWwmVAA==}
+  /@cloudflare/workerd-windows-64@1.20240304.0:
+    resolution: {integrity: sha512-I/j6nVpM+WDPg+bYUAiKLkwQsjrXFjpOGHvwYmcM44hnDjgODzk7AbVssEIXnhEO3oupBeuKvffr0lvX0Ngmpw==}
     engines: {node: '>=16'}
     cpu: [x64]
     os: [win32]
@@ -4529,7 +4529,7 @@ packages:
       valibot: 0.30.0
     dev: false
 
-  /@shopify/cli-hydrogen@8.0.0(@graphql-codegen/cli@5.0.2)(@remix-run/dev@2.8.1)(@shopify/hydrogen-codegen@0.3.0)(@shopify/mini-oxygen@3.0.0)(@types/react@18.3.1)(react-dom@18.2.0)(react@18.3.1):
+  /@shopify/cli-hydrogen@8.0.0(@graphql-codegen/cli@5.0.2)(@remix-run/dev@2.8.1)(@shopify/hydrogen-codegen@0.3.0)(@shopify/mini-oxygen@3.0.1)(@types/react@18.3.1)(react-dom@18.2.0)(react@18.3.1):
     resolution: {integrity: sha512-o6dyHFdmTRqZTPGOKX5FcjNkq8baKIaFShmimOd7djclTUEvSblgVydk9yaaQhIbnIyt6pfDw9NRD/zCXiiMqA==}
     engines: {node: '>=18.0.0'}
     hasBin: true
@@ -4560,7 +4560,7 @@ packages:
       '@remix-run/dev': 2.8.1(@types/node@20.12.7)(typescript@5.4.5)
       '@shopify/cli-kit': 3.58.0(@types/react@18.3.1)
       '@shopify/hydrogen-codegen': 0.3.0(graphql@16.8.1)
-      '@shopify/mini-oxygen': 3.0.0
+      '@shopify/mini-oxygen': 3.0.1
       '@shopify/oxygen-cli': 4.4.2(@oclif/core@3.19.6)(@shopify/cli-kit@3.58.0)
       '@shopify/plugin-cloudflare': 3.58.0(@types/react@18.3.1)
       ansi-escapes: 6.2.1
@@ -4846,8 +4846,8 @@ packages:
       - xstate
     dev: false
 
-  /@shopify/mini-oxygen@3.0.0:
-    resolution: {integrity: sha512-j5hMKfIw0S/J6T3csluU2MeVc2toT9KiqfK4DOqdwJRZ59ycOiJpXdqElpkPYsvkpoxuRtsgd1BA/C7DPHlI2g==}
+  /@shopify/mini-oxygen@3.0.1:
+    resolution: {integrity: sha512-z0uUK06gvtggLrMwvxMjSmYmxOZ87Hv2WKzu3VZdIa4rfhRT1kFFDL4MoeBn4ulI0Hfsn2mE4kXYm1qkVjK2MQ==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       vite: ^5.1.0
@@ -4865,7 +4865,7 @@ packages:
       body-parser: 1.20.2
       connect: 3.7.0
       get-port: 7.1.0
-      miniflare: 3.20240129.0
+      miniflare: 3.20240304.2
       mrmime: 1.0.1
       source-map: 0.7.4
       source-map-support: 0.5.21
@@ -6489,7 +6489,7 @@ packages:
       dot-prop: 7.2.0
       env-paths: 3.0.0
       json-schema-typed: 8.0.1
-      semver: 7.5.4
+      semver: 7.6.0
     dev: false
 
   /confbox@0.1.7:
@@ -10305,8 +10305,8 @@ packages:
     hasBin: true
     dev: true
 
-  /miniflare@3.20240129.0:
-    resolution: {integrity: sha512-27pDhlP2G/4gXmvnSt6LjMQ8KrkmbJElIQmn+BLjdiyIx+zXY4E8MSPJmi9flgf0dn3wtjuHO2ASenuopqqxrw==}
+  /miniflare@3.20240304.2:
+    resolution: {integrity: sha512-yQ5TBKv7TlvF8khFvvH+1WWk8cBnaLgNzcbJ5DLQOdecxdDxUCVlN38HThd6Nhcz6EY+ckDkww8FkugUbSSpIQ==}
     engines: {node: '>=16.13'}
     hasBin: true
     dependencies:
@@ -10318,7 +10318,7 @@ packages:
       glob-to-regexp: 0.4.1
       stoppable: 1.1.0
       undici: 5.28.4
-      workerd: 1.20240129.0
+      workerd: 1.20240304.0
       ws: 8.16.0
       youch: 3.3.3
       zod: 3.22.5
@@ -10979,7 +10979,7 @@ packages:
       got: 12.6.1
       registry-auth-token: 5.0.2
       registry-url: 6.0.1
-      semver: 7.5.4
+      semver: 7.6.0
     dev: false
 
   /pako@0.2.9:
@@ -13922,17 +13922,17 @@ packages:
     resolution: {integrity: sha512-gvVzJFlPycKc5dZN4yPkP8w7Dc37BtP1yczEneOb4uq34pXZcvrtRTmWV8W+Ume+XCxKgbjM+nevkyFPMybd4Q==}
     dev: false
 
-  /workerd@1.20240129.0:
-    resolution: {integrity: sha512-t4pnsmjjk/u+GdVDgH2M1AFmJaBUABshYK/vT/HNrAXsHSwN6VR8Yqw0JQ845OokO34VLkuUtYQYyxHHKpdtsw==}
+  /workerd@1.20240304.0:
+    resolution: {integrity: sha512-/tYxdypPh9NKQje9r7bgBB73vAQfCQZbEPjNlxE/ml7jNKMHnRZv/D+By4xO0IPAifa37D0sJFokvYOahz1Lqw==}
     engines: {node: '>=16'}
     hasBin: true
     requiresBuild: true
     optionalDependencies:
-      '@cloudflare/workerd-darwin-64': 1.20240129.0
-      '@cloudflare/workerd-darwin-arm64': 1.20240129.0
-      '@cloudflare/workerd-linux-64': 1.20240129.0
-      '@cloudflare/workerd-linux-arm64': 1.20240129.0
-      '@cloudflare/workerd-windows-64': 1.20240129.0
+      '@cloudflare/workerd-darwin-64': 1.20240304.0
+      '@cloudflare/workerd-darwin-arm64': 1.20240304.0
+      '@cloudflare/workerd-linux-64': 1.20240304.0
+      '@cloudflare/workerd-linux-arm64': 1.20240304.0
+      '@cloudflare/workerd-windows-64': 1.20240304.0
     dev: false
 
   /worktop@0.7.3:

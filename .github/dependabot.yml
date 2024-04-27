@@ -4,6 +4,8 @@ updates:
     directory: '/'
     schedule:
       interval: 'daily'
+        time: "05:30"
+        timezone: "America/New_York"
     ignore:
       - dependency-name: '@shopify/oxygen-workers-types'
         update-types:
@@ -16,3 +18,5 @@ updates:
     directory: '/studio'
     schedule:
       interval: 'daily'
+        time: "05:30"
+        timezone: "America/New_York"

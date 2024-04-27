@@ -28,7 +28,7 @@
     "@sanity/uuid": "^3.0.2",
     "@sanity/vision": "^3.38.0",
     "@shopify/polaris": "^13.1.0",
-    "@shopify/polaris-icons": "^9.0.0",
+    "@shopify/polaris-icons": "^9.0.1",
     "groq": "^3.38.0",
     "groqd-playground": "^0.0.18",
     "lodash": "^4.17.21",

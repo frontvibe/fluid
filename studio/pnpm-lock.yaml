@@ -1,4 +1,4 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: true
@@ -42,8 +42,8 @@ dependencies:
     specifier: ^13.1.0
     version: 13.1.0(react-dom@18.2.0)(react@18.2.0)
   '@shopify/polaris-icons':
-    specifier: ^9.0.0
-    version: 9.0.0(react@18.2.0)
+    specifier: ^9.0.1
+    version: 9.0.1(react@18.2.0)
   groq:
     specifier: ^3.38.0
     version: 3.38.0
@@ -3176,8 +3176,8 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@shopify/polaris-icons@9.0.0(react@18.2.0):
-    resolution: {integrity: sha512-RVgHc/c/bmU53PMDmtNVnAHDyD1cAyYGJhBAdpo7dgUhuDnz+/vFy5Pc68mERJtWe9Uqcyk288vpIScWF8NiPw==}
+  /@shopify/polaris-icons@9.0.1(react@18.2.0):
+    resolution: {integrity: sha512-g3V76HcxTXcp6DuKOIWIE08pj95yfzqZw7fnVTGQ1q49PRXTHWh0byDivQCt8wiQPenzWm2pWeme/Ix057nDLw==}
     engines: {node: '>=20.10.0'}
     peerDependencies:
       react: '*'
@@ -3224,7 +3224,7 @@ packages:
       react: ^18.0.0
       react-dom: ^18.0.0
     dependencies:
-      '@shopify/polaris-icons': 9.0.0(react@18.2.0)
+      '@shopify/polaris-icons': 9.0.1(react@18.2.0)
       '@shopify/polaris-tokens': 9.0.0
       '@types/react': 18.2.79
       '@types/react-dom': 18.2.25

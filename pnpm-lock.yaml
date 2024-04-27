@@ -1,4 +1,4 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: true
@@ -212,8 +212,8 @@ devDependencies:
     specifier: ^1.0.7
     version: 1.0.7(tailwindcss@3.4.3)
   type-fest:
-    specifier: ^4.15.0
-    version: 4.15.0
+    specifier: ^4.17.0
+    version: 4.17.0
   typescript:
     specifier: ^5.4.5
     version: 5.4.5
@@ -4787,7 +4787,7 @@ packages:
       '@graphql-codegen/typescript': 4.0.6(graphql@16.8.1)
       '@graphql-codegen/typescript-operations': 4.2.0(graphql@16.8.1)
       graphql: 16.8.1
-      type-fest: 4.15.0
+      type-fest: 4.17.0
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -4814,7 +4814,7 @@ packages:
       graphql: 16.8.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      type-fest: 4.15.0
+      type-fest: 4.17.0
       worktop: 0.7.3
     transitivePeerDependencies:
       - '@types/react'
@@ -4838,7 +4838,7 @@ packages:
       content-security-policy-builder: 2.1.1
       react: 18.2.0
       source-map-support: 0.5.21
-      type-fest: 4.15.0
+      type-fest: 4.17.0
       use-resize-observer: 9.1.0(react-dom@18.2.0)(react@18.2.0)
     transitivePeerDependencies:
       - '@types/react'
@@ -13359,8 +13359,8 @@ packages:
     engines: {node: '>=14.16'}
     dev: false
 
-  /type-fest@4.15.0:
-    resolution: {integrity: sha512-tB9lu0pQpX5KJq54g+oHOLumOx+pMep4RaM6liXh2PKmVRFF+/vAtUP0ZaJ0kOySfVNjF6doBWPHhBhISKdlIA==}
+  /type-fest@4.17.0:
+    resolution: {integrity: sha512-9flrz1zkfLRH3jO3bLflmTxryzKMxVa7841VeMgBaNQGY6vH4RCcpN/sQLB7mQQYh1GZ5utT2deypMuCy4yicw==}
     engines: {node: '>=16'}
 
   /type-is@1.6.18:

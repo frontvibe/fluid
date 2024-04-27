@@ -114,8 +114,8 @@ dependencies:
     specifier: ^3.38.0
     version: 3.38.0
   groqd:
-    specifier: ^0.15.10
-    version: 0.15.10
+    specifier: ^0.15.11
+    version: 0.15.11
   isbot:
     specifier: ^5.1.4
     version: 5.1.4
@@ -8720,8 +8720,8 @@ packages:
     engines: {node: '>=18'}
     dev: false
 
-  /groqd@0.15.10:
-    resolution: {integrity: sha512-lwAeIszEqNB2ccxCsQCHO/cnAno4kQ/6bmwrjdC4LKKXrptHkDFe3VObFMrv+YrpErRu1AqLDGCyEhwD5nzRlA==}
+  /groqd@0.15.11:
+    resolution: {integrity: sha512-i1JBi6CnRAVbsld9pThccvEg0jEq+xDiZE1OAkbTTt6bakpic5nv3QASvdgA+nWAoaX754q1ACvntgB7Pf83VQ==}
     engines: {node: '>= 14'}
     dependencies:
       zod: 3.22.4

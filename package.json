@@ -31,7 +31,7 @@
     "@radix-ui/react-select": "^2.0.0",
     "@radix-ui/react-slot": "^1.0.2",
     "@remix-run/react": "2.8.1",
-    "@sanity/client": "^6.15.18",
+    "@sanity/client": "^6.15.20",
     "@sanity/core-loader": "^1.6.7",
     "@sanity/image-url": "^1.0.2",
     "@sanity/react-loader": "^1.9.12",

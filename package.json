@@ -36,7 +36,7 @@
     "@sanity/image-url": "^1.0.2",
     "@sanity/react-loader": "^1.9.12",
     "@sanity/visual-editing": "^1.8.13",
-    "@shopify/cli": "3.53.0",
+    "@shopify/cli": "3.59.1",
     "@shopify/cli-hydrogen": "^8.0.0",
     "@shopify/hydrogen": "^2024.4.0",
     "@shopify/hydrogen-react": "^2024.4.0",

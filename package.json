@@ -38,7 +38,7 @@
     "@sanity/visual-editing": "^1.8.13",
     "@shopify/cli": "3.53.0",
     "@shopify/cli-hydrogen": "^8.0.0",
-    "@shopify/hydrogen": "^2024.4.0",
+    "@shopify/hydrogen": "^2024.4.1",
     "@shopify/hydrogen-react": "^2024.4.0",
     "@shopify/mini-oxygen": "^3.0.1",
     "@shopify/remix-oxygen": "^2.0.4",

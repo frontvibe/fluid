@@ -1,4 +1,4 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: true
@@ -149,8 +149,8 @@ devDependencies:
     specifier: 2.8.1
     version: 2.8.1(@types/node@20.12.7)(typescript@5.4.5)
   '@remix-run/eslint-config':
-    specifier: ^2.8.1
-    version: 2.8.1(eslint@8.57.0)(react@18.3.1)(typescript@5.4.5)
+    specifier: ^2.9.1
+    version: 2.9.1(eslint@8.57.0)(react@18.3.1)(typescript@5.4.5)
   '@shopify/hydrogen-codegen':
     specifier: ^0.3.0
     version: 0.3.0(graphql@16.8.1)
@@ -4181,8 +4181,8 @@ packages:
       - ts-node
       - utf-8-validate
 
-  /@remix-run/eslint-config@2.8.1(eslint@8.57.0)(react@18.3.1)(typescript@5.4.5):
-    resolution: {integrity: sha512-lH5/H8oznYk0pVhrNTBt7+++U+guEKOYFwK1aO3zoeyrBtSc7OdX1KWWFlJw0IdGVMSKDqnW3U0n1VbIa4sX/g==}
+  /@remix-run/eslint-config@2.9.1(eslint@8.57.0)(react@18.3.1)(typescript@5.4.5):
+    resolution: {integrity: sha512-2ij9MNX5dd7qDCLAlPmIasZ4JkRydFwd9CaIq9JlBsW0HJEGhIMjg27ofLu4aToWLr5yW9RduCSq2/ypjhiy1g==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       eslint: ^8.0.0

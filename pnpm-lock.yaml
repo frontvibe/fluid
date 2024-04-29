@@ -1,4 +1,4 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: true
@@ -57,8 +57,8 @@ dependencies:
     specifier: ^1.0.2
     version: 1.0.2
   '@sanity/react-loader':
-    specifier: ^1.9.12
-    version: 1.9.12(@sanity/client@6.15.20)(react@18.3.1)
+    specifier: ^1.9.15
+    version: 1.9.15(@sanity/client@6.15.20)(react@18.3.1)
   '@sanity/visual-editing':
     specifier: ^1.8.13
     version: 1.8.13(@remix-run/react@2.8.1)(@sanity/client@6.15.20)
@@ -4445,6 +4445,15 @@ packages:
       - debug
     dev: false
 
+  /@sanity/core-loader@1.6.10(@sanity/client@6.15.20):
+    resolution: {integrity: sha512-0LXO7QzsNAWxu+A+Ukam57jnwS+CsKGtalONvcO/ShtcxNr51fxS0i2+r50Ah5fV5cBv/6S+/0AtaHus22QG1Q==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      '@sanity/client': ^6.15.20
+    dependencies:
+      '@sanity/client': 6.15.20
+    dev: false
+
   /@sanity/core-loader@1.6.7(@sanity/client@6.15.20):
     resolution: {integrity: sha512-bO6kUzJW0haq4Ntf+4GTTSMGrdosUAURjp7tb0EFfwcyXOzRcmBtQn9anx0P3HTjahlxq2Gbf1Iel5Yv7RNT9g==}
     engines: {node: '>=18'}
@@ -4478,15 +4487,15 @@ packages:
       '@sanity/uuid': 3.0.2
     dev: false
 
-  /@sanity/react-loader@1.9.12(@sanity/client@6.15.20)(react@18.3.1):
-    resolution: {integrity: sha512-JQIKcDIWP/W8fIuORN2jXUf2ayzusvJAAALO++XB+25mTh/PJ2ec1CjYx5+OyQ2vwVIhzq1jLj4oPoc5uj1j5Q==}
+  /@sanity/react-loader@1.9.15(@sanity/client@6.15.20)(react@18.3.1):
+    resolution: {integrity: sha512-d7T+Xqg58/MNHCWBT97F/WqE9TfDhpl91fZOfsIeT3ct1ojG8mVsuOfI6TTROiIIhgOjEumUQdv40+4bQIcC9g==}
     engines: {node: '>=18'}
     peerDependencies:
-      '@sanity/client': ^6.15.17
+      '@sanity/client': ^6.15.20
       react: ^18.2.0
     dependencies:
       '@sanity/client': 6.15.20
-      '@sanity/core-loader': 1.6.7(@sanity/client@6.15.20)
+      '@sanity/core-loader': 1.6.10(@sanity/client@6.15.20)
       react: 18.3.1
     dev: false
 

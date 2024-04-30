@@ -29,7 +29,7 @@
     "@sanity/vision": "^3.39.1",
     "@shopify/polaris": "^13.2.0",
     "@shopify/polaris-icons": "^9.0.1",
-    "groq": "^3.38.0",
+    "groq": "^3.39.1",
     "groqd-playground": "^0.0.18",
     "lodash": "^4.17.21",
     "lodash.get": "^4.4.2",

@@ -10,6 +10,7 @@ updates:
       remix:
         patterns:
           - '@remix-run/*'
+          - '@sanity/*'
     ignore:
       - dependency-name: '@shopify/oxygen-workers-types'
         update-types:
@@ -29,5 +30,4 @@ updates:
         patterns:
           - 'sanity'
           - 'groq'
-          - '@sanity/vision'
-          - '@sanity/util'
+          - '@sanity/*'

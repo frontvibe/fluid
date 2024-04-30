@@ -7,12 +7,23 @@ updates:
       time: '05:30'
       timezone: 'America/New_York'
     groups:
+      patch-minor:
+        applies-to: version-updates
+        update-types:
+        - "minor"
+        - "patch"
       remix:
         patterns:
-          - '@remix-run/*'
+        - '@remix-run/*'
+        applies-to: version-updates
+        update-types:
+        - "major"
       sanity:
         patterns:
-          - '@sanity/*'
+        - '@sanity/*'
+        applies-to: version-updates
+        update-types:
+        - "major"
     ignore:
       - dependency-name: '@shopify/oxygen-workers-types'
         update-types:
@@ -28,8 +39,16 @@ updates:
       time: '05:30'
       timezone: 'America/New_York'
     groups:
+      patch-minor:
+        applies-to: version-updates
+        update-types:
+        - "minor"
+        - "patch"
       sanity:
         patterns:
-          - 'sanity'
-          - 'groq'
-          - '@sanity/*'
+        - 'sanity'
+        - 'groq'
+        - '@sanity/*'
+        applies-to: version-updates
+        update-types:
+        - "major"

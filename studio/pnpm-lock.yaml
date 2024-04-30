@@ -45,8 +45,8 @@ dependencies:
     specifier: ^9.0.1
     version: 9.0.1(react@18.3.1)
   groq:
-    specifier: ^3.38.0
-    version: 3.38.0
+    specifier: ^3.39.1
+    version: 3.39.1
   groqd-playground:
     specifier: ^0.0.18
     version: 0.0.18(@sanity/icons@2.11.8)(@sanity/ui@2.1.4)(react-dom@18.2.0)(react-is@18.3.1)(react@18.3.1)(sanity@3.38.0)(styled-components@6.1.8)
@@ -5686,6 +5686,11 @@ packages:
     engines: {node: '>=18'}
     dev: false
 
+  /groq@3.39.1:
+    resolution: {integrity: sha512-3KEMe7i6WcYB5GuI1Z9OyLZdawTN4iRQa+MNK21cKPtWizKsgEYJsXya+BhHdMZk0HLB2qLvaIorPnflW56cew==}
+    engines: {node: '>=18'}
+    dev: false
+
   /groqd-playground@0.0.18(@sanity/icons@2.11.8)(@sanity/ui@2.1.4)(react-dom@18.2.0)(react-is@18.3.1)(react@18.3.1)(sanity@3.38.0)(styled-components@6.1.8):
     resolution: {integrity: sha512-+zAeJDvm8O1A9t5o5D01uSO62/KGLxG4EcGM3VVZAqy1wjJ8V/nXDo6P30A/uYbDmqxPpd0dPXX9rpbysVMsDw==}
     peerDependencies:
@@ -7849,7 +7854,7 @@ packages:
       copy-to-clipboard: 3.3.3
       date-fns: 2.30.0
       filesize: 9.0.11
-      groq: 3.38.0
+      groq: 3.39.1
       is-hotkey: 0.2.0
       nanoid: 3.3.7
       npm-run-all: 4.1.5

@@ -48,8 +48,8 @@ dependencies:
     specifier: ^3.39.1
     version: 3.39.1
   groqd-playground:
-    specifier: ^0.0.18
-    version: 0.0.18(@sanity/icons@2.11.8)(@sanity/ui@2.1.4)(react-dom@18.2.0)(react-is@18.3.1)(react@18.3.1)(sanity@3.38.0)(styled-components@6.1.8)
+    specifier: ^0.0.19
+    version: 0.0.19(@sanity/icons@2.11.8)(@sanity/ui@2.1.4)(react-dom@18.2.0)(react-is@18.3.1)(react@18.3.1)(sanity@3.38.0)(styled-components@6.1.8)
   lodash:
     specifier: ^4.17.21
     version: 4.17.21
@@ -5691,21 +5691,21 @@ packages:
     engines: {node: '>=18'}
     dev: false
 
-  /groqd-playground@0.0.18(@sanity/icons@2.11.8)(@sanity/ui@2.1.4)(react-dom@18.2.0)(react-is@18.3.1)(react@18.3.1)(sanity@3.38.0)(styled-components@6.1.8):
-    resolution: {integrity: sha512-+zAeJDvm8O1A9t5o5D01uSO62/KGLxG4EcGM3VVZAqy1wjJ8V/nXDo6P30A/uYbDmqxPpd0dPXX9rpbysVMsDw==}
+  /groqd-playground@0.0.19(@sanity/icons@2.11.8)(@sanity/ui@2.1.4)(react-dom@18.2.0)(react-is@18.3.1)(react@18.3.1)(sanity@3.38.0)(styled-components@6.1.8):
+    resolution: {integrity: sha512-kUm42/MWjEBx8IsooFTvnSIn6oX6a25oG40JA+Nt4IUgPGauu4YjJEfTsoU3GPTijwPH7LoxNrXf1r9syvUqSg==}
     peerDependencies:
       '@sanity/icons': ^2.3.1
-      '@sanity/ui': ^1.3.2
+      '@sanity/ui': ^2
       react: ^18.2.0
       react-dom: ^18.2.0
       react-is: ^18.2.0
-      sanity: ^3.0.0
-      styled-components: ^5.3.9
+      sanity: ^3.15.0
+      styled-components: ^5.2 || ^6
     dependencies:
       '@sanity/icons': 2.11.8(react@18.3.1)
       '@sanity/ui': 2.1.4(react-dom@18.2.0)(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.8)
       '@uiw/react-split': 5.9.3(react-dom@18.2.0)(react@18.3.1)
-      groqd: 0.15.10
+      groqd: 0.15.11
       lodash.has: 4.5.2
       react: 18.3.1
       react-dom: 18.2.0(react@18.3.1)
@@ -5715,8 +5715,8 @@ packages:
       zod: 3.22.5
     dev: false
 
-  /groqd@0.15.10:
-    resolution: {integrity: sha512-lwAeIszEqNB2ccxCsQCHO/cnAno4kQ/6bmwrjdC4LKKXrptHkDFe3VObFMrv+YrpErRu1AqLDGCyEhwD5nzRlA==}
+  /groqd@0.15.11:
+    resolution: {integrity: sha512-i1JBi6CnRAVbsld9pThccvEg0jEq+xDiZE1OAkbTTt6bakpic5nv3QASvdgA+nWAoaX754q1ACvntgB7Pf83VQ==}
     engines: {node: '>= 14'}
     dependencies:
       zod: 3.22.4

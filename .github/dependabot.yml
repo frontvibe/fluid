@@ -6,6 +6,10 @@ updates:
       interval: 'daily'
         time: "05:30"
         timezone: "America/New_York"
+    groups:
+      remix:
+        patterns:
+          - "@remix-run/*"
     ignore:
       - dependency-name: '@shopify/oxygen-workers-types'
         update-types:
@@ -20,3 +24,10 @@ updates:
       interval: 'daily'
         time: "05:30"
         timezone: "America/New_York"
+    groups:
+      sanity:
+        patterns:
+          - "sanity"
+          - "groq"
+          - "@sanity/vision"
+          - "@sanity/util"

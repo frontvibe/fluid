@@ -1,9 +1,9 @@
 version: 2
 updates:
-  - package-ecosystem: 'npm'
-    directory: '/'
+  - package-ecosystem: "npm"
+    directory: "/"
     schedule:
-      interval: 'daily'
+      interval: "daily"
         time: "05:30"
         timezone: "America/New_York"
     groups:
@@ -11,17 +11,17 @@ updates:
         patterns:
           - "@remix-run/*"
     ignore:
-      - dependency-name: '@shopify/oxygen-workers-types'
+      - dependency-name: "@shopify/oxygen-workers-types"
         update-types:
-          ['version-update:semver-minor', 'version-update:semver-major']
-      - dependency-name: '@shopify/cli'
+          ["version-update:semver-minor", "version-update:semver-major"]
+      - dependency-name: "@shopify/cli"
         update-types:
-          ['version-update:semver-minor', 'version-update:semver-major']
+          ["version-update:semver-minor", "version-update:semver-major"]
 
-  - package-ecosystem: 'npm'
-    directory: '/studio'
+  - package-ecosystem: "npm"
+    directory: "/studio"
     schedule:
-      interval: 'daily'
+      interval: "daily"
         time: "05:30"
         timezone: "America/New_York"
     groups:

@@ -1,4 +1,4 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: true
@@ -63,8 +63,8 @@ dependencies:
     specifier: ^1.8.16
     version: 1.8.16(@remix-run/react@2.9.1)(@sanity/client@6.15.20)
   '@shopify/cli':
-    specifier: 3.53.0
-    version: 3.53.0(@types/node@20.12.7)(@types/react@18.3.1)(typescript@5.4.5)(zod@3.23.5)
+    specifier: 3.53.1
+    version: 3.53.1(@types/node@20.12.7)(@types/react@18.3.1)(typescript@5.4.5)(zod@3.23.5)
   '@shopify/cli-hydrogen':
     specifier: ^8.0.1
     version: 8.0.1(@graphql-codegen/cli@5.0.2)(@remix-run/dev@2.9.1)(@shopify/hydrogen-codegen@0.3.0)(@shopify/mini-oxygen@3.0.1)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)
@@ -2884,7 +2884,7 @@ packages:
     engines: {node: '>=16'}
     dependencies:
       '@oclif/color': 1.0.13
-      '@oclif/core': 2.11.7(@types/node@20.12.7)(typescript@5.4.5)
+      '@oclif/core': 2.16.0(@types/node@20.12.7)(typescript@5.4.5)
       chalk: 4.1.2
       debug: 4.3.4(supports-color@8.1.1)
       fs-extra: 9.1.0
@@ -4582,8 +4582,8 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@shopify/cli-kit@3.53.0(@types/node@20.12.7)(@types/react@18.3.1)(typescript@5.4.5):
-    resolution: {integrity: sha512-Rw5koF98VoiD5bbZ2Sd0UsmZY1aP6U6I+IUJKcu1V59BQgvHoVkIAnok7wkzUWbwjDQNH5kf/edwC8HgLpEXjA==}
+  /@shopify/cli-kit@3.53.1(@types/node@20.12.7)(@types/react@18.3.1)(typescript@5.4.5):
+    resolution: {integrity: sha512-Ly8BRVpJp4o+sCuuIf1Ukb548PdHEtxHV3H2bX9I1lsmm42QoRUaYsSszY4uXr0kRXbUYV/KfYSxaOJjCsEkwQ==}
     engines: {node: '>=18.12.0'}
     os: [darwin, linux, win32]
     dependencies:
@@ -4742,8 +4742,8 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@shopify/cli@3.53.0(@types/node@20.12.7)(@types/react@18.3.1)(typescript@5.4.5)(zod@3.23.5):
-    resolution: {integrity: sha512-kWWg7yilH3SOzRdSFlJ7y4uSKqMuFGzM2/mUtF5NP5/WrVZ20EXZNAZmnHU5zW3t3yDJpi5gDn1SUSGAU0rGlg==}
+  /@shopify/cli@3.53.1(@types/node@20.12.7)(@types/react@18.3.1)(typescript@5.4.5)(zod@3.23.5):
+    resolution: {integrity: sha512-08aez36erSrbwy2D22LnP2fYllUBRC12x4w3l9w34Y7wf4Pgr2HfBEmJaEciN7UwPh075IfSzovR7YAdYnYaqQ==}
     engines: {node: '>=18.12.0'}
     os: [darwin, linux, win32]
     hasBin: true
@@ -4752,8 +4752,8 @@ packages:
       '@oclif/plugin-commands': 2.2.24(@types/node@20.12.7)(typescript@5.4.5)
       '@oclif/plugin-help': 5.2.18(@types/node@20.12.7)(typescript@5.4.5)
       '@oclif/plugin-plugins': 3.1.8(@types/node@20.12.7)(typescript@5.4.5)
-      '@shopify/cli-kit': 3.53.0(@types/node@20.12.7)(@types/react@18.3.1)(typescript@5.4.5)
-      '@shopify/plugin-did-you-mean': 3.53.0(@types/node@20.12.7)(@types/react@18.3.1)(typescript@5.4.5)
+      '@shopify/cli-kit': 3.53.1(@types/node@20.12.7)(@types/react@18.3.1)(typescript@5.4.5)
+      '@shopify/plugin-did-you-mean': 3.53.1(@types/node@20.12.7)(@types/react@18.3.1)(typescript@5.4.5)
       zod-to-json-schema: 3.21.4(zod@3.23.5)
     transitivePeerDependencies:
       - '@swc/core'
@@ -4905,13 +4905,13 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@shopify/plugin-did-you-mean@3.53.0(@types/node@20.12.7)(@types/react@18.3.1)(typescript@5.4.5):
-    resolution: {integrity: sha512-DM48Z+oFKiU/01xgTPBjXwL6HYWSATEHKplHXb2rjPVF2IOtnf3hcgOCfaz+hmQk3W28BYLlocF2RcPNkDIASw==}
+  /@shopify/plugin-did-you-mean@3.53.1(@types/node@20.12.7)(@types/react@18.3.1)(typescript@5.4.5):
+    resolution: {integrity: sha512-VV/J9P/OMmT08cGEEeet+YGutFxHGI5CYEMTNb0ZgUKu9dp79oa4XnkGZ9r46ydDV+cdLcQTg/f/0VPYIoU9Cg==}
     engines: {node: '>=18.12.0'}
     os: [darwin, linux, win32]
     dependencies:
       '@oclif/core': 2.11.7(@types/node@20.12.7)(typescript@5.4.5)
-      '@shopify/cli-kit': 3.53.0(@types/node@20.12.7)(@types/react@18.3.1)(typescript@5.4.5)
+      '@shopify/cli-kit': 3.53.1(@types/node@20.12.7)(@types/react@18.3.1)(typescript@5.4.5)
       n-gram: 2.0.2
     transitivePeerDependencies:
       - '@swc/core'
@@ -6481,7 +6481,7 @@ packages:
       dot-prop: 7.2.0
       env-paths: 3.0.0
       json-schema-typed: 8.0.1
-      semver: 7.5.4
+      semver: 7.6.0
     dev: false
 
   /confbox@0.1.7:
@@ -8975,7 +8975,7 @@ packages:
     dependencies:
       '@alcalzone/ansi-tokenize': 0.1.3
       '@types/react': 18.3.1
-      ansi-escapes: 6.2.0
+      ansi-escapes: 6.2.1
       auto-bind: 5.0.1
       chalk: 5.3.0
       cli-boxes: 3.0.0
@@ -10970,7 +10970,7 @@ packages:
       got: 12.6.1
       registry-auth-token: 5.0.2
       registry-url: 6.0.1
-      semver: 7.5.4
+      semver: 7.6.0
     dev: false
 
   /pako@0.2.9:

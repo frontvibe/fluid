@@ -2,9 +2,10 @@
   "name": "fluid",
   "private": true,
   "sideEffects": false,
+  "type": "module",
   "version": "0.0.0",
   "scripts": {
-    "build": "shopify hydrogen build",
+    "build": "shopify hydrogen build --codegen",
     "dev": "run-p dev:app dev:studio",
     "dev:app": "shopify hydrogen dev --codegen",
     "dev:studio": "cd ./studio && run-s dev",
@@ -17,6 +18,7 @@
     "deploy:studio": "cd ./studio && run-s deploy"
   },
   "dependencies": {
+    "@graphql-codegen/cli": "^5.0.2",
     "@portabletext/react": "^3.0.18",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-checkbox": "^1.0.4",
@@ -30,19 +32,21 @@
     "@radix-ui/react-scroll-area": "^1.0.5",
     "@radix-ui/react-select": "^2.0.0",
     "@radix-ui/react-slot": "^1.0.2",
+    "@remix-run/node": "2.9.1",
     "@remix-run/react": "2.9.1",
     "@sanity/client": "^6.15.20",
     "@sanity/core-loader": "^1.6.11",
     "@sanity/image-url": "^1.0.2",
     "@sanity/react-loader": "^1.9.16",
     "@sanity/visual-editing": "^1.8.16",
-    "@shopify/cli": "3.53.1",
+    "@shopify/cli": "3.58.0",
     "@shopify/cli-hydrogen": "^8.0.3",
     "@shopify/hydrogen": "^2024.4.1",
     "@shopify/hydrogen-react": "^2024.4.1",
     "@shopify/mini-oxygen": "^3.0.1",
     "@shopify/remix-oxygen": "^2.0.4",
     "@tanem/react-nprogress": "^5.0.51",
+    "@vercel/remix": "2.9.1",
     "@vercel/stega": "^0.1.1",
     "class-variance-authority": "^0.7.0",
     "color2k": "^2.0.3",
@@ -63,7 +67,6 @@
     "vaul": "^0.9.0"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "^5.0.2",
     "@portabletext/types": "^2.0.13",
     "@remix-run/dev": "2.9.1",
     "@remix-run/eslint-config": "^2.9.1",
@@ -88,7 +91,10 @@
     "tailwindcss": "^3.4.3",
     "tailwindcss-animate": "^1.0.7",
     "type-fest": "^4.18.1",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "vite": "^5.2.10",
+    "vite-env-only": "^2.2.1",
+    "vite-tsconfig-paths": "^4.3.2"
   },
   "engines": {
     "node": ">=16.13"
@@ -103,5 +109,8 @@
     "*.d.ts",
     "dist",
     "studio/*"
-  ]
+  ],
+  "pnpm": {
+    "patchedDependencies": {}
+  }
 }

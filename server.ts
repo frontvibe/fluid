@@ -1,5 +1,3 @@
-// Virtual entry point for the app
-import * as remixBuild from '@remix-run/dev/server-build';
 import {
   cartGetIdDefault,
   cartSetIdDefault,
@@ -12,6 +10,9 @@ import {
   getStorefrontHeaders,
 } from '@shopify/remix-oxygen';
 import {getLocaleFromRequest} from 'countries';
+// Virtual entry point for the app
+// @ts-ignore
+import * as remixBuild from 'virtual:remix/server-build';
 
 import {CART_QUERY_FRAGMENT} from '~/graphql/fragments';
 import {envVariables} from '~/lib/env.server';

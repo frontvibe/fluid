@@ -12,7 +12,8 @@ import {
   sendShopifyAnalytics,
 } from '@shopify/hydrogen';
 import {useEffect, useState} from 'react';
-import {useIdle, useSessionStorage} from 'react-use';
+import useIdle from 'react-use/esm/useIdle';
+import useSessionStorage from 'react-use/esm/useSessionStorage';
 
 import {usePageAnalytics} from '~/hooks/useAnalytics';
 import {useLocalePath} from '~/hooks/useLocalePath';

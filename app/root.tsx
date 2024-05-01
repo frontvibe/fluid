@@ -9,7 +9,6 @@ import type {
 import {
   Link,
   Links,
-  LiveReload,
   Meta,
   Outlet,
   Scripts,
@@ -27,7 +26,6 @@ import {Layout} from '~/components/layout/Layout';
 
 import type {HydrogenSession} from './lib/hydrogen.session.server';
 
-import faviconAsset from '../public/favicon.ico';
 import {CssVars} from './components/CssVars';
 import {Fonts} from './components/Fonts';
 import {generateSanityImageUrl} from './components/sanity/SanityImage';
@@ -40,7 +38,9 @@ import {resolveShopifyPromises} from './lib/resolveShopifyPromises';
 import {sanityPreviewPayload} from './lib/sanity/sanity.payload.server';
 import {seoPayload} from './lib/seo.server';
 import {ROOT_QUERY} from './qroq/queries';
-import tailwindCss from './styles/tailwind.css';
+import tailwindCss from './styles/tailwind.css?url';
+
+import faviconAsset from '/favicon.ico?url';
 
 // This is important to avoid re-fetching root queries on sub-navigations
 export const shouldRevalidate: ShouldRevalidateFunction = ({
@@ -211,7 +211,6 @@ export default function App() {
         </Layout>
         <ScrollRestoration nonce={nonce} />
         <Scripts nonce={nonce} />
-        <LiveReload nonce={nonce} />
       </body>
     </html>
   );
@@ -271,7 +270,6 @@ export function ErrorBoundary() {
         </Layout>
         <ScrollRestoration nonce={nonce} />
         <Scripts nonce={nonce} />
-        <LiveReload nonce={nonce} />
       </body>
     </html>
   );

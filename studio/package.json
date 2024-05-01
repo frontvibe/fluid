@@ -24,12 +24,12 @@
     "@sanity/language-filter": "^4.0.2",
     "@sanity/presentation": "^1.13.0",
     "@sanity/ui": "2.1.4",
-    "@sanity/util": "^3.39.1",
+    "@sanity/util": "^3.40.0",
     "@sanity/uuid": "^3.0.2",
-    "@sanity/vision": "^3.39.1",
+    "@sanity/vision": "^3.40.0",
     "@shopify/polaris": "^13.2.0",
     "@shopify/polaris-icons": "^9.0.1",
-    "groq": "^3.39.1",
+    "groq": "^3.40.0",
     "groqd-playground": "^0.0.19",
     "lodash": "^4.17.21",
     "lodash.get": "^4.4.2",
@@ -40,10 +40,10 @@
     "react-dom": "^18.3.1",
     "react-is": "^18.3.1",
     "rxjs": "^7.8.1",
-    "sanity": "^3.39.1",
+    "sanity": "^3.40.0",
     "sanity-plugin-internationalized-array": "^2.0.0",
     "sanity-plugin-media": "^2.2.5",
-    "styled-components": "^6.1.8"
+    "styled-components": "^6.1.9"
   },
   "devDependencies": {
     "@sanity/eslint-config-studio": "^4.0.0",

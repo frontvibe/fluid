@@ -25,7 +25,7 @@ dependencies:
     version: 4.0.2(@sanity/ui@2.1.4)(@sanity/util@3.40.0)(react-dom@18.3.1)(react@18.3.1)(sanity@3.40.0)(styled-components@6.1.9)
   '@sanity/presentation':
     specifier: ^1.13.0
-    version: 1.13.0(@sanity/client@6.15.20)(react-dom@18.3.1)(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.9)
+    version: 1.13.0(@sanity/client@6.17.0)(react-dom@18.3.1)(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.9)
   '@sanity/ui':
     specifier: 2.1.4
     version: 2.1.4(react-dom@18.3.1)(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.9)
@@ -57,8 +57,8 @@ dependencies:
     specifier: ^4.4.2
     version: 4.4.2
   lucide-react:
-    specifier: ^0.377.0
-    version: 0.377.0(react@18.3.1)
+    specifier: ^0.378.0
+    version: 0.378.0(react@18.3.1)
   nanoid:
     specifier: ^5.0.7
     version: 5.0.7
@@ -3779,6 +3779,17 @@ packages:
       - debug
     dev: false
 
+  /@sanity/client@6.17.0:
+    resolution: {integrity: sha512-VSFzUqrtfe+RhbQqIhjhQ8tdHT+V1jsSjmbF6QCpcjLpMR19sPvOEacZByB9jT8832y7O5efFWBa9BaLwQdx5w==}
+    engines: {node: '>=14.18'}
+    dependencies:
+      '@sanity/eventsource': 5.0.2
+      get-it: 8.4.28
+      rxjs: 7.8.1
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
   /@sanity/code-input@4.1.4(@babel/runtime@7.24.5)(@codemirror/lint@6.7.0)(@codemirror/theme-one-dark@6.1.2)(@lezer/common@1.2.1)(codemirror@6.0.1)(react-dom@18.3.1)(react-is@18.3.1)(react@18.3.1)(sanity@3.40.0)(styled-components@6.1.9):
     resolution: {integrity: sha512-MQfZ6r0SdEtYiuhfMtFe54D+4pVIQzDa67nFQhM1D4hQJVt7yL+OBukGbcOK9Kx1PjKkb4Gog//AMoN7a90b9g==}
     engines: {node: '>=14'}
@@ -4129,15 +4140,15 @@ packages:
       - styled-components
     dev: false
 
-  /@sanity/presentation@1.13.0(@sanity/client@6.15.20)(react-dom@18.3.1)(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.9):
+  /@sanity/presentation@1.13.0(@sanity/client@6.17.0)(react-dom@18.3.1)(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.9):
     resolution: {integrity: sha512-G0ZTiLxW85ot/dXkLeGkG4Kp/i4XGYe3djIYZ3YAFaKsOWZ0smwFq3EtwTdjv3qURuMYQTH65d0BnfF/IxmFQw==}
     engines: {node: '>=16.14'}
     peerDependencies:
       '@sanity/client': ^6.15.20
     dependencies:
-      '@sanity/client': 6.15.20
+      '@sanity/client': 6.17.0
       '@sanity/icons': 2.11.8(react@18.3.1)
-      '@sanity/preview-url-secret': 1.6.11(@sanity/client@6.15.20)
+      '@sanity/preview-url-secret': 1.6.11(@sanity/client@6.17.0)
       '@sanity/ui': 2.1.4(react-dom@18.3.1)(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.9)
       '@sanity/uuid': 3.0.2
       '@types/lodash.isequal': 4.5.8
@@ -4162,7 +4173,17 @@ packages:
     peerDependencies:
       '@sanity/client': ^6.15.20
     dependencies:
-      '@sanity/client': 6.15.20
+      '@sanity/client': 6.15.20(debug@4.3.4)
+      '@sanity/uuid': 3.0.2
+    dev: false
+
+  /@sanity/preview-url-secret@1.6.11(@sanity/client@6.17.0):
+    resolution: {integrity: sha512-MNgDxznespH8I+gkG46IJk+KsTJFNb3BzstWsbJwKURywpcv11vzr8CR2g4B8HNkYcy3EhLN3TRFHTjQNKo2Xw==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      '@sanity/client': ^6.15.20
+    dependencies:
+      '@sanity/client': 6.17.0
       '@sanity/uuid': 3.0.2
     dev: false
 
@@ -6820,6 +6841,21 @@ packages:
       - debug
     dev: false
 
+  /get-it@8.4.28:
+    resolution: {integrity: sha512-zLUAazo/UMrm7tvhhHD6w/eKVuilXPW8zR1klDmGKZPP6LhWZ0iUWjel8EVi3OIeSMKS53XwDl5paiGsqCwhxQ==}
+    engines: {node: '>=14.0.0'}
+    dependencies:
+      decompress-response: 7.0.0
+      follow-redirects: 1.15.6
+      into-stream: 6.0.0
+      is-retry-allowed: 2.2.0
+      is-stream: 2.0.1
+      progress-stream: 2.0.0
+      tunnel-agent: 0.6.0
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
   /get-random-values-esm@1.0.2:
     resolution: {integrity: sha512-HMSDTgj1HPFAuZG0FqxzHbYt5JeEGDUeT9r1RLXhS6RZQS8rLRjokgjZ0Pd28CN0lhXlRwfH6eviZqZEJ2kIoA==}
     dependencies:
@@ -7773,8 +7809,8 @@ packages:
     dependencies:
       yallist: 4.0.0
 
-  /lucide-react@0.377.0(react@18.3.1):
-    resolution: {integrity: sha512-o0weTZC4j8YiSi5VIE6RTwPt5uOA+YtuXejvkOxbLghLwIloNkI20INgWigrhBthvgdDcuULp0XRTr0wokqKMw==}
+  /lucide-react@0.378.0(react@18.3.1):
+    resolution: {integrity: sha512-u6EPU8juLUk9ytRcyapkWI18epAv3RU+6+TC23ivjR0e+glWKBobFeSgRwOIJihzktILQuy6E0E80P2jVTDR5g==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0
     dependencies:

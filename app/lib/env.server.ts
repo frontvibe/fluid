@@ -3,6 +3,8 @@
  * some are only available through the process.env object
  */
 
+import {AppLoadContext} from '@shopify/remix-oxygen';
+
 export function envVariables(contextEnv: Env) {
   let env: Env | NodeJS.ProcessEnv = contextEnv;
 
@@ -11,41 +13,46 @@ export function envVariables(contextEnv: Env) {
     env = process.env;
   }
 
-  checkEnv(env as Env);
-
   return {
-    NODE_ENV: env.NODE_ENV,
-    PRIVATE_STOREFRONT_API_TOKEN: env.PRIVATE_STOREFRONT_API_TOKEN,
-    PUBLIC_STORE_DOMAIN: env.PUBLIC_STORE_DOMAIN,
-    PUBLIC_STOREFRONT_API_TOKEN: env.PUBLIC_STOREFRONT_API_TOKEN,
+    NODE_ENV: env.NODE_ENV as AppLoadContext['env']['NODE_ENV'],
+    PRIVATE_STOREFRONT_API_TOKEN: checkRequiredEnv(
+      env.PRIVATE_STOREFRONT_API_TOKEN,
+      'PRIVATE_STOREFRONT_API_TOKEN',
+    ),
+    PUBLIC_STORE_DOMAIN: checkRequiredEnv(
+      env.PUBLIC_STORE_DOMAIN,
+      'PUBLIC_STORE_DOMAIN',
+    ),
+    PUBLIC_STOREFRONT_API_TOKEN: checkRequiredEnv(
+      env.PUBLIC_STOREFRONT_API_TOKEN,
+      'PUBLIC_STOREFRONT_API_TOKEN',
+    ),
     PUBLIC_STOREFRONT_API_VERSION:
       env.PUBLIC_STOREFRONT_API_VERSION || '2024-01',
-    PUBLIC_STOREFRONT_ID: env.PUBLIC_STOREFRONT_ID,
-    SANITY_STUDIO_API_VERSION: env.SANITY_STUDIO_API_VERSION,
-    SANITY_STUDIO_DATASET: env.SANITY_STUDIO_DATASET,
-    SANITY_STUDIO_PROJECT_ID: env.SANITY_STUDIO_PROJECT_ID,
-    SANITY_STUDIO_URL: env.SANITY_STUDIO_URL,
-    SANITY_STUDIO_USE_PREVIEW_MODE: env.SANITY_STUDIO_USE_PREVIEW_MODE,
+    PUBLIC_STOREFRONT_ID: env.PUBLIC_STOREFRONT_ID || '',
+    SANITY_STUDIO_API_VERSION: env.SANITY_STUDIO_API_VERSION || '2024-05-01',
+    SANITY_STUDIO_DATASET: checkRequiredEnv(
+      env.SANITY_STUDIO_DATASET,
+      'SANITY_STUDIO_DATASET',
+    ),
+    SANITY_STUDIO_PROJECT_ID: checkRequiredEnv(
+      env.SANITY_STUDIO_PROJECT_ID,
+      'SANITY_STUDIO_PROJECT_ID',
+    ),
+    SANITY_STUDIO_URL: checkRequiredEnv(
+      env.SANITY_STUDIO_URL,
+      'SANITY_STUDIO_URL',
+    ),
+    SANITY_STUDIO_USE_PREVIEW_MODE:
+      env.SANITY_STUDIO_USE_PREVIEW_MODE || 'false',
+    SESSION_SECRET: env.SESSION_SECRET || '',
   };
 }
 
-function checkEnv(env: Env) {
-  const requiredVariables: (keyof Env)[] = [
-    'PUBLIC_STORE_DOMAIN',
-    'PUBLIC_STOREFRONT_API_TOKEN',
-    'PRIVATE_STOREFRONT_API_TOKEN',
-    'SESSION_SECRET',
-    'SANITY_STUDIO_API_VERSION',
-    'SANITY_STUDIO_PROJECT_ID',
-    'SANITY_STUDIO_DATASET',
-    'SANITY_STUDIO_URL',
-  ] as const;
-
-  for (const requiredEnv of requiredVariables) {
-    if (!env[requiredEnv]) {
-      throw new Error(
-        `Missing environment variable => ${requiredEnv} is not set`,
-      );
-    }
+function checkRequiredEnv(env: string | undefined, name: string) {
+  if (typeof env !== 'string') {
+    throw new Error(`Missing environment variable => ${name} is not set`);
   }
+
+  return env;
 }

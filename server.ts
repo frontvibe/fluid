@@ -7,6 +7,7 @@ import {
   createStorefrontClient,
   storefrontRedirect,
 } from '@shopify/hydrogen';
+import type {AppLoadContext} from '@shopify/remix-oxygen';
 import {
   createRequestHandler,
   getStorefrontHeaders,
@@ -40,8 +41,8 @@ export default {
        */
       const [cache, session, sanitySession] = await Promise.all([
         caches.open('hydrogen'),
-        HydrogenSession.init(request, [env.SESSION_SECRET]),
-        SanitySession.init(request, [env.SESSION_SECRET]),
+        HydrogenSession.init(request, [envVars.SESSION_SECRET]),
+        SanitySession.init(request, [envVars.SESSION_SECRET]),
       ]);
       const sanityPreviewMode = await sanitySession.has('previewMode');
 
@@ -94,7 +95,7 @@ export default {
        */
       const handleRequest = createRequestHandler({
         build: remixBuild,
-        getLoadContext: () => ({
+        getLoadContext: (): AppLoadContext => ({
           cart,
           env: envVars,
           isDev,

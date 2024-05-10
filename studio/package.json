@@ -43,7 +43,7 @@
     "sanity": "^3.41.1",
     "sanity-plugin-internationalized-array": "^2.0.0",
     "sanity-plugin-media": "^2.2.5",
-    "styled-components": "^6.1.10"
+    "styled-components": "^6.1.11"
   },
   "devDependencies": {
     "@sanity/eslint-config-studio": "^4.0.0",

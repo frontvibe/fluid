@@ -10,20 +10,20 @@ updates:
       patch-minor:
         applies-to: version-updates
         update-types:
-        - "minor"
-        - "patch"
+          - 'minor'
+          - 'patch'
       remix:
         patterns:
-        - '@remix-run/*'
+          - '@remix-run/*'
         applies-to: version-updates
         update-types:
-        - "major"
+          - 'major'
       sanity:
         patterns:
-        - '@sanity/*'
+          - '@sanity/*'
         applies-to: version-updates
         update-types:
-        - "major"
+          - 'major'
     ignore:
       - dependency-name: '@shopify/oxygen-workers-types'
         update-types:
@@ -42,13 +42,13 @@ updates:
       patch-minor:
         applies-to: version-updates
         update-types:
-        - "minor"
-        - "patch"
+          - 'minor'
+          - 'patch'
       sanity:
         patterns:
-        - 'sanity'
-        - 'groq'
-        - '@sanity/*'
+          - 'sanity'
+          - 'groq'
+          - '@sanity/*'
         applies-to: version-updates
         update-types:
-        - "major"
+          - 'major'

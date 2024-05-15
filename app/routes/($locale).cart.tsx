@@ -6,7 +6,7 @@ import type {
 import type {CartApiQueryFragment} from 'storefrontapi.generated';
 
 import {useLoaderData} from '@remix-run/react';
-import {CartForm} from '@shopify/hydrogen';
+import {UNSTABLE_Analytics as Analytics, CartForm} from '@shopify/hydrogen';
 import {json, redirectDocument} from '@shopify/remix-oxygen';
 import invariant from 'tiny-invariant';
 
@@ -64,7 +64,6 @@ export async function action({context, request}: ActionFunctionArgs) {
   /**
    * The Cart ID may change after each mutation. We need to update it each time in the session.
    */
-  const cartId = result.cart.id;
   const headers = cart.setCartId(result.cart.id);
 
   const redirectTo = formData.get('redirectTo') ?? null;
@@ -78,9 +77,6 @@ export async function action({context, request}: ActionFunctionArgs) {
 
   return json(
     {
-      analytics: {
-        cartId,
-      },
       cart: cartResult,
       errors,
     },
@@ -100,6 +96,7 @@ export default function CartRoute() {
   return (
     <div className="cart flex-grow bg-background text-foreground">
       <Cart cart={cart} layout="page" />
+      <Analytics.CartView />
     </div>
   );
 }

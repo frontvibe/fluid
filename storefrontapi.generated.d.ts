@@ -138,7 +138,7 @@ export type CartLineFragment = Pick<
         'id' | 'altText' | 'width' | 'height' | 'url'
       > & {thumbnail: StorefrontAPI.Image['url']}
     >;
-    product: Pick<StorefrontAPI.Product, 'handle' | 'title' | 'id'>;
+    product: Pick<StorefrontAPI.Product, 'handle' | 'vendor' | 'title' | 'id'>;
     selectedOptions: Array<
       Pick<StorefrontAPI.SelectedOption, 'name' | 'value'>
     >;
@@ -147,7 +147,7 @@ export type CartLineFragment = Pick<
 
 export type CartApiQueryFragment = Pick<
   StorefrontAPI.Cart,
-  'id' | 'checkoutUrl' | 'totalQuantity' | 'note'
+  'id' | 'updatedAt' | 'checkoutUrl' | 'totalQuantity' | 'note'
 > & {
   buyerIdentity: Pick<
     StorefrontAPI.CartBuyerIdentity,
@@ -188,7 +188,10 @@ export type CartApiQueryFragment = Pick<
               'id' | 'altText' | 'width' | 'height' | 'url'
             > & {thumbnail: StorefrontAPI.Image['url']}
           >;
-          product: Pick<StorefrontAPI.Product, 'handle' | 'title' | 'id'>;
+          product: Pick<
+            StorefrontAPI.Product,
+            'handle' | 'vendor' | 'title' | 'id'
+          >;
           selectedOptions: Array<
             Pick<StorefrontAPI.SelectedOption, 'name' | 'value'>
           >;

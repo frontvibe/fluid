@@ -178,6 +178,7 @@ export const CART_QUERY_FRAGMENT = `#graphql
         }
         product {
           handle
+          vendor
           title
           id
         }
@@ -190,6 +191,7 @@ export const CART_QUERY_FRAGMENT = `#graphql
   }
   fragment CartApiQuery on Cart {
     id
+    updatedAt
     checkoutUrl
     totalQuantity
     buyerIdentity {

@@ -15,11 +15,16 @@ import {
   Scripts,
   ScrollRestoration,
   isRouteErrorResponse,
+  useLoaderData,
   useMatches,
   useNavigate,
   useRouteError,
 } from '@remix-run/react';
-import {useNonce} from '@shopify/hydrogen';
+import {
+  UNSTABLE_Analytics as Analytics,
+  getShopAnalytics,
+  useNonce,
+} from '@shopify/hydrogen';
 import {defer} from '@shopify/remix-oxygen';
 import {DEFAULT_LOCALE} from 'countries';
 
@@ -29,10 +34,10 @@ import type {HydrogenSession} from './lib/hydrogen.session.server';
 
 import faviconAsset from '../public/favicon.ico';
 import {CssVars} from './components/CssVars';
+import {CustomAnalytics} from './components/CustomAnalytics';
 import {Fonts} from './components/Fonts';
 import {generateSanityImageUrl} from './components/sanity/SanityImage';
 import {Button} from './components/ui/Button';
-import {useAnalytics} from './hooks/useAnalytics';
 import {useLocalePath} from './hooks/useLocalePath';
 import {useSanityThemeContent} from './hooks/useSanityThemeContent';
 import {generateFontsPreloadLinks} from './lib/fonts';
@@ -151,12 +156,12 @@ export async function loader({context, request}: LoaderFunctionArgs) {
 
   return defer(
     {
-      analytics: {
-        shopId: layout.shop.id,
-        shopifySalesChannel: locale.salesChannel,
-      },
       cart: cartPromise,
       collectionListPromise,
+      consent: {
+        checkoutDomain: env.PUBLIC_CHECKOUT_DOMAIN,
+        storefrontAccessToken: env.PUBLIC_STOREFRONT_API_TOKEN,
+      },
       env: {
         /*
          * Be careful not to expose any sensitive environment variables here.
@@ -178,6 +183,10 @@ export async function loader({context, request}: LoaderFunctionArgs) {
       sanityPreviewMode,
       sanityRoot,
       seo,
+      shop: getShopAnalytics({
+        publicStorefrontId: env.PUBLIC_STOREFRONT_ID,
+        storefront: storefront,
+      }),
       ...sanityPreviewPayload({
         context,
         params: queryParams,
@@ -191,9 +200,7 @@ export async function loader({context, request}: LoaderFunctionArgs) {
 export default function App() {
   const nonce = useNonce();
   const {locale} = useRootLoaderData();
-  const hasUserConsent = true;
-
-  useAnalytics(hasUserConsent);
+  const data = useLoaderData<typeof loader>();
 
   return (
     <html lang={locale.language.toLowerCase()}>
@@ -206,9 +213,16 @@ export default function App() {
         <CssVars />
       </head>
       <body className="flex min-h-screen flex-col overflow-x-hidden bg-background text-foreground">
-        <Layout>
-          <Outlet />
-        </Layout>
+        <Analytics.Provider
+          cart={data.cart}
+          consent={data.consent}
+          shop={data.shop}
+        >
+          <Layout>
+            <Outlet />
+          </Layout>
+          <CustomAnalytics />
+        </Analytics.Provider>
         <ScrollRestoration nonce={nonce} />
         <Scripts nonce={nonce} />
         <LiveReload nonce={nonce} />

@@ -1,10 +1,9 @@
-import type {ShopifyAnalyticsProduct} from '@shopify/hydrogen';
 import type {LoaderFunctionArgs, MetaArgs} from '@shopify/remix-oxygen';
 import type {ProductQuery} from 'storefrontapi.generated';
 
 import {useLoaderData} from '@remix-run/react';
 import {
-  AnalyticsPageType,
+  UNSTABLE_Analytics as Analytics,
   getSelectedProductOptions,
   getSeoMeta,
 } from '@shopify/hydrogen';
@@ -86,13 +85,6 @@ export async function loader({context, params, request}: LoaderFunctionArgs) {
     storefront,
   });
 
-  const productAnalytics: ShopifyAnalyticsProduct = {
-    brand: product.vendor,
-    name: product.title,
-    price: product.priceRange.minVariantPrice.amount,
-    productGid: product.id,
-  };
-
   const seo = seoPayload.product({
     product,
     selectedVariant: product.variants.nodes[0],
@@ -100,12 +92,6 @@ export async function loader({context, params, request}: LoaderFunctionArgs) {
   });
 
   return defer({
-    analytics: {
-      pageType: AnalyticsPageType.product,
-      products: [productAnalytics],
-      resourceId: product.id,
-      totalValue: parseFloat(product.priceRange.minVariantPrice.amount),
-    },
     cmsProduct,
     collectionListPromise,
     featuredCollectionPromise,
@@ -126,6 +112,7 @@ export default function Product() {
   const {cmsProduct, product} = useLoaderData<typeof loader>();
   const {data, encodeDataAttribute} = useSanityData({initial: cmsProduct});
   const template = data?.product?.template || data?.defaultProductTemplate;
+  const selectedVariant = product.variants.nodes[0];
 
   return (
     <ProductProvider data={product}>
@@ -138,6 +125,21 @@ export default function Product() {
             key={section._key}
           />
         ))}
+      <Analytics.ProductView
+        data={{
+          products: [
+            {
+              id: product.id,
+              price: selectedVariant?.price.amount || '0',
+              quantity: 1,
+              title: product.title,
+              variantId: selectedVariant?.id || '',
+              variantTitle: selectedVariant?.title || '',
+              vendor: product.vendor,
+            },
+          ],
+        }}
+      />
     </ProductProvider>
   );
 }

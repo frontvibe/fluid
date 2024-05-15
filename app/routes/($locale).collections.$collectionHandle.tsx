@@ -2,8 +2,7 @@ import type {LoaderFunctionArgs, MetaArgs} from '@shopify/remix-oxygen';
 import type {CollectionDetailsQuery} from 'storefrontapi.generated';
 
 import {useLoaderData} from '@remix-run/react';
-import {getSeoMeta} from '@shopify/hydrogen';
-import {AnalyticsPageType} from '@shopify/hydrogen-react';
+import {UNSTABLE_Analytics as Analytics, getSeoMeta} from '@shopify/hydrogen';
 import {defer} from '@shopify/remix-oxygen';
 import {DEFAULT_LOCALE} from 'countries';
 import invariant from 'tiny-invariant';
@@ -68,11 +67,6 @@ export async function loader({context, params, request}: LoaderFunctionArgs) {
   const seo = seoPayload.collection({collection, url: request.url});
 
   return defer({
-    analytics: {
-      collectionHandle,
-      pageType: AnalyticsPageType.collection,
-      resourceId: collection.id,
-    },
     cmsCollection,
     collection,
     collectionListPromise,
@@ -89,18 +83,30 @@ export async function loader({context, params, request}: LoaderFunctionArgs) {
 }
 
 export default function Collection() {
-  const {cmsCollection} = useLoaderData<typeof loader>();
+  const {cmsCollection, collection} = useLoaderData<typeof loader>();
   const {data, encodeDataAttribute} = useSanityData({initial: cmsCollection});
   const template =
     data?.collection?.template || data?.defaultCollectionTemplate;
 
-  return template?.sections && template.sections.length > 0
-    ? template.sections.map((section) => (
-        <CmsSection
-          data={section}
-          encodeDataAttribute={encodeDataAttribute}
-          key={section._key}
-        />
-      ))
-    : null;
+  return (
+    <>
+      {template?.sections && template.sections.length > 0
+        ? template.sections.map((section) => (
+            <CmsSection
+              data={section}
+              encodeDataAttribute={encodeDataAttribute}
+              key={section._key}
+            />
+          ))
+        : null}
+      <Analytics.CollectionView
+        data={{
+          collection: {
+            handle: collection.handle,
+            id: collection.id,
+          },
+        }}
+      />
+    </>
+  );
 }

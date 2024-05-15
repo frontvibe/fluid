@@ -1,7 +1,7 @@
 import type {LoaderFunctionArgs, MetaArgs} from '@shopify/remix-oxygen';
 
 import {useLoaderData} from '@remix-run/react';
-import {AnalyticsPageType, getSeoMeta} from '@shopify/hydrogen';
+import {getSeoMeta} from '@shopify/hydrogen';
 import {defer} from '@shopify/remix-oxygen';
 import {DEFAULT_LOCALE} from 'countries';
 
@@ -61,10 +61,6 @@ export async function loader({context, params, request}: LoaderFunctionArgs) {
   });
 
   return defer({
-    analytics: {
-      pageType:
-        handle === 'home' ? AnalyticsPageType.home : AnalyticsPageType.page,
-    },
     collectionListPromise,
     featuredCollectionPromise,
     featuredProductPromise,

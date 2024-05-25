@@ -9,16 +9,7 @@ import type {
   ShopPolicy,
 } from '@shopify/hydrogen/storefront-api-types';
 import type {InferType, TypeFromSelection} from 'groqd';
-import type {
-  BreadcrumbList,
-  CollectionPage,
-  Offer,
-  Organization,
-  Article as SeoArticle,
-  Blog as SeoBlog,
-  Product as SeoProduct,
-  WebPage,
-} from 'schema-dts';
+import type {BreadcrumbList, CollectionPage, Offer} from 'schema-dts';
 
 import {vercelStegaCleanAll} from '@sanity/client/stega';
 import {type SeoConfig} from '@shopify/hydrogen';

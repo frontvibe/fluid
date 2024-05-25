@@ -5,7 +5,6 @@ import {useLoaderData} from '@remix-run/react';
 import {
   UNSTABLE_Analytics as Analytics,
   getSelectedProductOptions,
-  getSeoMeta,
 } from '@shopify/hydrogen';
 import {ProductProvider} from '@shopify/hydrogen-react';
 import {defer} from '@shopify/remix-oxygen';
@@ -17,11 +16,12 @@ import {PRODUCT_QUERY, VARIANTS_QUERY} from '~/graphql/queries';
 import {useSanityData} from '~/hooks/useSanityData';
 import {resolveShopifyPromises} from '~/lib/resolveShopifyPromises';
 import {sanityPreviewPayload} from '~/lib/sanity/sanity.payload.server';
+import {getSeoMetaFromMatches} from '~/lib/seo';
 import {seoPayload} from '~/lib/seo.server';
 import {PRODUCT_QUERY as CMS_PRODUCT_QUERY} from '~/qroq/queries';
 
 export const meta = ({matches}: MetaArgs<typeof loader>) => {
-  return getSeoMeta(...matches.map((match) => (match.data as any).seo));
+  return getSeoMetaFromMatches(matches);
 };
 
 export async function loader({context, params, request}: LoaderFunctionArgs) {

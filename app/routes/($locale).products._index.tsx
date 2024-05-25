@@ -1,22 +1,19 @@
 import type {LoaderFunctionArgs, MetaArgs} from '@shopify/remix-oxygen';
 
 import {useLoaderData} from '@remix-run/react';
-import {
-  flattenConnection,
-  getPaginationVariables,
-  getSeoMeta,
-} from '@shopify/hydrogen';
+import {flattenConnection, getPaginationVariables} from '@shopify/hydrogen';
 import {json} from '@shopify/remix-oxygen';
 
 import {ProductCardGrid} from '~/components/product/ProductCardGrid';
 import {ALL_PRODUCTS_QUERY} from '~/graphql/queries';
 import {useSanityRoot} from '~/hooks/useSanityRoot';
+import {getSeoMetaFromMatches} from '~/lib/seo';
 import {seoPayload} from '~/lib/seo.server';
 
 const PAGE_BY = 9;
 
 export const meta = ({matches}: MetaArgs<typeof loader>) => {
-  return getSeoMeta(...matches.map((match) => (match.data as any).seo));
+  return getSeoMetaFromMatches(matches);
 };
 
 export async function loader({

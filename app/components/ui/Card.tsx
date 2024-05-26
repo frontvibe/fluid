@@ -30,9 +30,9 @@ CardHeader.displayName = 'CardHeader';
 
 const CardMedia = forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement> & {
+  {
     aspectRatio?: 'auto' | 'square' | 'video';
-  }
+  } & React.HTMLAttributes<HTMLDivElement>
 >(({aspectRatio = 'video', className, ...props}, ref) => {
   const ratios = {
     auto: 'aspect-none',

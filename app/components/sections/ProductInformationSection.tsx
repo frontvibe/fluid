@@ -2,7 +2,7 @@ import type {TypeFromSelection} from 'groqd';
 import type {ProductVariantFragmentFragment} from 'storefrontapi.generated';
 
 import {Await, useLoaderData} from '@remix-run/react';
-import {vercelStegaCleanAll} from '@sanity/client/stega';
+import {stegaClean} from '@sanity/client/stega';
 import {flattenConnection} from '@shopify/hydrogen-react';
 import {Suspense, createContext, useContext} from 'react';
 
@@ -25,9 +25,9 @@ type ProductVariantsContextType = {
 };
 
 export function ProductInformationSection(
-  props: SectionDefaultProps & {
+  props: {
     data: ProductInformationSectionProps;
-  },
+  } & SectionDefaultProps,
 ) {
   const loaderData = useLoaderData<typeof loader>();
   const {data} = props;
@@ -41,7 +41,7 @@ export function ProductInformationSection(
           fallback={
             <Skeleton>
               <ProductInformationGrid
-                data={vercelStegaCleanAll(data)}
+                data={stegaClean(data)}
                 mediaGallery={<MediaGallery aspectRatio={aspectRatio} />}
                 productDetails={<ProductDetails data={data} />}
               />
@@ -52,7 +52,7 @@ export function ProductInformationSection(
             errorElement={
               <Skeleton isError>
                 <ProductInformationGrid
-                  data={vercelStegaCleanAll(data)}
+                  data={stegaClean(data)}
                   mediaGallery={<MediaGallery aspectRatio={aspectRatio} />}
                   productDetails={<ProductDetails data={data} />}
                 />
@@ -68,7 +68,7 @@ export function ProductInformationSection(
               return (
                 <ProductVariantsContext.Provider value={{variants}}>
                   <ProductInformationGrid
-                    data={vercelStegaCleanAll(data)}
+                    data={stegaClean(data)}
                     mediaGallery={<MediaGallery aspectRatio={aspectRatio} />}
                     productDetails={<ProductDetails data={data} />}
                   />
@@ -83,7 +83,7 @@ export function ProductInformationSection(
 
   return (
     <ProductInformationGrid
-      data={vercelStegaCleanAll(data)}
+      data={stegaClean(data)}
       mediaGallery={<MediaGallery aspectRatio={aspectRatio} />}
       productDetails={<ProductDetails data={data} />}
     />

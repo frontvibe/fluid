@@ -1,7 +1,7 @@
 import type {TypeFromSelection} from 'groqd';
 import type {ProductVariantFragmentFragment} from 'storefrontapi.generated';
 
-import {vercelStegaCleanAll} from '@sanity/client/stega';
+import {stegaClean} from '@sanity/client/stega';
 import {flattenConnection} from '@shopify/hydrogen';
 import {useProduct} from '@shopify/hydrogen-react';
 
@@ -65,7 +65,7 @@ export function ProductBadges({
     selectedVariant?.compareAtPrice?.amount &&
     parseFloat(selectedVariant?.price?.amount) <
       parseFloat(selectedVariant?.compareAtPrice?.amount);
-  const badgesPosition = vercelStegaCleanAll(data?.settings?.badgesPosition);
+  const badgesPosition = stegaClean(data?.settings?.badgesPosition);
 
   const badgeClass = cn(
     'bg-background text-foreground hover:bg-background rounded-[--badges-corner-radius]',

@@ -2,7 +2,7 @@ import type {SelectedOption} from '@shopify/hydrogen/storefront-api-types';
 import type {ClassValue} from 'class-variance-authority/types';
 
 import {useLocation} from '@remix-run/react';
-import {vercelStegaCleanAll} from '@sanity/client/stega';
+import {stegaClean} from '@sanity/client/stega';
 import {cx} from 'class-variance-authority';
 import {useMemo} from 'react';
 import {twMerge} from 'tailwind-merge';
@@ -97,7 +97,7 @@ export type AspectRatioData = ReturnType<typeof getAspectRatioData>;
 export const getAspectRatioData = (
   aspectRatio: (typeof aspectRatioValues)[number] | null,
 ) => {
-  const cleanAspectRatio = vercelStegaCleanAll(aspectRatio);
+  const cleanAspectRatio = stegaClean(aspectRatio);
   return cleanAspectRatio === 'video'
     ? ({
         className: 'aspect-video',

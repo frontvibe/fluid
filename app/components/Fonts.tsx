@@ -1,6 +1,6 @@
 import type {InferType} from 'groqd';
 
-import {vercelStegaCleanAll} from '@sanity/client/stega';
+import {stegaClean} from '@sanity/client/stega';
 
 import type {FONT_CATEGORY_FRAGMENT} from '~/qroq/fragments';
 import type {FONTS_QUERY} from '~/qroq/queries';
@@ -15,7 +15,7 @@ const defaultFontFamily =
 
 export function Fonts() {
   const {data} = useSanityRoot();
-  const fontsData = vercelStegaCleanAll(data?.fonts);
+  const fontsData = stegaClean(data?.fonts);
 
   if (!fontsData) {
     return null;

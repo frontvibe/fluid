@@ -4,7 +4,7 @@ import type {FeaturedProductQuery} from 'storefrontapi.generated';
 import type {PartialObjectDeep} from 'type-fest/source/partial-deep';
 
 import {Await, useLoaderData} from '@remix-run/react';
-import {vercelStegaCleanAll} from '@sanity/client/stega';
+import {stegaClean} from '@sanity/client/stega';
 import {flattenConnection} from '@shopify/hydrogen';
 import {ProductProvider} from '@shopify/hydrogen-react';
 import {Suspense} from 'react';
@@ -37,7 +37,7 @@ export type FeaturedProductSectionProps = TypeFromSelection<
  * component and to display a `Skeleton` while waiting for the data to be available.
  */
 export function FeaturedProductSection(
-  props: SectionDefaultProps & {data: FeaturedProductSectionProps},
+  props: {data: FeaturedProductSectionProps} & SectionDefaultProps,
 ) {
   const aspectRatio = getAspectRatioData(props.data.mediaAspectRatio);
   return (
@@ -119,7 +119,7 @@ function FeaturedProductSkeleton({
   isError?: true;
 }) {
   const {locale} = useRootLoaderData();
-  const sanityProduct = vercelStegaCleanAll(data.product?.store);
+  const sanityProduct = stegaClean(data.product?.store);
   const variants: PartialObjectDeep<
     ProductVariantConnection,
     {recurseIntoArrays: true}

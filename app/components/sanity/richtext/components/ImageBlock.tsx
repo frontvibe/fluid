@@ -1,6 +1,6 @@
 import type {TypeFromSelection} from 'groqd';
 
-import {vercelStegaCleanAll} from '@sanity/client/stega';
+import {stegaClean} from '@sanity/client/stega';
 import {cva} from 'class-variance-authority';
 
 import type {IMAGE_BLOCK_FRAGMENT} from '~/qroq/blocks';
@@ -10,9 +10,9 @@ import {SanityImage} from '../../SanityImage';
 export type ImageBlockProps = TypeFromSelection<typeof IMAGE_BLOCK_FRAGMENT>;
 
 export function ImageBlock(
-  props: ImageBlockProps & {
+  props: {
     containerMaxWidth?: null | number;
-  },
+  } & ImageBlockProps,
 ) {
   const maxWidth =
     props.containerMaxWidth &&
@@ -24,9 +24,7 @@ export function ImageBlock(
     '--maxWidth': maxWidth ? `${maxWidth}px` : 'auto',
   } as React.CSSProperties;
   const sizes = maxWidth ? `(min-width: 1024px) ${maxWidth}px, 100vw` : '100vw';
-  const alignment = props.alignment
-    ? vercelStegaCleanAll(props.alignment)
-    : 'center';
+  const alignment = props.alignment ? stegaClean(props.alignment) : 'center';
 
   const alignmentVariants = cva('w-[var(--maxWidth)] max-w-full h-auto', {
     variants: {

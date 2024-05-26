@@ -1,7 +1,7 @@
 import type {ProductCardFragment} from 'storefrontapi.generated';
 
 import {Link} from '@remix-run/react';
-import {vercelStegaCleanAll} from '@sanity/client/stega';
+import {stegaClean} from '@sanity/client/stega';
 import {flattenConnection} from '@shopify/hydrogen';
 import {cx} from 'class-variance-authority';
 
@@ -26,7 +26,7 @@ export function ProductCard(props: {
   };
 }) {
   const {columns, product, skeleton} = props;
-  const {data} = vercelStegaCleanAll(useSanityRoot());
+  const {data} = stegaClean(useSanityRoot());
   const style = data?.settings?.productCards?.style;
   const textAlignment = data?.settings?.productCards?.textAlignment || 'left';
   const aspectRatio = data?.settings?.productCards?.imageAspectRatio || 'video';

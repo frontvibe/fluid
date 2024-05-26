@@ -1,4 +1,6 @@
 // Virtual entry point for the app
+import type {AppLoadContext} from '@shopify/remix-oxygen';
+
 import * as remixBuild from '@remix-run/dev/server-build';
 import {
   cartGetIdDefault,
@@ -7,7 +9,6 @@ import {
   createStorefrontClient,
   storefrontRedirect,
 } from '@shopify/hydrogen';
-import type {AppLoadContext} from '@shopify/remix-oxygen';
 import {
   createRequestHandler,
   getStorefrontHeaders,

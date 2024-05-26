@@ -22,7 +22,7 @@ import {
 type CarouselSectionProps = TypeFromSelection<typeof CAROUSEL_SECTION_FRAGMENT>;
 
 export function CarouselSection(
-  props: SectionDefaultProps & {data: CarouselSectionProps},
+  props: {data: CarouselSectionProps} & SectionDefaultProps,
 ) {
   const {data} = props;
   const {arrows, autoplay, loop, pagination, slides, title} = data;

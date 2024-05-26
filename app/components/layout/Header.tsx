@@ -2,7 +2,7 @@ import type {Variants} from 'framer-motion';
 import type {CSSProperties} from 'react';
 
 import {Link, useLocation} from '@remix-run/react';
-import {vercelStegaCleanAll} from '@sanity/client/stega';
+import {stegaClean} from '@sanity/client/stega';
 import {cx} from 'class-variance-authority';
 import {m, transform, useMotionValueEvent, useTransform} from 'framer-motion';
 import React, {useEffect, useState} from 'react';
@@ -63,7 +63,7 @@ function HeaderWrapper(props: {children: React.ReactNode}) {
   const header = data?.header;
   const showSeparatorLine = header?.showSeparatorLine;
   const blur = header?.blur;
-  const sticky = vercelStegaCleanAll(header?.sticky);
+  const sticky = stegaClean(header?.sticky);
 
   const headerClassName = cx([
     'section-padding bg-background text-foreground',

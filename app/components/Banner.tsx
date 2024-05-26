@@ -1,4 +1,4 @@
-import {vercelStegaCleanAll} from '@sanity/client/stega';
+import {stegaClean} from '@sanity/client/stega';
 import {forwardRef} from 'react';
 
 import type {
@@ -15,9 +15,9 @@ import {
 
 const Banner = forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement> & {
+  {
     height: null | number;
-  }
+  } & React.HTMLAttributes<HTMLDivElement>
 >(({className, height, ...props}, ref) => {
   const bannerHeight = `${height}px` || '200px';
   return (
@@ -53,9 +53,9 @@ BannerMedia.displayName = 'BannerMedia';
 
 const BannerMediaOverlay = forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement> & {
+  {
     opacity?: null | number;
-  }
+  } & React.HTMLAttributes<HTMLDivElement>
 >(({className, opacity, ...props}, ref) => {
   const style = {
     '--tw-bg-opacity': opacity ? opacity / 100 : 0,
@@ -77,14 +77,14 @@ BannerMediaOverlay.displayName = 'BannerMediaOverlay';
 
 const BannerContent = forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement> & {
+  {
     contentAlignment: (typeof contentAlignmentValues)[number] | null;
     contentPosition: (typeof contentPositionValues)[number] | null;
-  }
+  } & React.HTMLAttributes<HTMLDivElement>
 >(({className, contentAlignment, contentPosition, ...props}, ref) => {
   // Remove all stega encoded data
-  const cleanContentPosition = vercelStegaCleanAll(contentPosition);
-  const cleanContentAlignement = vercelStegaCleanAll(contentAlignment);
+  const cleanContentPosition = stegaClean(contentPosition);
+  const cleanContentAlignement = stegaClean(contentAlignment);
 
   return (
     <div

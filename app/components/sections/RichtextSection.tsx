@@ -22,7 +22,7 @@ import {InternalLinkAnnotation} from '../sanity/richtext/components/InternalLink
 type RichtextSectionProps = TypeFromSelection<typeof RICHTEXT_SECTION_FRAGMENT>;
 
 export function RichtextSection(
-  props: SectionDefaultProps & {data: RichtextSectionProps},
+  props: {data: RichtextSectionProps} & SectionDefaultProps,
 ) {
   const {data} = props;
   const containerMaxWidth = data.maxWidth;

@@ -2,7 +2,7 @@ import type {LinkProps} from '@remix-run/react';
 import type {TypeFromSelection} from 'groqd';
 
 import {Link} from '@remix-run/react';
-import {vercelStegaCleanAll} from '@sanity/client/stega';
+import {stegaClean} from '@sanity/client/stega';
 
 import type {INTERNAL_LINK_FRAGMENT} from '~/qroq/links';
 
@@ -46,7 +46,7 @@ export function SanityInternalLink(props: {
   };
 
   // Remove encode stega data from url
-  const url = vercelStegaCleanAll(`${path()}${anchor}`);
+  const url = stegaClean(`${path()}${anchor}`);
 
   // Todo: add Navlink support
   return (

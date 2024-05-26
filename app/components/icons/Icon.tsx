@@ -1,9 +1,9 @@
 import {cx} from 'class-variance-authority';
 import {twMerge} from 'tailwind-merge';
 
-export type IconProps = JSX.IntrinsicElements['svg'] & {
+export type IconProps = {
   direction?: 'down' | 'left' | 'right' | 'up';
-};
+} & JSX.IntrinsicElements['svg'];
 
 export function Icon({
   children,

@@ -22,9 +22,9 @@ export function QuantitySelector(props: {children: React.ReactNode}) {
 
 const QuantityButton = forwardRef<
   HTMLButtonElement,
-  ButtonProps & {
+  {
     symbol: 'decrease' | 'increase';
-  }
+  } & ButtonProps
 >(({className, symbol, variant, ...props}, ref) => {
   return (
     <IconButton

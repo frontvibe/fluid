@@ -1,4 +1,4 @@
-import {vercelStegaCleanAll} from '@sanity/client/stega';
+import {stegaClean} from '@sanity/client/stega';
 import {cx} from 'class-variance-authority';
 
 import type {contentAlignmentValues} from '~/qroq/sections';
@@ -17,10 +17,8 @@ export function RichtextLayout(props: {
     '--maxWidth': props.maxWidth ? `${props.maxWidth}px` : 'auto',
   } as React.CSSProperties;
 
-  const cleanContentAlignement = vercelStegaCleanAll(props.contentAligment);
-  const cleanContentPosition = vercelStegaCleanAll(
-    props.desktopContentPosition,
-  );
+  const cleanContentAlignement = stegaClean(props.contentAligment);
+  const cleanContentPosition = stegaClean(props.desktopContentPosition);
 
   return (
     <div

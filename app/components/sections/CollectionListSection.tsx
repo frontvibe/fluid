@@ -23,7 +23,7 @@ type CollectionListSectionProps = TypeFromSelection<
  * component and to display a `Skeleton` while waiting for the data to be available.
  */
 export function CollectionListSection(
-  props: SectionDefaultProps & {data: CollectionListSectionProps},
+  props: {data: CollectionListSectionProps} & SectionDefaultProps,
 ) {
   return (
     <AwaitCollectionList

@@ -16,7 +16,7 @@ export type RelatedProductsSectionProps = TypeFromSelection<
 >;
 
 export function RelatedProductsSection(
-  props: SectionDefaultProps & {data: RelatedProductsSectionProps},
+  props: {data: RelatedProductsSectionProps} & SectionDefaultProps,
 ) {
   const {data} = props;
   const loaderData = useLoaderData<typeof loader>();

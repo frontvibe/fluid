@@ -1,7 +1,7 @@
 import type {MoneyV2} from '@shopify/hydrogen/storefront-api-types';
 import type {PartialObjectDeep} from 'type-fest/source/partial-deep';
 
-import {vercelStegaCleanAll} from '@sanity/client/stega';
+import {stegaClean} from '@sanity/client/stega';
 import {Money} from '@shopify/hydrogen';
 
 import {useSanityRoot} from '~/hooks/useSanityRoot';
@@ -25,7 +25,7 @@ export function ShopifyMoney({
   const key = setShowTrailingZeroKeyValue(locale);
   const showCurrencyCodes = sanityRootData?.settings?.showCurrencyCodes;
   const showTrailingZeros = sanityRootData?.settings?.showTrailingZeros?.find(
-    (k) => vercelStegaCleanAll(k) === key,
+    (k) => stegaClean(k) === key,
   );
 
   return (

@@ -24,7 +24,7 @@ type ImageBannerSectionProps = TypeFromSelection<
 >;
 
 export function ImageBannerSection(
-  props: SectionDefaultProps & {data: ImageBannerSectionProps},
+  props: {data: ImageBannerSectionProps} & SectionDefaultProps,
 ) {
   const {data} = props;
   const {contentAlignment, contentPosition, overlayOpacity} = data;

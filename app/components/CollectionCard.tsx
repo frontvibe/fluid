@@ -1,7 +1,7 @@
 import type {CollectionsQuery} from 'storefrontapi.generated';
 
 import {Link} from '@remix-run/react';
-import {vercelStegaCleanAll} from '@sanity/client/stega';
+import {stegaClean} from '@sanity/client/stega';
 import {cx} from 'class-variance-authority';
 
 import {useLocalePath} from '~/hooks/useLocalePath';
@@ -22,7 +22,7 @@ export function CollectionCard(props: {
 }) {
   const {collection, skeleton} = props;
   const sanityRoot = useSanityRoot();
-  const {data} = vercelStegaCleanAll(sanityRoot);
+  const {data} = stegaClean(sanityRoot);
   const style = data?.settings?.collectionCards?.style;
   const textAlignment =
     data?.settings?.collectionCards?.textAlignment || 'left';

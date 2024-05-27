@@ -212,8 +212,8 @@ devDependencies:
     specifier: ^1.0.7
     version: 1.0.7(tailwindcss@3.4.3)
   type-fest:
-    specifier: ^4.18.2
-    version: 4.18.2
+    specifier: ^4.18.3
+    version: 4.18.3
   typescript:
     specifier: ^5.4.5
     version: 5.4.5
@@ -4772,7 +4772,7 @@ packages:
       '@graphql-codegen/typescript': 4.0.6(graphql@16.8.1)
       '@graphql-codegen/typescript-operations': 4.2.0(graphql@16.8.1)
       graphql: 16.8.1
-      type-fest: 4.18.2
+      type-fest: 4.18.3
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -4799,7 +4799,7 @@ packages:
       graphql: 16.8.1
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
-      type-fest: 4.18.2
+      type-fest: 4.18.3
       worktop: 0.7.3
     transitivePeerDependencies:
       - '@types/react'
@@ -4824,7 +4824,7 @@ packages:
       react: 18.3.1
       source-map-support: 0.5.21
       tiny-invariant: 1.3.3
-      type-fest: 4.18.2
+      type-fest: 4.18.3
       use-resize-observer: 9.1.0(react-dom@18.3.1)(react@18.3.1)
     transitivePeerDependencies:
       - '@types/react'
@@ -13429,8 +13429,8 @@ packages:
     engines: {node: '>=14.16'}
     dev: false
 
-  /type-fest@4.18.2:
-    resolution: {integrity: sha512-+suCYpfJLAe4OXS6+PPXjW3urOS4IoP9waSiLuXfLgqZODKw/aWwASvzqE886wA0kQgGy0mIWyhd87VpqIy6Xg==}
+  /type-fest@4.18.3:
+    resolution: {integrity: sha512-Q08/0IrpvM+NMY9PA2rti9Jb+JejTddwmwmVQGskAlhtcrw1wsRzoR6ode6mR+OAabNa75w/dxedSUY2mlphaQ==}
     engines: {node: '>=16'}
 
   /type-is@1.6.18:

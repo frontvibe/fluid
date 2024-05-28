@@ -51,14 +51,14 @@ dependencies:
     specifier: ^6.18.3
     version: 6.18.3
   '@sanity/core-loader':
-    specifier: ^1.6.14
-    version: 1.6.14(@sanity/client@6.18.3)
+    specifier: ^1.6.15
+    version: 1.6.15(@sanity/client@6.18.3)
   '@sanity/image-url':
     specifier: ^1.0.2
     version: 1.0.2
   '@sanity/react-loader':
-    specifier: ^1.9.19
-    version: 1.9.19(@sanity/client@6.18.3)(react@18.3.1)
+    specifier: ^1.9.20
+    version: 1.9.20(@sanity/client@6.18.3)(react@18.3.1)
   '@sanity/visual-editing':
     specifier: ^1.8.21
     version: 1.8.21(@remix-run/react@2.9.2)(@sanity/client@6.18.3)
@@ -4438,11 +4438,11 @@ packages:
       - debug
     dev: false
 
-  /@sanity/core-loader@1.6.14(@sanity/client@6.18.3):
-    resolution: {integrity: sha512-gjTcwGpMjwsexylrdfMTJ4A2ipcLgt3RE55/C6O9ICdd7F+X4folIF91OMUWPUnWpll6mnadSEGceNllR3vA0g==}
+  /@sanity/core-loader@1.6.15(@sanity/client@6.18.3):
+    resolution: {integrity: sha512-PSdJfP+QZYSAZzJ/AliYlrpZiTAeHBQXVBMHpStYOb1JIJE2CAlU9ReanTZPN/iaUbtD7shEUAPa9N5h/LVpiQ==}
     engines: {node: '>=18'}
     peerDependencies:
-      '@sanity/client': ^6.18.2
+      '@sanity/client': ^6.18.3
     dependencies:
       '@sanity/client': 6.18.3
     dev: false
@@ -4471,15 +4471,15 @@ packages:
       '@sanity/uuid': 3.0.2
     dev: false
 
-  /@sanity/react-loader@1.9.19(@sanity/client@6.18.3)(react@18.3.1):
-    resolution: {integrity: sha512-ZbB0uU+WPzmnDCRghKMEmE3WURQZPd2Sx+rXz7EkUt6YlyEqOaHuW+uebeEvRijzON7qllBIDHf3EcIgrFcr1A==}
+  /@sanity/react-loader@1.9.20(@sanity/client@6.18.3)(react@18.3.1):
+    resolution: {integrity: sha512-Lmu2750i3Xszsbst4V4WFVnwgqCoVdO1XUnmjNPX1Jj8GJa+u8BSPTAtiB/ztNZTcodKGibbt71+JCQ26eUbkg==}
     engines: {node: '>=18'}
     peerDependencies:
-      '@sanity/client': ^6.18.2
+      '@sanity/client': ^6.18.3
       react: ^18.2.0
     dependencies:
       '@sanity/client': 6.18.3
-      '@sanity/core-loader': 1.6.14(@sanity/client@6.18.3)
+      '@sanity/core-loader': 1.6.15(@sanity/client@6.18.3)
       react: 18.3.1
     dev: false
 

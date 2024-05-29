@@ -60,8 +60,8 @@ dependencies:
     specifier: ^1.9.19
     version: 1.9.19(@sanity/client@6.18.3)(react@18.3.1)
   '@sanity/visual-editing':
-    specifier: ^1.8.21
-    version: 1.8.21(@remix-run/react@2.9.2)(@sanity/client@6.18.3)
+    specifier: ^2.1.1
+    version: 2.1.1(@remix-run/react@2.9.2)(@sanity/client@6.18.3)(react-dom@18.3.1)(react@18.3.1)
   '@shopify/cli':
     specifier: 3.53.1
     version: 3.53.1(@types/node@20.12.12)(@types/react@18.3.3)(typescript@5.4.5)(zod@3.23.8)
@@ -4461,11 +4461,11 @@ packages:
     engines: {node: '>=10.0.0'}
     dev: false
 
-  /@sanity/preview-url-secret@1.6.13(@sanity/client@6.18.3):
-    resolution: {integrity: sha512-3ZAadWN0bKtoa5A0ZDTerjaBRbxUNpIWWKEl/FF5s6rH84+Hx5ugtqVt0hjzK8SnWwHiq5KQsPuB8T+lqFomGA==}
+  /@sanity/preview-url-secret@1.6.15(@sanity/client@6.18.3):
+    resolution: {integrity: sha512-ccq6B2m1OYb3x1nFWLFQGpzMwA68M2qvWXwrXHqSoRXaDnT7gDXqi3gbaYgEdXMNuqnHCFnecK4cOZNY2QqVuQ==}
     engines: {node: '>=18'}
     peerDependencies:
-      '@sanity/client': ^6.18.2
+      '@sanity/client': ^6.19.0
     dependencies:
       '@sanity/client': 6.18.3
       '@sanity/uuid': 3.0.2
@@ -4490,14 +4490,16 @@ packages:
       uuid: 8.3.2
     dev: false
 
-  /@sanity/visual-editing@1.8.21(@remix-run/react@2.9.2)(@sanity/client@6.18.3):
-    resolution: {integrity: sha512-tX+BMRR6pCEnKItst8DlB5VAgV36vHNM8gM77ItyJCdV6HQNU9YSqiHlxtHb+duQYP41PvEk79/okBPu0pNexQ==}
+  /@sanity/visual-editing@2.1.1(@remix-run/react@2.9.2)(@sanity/client@6.18.3)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-d0lBD8n1KzqBv243Amk15SjRjrgOEohyNJck6wRZbGkZQdDH9CU7CzejNGGzOD9Y3sGUtEt+Yc/6F1xu6ELsYw==}
     engines: {node: '>=18'}
     peerDependencies:
       '@remix-run/react': '>= 2'
-      '@sanity/client': ^6.18.2
+      '@sanity/client': ^6.19.0
       '@sveltejs/kit': '>= 2'
       next: '>= 13 || >=14.3.0-canary.0 <14.3.0'
+      react: ^18.3 || >=19.0.0-rc
+      react-dom: ^18.3 || >=19.0.0-rc
       svelte: '>= 4'
     peerDependenciesMeta:
       '@remix-run/react':
@@ -4513,11 +4515,10 @@ packages:
     dependencies:
       '@remix-run/react': 2.9.2(react-dom@18.3.1)(react@18.3.1)(typescript@5.4.5)
       '@sanity/client': 6.18.3
-      '@sanity/preview-url-secret': 1.6.13(@sanity/client@6.18.3)
+      '@sanity/preview-url-secret': 1.6.15(@sanity/client@6.18.3)
       '@vercel/stega': 0.1.2
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
-      react-is: 18.3.1
       scroll-into-view-if-needed: 3.1.0
       valibot: 0.30.0
     dev: false
@@ -11983,10 +11984,6 @@ packages:
   /react-is@17.0.2:
     resolution: {integrity: sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==}
     dev: true
-
-  /react-is@18.3.1:
-    resolution: {integrity: sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==}
-    dev: false
 
   /react-reconciler@0.29.2(react@18.2.0):
     resolution: {integrity: sha512-zZQqIiYgDCTP/f1N/mAR10nJGrPD2ZR+jDSEsKWJHYC7Cm2wodlwbR3upZRdC3cjIjSlTLNVyO7Iu0Yy7t2AYg==}

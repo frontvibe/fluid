@@ -17,7 +17,7 @@
     "deploy:studio": "cd ./studio && run-s deploy"
   },
   "dependencies": {
-    "@portabletext/react": "^3.0.18",
+    "@portabletext/react": "^3.1.0",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-checkbox": "^1.0.4",
     "@radix-ui/react-dialog": "^1.0.5",
@@ -31,10 +31,10 @@
     "@radix-ui/react-select": "^2.0.0",
     "@radix-ui/react-slot": "^1.0.2",
     "@remix-run/react": "2.9.2",
-    "@sanity/client": "^6.18.3",
-    "@sanity/core-loader": "^1.6.14",
+    "@sanity/client": "^6.19.0",
+    "@sanity/core-loader": "^1.6.16",
     "@sanity/image-url": "^1.0.2",
-    "@sanity/react-loader": "^1.9.19",
+    "@sanity/react-loader": "^1.9.21",
     "@sanity/visual-editing": "^1.8.21",
     "@shopify/cli": "3.53.1",
     "@shopify/cli-hydrogen": "^8.0.4",

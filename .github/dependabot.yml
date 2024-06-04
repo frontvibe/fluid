@@ -6,6 +6,8 @@ updates:
       interval: 'daily'
       time: '05:30'
       timezone: 'America/New_York'
+    reviewers:
+      - 'frontvibe/maintainers'
     groups:
       patch-minor:
         applies-to: version-updates

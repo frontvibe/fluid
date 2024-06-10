@@ -2,7 +2,7 @@ import type {LoaderFunctionArgs, MetaArgs} from '@shopify/remix-oxygen';
 import type {CollectionDetailsQuery} from 'storefrontapi.generated';
 
 import {useLoaderData} from '@remix-run/react';
-import {UNSTABLE_Analytics as Analytics} from '@shopify/hydrogen';
+import {Analytics} from '@shopify/hydrogen';
 import {defer} from '@shopify/remix-oxygen';
 import {DEFAULT_LOCALE} from 'countries';
 import invariant from 'tiny-invariant';

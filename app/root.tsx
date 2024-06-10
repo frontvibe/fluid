@@ -20,11 +20,7 @@ import {
   useNavigate,
   useRouteError,
 } from '@remix-run/react';
-import {
-  UNSTABLE_Analytics as Analytics,
-  getShopAnalytics,
-  useNonce,
-} from '@shopify/hydrogen';
+import {Analytics, getShopAnalytics, useNonce} from '@shopify/hydrogen';
 import {defer} from '@shopify/remix-oxygen';
 import {DEFAULT_LOCALE} from 'countries';
 

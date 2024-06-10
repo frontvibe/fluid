@@ -6,7 +6,7 @@ import type {
 import type {CartApiQueryFragment} from 'storefrontapi.generated';
 
 import {useLoaderData} from '@remix-run/react';
-import {UNSTABLE_Analytics as Analytics, CartForm} from '@shopify/hydrogen';
+import {Analytics, CartForm} from '@shopify/hydrogen';
 import {json, redirectDocument} from '@shopify/remix-oxygen';
 import invariant from 'tiny-invariant';
 

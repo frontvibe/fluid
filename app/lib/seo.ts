@@ -10,11 +10,16 @@ type MatchData =
   | undefined;
 
 export function getSeoMetaFromMatches(matches: MetaArgs['matches']) {
+  const meta = [];
+  for (const match of matches) {
+    if (typeof match.meta !== 'undefined') {
+      meta.push(match.meta);
+    }
+  }
   const seoData = [
     ...matches
       .filter((match) => typeof (match.data as MatchData)?.seo !== 'undefined')
       .map((match) => (match.data as MatchData)?.seo),
   ];
-
-  return getSeoMeta(...seoData);
+  return [...meta, getSeoMeta(...seoData)];
 }

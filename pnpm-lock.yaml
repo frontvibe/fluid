@@ -48,20 +48,20 @@ dependencies:
     specifier: 2.9.2
     version: 2.9.2(react-dom@18.3.1)(react@18.3.1)(typescript@5.4.5)
   '@sanity/client':
-    specifier: ^6.19.1
-    version: 6.19.1
+    specifier: ^6.20.0
+    version: 6.20.0
   '@sanity/core-loader':
     specifier: ^1.6.18
-    version: 1.6.18(@sanity/client@6.19.1)
+    version: 1.6.18(@sanity/client@6.20.0)
   '@sanity/image-url':
     specifier: ^1.0.2
     version: 1.0.2
   '@sanity/react-loader':
     specifier: ^1.10.2
-    version: 1.10.2(@sanity/client@6.19.1)(react@18.3.1)
+    version: 1.10.2(@sanity/client@6.20.0)(react@18.3.1)
   '@sanity/visual-editing':
     specifier: ^2.1.4
-    version: 2.1.4(@remix-run/react@2.9.2)(@sanity/client@6.19.1)(react-dom@18.3.1)(react@18.3.1)
+    version: 2.1.4(@remix-run/react@2.9.2)(@sanity/client@6.20.0)(react-dom@18.3.1)(react@18.3.1)
   '@shopify/cli':
     specifier: 3.53.1
     version: 3.53.1(@types/node@20.14.2)(@types/react@18.3.3)(typescript@5.4.5)(zod@3.23.8)
@@ -93,14 +93,14 @@ dependencies:
     specifier: ^2.0.3
     version: 2.0.3
   embla-carousel:
-    specifier: 8.1.3
-    version: 8.1.3
+    specifier: 8.1.4
+    version: 8.1.4
   embla-carousel-autoplay:
-    specifier: 8.1.3
-    version: 8.1.3(embla-carousel@8.1.3)
+    specifier: 8.1.4
+    version: 8.1.4(embla-carousel@8.1.4)
   embla-carousel-react:
-    specifier: 8.1.3
-    version: 8.1.3(react@18.3.1)
+    specifier: 8.1.4
+    version: 8.1.4(react@18.3.1)
   framer-motion:
     specifier: ^11.2.10
     version: 11.2.10(react-dom@18.3.1)(react@18.3.1)
@@ -197,11 +197,11 @@ devDependencies:
     specifier: ^9.5.14
     version: 9.5.14(postcss@8.4.38)
   prettier:
-    specifier: ^3.3.1
-    version: 3.3.1
+    specifier: ^3.3.2
+    version: 3.3.2
   prettier-plugin-tailwindcss:
     specifier: 0.6.2
-    version: 0.6.2(prettier@3.3.1)
+    version: 0.6.2(prettier@3.3.2)
   schema-dts:
     specifier: ^1.1.2
     version: 1.1.2(typescript@5.4.5)
@@ -4427,24 +4427,24 @@ packages:
     resolution: {integrity: sha512-hw437iINopmQuxWPSUEvqE56NCPsiU8N4AYtfHmJFckclktzK9YQJieD3XkDCDH4OjL+C7zgPUh73R/nrcHrqw==}
     dev: true
 
-  /@sanity/client@6.19.1:
-    resolution: {integrity: sha512-D3ZDc1xj0a+lAnsAd5oXc4+JStJ92Z1GlkgL2+6PoKcqiK6xAQUXwcrUwgniWzzSmafXxBJYokpg/i1VuI/mCA==}
+  /@sanity/client@6.20.0:
+    resolution: {integrity: sha512-p6ENOFBR1QQirKj6zVYPDeZNVHMVV+3UVo+RptZDQPuyYyfAOA/TwJzX3cE19O2G4CgWnLfkmOOg6RcFjzFMWQ==}
     engines: {node: '>=14.18'}
     dependencies:
       '@sanity/eventsource': 5.0.2
-      get-it: 8.5.0
+      get-it: 8.6.0
       rxjs: 7.8.1
     transitivePeerDependencies:
       - debug
     dev: false
 
-  /@sanity/core-loader@1.6.18(@sanity/client@6.19.1):
+  /@sanity/core-loader@1.6.18(@sanity/client@6.20.0):
     resolution: {integrity: sha512-Ej7eFNqFaE9U/OHcNOmIu+BxHcH5xmMVg2LrWnhcO9vuDqiRxwxn8agHq/AYxOf1mtgPwROIuPb78NvgMSrN7A==}
     engines: {node: '>=18'}
     peerDependencies:
       '@sanity/client': ^6.19.1
     dependencies:
-      '@sanity/client': 6.19.1
+      '@sanity/client': 6.20.0
     dev: false
 
   /@sanity/eventsource@5.0.2:
@@ -4461,25 +4461,25 @@ packages:
     engines: {node: '>=10.0.0'}
     dev: false
 
-  /@sanity/preview-url-secret@1.6.17(@sanity/client@6.19.1):
+  /@sanity/preview-url-secret@1.6.17(@sanity/client@6.20.0):
     resolution: {integrity: sha512-Gj0bnochUdyGJdcYdZMJ8up81aqp6dCy1ldE5Hx3tIktANc7LYie0KfZctexY1h+teBi50vKpk8uiVID/V2e2w==}
     engines: {node: '>=18'}
     peerDependencies:
       '@sanity/client': ^6.19.1
     dependencies:
-      '@sanity/client': 6.19.1
+      '@sanity/client': 6.20.0
       '@sanity/uuid': 3.0.2
     dev: false
 
-  /@sanity/react-loader@1.10.2(@sanity/client@6.19.1)(react@18.3.1):
+  /@sanity/react-loader@1.10.2(@sanity/client@6.20.0)(react@18.3.1):
     resolution: {integrity: sha512-7PDDAHpCJ/289Yj63kFjRwQfXrMlM0uGznu4mFoep/uUV3luSanHx8DkyxsY8T8jaKlluB64pUeRE3TQ42+31A==}
     engines: {node: '>=18'}
     peerDependencies:
       '@sanity/client': ^6.19.1
       react: ^18.3 || >=19.0.0-rc
     dependencies:
-      '@sanity/client': 6.19.1
-      '@sanity/core-loader': 1.6.18(@sanity/client@6.19.1)
+      '@sanity/client': 6.20.0
+      '@sanity/core-loader': 1.6.18(@sanity/client@6.20.0)
       react: 18.3.1
     dev: false
 
@@ -4490,7 +4490,7 @@ packages:
       uuid: 8.3.2
     dev: false
 
-  /@sanity/visual-editing@2.1.4(@remix-run/react@2.9.2)(@sanity/client@6.19.1)(react-dom@18.3.1)(react@18.3.1):
+  /@sanity/visual-editing@2.1.4(@remix-run/react@2.9.2)(@sanity/client@6.20.0)(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-wHmINywcXSCMsc4JmbLVbsX7FX5JA4aKdOoTgZBDnbgdcIpIHvcpMTNqS8L1jfYsOQNBVswPt4wh7/Wu6io+TA==}
     engines: {node: '>=18'}
     peerDependencies:
@@ -4514,8 +4514,8 @@ packages:
         optional: true
     dependencies:
       '@remix-run/react': 2.9.2(react-dom@18.3.1)(react@18.3.1)(typescript@5.4.5)
-      '@sanity/client': 6.19.1
-      '@sanity/preview-url-secret': 1.6.17(@sanity/client@6.19.1)
+      '@sanity/client': 6.20.0
+      '@sanity/preview-url-secret': 1.6.17(@sanity/client@6.20.0)
       '@vercel/stega': 0.1.2
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
@@ -7064,34 +7064,34 @@ packages:
   /electron-to-chromium@1.4.782:
     resolution: {integrity: sha512-JUfU61e8tr+i5Y1FKXcKs+Xe+rJ+CEqm4cgv1kMihPE2EvYHmYyVr3Im/+1+Z5B29Be2EEGCZCwAc6Tazdl1Yg==}
 
-  /embla-carousel-autoplay@8.1.3(embla-carousel@8.1.3):
-    resolution: {integrity: sha512-nMPuOZ+f3yp/RzUEYDOWjO7EkhdNHfdxEoRxfwqIvTGdSQ04LAFAnMLiLWSetAXzB1bP30L391mZb9keZXRcWQ==}
+  /embla-carousel-autoplay@8.1.4(embla-carousel@8.1.4):
+    resolution: {integrity: sha512-lsQkKiU5sIVg5vuaWo6BTzQT+7Z6AEMnCIQho4bS6KFeBE8FtsL/HOmtLx7fLu2reH6keJ1vNmLn6L/w9CQj+Q==}
     peerDependencies:
-      embla-carousel: 8.1.3
+      embla-carousel: 8.1.4
     dependencies:
-      embla-carousel: 8.1.3
+      embla-carousel: 8.1.4
     dev: false
 
-  /embla-carousel-react@8.1.3(react@18.3.1):
-    resolution: {integrity: sha512-YrezDPgxPDKa+OKMhSrwuPEU2OgF5147vFW473EWT3bx9DETV3W/RyWTxq0/2pf3M4VXkjqFNbS/W1xM8lTaVg==}
+  /embla-carousel-react@8.1.4(react@18.3.1):
+    resolution: {integrity: sha512-0llfX4HlXrdgJKxlZ8q8LyI6EV+TvOI7KtZx9GkDTwdgP6/AyyuvzO8KYvDUNZOnbFBAPbVEe2qEgGMLEinlYw==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.1 || ^18.0.0
     dependencies:
-      embla-carousel: 8.1.3
-      embla-carousel-reactive-utils: 8.1.3(embla-carousel@8.1.3)
+      embla-carousel: 8.1.4
+      embla-carousel-reactive-utils: 8.1.4(embla-carousel@8.1.4)
       react: 18.3.1
     dev: false
 
-  /embla-carousel-reactive-utils@8.1.3(embla-carousel@8.1.3):
-    resolution: {integrity: sha512-D8tAK6NRQVEubMWb+b/BJ3VvGPsbEeEFOBM6cCCwfiyfLzNlacOAt0q2dtUEA9DbGxeWkB8ExgXzFRxhGV2Hig==}
+  /embla-carousel-reactive-utils@8.1.4(embla-carousel@8.1.4):
+    resolution: {integrity: sha512-qkovXTiNaURsnYhJxUBsDx9YV6crxLIZwfO6jIFSKKn6ZZE1JVeZAvy/UsiyNxiFikVrO76iquvD6uBHI9YD8w==}
     peerDependencies:
-      embla-carousel: 8.1.3
+      embla-carousel: 8.1.4
     dependencies:
-      embla-carousel: 8.1.3
+      embla-carousel: 8.1.4
     dev: false
 
-  /embla-carousel@8.1.3:
-    resolution: {integrity: sha512-GiRpKtzidV3v50oVMly8S+D7iE1r96ttt7fSlvtyKHoSkzrAnVcu8fX3c4j8Ol2hZSQlVfDqDIqdrFPs0u5TWQ==}
+  /embla-carousel@8.1.4:
+    resolution: {integrity: sha512-AMe40ZpyLpztfNnGQtMWVIgYdcBoY2MuQttRwQ/xqSPC3UvDG2QF17CR5Efz4c8qEkno7pxdZFDRO2R11y6hRQ==}
     dev: false
 
   /emoji-regex@10.3.0:
@@ -8458,8 +8458,8 @@ packages:
       has-symbols: 1.0.3
       hasown: 2.0.2
 
-  /get-it@8.5.0:
-    resolution: {integrity: sha512-OHrFT+2Nxk7PbzSnRHUMFjF83zqCvfc/t5l+ysSEK1MhvN26BtRt/AcZeA7uDs8TGtVPDKdGqLeqENKsM6GTDg==}
+  /get-it@8.6.0:
+    resolution: {integrity: sha512-ZFNZc3eKkYRHI5a7p3SAc3s0eBJgLL+qqpF7wpoFbTdzbHKC/XHu+6ot9RZTe6aoYGmZqf3Mdl62XdgiWJ7/ZQ==}
     engines: {node: '>=14.0.0'}
     dependencies:
       decompress-response: 7.0.0
@@ -11759,7 +11759,7 @@ packages:
       fast-diff: 1.3.0
     dev: true
 
-  /prettier-plugin-tailwindcss@0.6.2(prettier@3.3.1):
+  /prettier-plugin-tailwindcss@0.6.2(prettier@3.3.2):
     resolution: {integrity: sha512-eFefm4cg+1c2B57+H274Qm//CTWBdtQN9ansl0YTP/8TC8x3bugCTQSS/e4FC5Ctl9djhTzsbcMrZ7x2/abIow==}
     engines: {node: '>=14.21.3'}
     peerDependencies:
@@ -11811,7 +11811,7 @@ packages:
       prettier-plugin-svelte:
         optional: true
     dependencies:
-      prettier: 3.3.1
+      prettier: 3.3.2
     dev: true
 
   /prettier@2.8.8:
@@ -11819,8 +11819,8 @@ packages:
     engines: {node: '>=10.13.0'}
     hasBin: true
 
-  /prettier@3.3.1:
-    resolution: {integrity: sha512-7CAwy5dRsxs8PHXT3twixW9/OEll8MLE0VRPCJyl7CkS6VHGPSlsVaWTiASPTyGyYRyApxlaWTzwUxVNrhcwDg==}
+  /prettier@3.3.2:
+    resolution: {integrity: sha512-rAVeHYMcv8ATV5d508CFdn+8/pHPpXeIid1DdrPwXnaAdH7cqjVbpJaT5eq4yRAFU/lsbwYwSF/n5iNrdJHPQA==}
     engines: {node: '>=14'}
     hasBin: true
     dev: true

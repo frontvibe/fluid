@@ -13,36 +13,26 @@ export const aspectRatioValues = ['square', 'video', 'auto'] as const;
 */
 export const IMAGE_FRAGMENT = {
   _ref: q('asset').grabOne('_ref', q.string()),
+  _type: q.literal('image'),
   altText: q('asset').deref().grabOne('altText', q.string()).nullable(),
-  blurDataURL: q('asset').deref().grabOne('metadata.lqip', q.string()),
-  crop: q('crop')
-    .grab({
+  asset: q.object({
+    _ref: q.string(),
+    _type: q.literal('reference'),
+  }),
+  crop: q
+    .object({
       bottom: q.number(),
       left: q.number(),
       right: q.number(),
       top: q.number(),
     })
     .nullable(),
-  height: q('asset').deref().grabOne('metadata.dimensions.height', q.number()),
-  hotspot: q('hotspot')
-    .grab({
-      height: q.number(),
-      width: q.number(),
-      x: q.number(),
-      y: q.number(),
-    })
-    .nullable(),
-  url: q('asset').deref().grabOne('url', q.string()),
-  width: q('asset').deref().grabOne('metadata.dimensions.width', q.number()),
-} as const;
-
-export const SIMPLE_IMAGE_FRAGMENT = {
-  _ref: q('asset').grabOne('_ref', q.string()),
-  altText: q('asset').deref().grabOne('altText', q.string()).nullable(),
-  height: q('asset').deref().grabOne('metadata.dimensions.height', q.number()),
-  mimeType: q('asset').deref().grabOne('mimeType', q.string()),
-  url: q('asset').deref().grabOne('url', q.string()),
-  width: q('asset').deref().grabOne('metadata.dimensions.width', q.number()),
+  hotspot: q.object({
+    height: q.number(),
+    width: q.number(),
+    x: q.number(),
+    y: q.number(),
+  }),
 } as const;
 
 /*
@@ -188,7 +178,7 @@ export const SETTINGS_FRAGMENT = {
   dropdownsAndPopupsBorder: q.object(BORDER_FRAGMENT).nullable(),
   dropdownsAndPopupsShadow: q.object(SHADOW_FRAGMENT).nullable(),
   facebook: q.string().nullable(),
-  favicon: q('favicon').grab(SIMPLE_IMAGE_FRAGMENT).nullable(),
+  favicon: q('favicon').grab(IMAGE_FRAGMENT).nullable(),
   grid: q
     .object({
       horizontalSpace: q.number(),
@@ -217,7 +207,7 @@ export const SETTINGS_FRAGMENT = {
   siteName: q.string().nullable(),
   snapchat: q.string().nullable(),
   socialSharingImagePreview: q('socialSharingImagePreview')
-    .grab(SIMPLE_IMAGE_FRAGMENT)
+    .grab(IMAGE_FRAGMENT)
     .nullable(),
   spaceBetweenTemplateSections: q.number().nullable(),
   tiktok: q.string().nullable(),

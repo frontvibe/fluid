@@ -36,7 +36,7 @@ export function ImageBlock(
     },
   });
 
-  if (!props._ref || !props.url || !props.width) return null;
+  if (!props._ref) return null;
 
   return (
     <SanityImage

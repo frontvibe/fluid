@@ -5,9 +5,9 @@ import {
   ANNOUCEMENT_BAR_ARRAY_FRAGMENT,
   COLOR_SCHEME_FRAGMENT,
   FONT_FRAGMENT,
+  IMAGE_FRAGMENT,
   MENU_FRAGMENT,
   SETTINGS_FRAGMENT,
-  SIMPLE_IMAGE_FRAGMENT,
 } from './fragments';
 import {
   COLLECTION_SECTIONS_FRAGMENT,
@@ -64,7 +64,7 @@ export const PAGE_QUERY = q('*')
     seo: q('seo')
       .grab({
         description: [getIntValue('description'), q.string().nullable()],
-        image: q('image').grab(SIMPLE_IMAGE_FRAGMENT).nullable(),
+        image: q('image').grab(IMAGE_FRAGMENT).nullable(),
         title: [getIntValue('title'), q.string().nullable()],
       })
       .nullable(),

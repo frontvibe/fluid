@@ -153,7 +153,6 @@ function FeaturedProductSkeleton({
               className={cn('h-auto object-cover', imageAspectRatio.className)}
               data={{
                 id: data.product?.store.gid,
-                thumbnail: thumbnailUrl,
                 url: imageUrl,
               }}
               sizes="(min-width: 1024px) 50vw, 100vw"

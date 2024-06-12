@@ -23,7 +23,7 @@
     "@sanity/icons": "^3.2.0",
     "@sanity/language-filter": "^4.0.2",
     "@sanity/presentation": "^1.15.14",
-    "@sanity/ui": "2.3.2",
+    "@sanity/ui": "2.3.3",
     "@sanity/util": "^3.45.0",
     "@sanity/uuid": "^3.0.2",
     "@sanity/vision": "^3.45.0",

@@ -1,4 +1,4 @@
-import type {LoaderFunctionArgs, MetaArgs} from '@shopify/remix-oxygen';
+import type {LoaderFunctionArgs, MetaFunction} from '@shopify/remix-oxygen';
 
 import {useLoaderData} from '@remix-run/react';
 import {getPaginationVariables} from '@shopify/hydrogen';
@@ -7,14 +7,15 @@ import {json} from '@shopify/remix-oxygen';
 import {CollectionListGrid} from '~/components/CollectionListGrid';
 import {COLLECTIONS_QUERY} from '~/graphql/queries';
 import {useSanityRoot} from '~/hooks/useSanityRoot';
+import {mergeMeta} from '~/lib/meta';
 import {getSeoMetaFromMatches} from '~/lib/seo';
 import {seoPayload} from '~/lib/seo.server';
 
 const PAGINATION_SIZE = 4;
 
-export const meta = ({matches}: MetaArgs<typeof loader>) => {
-  return getSeoMetaFromMatches(matches);
-};
+export const meta: MetaFunction<typeof loader> = mergeMeta(({matches}) =>
+  getSeoMetaFromMatches(matches),
+);
 
 export const loader = async ({
   context: {storefront},

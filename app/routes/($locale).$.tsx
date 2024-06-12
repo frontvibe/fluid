@@ -1,7 +1,6 @@
-import type {LoaderFunctionArgs, MetaArgs} from '@shopify/remix-oxygen';
+import type {LoaderFunctionArgs, MetaFunction} from '@shopify/remix-oxygen';
 
 import {useLoaderData} from '@remix-run/react';
-import {getSeoMeta} from '@shopify/hydrogen';
 import {defer} from '@shopify/remix-oxygen';
 import {DEFAULT_LOCALE} from 'countries';
 
@@ -9,15 +8,16 @@ import type {I18nLocale} from '~/lib/type';
 
 import {CmsSection} from '~/components/CmsSection';
 import {useSanityData} from '~/hooks/useSanityData';
+import {mergeMeta} from '~/lib/meta';
 import {resolveShopifyPromises} from '~/lib/resolveShopifyPromises';
 import {sanityPreviewPayload} from '~/lib/sanity/sanity.payload.server';
 import {getSeoMetaFromMatches} from '~/lib/seo';
 import {seoPayload} from '~/lib/seo.server';
 import {PAGE_QUERY} from '~/qroq/queries';
 
-export const meta = ({matches}: MetaArgs<typeof loader>) => {
-  return getSeoMetaFromMatches(matches);
-};
+export const meta: MetaFunction<typeof loader> = mergeMeta(({matches}) =>
+  getSeoMetaFromMatches(matches),
+);
 
 export async function loader({context, params, request}: LoaderFunctionArgs) {
   const {env, locale, sanity, storefront} = context;

@@ -1,3 +1,4 @@
+import type {SeoConfig} from '@shopify/hydrogen';
 import type {
   Article,
   Blog,
@@ -11,10 +12,10 @@ import type {
 import type {InferType, TypeFromSelection} from 'groqd';
 import type {BreadcrumbList, CollectionPage, Offer} from 'schema-dts';
 
+import {getImageDimensions} from '@sanity/asset-utils';
 import {stegaClean} from '@sanity/client/stega';
-import {type SeoConfig} from '@shopify/hydrogen';
 
-import type {SIMPLE_IMAGE_FRAGMENT} from '~/qroq/fragments';
+import type {IMAGE_FRAGMENT as SANITY_IMAGE_FRAGMENT} from '~/qroq/fragments';
 import type {PAGE_QUERY, ROOT_QUERY} from '~/qroq/queries';
 
 import {generateSanityImageUrl} from '~/components/sanity/SanityImage';
@@ -34,10 +35,18 @@ function root({
   url: Request['url'];
 }): SeoConfig {
   const settings = root?.settings;
-
   const media = generateOGImageData({
     image: settings?.socialSharingImagePreview,
     sanity,
+  });
+  const logoWidth = settings?.logo
+    ? getImageDimensions(settings.logo._ref).width
+    : 0;
+  const logoUrl = generateSanityImageUrl({
+    dataset: sanity.dataset,
+    projectId: sanity.projectId,
+    ref: settings?.logo?._ref,
+    width: logoWidth,
   });
 
   return {
@@ -46,7 +55,7 @@ function root({
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'Organization',
-      logo: settings?.logo?.url ?? '',
+      logo: logoUrl || undefined,
       name: settings?.siteName ?? '',
       // Todo => Add search to schema
       // potentialAction: {
@@ -519,7 +528,7 @@ function generateOGImageData({
   image,
   sanity,
 }: {
-  image?: TypeFromSelection<typeof SIMPLE_IMAGE_FRAGMENT> | null;
+  image?: TypeFromSelection<typeof SANITY_IMAGE_FRAGMENT> | null;
   sanity: SanityConfig;
 }): SeoConfig['media'] {
   if (!image) {

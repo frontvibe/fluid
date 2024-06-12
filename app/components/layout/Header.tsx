@@ -2,6 +2,7 @@ import type {Variants} from 'framer-motion';
 import type {CSSProperties} from 'react';
 
 import {Link, useLocation} from '@remix-run/react';
+import {getImageDimensions} from '@sanity/asset-utils';
 import {stegaClean} from '@sanity/client/stega';
 import {cx} from 'class-variance-authority';
 import {m, transform, useMotionValueEvent, useTransform} from 'framer-motion';
@@ -24,7 +25,7 @@ export function Header() {
   const header = data?.header;
   const logoWidth = header?.desktopLogoWidth
     ? `${header?.desktopLogoWidth}px`
-    : null;
+    : undefined;
   const homePath = useLocalePath({path: '/'});
   const colorsCssVars = useColorsCssVars({
     selector: 'header',
@@ -189,10 +190,10 @@ function useHeaderHeigth() {
   const headerBorder = data?.header?.showSeparatorLine ? 1 : 0;
   const sanitySettings = data?.settings;
   const logo = sanitySettings?.logo;
+  const width = logo ? getImageDimensions(logo._ref).width : 0;
+  const height = logo ? getImageDimensions(logo._ref).height : 0;
   const desktopLogoHeight =
-    logo?._ref && logo?.width && logo?.height
-      ? (desktopLogoWidth * logo?.height) / logo?.width
-      : 44;
+    logo?._ref && width && height ? (desktopLogoWidth * height) / width : 44;
 
   const desktopHeaderHeight = (
     desktopLogoHeight +

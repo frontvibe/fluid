@@ -12,7 +12,7 @@ export function Logo(props: {
   className?: string;
   loading?: 'eager' | 'lazy';
   sanityEncodeData?: string;
-  sizes?: null | string;
+  sizes?: string;
   style?: React.CSSProperties;
 }) {
   const {data, encodeDataAttribute} = useSanityRoot();
@@ -40,7 +40,7 @@ export function Logo(props: {
     <SanityImage
       data={{
         ...logo,
-        altText: siteName || '',
+        alt: siteName || '',
       }}
       dataSanity={encodeData}
       {...props}

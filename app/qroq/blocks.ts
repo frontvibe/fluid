@@ -98,7 +98,6 @@ export const BUTTON_BLOCK_FRAGMENT = {
 
 export const IMAGE_BLOCK_FRAGMENT = {
   _key: q.string(),
-  _type: q.literal('image'),
   ...IMAGE_FRAGMENT,
   alignment: z.enum(contentAlignmentValues).nullable(),
   maxWidth: q.number().nullable(),

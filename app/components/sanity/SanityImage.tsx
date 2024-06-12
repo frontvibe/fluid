@@ -1,173 +1,287 @@
 import type {CropMode} from '@sanity/image-url/lib/types/types';
+import type {ImageUrlBuilder} from 'sanity';
 
+import {getExtension, getImageDimensions} from '@sanity/asset-utils';
 import imageUrlBuilder from '@sanity/image-url';
 import React from 'react';
 
-import type {SanityImageFragment} from '~/lib/type';
-
+import {useIsDev} from '~/hooks/useIsDev';
 import {cn} from '~/lib/utils';
 import {useRootLoaderData} from '~/root';
 
-export function SanityImage({
-  aspectRatio,
-  className,
-  data,
-  dataSanity,
-  decoding = 'async',
-  draggable,
-  fetchpriority,
-  loading,
-  showBorder = true,
-  showShadow = true,
-  sizes,
-  style,
-}: {
+type ImageCrop = {
+  bottom?: null | number;
+  left?: null | number;
+  right?: null | number;
+  top?: null | number;
+} | null;
+
+type ImageHotspot = {
+  height?: null | number;
+  width?: null | number;
+  x?: null | number;
+  y?: null | number;
+} | null;
+export type SanityImageProps = {
+  /** The aspect ratio of the image, in the format of `width/height`.
+   *
+   * @example
+   * ```
+   * <SanityImage data={image} aspectRatio="4/5" />
+   * ```
+   */
   aspectRatio?: string;
   className?: string;
-  data?: SanityImageFragment | null;
+  data: {
+    alt?: string;
+    asset?: {
+      _ref: string;
+      _type: 'reference';
+    };
+    crop?: ImageCrop;
+    hotspot?: ImageHotspot;
+  } | null;
   dataSanity?: string;
-  decoding?: 'async' | 'auto' | 'sync';
-  draggable?: boolean;
-  fetchpriority?: 'auto' | 'high' | 'low';
-  loading?: 'eager' | 'lazy';
+  /**
+   * Set to `true` to enable LQIP (Low Quality Image Placeholder).
+   * The LQIP image is used as a placeholder for images that are too large to load and
+   * is cropped to the aspect ratio of the original image.
+   * It renders as a blurred background while the original image is loading.
+   */
+  lqip?: boolean;
   showBorder?: boolean;
   showShadow?: boolean;
-  sizes?: null | string;
-  style?: React.CSSProperties;
-}) {
-  const {env} = useRootLoaderData();
+} & React.ComponentPropsWithRef<'img'>;
 
-  if (!data) {
-    return null;
-  }
+/**
+ * Sanity’s Image component is a wrapper around the HTML image element.
+ * It supports the same props as the HTML `img` element, but automatically
+ * generates the srcSet and sizes attributes for you. For most use cases,
+ * you’ll want to set the `aspectRatio` prop to ensure the image is sized
+ * correctly.
+ *
+ * @remarks
+ * - `decoding` is set to `async` by default.
+ * - `loading` is set to `lazy` by default.
+ * - `alt` will automatically be set to the `altText` if passed in the `data` prop.
+ * - `src` will automatically be set to the `url` if passed in the `data` prop.
+ * - `lqip` is set to `true` by default.
+ *
+ * @example
+ * A responsive image with a 4:5 aspect ratio:
+ * ```
+ * <SanityImage
+ *   data={data.image}
+ *   aspectRatio="4/5"
+ *   sizes="(min-width: 45em) 40vw, 100vw"
+ * />
+ * ```
+ */
+const SanityImage = React.forwardRef<HTMLImageElement, SanityImageProps>(
+  (
+    {
+      aspectRatio,
+      className,
+      data,
+      decoding = 'async',
+      loading = 'lazy',
+      lqip = true,
+      showBorder = true,
+      showShadow = true,
+      sizes,
+      style,
+      ...passthroughProps
+    },
+    ref,
+  ) => {
+    const {env} = useRootLoaderData();
+    const isDev = useIsDev();
 
-  const aspectRatioValues = aspectRatio?.split('/');
+    if (!data || !data.asset || !env) {
+      return null;
+    }
 
-  if (aspectRatio && aspectRatioValues?.length !== 2) {
-    console.warn(
-      `Invalid aspect ratio: ${aspectRatio}. Using the original aspect ratio. The aspect ratio should be in the format "width/height".`,
-    );
-  }
+    const config = {
+      dataset: env.SANITY_STUDIO_DATASET,
+      projectId: env.SANITY_STUDIO_PROJECT_ID,
+    };
+    const _ref = data.asset._ref;
+    const {height, width} = getImageDimensions(_ref);
+    const extension = getExtension(_ref);
+    const aspectRatioValues = aspectRatio?.split('/');
 
-  const aspectRatioWidth = aspectRatioValues
-    ? parseFloat(aspectRatioValues[0])
-    : undefined;
-  const aspectRatioHeight = aspectRatioValues
-    ? parseFloat(aspectRatioValues[1])
-    : undefined;
+    if (aspectRatio && aspectRatioValues?.length !== 2 && isDev) {
+      console.warn(
+        `Invalid aspect ratio: ${aspectRatio}. Using the original aspect ratio. The aspect ratio should be in the format "width/height".`,
+      );
+    }
 
-  const urlBuilder = imageUrlBuilder({
-    dataset: env.SANITY_STUDIO_DATASET,
-    projectId: env.SANITY_STUDIO_PROJECT_ID,
-  })
-    .image({
-      _ref: data._ref,
-      crop: data.crop,
-      hotspot: data.hotspot,
+    const aspectRatioWidth = aspectRatioValues
+      ? parseFloat(aspectRatioValues[0])
+      : undefined;
+    const aspectRatioHeight = aspectRatioValues
+      ? parseFloat(aspectRatioValues[1])
+      : undefined;
+
+    const urlBuilder = imageUrlBuilder({
+      dataset: config.dataset,
+      projectId: config.projectId,
     })
-    .auto('format');
+      .image({
+        _ref,
+        crop: data.crop,
+        hotspot: data.hotspot,
+      })
+      .auto('format');
 
-  const urlPreview = urlBuilder.width(30).url();
-  const urlDefault = urlBuilder.url();
-  // Values used for srcset attribute of image tag (in pixels)
-  const srcSetValues = [
-    50, 100, 200, 450, 600, 750, 900, 1000, 1250, 1500, 1750, 2000, 2500, 3000,
-    3500, 4000, 5000,
-  ];
-  const focalCoords = {
-    x: data.hotspot ? Math.ceil(data.hotspot.x * 100) : 0,
-    y: data.hotspot ? Math.ceil(data.hotspot.y * 100) : 0,
-  };
+    // Values used for srcset attribute of image tag (in pixels)
+    const srcSetValues = [
+      50, 100, 200, 450, 600, 750, 900, 1000, 1250, 1500, 1750, 2000, 2500,
+      3000, 3500, 4000, 5000,
+    ];
 
-  // Create srcset attribute
-  const srcSet = srcSetValues
-    .filter((value) => value < data.width)
-    .map((value) => {
-      let imageUrl = urlBuilder.width(value);
-      const height =
-        aspectRatioHeight && aspectRatioWidth
-          ? Math.round((value / aspectRatioWidth) * aspectRatioHeight)
-          : undefined;
+    const urlDefault = generateImageUrl({
+      aspectRatioHeight,
+      aspectRatioWidth,
+      urlBuilder,
+      width,
+    });
 
-      if (height) {
-        imageUrl = imageUrl.height(height);
-      }
-      if (data.width >= value) {
-        return `${imageUrl} ${value}w`;
-      }
-      return '';
-    })
-    .join(', ')
-    .concat(`, ${urlDefault} ${data.width}w`);
+    if (isDev && !sizes) {
+      console.warn(
+        [
+          'No sizes prop provided to SanityImage component,',
+          'you may be loading unnecessarily large images.',
+          `Image used is ${urlDefault || _ref || 'unknown'}`,
+        ].join(' '),
+      );
+    }
 
-  // No padding should be applied to the wrapper <span/> or the <img/> tag to avoid blurry LQIP becoming visible
-  return (
-    <span
-      className={cn(
-        'relative block overflow-hidden !p-0',
-        showBorder &&
-          'rounded-[--media-border-corner-radius] border-[rgb(var(--border)_/_var(--media-border-opacity))] [border-width:--media-border-thickness]',
-        showShadow &&
-          '[box-shadow:rgb(var(--shadow)_/_var(--media-shadow-opacity))_var(--media-shadow-horizontal-offset)_var(--media-shadow-vertical-offset)_var(--media-shadow-blur-radius)_0px]',
-      )}
-      id={data._ref ? `img-${data._ref}` : undefined}
-      style={
-        {
-          '--focalX': focalCoords.x + '%',
-          '--focalY': focalCoords.y + '%',
-        } as React.CSSProperties
-      }
-    >
+    // Create srcset attribute
+    const srcSet = srcSetValues
+      .filter((value) => value < width)
+      .map((value) => {
+        const imageUrl = generateImageUrl({
+          aspectRatioHeight,
+          aspectRatioWidth,
+          urlBuilder,
+          width: value,
+        });
+        if (width >= value) {
+          return `${imageUrl} ${value}w`;
+        }
+        return '';
+      })
+      .join(', ')
+      .concat(`, ${urlDefault} ${width}w`);
+
+    // Blurry bg image used as LQIP (Low Quality Image Placeholder)
+    // while high quality image is loading.
+    const blurDataUrl = generateImageUrl({
+      aspectRatioHeight,
+      aspectRatioWidth,
+      blur: 10,
+      urlBuilder,
+      width: 30,
+    });
+
+    // Don't use LQIP if the image is a PNG or SVG
+    if (extension === 'svg' || extension === 'png') {
+      lqip = false;
+    }
+
+    const LQIP =
+      lqip &&
+      ({
+        background: `url(${blurDataUrl})`,
+        backgroundPositionX: `var(--focalX)`,
+        backgroundPositionY: `var(--focalY)`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+      } as React.CSSProperties);
+
+    const focalCoords = data.hotspot?.x &&
+      data.hotspot?.y && {
+        x: Math.ceil(data.hotspot.x * 100),
+        y: Math.ceil(data.hotspot.y * 100),
+      };
+
+    const focalProperties =
+      focalCoords &&
+      ({
+        '--focalX': focalCoords?.x + '%',
+        '--focalY': focalCoords?.y + '%',
+        objectPosition: `var(--focalX) var(--focalY)`,
+      } as React.CSSProperties);
+
+    return (
       <img
-        alt={data.altText || ''}
+        alt={data.alt || ''}
         className={cn(
-          'relative z-[1] object-[var(--focalX)_var(--focalY)]',
+          showBorder &&
+            'rounded-[--media-border-corner-radius] border-[rgb(var(--border)_/_var(--media-border-opacity))] [border-width:--media-border-thickness]',
+          showShadow &&
+            '[box-shadow:rgb(var(--shadow)_/_var(--media-shadow-opacity))_var(--media-shadow-horizontal-offset)_var(--media-shadow-vertical-offset)_var(--media-shadow-blur-radius)_0px]',
           className,
-          '!p-0',
         )}
-        // Adding this attribute makes sure the image is always clickable in the Presentation tool
-        data-sanity={dataSanity}
         decoding={decoding}
-        draggable={draggable}
-        fetchpriority={fetchpriority}
-        height={aspectRatioHeight || data.height}
+        height={aspectRatioHeight ? aspectRatioHeight * 100 : height}
         loading={loading}
-        sizes={sizes!}
+        ref={ref}
+        sizes={sizes}
         src={urlDefault}
         srcSet={srcSet}
         style={
           {
             ...style,
-            aspectRatio: `${aspectRatioWidth || data.width}/${aspectRatioHeight || data.height}`,
+            ...focalProperties,
+            ...LQIP,
+            aspectRatio: `${aspectRatioWidth || width}/${
+              aspectRatioHeight || height
+            }`,
+            width: '100%',
           } as React.CSSProperties
         }
-        width={aspectRatioWidth || data.width}
+        width={aspectRatioWidth ? aspectRatioWidth * 100 : width}
+        {...passthroughProps}
       />
-      {data._ref && (
-        <style
-          // Blurry bg image used as LQIP (Low Quality Image Placeholder)
-          // while high quality image is loading.
-          dangerouslySetInnerHTML={{
-            __html: `
-              #img-${data._ref}::before {
-                content: "";
-                position: absolute;
-                background: url(${urlPreview});
-                background-size: cover;
-                background-repeat: no-repeat;
-                background-position: center;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                filter: blur(6px);
-              }
-            `.trim(),
-          }}
-        />
-      )}
-    </span>
-  );
+    );
+  },
+);
+
+SanityImage.displayName = 'SanityImage';
+
+export {SanityImage};
+
+function generateImageUrl(args: {
+  aspectRatioHeight?: number;
+  aspectRatioWidth?: number;
+  blur?: number;
+  urlBuilder: ImageUrlBuilder;
+  width: number;
+}) {
+  const {
+    aspectRatioHeight,
+    aspectRatioWidth,
+    blur = 0,
+    urlBuilder,
+    width,
+  } = args;
+  let imageUrl = urlBuilder.width(width);
+  const imageHeight =
+    aspectRatioHeight && aspectRatioWidth
+      ? Math.round((width / aspectRatioWidth) * aspectRatioHeight)
+      : undefined;
+
+  if (imageHeight) {
+    imageUrl = imageUrl.height(imageHeight);
+  }
+
+  if (blur && blur > 0) {
+    imageUrl = imageUrl.blur(blur);
+  }
+
+  return imageUrl.url();
 }
 
 export function generateSanityImageUrl({
@@ -185,6 +299,7 @@ export function generateSanityImageUrl({
   ref?: null | string;
   width: number;
 }) {
+  if (!ref) return null;
   const urlBuilder = imageUrlBuilder({
     dataset,
     projectId,

@@ -1,3 +1,4 @@
+import {ImageIcon} from '@sanity/icons';
 import {EyeOff} from 'lucide-react';
 import {defineField} from 'sanity';
 
@@ -64,8 +65,10 @@ export default defineField({
         media: () =>
           settings?.hide ? (
             <EyeOff />
-          ) : (
+          ) : collection.imageUrl ? (
             <img src={collection.imageUrl} alt={collection.title} />
+          ) : (
+            <ImageIcon />
           ),
       };
     },

@@ -1,4 +1,5 @@
 import {EyeOff} from 'lucide-react';
+import {ImageIcon} from '@sanity/icons';
 import {defineField} from 'sanity';
 
 export default defineField({
@@ -37,8 +38,10 @@ export default defineField({
         media: () =>
           settings.hide ? (
             <EyeOff />
-          ) : (
+          ) : product.previewImageUrl ? (
             <img src={product.previewImageUrl} alt={product.title} />
+          ) : (
+            <ImageIcon />
           ),
       };
     },

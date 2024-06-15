@@ -193,7 +193,7 @@ const SanityImage = React.forwardRef<HTMLImageElement, SanityImageProps>(
     const LQIP =
       lqip &&
       ({
-        background: `url(${blurDataUrl})`,
+        backgroundImage: `url(${blurDataUrl})`,
         backgroundPositionX: `var(--focalX)`,
         backgroundPositionY: `var(--focalY)`,
         backgroundRepeat: 'no-repeat',

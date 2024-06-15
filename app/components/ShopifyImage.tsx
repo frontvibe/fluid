@@ -65,13 +65,15 @@ const ShopifyImage = React.forwardRef<
       lqip = true,
       showBorder = true,
       showShadow = true,
+      style,
       ...passthroughProps
     },
     ref,
   ) => {
     const lqipWidth = 30;
+
     const lqipUrl = shopifyLoader({
-      crop,
+      crop: crop || 'center',
       height: aspectRatio
         ? lqipWidth * (parseAspectRatio(aspectRatio) ?? 1)
         : undefined,
@@ -89,7 +91,7 @@ const ShopifyImage = React.forwardRef<
     const LQIP =
       lqip &&
       ({
-        background: `url(${lqipUrl})`,
+        backgroundImage: `url(${lqipUrl})`,
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
       } as React.CSSProperties);
@@ -110,7 +112,7 @@ const ShopifyImage = React.forwardRef<
         ref={ref}
         style={{
           ...LQIP,
-          ...passthroughProps.style,
+          ...style,
         }}
         {...passthroughProps}
       />

@@ -1,5 +1,4 @@
 import type {ShouldRevalidateFunction} from '@remix-run/react';
-import type {CustomerAccessToken} from '@shopify/hydrogen/storefront-api-types';
 import type {
   LoaderFunctionArgs,
   MetaFunction,
@@ -25,8 +24,6 @@ import {defer} from '@shopify/remix-oxygen';
 import {DEFAULT_LOCALE} from 'countries';
 
 import {Layout} from '~/components/layout/Layout';
-
-import type {HydrogenSession} from './lib/hydrogen.session.server';
 
 import faviconAsset from '../public/favicon.ico';
 import {CssVars} from './components/CssVars';
@@ -96,10 +93,18 @@ export const meta: MetaFunction<typeof loader> = (loaderData) => {
 };
 
 export async function loader({context, request}: LoaderFunctionArgs) {
-  const {cart, env, locale, sanity, sanityPreviewMode, session, storefront} =
-    context;
+  const {
+    cart,
+    customerAccount,
+    env,
+    locale,
+    sanity,
+    sanityPreviewMode,
+    session,
+    storefront,
+  } = context;
   const language = locale?.language.toLowerCase();
-  const customerAccessToken = await session.get('customerAccessToken');
+  const isLoggedInPromise = customerAccount.isLoggedIn();
 
   const queryParams = {
     defaultLanguage: DEFAULT_LOCALE.language.toLowerCase(),
@@ -131,12 +136,6 @@ export async function loader({context, request}: LoaderFunctionArgs) {
     url: request.url,
   });
 
-  // validate the customer access token is valid
-  const {headers, isLoggedIn} = await validateCustomerAccessToken(
-    session,
-    customerAccessToken,
-  );
-
   const {
     collectionListPromise,
     featuredCollectionPromise,
@@ -150,47 +149,44 @@ export async function loader({context, request}: LoaderFunctionArgs) {
   // defer the cart query by not awaiting it
   const cartPromise = cart.get();
 
-  return defer(
-    {
-      cart: cartPromise,
-      collectionListPromise,
-      consent: {
-        checkoutDomain: env.PUBLIC_CHECKOUT_DOMAIN,
-        storefrontAccessToken: env.PUBLIC_STOREFRONT_API_TOKEN,
-      },
-      env: {
-        /*
-         * Be careful not to expose any sensitive environment variables here.
-         */
-        NODE_ENV: env.NODE_ENV,
-        PUBLIC_STORE_DOMAIN: env.PUBLIC_STORE_DOMAIN,
-        PUBLIC_STOREFRONT_API_TOKEN: env.PUBLIC_STOREFRONT_API_TOKEN,
-        PUBLIC_STOREFRONT_API_VERSION: env.PUBLIC_STOREFRONT_API_VERSION,
-        SANITY_STUDIO_API_VERSION: env.SANITY_STUDIO_API_VERSION,
-        SANITY_STUDIO_DATASET: env.SANITY_STUDIO_DATASET,
-        SANITY_STUDIO_PROJECT_ID: env.SANITY_STUDIO_PROJECT_ID,
-        SANITY_STUDIO_URL: env.SANITY_STUDIO_URL,
-        SANITY_STUDIO_USE_PREVIEW_MODE: env.SANITY_STUDIO_USE_PREVIEW_MODE,
-      },
-      featuredCollectionPromise,
-      featuredProductPromise,
-      isLoggedIn,
-      locale,
-      sanityPreviewMode,
-      sanityRoot,
-      seo,
-      shop: getShopAnalytics({
-        publicStorefrontId: env.PUBLIC_STOREFRONT_ID,
-        storefront: storefront,
-      }),
-      ...sanityPreviewPayload({
-        context,
-        params: queryParams,
-        query: ROOT_QUERY.query,
-      }),
+  return defer({
+    cart: cartPromise,
+    collectionListPromise,
+    consent: {
+      checkoutDomain: env.PUBLIC_CHECKOUT_DOMAIN,
+      storefrontAccessToken: env.PUBLIC_STOREFRONT_API_TOKEN,
     },
-    {headers},
-  );
+    env: {
+      /*
+       * Be careful not to expose any sensitive environment variables here.
+       */
+      NODE_ENV: env.NODE_ENV,
+      PUBLIC_STORE_DOMAIN: env.PUBLIC_STORE_DOMAIN,
+      PUBLIC_STOREFRONT_API_TOKEN: env.PUBLIC_STOREFRONT_API_TOKEN,
+      PUBLIC_STOREFRONT_API_VERSION: env.PUBLIC_STOREFRONT_API_VERSION,
+      SANITY_STUDIO_API_VERSION: env.SANITY_STUDIO_API_VERSION,
+      SANITY_STUDIO_DATASET: env.SANITY_STUDIO_DATASET,
+      SANITY_STUDIO_PROJECT_ID: env.SANITY_STUDIO_PROJECT_ID,
+      SANITY_STUDIO_URL: env.SANITY_STUDIO_URL,
+      SANITY_STUDIO_USE_PREVIEW_MODE: env.SANITY_STUDIO_USE_PREVIEW_MODE,
+    },
+    featuredCollectionPromise,
+    featuredProductPromise,
+    isLoggedIn: isLoggedInPromise,
+    locale,
+    sanityPreviewMode,
+    sanityRoot,
+    seo,
+    shop: getShopAnalytics({
+      publicStorefrontId: env.PUBLIC_STOREFRONT_ID,
+      storefront: storefront,
+    }),
+    ...sanityPreviewPayload({
+      context,
+      params: queryParams,
+      query: ROOT_QUERY.query,
+    }),
+  });
 }
 
 export default function App() {
@@ -291,42 +287,6 @@ export const useRootLoaderData = () => {
   const [root] = useMatches();
   return root?.data as SerializeFrom<typeof loader>;
 };
-
-/**
- * Validates the customer access token and returns a boolean and headers
- * @see https://shopify.dev/docs/api/storefront/latest/objects/CustomerAccessToken
- *
- * @example
- * ```js
- * const {isLoggedIn, headers} = await validateCustomerAccessToken(
- *  customerAccessToken,
- *  session,
- * );
- * ```
- */
-async function validateCustomerAccessToken(
-  session: HydrogenSession,
-  customerAccessToken?: CustomerAccessToken,
-) {
-  let isLoggedIn = false;
-  const headers = new Headers();
-  if (!customerAccessToken?.accessToken || !customerAccessToken?.expiresAt) {
-    return {headers, isLoggedIn};
-  }
-
-  const expiresAt = new Date(customerAccessToken.expiresAt).getTime();
-  const dateNow = Date.now();
-  const customerAccessTokenExpired = expiresAt < dateNow;
-
-  if (customerAccessTokenExpired) {
-    session.unset('customerAccessToken');
-    headers.append('Set-Cookie', await session.commit());
-  } else {
-    isLoggedIn = true;
-  }
-
-  return {headers, isLoggedIn};
-}
 
 function generateFaviconUrls(loaderData: SerializeFrom<typeof loader>) {
   const {env, sanityRoot} = loaderData;

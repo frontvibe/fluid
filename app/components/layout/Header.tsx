@@ -15,8 +15,10 @@ import {useSanityRoot} from '~/hooks/useSanityRoot';
 import {cn} from '~/lib/utils';
 
 import {headerVariants} from '../cva/header';
+import {IconAccount} from '../icons/IconAccount';
 import {DesktopNavigation} from '../navigation/DesktopNavigation';
 import {MobileNavigation} from '../navigation/MobileNavigation';
+import {IconButton} from '../ui/Button';
 import {CartDrawer} from './CartDrawer';
 import {Logo} from './Logo';
 
@@ -48,14 +50,25 @@ export function Header() {
               }
             />
           </Link>
-          <div className="flex items-center gap-0 md:gap-2">
+          <div className="flex items-center">
             <DesktopNavigation data={header?.menu} />
+            <AccountLink className="relative flex items-center justify-center focus:ring-primary/5" />
             <CartDrawer />
             <MobileNavigation data={header?.menu} />
           </div>
         </div>
       </div>
     </HeaderWrapper>
+  );
+}
+
+function AccountLink({className}: {className?: string}) {
+  return (
+    <IconButton asChild>
+      <Link className={className} to="/account">
+        <IconAccount className="size-6" />
+      </Link>
+    </IconButton>
   );
 }
 

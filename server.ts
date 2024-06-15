@@ -6,6 +6,7 @@ import {
   cartGetIdDefault,
   cartSetIdDefault,
   createCartHandler,
+  createCustomerAccountClient,
   createStorefrontClient,
   storefrontRedirect,
 } from '@shopify/hydrogen';
@@ -62,6 +63,17 @@ export default {
         waitUntil,
       });
 
+      /**
+       * Create a client for Customer Account API.
+       */
+      const customerAccount = createCustomerAccountClient({
+        customerAccountId: env.PUBLIC_CUSTOMER_ACCOUNT_API_CLIENT_ID,
+        customerAccountUrl: env.PUBLIC_CUSTOMER_ACCOUNT_API_URL,
+        request,
+        session,
+        waitUntil,
+      });
+
       /*
        * Create a cart handler that will be used to
        * create and update the cart in the session.
@@ -98,6 +110,7 @@ export default {
         build: remixBuild,
         getLoadContext: (): AppLoadContext => ({
           cart,
+          customerAccount,
           env: envVars,
           isDev,
           locale,

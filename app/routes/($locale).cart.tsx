@@ -50,11 +50,9 @@ export async function action({context, request}: ActionFunctionArgs) {
 
       result = await cart.updateDiscountCodes(discountCodes);
       break;
-    // Todo => Customer Access Token
     case CartForm.ACTIONS.BuyerIdentityUpdate:
       result = await cart.updateBuyerIdentity({
         ...inputs.buyerIdentity,
-        // customerAccessToken,
       });
       break;
     default:

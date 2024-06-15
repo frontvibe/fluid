@@ -8,8 +8,8 @@ import type {
   HydrogenCart,
   Storefront,
   HydrogenSessionData,
+  CustomerAccount,
 } from '@shopify/hydrogen';
-import type {CustomerAccessToken} from '@shopify/hydrogen/storefront-api-types';
 import type {AriaAttributes, DOMAttributes} from 'react';
 
 import '@total-typescript/ts-reset';
@@ -36,6 +36,8 @@ declare global {
     PUBLIC_STOREFRONT_API_TOKEN: string;
     PUBLIC_STOREFRONT_API_VERSION: string;
     PUBLIC_STOREFRONT_ID: string;
+    PUBLIC_CUSTOMER_ACCOUNT_API_CLIENT_ID: string;
+    PUBLIC_CUSTOMER_ACCOUNT_API_URL: string;
     PUBLIC_CHECKOUT_DOMAIN: string;
     SANITY_STUDIO_API_VERSION: string;
     SANITY_STUDIO_DATASET: string;
@@ -52,6 +54,7 @@ declare module '@shopify/remix-oxygen' {
    */
   export interface AppLoadContext {
     cart: HydrogenCart;
+    customerAccount: CustomerAccount;
     env: Env;
     isDev: boolean;
     locale: I18nLocale;
@@ -61,13 +64,6 @@ declare module '@shopify/remix-oxygen' {
     session: HydrogenSession;
     storefront: Storefront;
     waitUntil: ExecutionContext['waitUntil'];
-  }
-
-  /**
-   * Declare the data we expect to access via `context.session`.
-   */
-  export interface SessionData extends HydrogenSessionData {
-    customerAccessToken: CustomerAccessToken;
   }
 }
 

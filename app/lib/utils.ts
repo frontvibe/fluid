@@ -1,11 +1,15 @@
+import type {FulfillmentStatus} from '@shopify/hydrogen/customer-account-api-types';
 import type {SelectedOption} from '@shopify/hydrogen/storefront-api-types';
 import type {ClassValue} from 'class-variance-authority/types';
+import type {TypeFromSelection} from 'groqd';
 
 import {useLocation} from '@remix-run/react';
 import {stegaClean} from '@sanity/client/stega';
 import {cx} from 'class-variance-authority';
 import {useMemo} from 'react';
 import {twMerge} from 'tailwind-merge';
+
+import type {THEME_CONTENT_FRAGMENT} from '~/qroq/themeContent';
 
 import type {aspectRatioValues} from '../qroq/sections';
 import type {I18nLocale} from './type';
@@ -130,4 +134,23 @@ export function generateShopifyImageThumbnail(url?: null | string) {
 
 export function setShowTrailingZeroKeyValue(locale: I18nLocale) {
   return locale.country + '_' + locale.language + +'_' + locale.pathPrefix;
+}
+
+export function statusMessage(
+  status: FulfillmentStatus,
+  themeContent?: TypeFromSelection<typeof THEME_CONTENT_FRAGMENT> | null,
+) {
+  const translations: Record<FulfillmentStatus, string> = {
+    CANCELLED: themeContent?.account.orderStatusCancelled || 'Cancelled',
+    ERROR: themeContent?.account.orderStatusError || 'Error',
+    FAILURE: themeContent?.account.orderStatusFailure || 'Failed',
+    OPEN: themeContent?.account.orderStatusOpen || 'Open',
+    PENDING: themeContent?.account.orderStatusPending || 'Pending',
+    SUCCESS: themeContent?.account.orderStatusSuccess || 'Success',
+  };
+  try {
+    return translations?.[status];
+  } catch (error) {
+    return status;
+  }
 }

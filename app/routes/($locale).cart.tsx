@@ -16,10 +16,7 @@ import {isLocalPath} from '~/lib/utils';
 export async function action({context, request}: ActionFunctionArgs) {
   const {cart} = context;
 
-  const [formData] = await Promise.all([
-    request.formData(),
-    // context.customerAccount.getAccessToken(),
-  ]);
+  const [formData] = await Promise.all([request.formData()]);
 
   const {action, inputs} = CartForm.getFormInput(formData);
   invariant(action, 'No cartAction defined');
@@ -50,11 +47,9 @@ export async function action({context, request}: ActionFunctionArgs) {
 
       result = await cart.updateDiscountCodes(discountCodes);
       break;
-    // Todo => Customer Access Token
     case CartForm.ACTIONS.BuyerIdentityUpdate:
       result = await cart.updateBuyerIdentity({
         ...inputs.buyerIdentity,
-        // customerAccessToken,
       });
       break;
     default:

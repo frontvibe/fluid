@@ -1,6 +1,7 @@
 import {defineArrayMember, defineField} from 'sanity';
 import {internalLinkField} from './headerNavigation';
 import {ExternalLink, Link, SquareMousePointer} from 'lucide-react';
+import CustomPortableTextInput from '../../../components/portable-text-editor/PortableTextInput';
 
 export const internalLinkFields = [
   internalLinkField,
@@ -115,4 +116,7 @@ export default defineField({
       },
     }),
   ],
+  components: {
+    input: CustomPortableTextInput,
+  },
 });

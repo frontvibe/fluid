@@ -116,10 +116,11 @@ export default function Product() {
     <ProductProvider data={product}>
       {template?.sections &&
         template.sections.length > 0 &&
-        template.sections.map((section) => (
+        template.sections.map((section, index) => (
           <CmsSection
             data={section}
             encodeDataAttribute={encodeDataAttribute}
+            index={index}
             key={section._key}
           />
         ))}

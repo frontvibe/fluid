@@ -16,6 +16,7 @@ import {
   BannerMedia,
   BannerMediaOverlay,
 } from '../Banner';
+import {useSection} from '../CmsSection';
 import {SanityImage} from '../sanity/SanityImage';
 import {ButtonBlock} from '../sanity/richtext/components/ButtonBlock';
 
@@ -28,6 +29,7 @@ export function ImageBannerSection(
 ) {
   const {data} = props;
   const {contentAlignment, contentPosition, overlayOpacity} = data;
+  const section = useSection();
 
   // Todo: add encodeDataAttribute to SanityImage
   return (
@@ -38,7 +40,8 @@ export function ImageBannerSection(
           data={data.backgroundImage}
           decoding="sync"
           draggable={false}
-          fetchpriority="high"
+          fetchpriority={section?.index === 0 ? 'high' : 'auto'}
+          loading={section?.index === 0 ? 'eager' : 'lazy'}
           showBorder={false}
           showShadow={false}
           sizes="100vw"

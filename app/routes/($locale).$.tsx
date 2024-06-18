@@ -82,10 +82,11 @@ export default function PageRoute() {
   });
 
   return data?.sections && data.sections.length > 0
-    ? data.sections.map((section) => (
+    ? data.sections.map((section, index) => (
         <CmsSection
           data={section}
           encodeDataAttribute={encodeDataAttribute}
+          index={index}
           key={section._key}
         />
       ))

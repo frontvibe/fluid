@@ -11,10 +11,11 @@ export function Footer() {
     <>
       {/* Sections */}
       {footerSections && footerSections.length > 0
-        ? footerSections.map((section) => (
+        ? footerSections.map((section, index) => (
             <CmsSection
               data={section}
               encodeDataAttribute={encodeDataAttribute}
+              index={index}
               key={section._key}
             />
           ))

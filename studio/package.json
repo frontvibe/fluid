@@ -24,23 +24,23 @@
     "@sanity/language-filter": "^4.0.2",
     "@sanity/presentation": "^1.16.0",
     "@sanity/ui": "2.4.0",
-    "@sanity/util": "^3.46.1",
+    "@sanity/util": "^3.47.1",
     "@sanity/uuid": "^3.0.2",
-    "@sanity/vision": "^3.46.1",
-    "@shopify/polaris": "^13.5.0",
-    "@shopify/polaris-icons": "^9.1.1",
-    "groq": "^3.46.1",
+    "@sanity/vision": "^3.47.1",
+    "@shopify/polaris": "^13.6.0",
+    "@shopify/polaris-icons": "^9.2.0",
+    "groq": "^3.47.1",
     "groqd-playground": "^0.0.19",
     "lodash": "^4.17.21",
     "lodash.get": "^4.4.2",
-    "lucide-react": "^0.395.0",
+    "lucide-react": "^0.396.0",
     "nanoid": "^5.0.7",
     "pluralize-esm": "^9.0.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-is": "^18.3.1",
     "rxjs": "^7.8.1",
-    "sanity": "^3.46.1",
+    "sanity": "^3.47.1",
     "sanity-plugin-internationalized-array": "^2.0.0",
     "sanity-plugin-media": "^2.2.5",
     "styled-components": "^6.1.11"
@@ -54,6 +54,6 @@
     "eslint": "^8.57.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^3.3.2",
-    "typescript": "^5.4.5"
+    "typescript": "^5.5.2"
   }
 }

@@ -93,7 +93,8 @@
     "typescript": "^5.5.2"
   },
   "engines": {
-    "node": ">=16.13"
+    "node": ">=16.13",
+    "pnpm": ">=9"
   },
   "browserslist": [
     "defaults"

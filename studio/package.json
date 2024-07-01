@@ -16,9 +16,9 @@
     "sanity"
   ],
   "dependencies": {
-    "@frontvibe/sanity-color-picker": "^1.0.5",
-    "@frontvibe/sanity-font-picker": "^1.0.5",
-    "@frontvibe/sanity-plugin-range-slider": "^1.0.5",
+    "@frontvibe/sanity-color-picker": "^1.0.6",
+    "@frontvibe/sanity-font-picker": "^1.0.6",
+    "@frontvibe/sanity-plugin-range-slider": "^1.0.6",
     "@sanity/code-input": "^4.1.4",
     "@sanity/icons": "^3.2.0",
     "@sanity/language-filter": "^4.0.2",

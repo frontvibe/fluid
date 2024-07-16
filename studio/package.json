@@ -16,9 +16,9 @@
     "sanity"
   ],
   "dependencies": {
-    "@frontvibe/sanity-color-picker": "^1.0.7",
-    "@frontvibe/sanity-font-picker": "^1.0.7",
-    "@frontvibe/sanity-plugin-range-slider": "^1.0.7",
+    "@frontvibe/sanity-color-picker": "^1.0.8",
+    "@frontvibe/sanity-font-picker": "^1.0.8",
+    "@frontvibe/sanity-plugin-range-slider": "^1.0.8",
     "@sanity/code-input": "^4.1.4",
     "@sanity/icons": "^3.3.0",
     "@sanity/language-filter": "^4.0.2",
@@ -27,7 +27,7 @@
     "@sanity/util": "^3.50.0",
     "@sanity/uuid": "^3.0.2",
     "@sanity/vision": "^3.50.0",
-    "@shopify/polaris": "^13.6.1",
+    "@shopify/polaris": "^13.7.0",
     "@shopify/polaris-icons": "^9.2.0",
     "groq": "^3.50.0",
     "groqd-playground": "^0.0.20",
@@ -42,18 +42,18 @@
     "rxjs": "^7.8.1",
     "sanity": "^3.50.0",
     "sanity-plugin-internationalized-array": "^2.0.0",
-    "sanity-plugin-media": "^2.2.5",
+    "sanity-plugin-media": "^2.3.0",
     "styled-components": "^6.1.11"
   },
   "devDependencies": {
     "@sanity/eslint-config-studio": "^4.0.0",
-    "@types/lodash": "^4.17.6",
+    "@types/lodash": "^4.17.7",
     "@types/lodash.get": "^4.4.9",
     "@types/react": "^18.3.3",
     "@types/styled-components": "^5.1.34",
     "eslint": "^8.57.0",
     "npm-run-all": "^4.1.5",
-    "prettier": "^3.3.2",
+    "prettier": "^3.3.3",
     "typescript": "^5.5.3"
   }
 }

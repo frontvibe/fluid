@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import {defineArrayMember, defineField} from 'sanity';
 import {internalLinkFields} from './richtext';
+import CustomPortableTextInput from '../../../components/portable-text-editor/PortableTextInput';
 
 export default defineField({
   name: 'productRichtext',
@@ -134,4 +135,7 @@ export default defineField({
       },
     }),
   ],
+  components: {
+    input: CustomPortableTextInput,
+  },
 });

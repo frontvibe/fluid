@@ -34,11 +34,25 @@ export function ProductCard(props: {
     ? flattenConnection(product?.variants)
     : null;
   const firstVariant = variants?.[0];
-  const sizes = cx([
+  const sizes = [
     '(min-width: 1024px)',
-    columns?.desktop ? `${100 / columns.desktop}vw,` : '33vw,',
-    columns?.mobile ? `${100 / columns.mobile}vw` : '100vw',
-  ]);
+    columns?.desktop ? `${100 / columns.desktop}vw` : '33vw',
+    columns?.mobile ? `${100 / columns.mobile}vw` : '100vw'
+  ].join(', ');
+
+  /**
+ * Optional: Extended more granular image sizes
+ * 
+  const sizes = [
+    '(min-width: 1200px) and (max-width: 1599px)',
+    columns?.desktop ? `${100 / columns.desktop}vw` : '25vw',
+    '(min-width: 1024px) and (max-width: 1199px)',
+    columns?.desktop ? `${100 / columns.desktop}vw` : '33vw',
+    '(min-width: 768px) and (max-width: 1023px)',
+    columns?.mobile ? `${100 / columns.mobile}vw` : '50vw',
+    '100vw'
+  ].join(', ');
+ */
 
   const path = useLocalePath({path: `/products/${product?.handle}`});
 

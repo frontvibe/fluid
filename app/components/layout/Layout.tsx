@@ -1,11 +1,11 @@
 import {ShopifyProvider} from '@shopify/hydrogen-react';
-import {Suspense, lazy} from 'react';
+import {lazy, Suspense} from 'react';
 
 import {useRootLoaderData} from '~/root';
 
-import {TailwindIndicator} from '../TailwindIndicator';
 import {TogglePreviewMode} from '../sanity/TogglePreviewMode';
-import {AnnouncementBar} from './AnnoucementBar';
+import {TailwindIndicator} from '../TailwindIndicator';
+import {AnnouncementBar} from './AnnouncementBar';
 import {Footer} from './Footer';
 import {FramerMotion} from './FramerMotion';
 import {Header} from './Header';

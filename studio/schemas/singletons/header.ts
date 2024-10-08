@@ -23,18 +23,18 @@ export default defineType({
   groups: GROUPS,
   fields: [
     defineField({
-      name: 'annoucementBar',
+      name: 'announcementBar',
       group: 'announcementBar',
       type: 'internationalizedArrayAnnouncementBar',
     }),
     defineField({
-      name: 'annoucementBarColorScheme',
+      name: 'announcementBarColorScheme',
       type: 'reference',
       group: 'announcementBar',
       to: [{type: 'colorScheme'}],
     }),
     defineField({
-      name: 'autoRotateAnnoucements',
+      name: 'autoRotateAnnouncements',
       type: 'boolean',
       group: 'announcementBar',
       initialValue: false,

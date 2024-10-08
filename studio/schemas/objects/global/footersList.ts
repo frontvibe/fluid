@@ -1,20 +1,20 @@
 import {ArrayOfObjectsInputProps, defineArrayMember, defineField} from 'sanity';
-
-import SectionsListInput from '../../../components/SectionsListInput';
-
+import {sectionOptionInsertMenu} from './sectionsList';
+import {ArrayMaxRule} from '../../../components/ArrayMaxRule';
 export default defineField({
   title: 'Footers',
   name: 'footers',
   type: 'array',
-  group: 'pagebuilder',
   of: [
     defineArrayMember({
       type: 'socialLinksOnly',
     }),
   ],
-  components: {
-    input: (props: ArrayOfObjectsInputProps) =>
-      SectionsListInput({type: 'footer', ...props}),
+  options: {
+    ...sectionOptionInsertMenu,
   },
-  validation: (Rule: any) => Rule.max(1),
+  components: {
+    input: ArrayMaxRule,
+  },
+  validation: (Rule: any) => Rule.min(0).max(1),
 });

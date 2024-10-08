@@ -1,6 +1,4 @@
-import {ArrayOfObjectsInputProps, defineField} from 'sanity';
-
-import SectionsListInput from '../../../components/SectionsListInput';
+import {defineField, InsertMenuOptions} from 'sanity';
 
 const globalSections = [
   {
@@ -43,15 +41,26 @@ const collectionSectionsList = [
   ...globalSections,
 ];
 
+export const sectionOptionInsertMenu: {insertMenu: InsertMenuOptions} = {
+  insertMenu: {
+    views: [
+      {
+        name: 'grid',
+        previewImageUrl: (schemaTypeName) =>
+          `/static/assets/${schemaTypeName}.jpg`,
+      },
+    ],
+  },
+};
+
 export default defineField({
   title: 'Sections',
   name: 'sections',
   type: 'array',
   group: 'pagebuilder',
   of: globalSections,
-  components: {
-    input: (props: ArrayOfObjectsInputProps) =>
-      SectionsListInput({type: 'section', ...props}),
+  options: {
+    ...sectionOptionInsertMenu,
   },
 });
 
@@ -61,9 +70,8 @@ export const productSections = defineField({
   type: 'array',
   group: 'pagebuilder',
   of: pdpSections,
-  components: {
-    input: (props: ArrayOfObjectsInputProps) =>
-      SectionsListInput({type: 'section', ...props}),
+  options: {
+    ...sectionOptionInsertMenu,
   },
 });
 
@@ -73,8 +81,7 @@ export const collectionSections = defineField({
   type: 'array',
   group: 'pagebuilder',
   of: collectionSectionsList,
-  components: {
-    input: (props: ArrayOfObjectsInputProps) =>
-      SectionsListInput({type: 'section', ...props}),
+  options: {
+    ...sectionOptionInsertMenu,
   },
 });

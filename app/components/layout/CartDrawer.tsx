@@ -19,6 +19,7 @@ import {iconButtonClass} from '../ui/Button';
 import {
   Drawer,
   DrawerContent,
+  DrawerDescription,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
@@ -108,6 +109,9 @@ function Badge(props: {cart?: CartApiQueryFragment; count: number}) {
             <span>{themeContent?.cart?.heading}</span>
           </DrawerTitle>
         </DrawerHeader>
+        <DrawerDescription className="sr-only">
+          {themeContent?.cart?.heading}
+        </DrawerDescription>
         <Cart
           cart={props.cart}
           layout="drawer"

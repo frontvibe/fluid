@@ -37,7 +37,7 @@ export function ProductCard(props: {
   const sizes = [
     '(min-width: 1024px)',
     columns?.desktop ? `${100 / columns.desktop}vw` : '33vw',
-    columns?.mobile ? `${100 / columns.mobile}vw` : '100vw'
+    columns?.mobile ? `${100 / columns.mobile}vw` : '100vw',
   ].join(', ');
 
   /**

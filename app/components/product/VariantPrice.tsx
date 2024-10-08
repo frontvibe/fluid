@@ -17,7 +17,7 @@ export function VariantPrice({
     <>
       {compareAtPrice && (
         <ShopifyMoney
-          className=" text-muted-foreground line-through"
+          className="text-muted-foreground line-through"
           data={compareAtPrice}
         />
       )}

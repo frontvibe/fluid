@@ -9,7 +9,7 @@ module.exports = {
   },
   extends: [
     '@remix-run/eslint-config',
-    'plugin:perfectionist/recommended-natural',
+    'plugin:perfectionist/recommended-natural-legacy',
     'plugin:hydrogen/typescript',
   ],
   ignorePatterns: ['studio/*'],

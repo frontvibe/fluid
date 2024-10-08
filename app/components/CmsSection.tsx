@@ -12,7 +12,7 @@ import type {
 
 import {useCardColorsCssVars, useColorsCssVars} from '~/hooks/useColorsCssVars';
 import {useIsDev} from '~/hooks/useIsDev';
-import {sections} from '~/lib/sectionRelsolver';
+import {sections} from '~/lib/sectionResolver';
 
 type CmsSectionsProps =
   | NonNullable<InferType<typeof COLLECTION_SECTIONS_FRAGMENT>>[0]

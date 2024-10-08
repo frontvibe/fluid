@@ -193,7 +193,7 @@ export const initialSingletonsValues = {
       top: 10,
       bottom: 10,
     },
-    annoucementBar: [
+    announcementBar: [
       {
         _key: DEFAULT_LOCALE.language.toLowerCase(),
         _type: 'internationalizedArrayAnnouncementBarValue',
@@ -208,7 +208,7 @@ export const initialSingletonsValues = {
         ],
       },
     ],
-    annoucementBarColorScheme: {
+    announcementBarColorScheme: {
       _ref: 'dark-color-scheme',
       _type: 'reference',
     },

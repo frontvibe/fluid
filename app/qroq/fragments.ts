@@ -100,10 +100,10 @@ export const COLOR_SCHEME_FRAGMENT = {
 
 /*
 |--------------------------------------------------------------------------
-| Annoucement Bar Fragment
+| Announcement Bar Fragment
 |--------------------------------------------------------------------------
 */
-export const ANNOUCEMENT_BAR_FRAGMENT = {
+export const ANNOUNCEMENT_BAR_FRAGMENT = {
   _key: q.string(),
   externalLink: q.string().nullable(),
   link: LINK_REFERENCE_FRAGMENT,
@@ -111,15 +111,15 @@ export const ANNOUCEMENT_BAR_FRAGMENT = {
   text: q.string().nullable(),
 } satisfies Selection;
 
-export const ANNOUCEMENT_BAR_ARRAY_FRAGMENT = q(
+export const ANNOUNCEMENT_BAR_ARRAY_FRAGMENT = q(
   `coalesce(
-    annoucementBar[_key == $language][0].value[],
-    annoucementBar[_key == $defaultLanguage][0].value[],
+    announcementBar[_key == $language][0].value[],
+    announcementBar[_key == $defaultLanguage][0].value[],
   )[]`,
   {isArray: true},
 )
   .select({
-    '_type == "announcement"': ANNOUCEMENT_BAR_FRAGMENT,
+    '_type == "announcement"': ANNOUNCEMENT_BAR_FRAGMENT,
   })
   .nullable();
 

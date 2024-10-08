@@ -5,7 +5,7 @@ import {cx} from 'class-variance-authority';
 import Autoplay from 'embla-carousel-autoplay';
 import {useMemo} from 'react';
 
-import type {ANNOUCEMENT_BAR_FRAGMENT} from '~/qroq/fragments';
+import type {ANNOUNCEMENT_BAR_FRAGMENT} from '~/qroq/fragments';
 
 import {useColorsCssVars} from '~/hooks/useColorsCssVars';
 import {useSanityRoot} from '~/hooks/useSanityRoot';
@@ -20,15 +20,15 @@ import {
   CarouselPrevious,
 } from '../ui/Carousel';
 
-type AnnoucementBarProps = TypeFromSelection<typeof ANNOUCEMENT_BAR_FRAGMENT>;
+type AnnouncementBarProps = TypeFromSelection<typeof ANNOUNCEMENT_BAR_FRAGMENT>;
 
 export function AnnouncementBar() {
   const {data} = useSanityRoot();
   const header = data?.header;
-  const annoucementBar = header?.annoucementBar;
+  const announcementBar = header?.announcementBar;
   const plugins = useMemo(
     () =>
-      header?.autoRotateAnnoucements
+      header?.autoRotateAnnouncements
         ? [Autoplay({delay: 5000, stopOnMouseEnter: true})]
         : [],
     [header],
@@ -37,16 +37,16 @@ export function AnnouncementBar() {
   const colorsCssVars = useColorsCssVars({
     selector: `#announcement-bar`,
     settings: {
-      colorScheme: header?.annoucementBarColorScheme!,
+      colorScheme: header?.announcementBarColorScheme!,
       customCss: null,
       hide: null,
       padding: null,
     },
   });
 
-  const isActive = annoucementBar?.length! > 1;
+  const isActive = announcementBar?.length! > 1;
 
-  if (!annoucementBar) return null;
+  if (!announcementBar) return null;
 
   return (
     <section className="bg-background text-foreground" id="announcement-bar">
@@ -54,7 +54,7 @@ export function AnnouncementBar() {
         <style dangerouslySetInnerHTML={{__html: colorsCssVars}} />
         <Carousel opts={{active: isActive, align: 'center'}} plugins={plugins}>
           <CarouselContent className="relative ml-0 justify-center">
-            {annoucementBar?.map((item) => (
+            {announcementBar?.map((item) => (
               <CarouselItem key={item._key}>
                 <Item
                   _key={item._key}
@@ -78,7 +78,7 @@ export function AnnouncementBar() {
   );
 }
 
-function Item(props: AnnoucementBarProps) {
+function Item(props: AnnouncementBarProps) {
   if (!props.text) return null;
 
   const className = cx('flex w-full justify-center py-3 text-center');

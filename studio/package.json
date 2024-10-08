@@ -30,7 +30,6 @@
     "@shopify/polaris": "^13.9.0",
     "@shopify/polaris-icons": "^9.3.0",
     "groq": "^3.60.0",
-    "groqd-playground": "^0.0.20",
     "lodash": "^4.17.21",
     "lodash.get": "^4.4.2",
     "lucide-react": "^0.451.0",

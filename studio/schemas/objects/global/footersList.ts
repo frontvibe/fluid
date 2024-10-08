@@ -1,4 +1,4 @@
-import {ArrayOfObjectsInputProps, defineArrayMember, defineField} from 'sanity';
+import {defineArrayMember, defineField} from 'sanity';
 import {sectionOptionInsertMenu} from './sectionsList';
 import {ArrayMaxRule} from '../../../components/ArrayMaxRule';
 export default defineField({

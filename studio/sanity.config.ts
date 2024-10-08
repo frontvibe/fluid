@@ -9,7 +9,6 @@ import {rangeSlider} from '@frontvibe/sanity-plugin-range-slider';
 import {codeInput} from '@sanity/code-input';
 import {presentationTool} from '@sanity/presentation';
 import {languageFilter} from '@sanity/language-filter';
-import {groqdPlaygroundTool} from 'groqd-playground';
 
 import {schemaTypes} from './schemas';
 import {defaultDocumentNode, structure} from './structure';
@@ -29,7 +28,6 @@ const devOnlyPlugins = [
     defaultApiVersion: apiVersion,
     defaultDataset: dataset,
   }),
-  groqdPlaygroundTool(),
 ];
 const SANITY_STUDIO_PRODUCTION_URL = isDev
   ? localePreviewUrl

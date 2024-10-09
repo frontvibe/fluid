@@ -38,9 +38,9 @@
     "@sanity/react-loader": "^1.10.7",
     "@sanity/visual-editing": "^2.1.10",
     "@shopify/cli": "3.53.1",
-    "@shopify/cli-hydrogen": "^8.4.5",
-    "@shopify/hydrogen": "^2024.7.8",
-    "@shopify/hydrogen-react": "^2024.7.5",
+    "@shopify/cli-hydrogen": "^8.4.6",
+    "@shopify/hydrogen": "^2024.7.9",
+    "@shopify/hydrogen-react": "^2024.7.6",
     "@shopify/mini-oxygen": "^3.0.6",
     "@shopify/remix-oxygen": "^2.0.8",
     "@tanem/react-nprogress": "^5.0.51",
@@ -90,7 +90,7 @@
     "tailwindcss": "^3.4.13",
     "tailwindcss-animate": "^1.0.7",
     "type-fest": "^4.26.1",
-    "typescript": "^5.6.2"
+    "typescript": "^5.6.3"
   },
   "engines": {
     "node": ">=16.13",

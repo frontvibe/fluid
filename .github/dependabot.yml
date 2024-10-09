@@ -38,7 +38,7 @@ updates:
   - package-ecosystem: 'npm'
     directory: '/studio'
     schedule:
-      interval: 'daily'
+      interval: 'weekly'
       time: '05:30'
       timezone: 'America/New_York'
     groups:

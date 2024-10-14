@@ -32,7 +32,7 @@
     "groq": "^3.60.0",
     "lodash": "^4.17.21",
     "lodash.get": "^4.4.2",
-    "lucide-react": "^0.451.0",
+    "lucide-react": "^0.452.0",
     "nanoid": "^5.0.7",
     "pluralize-esm": "^9.0.5",
     "react": "^18.3.1",

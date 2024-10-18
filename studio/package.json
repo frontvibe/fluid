@@ -9,7 +9,6 @@
     "start": "sanity start",
     "build": "sanity build",
     "deploy": "sanity deploy",
-    "deploy-graphql": "sanity graphql deploy",
     "create:initial": "npx sanity@latest exec ./scripts/createInitialDocuments.ts --with-user-token"
   },
   "keywords": [

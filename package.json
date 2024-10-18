@@ -5,7 +5,7 @@
   "version": "0.0.0",
   "scripts": {
     "build": "shopify hydrogen build",
-    "dev": "run-p dev:app dev:studio",
+    "dev": "run-p dev:*",
     "dev:app": "shopify hydrogen dev --codegen",
     "dev:studio": "cd ./studio && run-s dev",
     "preview": "npm run build && shopify hydrogen preview",

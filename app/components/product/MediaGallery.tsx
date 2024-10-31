@@ -25,6 +25,9 @@ import {
   CarouselItem,
 } from '../ui/Carousel';
 
+import {useProductVariants} from '~/hooks/useProductVariants';
+import {useSelectedVariant} from '~/hooks/useSelectedVariant';
+
 type Media =
   | Media_ExternalVideo_Fragment
   | Media_MediaImage_Fragment
@@ -36,9 +39,26 @@ export function MediaGallery(props: {aspectRatio?: AspectRatioData}) {
   const medias = product?.media?.nodes.length
     ? flattenConnection(product.media)
     : [];
+  const {variants} = useProductVariants();
+  const selectedVariant = useSelectedVariant({variants});
+  const variantMedias = selectedVariant?.images?.length
+    ? flattenConnection(selectedVariant.images)
+    : [];
+  const combinedMedias = [...variantMedias, ...medias];
+  const uniqueMedias = combinedMedias.filter(
+    (media, index, self) =>
+      index ===
+      self.findIndex(
+        (m) =>
+          m.__typename === 'MediaImage' &&
+          media.__typename === 'MediaImage' &&
+          m.image.url === media.image.url,
+      ),
+  );
   const [activeMediaId, setActiveMediaId] = useState<null | string>(null);
   const selectedImage =
-    medias.find((media) => media?.id === activeMediaId) || medias[0];
+    uniqueMedias.find((media) => media?.id === activeMediaId) ||
+    uniqueMedias[0];
 
   if (!selectedImage) return null;
 
@@ -47,9 +67,9 @@ export function MediaGallery(props: {aspectRatio?: AspectRatioData}) {
       <div className="hidden lg:block">
         <MainMedia aspectRatio={props.aspectRatio} media={selectedImage} />
       </div>
-      <MobileCarousel aspectRatio={props.aspectRatio} medias={medias} />
+      <MobileCarousel aspectRatio={props.aspectRatio} medias={uniqueMedias} />
       <ThumbnailCarousel
-        medias={medias}
+        medias={uniqueMedias}
         selectedImage={selectedImage}
         setActiveMediaId={setActiveMediaId}
       />

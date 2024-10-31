@@ -34,5 +34,8 @@ export function useSelectedVariant(props: {
     return firstAvailableVariant ?? firstVariantFound;
   }
 
-  return selectedVariant;
+  return {
+    ...selectedVariant,
+    images: selectedVariant?.images || [],
+  };
 }

@@ -3,15 +3,14 @@ import type {ProductCardFragment} from 'storefrontapi.generated';
 import {Link} from '@remix-run/react';
 import {stegaClean} from '@sanity/client/stega';
 import {flattenConnection} from '@shopify/hydrogen';
-import {cx} from 'class-variance-authority';
 
 import {useLocalePath} from '~/hooks/useLocalePath';
-import {useSanityRoot} from '~/hooks/useSanityRoot';
 import {cn} from '~/lib/utils';
+import {useRootLoaderData} from '~/root';
 
+import {ProductBadges} from '../blocks/PriceBlock';
 import {ShopifyImage} from '../ShopifyImage';
 import {ShopifyMoney} from '../ShopifyMoney';
-import {ProductBadges} from '../blocks/PriceBlock';
 import {Card, CardContent, CardMedia} from '../ui/Card';
 
 export function ProductCard(props: {
@@ -26,7 +25,8 @@ export function ProductCard(props: {
   };
 }) {
   const {columns, product, skeleton} = props;
-  const {data} = stegaClean(useSanityRoot());
+  const {sanityRoot} = useRootLoaderData();
+  const {data} = stegaClean(sanityRoot);
   const style = data?.settings?.productCards?.style;
   const textAlignment = data?.settings?.productCards?.textAlignment || 'left';
   const aspectRatio = data?.settings?.productCards?.imageAspectRatio || 'video';

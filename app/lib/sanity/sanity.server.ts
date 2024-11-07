@@ -8,10 +8,10 @@ import type {
 } from '@sanity/client/stega';
 import type {BaseQuery, InferType, z} from 'groqd';
 
+import {loadQuery, setServerClient} from '@sanity/react-loader';
 import {CacheShort, createWithCache} from '@shopify/hydrogen';
 
 import {getSanityClient} from './client';
-import {queryStore} from './sanity.loader';
 
 type CreateSanityClientOptions = {
   cache: Cache;
@@ -20,10 +20,12 @@ type CreateSanityClientOptions = {
     dataset: string | undefined;
     projectId: string | undefined;
     studioUrl: string | undefined;
+    token: string | undefined;
     useCdn: boolean | undefined;
     useStega: string | undefined;
   };
   isPreviewMode: boolean;
+  request: Request;
   waitUntil: ExecutionContext['waitUntil'];
 };
 
@@ -48,14 +50,16 @@ export type Sanity = {
 };
 
 export function createSanityClient(options: CreateSanityClientOptions) {
-  const {cache, config, isPreviewMode, waitUntil} = options;
-  const {apiVersion, dataset, projectId, studioUrl, useCdn, useStega} = config;
+  const {cache, config, isPreviewMode, request, waitUntil} = options;
+  const {apiVersion, dataset, projectId, studioUrl, token, useCdn, useStega} =
+    config;
 
   if (
     typeof projectId === 'undefined' ||
     typeof apiVersion === 'undefined' ||
     typeof dataset === 'undefined' ||
-    typeof studioUrl === 'undefined'
+    typeof studioUrl === 'undefined' ||
+    typeof token === 'undefined'
   ) {
     throw new Error('Missing required configuration for Sanity client');
   }
@@ -65,12 +69,12 @@ export function createSanityClient(options: CreateSanityClientOptions) {
     dataset,
     projectId,
     studioUrl,
+    token,
     useCdn: useCdn ?? true,
     useStega: isPreviewMode && useStega === 'true' ? useStega : 'false',
   });
 
-  queryStore.setServerClient(client);
-  const {loadQuery} = queryStore;
+  setServerClient(client);
 
   const sanity: Sanity = {
     client,
@@ -84,21 +88,29 @@ export function createSanityClient(options: CreateSanityClientOptions) {
       const queryHash = await hashQuery(query, params);
       const withCache = createWithCache({
         cache,
+        request,
         waitUntil,
       });
 
-      return withCache(queryHash, strategy, () => {
-        if (!queryOptions) {
-          return loadQuery(query, params);
-        }
+      return withCache.run(
+        {
+          cacheKey: queryHash,
+          cacheStrategy: strategy,
+          shouldCacheResult: (result) => result.data !== null,
+        },
+        () => {
+          if (!queryOptions) {
+            return loadQuery(query, params);
+          }
 
-        // NOTE: satisfy union type
-        if (queryOptions.filterResponse === false) {
+          // NOTE: satisfy union type
+          if (queryOptions.filterResponse === false) {
+            return loadQuery(query, params, queryOptions);
+          }
+
           return loadQuery(query, params, queryOptions);
-        }
-
-        return loadQuery(query, params, queryOptions);
-      });
+        },
+      );
     },
   };
 

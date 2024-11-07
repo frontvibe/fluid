@@ -138,7 +138,7 @@ export function setShowTrailingZeroKeyValue(locale: I18nLocale) {
 
 export function statusMessage(
   status: FulfillmentStatus,
-  themeContent?: TypeFromSelection<typeof THEME_CONTENT_FRAGMENT> | null,
+  themeContent?: null | TypeFromSelection<typeof THEME_CONTENT_FRAGMENT>,
 ) {
   const translations: Record<FulfillmentStatus, string> = {
     CANCELLED: themeContent?.account.orderStatusCancelled || 'Cancelled',

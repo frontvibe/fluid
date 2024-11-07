@@ -128,12 +128,12 @@ export const THEME_CONTENT_FRAGMENT = {
         q.string().nullable(),
       ],
       from: [getIntValue('from'), q.string().nullable()],
+      loading: [getIntValue('loading'), q.string().nullable()],
       loadMoreProducts: [
         getIntValue('loadMoreProducts'),
         q.string().nullable(),
       ],
       loadPrevious: [getIntValue('loadPrevious'), q.string().nullable()],
-      loading: [getIntValue('loading'), q.string().nullable()],
       noCollectionFound: [
         getIntValue('noCollectionFound'),
         q.string().nullable(),

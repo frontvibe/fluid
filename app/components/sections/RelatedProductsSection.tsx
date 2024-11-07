@@ -7,9 +7,9 @@ import type {SectionDefaultProps} from '~/lib/type';
 import type {RELATED_PRODUCTS_SECTION_FRAGMENT} from '~/qroq/sections';
 import type {loader} from '~/routes/($locale).products.$productHandle';
 
-import {Skeleton} from '../Skeleton';
 import {ProductCardGrid} from '../product/ProductCardGrid';
 import {RelatedProducts} from '../product/RelatedProducts';
+import {Skeleton} from '../Skeleton';
 
 export type RelatedProductsSectionProps = TypeFromSelection<
   typeof RELATED_PRODUCTS_SECTION_FRAGMENT

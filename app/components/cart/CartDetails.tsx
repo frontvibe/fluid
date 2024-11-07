@@ -12,9 +12,9 @@ import {cn} from '~/lib/utils';
 
 import type {CartLayouts} from './Cart';
 
+import {IconLoader} from '../icons/IconLoader';
 import {ProgressiveMotionDiv} from '../ProgressiveMotionDiv';
 import {ShopifyMoney} from '../ShopifyMoney';
-import {IconLoader} from '../icons/IconLoader';
 import {Button} from '../ui/Button';
 import {Card, CardContent} from '../ui/Card';
 import {CartDiscounts} from './CartDiscounts';

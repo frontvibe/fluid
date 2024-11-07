@@ -51,6 +51,10 @@ export function envVariables(contextEnv: Env) {
       env.SANITY_STUDIO_PROJECT_ID,
       'SANITY_STUDIO_PROJECT_ID',
     ),
+    SANITY_STUDIO_TOKEN: checkRequiredEnv(
+      env.SANITY_STUDIO_TOKEN,
+      'SANITY_STUDIO_TOKEN',
+    ),
     SANITY_STUDIO_URL: checkRequiredEnv(
       env.SANITY_STUDIO_URL,
       'SANITY_STUDIO_URL',

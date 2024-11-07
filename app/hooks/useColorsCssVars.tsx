@@ -7,7 +7,7 @@ import type {SETTINGS_FRAGMENT} from '~/qroq/fragments';
 import type {HEADER_QUERY} from '~/qroq/queries';
 import type {SECTION_SETTINGS_FRAGMENT} from '~/qroq/sections';
 
-import {useSanityRoot} from './useSanityRoot';
+import {useRootLoaderData} from '~/root';
 
 export type CmsSectionSettings = InferType<typeof SECTION_SETTINGS_FRAGMENT>;
 export type FooterSettings = InferType<typeof FOOTER_SETTINGS_FRAGMENT>;
@@ -26,7 +26,8 @@ export function useColorsCssVars(props: {
     | HeaderQuery;
 }) {
   const {settings} = props;
-  const {data} = useSanityRoot();
+  const {sanityRoot} = useRootLoaderData();
+  const data = sanityRoot?.data;
   const defaultColorScheme = data?.defaultColorScheme;
   const fallbackScheme = useFallbackColorScheme();
   const selector = props.selector || ':root';
@@ -78,7 +79,8 @@ export function useCardColorsCssVars(props: {
   settings?: CartColorScheme | CmsSectionSettings;
 }) {
   const {settings} = props;
-  const {data} = useSanityRoot();
+  const {sanityRoot} = useRootLoaderData();
+  const data = sanityRoot?.data;
   const defaultColorScheme = data?.defaultColorScheme;
   const fallbackScheme = useFallbackColorScheme();
   // Color scheme

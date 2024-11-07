@@ -4,7 +4,7 @@ import type {ProductVariantFragmentFragment} from 'storefrontapi.generated';
 import {Await, useLoaderData} from '@remix-run/react';
 import {stegaClean} from '@sanity/client/stega';
 import {flattenConnection} from '@shopify/hydrogen-react';
-import {Suspense, createContext, useContext} from 'react';
+import {createContext, Suspense, useContext} from 'react';
 
 import type {SectionDefaultProps} from '~/lib/type';
 import type {PRODUCT_INFORMATION_SECTION_FRAGMENT} from '~/qroq/sections';
@@ -12,9 +12,9 @@ import type {loader} from '~/routes/($locale).products.$productHandle';
 
 import {cn, getAspectRatioData} from '~/lib/utils';
 
-import {Skeleton} from '../Skeleton';
 import {MediaGallery} from '../product/MediaGallery';
 import {ProductDetails} from '../product/ProductDetails';
+import {Skeleton} from '../Skeleton';
 
 export type ProductInformationSectionProps = TypeFromSelection<
   typeof PRODUCT_INFORMATION_SECTION_FRAGMENT
@@ -129,7 +129,7 @@ function ProductInformationGrid({
 }
 
 export const ProductVariantsContext =
-  createContext<ProductVariantsContextType | null>(null);
+  createContext<null | ProductVariantsContextType>(null);
 
 export function useProductVariants() {
   return useContext(ProductVariantsContext);

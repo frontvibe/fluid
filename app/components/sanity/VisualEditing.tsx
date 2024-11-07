@@ -9,15 +9,10 @@ import {cx} from 'class-variance-authority';
 import {useCallback, useEffect} from 'react';
 
 import {useIsInIframe} from '~/hooks/useIsInIframe';
-import {useSanityClient} from '~/hooks/useSanityClient';
-import {useLiveMode} from '~/lib/sanity/sanity.loader';
 import {useRootLoaderData} from '~/root';
 
 export function VisualEditing() {
   const isInIframe = useIsInIframe();
-  const client = useSanityClient();
-  // Enable live queries
-  useLiveMode({client});
 
   return !isInIframe ? (
     <>

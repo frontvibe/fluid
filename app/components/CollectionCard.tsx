@@ -5,11 +5,11 @@ import {stegaClean} from '@sanity/client/stega';
 import {cx} from 'class-variance-authority';
 
 import {useLocalePath} from '~/hooks/useLocalePath';
-import {useSanityRoot} from '~/hooks/useSanityRoot';
 import {cn} from '~/lib/utils';
+import {useRootLoaderData} from '~/root';
 
-import {ShopifyImage} from './ShopifyImage';
 import {IconArrowRight} from './icons/IconArrowRight';
+import {ShopifyImage} from './ShopifyImage';
 import {Card, CardContent, CardMedia} from './ui/Card';
 
 export function CollectionCard(props: {
@@ -21,7 +21,7 @@ export function CollectionCard(props: {
   };
 }) {
   const {collection, skeleton} = props;
-  const sanityRoot = useSanityRoot();
+  const {sanityRoot} = useRootLoaderData();
   const {data} = stegaClean(sanityRoot);
   const style = data?.settings?.collectionCards?.style;
   const textAlignment =

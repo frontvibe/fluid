@@ -2,8 +2,8 @@ import type {FulfillmentStatus} from '@shopify/hydrogen/customer-account-api-typ
 import type {OrderFragment} from 'customer-accountapi.generated';
 
 import {Link, type MetaFunction, useLoaderData} from '@remix-run/react';
-import {Image, Money, flattenConnection} from '@shopify/hydrogen';
-import {type LoaderFunctionArgs, json, redirect} from '@shopify/remix-oxygen';
+import {flattenConnection, Image, Money} from '@shopify/hydrogen';
+import {json, type LoaderFunctionArgs, redirect} from '@shopify/remix-oxygen';
 
 import {Badge} from '~/components/ui/Badge';
 import {Button} from '~/components/ui/Button';

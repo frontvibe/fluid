@@ -10,7 +10,7 @@ const languages = getAllLanguages();
 const defaultLanguage = languages[0];
 const sanityPreviewPath = (slug?: string) => `/sanity/preview?slug=/${slug}`;
 
-export const locate: DocumentLocationResolver = (params, context) => {
+export const locations: DocumentLocationResolver = (params, context) => {
   if (
     params.type === 'collection' ||
     params.type === 'home' ||

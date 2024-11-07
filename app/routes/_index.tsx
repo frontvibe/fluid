@@ -5,7 +5,6 @@ import {DEFAULT_LOCALE} from 'countries';
 
 import {mergeMeta} from '~/lib/meta';
 import {resolveShopifyPromises} from '~/lib/resolveShopifyPromises';
-import {sanityPreviewPayload} from '~/lib/sanity/sanity.payload.server';
 import {getSeoMetaFromMatches} from '~/lib/seo';
 import {seoPayload} from '~/lib/seo.server';
 import {PAGE_QUERY} from '~/qroq/queries';
@@ -61,11 +60,6 @@ export async function loader({context, request}: LoaderFunctionArgs) {
     featuredProductPromise,
     page,
     seo,
-    ...sanityPreviewPayload({
-      context,
-      params: queryParams,
-      query: PAGE_QUERY.query,
-    }),
   });
 }
 

@@ -9,10 +9,8 @@ import invariant from 'tiny-invariant';
 
 import {CmsSection} from '~/components/CmsSection';
 import {COLLECTION_QUERY} from '~/graphql/queries';
-import {useSanityData} from '~/hooks/useSanityData';
 import {mergeMeta} from '~/lib/meta';
 import {resolveShopifyPromises} from '~/lib/resolveShopifyPromises';
-import {sanityPreviewPayload} from '~/lib/sanity/sanity.payload.server';
 import {getSeoMetaFromMatches} from '~/lib/seo';
 import {seoPayload} from '~/lib/seo.server';
 import {COLLECTION_QUERY as CMS_COLLECTION_QUERY} from '~/qroq/queries';
@@ -75,17 +73,14 @@ export async function loader({context, params, request}: LoaderFunctionArgs) {
     featuredCollectionPromise,
     featuredProductPromise,
     seo,
-    ...sanityPreviewPayload({
-      context,
-      params: queryParams,
-      query: CMS_COLLECTION_QUERY.query,
-    }),
   });
 }
 
 export default function Collection() {
-  const {cmsCollection, collection} = useLoaderData<typeof loader>();
-  const {data, encodeDataAttribute} = useSanityData({initial: cmsCollection});
+  const {
+    cmsCollection: {data},
+    collection,
+  } = useLoaderData<typeof loader>();
   const template =
     data?.collection?.template || data?.defaultCollectionTemplate;
 
@@ -93,12 +88,7 @@ export default function Collection() {
     <>
       {template?.sections && template.sections.length > 0
         ? template.sections.map((section, index) => (
-            <CmsSection
-              data={section}
-              encodeDataAttribute={encodeDataAttribute}
-              index={index}
-              key={section._key}
-            />
+            <CmsSection data={section} index={index} key={section._key} />
           ))
         : null}
       <Analytics.CollectionView

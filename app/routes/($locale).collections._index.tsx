@@ -6,7 +6,7 @@ import {json} from '@shopify/remix-oxygen';
 
 import {CollectionListGrid} from '~/components/CollectionListGrid';
 import {COLLECTIONS_QUERY} from '~/graphql/queries';
-import {useSanityRoot} from '~/hooks/useSanityRoot';
+import {useSanityThemeContent} from '~/hooks/useSanityThemeContent';
 import {mergeMeta} from '~/lib/meta';
 import {getSeoMetaFromMatches} from '~/lib/seo';
 import {seoPayload} from '~/lib/seo.server';
@@ -42,7 +42,7 @@ export const loader = async ({
 
 export default function Collections() {
   const data = useLoaderData<typeof loader>();
-  const themeContent = useSanityRoot().data?.themeContent;
+  const {themeContent} = useSanityThemeContent();
 
   return (
     <div className="container py-20">

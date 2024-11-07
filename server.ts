@@ -95,10 +95,12 @@ export default {
           dataset: envVars.SANITY_STUDIO_DATASET,
           projectId: envVars.SANITY_STUDIO_PROJECT_ID,
           studioUrl: envVars.SANITY_STUDIO_URL,
+          token: envVars.SANITY_STUDIO_TOKEN,
           useCdn: !envVars.NODE_ENV || envVars.NODE_ENV === 'production',
           useStega: envVars.SANITY_STUDIO_USE_PREVIEW_MODE,
         },
         isPreviewMode: sanityPreviewMode,
+        request,
         waitUntil,
       });
 

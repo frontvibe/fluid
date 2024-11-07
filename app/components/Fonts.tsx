@@ -5,7 +5,7 @@ import {stegaClean} from '@sanity/client/stega';
 import type {FONT_CATEGORY_FRAGMENT} from '~/qroq/fragments';
 import type {FONTS_QUERY} from '~/qroq/queries';
 
-import {useSanityRoot} from '~/hooks/useSanityRoot';
+import {useRootLoaderData} from '~/root';
 
 type FontsQuery = InferType<typeof FONTS_QUERY>;
 type FontAssetsFragment = InferType<typeof FONT_CATEGORY_FRAGMENT.fontAssets>;
@@ -14,8 +14,8 @@ const defaultFontFamily =
   '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu, Helvetica Neue, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;';
 
 export function Fonts() {
-  const {data} = useSanityRoot();
-  const fontsData = stegaClean(data?.fonts);
+  const {sanityRoot} = useRootLoaderData();
+  const fontsData = stegaClean(sanityRoot?.data?.fonts);
 
   if (!fontsData) {
     return null;

@@ -4,7 +4,6 @@ import type {PartialObjectDeep} from 'type-fest/source/partial-deep';
 import {stegaClean} from '@sanity/client/stega';
 import {Money} from '@shopify/hydrogen';
 
-import {useSanityRoot} from '~/hooks/useSanityRoot';
 import {cn, setShowTrailingZeroKeyValue} from '~/lib/utils';
 import {useRootLoaderData} from '~/root';
 
@@ -21,7 +20,8 @@ export function ShopifyMoney({
   >;
 }) {
   const {locale} = useRootLoaderData();
-  const {data: sanityRootData} = useSanityRoot();
+  const {sanityRoot} = useRootLoaderData();
+  const sanityRootData = sanityRoot?.data;
   const key = setShowTrailingZeroKeyValue(locale);
   const showCurrencyCodes = sanityRootData?.settings?.showCurrencyCodes;
   const showTrailingZeros = sanityRootData?.settings?.showTrailingZeros?.find(

@@ -116,7 +116,7 @@ function home({
 }
 
 type SelectedVariantRequiredFields = {
-  image?: Partial<Image> | null;
+  image?: null | Partial<Image>;
 } & Pick<ProductVariant, 'sku'>;
 
 type ProductRequiredFields = {
@@ -219,7 +219,7 @@ function product({
 
 type CollectionRequiredFields = {
   descriptionHtml?: Collection['descriptionHtml'] | null;
-  image?: Pick<Image, 'altText' | 'height' | 'url' | 'width'> | null;
+  image?: null | Pick<Image, 'altText' | 'height' | 'url' | 'width'>;
   metafields?: Collection['metafields'] | null;
   products: {nodes: Pick<Product, 'handle'>[]};
   updatedAt?: Collection['updatedAt'] | null;
@@ -359,10 +359,10 @@ function article({
   url,
 }: {
   article: {
-    image?: Pick<
+    image?: null | Pick<
       NonNullable<Article['image']>,
       'altText' | 'height' | 'url' | 'width'
-    > | null;
+    >;
   } & Pick<
     Article,
     'contentHtml' | 'excerpt' | 'publishedAt' | 'seo' | 'title'
@@ -528,7 +528,7 @@ function generateOGImageData({
   image,
   sanity,
 }: {
-  image?: TypeFromSelection<typeof SANITY_IMAGE_FRAGMENT> | null;
+  image?: null | TypeFromSelection<typeof SANITY_IMAGE_FRAGMENT>;
   sanity: SanityConfig;
 }): SeoConfig['media'] {
   if (!image) {

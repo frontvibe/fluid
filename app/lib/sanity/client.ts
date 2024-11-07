@@ -6,21 +6,37 @@ export const getSanityClient = (args: {
   dataset: string;
   projectId: string;
   studioUrl: string;
+  token: string;
   useCdn: boolean;
   useStega: string;
 }) => {
-  const {apiVersion, dataset, projectId, studioUrl, useCdn, useStega} = args;
+  const {apiVersion, dataset, projectId, studioUrl, token, useCdn, useStega} =
+    args;
+
+  const client = createClient({
+    apiVersion: apiVersion || '2023-10-01',
+    dataset,
+    projectId,
+    useCdn,
+  });
+
+  const previewClient = client.withConfig({
+    perspective: 'previewDrafts' as const,
+    stega: {
+      ...client.config().stega,
+      enabled: useStega === 'true' ? true : false,
+      studioUrl,
+    },
+    token,
+  });
+
+  if (useStega === 'true') {
+    return {
+      client: previewClient,
+    };
+  }
 
   return {
-    client: createClient({
-      apiVersion: apiVersion || '2023-10-01',
-      dataset,
-      projectId,
-      stega: {
-        enabled: useStega === 'true' ? true : false,
-        studioUrl,
-      },
-      useCdn,
-    }),
+    client,
   };
 };

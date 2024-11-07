@@ -1,6 +1,6 @@
 import {Link} from '@remix-run/react';
 
-import {useSanityRoot} from '~/hooks/useSanityRoot';
+import {useRootLoaderData} from '~/root';
 
 import type {Socials} from './icons/IconSocial';
 
@@ -18,7 +18,8 @@ export function SocialMediaButtons() {
 }
 
 export function SocialButton({media}: {media: Socials}) {
-  const {data} = useSanityRoot();
+  const {sanityRoot} = useRootLoaderData();
+  const data = sanityRoot?.data;
   const settings = data?.settings;
   const mediaUrl = settings?.[media];
 

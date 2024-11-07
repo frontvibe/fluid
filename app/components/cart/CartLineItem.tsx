@@ -17,11 +17,11 @@ import {cn} from '~/lib/utils';
 
 import type {CartLayouts} from './Cart';
 
+import {IconRemove} from '../icons/IconRemove';
 import {ProgressiveMotionDiv} from '../ProgressiveMotionDiv';
 import {QuantitySelector} from '../QuantitySelector';
 import {ShopifyImage} from '../ShopifyImage';
 import {ShopifyMoney} from '../ShopifyMoney';
-import {IconRemove} from '../icons/IconRemove';
 import {IconButton} from '../ui/Button';
 
 type OptimisticData = {

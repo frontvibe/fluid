@@ -7,10 +7,8 @@ import {DEFAULT_LOCALE} from 'countries';
 import type {I18nLocale} from '~/lib/type';
 
 import {CmsSection} from '~/components/CmsSection';
-import {useSanityData} from '~/hooks/useSanityData';
 import {mergeMeta} from '~/lib/meta';
 import {resolveShopifyPromises} from '~/lib/resolveShopifyPromises';
-import {sanityPreviewPayload} from '~/lib/sanity/sanity.payload.server';
 import {getSeoMetaFromMatches} from '~/lib/seo';
 import {seoPayload} from '~/lib/seo.server';
 import {PAGE_QUERY} from '~/qroq/queries';
@@ -67,28 +65,17 @@ export async function loader({context, params, request}: LoaderFunctionArgs) {
     featuredProductPromise,
     page,
     seo,
-    ...sanityPreviewPayload({
-      context,
-      params: queryParams,
-      query: PAGE_QUERY.query,
-    }),
   });
 }
 
 export default function PageRoute() {
-  const {page} = useLoaderData<typeof loader>();
-  const {data, encodeDataAttribute} = useSanityData({
-    initial: page,
-  });
+  const {
+    page: {data},
+  } = useLoaderData<typeof loader>();
 
   return data?.sections && data.sections.length > 0
     ? data.sections.map((section, index) => (
-        <CmsSection
-          data={section}
-          encodeDataAttribute={encodeDataAttribute}
-          index={index}
-          key={section._key}
-        />
+        <CmsSection data={section} index={index} key={section._key} />
       ))
     : null;
 }

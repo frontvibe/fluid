@@ -27,9 +27,9 @@ import {useRootLoaderData} from '~/root';
 
 import type {AppliedFilter} from '../collection/SortFilterLayout';
 
-import {Skeleton} from '../Skeleton';
 import {SortFilter} from '../collection/SortFilterLayout';
 import {ProductCardGrid} from '../product/ProductCardGrid';
+import {Skeleton} from '../Skeleton';
 import {Button} from '../ui/Button';
 
 type CollectionProductGridSectionProps = TypeFromSelection<
@@ -127,12 +127,12 @@ export function CollectionProductGridSection(
               >
                 <Pagination connection={collection?.products}>
                   {({
-                    NextLink,
-                    PreviousLink,
                     hasNextPage,
                     isLoading,
+                    NextLink,
                     nextPageUrl,
                     nodes,
+                    PreviousLink,
                     state,
                   }) => (
                     <>

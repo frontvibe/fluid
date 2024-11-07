@@ -2,13 +2,14 @@ import type {TypeFromSelection} from 'groqd';
 
 import type {BORDER_FRAGMENT, SHADOW_FRAGMENT} from '~/qroq/fragments';
 
-import {useSanityRoot} from './useSanityRoot';
+import {useRootLoaderData} from '~/root';
 
-type BorderFragment = TypeFromSelection<typeof BORDER_FRAGMENT> | null;
-type ShadowFragment = TypeFromSelection<typeof SHADOW_FRAGMENT> | null;
+type BorderFragment = null | TypeFromSelection<typeof BORDER_FRAGMENT>;
+type ShadowFragment = null | TypeFromSelection<typeof SHADOW_FRAGMENT>;
 
 export function useSettingsCssVars() {
-  const {data} = useSanityRoot();
+  const {sanityRoot} = useRootLoaderData();
+  const data = sanityRoot?.data;
   const settings = data?.settings;
 
   const cssVars = `

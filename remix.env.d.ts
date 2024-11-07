@@ -44,6 +44,7 @@ declare global {
     SANITY_STUDIO_PROJECT_ID: string;
     SANITY_STUDIO_URL: string;
     SANITY_STUDIO_USE_PREVIEW_MODE: string;
+    SANITY_STUDIO_TOKEN: string;
     SESSION_SECRET: string;
   }
 }

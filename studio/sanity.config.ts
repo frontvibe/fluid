@@ -16,7 +16,7 @@ import {projectDetails} from './project.details';
 import {getAllLanguages} from '../countries';
 import {customDocumentActions} from './plugins/customDocumentActions';
 import {singletonActions, singletonsTypes} from './structure/singletons';
-import {locate} from './presentation/locate';
+import {locations} from './presentation/locations';
 import {PreviewIcon} from './components/icons/Preview';
 
 const isDev = process.env.MODE === 'development';
@@ -51,7 +51,9 @@ export default defineConfig({
     presentationTool({
       // Required: set the base URL to the preview location in the front end
       previewUrl: `${SANITY_STUDIO_PRODUCTION_URL}/sanity/preview`,
-      locate,
+      resolve: {
+        locations,
+      },
       icon: PreviewIcon,
       title: 'Preview',
     }),

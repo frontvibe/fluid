@@ -7,7 +7,7 @@ export function RelatedProducts(props: {
     desktop?: null | number;
     mobile?: null | number;
   };
-  data: ProductRecommendationsQuery | null;
+  data: null | ProductRecommendationsQuery;
   heading?: null | string;
   maxProducts: number;
 }) {

@@ -1,4 +1,4 @@
-import {useSanityRoot} from '~/hooks/useSanityRoot';
+import {useRootLoaderData} from '~/root';
 
 import {
   useCardColorsCssVars,
@@ -9,7 +9,8 @@ import {useSettingsCssVars} from '../hooks/useSettingsCssVars';
 export function CssVars() {
   const settingsCssVars = useSettingsCssVars();
   const colorsCssVars = useColorsCssVars({});
-  const {data} = useSanityRoot();
+  const {sanityRoot} = useRootLoaderData();
+  const data = sanityRoot?.data;
 
   const cartColorsCssVars = useColorsCssVars({
     selector: '.cart',

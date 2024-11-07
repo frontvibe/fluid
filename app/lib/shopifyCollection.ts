@@ -102,11 +102,26 @@ export function getAppliedFilters({
     .filter((filter): filter is NonNullable<typeof filter> => filter !== null);
 }
 
-export function getSortValuesFromParam(sortParam: SortParam | null): {
+export function getSortValuesFromParam(sortParam: null | SortParam): {
   reverse: boolean;
   sortKey: ProductCollectionSortKeys;
 } {
   switch (sortParam) {
+    case 'best-selling':
+      return {
+        reverse: false,
+        sortKey: 'BEST_SELLING',
+      };
+    case 'featured':
+      return {
+        reverse: false,
+        sortKey: 'MANUAL',
+      };
+    case 'newest':
+      return {
+        reverse: true,
+        sortKey: 'CREATED',
+      };
     case 'price-high-low':
       return {
         reverse: true,
@@ -116,21 +131,6 @@ export function getSortValuesFromParam(sortParam: SortParam | null): {
       return {
         reverse: false,
         sortKey: 'PRICE',
-      };
-    case 'best-selling':
-      return {
-        reverse: false,
-        sortKey: 'BEST_SELLING',
-      };
-    case 'newest':
-      return {
-        reverse: true,
-        sortKey: 'CREATED',
-      };
-    case 'featured':
-      return {
-        reverse: false,
-        sortKey: 'MANUAL',
       };
     default:
       return {

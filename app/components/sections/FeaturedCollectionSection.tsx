@@ -16,8 +16,8 @@ import {useSanityThemeContent} from '~/hooks/useSanityThemeContent';
 
 import type {loader as indexLoader} from '../../routes/_index';
 
-import {Skeleton} from '../Skeleton';
 import {ProductCardGrid} from '../product/ProductCardGrid';
+import {Skeleton} from '../Skeleton';
 import {Button} from '../ui/Button';
 
 type FeaturedCollectionSectionProps = TypeFromSelection<

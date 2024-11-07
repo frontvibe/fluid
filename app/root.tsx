@@ -6,6 +6,7 @@ import type {
 } from '@shopify/remix-oxygen';
 
 import {
+  isRouteErrorResponse,
   Link,
   Links,
   LiveReload,
@@ -13,7 +14,6 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  isRouteErrorResponse,
   useLoaderData,
   useMatches,
   useNavigate,
@@ -35,7 +35,6 @@ import {useLocalePath} from './hooks/useLocalePath';
 import {useSanityThemeContent} from './hooks/useSanityThemeContent';
 import {generateFontsPreloadLinks} from './lib/fonts';
 import {resolveShopifyPromises} from './lib/resolveShopifyPromises';
-import {sanityPreviewPayload} from './lib/sanity/sanity.payload.server';
 import {seoPayload} from './lib/seo.server';
 import {ROOT_QUERY} from './qroq/queries';
 import tailwindCss from './styles/tailwind.css';
@@ -179,11 +178,6 @@ export async function loader({context, request}: LoaderFunctionArgs) {
     shop: getShopAnalytics({
       publicStorefrontId: env.PUBLIC_STOREFRONT_ID,
       storefront: storefront,
-    }),
-    ...sanityPreviewPayload({
-      context,
-      params: queryParams,
-      query: ROOT_QUERY.query,
     }),
   });
 }

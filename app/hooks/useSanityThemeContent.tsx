@@ -1,8 +1,9 @@
-import {useSanityRoot} from './useSanityRoot';
+import {useRootLoaderData} from '~/root';
 
 export function useSanityThemeContent() {
-  const {data, encodeDataAttribute, loading} = useSanityRoot();
+  const {
+    sanityRoot: {data},
+  } = useRootLoaderData();
   const themeContent = data?.themeContent;
-
-  return {encodeDataAttribute, loading, themeContent};
+  return {themeContent};
 }

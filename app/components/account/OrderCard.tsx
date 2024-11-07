@@ -1,7 +1,7 @@
 import type {OrderCardFragment} from 'customer-accountapi.generated';
 
 import {Link} from '@remix-run/react';
-import {Image, flattenConnection} from '@shopify/hydrogen';
+import {flattenConnection, Image} from '@shopify/hydrogen';
 
 import {useSanityThemeContent} from '~/hooks/useSanityThemeContent';
 import {statusMessage} from '~/lib/utils';

@@ -13,11 +13,11 @@ import type {ExternalLinkAnnotationProps} from '../sanity/richtext/components/Ex
 import type {ImageBlockProps} from '../sanity/richtext/components/ImageBlock';
 import type {InternalLinkAnnotationProps} from '../sanity/richtext/components/InternalLinkAnnotation';
 
-import {RichtextLayout} from '../sanity/richtext/RichTextLayout';
 import {ButtonBlock} from '../sanity/richtext/components/ButtonBlock';
 import {ExternalLinkAnnotation} from '../sanity/richtext/components/ExternalLinkAnnotation';
 import {ImageBlock} from '../sanity/richtext/components/ImageBlock';
 import {InternalLinkAnnotation} from '../sanity/richtext/components/InternalLinkAnnotation';
+import {RichtextLayout} from '../sanity/richtext/RichTextLayout';
 
 type RichtextSectionProps = TypeFromSelection<typeof RICHTEXT_SECTION_FRAGMENT>;
 

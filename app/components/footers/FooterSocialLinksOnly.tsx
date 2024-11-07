@@ -5,8 +5,8 @@ import type {FOOTER_SOCIAL_LINKS_ONLY_FRAGMENT} from '~/qroq/footers';
 
 import {useColorsCssVars} from '~/hooks/useColorsCssVars';
 
-import {SocialMediaButtons} from '../SocialMedia';
 import {CountrySelector} from '../layout/CountrySelector';
+import {SocialMediaButtons} from '../SocialMedia';
 
 type FooterSocialLinksOnlyProps = TypeFromSelection<
   typeof FOOTER_SOCIAL_LINKS_ONLY_FRAGMENT

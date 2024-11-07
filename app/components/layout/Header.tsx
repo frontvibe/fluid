@@ -11,8 +11,8 @@ import React, {useEffect, useState} from 'react';
 import {useBoundedScroll} from '~/hooks/useBoundedScroll';
 import {useColorsCssVars} from '~/hooks/useColorsCssVars';
 import {useLocalePath} from '~/hooks/useLocalePath';
-import {useSanityRoot} from '~/hooks/useSanityRoot';
 import {cn} from '~/lib/utils';
+import {useRootLoaderData} from '~/root';
 
 import {headerVariants} from '../cva/header';
 import {IconAccount} from '../icons/IconAccount';
@@ -23,7 +23,8 @@ import {CartDrawer} from './CartDrawer';
 import {Logo} from './Logo';
 
 export function Header() {
-  const {data} = useSanityRoot();
+  const {sanityRoot} = useRootLoaderData();
+  const data = sanityRoot?.data;
   const header = data?.header;
   const logoWidth = header?.desktopLogoWidth
     ? `${header?.desktopLogoWidth}px`
@@ -73,7 +74,8 @@ function AccountLink({className}: {className?: string}) {
 }
 
 function HeaderWrapper(props: {children: React.ReactNode}) {
-  const {data} = useSanityRoot();
+  const {sanityRoot} = useRootLoaderData();
+  const data = sanityRoot?.data;
   const header = data?.header;
   const showSeparatorLine = header?.showSeparatorLine;
   const blur = header?.blur;
@@ -194,7 +196,8 @@ function HeaderHeightCssVars() {
 }
 
 function useHeaderHeigth() {
-  const {data} = useSanityRoot();
+  const {sanityRoot} = useRootLoaderData();
+  const data = sanityRoot?.data;
   const headerPadding = {
     bottom: data?.header?.padding?.bottom || 0,
     top: data?.header?.padding?.top || 0,

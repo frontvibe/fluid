@@ -17,8 +17,8 @@ import {
   BannerMediaOverlay,
 } from '../Banner';
 import {useSection} from '../CmsSection';
-import {SanityImage} from '../sanity/SanityImage';
 import {ButtonBlock} from '../sanity/richtext/components/ButtonBlock';
+import {SanityImage} from '../sanity/SanityImage';
 
 type ImageBannerSectionProps = TypeFromSelection<
   typeof IMAGE_BANNER_SECTION_FRAGMENT
@@ -58,7 +58,7 @@ export function ImageBannerSection(
   );
 }
 
-function BannerRichtext(props: {value?: PortableTextBlock[] | null}) {
+function BannerRichtext(props: {value?: null | PortableTextBlock[]}) {
   const components = useMemo(
     () => ({
       types: {

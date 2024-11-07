@@ -10,10 +10,8 @@ import invariant from 'tiny-invariant';
 
 import {CmsSection} from '~/components/CmsSection';
 import {PRODUCT_QUERY, VARIANTS_QUERY} from '~/graphql/queries';
-import {useSanityData} from '~/hooks/useSanityData';
 import {mergeMeta} from '~/lib/meta';
 import {resolveShopifyPromises} from '~/lib/resolveShopifyPromises';
-import {sanityPreviewPayload} from '~/lib/sanity/sanity.payload.server';
 import {getSeoMetaFromMatches} from '~/lib/seo';
 import {seoPayload} from '~/lib/seo.server';
 import {PRODUCT_QUERY as CMS_PRODUCT_QUERY} from '~/qroq/queries';
@@ -98,17 +96,15 @@ export async function loader({context, params, request}: LoaderFunctionArgs) {
     relatedProductsPromise,
     seo,
     variants,
-    ...sanityPreviewPayload({
-      context,
-      params: queryParams,
-      query: CMS_PRODUCT_QUERY.query,
-    }),
   });
 }
 
 export default function Product() {
-  const {cmsProduct, product} = useLoaderData<typeof loader>();
-  const {data, encodeDataAttribute} = useSanityData({initial: cmsProduct});
+  const {
+    cmsProduct: {data},
+    product,
+  } = useLoaderData<typeof loader>();
+
   const template = data?.product?.template || data?.defaultProductTemplate;
   const selectedVariant = product.variants.nodes[0];
 
@@ -117,12 +113,7 @@ export default function Product() {
       {template?.sections &&
         template.sections.length > 0 &&
         template.sections.map((section, index) => (
-          <CmsSection
-            data={section}
-            encodeDataAttribute={encodeDataAttribute}
-            index={index}
-            key={section._key}
-          />
+          <CmsSection data={section} index={index} key={section._key} />
         ))}
       <Analytics.ProductView
         data={{

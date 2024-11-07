@@ -22,9 +22,9 @@ import {useRootLoaderData} from '~/root';
 
 import type {loader as indexLoader} from '../../routes/_index';
 
+import {ProductDetails} from '../product/ProductDetails';
 import {ShopifyImage} from '../ShopifyImage';
 import {Skeleton} from '../Skeleton';
-import {ProductDetails} from '../product/ProductDetails';
 
 export type FeaturedProductSectionProps = TypeFromSelection<
   typeof FEATURED_PRODUCT_SECTION_FRAGMENT

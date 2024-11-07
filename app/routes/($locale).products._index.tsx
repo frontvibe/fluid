@@ -6,10 +6,11 @@ import {json} from '@shopify/remix-oxygen';
 
 import {ProductCardGrid} from '~/components/product/ProductCardGrid';
 import {ALL_PRODUCTS_QUERY} from '~/graphql/queries';
-import {useSanityRoot} from '~/hooks/useSanityRoot';
+import {useSanityThemeContent} from '~/hooks/useSanityThemeContent';
 import {mergeMeta} from '~/lib/meta';
 import {getSeoMetaFromMatches} from '~/lib/seo';
 import {seoPayload} from '~/lib/seo.server';
+import {useRootLoaderData} from '~/root';
 
 const PAGE_BY = 9;
 
@@ -54,7 +55,7 @@ export async function loader({
 
 export default function AllProducts() {
   const data = useLoaderData<typeof loader>();
-  const themeContent = useSanityRoot().data?.themeContent;
+  const {themeContent} = useSanityThemeContent();
   const products = data.products?.nodes.length
     ? flattenConnection(data.products)
     : [];

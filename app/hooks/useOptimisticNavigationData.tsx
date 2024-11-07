@@ -9,7 +9,7 @@ import {useNavigation} from '@remix-run/react';
  * const {data, pending} = useOptimisticNavigationData<OptimisticData>(id);
  */
 export function useOptimisticNavigationData<T>(id: string): {
-  optimisticData: T | null;
+  optimisticData: null | T;
   pending: boolean;
 } {
   const {location, state} = useNavigation();

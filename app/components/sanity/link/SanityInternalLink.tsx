@@ -30,16 +30,16 @@ export function SanityInternalLink(props: {
 
   const path: () => string = () => {
     switch (documentType) {
-      case 'page':
-        return `${locale.pathPrefix}/${slug}`;
-      case 'product':
-        return `${locale.pathPrefix}/products/${slug}`;
+      case 'blogPost':
+        return `${locale.pathPrefix}/blog/${slug}`;
       case 'collection':
         return `${locale.pathPrefix}/collections/${slug}`;
       case 'home':
         return locale.pathPrefix || '/';
-      case 'blogPost':
-        return `${locale.pathPrefix}/blog/${slug}`;
+      case 'page':
+        return `${locale.pathPrefix}/${slug}`;
+      case 'product':
+        return `${locale.pathPrefix}/products/${slug}`;
       default:
         return '';
     }

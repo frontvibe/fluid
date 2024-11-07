@@ -13,7 +13,7 @@ import {
   useOutlet,
 } from '@remix-run/react';
 import {flattenConnection} from '@shopify/hydrogen';
-import {type LoaderFunctionArgs, defer} from '@shopify/remix-oxygen';
+import {defer, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 
 import {AccountAddressBook} from '~/components/account/AccountAddressBook';
 import {AccountDetails} from '~/components/account/AccountDetails';

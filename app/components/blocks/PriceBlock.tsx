@@ -7,10 +7,10 @@ import {useProduct} from '@shopify/hydrogen-react';
 
 import type {PRICE_BLOCK_FRAGMENT} from '~/qroq/blocks';
 
-import {useSanityRoot} from '~/hooks/useSanityRoot';
 import {useSanityThemeContent} from '~/hooks/useSanityThemeContent';
 import {useSelectedVariant} from '~/hooks/useSelectedVariant';
 import {cn} from '~/lib/utils';
+import {useRootLoaderData} from '~/root';
 
 import {VariantPrice} from '../product/VariantPrice';
 import {useProductVariants} from '../sections/ProductInformationSection';
@@ -56,7 +56,8 @@ export function ProductBadges({
   layout?: 'card';
   variants: ProductVariantFragmentFragment[];
 }) {
-  const {data} = useSanityRoot();
+  const {sanityRoot} = useRootLoaderData();
+  const data = sanityRoot?.data;
   const {themeContent} = useSanityThemeContent();
   const selectedVariant = useSelectedVariant({variants});
   const isSoldOut = !selectedVariant?.availableForSale;

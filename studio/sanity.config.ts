@@ -7,7 +7,7 @@ import {fontPicker} from '@frontvibe/sanity-font-picker';
 import {colorPicker} from '@frontvibe/sanity-color-picker';
 import {rangeSlider} from '@frontvibe/sanity-plugin-range-slider';
 import {codeInput} from '@sanity/code-input';
-import {presentationTool} from '@sanity/presentation';
+import {presentationTool} from 'sanity/presentation';
 import {languageFilter} from '@sanity/language-filter';
 
 import {schemaTypes} from './schemas';

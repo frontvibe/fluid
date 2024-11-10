@@ -3,33 +3,33 @@ import {getLocaleFromRequest} from 'countries';
 
 import {CART_QUERY_FRAGMENT} from '~/graphql/fragments';
 
-import {envVariables} from './env.server';
-import {HydrogenSession} from './hydrogen.session.server';
+import type {HydrogenSession} from './hydrogen.session.server';
+import type {SanitySession} from './sanity/sanity.session.server';
+
 import {createSanityClient} from './sanity/sanity.server';
-import {SanitySession} from './sanity/sanity.session.server';
 
 /**
  * The context implementation is separate from server.ts
  * so that type can be extracted for AppLoadContext
  * */
-export async function createAppLoadContext(
-  request: Request,
-  env: Env,
-  executionContext: ExecutionContext,
-) {
-  const envVars = envVariables(env);
-  const isDev = envVars.NODE_ENV === 'development';
+export async function createAppLoadContext({
+  cache,
+  env,
+  request,
+  sanitySession,
+  session,
+  waitUntil,
+}: {
+  cache: Cache;
+  env: Env;
+  request: Request;
+  sanitySession: SanitySession;
+  session: HydrogenSession;
+  waitUntil: ExecutionContext['waitUntil'];
+}) {
+  const isDev = env.NODE_ENV === 'development';
   const locale = getLocaleFromRequest(request);
-  const waitUntil = executionContext.waitUntil.bind(executionContext);
 
-  /*
-   * Open a cache instance in the worker and a custom session instance.
-   */
-  const [cache, session, sanitySession] = await Promise.all([
-    caches.open('hydrogen'),
-    HydrogenSession.init(request, [envVars.SESSION_SECRET]),
-    SanitySession.init(request, [envVars.SESSION_SECRET]),
-  ]);
   const sanityPreviewMode = await sanitySession.has('previewMode');
 
   const hydrogenContext = createHydrogenContext({
@@ -50,13 +50,13 @@ export async function createAppLoadContext(
   const sanity = createSanityClient({
     cache,
     config: {
-      apiVersion: envVars.SANITY_STUDIO_API_VERSION,
-      dataset: envVars.SANITY_STUDIO_DATASET,
-      projectId: envVars.SANITY_STUDIO_PROJECT_ID,
-      studioUrl: envVars.SANITY_STUDIO_URL,
-      token: envVars.SANITY_STUDIO_TOKEN,
-      useCdn: !envVars.NODE_ENV || envVars.NODE_ENV === 'production',
-      useStega: envVars.SANITY_STUDIO_USE_PREVIEW_MODE,
+      apiVersion: env.SANITY_STUDIO_API_VERSION,
+      dataset: env.SANITY_STUDIO_DATASET,
+      projectId: env.SANITY_STUDIO_PROJECT_ID,
+      studioUrl: env.SANITY_STUDIO_URL,
+      token: env.SANITY_STUDIO_TOKEN,
+      useCdn: !env.NODE_ENV || env.NODE_ENV === 'production',
+      useStega: env.SANITY_STUDIO_USE_PREVIEW_MODE,
     },
     isPreviewMode: sanityPreviewMode,
     request,

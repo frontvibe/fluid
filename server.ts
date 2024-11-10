@@ -6,6 +6,9 @@ import {storefrontRedirect} from '@shopify/hydrogen';
 import {createRequestHandler} from '@shopify/remix-oxygen';
 
 import {createAppLoadContext} from '~/lib/context';
+import {envVariables} from '~/lib/env.server';
+import {HydrogenSession} from '~/lib/hydrogen.session.server';
+import {SanitySession} from '~/lib/sanity/sanity.session.server';
 
 /*
  * Export a fetch handler in module format.
@@ -17,11 +20,24 @@ export default {
     executionContext: ExecutionContext,
   ): Promise<Response> {
     try {
-      const appLoadContext = await createAppLoadContext(
+      const envVars = envVariables(env);
+      /*
+       * Open a cache instance in the worker and a custom session instance.
+       */
+      const [cache, session, sanitySession] = await Promise.all([
+        caches.open('hydrogen'),
+        HydrogenSession.init(request, [envVars.SESSION_SECRET]),
+        SanitySession.init(request, [envVars.SESSION_SECRET]),
+      ]);
+
+      const appLoadContext = await createAppLoadContext({
+        cache,
+        env: envVars,
         request,
-        env,
-        executionContext,
-      );
+        sanitySession,
+        session,
+        waitUntil: executionContext.waitUntil,
+      });
 
       /*
        * Create a Remix request handler and pass

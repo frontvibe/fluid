@@ -43,7 +43,7 @@ export default {
         cart: {
           queryFragment: CART_QUERY_FRAGMENT,
         },
-        env,
+        env: envVars,
         i18n: {country: locale.country, language: locale.language},
         request,
         session,
@@ -77,18 +77,23 @@ export default {
         build: remixBuild,
         getLoadContext: (): AppLoadContext => ({
           ...hydrogenContext,
-          // declare additional Remix loader context
+          env: envVars,
           isDev,
           locale,
           sanity,
           sanityPreviewMode,
           sanitySession,
+          session,
           waitUntil,
         }),
         mode: process.env.NODE_ENV,
       });
 
       const response = await handleRequest(request);
+
+      if (session.isPending) {
+        response.headers.set('Set-Cookie', await session.commit());
+      }
 
       if (response.status === 404) {
         /*

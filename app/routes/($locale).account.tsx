@@ -48,8 +48,7 @@ export async function loader({context}: LoaderFunctionArgs) {
     },
     {
       headers: {
-        'Cache-Control': CACHE_NONE,
-        'Set-Cookie': await context.session.commit(),
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
       },
     },
   );

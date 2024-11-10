@@ -10,6 +10,7 @@ import {createCookieSessionStorage} from '@shopify/remix-oxygen';
 export class HydrogenSession {
   #session;
   #sessionStorage;
+  public isPending = false;
 
   constructor(sessionStorage: SessionStorage, session: Session) {
     this.#sessionStorage = sessionStorage;
@@ -27,12 +28,15 @@ export class HydrogenSession {
       },
     });
 
-    const session = await storage.getSession(request.headers.get('Cookie'));
+    const session = await storage
+      .getSession(request.headers.get('Cookie'))
+      .catch(() => storage.getSession());
 
     return new this(storage, session);
   }
 
   commit() {
+    this.isPending = false;
     return this.#sessionStorage.commitSession(this.#session);
   }
 
@@ -53,10 +57,12 @@ export class HydrogenSession {
   }
 
   get set() {
+    this.isPending = true;
     return this.#session.set;
   }
 
   get unset() {
+    this.isPending = true;
     return this.#session.unset;
   }
 }

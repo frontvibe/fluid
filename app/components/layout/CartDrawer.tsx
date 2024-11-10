@@ -51,15 +51,36 @@ function Badge(props: {cart?: CartApiQueryFragment; count: number}) {
   const addToCartFetchers = useCartFetchers(CartForm.ACTIONS.LinesAdd);
   const device = useDevice();
   const cartIsLoading = Boolean(addToCartFetchers.length);
+  /**
+   * Whether the user has manually closed the cart drawer,
+   * so we avoid opening it again when addToCartFetchers updates
+   */
+  const [userClosedCart, setUserClosedCart] = useState(false);
 
   const handleOpen = useCallback(() => {
-    if (cartOpen || !addToCartFetchers.length) return;
-    setCartOpen(true);
-  }, [addToCartFetchers, cartOpen]);
+    if (!cartOpen && addToCartFetchers.length && !userClosedCart) {
+      setCartOpen(true);
+    }
+  }, [addToCartFetchers, cartOpen, userClosedCart]);
+
+  const onOpenChange = useCallback((open: boolean) => {
+    setCartOpen(open);
+    if (!open) {
+      setUserClosedCart(true);
+    }
+  }, []);
 
   const handleClose = useCallback(() => {
     setCartOpen(false);
+    setUserClosedCart(true);
   }, []);
+
+  // Reset userClosedCart when fetchers are done
+  useEffect(() => {
+    if (addToCartFetchers.length === 0) {
+      setUserClosedCart(false);
+    }
+  }, [addToCartFetchers]);
 
   // Toggle cart drawer when adding to cart
   useEffect(() => {
@@ -95,7 +116,7 @@ function Badge(props: {cart?: CartApiQueryFragment; count: number}) {
   return isHydrated ? (
     <Drawer
       direction={device === 'desktop' ? 'right' : 'bottom'}
-      onOpenChange={setCartOpen}
+      onOpenChange={onOpenChange}
       open={cartOpen}
     >
       <DrawerTrigger className={buttonClass}>{BadgeCounter}</DrawerTrigger>

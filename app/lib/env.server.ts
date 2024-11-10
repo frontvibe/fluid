@@ -62,6 +62,7 @@ export function envVariables(contextEnv: Env) {
     SANITY_STUDIO_USE_PREVIEW_MODE:
       env.SANITY_STUDIO_USE_PREVIEW_MODE || 'false',
     SESSION_SECRET: env.SESSION_SECRET || '',
+    SHOP_ID: checkRequiredEnv(env.SHOP_ID, 'SHOP_ID'),
   };
 }
 

@@ -46,6 +46,7 @@ declare global {
     SANITY_STUDIO_USE_PREVIEW_MODE: string;
     SANITY_STUDIO_TOKEN: string;
     SESSION_SECRET: string;
+    SHOP_ID: string;
   }
 }
 

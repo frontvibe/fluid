@@ -2,26 +2,15 @@
 import type {AppLoadContext} from '@shopify/remix-oxygen';
 
 import * as remixBuild from '@remix-run/dev/server-build';
-import {
-  cartGetIdDefault,
-  cartSetIdDefault,
-  createCartHandler,
-  createCustomerAccountClient,
-  createStorefrontClient,
-  storefrontRedirect,
-} from '@shopify/hydrogen';
-import {
-  createRequestHandler,
-  getStorefrontHeaders,
-} from '@shopify/remix-oxygen';
+import {createHydrogenContext, storefrontRedirect} from '@shopify/hydrogen';
+import {createRequestHandler} from '@shopify/remix-oxygen';
 import {getLocaleFromRequest} from 'countries';
 
 import {CART_QUERY_FRAGMENT} from '~/graphql/fragments';
 import {envVariables} from '~/lib/env.server';
 import {HydrogenSession} from '~/lib/hydrogen.session.server';
+import {createSanityClient} from '~/lib/sanity/sanity.server';
 import {SanitySession} from '~/lib/sanity/sanity.session.server';
-
-import {createSanityClient} from './app/lib/sanity/sanity.server';
 
 /*
  * Export a fetch handler in module format.
@@ -46,43 +35,19 @@ export default {
         HydrogenSession.init(request, [envVars.SESSION_SECRET]),
         SanitySession.init(request, [envVars.SESSION_SECRET]),
       ]);
+
       const sanityPreviewMode = await sanitySession.has('previewMode');
 
-      /*
-       * Create Hydrogen's Storefront client.
-       */
-      const {storefront} = createStorefrontClient({
+      const hydrogenContext = createHydrogenContext({
         cache,
+        cart: {
+          queryFragment: CART_QUERY_FRAGMENT,
+        },
+        env,
         i18n: {country: locale.country, language: locale.language},
-        privateStorefrontToken: env.PRIVATE_STOREFRONT_API_TOKEN,
-        publicStorefrontToken: env.PUBLIC_STOREFRONT_API_TOKEN,
-        storeDomain: env.PUBLIC_STORE_DOMAIN,
-        storefrontApiVersion: env.PUBLIC_STOREFRONT_API_VERSION || '2023-10',
-        storefrontHeaders: getStorefrontHeaders(request),
-        storefrontId: env.PUBLIC_STOREFRONT_ID,
-        waitUntil,
-      });
-
-      /**
-       * Create a client for Customer Account API.
-       */
-      const customerAccount = createCustomerAccountClient({
-        customerAccountId: env.PUBLIC_CUSTOMER_ACCOUNT_API_CLIENT_ID,
-        customerAccountUrl: env.PUBLIC_CUSTOMER_ACCOUNT_API_URL,
         request,
         session,
         waitUntil,
-      });
-
-      /*
-       * Create a cart handler that will be used to
-       * create and update the cart in the session.
-       */
-      const cart = createCartHandler({
-        cartQueryFragment: CART_QUERY_FRAGMENT,
-        getCartId: cartGetIdDefault(request.headers),
-        setCartId: cartSetIdDefault(),
-        storefront,
       });
 
       /*
@@ -91,13 +56,13 @@ export default {
       const sanity = createSanityClient({
         cache,
         config: {
-          apiVersion: envVars.SANITY_STUDIO_API_VERSION,
-          dataset: envVars.SANITY_STUDIO_DATASET,
-          projectId: envVars.SANITY_STUDIO_PROJECT_ID,
-          studioUrl: envVars.SANITY_STUDIO_URL,
-          token: envVars.SANITY_STUDIO_TOKEN,
-          useCdn: !envVars.NODE_ENV || envVars.NODE_ENV === 'production',
-          useStega: envVars.SANITY_STUDIO_USE_PREVIEW_MODE,
+          apiVersion: env.SANITY_STUDIO_API_VERSION,
+          dataset: env.SANITY_STUDIO_DATASET,
+          projectId: env.SANITY_STUDIO_PROJECT_ID,
+          studioUrl: env.SANITY_STUDIO_URL,
+          token: env.SANITY_STUDIO_TOKEN,
+          useCdn: !env.NODE_ENV || env.NODE_ENV === 'production',
+          useStega: env.SANITY_STUDIO_USE_PREVIEW_MODE,
         },
         isPreviewMode: sanityPreviewMode,
         request,
@@ -111,16 +76,13 @@ export default {
       const handleRequest = createRequestHandler({
         build: remixBuild,
         getLoadContext: (): AppLoadContext => ({
-          cart,
-          customerAccount,
-          env: envVars,
+          ...hydrogenContext,
+          // declare additional Remix loader context
           isDev,
           locale,
           sanity,
           sanityPreviewMode,
           sanitySession,
-          session,
-          storefront,
           waitUntil,
         }),
         mode: process.env.NODE_ENV,
@@ -134,7 +96,11 @@ export default {
          * If the redirect doesn't exist, then `storefrontRedirect`
          * will pass through the 404 response.
          */
-        return storefrontRedirect({request, response, storefront});
+        return storefrontRedirect({
+          request,
+          response,
+          storefront: hydrogenContext.storefront,
+        });
       }
 
       return response;

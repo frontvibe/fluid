@@ -93,9 +93,9 @@
     "typescript": "^5.6.3"
   },
   "engines": {
-    "node": ">=16.13",
-    "pnpm": ">=9"
+    "node": "20.x"
   },
+  "packageManager": "pnpm@9.12.3",
   "browserslist": [
     "defaults"
   ],

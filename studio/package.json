@@ -9,7 +9,7 @@
     "start": "sanity start",
     "build": "sanity build",
     "deploy": "sanity deploy",
-    "create:initial": "npx sanity@latest exec ./scripts/createInitialDocuments.ts --with-user-token"
+    "create:initial": "sanity exec ./scripts/createInitialDocuments.ts --with-user-token"
   },
   "keywords": [
     "sanity"
@@ -21,13 +21,13 @@
     "@sanity/code-input": "^4.1.4",
     "@sanity/icons": "^3.4.0",
     "@sanity/language-filter": "^4.0.2",
-    "@sanity/ui": "2.8.22",
-    "@sanity/util": "^3.63.0",
+    "@sanity/ui": "2.8.23",
+    "@sanity/util": "^3.64.0",
     "@sanity/uuid": "^3.0.2",
-    "@sanity/vision": "^3.63.0",
+    "@sanity/vision": "^3.64.0",
     "@shopify/polaris": "^13.9.1",
     "@shopify/polaris-icons": "^9.3.0",
-    "groq": "^3.63.0",
+    "groq": "^3.64.0",
     "lodash": "^4.17.21",
     "lodash.get": "^4.4.2",
     "lucide-react": "^0.456.0",
@@ -36,7 +36,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-is": "^18.3.1",
-    "sanity": "^3.63.0",
+    "sanity": "^3.64.0",
     "sanity-plugin-internationalized-array": "^3.0.2",
     "sanity-plugin-media": "^2.3.2",
     "styled-components": "^6.1.13"

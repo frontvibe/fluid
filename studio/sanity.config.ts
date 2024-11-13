@@ -7,7 +7,6 @@ import {fontPicker} from '@frontvibe/sanity-font-picker';
 import {colorPicker} from '@frontvibe/sanity-color-picker';
 import {rangeSlider} from '@frontvibe/sanity-plugin-range-slider';
 import {codeInput} from '@sanity/code-input';
-import {presentationTool} from 'sanity/presentation';
 import {languageFilter} from '@sanity/language-filter';
 
 import {schemaTypes} from './schemas';
@@ -18,6 +17,7 @@ import {customDocumentActions} from './plugins/customDocumentActions';
 import {singletonActions, singletonsTypes} from './structure/singletons';
 import {locations} from './presentation/locations';
 import {PreviewIcon} from './components/icons/Preview';
+import {presentationTool} from '@sanity/presentation';
 
 const isDev = process.env.MODE === 'development';
 const {projectId, dataset, apiVersion, previewUrl} = projectDetails;

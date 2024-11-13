@@ -21,6 +21,7 @@
     "@sanity/code-input": "^4.1.4",
     "@sanity/icons": "^3.4.0",
     "@sanity/language-filter": "^4.0.2",
+    "@sanity/presentation": "^1.18.2",
     "@sanity/ui": "2.8.23",
     "@sanity/util": "^3.64.0",
     "@sanity/uuid": "^3.0.2",

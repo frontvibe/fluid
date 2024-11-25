@@ -115,11 +115,11 @@ function home({
   };
 }
 
-type SelectedVariantRequiredFields = {
+type SelectedVariantRequiredFields = Pick<ProductVariant, 'sku'> & {
   image?: null | Partial<Image>;
-} & Pick<ProductVariant, 'sku'>;
+};
 
-type ProductRequiredFields = {
+type ProductRequiredFields = Pick<Product, 'description' | 'seo' | 'title' | 'vendor'> & {
   variants: {
     nodes: Array<
       Pick<
@@ -128,7 +128,7 @@ type ProductRequiredFields = {
       >
     >;
   };
-} & Pick<Product, 'description' | 'seo' | 'title' | 'vendor'>;
+};
 
 function productJsonLd({
   product,
@@ -217,16 +217,16 @@ function product({
   };
 }
 
-type CollectionRequiredFields = {
+type CollectionRequiredFields = Omit<
+  Collection,
+  'descriptionHtml' | 'image' | 'metafields' | 'products' | 'updatedAt'
+> & {
   descriptionHtml?: Collection['descriptionHtml'] | null;
   image?: null | Pick<Image, 'altText' | 'height' | 'url' | 'width'>;
   metafields?: Collection['metafields'] | null;
   products: {nodes: Pick<Product, 'handle'>[]};
   updatedAt?: Collection['updatedAt'] | null;
-} & Omit<
-  Collection,
-  'descriptionHtml' | 'image' | 'metafields' | 'products' | 'updatedAt'
->;
+};
 
 function collectionJsonLd({
   collection,
@@ -358,15 +358,15 @@ function article({
   article,
   url,
 }: {
-  article: {
+  article: Pick<
+    Article,
+    'contentHtml' | 'excerpt' | 'publishedAt' | 'seo' | 'title'
+  > & {
     image?: null | Pick<
       NonNullable<Article['image']>,
       'altText' | 'height' | 'url' | 'width'
     >;
-  } & Pick<
-    Article,
-    'contentHtml' | 'excerpt' | 'publishedAt' | 'seo' | 'title'
-  >;
+  };
   url: Request['url'];
 }): SeoConfig {
   return {

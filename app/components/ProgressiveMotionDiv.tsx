@@ -11,10 +11,10 @@ export function ProgressiveMotionDiv({
   className,
   forceMotion,
   ...props
-}: {
+}: HTMLMotionProps<'div'> & {
   children: React.ReactNode;
   forceMotion?: boolean;
-} & HTMLMotionProps<'div'>) {
+}) {
   const isHydrated = useIsHydrated();
 
   return forceMotion || isHydrated ? (

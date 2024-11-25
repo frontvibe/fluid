@@ -39,7 +39,7 @@ type CollectionProductGridSectionProps = TypeFromSelection<
 export type ShopifyCollection = CollectionProductGridQuery['collection'];
 
 export function CollectionProductGridSection(
-  props: {data: CollectionProductGridSectionProps} & SectionDefaultProps,
+  props: SectionDefaultProps & {data: CollectionProductGridSectionProps},
 ) {
   const {locale} = useRootLoaderData();
   const [searchParams] = useSearchParams();

@@ -13,7 +13,7 @@ type FooterSocialLinksOnlyProps = TypeFromSelection<
 >;
 
 export function FooterSocialLinksOnly(
-  props: {data: FooterSocialLinksOnlyProps} & SectionDefaultProps,
+  props: SectionDefaultProps & {data: FooterSocialLinksOnlyProps},
 ) {
   const {data} = props;
   const colorsCssVars = useColorsCssVars({

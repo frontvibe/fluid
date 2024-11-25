@@ -22,7 +22,7 @@ import {RichtextLayout} from '../sanity/richtext/RichTextLayout';
 type RichtextSectionProps = TypeFromSelection<typeof RICHTEXT_SECTION_FRAGMENT>;
 
 export function RichtextSection(
-  props: {data: RichtextSectionProps} & SectionDefaultProps,
+  props: SectionDefaultProps & {data: RichtextSectionProps},
 ) {
   const {data} = props;
   const containerMaxWidth = data.maxWidth;

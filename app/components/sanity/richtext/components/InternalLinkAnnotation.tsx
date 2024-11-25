@@ -15,7 +15,7 @@ export const richTextLinkClassName = cx(
 );
 
 export function InternalLinkAnnotation(
-  props: {children: React.ReactNode} & InternalLinkAnnotationProps,
+  props: InternalLinkAnnotationProps & {children: React.ReactNode},
 ) {
   return (
     <SanityInternalLink

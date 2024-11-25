@@ -31,7 +31,7 @@ type FeaturedCollectionSectionProps = TypeFromSelection<
  * component and to display a `Skeleton` while waiting for the data to be available.
  */
 export function FeaturedCollectionSection(
-  props: {data: FeaturedCollectionSectionProps} & SectionDefaultProps,
+  props: SectionDefaultProps & {data: FeaturedCollectionSectionProps},
 ) {
   const collectionHandle = useLocalePath({
     path: `/collections/${props.data.collection?.store.slug?.current}`,

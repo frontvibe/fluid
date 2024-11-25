@@ -10,9 +10,9 @@ import {SanityImage} from '../../SanityImage';
 export type ImageBlockProps = TypeFromSelection<typeof IMAGE_BLOCK_FRAGMENT>;
 
 export function ImageBlock(
-  props: {
+  props: ImageBlockProps & {
     containerMaxWidth?: null | number;
-  } & ImageBlockProps,
+  },
 ) {
   const maxWidth =
     props.containerMaxWidth &&

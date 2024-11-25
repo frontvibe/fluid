@@ -4,9 +4,9 @@ import type {MetaArgs} from '@shopify/remix-oxygen';
 import {getSeoMeta} from '@shopify/hydrogen';
 
 type MatchData =
-  | ({
+  | (Record<string, unknown> & {
       seo?: SeoConfig;
-    } & Record<string, unknown>)
+    })
   | undefined;
 
 export function getSeoMetaFromMatches(matches: MetaArgs['matches']) {

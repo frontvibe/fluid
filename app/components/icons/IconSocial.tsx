@@ -18,9 +18,9 @@ export type Socials = (typeof socials)[number];
 export function IconSocial({
   media,
   ...props
-}: {
+}: IconProps & {
   media: Socials;
-} & IconProps) {
+}) {
   return (
     <Icon {...props}>
       <title>{media}</title>

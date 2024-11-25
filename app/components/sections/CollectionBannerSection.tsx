@@ -19,7 +19,7 @@ type CollectionBannerSectionProps = TypeFromSelection<
 >;
 
 export function CollectionBannerSection(
-  props: {data: CollectionBannerSectionProps} & SectionDefaultProps,
+  props: SectionDefaultProps & {data: CollectionBannerSectionProps},
 ) {
   const loaderData = useLoaderData<typeof loader>();
   const collection = loaderData.collection;

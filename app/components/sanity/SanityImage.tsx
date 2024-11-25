@@ -9,20 +9,20 @@ import {useIsDev} from '~/hooks/useIsDev';
 import {cn} from '~/lib/utils';
 import {useRootLoaderData} from '~/root';
 
-type ImageCrop = {
+type ImageCrop = null | {
   bottom?: null | number;
   left?: null | number;
   right?: null | number;
   top?: null | number;
-} | null;
+};
 
-type ImageHotspot = {
+type ImageHotspot = null | {
   height?: null | number;
   width?: null | number;
   x?: null | number;
   y?: null | number;
-} | null;
-export type SanityImageProps = {
+};
+export type SanityImageProps = React.ComponentPropsWithRef<'img'> & {
   /** The aspect ratio of the image, in the format of `width/height`.
    *
    * @example
@@ -32,7 +32,7 @@ export type SanityImageProps = {
    */
   aspectRatio?: string;
   className?: string;
-  data: {
+  data: null | {
     alt?: string;
     asset?: {
       _ref: string;
@@ -40,7 +40,7 @@ export type SanityImageProps = {
     };
     crop?: ImageCrop;
     hotspot?: ImageHotspot;
-  } | null;
+  };
   dataSanity?: string;
   /**
    * Set to `true` to enable LQIP (Low Quality Image Placeholder).
@@ -51,7 +51,7 @@ export type SanityImageProps = {
   lqip?: boolean;
   showBorder?: boolean;
   showShadow?: boolean;
-} & React.ComponentPropsWithRef<'img'>;
+};
 
 /**
  * Sanity’s Image component is a wrapper around the HTML image element.

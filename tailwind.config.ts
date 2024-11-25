@@ -2,8 +2,8 @@
 import type {Config} from 'tailwindcss';
 
 import typographyPlugin from '@tailwindcss/typography';
-import plugin from 'tailwindcss/plugin';
 import tailwindAnimatePlugin from 'tailwindcss-animate';
+import plugin from 'tailwindcss/plugin';
 
 export default {
   content: ['./app/**/*.{js,ts,jsx,tsx}'],

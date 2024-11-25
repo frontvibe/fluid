@@ -15,7 +15,7 @@ type HeaderQuery = InferType<typeof HEADER_QUERY>;
 type CartColorScheme = {
   colorScheme?: InferType<typeof SETTINGS_FRAGMENT.cartColorScheme>;
 };
-type Rgb = {b: number; g: number; r: number} | undefined;
+type Rgb = undefined | {b: number; g: number; r: number};
 
 export function useColorsCssVars(props: {
   selector?: string;

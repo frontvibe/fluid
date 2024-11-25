@@ -5,7 +5,7 @@ import type {IconProps} from './Icon';
 import {Icon} from './Icon';
 
 export function IconChevron(
-  props: {direction: 'down' | 'left' | 'right' | 'up'} & IconProps,
+  props: IconProps & {direction: 'down' | 'left' | 'right' | 'up'},
 ) {
   return (
     <Icon

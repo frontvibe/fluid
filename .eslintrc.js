@@ -14,6 +14,8 @@ module.exports = {
   ],
   ignorePatterns: ['studio/*'],
   rules: {
+    'perfectionist/sort-objects': 0,
+    'perfectionist/sort-modules': 0,
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/naming-convention': 'off',
     '@typescript-eslint/no-non-null-asserted-optional-chain': 'off',

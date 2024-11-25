@@ -8,9 +8,31 @@ import {createCookieSessionStorage} from '@shopify/remix-oxygen';
  * swap out the cookie-based implementation with something else!
  */
 export class HydrogenSession {
-  #session;
-  #sessionStorage;
   public isPending = false;
+  get flash() {
+    return this.#session.flash;
+  }
+  get get() {
+    return this.#session.get;
+  }
+
+  get has() {
+    return this.#session.has;
+  }
+
+  get set() {
+    this.isPending = true;
+    return this.#session.set;
+  }
+
+  get unset() {
+    this.isPending = true;
+    return this.#session.unset;
+  }
+
+  #session;
+
+  #sessionStorage;
 
   constructor(sessionStorage: SessionStorage, session: Session) {
     this.#sessionStorage = sessionStorage;
@@ -42,27 +64,5 @@ export class HydrogenSession {
 
   destroy() {
     return this.#sessionStorage.destroySession(this.#session);
-  }
-
-  get flash() {
-    return this.#session.flash;
-  }
-
-  get get() {
-    return this.#session.get;
-  }
-
-  get has() {
-    return this.#session.has;
-  }
-
-  get set() {
-    this.isPending = true;
-    return this.#session.set;
-  }
-
-  get unset() {
-    this.isPending = true;
-    return this.#session.unset;
   }
 }

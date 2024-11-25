@@ -25,9 +25,9 @@ type ProductVariantsContextType = {
 };
 
 export function ProductInformationSection(
-  props: {
+  props: SectionDefaultProps & {
     data: ProductInformationSectionProps;
-  } & SectionDefaultProps,
+  },
 ) {
   const loaderData = useLoaderData<typeof loader>();
   const {data} = props;

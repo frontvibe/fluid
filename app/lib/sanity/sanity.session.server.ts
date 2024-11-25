@@ -3,7 +3,15 @@ import type {Session, SessionStorage} from '@shopify/remix-oxygen';
 import {createCookieSessionStorage} from '@shopify/remix-oxygen';
 
 export class SanitySession {
+  get has() {
+    return this.#session.has;
+  }
+  get set() {
+    return this.#session.set;
+  }
+
   #session;
+
   #sessionStorage;
 
   constructor(sessionStorage: SessionStorage, session: Session) {
@@ -34,13 +42,5 @@ export class SanitySession {
 
   destroy() {
     return this.#sessionStorage.destroySession(this.#session);
-  }
-
-  get has() {
-    return this.#session.has;
-  }
-
-  get set() {
-    return this.#session.set;
   }
 }

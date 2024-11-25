@@ -44,7 +44,7 @@ import {cn} from '~/lib/utils';
  */
 const ShopifyImage = React.forwardRef<
   HTMLImageElement,
-  {
+  React.ComponentProps<typeof Image> & {
     /**
      * Set to `true` to enable LQIP (Low Quality Image Placeholder).
      * The LQIP image is used as a placeholder for images that are too large to load and
@@ -54,7 +54,7 @@ const ShopifyImage = React.forwardRef<
     lqip?: boolean;
     showBorder?: boolean;
     showShadow?: boolean;
-  } & React.ComponentProps<typeof Image>
+  }
 >(
   (
     {

@@ -37,7 +37,7 @@ export type FeaturedProductSectionProps = TypeFromSelection<
  * component and to display a `Skeleton` while waiting for the data to be available.
  */
 export function FeaturedProductSection(
-  props: {data: FeaturedProductSectionProps} & SectionDefaultProps,
+  props: SectionDefaultProps & {data: FeaturedProductSectionProps},
 ) {
   const aspectRatio = getAspectRatioData(props.data.mediaAspectRatio);
   return (

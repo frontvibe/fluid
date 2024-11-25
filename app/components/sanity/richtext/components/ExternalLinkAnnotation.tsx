@@ -13,7 +13,7 @@ export type ExternalLinkAnnotationProps = TypeFromSelection<
 >;
 
 export function ExternalLinkAnnotation(
-  props: {children: React.ReactNode} & ExternalLinkAnnotationProps,
+  props: ExternalLinkAnnotationProps & {children: React.ReactNode},
 ) {
   return (
     <SanityExternalLink

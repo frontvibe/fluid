@@ -107,11 +107,11 @@ function SectionWrapper(props: {
   );
 }
 
-export const SectionContext = createContext<{
+export const SectionContext = createContext<null | {
   encodeDataAttribute?: EncodeDataAttributeCallback;
   id: null | string;
   index?: number;
-} | null>(null);
+}>(null);
 
 export function useSection() {
   return useContext(SectionContext);

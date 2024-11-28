@@ -12,7 +12,6 @@ module.exports = {
     'plugin:perfectionist/recommended-natural-legacy',
     'plugin:hydrogen/typescript',
   ],
-  ignorePatterns: ['studio/*'],
   rules: {
     'perfectionist/sort-objects': 'off',
     'perfectionist/sort-modules': 'off',

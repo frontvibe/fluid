@@ -6,7 +6,7 @@ import {cx} from 'class-variance-authority';
 import {Suspense, useCallback, useEffect, useMemo, useState} from 'react';
 
 import {useCartFetchers} from '~/hooks/useCartFetchers';
-import {useIsHydrated} from '~/hooks/useIsHydrated';
+import {useHydrated} from '~/hooks/useHydrated';
 import {useLocalePath} from '~/hooks/useLocalePath';
 import {useSanityThemeContent} from '~/hooks/useSanityThemeContent';
 import {cn} from '~/lib/utils';
@@ -44,7 +44,7 @@ export function CartDrawer() {
 
 function Badge(props: {cart?: CartApiQueryFragment; count: number}) {
   const {count} = props;
-  const isHydrated = useIsHydrated();
+  const isHydrated = useHydrated();
   const path = useLocalePath({path: '/cart'});
   const {themeContent} = useSanityThemeContent();
   const [cartOpen, setCartOpen] = useState(false);

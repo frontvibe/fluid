@@ -1,6 +1,6 @@
 import {type HTMLMotionProps, m} from 'framer-motion';
 
-import {useIsHydrated} from '~/hooks/useIsHydrated';
+import {useHydrated} from '~/hooks/useHydrated';
 
 /**
  * Renders a progressive motion div based on the hydration status.
@@ -15,7 +15,7 @@ export function ProgressiveMotionDiv({
   children: React.ReactNode;
   forceMotion?: boolean;
 }) {
-  const isHydrated = useIsHydrated();
+  const isHydrated = useHydrated();
 
   return forceMotion || isHydrated ? (
     <m.div className={className} {...props}>

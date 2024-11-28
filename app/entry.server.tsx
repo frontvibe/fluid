@@ -17,7 +17,9 @@ export default async function handleRequest(
       checkoutDomain: context.env.PUBLIC_CHECKOUT_DOMAIN,
       storeDomain: context.env.PUBLIC_STORE_DOMAIN,
     },
-    ...createCspHeaders(),
+    ...createCspHeaders({
+      projectId: context.env.PUBLIC_SANITY_STUDIO_PROJECT_ID,
+    }),
   });
 
   const body = await renderToReadableStream(
@@ -53,14 +55,26 @@ export default async function handleRequest(
   });
 }
 
-export const createCspHeaders = () => {
+export const createCspHeaders = ({projectId}: {projectId: string}) => {
   // Default CSP headers, will be used as a base for all environments
   const defaultsCSPHeaders = {
-    connectSrc: ['*', "'self'"],
+    connectSrc: [
+      '*',
+      "'self'",
+      `https://${projectId}.api.sanity.io`,
+      `wss://${projectId}.api.sanity.io`,
+    ],
     fontSrc: ['*.sanity.io', "'self'", 'localhost:*'],
     frameAncestors: ['localhost:*', '*.sanity.studio'],
     frameSrc: ["'self'"],
-    imgSrc: ['*.sanity.io', 'https://cdn.shopify.com', "'self'", 'localhost:*'],
+    imgSrc: [
+      '*.sanity.io',
+      'https://cdn.shopify.com',
+      "'self'",
+      'localhost:*',
+      'https://lh3.googleusercontent.com',
+      'data:',
+    ],
     scriptSrc: ["'self'", 'localhost:*', 'https://cdn.shopify.com'],
   };
 

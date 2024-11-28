@@ -11,6 +11,7 @@ import {envVariables} from '~/lib/env.server';
 import {HydrogenSession} from '~/lib/hydrogen.session.server';
 import {createSanityClient} from '~/lib/sanity/sanity.server';
 import {SanitySession} from '~/lib/sanity/sanity.session.server';
+import {SANITY_API_VERSION, SANITY_STUDIO_URL} from '~/sanity/constants';
 
 /*
  * Export a fetch handler in module format.
@@ -56,10 +57,10 @@ export default {
       const sanity = createSanityClient({
         cache,
         config: {
-          apiVersion: env.SANITY_STUDIO_API_VERSION,
-          dataset: env.SANITY_STUDIO_DATASET,
-          projectId: env.SANITY_STUDIO_PROJECT_ID,
-          studioUrl: env.SANITY_STUDIO_URL,
+          apiVersion: SANITY_API_VERSION,
+          dataset: env.PUBLIC_SANITY_STUDIO_DATASET,
+          projectId: env.PUBLIC_SANITY_STUDIO_PROJECT_ID,
+          studioUrl: SANITY_STUDIO_URL,
           token: env.SANITY_STUDIO_TOKEN,
           useCdn: !env.NODE_ENV || env.NODE_ENV === 'production',
           useStega: env.SANITY_STUDIO_USE_PREVIEW_MODE,

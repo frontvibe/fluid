@@ -102,8 +102,8 @@ const SanityImage = React.forwardRef<HTMLImageElement, SanityImageProps>(
     }
 
     const config = {
-      dataset: env.SANITY_STUDIO_DATASET,
-      projectId: env.SANITY_STUDIO_PROJECT_ID,
+      dataset: env.PUBLIC_SANITY_STUDIO_DATASET,
+      projectId: env.PUBLIC_SANITY_STUDIO_PROJECT_ID,
     };
     const _ref = data.asset._ref;
     const {height, width} = getImageDimensions(_ref);

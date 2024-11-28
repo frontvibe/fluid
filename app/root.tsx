@@ -1,5 +1,6 @@
 import type {ShouldRevalidateFunction} from '@remix-run/react';
 import type {
+  LinksFunction,
   LoaderFunctionArgs,
   MetaFunction,
   SerializeFrom,
@@ -15,6 +16,7 @@ import {
   Scripts,
   ScrollRestoration,
   useLoaderData,
+  useLocation,
   useMatches,
   useNavigate,
   useRouteError,
@@ -58,7 +60,7 @@ export const shouldRevalidate: ShouldRevalidateFunction = ({
   return false;
 };
 
-export function links() {
+export const links: LinksFunction = () => {
   return [
     {
       href: 'https://cdn.shopify.com',
@@ -70,7 +72,7 @@ export function links() {
     },
     {href: tailwindCss, rel: 'stylesheet'},
   ];
-}
+};
 
 export const meta: MetaFunction<typeof loader> = (loaderData) => {
   const {data} = loaderData;
@@ -128,8 +130,8 @@ export async function loader({context, request}: LoaderFunctionArgs) {
   const seo = seoPayload.root({
     root: sanityRoot.data,
     sanity: {
-      dataset: env.SANITY_STUDIO_DATASET,
-      projectId: env.SANITY_STUDIO_PROJECT_ID,
+      dataset: env.PUBLIC_SANITY_STUDIO_DATASET,
+      projectId: env.PUBLIC_SANITY_STUDIO_PROJECT_ID,
     },
     url: request.url,
   });
@@ -162,10 +164,8 @@ export async function loader({context, request}: LoaderFunctionArgs) {
       PUBLIC_STORE_DOMAIN: env.PUBLIC_STORE_DOMAIN,
       PUBLIC_STOREFRONT_API_TOKEN: env.PUBLIC_STOREFRONT_API_TOKEN,
       PUBLIC_STOREFRONT_API_VERSION: env.PUBLIC_STOREFRONT_API_VERSION,
-      SANITY_STUDIO_API_VERSION: env.SANITY_STUDIO_API_VERSION,
-      SANITY_STUDIO_DATASET: env.SANITY_STUDIO_DATASET,
-      SANITY_STUDIO_PROJECT_ID: env.SANITY_STUDIO_PROJECT_ID,
-      SANITY_STUDIO_URL: env.SANITY_STUDIO_URL,
+      PUBLIC_SANITY_STUDIO_DATASET: env.PUBLIC_SANITY_STUDIO_DATASET,
+      PUBLIC_SANITY_STUDIO_PROJECT_ID: env.PUBLIC_SANITY_STUDIO_PROJECT_ID,
       SANITY_STUDIO_USE_PREVIEW_MODE: env.SANITY_STUDIO_USE_PREVIEW_MODE,
     },
     featuredCollectionPromise,
@@ -186,6 +186,13 @@ export default function App() {
   const nonce = useNonce();
   const {locale} = useRootLoaderData();
   const data = useLoaderData<typeof loader>();
+  const {pathname} = useLocation();
+
+  const isCmsRoute = pathname.includes('/cms');
+
+  if (isCmsRoute) {
+    return <Outlet />;
+  }
 
   return (
     <html lang={locale.language.toLowerCase()}>
@@ -297,17 +304,17 @@ function generateFaviconUrls(loaderData: SerializeFrom<typeof loader>) {
   }
 
   const faviconUrl = generateSanityImageUrl({
-    dataset: env.SANITY_STUDIO_DATASET,
+    dataset: env.PUBLIC_SANITY_STUDIO_DATASET,
     height: 32,
-    projectId: env.SANITY_STUDIO_PROJECT_ID,
+    projectId: env.PUBLIC_SANITY_STUDIO_PROJECT_ID,
     ref: favicon?._ref,
     width: 32,
   });
 
   const appleTouchIconUrl = generateSanityImageUrl({
-    dataset: env.SANITY_STUDIO_DATASET,
+    dataset: env.PUBLIC_SANITY_STUDIO_DATASET,
     height: 180,
-    projectId: env.SANITY_STUDIO_PROJECT_ID,
+    projectId: env.PUBLIC_SANITY_STUDIO_PROJECT_ID,
     ref: favicon?._ref,
     width: 180,
   });

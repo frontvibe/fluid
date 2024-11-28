@@ -54,8 +54,8 @@ export async function loader({context, params, request}: LoaderFunctionArgs) {
   const seo = seoPayload.home({
     page: page.data,
     sanity: {
-      dataset: env.SANITY_STUDIO_DATASET,
-      projectId: env.SANITY_STUDIO_PROJECT_ID,
+      dataset: env.PUBLIC_SANITY_STUDIO_DATASET,
+      projectId: env.PUBLIC_SANITY_STUDIO_PROJECT_ID,
     },
   });
 

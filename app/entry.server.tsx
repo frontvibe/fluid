@@ -27,7 +27,6 @@ export default async function handleRequest(
     {
       nonce,
       onError(error) {
-        // eslint-disable-next-line no-console
         console.error(error);
         responseStatusCode = 500;
       },

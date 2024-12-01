@@ -65,7 +65,7 @@ export const createCspHeaders = ({projectId}: {projectId: string}) => {
       `wss://${projectId}.api.sanity.io`,
     ],
     fontSrc: ['*.sanity.io', "'self'", 'localhost:*'],
-    frameAncestors: ['localhost:*', '*.sanity.studio'],
+    frameAncestors: ["'self'"],
     frameSrc: ["'self'"],
     imgSrc: [
       '*.sanity.io',

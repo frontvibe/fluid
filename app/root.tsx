@@ -25,7 +25,7 @@ import {Analytics, getShopAnalytics, useNonce} from '@shopify/hydrogen';
 import {defer} from '@shopify/remix-oxygen';
 import {DEFAULT_LOCALE} from 'countries';
 
-import {Layout} from '~/components/layout/Layout';
+import {Layout as AppLayout} from '~/components/layout/Layout';
 
 import faviconAsset from '../public/favicon.ico';
 import {CssVars} from './components/CssVars';
@@ -182,17 +182,13 @@ export async function loader({context, request}: LoaderFunctionArgs) {
   });
 }
 
-export default function App() {
+export function Layout({children}: {children?: React.ReactNode}) {
   const nonce = useNonce();
   const {locale} = useRootLoaderData();
   const data = useLoaderData<typeof loader>();
   const {pathname} = useLocation();
 
   const isCmsRoute = pathname.includes('/cms');
-
-  if (isCmsRoute) {
-    return <Outlet />;
-  }
 
   return (
     <html lang={locale.language.toLowerCase()}>
@@ -205,16 +201,20 @@ export default function App() {
         <CssVars />
       </head>
       <body className="flex min-h-screen flex-col overflow-x-hidden bg-background text-foreground">
-        <Analytics.Provider
-          cart={data.cart}
-          consent={data.consent}
-          shop={data.shop}
-        >
-          <Layout>
-            <Outlet />
-          </Layout>
-          <CustomAnalytics />
-        </Analytics.Provider>
+        {isCmsRoute ? (
+          children
+        ) : data ? (
+          <Analytics.Provider
+            cart={data?.cart}
+            consent={data?.consent}
+            shop={data?.shop}
+          >
+            <AppLayout>{children}</AppLayout>
+            <CustomAnalytics />
+          </Analytics.Provider>
+        ) : (
+          <AppLayout>{children}</AppLayout>
+        )}
         <ScrollRestoration nonce={nonce} />
         <Scripts nonce={nonce} />
         <LiveReload nonce={nonce} />
@@ -223,10 +223,12 @@ export default function App() {
   );
 }
 
+export default function App() {
+  return <Outlet />;
+}
+
 export function ErrorBoundary() {
-  const nonce = useNonce();
   const routeError = useRouteError();
-  const {locale} = useRootLoaderData();
   const isRouteError = isRouteErrorResponse(routeError);
   const {themeContent} = useSanityThemeContent();
   const errorStatus = isRouteError ? routeError.status : 500;
@@ -242,44 +244,27 @@ export function ErrorBoundary() {
   }
 
   return (
-    <html lang={locale.language.toLowerCase()}>
-      <head>
-        <meta charSet="utf-8" />
-        <meta content="width=device-width,initial-scale=1" name="viewport" />
-        <Meta />
-        <Fonts />
-        <Links />
-        <CssVars />
-      </head>
-      <body className="flex min-h-screen flex-col overflow-x-hidden bg-background text-foreground">
-        <Layout>
-          <section>
-            <div className="container flex flex-col items-center justify-center py-20 text-center">
-              <span>{errorStatus}</span>
-              <h1 className="mt-5">{title}</h1>
-              {errorStatus === 404 ? (
-                <Button asChild className="mt-6" variant="secondary">
-                  <Link to={collectionsPath}>
-                    {themeContent?.cart?.continueShopping}
-                  </Link>
-                </Button>
-              ) : (
-                <Button
-                  className="mt-6"
-                  onClick={() => navigate(0)}
-                  variant="secondary"
-                >
-                  {themeContent?.error?.reloadPage}
-                </Button>
-              )}
-            </div>
-          </section>
-        </Layout>
-        <ScrollRestoration nonce={nonce} />
-        <Scripts nonce={nonce} />
-        <LiveReload nonce={nonce} />
-      </body>
-    </html>
+    <section>
+      <div className="container flex flex-col items-center justify-center py-20 text-center">
+        <span>{errorStatus}</span>
+        <h1 className="mt-5">{title}</h1>
+        {errorStatus === 404 ? (
+          <Button asChild className="mt-6" variant="secondary">
+            <Link to={collectionsPath}>
+              {themeContent?.cart?.continueShopping}
+            </Link>
+          </Button>
+        ) : (
+          <Button
+            className="mt-6"
+            onClick={() => navigate(0)}
+            variant="secondary"
+          >
+            {themeContent?.error?.reloadPage}
+          </Button>
+        )}
+      </div>
+    </section>
   );
 }
 

@@ -5,14 +5,7 @@ import type {
 } from '@shopify/remix-oxygen';
 import type {ReactElement} from 'react';
 
-import {
-  Links,
-  LiveReload,
-  Meta,
-  Scripts,
-  useLoaderData,
-} from '@remix-run/react';
-import {useNonce} from '@shopify/hydrogen';
+import {useLoaderData} from '@remix-run/react';
 import polarisCss from '@shopify/polaris/build/esm/styles.css';
 import {json} from '@shopify/remix-oxygen';
 import {lazy, Suspense} from 'react';
@@ -88,31 +81,18 @@ export function loader({context}: LoaderFunctionArgs) {
 export default function Studio() {
   const {dataset, projectId, shopifyStoreDomain} =
     useLoaderData<typeof loader>();
-  const nonce = useNonce();
 
   return (
-    <html>
-      <head>
-        <meta charSet="utf-8" />
-        <meta content="width=device-width,initial-scale=1" name="viewport" />
-        <Meta />
-        <Links />
-      </head>
-      <body>
-        <ClientOnly>
-          {() => (
-            <Suspense>
-              <SanityStudio
-                dataset={dataset}
-                projectId={projectId}
-                shopifyStoreDomain={shopifyStoreDomain}
-              />
-            </Suspense>
-          )}
-        </ClientOnly>
-        <Scripts nonce={nonce} />
-        <LiveReload nonce={nonce} />
-      </body>
-    </html>
+    <ClientOnly>
+      {() => (
+        <Suspense>
+          <SanityStudio
+            dataset={dataset}
+            projectId={projectId}
+            shopifyStoreDomain={shopifyStoreDomain}
+          />
+        </Suspense>
+      )}
+    </ClientOnly>
   );
 }

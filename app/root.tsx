@@ -1,5 +1,6 @@
 import type {ShouldRevalidateFunction} from '@remix-run/react';
 import type {
+  LinksFunction,
   LoaderFunctionArgs,
   MetaFunction,
   SerializeFrom,
@@ -15,6 +16,7 @@ import {
   Scripts,
   ScrollRestoration,
   useLoaderData,
+  useLocation,
   useMatches,
   useNavigate,
   useRouteError,
@@ -23,7 +25,7 @@ import {Analytics, getShopAnalytics, useNonce} from '@shopify/hydrogen';
 import {defer} from '@shopify/remix-oxygen';
 import {DEFAULT_LOCALE} from 'countries';
 
-import {Layout} from '~/components/layout/Layout';
+import {Layout as AppLayout} from '~/components/layout/Layout';
 
 import faviconAsset from '../public/favicon.ico';
 import {CssVars} from './components/CssVars';
@@ -58,7 +60,7 @@ export const shouldRevalidate: ShouldRevalidateFunction = ({
   return false;
 };
 
-export function links() {
+export const links: LinksFunction = () => {
   return [
     {
       href: 'https://cdn.shopify.com',
@@ -70,7 +72,7 @@ export function links() {
     },
     {href: tailwindCss, rel: 'stylesheet'},
   ];
-}
+};
 
 export const meta: MetaFunction<typeof loader> = (loaderData) => {
   const {data} = loaderData;
@@ -128,8 +130,8 @@ export async function loader({context, request}: LoaderFunctionArgs) {
   const seo = seoPayload.root({
     root: sanityRoot.data,
     sanity: {
-      dataset: env.SANITY_STUDIO_DATASET,
-      projectId: env.SANITY_STUDIO_PROJECT_ID,
+      dataset: env.PUBLIC_SANITY_STUDIO_DATASET,
+      projectId: env.PUBLIC_SANITY_STUDIO_PROJECT_ID,
     },
     url: request.url,
   });
@@ -162,10 +164,8 @@ export async function loader({context, request}: LoaderFunctionArgs) {
       PUBLIC_STORE_DOMAIN: env.PUBLIC_STORE_DOMAIN,
       PUBLIC_STOREFRONT_API_TOKEN: env.PUBLIC_STOREFRONT_API_TOKEN,
       PUBLIC_STOREFRONT_API_VERSION: env.PUBLIC_STOREFRONT_API_VERSION,
-      SANITY_STUDIO_API_VERSION: env.SANITY_STUDIO_API_VERSION,
-      SANITY_STUDIO_DATASET: env.SANITY_STUDIO_DATASET,
-      SANITY_STUDIO_PROJECT_ID: env.SANITY_STUDIO_PROJECT_ID,
-      SANITY_STUDIO_URL: env.SANITY_STUDIO_URL,
+      PUBLIC_SANITY_STUDIO_DATASET: env.PUBLIC_SANITY_STUDIO_DATASET,
+      PUBLIC_SANITY_STUDIO_PROJECT_ID: env.PUBLIC_SANITY_STUDIO_PROJECT_ID,
       SANITY_STUDIO_USE_PREVIEW_MODE: env.SANITY_STUDIO_USE_PREVIEW_MODE,
     },
     featuredCollectionPromise,
@@ -182,10 +182,13 @@ export async function loader({context, request}: LoaderFunctionArgs) {
   });
 }
 
-export default function App() {
+export function Layout({children}: {children?: React.ReactNode}) {
   const nonce = useNonce();
   const {locale} = useRootLoaderData();
   const data = useLoaderData<typeof loader>();
+  const {pathname} = useLocation();
+
+  const isCmsRoute = pathname.includes('/cms');
 
   return (
     <html lang={locale.language.toLowerCase()}>
@@ -198,16 +201,20 @@ export default function App() {
         <CssVars />
       </head>
       <body className="flex min-h-screen flex-col overflow-x-hidden bg-background text-foreground">
-        <Analytics.Provider
-          cart={data.cart}
-          consent={data.consent}
-          shop={data.shop}
-        >
-          <Layout>
-            <Outlet />
-          </Layout>
-          <CustomAnalytics />
-        </Analytics.Provider>
+        {isCmsRoute ? (
+          children
+        ) : data ? (
+          <Analytics.Provider
+            cart={data?.cart}
+            consent={data?.consent}
+            shop={data?.shop}
+          >
+            <AppLayout>{children}</AppLayout>
+            <CustomAnalytics />
+          </Analytics.Provider>
+        ) : (
+          <AppLayout>{children}</AppLayout>
+        )}
         <ScrollRestoration nonce={nonce} />
         <Scripts nonce={nonce} />
         <LiveReload nonce={nonce} />
@@ -216,10 +223,12 @@ export default function App() {
   );
 }
 
+export default function App() {
+  return <Outlet />;
+}
+
 export function ErrorBoundary() {
-  const nonce = useNonce();
   const routeError = useRouteError();
-  const {locale} = useRootLoaderData();
   const isRouteError = isRouteErrorResponse(routeError);
   const {themeContent} = useSanityThemeContent();
   const errorStatus = isRouteError ? routeError.status : 500;
@@ -235,44 +244,27 @@ export function ErrorBoundary() {
   }
 
   return (
-    <html lang={locale.language.toLowerCase()}>
-      <head>
-        <meta charSet="utf-8" />
-        <meta content="width=device-width,initial-scale=1" name="viewport" />
-        <Meta />
-        <Fonts />
-        <Links />
-        <CssVars />
-      </head>
-      <body className="flex min-h-screen flex-col overflow-x-hidden bg-background text-foreground">
-        <Layout>
-          <section>
-            <div className="container flex flex-col items-center justify-center py-20 text-center">
-              <span>{errorStatus}</span>
-              <h1 className="mt-5">{title}</h1>
-              {errorStatus === 404 ? (
-                <Button asChild className="mt-6" variant="secondary">
-                  <Link to={collectionsPath}>
-                    {themeContent?.cart?.continueShopping}
-                  </Link>
-                </Button>
-              ) : (
-                <Button
-                  className="mt-6"
-                  onClick={() => navigate(0)}
-                  variant="secondary"
-                >
-                  {themeContent?.error?.reloadPage}
-                </Button>
-              )}
-            </div>
-          </section>
-        </Layout>
-        <ScrollRestoration nonce={nonce} />
-        <Scripts nonce={nonce} />
-        <LiveReload nonce={nonce} />
-      </body>
-    </html>
+    <section>
+      <div className="container flex flex-col items-center justify-center py-20 text-center">
+        <span>{errorStatus}</span>
+        <h1 className="mt-5">{title}</h1>
+        {errorStatus === 404 ? (
+          <Button asChild className="mt-6" variant="secondary">
+            <Link to={collectionsPath}>
+              {themeContent?.cart?.continueShopping}
+            </Link>
+          </Button>
+        ) : (
+          <Button
+            className="mt-6"
+            onClick={() => navigate(0)}
+            variant="secondary"
+          >
+            {themeContent?.error?.reloadPage}
+          </Button>
+        )}
+      </div>
+    </section>
   );
 }
 
@@ -297,17 +289,17 @@ function generateFaviconUrls(loaderData: SerializeFrom<typeof loader>) {
   }
 
   const faviconUrl = generateSanityImageUrl({
-    dataset: env.SANITY_STUDIO_DATASET,
+    dataset: env.PUBLIC_SANITY_STUDIO_DATASET,
     height: 32,
-    projectId: env.SANITY_STUDIO_PROJECT_ID,
+    projectId: env.PUBLIC_SANITY_STUDIO_PROJECT_ID,
     ref: favicon?._ref,
     width: 32,
   });
 
   const appleTouchIconUrl = generateSanityImageUrl({
-    dataset: env.SANITY_STUDIO_DATASET,
+    dataset: env.PUBLIC_SANITY_STUDIO_DATASET,
     height: 180,
-    projectId: env.SANITY_STUDIO_PROJECT_ID,
+    projectId: env.PUBLIC_SANITY_STUDIO_PROJECT_ID,
     ref: favicon?._ref,
     width: 180,
   });

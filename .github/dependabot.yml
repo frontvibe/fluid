@@ -24,6 +24,8 @@ updates:
       sanity:
         patterns:
           - '@sanity/*'
+          - 'sanity'
+          - 'groq'
         applies-to: version-updates
         update-types:
           - 'major'
@@ -34,24 +36,3 @@ updates:
       - dependency-name: '@shopify/cli'
         update-types:
           ['version-update:semver-minor', 'version-update:semver-major']
-
-  - package-ecosystem: 'npm'
-    directory: '/studio'
-    schedule:
-      interval: 'weekly'
-      time: '05:30'
-      timezone: 'America/New_York'
-    groups:
-      patch-minor:
-        applies-to: version-updates
-        update-types:
-          - 'minor'
-          - 'patch'
-      sanity:
-        patterns:
-          - 'sanity'
-          - 'groq'
-          - '@sanity/*'
-        applies-to: version-updates
-        update-types:
-          - 'major'

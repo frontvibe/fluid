@@ -9,7 +9,7 @@ import {cx} from 'class-variance-authority';
 import {m} from 'framer-motion';
 import {useCallback, useMemo} from 'react';
 
-import {useIsHydrated} from '~/hooks/useIsHydrated';
+import {useHydrated} from '~/hooks/useHydrated';
 import {useOptimisticNavigationData} from '~/hooks/useOptimisticNavigationData';
 import {useSelectedVariant} from '~/hooks/useSelectedVariant';
 
@@ -196,7 +196,7 @@ function Pill(props: {
     search,
     value,
   } = props;
-  const isHydrated = useIsHydrated();
+  const isHydrated = useHydrated();
   const section = useSection();
   const layoutId = handle! + option.name + section?.id;
 

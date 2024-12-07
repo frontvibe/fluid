@@ -119,7 +119,10 @@ type SelectedVariantRequiredFields = Pick<ProductVariant, 'sku'> & {
   image?: null | Partial<Image>;
 };
 
-type ProductRequiredFields = Pick<Product, 'description' | 'seo' | 'title' | 'vendor'> & {
+type ProductRequiredFields = Pick<
+  Product,
+  'description' | 'seo' | 'title' | 'vendor'
+> & {
   variants: {
     nodes: Array<
       Pick<

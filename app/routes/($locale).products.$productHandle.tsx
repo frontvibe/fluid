@@ -4,7 +4,6 @@ import type {ProductQuery} from 'storefrontapi.generated';
 import {useLoaderData} from '@remix-run/react';
 import {Analytics, getSelectedProductOptions} from '@shopify/hydrogen';
 import {ProductProvider} from '@shopify/hydrogen-react';
-import {defer} from '@shopify/remix-oxygen';
 import {DEFAULT_LOCALE} from 'countries';
 import invariant from 'tiny-invariant';
 
@@ -87,7 +86,7 @@ export async function loader({context, params, request}: LoaderFunctionArgs) {
     url: request.url,
   });
 
-  return defer({
+  return {
     cmsProduct,
     collectionListPromise,
     featuredCollectionPromise,
@@ -96,7 +95,7 @@ export async function loader({context, params, request}: LoaderFunctionArgs) {
     relatedProductsPromise,
     seo,
     variants,
-  });
+  };
 }
 
 export default function Product() {

@@ -1,7 +1,6 @@
 import type {LoaderFunctionArgs, MetaFunction} from '@shopify/remix-oxygen';
 
 import {useLoaderData} from '@remix-run/react';
-import {defer} from '@shopify/remix-oxygen';
 import {DEFAULT_LOCALE} from 'countries';
 
 import type {I18nLocale} from '~/lib/type';
@@ -59,13 +58,13 @@ export async function loader({context, params, request}: LoaderFunctionArgs) {
     },
   });
 
-  return defer({
+  return {
     collectionListPromise,
     featuredCollectionPromise,
     featuredProductPromise,
     page,
     seo,
-  });
+  };
 }
 
 export default function PageRoute() {

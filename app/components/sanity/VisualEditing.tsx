@@ -52,7 +52,7 @@ function ExitBanner() {
   return (
     <section className="bg-[--background] text-[--foreground] [--background:#16120C] [--foreground:#FFE7B3]">
       <div className="container py-6">
-        <fetcher.Form action="/sanity/preview" method="POST">
+        <fetcher.Form action="/sanity-preview" method="POST">
           <input name="slug" type="hidden" value={location.pathname} />
           <div className="flex items-center justify-center gap-6">
             <small>Sanity Preview mode activated</small>

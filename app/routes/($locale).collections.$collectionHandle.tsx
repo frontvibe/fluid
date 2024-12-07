@@ -3,7 +3,6 @@ import type {CollectionDetailsQuery} from 'storefrontapi.generated';
 
 import {useLoaderData} from '@remix-run/react';
 import {Analytics} from '@shopify/hydrogen';
-import {defer} from '@shopify/remix-oxygen';
 import {DEFAULT_LOCALE} from 'countries';
 import invariant from 'tiny-invariant';
 
@@ -65,7 +64,7 @@ export async function loader({context, params, request}: LoaderFunctionArgs) {
 
   const seo = seoPayload.collection({collection, url: request.url});
 
-  return defer({
+  return {
     cmsCollection,
     collection,
     collectionListPromise,
@@ -73,7 +72,7 @@ export async function loader({context, params, request}: LoaderFunctionArgs) {
     featuredCollectionPromise,
     featuredProductPromise,
     seo,
-  });
+  };
 }
 
 export default function Collection() {

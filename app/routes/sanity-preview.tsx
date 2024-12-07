@@ -3,7 +3,7 @@ import type {
   LoaderFunctionArgs,
 } from '@shopify/remix-oxygen';
 
-import {json, redirectDocument} from '@shopify/remix-oxygen';
+import {redirectDocument} from '@shopify/remix-oxygen';
 
 import {notFound} from '~/lib/utils';
 
@@ -13,7 +13,7 @@ export async function action({context, request}: ActionFunctionArgs) {
   const {sanitySession} = context;
 
   if (!(request.method === 'POST' && sanitySession)) {
-    return json({message: 'Method not allowed'}, 405);
+    return {message: 'Method not allowed'};
   }
 
   const body = await request.formData();

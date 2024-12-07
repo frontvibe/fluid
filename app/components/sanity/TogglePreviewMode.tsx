@@ -17,7 +17,7 @@ export function TogglePreviewMode() {
   const handleTogglePreviewMode = useCallback(
     (event: KeyboardEvent) => {
       if (event.metaKey && event.ctrlKey && event.key === 'p') {
-        fetcher.load(`/sanity/preview?slug=${pathname}`);
+        fetcher.load(`/sanity-preview?slug=${pathname}`);
       }
     },
     [fetcher, pathname],

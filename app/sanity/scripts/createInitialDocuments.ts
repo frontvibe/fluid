@@ -31,7 +31,7 @@ type JsonCache = {
 // This will use the client configured in ./sanity.cli.ts
 const client = getCliClient();
 const projectId = client.config().projectId;
-const JSON_FILE_PATH = './scripts/cache.json';
+const JSON_FILE_PATH = './app/sanity/scripts/cache.json';
 
 if (!projectId) {
   console.log('❌ Project ID not found. Exiting...');

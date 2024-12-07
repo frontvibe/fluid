@@ -12,7 +12,7 @@
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
     "typecheck": "tsc --noEmit",
-    "create:initial": "sanity exec ./scripts/createInitialDocuments.ts --with-user-token"
+    "create:initial": "sanity exec ./app/sanity/scripts/createInitialDocuments.ts --with-user-token"
   },
   "dependencies": {
     "@frontvibe/sanity-color-picker": "^1.0.12",

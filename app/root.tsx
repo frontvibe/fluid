@@ -10,7 +10,6 @@ import {
   isRouteErrorResponse,
   Link,
   Links,
-  LiveReload,
   Meta,
   Outlet,
   Scripts,
@@ -27,7 +26,6 @@ import {DEFAULT_LOCALE} from 'countries';
 
 import {Layout as AppLayout} from '~/components/layout/Layout';
 
-import faviconAsset from '../public/favicon.ico';
 import {CssVars} from './components/CssVars';
 import {CustomAnalytics} from './components/CustomAnalytics';
 import {Fonts} from './components/Fonts';
@@ -39,7 +37,9 @@ import {generateFontsPreloadLinks} from './lib/fonts';
 import {resolveShopifyPromises} from './lib/resolveShopifyPromises';
 import {seoPayload} from './lib/seo.server';
 import {ROOT_QUERY} from './qroq/queries';
-import tailwindCss from './styles/tailwind.css';
+import tailwindCss from './styles/tailwind.css?url';
+
+import faviconAsset from '/favicon.ico?url';
 
 // This is important to avoid re-fetching root queries on sub-navigations
 export const shouldRevalidate: ShouldRevalidateFunction = ({
@@ -217,7 +217,6 @@ export function Layout({children}: {children?: React.ReactNode}) {
         )}
         <ScrollRestoration nonce={nonce} />
         <Scripts nonce={nonce} />
-        <LiveReload nonce={nonce} />
       </body>
     </html>
   );

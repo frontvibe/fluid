@@ -1,4 +1,4 @@
-/// <reference types="@remix-run/dev" />
+/// <reference types="vite/client" />
 /// <reference types="@shopify/remix-oxygen" />
 /// <reference types="@shopify/oxygen-workers-types" />
 
@@ -9,12 +9,13 @@ import type {
   Storefront,
   HydrogenSessionData,
   CustomerAccount,
+  HydrogenEnv,
 } from '@shopify/hydrogen';
+import type {createAppLoadContext} from '~/lib/context';
 import type {AriaAttributes, DOMAttributes} from 'react';
 
 import '@total-typescript/ts-reset';
 
-import type {HydrogenSession} from '~/lib/hydrogen.session.server';
 import type {SanitySession} from '~/lib/sanity/sanity.session.server';
 import type {I18nLocale} from '~/lib/type';
 
@@ -25,11 +26,7 @@ declare global {
    * A global `process` object is only available during build to access NODE_ENV.
    */
   const process: {env: {NODE_ENV: 'development' | 'production'}};
-
-  /**
-   * Declare expected Env parameter in fetch handler.
-   */
-  interface Env {
+  interface Env extends HydrogenEnv {
     NODE_ENV: 'development' | 'production';
     PRIVATE_STOREFRONT_API_TOKEN: string;
     PUBLIC_STORE_DOMAIN: string;
@@ -49,22 +46,8 @@ declare global {
 }
 
 declare module '@shopify/remix-oxygen' {
-  /**
-   * Declare local additions to the Remix loader context.
-   */
-  export interface AppLoadContext {
-    cart: HydrogenCart;
-    customerAccount: CustomerAccount;
-    env: Env;
-    isDev: boolean;
-    locale: I18nLocale;
-    sanity: Sanity;
-    sanityPreviewMode: boolean;
-    sanitySession: SanitySession;
-    session: HydrogenSession;
-    storefront: Storefront;
-    waitUntil: ExecutionContext['waitUntil'];
-  }
+  interface AppLoadContext
+    extends Awaited<ReturnType<typeof createAppLoadContext>> {}
 }
 
 declare module 'react' {

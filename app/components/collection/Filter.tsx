@@ -12,7 +12,7 @@ import {
   useSearchParams,
 } from '@remix-run/react';
 import {useCallback, useEffect, useMemo, useState} from 'react';
-import useDebounce from 'react-use/lib/useDebounce';
+import useDebounce from 'react-use/esm/useDebounce';
 
 import {useOptimisticNavigationData} from '~/hooks/useOptimisticNavigationData';
 import {useSanityThemeContent} from '~/hooks/useSanityThemeContent';

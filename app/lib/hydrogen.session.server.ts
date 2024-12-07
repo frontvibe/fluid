@@ -1,3 +1,4 @@
+import type {HydrogenSession} from '@shopify/hydrogen';
 import type {Session, SessionStorage} from '@shopify/remix-oxygen';
 
 import {createCookieSessionStorage} from '@shopify/remix-oxygen';
@@ -7,7 +8,7 @@ import {createCookieSessionStorage} from '@shopify/remix-oxygen';
  * Feel free to customize it to your needs, add helper methods, or
  * swap out the cookie-based implementation with something else!
  */
-export class HydrogenSession {
+export class AppSession implements HydrogenSession {
   public isPending = false;
   get flash() {
     return this.#session.flash;

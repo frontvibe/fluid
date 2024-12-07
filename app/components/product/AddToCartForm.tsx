@@ -3,7 +3,8 @@ import type {ProductVariantFragmentFragment} from 'storefrontapi.generated';
 import {useNavigation} from '@remix-run/react';
 import {CartForm, OptimisticInput, ShopPayButton} from '@shopify/hydrogen';
 import {useEffect, useState} from 'react';
-import {useIdle, useSessionStorage} from 'react-use';
+import useIdle from 'react-use/esm/useIdle';
+import useSessionStorage from 'react-use/esm/useSessionStorage';
 
 import {useLocalePath} from '~/hooks/useLocalePath';
 import {useSanityThemeContent} from '~/hooks/useSanityThemeContent';

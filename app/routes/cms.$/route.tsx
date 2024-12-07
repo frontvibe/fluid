@@ -6,13 +6,13 @@ import type {
 import type {ReactElement} from 'react';
 
 import {useLoaderData} from '@remix-run/react';
-import polarisCss from '@shopify/polaris/build/esm/styles.css';
+import polarisCss from '@shopify/polaris/build/esm/styles.css?url';
 import {json} from '@shopify/remix-oxygen';
 import {lazy, Suspense} from 'react';
 
 import {ClientOnly} from '~/components/ClientOnly';
 
-import studioStyles from './studio.css';
+import studioStyles from './studio.css?url';
 
 /**
  * Provide a consistent fallback to prevent hydration mismatch errors.

@@ -2,7 +2,6 @@ import type {LoaderFunctionArgs, MetaFunction} from '@shopify/remix-oxygen';
 
 import {useLoaderData} from '@remix-run/react';
 import {flattenConnection, getPaginationVariables} from '@shopify/hydrogen';
-import {json} from '@shopify/remix-oxygen';
 
 import {ProductCardGrid} from '~/components/product/ProductCardGrid';
 import {ALL_PRODUCTS_QUERY} from '~/graphql/queries';
@@ -10,7 +9,6 @@ import {useSanityThemeContent} from '~/hooks/useSanityThemeContent';
 import {mergeMeta} from '~/lib/meta';
 import {getSeoMetaFromMatches} from '~/lib/seo';
 import {seoPayload} from '~/lib/seo.server';
-import {useRootLoaderData} from '~/root';
 
 const PAGE_BY = 9;
 
@@ -50,7 +48,7 @@ export async function loader({
     url: request.url,
   });
 
-  return json({products: data.products, seo});
+  return {products: data.products, seo};
 }
 
 export default function AllProducts() {

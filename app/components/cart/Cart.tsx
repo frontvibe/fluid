@@ -16,7 +16,7 @@ export function Cart({
   loading,
   onClose,
 }: {
-  cart?: CartApiQueryFragment;
+  cart?: CartApiQueryFragment | null;
   layout: CartLayouts;
   loading?: boolean;
   onClose?: () => void;

@@ -24,7 +24,7 @@ export default async function handleRequest(
 
   const body = await renderToReadableStream(
     <NonceProvider>
-      <RemixServer context={remixContext} url={request.url} />
+      <RemixServer context={remixContext} nonce={nonce} url={request.url} />
     </NonceProvider>,
     {
       nonce,
@@ -41,13 +41,7 @@ export default async function handleRequest(
   }
 
   responseHeaders.set('Content-Type', 'text/html');
-
-  // Set CSP headers only for non-preview environments
-  // to allow vercel preview feedback/comments feature
-  const VERCEL_ENV = getVercelEnv();
-  if (!VERCEL_ENV || VERCEL_ENV !== 'preview') {
-    responseHeaders.set('Content-Security-Policy', header);
-  }
+  responseHeaders.set('Content-Security-Policy', header);
 
   return new Response(body, {
     headers: responseHeaders,
@@ -78,19 +72,5 @@ export const createCspHeaders = ({projectId}: {projectId: string}) => {
     scriptSrc: ["'self'", 'localhost:*', 'https://cdn.shopify.com'],
   };
 
-  // For Vercel production environment white-list vitals.vercel-insights
-  const VERCEL_ENV = getVercelEnv();
-  if (VERCEL_ENV === 'production') {
-    defaultsCSPHeaders.connectSrc.push('https://vitals.vercel-insights.com');
-    defaultsCSPHeaders.imgSrc.push('blob:', 'data:');
-  }
-
   return defaultsCSPHeaders;
-};
-
-const getVercelEnv = () => {
-  if (typeof process !== 'undefined') {
-    return process.env.VERCEL_ENV;
-  }
-  return null;
 };

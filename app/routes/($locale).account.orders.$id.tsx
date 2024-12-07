@@ -3,7 +3,11 @@ import type {OrderFragment} from 'customer-accountapi.generated';
 
 import {Link, type MetaFunction, useLoaderData} from '@remix-run/react';
 import {flattenConnection, Image, Money} from '@shopify/hydrogen';
-import {json, type LoaderFunctionArgs, redirect} from '@shopify/remix-oxygen';
+import {
+  type LoaderFunctionArgs,
+  redirect,
+  data as remixData,
+} from '@shopify/remix-oxygen';
 
 import {Badge} from '~/components/ui/Badge';
 import {Button} from '~/components/ui/Button';
@@ -54,7 +58,7 @@ export async function loader({context, params, request}: LoaderFunctionArgs) {
         ? fulfillments[0].status
         : ('OPEN' as FulfillmentStatus);
 
-    return json(
+    return remixData(
       {
         discountPercentage,
         discountValue,

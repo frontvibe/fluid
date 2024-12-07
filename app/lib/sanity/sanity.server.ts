@@ -11,7 +11,7 @@ import type {BaseQuery, InferType, z} from 'groqd';
 import {loadQuery, setServerClient} from '@sanity/react-loader';
 import {CacheShort, createWithCache} from '@shopify/hydrogen';
 
-import {getSanityClient} from './client';
+import {getSanityClient} from './sanityClient';
 
 type CreateSanityClientOptions = {
   cache: Cache;

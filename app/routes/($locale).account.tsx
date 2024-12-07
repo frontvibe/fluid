@@ -13,7 +13,10 @@ import {
   useOutlet,
 } from '@remix-run/react';
 import {flattenConnection} from '@shopify/hydrogen';
-import {defer, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
+import {
+  type LoaderFunctionArgs,
+  data as remixData,
+} from '@shopify/remix-oxygen';
 
 import {AccountAddressBook} from '~/components/account/AccountAddressBook';
 import {AccountDetails} from '~/components/account/AccountDetails';
@@ -40,11 +43,9 @@ export async function loader({context}: LoaderFunctionArgs) {
     throw await doLogout(context);
   }
 
-  const customer = data?.customer;
-
-  return defer(
+  return remixData(
     {
-      customer,
+      customer: data?.customer,
     },
     {
       headers: {

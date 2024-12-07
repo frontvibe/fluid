@@ -10,7 +10,11 @@ import {
   useNavigation,
   useOutletContext,
 } from '@remix-run/react';
-import {type ActionFunction, json, redirect} from '@shopify/remix-oxygen';
+import {
+  type ActionFunction,
+  redirect,
+  data as remixData,
+} from '@shopify/remix-oxygen';
 import invariant from 'tiny-invariant';
 
 import {Button} from '~/components/ui/Button';
@@ -88,7 +92,7 @@ export const action: ActionFunction = async ({context, params, request}) => {
       },
     });
   } catch (error: any) {
-    return json(
+    return remixData(
       {formError: error?.message},
       {
         headers: {

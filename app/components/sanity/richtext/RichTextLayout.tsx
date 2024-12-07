@@ -1,7 +1,7 @@
 import {stegaClean} from '@sanity/client/stega';
 import {cx} from 'class-variance-authority';
 
-import type {contentAlignmentValues} from '~/qroq/sections';
+import type {contentAlignmentValues} from '~/qroq/constant';
 
 import {contentAlignment} from '~/components/cva/contentAlignment';
 

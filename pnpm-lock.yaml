@@ -153,8 +153,8 @@ importers:
         specifier: ^3.72.1
         version: 3.72.1
       groqd:
-        specifier: ^0.15.12
-        version: 0.15.12
+        specifier: ^1.0.6
+        version: 1.0.6
       isbot:
         specifier: ^5.1.22
         version: 5.1.22
@@ -3668,6 +3668,7 @@ packages:
   '@sanity/presentation@1.19.16':
     resolution: {integrity: sha512-qxrhHkUcLrW1zk8+jjzc1K8co8Hn+GM4oBpLXub4vZbIRHeUzxfIRlP3IwgAIWTpzV+CWLGVWsTJQU2E6WvFqw==}
     engines: {node: '>=16.14'}
+    deprecated: migrate to sanity/presentation from sanity@latest
 
   '@sanity/preview-url-secret@2.0.5':
     resolution: {integrity: sha512-YWExuJ/Z0CW37vYdiouE9A/NAN3QEewZL6qu6IohXqVY6wDDT0b9ubetTR4Op1kzmK6WbPGj79aiHrPubrM70A==}
@@ -6558,8 +6559,8 @@ packages:
     resolution: {integrity: sha512-F5WNkeLstW7/aSW3QauOIX/LohuEpqn56H0Mz6LX/9Qmfhapbn9KljEgfvAm6MYI6nO34iJbN2mPWQUlODKpxw==}
     engines: {node: '>=18'}
 
-  groqd@0.15.12:
-    resolution: {integrity: sha512-IVxefzYb9dnGelt1+ggxvUFheGEWHcKTDelDxEBq7b5lqPHEbKXsetRos5EEakTnj0KfmYUMZI9u/HBQLHJIgQ==}
+  groqd@1.0.6:
+    resolution: {integrity: sha512-i5N3ABPYQtanhHiEGWqVbVBF2HnPt9EANd0gx7nX8n/JqGDuiuWzHtkogEOvi8uCBtqDFuBAuUS3pvjkt721+A==}
     engines: {node: '>= 14'}
 
   gunzip-maybe@1.4.2:
@@ -10896,9 +10897,6 @@ packages:
     engines: {node: '>=18.0.0'}
     peerDependencies:
       zod: ^3.18.0
-
-  zod@3.22.4:
-    resolution: {integrity: sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==}
 
   zod@3.23.8:
     resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
@@ -15980,7 +15978,7 @@ snapshots:
       '@babel/plugin-syntax-typescript': 7.25.9(@babel/core@7.26.7)
       '@vanilla-extract/babel-plugin-debug-ids': 1.2.0
       '@vanilla-extract/css': 1.17.1(babel-plugin-macros@3.1.0)
-      esbuild: 0.17.6
+      esbuild: 0.19.8
       eval: 0.1.8
       find-up: 5.0.0
       javascript-stringify: 2.1.0
@@ -18892,9 +18890,10 @@ snapshots:
 
   groq@3.72.1: {}
 
-  groqd@0.15.12:
+  groqd@1.0.6:
     dependencies:
-      zod: 3.22.4
+      type-fest: 4.33.0
+      zod: 3.24.1
 
   gunzip-maybe@1.4.2:
     dependencies:
@@ -23798,8 +23797,6 @@ snapshots:
   zod-validation-error@3.4.0(zod@3.24.1):
     dependencies:
       zod: 3.24.1
-
-  zod@3.22.4: {}
 
   zod@3.23.8: {}
 

@@ -39,7 +39,7 @@
     "@sanity/icons": "^3.5.7",
     "@sanity/image-url": "^1.1.0",
     "@sanity/language-filter": "^4.0.3",
-    "@sanity/presentation": "^1.19.16",
+    "@sanity/presentation": "^2.0.0",
     "@sanity/react-loader": "^1.10.41",
     "@sanity/ui": "^2.11.7",
     "@sanity/uuid": "^3.0.2",

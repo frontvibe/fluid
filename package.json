@@ -48,7 +48,7 @@
     "@shopify/cli": "3.69.4",
     "@shopify/cli-hydrogen": "^9.0.5",
     "@shopify/hydrogen": "^2024.10.1",
-    "@shopify/hydrogen-react": "^2024.10.1",
+    "@shopify/hydrogen-react": "^2025.1.1",
     "@shopify/mini-oxygen": "^3.1.1",
     "@shopify/polaris": "^13.9.2",
     "@shopify/remix-oxygen": "^2.0.10",

@@ -108,8 +108,8 @@ importers:
         specifier: ^2024.10.1
         version: 2024.10.1(@remix-run/react@2.15.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.7.3))(@remix-run/server-runtime@2.15.3(typescript@5.7.3))(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@5.4.14(@types/node@22.13.0)(terser@5.37.0))(xstate@5.19.2)
       '@shopify/hydrogen-react':
-        specifier: ^2024.10.1
-        version: 2024.10.1(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(xstate@5.19.2)
+        specifier: ^2025.1.1
+        version: 2025.1.1(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(xstate@5.19.2)
       '@shopify/mini-oxygen':
         specifier: ^3.1.1
         version: 3.1.1(vite@5.4.14(@types/node@22.13.0)(terser@5.37.0))
@@ -2407,8 +2407,8 @@ packages:
   '@lezer/php@1.0.2':
     resolution: {integrity: sha512-GN7BnqtGRpFyeoKSEqxvGvhJQiI4zkgmYnDk/JIyc7H7Ifc1tkPnUn/R2R8meH3h/aBf5rzjvU8ZQoyiNDtDrA==}
 
-  '@lit-labs/ssr-dom-shim@1.2.1':
-    resolution: {integrity: sha512-wx4aBmgeGvFmOKucFKY+8VFJSYZxs9poN3SDNQFF6lT6NrQUnHiPB2PWz2sc4ieEcAaYYzN+1uWahEeTq2aRIQ==}
+  '@lit-labs/ssr-dom-shim@1.3.0':
+    resolution: {integrity: sha512-nQIWonJ6eFAvUUrSlwyHDm/aE8PBDu5kRpL0vHMg6K8fK3Diq1xdPjTnsJSwxABhaZ+5eBi1btQB5ShUTKo4nQ==}
 
   '@lit/reactive-element@1.6.3':
     resolution: {integrity: sha512-QuTgnG52Poic7uM1AN5yJ09QMe0O28e10XzSvWDz02TJiiKee4stsiownEIadWm8nYzyDAyT+gKzUoZmiWQtsQ==}
@@ -3668,6 +3668,7 @@ packages:
   '@sanity/presentation@1.19.16':
     resolution: {integrity: sha512-qxrhHkUcLrW1zk8+jjzc1K8co8Hn+GM4oBpLXub4vZbIRHeUzxfIRlP3IwgAIWTpzV+CWLGVWsTJQU2E6WvFqw==}
     engines: {node: '>=16.14'}
+    deprecated: migrate to sanity/presentation from sanity@latest
 
   '@sanity/preview-url-secret@2.0.5':
     resolution: {integrity: sha512-YWExuJ/Z0CW37vYdiouE9A/NAN3QEewZL6qu6IohXqVY6wDDT0b9ubetTR4Op1kzmK6WbPGj79aiHrPubrM70A==}
@@ -3856,6 +3857,13 @@ packages:
 
   '@shopify/hydrogen-react@2024.10.1':
     resolution: {integrity: sha512-7tNdany/ueQqqeOqJ/gewoNg6mM6J5KxcSGeYDBQWHOjQdVpWNW+T2SzaNtXobtW/TB6gQ/6S8mSstQSyr4kyA==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      react: ^18.0.0
+      react-dom: ^18.0.0
+
+  '@shopify/hydrogen-react@2025.1.1':
+    resolution: {integrity: sha512-FabTrrz+SroqV2P4fXWtiQk92sTk588lK1fpX9TAor/klxPoRrWd+7QTujqW6+3dw9X7VSp5taeH8Tz6LygoSw==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       react: ^18.0.0
@@ -13387,11 +13395,11 @@ snapshots:
       '@lezer/highlight': 1.2.1
       '@lezer/lr': 1.4.2
 
-  '@lit-labs/ssr-dom-shim@1.2.1': {}
+  '@lit-labs/ssr-dom-shim@1.3.0': {}
 
   '@lit/reactive-element@1.6.3':
     dependencies:
-      '@lit-labs/ssr-dom-shim': 1.2.1
+      '@lit-labs/ssr-dom-shim': 1.3.0
 
   '@marijn/find-cluster-break@1.0.2': {}
 
@@ -15421,6 +15429,20 @@ snapshots:
       - '@types/react'
       - xstate
 
+  '@shopify/hydrogen-react@2025.1.1(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(xstate@5.19.2)':
+    dependencies:
+      '@google/model-viewer': 1.12.1
+      '@xstate/fsm': 2.0.0
+      '@xstate/react': 3.2.1(@types/react@18.3.12)(@xstate/fsm@2.0.0)(react@18.3.1)(xstate@5.19.2)
+      graphql: 16.10.0
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      type-fest: 4.33.0
+      worktop: 0.7.3
+    transitivePeerDependencies:
+      - '@types/react'
+      - xstate
+
   '@shopify/hydrogen@2024.10.1(@remix-run/react@2.15.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.7.3))(@remix-run/server-runtime@2.15.3(typescript@5.7.3))(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@5.4.14(@types/node@22.13.0)(terser@5.37.0))(xstate@5.19.2)':
     dependencies:
       '@remix-run/react': 2.15.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.7.3)
@@ -15980,7 +16002,7 @@ snapshots:
       '@babel/plugin-syntax-typescript': 7.25.9(@babel/core@7.26.7)
       '@vanilla-extract/babel-plugin-debug-ids': 1.2.0
       '@vanilla-extract/css': 1.17.1(babel-plugin-macros@3.1.0)
-      esbuild: 0.17.6
+      esbuild: 0.19.8
       eval: 0.1.8
       find-up: 5.0.0
       javascript-stringify: 2.1.0
@@ -19737,7 +19759,7 @@ snapshots:
 
   lit-element@3.3.3:
     dependencies:
-      '@lit-labs/ssr-dom-shim': 1.2.1
+      '@lit-labs/ssr-dom-shim': 1.3.0
       '@lit/reactive-element': 1.6.3
       lit-html: 2.8.0
 

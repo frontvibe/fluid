@@ -5,12 +5,12 @@ import {fontPicker} from '@frontvibe/sanity-font-picker';
 import {rangeSlider} from '@frontvibe/sanity-plugin-range-slider';
 import {codeInput} from '@sanity/code-input';
 import {languageFilter} from '@sanity/language-filter';
-import {presentationTool} from '@sanity/presentation';
 import {visionTool} from '@sanity/vision';
 import {getAllLanguages} from 'countries';
 import {defineConfig, isDev} from 'sanity';
 import {internationalizedArray} from 'sanity-plugin-internationalized-array';
 import {media, mediaAssetSource} from 'sanity-plugin-media';
+import {presentationTool} from 'sanity/presentation';
 import {structureTool} from 'sanity/structure';
 
 import {PreviewIcon} from './components/icons/Preview';

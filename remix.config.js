@@ -4,6 +4,11 @@ module.exports = {
   assetsBuildDirectory: 'dist/client/build',
   ignoredRouteFiles: ['**/.*'],
   postcss: true,
+  serverNodeBuiltinsPolyfill: {
+    modules: {
+      stream: true,
+    },
+  },
   /**
    * The following settings are required to deploy Hydrogen apps to Oxygen:
    */

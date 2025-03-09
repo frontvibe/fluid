@@ -150,8 +150,8 @@ importers:
         specifier: ^3.78.1
         version: 3.78.1
       groqd:
-        specifier: ^0.15.12
-        version: 0.15.12
+        specifier: ^1.3.0
+        version: 1.3.0
       isbot:
         specifier: ^5.1.23
         version: 5.1.23
@@ -6468,8 +6468,8 @@ packages:
     resolution: {integrity: sha512-eIgcFmqNq00yv00oHDk7qkDMcEQeDgT2HaIKL3KDVC4Od/A1LkPklzpxDbU78bLXnWoillLfkSV9FMHal+ti6w==}
     engines: {node: '>=18'}
 
-  groqd@0.15.12:
-    resolution: {integrity: sha512-IVxefzYb9dnGelt1+ggxvUFheGEWHcKTDelDxEBq7b5lqPHEbKXsetRos5EEakTnj0KfmYUMZI9u/HBQLHJIgQ==}
+  groqd@1.3.0:
+    resolution: {integrity: sha512-G+s6Zz171Fe7WsXpzuEuCv0vlQKtmyJ2AxcNEH8dCgnyLnpIHTqKBmhQUFsmWq4wIWyi3EgqOTQSL7dFOqP9hw==}
     engines: {node: '>= 14'}
 
   gunzip-maybe@1.4.2:
@@ -10829,9 +10829,6 @@ packages:
 
   zod@3.22.3:
     resolution: {integrity: sha512-EjIevzuJRiRPbVH4mGc8nApb/lVLKVpmUhAaR5R5doKGfAnGJ6Gr3CViAVjP+4FWSxCsybeWQdcgCtbX+7oZug==}
-
-  zod@3.22.4:
-    resolution: {integrity: sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==}
 
   zod@3.24.1:
     resolution: {integrity: sha512-muH7gBL9sI1nciMZV67X5fTKKBLtwpZ5VBp1vsOQzj1MhrBZ4wlVCm3gedKZWLp0Oyel8sIGfeiz54Su+OVT+A==}
@@ -18510,9 +18507,10 @@ snapshots:
 
   groq@3.78.1: {}
 
-  groqd@0.15.12:
+  groqd@1.3.0:
     dependencies:
-      zod: 3.22.4
+      type-fest: 4.37.0
+      zod: 3.24.2
 
   gunzip-maybe@1.4.2:
     dependencies:
@@ -23280,8 +23278,6 @@ snapshots:
       zod: 3.24.1
 
   zod@3.22.3: {}
-
-  zod@3.22.4: {}
 
   zod@3.24.1: {}
 

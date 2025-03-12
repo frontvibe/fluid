@@ -117,6 +117,23 @@ export const initialDocumentsValues = [
         value: 'Collections',
       },
     ],
+    seo: {
+      _type: 'seo',
+      title: [
+        {
+          _type: 'internationalizedArrayStringValue',
+          _key: 'en',
+          value: 'Collections',
+        },
+      ],
+      description: [
+        {
+          _type: 'internationalizedArrayTextValue',
+          _key: 'en',
+          value: '',
+        },
+      ],
+    },
   },
   // Products page
   {
@@ -133,6 +150,23 @@ export const initialDocumentsValues = [
         value: 'Products',
       },
     ],
+    seo: {
+      _type: 'seo',
+      title: [
+        {
+          _type: 'internationalizedArrayStringValue',
+          _key: 'en',
+          value: 'Products',
+        },
+      ],
+      description: [
+        {
+          _type: 'internationalizedArrayTextValue',
+          _key: 'en',
+          value: '',
+        },
+      ],
+    },
   },
   // Light Color Scheme
   {

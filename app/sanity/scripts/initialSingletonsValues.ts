@@ -95,6 +95,24 @@ export const initialSingletonsValues = {
         },
       },
     ],
+    seo: {
+      _type: 'seo',
+      title: [
+        {
+          _type: 'internationalizedArrayStringValue',
+          _key: 'en',
+          value: 'Fluid',
+        },
+      ],
+      description: [
+        {
+          _type: 'internationalizedArrayTextValue',
+          _key: 'en',
+          value:
+            'Fluid is a Hydrogen theme that lets you easily build Shopify headless storefronts by organizing your content with Sanity.',
+        },
+      ],
+    },
   },
   typography: {
     heading: {

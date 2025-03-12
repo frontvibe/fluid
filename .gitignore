@@ -16,3 +16,6 @@ node_modules
 *.pem
 .vercel
 .env*.local
+
+# Sanity scripts cache
+app/sanity/**/cache.json

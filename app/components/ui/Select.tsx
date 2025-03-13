@@ -17,10 +17,10 @@ const SelectTrigger = forwardRef<
 >(({children, className, ...props}, ref) => (
   <SelectPrimitive.Trigger
     className={cn(
-      'flex h-11 w-full items-center justify-between bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1',
-      'rounded-[--button-border-corner-radius]',
+      'flex h-11 w-full items-center justify-between bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-hidden focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1',
+      'rounded-(--button-border-corner-radius)',
       '[box-shadow:rgb(var(--shadow)_/_var(--button-shadow-opacity))_var(--button-shadow-horizontal-offset)_var(--button-shadow-vertical-offset)_var(--button-shadow-blur-radius)_0px]',
-      'border-[rgb(var(--input)_/_var(--button-border-opacity))] [border-width:--button-border-thickness]',
+      'border-[rgb(var(--input)_/_var(--button-border-opacity))] [border-width:var(--button-border-thickness)]',
       className,
     )}
     ref={ref}
@@ -77,8 +77,8 @@ const SelectContent = forwardRef<
     <SelectPrimitive.Content
       className={cn(
         'relative z-50 max-h-96 min-w-[8rem] overflow-hidden bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
-        'rounded-[--dropdown-popup-border-corner-radius]',
-        'border-[rgb(var(--border)_/_var(--dropdown-popup-border-opacity))] [border-width:--dropdown-popup-border-thickness]',
+        'rounded-(--dropdown-popup-border-corner-radius)',
+        'border-[rgb(var(--border)_/_var(--dropdown-popup-border-opacity))] [border-width:var(--dropdown-popup-border-thickness)]',
         '[box-shadow:rgb(var(--shadow)_/_var(--dropdown-popup-shadow-opacity))_var(--dropdown-popup-shadow-horizontal-offset)_var(--dropdown-popup-shadow-vertical-offset)_var(--dropdown-popup-shadow-blur-radius)_0px]',
         position === 'popper' &&
           'data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1',
@@ -122,7 +122,7 @@ const SelectItem = forwardRef<
 >(({children, className, ...props}, ref) => (
   <SelectPrimitive.Item
     className={cn(
-      'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
+      'relative flex w-full cursor-default select-none items-center rounded-xs py-1.5 pl-8 pr-2 text-sm outline-hidden focus:bg-accent focus:text-accent-foreground data-disabled:pointer-events-none data-disabled:opacity-50',
       className,
     )}
     ref={ref}

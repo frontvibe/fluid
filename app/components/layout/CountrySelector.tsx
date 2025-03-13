@@ -37,7 +37,7 @@ export function CountrySelector() {
       <DropdownMenuContent id="country-selector">
         {locales.map((locale) => (
           <DropdownMenuItem
-            className="flex [&>*]:flex-grow"
+            className="flex *:grow"
             key={locale.country + locale.language + locale.pathPrefix}
             onSelect={(e) => e.preventDefault()}
           >

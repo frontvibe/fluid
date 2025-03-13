@@ -245,7 +245,7 @@ export default function EditAddress() {
             value={address?.id ?? addressId}
           />
           {actionData?.formError && (
-            <div className="mb-6 flex items-center justify-center rounded bg-red-100">
+            <div className="mb-6 flex items-center justify-center rounded-sm bg-red-100">
               <p className="m-4 text-sm text-red-900">{formErrorString}</p>
             </div>
           )}

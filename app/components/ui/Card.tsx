@@ -5,7 +5,7 @@ const Card = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({className, ...props}, ref) => (
     <div
       className={cn(
-        'group/card rounded-lg border bg-card text-card-foreground shadow-sm shadow-foreground/10',
+        'group/card rounded-lg border bg-card text-card-foreground shadow-xs shadow-foreground/10',
         className,
       )}
       data-type="card"
@@ -46,7 +46,7 @@ const CardMedia = forwardRef<
       ref={ref}
       {...props}
     >
-      <div className="origin-center [&_img]:size-full [&_img]:scale-[1.005] [&_img]:object-cover [&_img]:[transition:transform_0.5s_ease] group-hover/card:[&_img]:scale-[1.03]">
+      <div className="origin-center [&_img]:size-full [&_img]:scale-[1.005] [&_img]:object-cover [&_img]:[transition:transform_0.5s_ease] [&_img]:group-hover/card:scale-[1.03]">
         {props.children}
       </div>
     </div>

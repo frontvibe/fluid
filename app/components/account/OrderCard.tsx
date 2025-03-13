@@ -19,7 +19,7 @@ export function OrderCard({order}: {order: OrderCardFragment}) {
     : `/account/orders/${legacyOrderId}`;
 
   return (
-    <li className="grid rounded border text-center">
+    <li className="grid rounded-sm border text-center">
       <Link
         className="grid items-center gap-4 p-4 md:grid-cols-2 md:gap-6 md:p-6"
         prefetch="intent"

@@ -163,9 +163,9 @@ function MobileDrawer({
         </DrawerTrigger>
         <DrawerContent
           className={cn([
-            'h-[--dialog-content-height] max-h-screen w-screen bg-background p-0 text-foreground',
+            'h-(--dialog-content-height) max-h-screen w-screen bg-background p-0 text-foreground',
             '[--dialog-content-height:calc(100svh_*_.95)] [--dialog-content-max-width:calc(32rem)]',
-            'lg:left-auto lg:right-0 lg:max-w-[--dialog-content-max-width] lg:[--dialog-content-height:100svh]',
+            'lg:left-auto lg:right-0 lg:max-w-(--dialog-content-max-width) lg:[--dialog-content-height:100svh]',
           ])}
           onCloseAutoFocus={(e) => e.preventDefault()}
           onOpenAutoFocus={(e) => e.preventDefault()}
@@ -249,7 +249,7 @@ export function DesktopFiltersDrawer({
     <ScrollArea
       className={cn(
         'h-[calc(100svh_-_var(--desktopHeaderHeight)_-2rem)] w-full px-4 transition-all',
-        'rounded-[--product-card-border-corner-radius]',
+        'rounded-(--product-card-border-corner-radius)',
         'border border-[rgb(var(--border))]',
       )}
     >

@@ -20,7 +20,7 @@ import {
 import {ScrollArea} from '../ui/ScrollArea';
 
 const mobileMenuLinkClass = cn(
-  'flex rounded-sm px-4 py-2 items-center gap-2 w-full transition-colors notouch:hover:bg-accent notouch:hover:text-accent-foreground touch:active:bg-accent touch:active:text-accent-foreground',
+  'flex rounded-xs px-4 py-2 items-center gap-2 w-full transition-colors notouch:hover:bg-accent notouch:hover:text-accent-foreground touch:active:bg-accent touch:active:text-accent-foreground',
 );
 
 export function MobileNavigation(props: {data?: NavigationProps}) {
@@ -74,9 +74,9 @@ function MobileNavigationContent(props: {
   return (
     <DrawerContent
       className={cn([
-        'h-[--dialog-content-height] max-h-screen w-screen bg-background p-0 text-foreground',
+        'h-(--dialog-content-height) max-h-screen w-screen bg-background p-0 text-foreground',
         '[--dialog-content-height:calc(100svh_*_.75)] [--dialog-content-max-width:calc(32rem)]',
-        'lg:left-auto lg:right-0 lg:max-w-[--dialog-content-max-width] lg:[--dialog-content-height:100svh]',
+        'lg:left-auto lg:right-0 lg:max-w-(--dialog-content-max-width) lg:[--dialog-content-height:100svh]',
         props.className,
       ])}
       onCloseAutoFocus={(e) => e.preventDefault()}
@@ -126,7 +126,7 @@ function MobileNavigationNested(props: {
       <MobileNavigationContent
         className={cn([
           'h-[calc(var(--dialog-content-height)*.95)]',
-          'lg:h-[--dialog-content-height] lg:max-w-[calc(var(--dialog-content-max-width)*.95)]',
+          'lg:h-(--dialog-content-height) lg:max-w-[calc(var(--dialog-content-max-width)*.95)]',
         ])}
       >
         {childLinks &&

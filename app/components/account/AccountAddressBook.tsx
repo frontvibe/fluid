@@ -54,7 +54,7 @@ function Address({
 }) {
   const {themeContent} = useSanityThemeContent();
   return (
-    <div className="flex flex-col rounded border border-gray-200 p-6 lg:p-8">
+    <div className="flex flex-col rounded-sm border border-gray-200 p-6 lg:p-8">
       {defaultAddress && (
         <div className="mb-3">
           <Badge>{themeContent?.account.default}</Badge>

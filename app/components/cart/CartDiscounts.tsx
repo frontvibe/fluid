@@ -40,7 +40,7 @@ export function CartDiscounts({
           <div className="flex items-center justify-between">
             <UpdateDiscountForm>
               <button
-                className="[&>*]:pointer-events-none"
+                className="*:pointer-events-none"
                 disabled={cartIsLoading}
               >
                 <IconRemove

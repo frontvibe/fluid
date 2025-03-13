@@ -153,14 +153,14 @@ function ShopPay(props: {
   }, [userIsIdle, shopPayLoadState, setShopPayLoadState]);
 
   return (
-    <div className="relative h-[--shop-pay-button-height] overflow-hidden rounded-[--button-border-corner-radius] [--shop-pay-button-border-radius:--button-border-corner-radius] [--shop-pay-button-height:44px]">
+    <div className="relative h-(--shop-pay-button-height) overflow-hidden rounded-(--button-border-corner-radius) [--shop-pay-button-border-radius:var(--button-border-corner-radius)] [--shop-pay-button-height:44px]">
       {!show ? (
         <div className="flex size-full items-center justify-center bg-[#5a31f4] [&_svg]:h-[21px] [&_svg]:w-[88px]">
           {/* Plaholder */}
           <ShopPayLogo />
         </div>
       ) : (
-        <div className="absolute inset-0 z-[2]">
+        <div className="absolute inset-0 z-2">
           <ShopPayButton
             className={cn([
               (isLoading || isOutOfStock) &&

@@ -73,7 +73,7 @@ function BannerRichtext(props: {value?: null | PortableTextBlock[]}) {
   if (!props.value) return null;
 
   return (
-    <div className="space-y-4 text-balance [&_a:not(last-child)]:mr-4">
+    <div className="flex flex-col gap-4 text-balance [&_a]:w-fit [&_a:not(:last-child)]:mr-4">
       <PortableText
         components={components as PortableTextComponents}
         value={props.value}

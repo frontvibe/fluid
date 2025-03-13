@@ -41,7 +41,7 @@ NavigationMenuList.displayName = NavigationMenuPrimitive.List.displayName;
 const NavigationMenuItem = NavigationMenuPrimitive.Item;
 
 const navigationMenuTriggerStyle = cva(
-  'group inline-flex select-none h-8 w-max items-center justify-center rounded-[--button-border-corner-radius] px-2 py-2 text-sm font-medium transition-colors hover:text-accent-foreground hover:active:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+  'group inline-flex select-none h-8 w-max items-center justify-center rounded-(--button-border-corner-radius) px-2 py-2 text-sm font-medium transition-colors hover:text-accent-foreground hover:active:bg-accent focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
 );
 
 const NavigationMenuTrigger = forwardRef<
@@ -91,8 +91,8 @@ const NavigationMenuViewport = forwardRef<
     <NavigationMenuPrimitive.Viewport
       className={cn(
         'relative mt-1.5 h-[var(--radix-navigation-menu-viewport-height)] w-full origin-[top_center] overflow-hidden bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-90 md:w-[var(--radix-navigation-menu-viewport-width)]',
-        'rounded-[--dropdown-popup-border-corner-radius]',
-        'border-[rgb(var(--border)_/_var(--dropdown-popup-border-opacity))] [border-width:--dropdown-popup-border-thickness]',
+        'rounded-(--dropdown-popup-border-corner-radius)',
+        'border-[rgb(var(--border)_/_var(--dropdown-popup-border-opacity))] [border-width:var(--dropdown-popup-border-thickness)]',
         '[box-shadow:rgb(var(--shadow)_/_var(--dropdown-popup-shadow-opacity))_var(--dropdown-popup-shadow-horizontal-offset)_var(--dropdown-popup-shadow-vertical-offset)_var(--dropdown-popup-shadow-blur-radius)_0px]',
         className,
       )}
@@ -110,7 +110,7 @@ const NavigationMenuIndicator = forwardRef<
 >(({className, ...props}, ref) => (
   <NavigationMenuPrimitive.Indicator
     className={cn(
-      'top-full z-[1] flex h-1.5 items-end justify-center overflow-hidden data-[state=visible]:animate-in data-[state=hidden]:animate-out data-[state=hidden]:fade-out data-[state=visible]:fade-in',
+      'top-full z-1 flex h-1.5 items-end justify-center overflow-hidden data-[state=visible]:animate-in data-[state=hidden]:animate-out data-[state=hidden]:fade-out data-[state=visible]:fade-in',
       className,
     )}
     ref={ref}

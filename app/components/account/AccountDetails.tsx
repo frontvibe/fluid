@@ -15,7 +15,7 @@ export function AccountDetails({
   return (
     <div className="mt-10 grid w-full gap-4 md:gap-8">
       <h3>{themeContent?.account.accountDetails}</h3>
-      <div className="rounded border border-border/30 p-6 lg:p-8">
+      <div className="rounded-sm border border-border/30 p-6 lg:p-8">
         <div className="flex">
           <h4 className="flex-1">{themeContent?.account.profile}</h4>
           <Link

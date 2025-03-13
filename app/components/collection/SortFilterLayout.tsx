@@ -146,7 +146,7 @@ export function DesktopFiltersDrawer({
     <ScrollArea
       className={cn(
         'h-[calc(100svh_-_var(--desktopHeaderHeight)_-2rem)] w-full px-4 transition-all',
-        'rounded-[--product-card-border-corner-radius]',
+        'rounded-(--product-card-border-corner-radius)',
         'border border-[rgb(var(--border))]',
       )}
     >

@@ -1,11 +1,72 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@plugin "tailwindcss-animate";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  /* Fonts */
+  --font-heading: var(--heading-font-family);
+  --font-body: var(--heading-body-family);
+  --font-extra: var(--heading-extra-family);
+}
+
+@theme inline {
+  /* Colors */
+  --color-background: rgb(var(--background));
+  --color-foreground: rgb(var(--foreground));
+  --color-border: rgb(var(--border));
+  --color-input: rgb(var(--input));
+  --color-ring: rgb(var(--ring));
+  --color-primary: rgb(var(--primary));
+  --color-primary-foreground: rgb(var(--primary-foreground));
+  --color-secondary: rgb(var(--secondary));
+  --color-secondary-foreground: rgb(var(--secondary-foreground));
+  --color-muted: rgb(var(--muted));
+  --color-muted-foreground: rgb(var(--muted-foreground));
+  --color-accent: rgb(var(--accent));
+  --color-accent-foreground: rgb(var(--accent-foreground));
+  --color-popover: rgb(var(--popover));
+  --color-popover-foreground: rgb(var(--popover-foreground));
+  --color-card: rgb(var(--card));
+  --color-card-foreground: rgb(var(--card-foreground));
+  --color-destructive: rgb(var(--destructive));
+  --color-destructive-foreground: rgb(var(--destructive-foreground));
+}
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 1rem;
+
+  @variant md {
+    padding-inline: 1.5rem;
+  }
+
+  @variant xl {
+    padding-inline: 2rem;
+  }
+
+  @variant 2xl {
+    padding-inline: 12rem;
+  }
+}
+
+@utility section-padding {
+  padding-bottom: calc(var(--paddingBottom) * 0.75);
+  padding-top: calc(var(--paddingTop) * 0.75);
+
+  @variant sm {
+    padding-bottom: var(--paddingBottom);
+    padding-top: var(--paddingTop);
+  }
+}
 
 @layer base {
   * {
-    @apply border-border;
-    @apply focus-visible:outline-ring;
+    border-color: var(--color-border);
+
+    &:focus-visible {
+      outline-color: var(--color-ring);
+    }
   }
 
   body {
@@ -15,6 +76,11 @@
     letter-spacing: calc(var(--body-letter-spacing) * 1px);
     -webkit-font-smoothing: var(--body-font-webkit-font-smoothing);
     -moz-osx-font-smoothing: var(--body-font-moz-osx-font-smoothing);
+  }
+
+  button,
+  [role='button'] {
+    cursor: pointer;
   }
 
   h1,
@@ -55,3 +121,6 @@
     font-size: calc(var(--heading-base-size) * 0.375 * 1px);
   }
 }
+
+@custom-variant touch (@media (pointer: coarse));
+@custom-variant notouch (@media (hover: hover));

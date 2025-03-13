@@ -69,14 +69,14 @@ export function ProductBadges({
   const badgesPosition = stegaClean(data?.settings?.badgesPosition);
 
   const badgeClass = cn(
-    'bg-background text-foreground hover:bg-background rounded-[--badges-corner-radius]',
+    'bg-background text-foreground hover:bg-background rounded-(--badges-corner-radius)',
   );
 
   return (
     <div
       className={cn(
         'flex flex-wrap items-center gap-3',
-        layout === 'card' && 'absolute z-[5] m-2',
+        layout === 'card' && 'absolute z-5 m-2',
         layout === 'card' && badgesPosition === 'top_left' && 'left-0 top-0',
         layout === 'card' && badgesPosition === 'top_right' && 'right-0 top-0',
         layout === 'card' &&

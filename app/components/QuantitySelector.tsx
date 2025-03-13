@@ -11,7 +11,7 @@ export function QuantitySelector(props: {children: React.ReactNode}) {
     <div
       className={cn(
         'flex items-center',
-        'rounded-[--input-border-corner-radius]',
+        'rounded-(--input-border-corner-radius)',
         '[box-shadow:rgb(var(--shadow)_/_var(--input-shadow-opacity))_var(--input-shadow-horizontal-offset)_var(--input-shadow-vertical-offset)_var(--input-shadow-blur-radius)_0px]',
       )}
     >
@@ -33,12 +33,12 @@ const QuantityButton = forwardRef<
         symbol === 'increase' && 'Increase quantity',
       ])}
       className={cn([
-        'group rounded-[--input-border-corner-radius] disabled:opacity-100',
+        'group rounded-(--input-border-corner-radius) disabled:opacity-100',
         'border-[rgb(var(--input)_/_var(--input-border-opacity))]',
         '[border-width:var(--input-border-thickness)]',
         symbol === 'decrease'
-          ? 'rounded-br-none rounded-tr-none !border-r-0'
-          : 'rounded-bl-none rounded-tl-none !border-l-0',
+          ? 'rounded-br-none rounded-tr-none border-r-0!'
+          : 'rounded-bl-none rounded-tl-none border-l-0!',
         className,
       ])}
       name={cx([

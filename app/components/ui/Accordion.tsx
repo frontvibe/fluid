@@ -35,7 +35,7 @@ const AccordionTrigger = forwardRef<
       >
         {children}
         <IconChevron
-          className="size-3 shrink-0 transition-transform duration-200 group-[[data-state='open']]:rotate-[180deg]"
+          className="size-3 shrink-0 transition-transform duration-200 group-data-[state='open']:rotate-[180deg]"
           direction="down"
         />
       </AccordionPrimitive.Trigger>

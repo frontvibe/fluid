@@ -44,7 +44,7 @@ const BannerMedia = forwardRef<
     ref={ref}
     {...props}
   >
-    <div className="[&_img]:h-[--banner-height] [&_img]:w-screen [&_img]:object-cover">
+    <div className="[&_img]:h-(--banner-height) [&_img]:w-screen [&_img]:object-cover">
       {props.children}
     </div>
   </div>
@@ -66,7 +66,7 @@ const BannerMediaOverlay = forwardRef<
   return (
     <div
       aria-hidden
-      className={cn('absolute inset-0 z-[2] bg-black', className)}
+      className={cn('absolute inset-0 z-2 bg-black', className)}
       ref={ref}
       style={style}
       {...props}
@@ -89,7 +89,7 @@ const BannerContent = forwardRef<
   return (
     <div
       className={cn(
-        'container relative z-[3] flex h-full py-4',
+        'container relative z-3 flex h-full py-4',
         contentAlignmentVariants({
           required: cleanContentAlignement,
         }),

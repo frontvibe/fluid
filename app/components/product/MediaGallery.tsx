@@ -106,11 +106,11 @@ function MobileCarousel({
       }}
     >
       <div className="relative">
-        <CarouselContent className="px-[--slide-spacing]">
+        <CarouselContent className="px-(--slide-spacing)">
           {medias.map((media, index) => {
             return (
               <CarouselItem
-                className="last:pr-[--slide-spacing] [&>span]:h-full"
+                className="last:pr-(--slide-spacing) [&>span]:h-full"
                 key={media.id}
               >
                 {media.__typename === 'MediaImage' && media.image && (
@@ -193,9 +193,9 @@ function ThumbnailCarousel({
                   {media.__typename === 'MediaImage' && media.image && (
                     <button
                       className={cn(
-                        'overflow-hidden rounded-[--media-border-corner-radius] border-2 border-primary border-opacity-0 transition-opacity notouch:hover:border-opacity-100',
-                        'ring-offset-background transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
-                        media.id === selectedImage.id && 'border-opacity-100',
+                        'border-primary/0 notouch:hover:border-primary/100 overflow-hidden rounded-(--media-border-corner-radius) border-2 transition-opacity',
+                        'ring-offset-background focus-visible:ring-ring transition focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-hidden',
+                        media.id === selectedImage.id && 'border-primary/100',
                       )}
                       key={media.id}
                       onClick={() => handleSelect(index, media.id)}

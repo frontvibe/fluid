@@ -1,28 +1,12 @@
 /* eslint perfectionist/sort-objects: 0 */
 import type {Config} from 'tailwindcss';
 
-import typographyPlugin from '@tailwindcss/typography';
-import tailwindAnimatePlugin from 'tailwindcss-animate';
 import plugin from 'tailwindcss/plugin';
 
 export default {
   content: ['./app/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
-      container: {
-        center: true,
-        padding: {
-          DEFAULT: '1rem',
-          md: '1.5rem',
-          xl: '2rem',
-          '2xl': '12rem',
-        },
-      },
-      fontFamily: {
-        heading: 'var(--heading-font-family)',
-        body: 'var(--heading-body-family)',
-        extra: 'var(--heading-extra-family)',
-      },
       colors: {
         background: 'rgb(var(--background) / <alpha-value>)',
         foreground: 'rgb(var(--foreground) / <alpha-value>)',
@@ -75,8 +59,6 @@ export default {
     },
   },
   plugins: [
-    typographyPlugin,
-    tailwindAnimatePlugin,
     plugin(({addComponents, addVariant}) => {
       addComponents({
         '.section-padding': {

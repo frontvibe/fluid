@@ -32,28 +32,28 @@ fs.writeFileSync("package.json", JSON.stringify(packageJson, null, 2) + "\n");
 console.log("Updated build script in package.json");
 '
 
-echo "Replacing server.ts with .netlify/server.ts..."
-if [ -f ".netlify/server.ts" ]; then
-  cp .netlify/server.ts server.ts
-  echo "Successfully replaced server.ts with .netlify/server.ts"
+echo "Replacing server.ts with netlify/server.ts..."
+if [ -f "netlify/server.ts" ]; then
+  cp netlify/server.ts server.ts
+  echo "Successfully replaced server.ts with netlify/server.ts"
 else
-  echo "Warning: .netlify/server.ts not found, skipping server replacement"
+  echo "Warning: netlify/server.ts not found, skipping server replacement"
 fi
 
-echo "Replacing context.ts with .netlify/context.ts..."
-if [ -f ".netlify/context.ts" ]; then
-  cp .netlify/context.ts app/lib/context.ts
-  echo "Successfully replaced context.ts with .netlify/context.ts"
+echo "Replacing context.ts with netlify/context.ts..."
+if [ -f "netlify/context.ts" ]; then
+  cp netlify/context.ts app/lib/context.ts
+  echo "Successfully replaced context.ts with netlify/context.ts"
 else
-  echo "Warning: .netlify/context.ts not found, skipping context replacement"
+  echo "Warning: netlify/context.ts not found, skipping context replacement"
 fi
 
-echo "Replacing entry.server.tsx with .netlify/entry.server.tsx..."
-if [ -f ".netlify/entry.server.tsx" ]; then
-  cp .netlify/entry.server.tsx app/entry.server.tsx
-  echo "Successfully replaced entry.server.tsx with .netlify/entry.server.tsx"
+echo "Replacing entry.server.tsx with netlify/entry.server.tsx..."
+if [ -f "netlify/entry.server.tsx" ]; then
+  cp netlify/entry.server.tsx app/entry.server.tsx
+  echo "Successfully replaced entry.server.tsx with netlify/entry.server.tsx"
 else
-  echo "Warning: .netlify/entry.server.ts not found, skipping entry.server replacement"
+  echo "Warning: netlify/entry.server.tsx not found, skipping entry.server replacement"
 fi
 
 echo "Running build command..."

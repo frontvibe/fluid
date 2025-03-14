@@ -31,6 +31,30 @@ fs.writeFileSync("package.json", JSON.stringify(packageJson, null, 2) + "\n");
 console.log("Updated build script in package.json");
 '
 
+echo "Replacing server.ts with .netlify/server.ts..."
+if [ -f ".netlify/server.ts" ]; then
+  cp .netlify/server.ts server.ts
+  echo "Successfully replaced server.ts with .netlify/server.ts"
+else
+  echo "Warning: .netlify/server.ts not found, skipping server replacement"
+fi
+
+echo "Replacing context.ts with .netlify/context.ts..."
+if [ -f ".netlify/context.ts" ]; then
+  cp .netlify/context.ts app/context.ts
+  echo "Successfully replaced context.ts with .netlify/context.ts"
+else
+  echo "Warning: .netlify/context.ts not found, skipping context replacement"
+fi
+
+echo "Replacing entry.server.ts with .netlify/entry.server.ts..."
+if [ -f ".netlify/entry.server.ts" ]; then
+  cp .netlify/entry.server.ts app/entry.server.ts
+  echo "Successfully replaced entry.server.ts with .netlify/entry.server.ts"
+else
+  echo "Warning: .netlify/entry.server.ts not found, skipping entry.server replacement"
+fi
+
 echo "Running build command..."
 pnpm run build
 

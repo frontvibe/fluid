@@ -21,7 +21,17 @@ else
 fi
 echo "Replaced @shopify/remix-oxygen with @netlify/remix-runtime"
 
+echo "Updating package.json build script..."
+# Use node to update the package.json file
+node -e '
+const fs = require("fs");
+const packageJson = JSON.parse(fs.readFileSync("package.json", "utf8"));
+packageJson.scripts.build = "remix vite:build";
+fs.writeFileSync("package.json", JSON.stringify(packageJson, null, 2) + "\n");
+console.log("Updated build script in package.json");
+'
+
 echo "Running build command..."
-pnpm run remix vite:build
+pnpm run build
 
 echo "Build completed successfully!"

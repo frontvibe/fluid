@@ -1,5 +1,5 @@
 [build]
-  command = "sh .netlify/scripts/build.sh"
+  command = "sh ./netlify/scripts/build.sh"
   publish = "dist/client"
 
 [dev]

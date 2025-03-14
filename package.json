@@ -126,6 +126,7 @@
     "bin",
     "*.d.ts",
     "dist",
-    "studio/*"
+    "studio/*",
+    "netlify/*"
   ]
 }

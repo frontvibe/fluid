@@ -5,7 +5,7 @@ set -e
 set -x
 
 echo "Installing Netlify-specific dependencies..."
-pnpm add @netlify/edge-functions@2.10.0 @netlify/remix-edge-adapter@3.4.2 @netlify/remix-runtime@2.3.1
+pnpm add @netlify/edge-functions @netlify/remix-edge-adapter @netlify/remix-runtime
 pnpm install
 
 echo "Updating files before build..."

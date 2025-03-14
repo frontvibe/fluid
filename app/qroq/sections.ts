@@ -7,24 +7,13 @@ import {
   PRODUCT_RICHTEXT_BLOCKS,
   RICHTEXT_BLOCKS,
 } from './blocks';
-import {COLOR_SCHEME_FRAGMENT, IMAGE_FRAGMENT} from './fragments';
+import {contentAlignmentValues, contentPositionValues} from './constant';
+import {
+  aspectRatioValues,
+  COLOR_SCHEME_FRAGMENT,
+  IMAGE_FRAGMENT,
+} from './fragments';
 import {getIntValue} from './utils';
-
-export const contentPositionValues = [
-  'top_left',
-  'top_center',
-  'top_right',
-  'middle_left',
-  'middle_center',
-  'middle_right',
-  'bottom_left',
-  'bottom_center',
-  'bottom_right',
-] as const;
-
-export const contentAlignmentValues = ['left', 'center', 'right'] as const;
-
-export const aspectRatioValues = ['square', 'video', 'auto'] as const;
 
 /*
 |--------------------------------------------------------------------------

@@ -6,6 +6,7 @@ set -x
 
 echo "Installing Netlify-specific dependencies..."
 pnpm add @netlify/edge-functions @netlify/remix-edge-adapter @netlify/remix-runtime
+pnpm install
 
 echo "Updating files before build..."
 # Replace all occurrences of @shopify/remix-oxygen with @netlify/remix-runtime
@@ -41,7 +42,7 @@ fi
 
 echo "Replacing context.ts with .netlify/context.ts..."
 if [ -f ".netlify/context.ts" ]; then
-  cp .netlify/context.ts app/context.ts
+  cp .netlify/context.ts app/lib/context.ts
   echo "Successfully replaced context.ts with .netlify/context.ts"
 else
   echo "Warning: .netlify/context.ts not found, skipping context replacement"

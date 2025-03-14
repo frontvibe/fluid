@@ -59,6 +59,9 @@ importers:
       '@remix-run/react':
         specifier: 2.16.0
         version: 2.16.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.8.2)
+      '@remix-run/server-runtime':
+        specifier: ^2.15.0
+        version: 2.16.0(typescript@5.8.2)
       '@sanity/asset-utils':
         specifier: ^2.2.1
         version: 2.2.1
@@ -100,16 +103,16 @@ importers:
         version: 3.76.2
       '@shopify/cli-hydrogen':
         specifier: ^9.0.8
-        version: 9.0.8(@graphql-codegen/cli@5.0.5(@parcel/watcher@2.5.0)(@types/node@22.13.10)(graphql@16.10.0)(typescript@5.8.2))(@remix-run/dev@2.16.0(@remix-run/react@2.16.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.8.2))(@types/node@22.13.10)(babel-plugin-macros@3.1.0)(jiti@2.4.2)(terser@5.39.0)(ts-node@10.9.2(@types/node@22.13.10)(typescript@5.8.2))(typescript@5.8.2)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0))(yaml@2.7.0))(@shopify/hydrogen-codegen@0.3.2(graphql@16.10.0))(@shopify/mini-oxygen@3.1.1(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0)))(@types/react@18.3.18)(graphql-config@5.1.3(@types/node@22.13.10)(graphql@16.10.0)(typescript@5.8.2))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0))
+        version: 9.0.8(@graphql-codegen/cli@5.0.5(@parcel/watcher@2.5.0)(@types/node@22.13.10)(graphql@16.10.0)(typescript@5.8.2))(@remix-run/dev@2.16.0(@remix-run/react@2.16.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.8.2))(@types/node@22.13.10)(babel-plugin-macros@3.1.0)(jiti@2.4.2)(terser@5.39.0)(ts-node@10.9.2(@types/node@22.13.10)(typescript@5.8.2))(typescript@5.8.2)(vite@5.4.14(@types/node@22.13.10)(terser@5.39.0))(yaml@2.7.0))(@shopify/hydrogen-codegen@0.3.2(graphql@16.10.0))(@shopify/mini-oxygen@3.1.1(vite@5.4.14(@types/node@22.13.10)(terser@5.39.0)))(@types/react@18.3.18)(graphql-config@5.1.3(@types/node@22.13.10)(graphql@16.10.0)(typescript@5.8.2))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@5.4.14(@types/node@22.13.10)(terser@5.39.0))
       '@shopify/hydrogen':
         specifier: ^2025.1.2
-        version: 2025.1.2(@remix-run/react@2.16.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.8.2))(@remix-run/server-runtime@2.16.0(typescript@5.8.2))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0))(xstate@5.19.2)
+        version: 2025.1.2(@remix-run/react@2.16.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.8.2))(@remix-run/server-runtime@2.16.0(typescript@5.8.2))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@5.4.14(@types/node@22.13.10)(terser@5.39.0))(xstate@5.19.2)
       '@shopify/hydrogen-react':
         specifier: ^2025.1.2
         version: 2025.1.2(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(xstate@5.19.2)
       '@shopify/mini-oxygen':
         specifier: ^3.1.1
-        version: 3.1.1(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0))
+        version: 3.1.1(vite@5.4.14(@types/node@22.13.10)(terser@5.39.0))
       '@shopify/polaris':
         specifier: ^13.9.3
         version: 13.9.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -203,7 +206,7 @@ importers:
         version: 2.0.13
       '@remix-run/dev':
         specifier: 2.16.0
-        version: 2.16.0(@remix-run/react@2.16.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.8.2))(@types/node@22.13.10)(babel-plugin-macros@3.1.0)(jiti@2.4.2)(terser@5.39.0)(ts-node@10.9.2(@types/node@22.13.10)(typescript@5.8.2))(typescript@5.8.2)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0))(yaml@2.7.0)
+        version: 2.16.0(@remix-run/react@2.16.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.8.2))(@types/node@22.13.10)(babel-plugin-macros@3.1.0)(jiti@2.4.2)(terser@5.39.0)(ts-node@10.9.2(@types/node@22.13.10)(typescript@5.8.2))(typescript@5.8.2)(vite@5.4.14(@types/node@22.13.10)(terser@5.39.0))(yaml@2.7.0)
       '@remix-run/eslint-config':
         specifier: ^2.16.0
         version: 2.16.0(eslint@8.57.1)(react@18.3.1)(typescript@5.8.2)
@@ -261,6 +264,9 @@ importers:
       prettier-plugin-tailwindcss:
         specifier: 0.6.11
         version: 0.6.11(prettier@3.5.3)
+      react-compiler-runtime:
+        specifier: 19.0.0-beta-bafa41b-20250307
+        version: 19.0.0-beta-bafa41b-20250307(react@18.3.1)
       schema-dts:
         specifier: ^1.1.5
         version: 1.1.5
@@ -276,6 +282,12 @@ importers:
       typescript:
         specifier: ^5.8.2
         version: 5.8.2
+      vite:
+        specifier: ^5.4.14
+        version: 5.4.14(@types/node@22.13.10)(terser@5.39.0)
+      vite-tsconfig-paths:
+        specifier: ^4.3.2
+        version: 4.3.2(typescript@5.8.2)(vite@5.4.14(@types/node@22.13.10)(terser@5.39.0))
 
 packages:
 
@@ -6386,6 +6398,9 @@ packages:
     resolution: {integrity: sha512-jhIXaOzy1sb8IyocaruWSn1TjmnBVs8Ayhcy83rmxNJ8q2uWKCAj3CnJY+KpGSXCueAPc0i05kVvVKtP1t9S3g==}
     engines: {node: '>=10'}
 
+  globrex@0.1.2:
+    resolution: {integrity: sha512-uHJgbwAMwNFf5mLst7IWLNg14x1CkeqglJb/K3doi4dw6q2IvAAmM/Y81kevy83wP+Sst+nutFTYOGg3d1lsxg==}
+
   gopd@1.2.0:
     resolution: {integrity: sha512-ZUKRh6/kUFoAiTAtTYPZJ3hw9wNxx+BIBOijnlG9PnrJsCcSjs1wyyD6vJpaYtgnzDrKYRSqf3OO6Rfa93xsRg==}
     engines: {node: '>= 0.4'}
@@ -8862,6 +8877,11 @@ packages:
     peerDependencies:
       react: ^17.0.0 || ^18.0.0 || ^19.0.0 || ^0.0.0-experimental
 
+  react-compiler-runtime@19.0.0-beta-bafa41b-20250307:
+    resolution: {integrity: sha512-9Hbwx4fbp4tn+hlx2jy3ydE3DAcE1kLdUO7Vulz0Sl4v8KailaWV0H6lh6Su8KOzYgfFMtfXRDb0AfcNoiPtYQ==}
+    peerDependencies:
+      react: ^17.0.0 || ^18.0.0 || ^19.0.0 || ^0.0.0-experimental
+
   react-compiler-runtime@19.0.0-beta-e1e972c-20250221:
     resolution: {integrity: sha512-6nONLW+4zbfAt6mLG6SV73tKlZLJqmezqX0EF9ZKzab84Pje/4CMVs8QVw4OeRS+FFtPcfWU4fOK28nq7lM4Hg==}
     peerDependencies:
@@ -10481,6 +10501,14 @@ packages:
     engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
     hasBin: true
 
+  vite-tsconfig-paths@4.3.2:
+    resolution: {integrity: sha512-0Vd/a6po6Q+86rPlntHye7F31zA2URZMbH8M3saAZ/xR9QoGN/L21bxEGfXdWmFdNkqPpRdxFT7nmNe12e9/uA==}
+    peerDependencies:
+      vite: '*'
+    peerDependenciesMeta:
+      vite:
+        optional: true
+
   vite@5.4.14:
     resolution: {integrity: sha512-EK5cY7Q1D8JNhSaPKVK4pwBFvaTmZxEnoKXLG/U9gmdDcihQGNzFlgIvaxezFR4glP1LsuiedwMBqCXH3wZccA==}
     engines: {node: ^18.0.0 || >=20.0.0}
@@ -10512,8 +10540,8 @@ packages:
       terser:
         optional: true
 
-  vite@6.2.1:
-    resolution: {integrity: sha512-n2GnqDb6XPhlt9B8olZPrgMD/es/Nd1RdChF6CBD/fHW6pUyUTt2sQW2fPRX5GiD9XEa6+8A6A4f2vT6pSsE7Q==}
+  vite@6.2.2:
+    resolution: {integrity: sha512-yW7PeMM+LkDzc7CgJuRLMW2Jz0FxMOsVJ8Lv3gpgW9WLcb9cTW+121UEr1hvmfR7w3SegR5ItvYyzVz1vxNJgQ==}
     engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
     hasBin: true
     peerDependencies:
@@ -14204,7 +14232,7 @@ snapshots:
       react: 18.3.1
       react-redux: 9.2.0(@types/react@18.3.18)(react@18.3.1)(redux@5.0.1)
 
-  '@remix-run/dev@2.16.0(@remix-run/react@2.16.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.8.2))(@types/node@22.13.10)(babel-plugin-macros@3.1.0)(jiti@2.4.2)(terser@5.39.0)(ts-node@10.9.2(@types/node@22.13.10)(typescript@5.8.2))(typescript@5.8.2)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0))(yaml@2.7.0)':
+  '@remix-run/dev@2.16.0(@remix-run/react@2.16.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.8.2))(@types/node@22.13.10)(babel-plugin-macros@3.1.0)(jiti@2.4.2)(terser@5.39.0)(ts-node@10.9.2(@types/node@22.13.10)(typescript@5.8.2))(typescript@5.8.2)(vite@5.4.14(@types/node@22.13.10)(terser@5.39.0))(yaml@2.7.0)':
     dependencies:
       '@babel/core': 7.26.10
       '@babel/generator': 7.26.10
@@ -14265,7 +14293,7 @@ snapshots:
       ws: 7.5.10
     optionalDependencies:
       typescript: 5.8.2
-      vite: 6.2.1(@types/node@22.13.10)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0)
+      vite: 5.4.14(@types/node@22.13.10)(terser@5.39.0)
     transitivePeerDependencies:
       - '@types/node'
       - babel-plugin-macros
@@ -15131,7 +15159,7 @@ snapshots:
       hoist-non-react-statics: 3.3.2
       react: 18.3.1
 
-  '@shopify/cli-hydrogen@9.0.8(@graphql-codegen/cli@5.0.5(@parcel/watcher@2.5.0)(@types/node@22.13.10)(graphql@16.10.0)(typescript@5.8.2))(@remix-run/dev@2.16.0(@remix-run/react@2.16.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.8.2))(@types/node@22.13.10)(babel-plugin-macros@3.1.0)(jiti@2.4.2)(terser@5.39.0)(ts-node@10.9.2(@types/node@22.13.10)(typescript@5.8.2))(typescript@5.8.2)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0))(yaml@2.7.0))(@shopify/hydrogen-codegen@0.3.2(graphql@16.10.0))(@shopify/mini-oxygen@3.1.1(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0)))(@types/react@18.3.18)(graphql-config@5.1.3(@types/node@22.13.10)(graphql@16.10.0)(typescript@5.8.2))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0))':
+  '@shopify/cli-hydrogen@9.0.8(@graphql-codegen/cli@5.0.5(@parcel/watcher@2.5.0)(@types/node@22.13.10)(graphql@16.10.0)(typescript@5.8.2))(@remix-run/dev@2.16.0(@remix-run/react@2.16.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.8.2))(@types/node@22.13.10)(babel-plugin-macros@3.1.0)(jiti@2.4.2)(terser@5.39.0)(ts-node@10.9.2(@types/node@22.13.10)(typescript@5.8.2))(typescript@5.8.2)(vite@5.4.14(@types/node@22.13.10)(terser@5.39.0))(yaml@2.7.0))(@shopify/hydrogen-codegen@0.3.2(graphql@16.10.0))(@shopify/mini-oxygen@3.1.1(vite@5.4.14(@types/node@22.13.10)(terser@5.39.0)))(@types/react@18.3.18)(graphql-config@5.1.3(@types/node@22.13.10)(graphql@16.10.0)(typescript@5.8.2))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@5.4.14(@types/node@22.13.10)(terser@5.39.0))':
     dependencies:
       '@ast-grep/napi': 0.11.0
       '@oclif/core': 3.26.5
@@ -15155,11 +15183,11 @@ snapshots:
       use-resize-observer: 9.1.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     optionalDependencies:
       '@graphql-codegen/cli': 5.0.5(@parcel/watcher@2.5.0)(@types/node@22.13.10)(graphql@16.10.0)(typescript@5.8.2)
-      '@remix-run/dev': 2.16.0(@remix-run/react@2.16.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.8.2))(@types/node@22.13.10)(babel-plugin-macros@3.1.0)(jiti@2.4.2)(terser@5.39.0)(ts-node@10.9.2(@types/node@22.13.10)(typescript@5.8.2))(typescript@5.8.2)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0))(yaml@2.7.0)
+      '@remix-run/dev': 2.16.0(@remix-run/react@2.16.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.8.2))(@types/node@22.13.10)(babel-plugin-macros@3.1.0)(jiti@2.4.2)(terser@5.39.0)(ts-node@10.9.2(@types/node@22.13.10)(typescript@5.8.2))(typescript@5.8.2)(vite@5.4.14(@types/node@22.13.10)(terser@5.39.0))(yaml@2.7.0)
       '@shopify/hydrogen-codegen': 0.3.2(graphql@16.10.0)
-      '@shopify/mini-oxygen': 3.1.1(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0))
+      '@shopify/mini-oxygen': 3.1.1(vite@5.4.14(@types/node@22.13.10)(terser@5.39.0))
       graphql-config: 5.1.3(@types/node@22.13.10)(graphql@16.10.0)(typescript@5.8.2)
-      vite: 6.2.1(@types/node@22.13.10)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0)
+      vite: 5.4.14(@types/node@22.13.10)(terser@5.39.0)
     transitivePeerDependencies:
       - '@types/react'
       - bufferutil
@@ -15277,7 +15305,7 @@ snapshots:
       - '@types/react'
       - xstate
 
-  '@shopify/hydrogen@2025.1.2(@remix-run/react@2.16.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.8.2))(@remix-run/server-runtime@2.16.0(typescript@5.8.2))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0))(xstate@5.19.2)':
+  '@shopify/hydrogen@2025.1.2(@remix-run/react@2.16.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.8.2))(@remix-run/server-runtime@2.16.0(typescript@5.8.2))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@5.4.14(@types/node@22.13.10)(terser@5.39.0))(xstate@5.19.2)':
     dependencies:
       '@remix-run/react': 2.16.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.8.2)
       '@remix-run/server-runtime': 2.16.0(typescript@5.8.2)
@@ -15290,13 +15318,13 @@ snapshots:
       use-resize-observer: 9.1.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       worktop: 0.7.3
     optionalDependencies:
-      vite: 6.2.1(@types/node@22.13.10)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0)
+      vite: 5.4.14(@types/node@22.13.10)(terser@5.39.0)
     transitivePeerDependencies:
       - '@types/react'
       - react-dom
       - xstate
 
-  '@shopify/mini-oxygen@3.1.1(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0))':
+  '@shopify/mini-oxygen@3.1.1(vite@5.4.14(@types/node@22.13.10)(terser@5.39.0))':
     dependencies:
       '@miniflare/cache': 2.14.4
       '@miniflare/core': 2.14.4
@@ -15316,7 +15344,7 @@ snapshots:
       undici: 6.21.1
       ws: 8.18.1
     optionalDependencies:
-      vite: 6.2.1(@types/node@22.13.10)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0)
+      vite: 5.4.14(@types/node@22.13.10)(terser@5.39.0)
     transitivePeerDependencies:
       - bufferutil
       - supports-color
@@ -15823,14 +15851,14 @@ snapshots:
 
   '@vercel/stega@0.1.2': {}
 
-  '@vitejs/plugin-react@4.3.4(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0))':
+  '@vitejs/plugin-react@4.3.4(vite@6.2.2(@types/node@22.13.10)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0))':
     dependencies:
       '@babel/core': 7.26.10
       '@babel/plugin-transform-react-jsx-self': 7.25.9(@babel/core@7.26.10)
       '@babel/plugin-transform-react-jsx-source': 7.25.9(@babel/core@7.26.10)
       '@types/babel__core': 7.20.5
       react-refresh: 0.14.2
-      vite: 6.2.1(@types/node@22.13.10)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0)
+      vite: 6.2.2(@types/node@22.13.10)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -18409,6 +18437,8 @@ snapshots:
       ignore: 5.3.2
       merge2: 1.4.1
       slash: 3.0.0
+
+  globrex@0.1.2: {}
 
   gopd@1.2.0: {}
 
@@ -21000,6 +21030,10 @@ snapshots:
     dependencies:
       react: 18.3.1
 
+  react-compiler-runtime@19.0.0-beta-bafa41b-20250307(react@18.3.1):
+    dependencies:
+      react: 18.3.1
+
   react-compiler-runtime@19.0.0-beta-e1e972c-20250221(react@18.3.1):
     dependencies:
       react: 18.3.1
@@ -21665,7 +21699,7 @@ snapshots:
       '@types/speakingurl': 13.0.6
       '@types/tar-stream': 3.1.3
       '@types/use-sync-external-store': 0.0.6
-      '@vitejs/plugin-react': 4.3.4(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0))
+      '@vitejs/plugin-react': 4.3.4(vite@6.2.2(@types/node@22.13.10)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0))
       archiver: 7.0.1
       arrify: 2.0.1
       async-mutex: 0.4.1
@@ -21748,7 +21782,7 @@ snapshots:
       use-sync-external-store: 1.4.0(react@18.3.1)
       uuid: 11.1.0
       valibot: 0.31.1
-      vite: 6.2.1(@types/node@22.13.10)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0)
+      vite: 6.2.2(@types/node@22.13.10)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0)
       yargs: 17.7.2
     transitivePeerDependencies:
       - '@emotion/is-prop-valid'
@@ -22569,9 +22603,9 @@ snapshots:
       yn: 3.1.1
     optional: true
 
-  tsconfck@3.1.4(typescript@5.7.2):
+  tsconfck@3.1.4(typescript@5.8.2):
     optionalDependencies:
-      typescript: 5.7.2
+      typescript: 5.8.2
 
   tsconfig-paths@3.15.0:
     dependencies:
@@ -22982,7 +23016,7 @@ snapshots:
       debug: 4.4.0(supports-color@8.1.1)
       es-module-lexer: 1.6.0
       pathe: 1.1.2
-      vite: 6.2.1(@types/node@22.13.10)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0)
+      vite: 6.2.2(@types/node@22.13.10)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0)
     transitivePeerDependencies:
       - '@types/node'
       - jiti
@@ -22997,6 +23031,17 @@ snapshots:
       - tsx
       - yaml
 
+  vite-tsconfig-paths@4.3.2(typescript@5.8.2)(vite@5.4.14(@types/node@22.13.10)(terser@5.39.0)):
+    dependencies:
+      debug: 4.4.0(supports-color@8.1.1)
+      globrex: 0.1.2
+      tsconfck: 3.1.4(typescript@5.8.2)
+    optionalDependencies:
+      vite: 5.4.14(@types/node@22.13.10)(terser@5.39.0)
+    transitivePeerDependencies:
+      - supports-color
+      - typescript
+
   vite@5.4.14(@types/node@22.13.10)(terser@5.39.0):
     dependencies:
       esbuild: 0.21.5
@@ -23007,7 +23052,7 @@ snapshots:
       fsevents: 2.3.3
       terser: 5.39.0
 
-  vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0):
+  vite@6.2.2(@types/node@22.13.10)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0):
     dependencies:
       esbuild: 0.25.1
       postcss: 8.5.3

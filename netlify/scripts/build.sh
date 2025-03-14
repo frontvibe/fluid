@@ -48,10 +48,10 @@ else
   echo "Warning: .netlify/context.ts not found, skipping context replacement"
 fi
 
-echo "Replacing entry.server.ts with .netlify/entry.server.ts..."
-if [ -f ".netlify/entry.server.ts" ]; then
-  cp .netlify/entry.server.ts app/entry.server.ts
-  echo "Successfully replaced entry.server.ts with .netlify/entry.server.ts"
+echo "Replacing entry.server.tsx with .netlify/entry.server.tsx..."
+if [ -f ".netlify/entry.server.tsx" ]; then
+  cp .netlify/entry.server.tsx app/entry.server.tsx
+  echo "Successfully replaced entry.server.tsx with .netlify/entry.server.tsx"
 else
   echo "Warning: .netlify/entry.server.ts not found, skipping entry.server replacement"
 fi

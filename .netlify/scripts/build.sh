@@ -9,7 +9,16 @@ pnpm add @netlify/edge-functions @netlify/remix-edge-adapter @netlify/remix-runt
 
 echo "Updating files before build..."
 # Replace all occurrences of @shopify/remix-oxygen with @netlify/remix-runtime
-find . -type f -name "*.js" -o -name "*.jsx" -o -name "*.ts" -o -name "*.tsx" | xargs grep -l "@shopify/remix-oxygen" | xargs sed -i 's/@shopify\/remix-oxygen/@netlify\/remix-runtime/g'
+# This approach works on both macOS and Linux
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  # macOS version (BSD sed)
+  find ./app -type f \( -name "*.js" -o -name "*.jsx" -o -name "*.ts" -o -name "*.tsx" \) -exec grep -l "@shopify/remix-oxygen" {} \; | while read file; do
+    sed -i '' 's/@shopify\/remix-oxygen/@netlify\/remix-runtime/g' "$file"
+  done
+else
+  # Linux version (GNU sed)
+  find ./app -type f \( -name "*.js" -o -name "*.jsx" -o -name "*.ts" -o -name "*.tsx" \) -exec grep -l "@shopify/remix-oxygen" {} \; | xargs -r sed -i 's/@shopify\/remix-oxygen/@netlify\/remix-runtime/g'
+fi
 echo "Replaced @shopify/remix-oxygen with @netlify/remix-runtime"
 
 echo "Running build command..."

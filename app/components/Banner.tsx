@@ -4,7 +4,7 @@ import {forwardRef} from 'react';
 import type {
   contentAlignmentValues,
   contentPositionValues,
-} from '~/qroq/sections';
+} from '~/qroq/constant';
 
 import {cn} from '~/lib/utils';
 

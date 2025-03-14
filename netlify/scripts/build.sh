@@ -56,6 +56,31 @@ else
   echo "Warning: netlify/entry.server.tsx not found, skipping entry.server replacement"
 fi
 
+echo "Updating vite.config.ts..."
+# Use node to update the vite.config.ts file
+node -e '
+const fs = require("fs");
+const path = require("path");
+
+const viteConfigPath = path.resolve("vite.config.ts");
+let viteConfig = fs.readFileSync(viteConfigPath, "utf8");
+
+if (!viteConfig.includes("@netlify/remix-edge-adapter/plugin")) {
+  const lastImportIndex = viteConfig.lastIndexOf("import");
+  const lastImportEndIndex = viteConfig.indexOf("\n", lastImportIndex);
+  
+  viteConfig = 
+    viteConfig.substring(0, lastImportEndIndex + 1) + 
+    "import {netlifyPlugin} from \"@netlify/remix-edge-adapter/plugin\";\n" + 
+    viteConfig.substring(lastImportEndIndex + 1);
+}
+
+viteConfig = viteConfig.replace(/oxygen\(\)/g, "netlifyPlugin()");
+
+fs.writeFileSync(viteConfigPath, viteConfig);
+console.log("Updated vite.config.ts");
+'
+
 echo "Running build command..."
 pnpm run build
 

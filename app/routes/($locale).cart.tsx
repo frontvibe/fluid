@@ -7,7 +7,7 @@ import type {CartApiQueryFragment} from 'storefrontapi.generated';
 
 import {useLoaderData} from '@remix-run/react';
 import {Analytics, CartForm} from '@shopify/hydrogen';
-import {data} from '@shopify/remix-oxygen';
+import {redirectDocument, data as remixData} from '@shopify/remix-oxygen';
 
 import {Cart} from '~/components/cart/Cart';
 import {isLocalPath} from '~/lib/utils';
@@ -23,7 +23,7 @@ export async function action({context, request}: ActionFunctionArgs) {
     throw new Error('No action provided');
   }
 
-  let status = 200;
+  const status = 200;
   let result: CartQueryDataReturn;
 
   switch (action) {
@@ -65,16 +65,16 @@ export async function action({context, request}: ActionFunctionArgs) {
   const headers = cartId ? cart.setCartId(cartId) : new Headers();
 
   const redirectTo = formData.get('redirectTo') ?? null;
+
   if (typeof redirectTo === 'string' && isLocalPath(redirectTo)) {
-    status = 303;
-    headers.set('Location', redirectTo);
+    return redirectDocument(redirectTo, 303);
   }
 
   const {cart: cartResult, errors, warnings} = result;
 
   headers.append('Set-Cookie', await context.session.commit());
 
-  return data(
+  return remixData(
     {
       cart: cartResult,
       errors,

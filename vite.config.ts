@@ -19,6 +19,7 @@ export default defineConfig({
     remix({
       presets: [hydrogen.preset()],
       future: {
+        v3_singleFetch: true,
         v3_fetcherPersist: true,
         v3_relativeSplatPath: true,
         v3_throwAbortReason: true,

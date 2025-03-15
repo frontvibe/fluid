@@ -3,7 +3,6 @@ import type {
   LinksFunction,
   LoaderFunctionArgs,
   MetaFunction,
-  SerializeFrom,
 } from '@shopify/remix-oxygen';
 
 import {
@@ -14,14 +13,13 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  useLoaderData,
   useLocation,
   useMatches,
   useNavigate,
   useRouteError,
+  useRouteLoaderData,
 } from '@remix-run/react';
 import {Analytics, getShopAnalytics, useNonce} from '@shopify/hydrogen';
-import {defer} from '@shopify/remix-oxygen';
 import {DEFAULT_LOCALE} from 'countries';
 
 import {Layout as AppLayout} from '~/components/layout/Layout';
@@ -41,22 +39,27 @@ import tailwindCss from './styles/tailwind.css?url';
 
 import faviconAsset from '/favicon.ico?url';
 
-// This is important to avoid re-fetching root queries on sub-navigations
+export type RootLoader = typeof loader;
+
+/**
+ * This is important to avoid re-fetching root queries on sub-navigations
+ */
 export const shouldRevalidate: ShouldRevalidateFunction = ({
-  currentUrl,
   formMethod,
+  currentUrl,
   nextUrl,
 }) => {
   // revalidate when a mutation is performed e.g add to cart, login...
-  if (formMethod && formMethod !== 'GET') {
-    return true;
-  }
+  if (formMethod && formMethod !== 'GET') return true;
 
   // revalidate when manually revalidating via useRevalidator
-  if (currentUrl.toString() === nextUrl.toString()) {
-    return true;
-  }
+  if (currentUrl.toString() === nextUrl.toString()) return true;
 
+  // Defaulting to no revalidation for root loader data to improve performance.
+  // When using this feature, you risk your UI getting out of sync with your server.
+  // Use with caution. If you are uncomfortable with this optimization, update the
+  // line below to `return defaultShouldRevalidate` instead.
+  // For more details see: https://remix.run/docs/en/main/route/should-revalidate
   return false;
 };
 
@@ -74,12 +77,14 @@ export const links: LinksFunction = () => {
   ];
 };
 
-export const meta: MetaFunction<typeof loader> = (loaderData) => {
+export const meta: MetaFunction<RootLoader> = (loaderData) => {
   const {data} = loaderData;
   // Preload fonts files to avoid FOUT (flash of unstyled text)
   const fontsPreloadLinks = generateFontsPreloadLinks({
     fontsData: data?.sanityRoot.data?.fonts,
   });
+
+  const faviconUrls = data ? generateFaviconUrls(data) : [];
 
   return [
     {
@@ -88,7 +93,7 @@ export const meta: MetaFunction<typeof loader> = (loaderData) => {
       rel: 'preconnect',
       tagName: 'link',
     },
-    ...generateFaviconUrls(data as SerializeFrom<typeof loader>),
+    ...faviconUrls,
     ...fontsPreloadLinks,
   ];
 };
@@ -146,11 +151,8 @@ export async function loader({context, request}: LoaderFunctionArgs) {
     storefront,
   });
 
-  // defer the cart query by not awaiting it
-  const cartPromise = cart.get();
-
-  return defer({
-    cart: cartPromise,
+  return {
+    cart: cart.get(),
     collectionListPromise,
     consent: {
       checkoutDomain: env.PUBLIC_CHECKOUT_DOMAIN,
@@ -179,19 +181,18 @@ export async function loader({context, request}: LoaderFunctionArgs) {
       publicStorefrontId: env.PUBLIC_STOREFRONT_ID,
       storefront: storefront,
     }),
-  });
+  };
 }
 
 export function Layout({children}: {children?: React.ReactNode}) {
   const nonce = useNonce();
-  const {locale} = useRootLoaderData();
-  const data = useLoaderData<typeof loader>();
+  const data = useRouteLoaderData<RootLoader>('root');
   const {pathname} = useLocation();
 
   const isCmsRoute = pathname.includes('/cms');
 
   return (
-    <html lang={locale.language.toLowerCase()}>
+    <html lang={data?.locale.language.toLowerCase()}>
       <head>
         <meta charSet="utf-8" />
         <meta content="width=device-width,initial-scale=1" name="viewport" />
@@ -205,9 +206,9 @@ export function Layout({children}: {children?: React.ReactNode}) {
           children
         ) : data ? (
           <Analytics.Provider
-            cart={data?.cart}
-            consent={data?.consent}
-            shop={data?.shop}
+            cart={data.cart}
+            consent={data.consent}
+            shop={data.shop}
           >
             <AppLayout>{children}</AppLayout>
             <CustomAnalytics />
@@ -269,11 +270,16 @@ export function ErrorBoundary() {
 
 export const useRootLoaderData = () => {
   const [root] = useMatches();
-  return root?.data as SerializeFrom<typeof loader>;
+  return root?.data as Awaited<ReturnType<typeof loader>>;
 };
 
-function generateFaviconUrls(loaderData: SerializeFrom<typeof loader>) {
-  const {env, sanityRoot} = loaderData;
+function generateFaviconUrls({
+  sanityRoot,
+  env,
+}: {
+  env: NonNullable<Awaited<ReturnType<typeof loader>>>['env'];
+  sanityRoot: NonNullable<Awaited<ReturnType<typeof loader>>>['sanityRoot'];
+}) {
   const favicon = sanityRoot.data?.settings?.favicon;
 
   if (!favicon) {

@@ -2,7 +2,6 @@ import type {LoaderFunctionArgs, MetaFunction} from '@shopify/remix-oxygen';
 
 import {useLoaderData} from '@remix-run/react';
 import {getPaginationVariables} from '@shopify/hydrogen';
-import {json} from '@shopify/remix-oxygen';
 
 import {CollectionListGrid} from '~/components/CollectionListGrid';
 import {COLLECTIONS_QUERY} from '~/graphql/queries';
@@ -37,7 +36,7 @@ export const loader = async ({
     url: request.url,
   });
 
-  return json({collections, seo});
+  return {collections, seo};
 };
 
 export default function Collections() {

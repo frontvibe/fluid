@@ -4,6 +4,12 @@ import {oxygen} from '@shopify/mini-oxygen/vite';
 import {defineConfig} from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
+declare module '@remix-run/server-runtime' {
+  interface Future {
+    v3_singleFetch: true;
+  }
+}
+
 export default defineConfig({
   optimizeDeps: {
     include: [
@@ -19,14 +25,20 @@ export default defineConfig({
     remix({
       presets: [hydrogen.preset()],
       future: {
-        v3_singleFetch: true,
         v3_fetcherPersist: true,
         v3_relativeSplatPath: true,
         v3_throwAbortReason: true,
+        v3_lazyRouteDiscovery: true,
+        v3_singleFetch: true,
       },
     }),
     tsconfigPaths(),
   ],
+  build: {
+    // Allow a strict Content-Security-Policy
+    // withtout inlining assets as base64:
+    assetsInlineLimit: 0,
+  },
   ssr: {
     optimizeDeps: {
       /**

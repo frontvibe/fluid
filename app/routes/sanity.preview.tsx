@@ -3,7 +3,7 @@ import type {
   LoaderFunctionArgs,
 } from '@shopify/remix-oxygen';
 
-import {json, redirectDocument} from '@shopify/remix-oxygen';
+import {redirectDocument} from '@shopify/remix-oxygen';
 
 import {notFound} from '~/lib/utils';
 

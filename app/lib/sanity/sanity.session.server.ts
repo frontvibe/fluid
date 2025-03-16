@@ -38,7 +38,7 @@ export class SanitySession {
     const storage = createCookieSessionStorage({
       cookie: {
         httpOnly: true,
-        name: 'session',
+        name: 'sanity-session',
         path: '/',
         sameSite: 'lax',
         secrets,

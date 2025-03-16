@@ -5,8 +5,9 @@
   "type": "module",
   "version": "0.0.0",
   "scripts": {
-    "build": "shopify hydrogen build --codegen",
-    "dev": "shopify hydrogen dev --codegen",
+    "build": "remix vite:build",
+    "dev": "remix vite:dev",
+    "start": "wrangler dev",
     "preview": "shopify hydrogen preview --build",
     "lint": "eslint --no-error-on-unmatched-pattern --ext .js,.ts,.jsx,.tsx .",
     "lint:fix": "npm run lint -- --fix",
@@ -33,6 +34,7 @@
     "@radix-ui/react-scroll-area": "^1.2.3",
     "@radix-ui/react-select": "^2.1.6",
     "@radix-ui/react-slot": "^1.1.2",
+    "@remix-run/cloudflare": "^2.16.0",
     "@remix-run/react": "2.16.0",
     "@remix-run/server-runtime": "^2.15.0",
     "@sanity/asset-utils": "^2.2.1",
@@ -111,7 +113,8 @@
     "type-fest": "^4.37.0",
     "typescript": "^5.8.2",
     "vite": "^5.4.14",
-    "vite-tsconfig-paths": "^4.3.2"
+    "vite-tsconfig-paths": "^4.3.2",
+    "wrangler": "^4.0.0"
   },
   "engines": {
     "node": "20.x"

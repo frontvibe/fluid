@@ -3,8 +3,7 @@ import type {ProductVariantFragmentFragment} from 'storefrontapi.generated';
 import {useNavigation} from '@remix-run/react';
 import {CartForm, OptimisticInput, ShopPayButton} from '@shopify/hydrogen';
 import {useEffect, useState} from 'react';
-import useIdle from 'react-use/esm/useIdle';
-import useSessionStorage from 'react-use/esm/useSessionStorage';
+import * as reactUse from 'react-use';
 
 import {useLocalePath} from '~/hooks/useLocalePath';
 import {useSanityThemeContent} from '~/hooks/useSanityThemeContent';
@@ -15,6 +14,8 @@ import {useRootLoaderData} from '~/root';
 import {QuantitySelector} from '../QuantitySelector';
 import CleanString from '../sanity/CleanString';
 import {Button} from '../ui/Button';
+
+const {useIdle, useSessionStorage} = reactUse;
 
 export function AddToCartForm(props: {
   showQuantitySelector?: boolean | null;

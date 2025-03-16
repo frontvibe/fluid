@@ -21,7 +21,7 @@ export const getSanityClient = (args: {
   });
 
   const previewClient = client.withConfig({
-    perspective: 'previewDrafts' as const,
+    perspective: 'drafts' as const,
     stega: {
       ...client.config().stega,
       enabled: useStega === 'true' ? true : false,

@@ -12,7 +12,7 @@ import {
   useSearchParams,
 } from '@remix-run/react';
 import {useCallback, useEffect, useMemo, useState} from 'react';
-import useDebounce from 'react-use/esm/useDebounce';
+import * as reactUse from 'react-use';
 
 import {useOptimisticNavigationData} from '~/hooks/useOptimisticNavigationData';
 import {useSanityThemeContent} from '~/hooks/useSanityThemeContent';
@@ -24,6 +24,8 @@ import {Checkbox} from '../ui/Checkbox';
 import {Input} from '../ui/Input';
 import {Label} from '../ui/Label';
 import {FILTER_URL_PREFIX} from './SortFilterLayout';
+
+const {useDebounce} = reactUse;
 
 export function DefaultFilter(props: {
   appliedFilters: AppliedFilter[];

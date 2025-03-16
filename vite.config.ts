@@ -1,8 +1,12 @@
-import {vitePlugin as remix} from '@remix-run/dev';
+import {
+  cloudflareDevProxyVitePlugin,
+  vitePlugin as remix,
+} from '@remix-run/dev';
 import {hydrogen} from '@shopify/hydrogen/vite';
-import {oxygen} from '@shopify/mini-oxygen/vite';
 import {defineConfig} from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
+
+import {getLoadContext} from './load-context';
 
 declare module '@remix-run/server-runtime' {
   interface Future {
@@ -11,17 +15,11 @@ declare module '@remix-run/server-runtime' {
 }
 
 export default defineConfig({
-  optimizeDeps: {
-    include: [
-      'react-use/esm/useIdle',
-      'react-use/esm/useMedia',
-      'react-use/esm/useDebounce',
-      'react-use/esm/useSessionStorage',
-    ],
-  },
   plugins: [
     hydrogen(),
-    oxygen(),
+    cloudflareDevProxyVitePlugin({
+      getLoadContext,
+    }),
     remix({
       presets: [hydrogen.preset()],
       future: {
@@ -39,7 +37,13 @@ export default defineConfig({
     // withtout inlining assets as base64:
     assetsInlineLimit: 0,
   },
+  resolve: {
+    mainFields: ['browser', 'module', 'main'],
+  },
   ssr: {
+    resolve: {
+      conditions: ['workerd', 'worker', 'browser'],
+    },
     optimizeDeps: {
       /**
        * Include dependencies here if they throw CJS<>ESM errors.

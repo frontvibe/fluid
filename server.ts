@@ -1,71 +1,38 @@
-import {storefrontRedirect} from '@shopify/hydrogen';
-import {createRequestHandler} from '@shopify/remix-oxygen';
-// Virtual entry point for the app
-// @ts-ignore
-import * as remixBuild from 'virtual:remix/server-build';
+import {createRequestHandler, type ServerBuild} from '@remix-run/cloudflare';
 
-import {createAppLoadContext} from '~/lib/context';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore This file won’t exist if it hasn’t yet been built
+import * as build from './dist/server'; // eslint-disable-line import/no-unresolved
+import {getLoadContext} from './load-context';
 
-/*
- * Export a fetch handler in module format.
- */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const handleRemixRequest = createRequestHandler(build as any as ServerBuild);
+
 export default {
-  async fetch(
-    request: Request,
-    env: Env,
-    executionContext: ExecutionContext,
-  ): Promise<Response> {
+  async fetch(request, env, ctx) {
     try {
-      const appLoadContext = await createAppLoadContext(
+      const loadContext = getLoadContext({
         request,
-        env,
-        executionContext,
-      );
-
-      /*
-       * Create a Remix request handler and pass
-       * Hydrogen's Storefront client to the loader context.
-       */
-      const handleRequest = createRequestHandler({
-        build: remixBuild,
-        getLoadContext: () => appLoadContext,
-        mode: process.env.NODE_ENV,
+        context: {
+          cloudflare: {
+            // This object matches the return value from Wrangler's
+            // `getPlatformProxy` used during development via Remix's
+            // `cloudflareDevProxyVitePlugin`:
+            // https://developers.cloudflare.com/workers/wrangler/api/#getplatformproxy
+            cf: request.cf,
+            ctx: {
+              waitUntil: ctx.waitUntil.bind(ctx),
+              passThroughOnException: ctx.passThroughOnException.bind(ctx),
+            },
+            caches,
+            env,
+          },
+        },
       });
-
-      const response = await handleRequest(request);
-
-      if (appLoadContext.session.isPending) {
-        response.headers.set(
-          'Set-Cookie',
-          await appLoadContext.session.commit(),
-        );
-      }
-
-      if (response.status === 404) {
-        /*
-         * Check for redirects only when there's a 404 from the app.
-         * If the redirect doesn't exist, then `storefrontRedirect`
-         * will pass through the 404 response.
-         */
-        return storefrontRedirect({
-          request,
-          response,
-          storefront: appLoadContext.storefront,
-        });
-      }
-
-      return response;
+      return await handleRemixRequest(request, loadContext);
     } catch (error) {
-      const errorString = error instanceof Error ? error.toString() : '';
-      let message = 'An unexpected error occurred';
-
-      if (errorString.includes('Missing environment variable')) {
-        message = 'Missing environment variable';
-      }
-
-      // eslint-disable-next-line no-console
-      console.error(error);
-      return new Response(message, {status: 500});
+      console.log(error);
+      return new Response('An unexpected error occurred', {status: 500});
     }
   },
-};
+} satisfies ExportedHandler<Env>;

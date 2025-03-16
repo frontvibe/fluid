@@ -5,6 +5,8 @@ import {createContentSecurityPolicy} from '@shopify/hydrogen';
 import {isbot} from 'isbot';
 import {renderToReadableStream} from 'react-dom/server';
 
+const ABORT_DELAY = 5000;
+
 export default async function handleRequest(
   request: Request,
   responseStatusCode: number,
@@ -24,7 +26,12 @@ export default async function handleRequest(
 
   const body = await renderToReadableStream(
     <NonceProvider>
-      <RemixServer context={remixContext} nonce={nonce} url={request.url} />
+      <RemixServer
+        abortDelay={ABORT_DELAY}
+        context={remixContext}
+        nonce={nonce}
+        url={request.url}
+      />
     </NonceProvider>,
     {
       nonce,

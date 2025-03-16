@@ -11,7 +11,7 @@ const handleRemixRequest = createRequestHandler(build as any as ServerBuild);
 export default {
   async fetch(request, env, ctx) {
     try {
-      const loadContext = getLoadContext({
+      const loadContext = await getLoadContext({
         request,
         context: {
           cloudflare: {

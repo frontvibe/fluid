@@ -2,8 +2,8 @@ import {ShopifyProvider} from '@shopify/hydrogen-react';
 
 import {useRootLoaderData} from '~/root';
 
-// import {TogglePreviewMode} from '../sanity/TogglePreviewMode';
-// import {VisualEditing} from '../sanity/VisualEditing';
+import {TogglePreviewMode} from '../sanity/TogglePreviewMode';
+import VisualEditing from '../sanity/VisualEditing.client';
 import {TailwindIndicator} from '../TailwindIndicator';
 import {AnnouncementBar} from './AnnouncementBar';
 import {Footer} from './Footer';
@@ -35,7 +35,7 @@ export function Layout({children = null}: LayoutProps) {
         </main>
         <Footer />
         <TailwindIndicator />
-        {/* {sanityPreviewMode ? <VisualEditing /> : <TogglePreviewMode />} */}
+        {sanityPreviewMode ? <VisualEditing /> : <TogglePreviewMode />}
       </FramerMotion>
     </ShopifyProvider>
   );

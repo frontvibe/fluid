@@ -69,8 +69,8 @@ importers:
         specifier: ^5.1.2
         version: 5.1.2(@babel/runtime@7.26.10)(@codemirror/lint@6.8.4)(@codemirror/theme-one-dark@6.1.2)(@emotion/is-prop-valid@1.3.1)(codemirror@6.0.1)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(sanity@3.79.0(@emotion/is-prop-valid@1.3.1)(@types/babel__core@7.20.5)(@types/node@22.13.10)(@types/react@18.3.18)(jiti@2.4.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.39.0)(typescript@5.8.2)(yaml@2.7.0))(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       '@sanity/core-loader':
-        specifier: ^1.7.39
-        version: 1.7.39(@sanity/types@3.79.0(@types/react@18.3.18))
+        specifier: ^1.7.40
+        version: 1.7.40(@sanity/types@3.79.0(@types/react@18.3.18))
       '@sanity/icons':
         specifier: ^3.7.0
         version: 3.7.0(react@18.3.1)
@@ -81,8 +81,8 @@ importers:
         specifier: ^4.0.3
         version: 4.0.3(@emotion/is-prop-valid@1.3.1)(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(sanity@3.79.0(@emotion/is-prop-valid@1.3.1)(@types/babel__core@7.20.5)(@types/node@22.13.10)(@types/react@18.3.18)(jiti@2.4.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.39.0)(typescript@5.8.2)(yaml@2.7.0))(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       '@sanity/react-loader':
-        specifier: ^1.10.48
-        version: 1.10.48(@sanity/types@3.79.0(@types/react@18.3.18))(react@18.3.1)
+        specifier: ^1.10.49
+        version: 1.10.49(@sanity/types@3.79.0(@types/react@18.3.18))(react@18.3.1)
       '@sanity/ui':
         specifier: ^2.15.6
         version: 2.15.6(@emotion/is-prop-valid@1.3.1)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
@@ -93,8 +93,8 @@ importers:
         specifier: ^3.79.0
         version: 3.79.0(@babel/runtime@7.26.10)(@codemirror/lint@6.8.4)(@codemirror/theme-one-dark@6.1.2)(@emotion/is-prop-valid@1.3.1)(codemirror@6.0.1)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       '@sanity/visual-editing':
-        specifier: ^2.13.8
-        version: 2.13.8(@emotion/is-prop-valid@1.3.1)(@remix-run/react@2.16.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.8.2))(@sanity/client@6.28.3)(@sanity/types@3.79.0(@types/react@18.3.18))(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react-router@6.30.0(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
+        specifier: ^2.13.11
+        version: 2.13.11(@emotion/is-prop-valid@1.3.1)(@remix-run/react@2.16.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.8.2))(@sanity/client@6.28.3)(@sanity/types@3.79.0(@types/react@18.3.18))(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react-router@6.30.0(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       '@shopify/cli':
         specifier: 3.76.2
         version: 3.76.2
@@ -111,8 +111,8 @@ importers:
         specifier: ^3.1.1
         version: 3.1.1(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0))
       '@shopify/polaris':
-        specifier: ^13.9.3
-        version: 13.9.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^13.9.4
+        version: 13.9.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@shopify/remix-oxygen':
         specifier: ^2.0.11
         version: 2.0.11(@remix-run/server-runtime@2.16.0(typescript@5.8.2))(@shopify/oxygen-workers-types@4.1.6)
@@ -159,11 +159,11 @@ importers:
         specifier: ^4.4.2
         version: 4.4.2
       lucide-react:
-        specifier: ^0.479.0
-        version: 0.479.0(react@18.3.1)
+        specifier: ^0.482.0
+        version: 0.482.0(react@18.3.1)
       nanoid:
-        specifier: ^5.1.3
-        version: 5.1.3
+        specifier: ^5.1.4
+        version: 5.1.4
       pluralize-esm:
         specifier: ^9.0.5
         version: 9.0.5
@@ -2432,34 +2432,42 @@ packages:
   '@miniflare/cache@2.14.4':
     resolution: {integrity: sha512-ayzdjhcj+4mjydbNK7ZGDpIXNliDbQY4GPcY2KrYw0v1OSUdj5kZUkygD09fqoGRfAks0d91VelkyRsAXX8FQA==}
     engines: {node: '>=16.13'}
+    deprecated: Miniflare v2 is no longer supported. Please upgrade to Miniflare v4
 
   '@miniflare/core@2.14.4':
     resolution: {integrity: sha512-FMmZcC1f54YpF4pDWPtdQPIO8NXfgUxCoR9uyrhxKJdZu7M6n8QKopPVNuaxR40jcsdxb7yKoQoFWnHfzJD9GQ==}
     engines: {node: '>=16.13'}
+    deprecated: Miniflare v2 is no longer supported. Please upgrade to Miniflare v4
 
   '@miniflare/queues@2.14.4':
     resolution: {integrity: sha512-aXQ5Ik8Iq1KGMBzGenmd6Js/jJgqyYvjom95/N9GptCGpiVWE5F0XqC1SL5rCwURbHN+aWY191o8XOFyY2nCUA==}
     engines: {node: '>=16.7'}
+    deprecated: Miniflare v2 is no longer supported. Please upgrade to Miniflare v4
 
   '@miniflare/runner-vm@2.14.4':
     resolution: {integrity: sha512-Nog0bB9SVhPbZAkTWfO4lpLAUsBXKEjlb4y+y66FJw77mPlmPlVdpjElCvmf8T3VN/pqh83kvELGM+/fucMf4g==}
     engines: {node: '>=16.13'}
+    deprecated: Miniflare v2 is no longer supported. Please upgrade to Miniflare v4
 
   '@miniflare/shared@2.14.4':
     resolution: {integrity: sha512-upl4RSB3hyCnITOFmRZjJj4A72GmkVrtfZTilkdq5Qe5TTlzsjVeDJp7AuNUM9bM8vswRo+N5jOiot6O4PVwwQ==}
     engines: {node: '>=16.13'}
+    deprecated: Miniflare v2 is no longer supported. Please upgrade to Miniflare v4
 
   '@miniflare/storage-memory@2.14.4':
     resolution: {integrity: sha512-9jB5BqNkMZ3SFjbPFeiVkLi1BuSahMhc/W1Y9H0W89qFDrrD+z7EgRgDtHTG1ZRyi9gIlNtt9qhkO1B6W2qb2A==}
     engines: {node: '>=16.13'}
+    deprecated: Miniflare v2 is no longer supported. Please upgrade to Miniflare v4
 
   '@miniflare/watcher@2.14.4':
     resolution: {integrity: sha512-PYn05ET2USfBAeXF6NZfWl0O32KVyE8ncQ/ngysrh3hoIV7l3qGGH7ubeFx+D8VWQ682qYhwGygUzQv2j1tGGg==}
     engines: {node: '>=16.13'}
+    deprecated: Miniflare v2 is no longer supported. Please upgrade to Miniflare v4
 
   '@miniflare/web-sockets@2.14.4':
     resolution: {integrity: sha512-stTxvLdJ2IcGOs76AnvGYAzGvx8JvQPRxC5DW0P5zdAAnhL33noqb5LKdPt3P37BKp9FzBKZHuihQI9oVqwm0g==}
     engines: {node: '>=16.13'}
+    deprecated: Miniflare v2 is no longer supported. Please upgrade to Miniflare v4
 
   '@nicolo-ribaudo/eslint-scope-5-internals@5.1.1-v1':
     resolution: {integrity: sha512-54/JRvkLIzzDWshCWfuhadfrfZVPiElY8Fcgmg1HroEly/EDSszzhBAsarCux+D/kOslTRquNzuyGSmUSTTHGg==}
@@ -3555,8 +3563,8 @@ packages:
     resolution: {integrity: sha512-I1F57GKL69xoJUF9/4XTMvXFJZ7BnaFmTBIaiRvXaovJEZ677p5f+UkURPG/dd9L63+OnTV0SNmhTjIIzNexdw==}
     engines: {node: '>=18'}
 
-  '@sanity/core-loader@1.7.39':
-    resolution: {integrity: sha512-8LtKW54VXvJ9AtiuMXlmzfkM+PMDjJvhZKb5vj83JjLGXICKNblK7o5Bg7xgpCBiZaBo0HHODyRnAGBSsjT25Q==}
+  '@sanity/core-loader@1.7.40':
+    resolution: {integrity: sha512-mESsel9DTlBX7HU+3QRX53s6rH9ZXtZxhSjsowt0ZxsOPmL2+0y1FxtzJC6fr5IUtvcPK/PYtne8vAgT9HVMIA==}
     engines: {node: '>=18'}
 
   '@sanity/diff-match-patch@3.2.0':
@@ -3663,14 +3671,20 @@ packages:
     peerDependencies:
       '@sanity/client': ^6.28.3
 
+  '@sanity/presentation-comlink@1.0.11':
+    resolution: {integrity: sha512-CuAKJIduwnLtmm+jAKujtVNFm0AZAOU67R6wck3K6ffe39lpw2QRhck0Iq+0ZOx4oA7uqxUHmLAHvUBnhU9jyQ==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      '@sanity/client': ^6.28.3
+
   '@sanity/preview-url-secret@2.1.6':
     resolution: {integrity: sha512-cvPUREWZo34NGR8sAFaQji6wv8iYiGDIGp9n8W85iKfvrJuQhsvfVvtbDiYrCyPb9GK2e514RE/5dHh/c0UQHA==}
     engines: {node: '>=18'}
     peerDependencies:
       '@sanity/client': ^6.28.3
 
-  '@sanity/react-loader@1.10.48':
-    resolution: {integrity: sha512-gGbarqYhUwqiGmUMUtvD0/9xG2Jk2fNeY7eL81KZvda+UfYR3baiNF+d1UAOwPt5OCPwb0Lne86KR0WwFkxpzA==}
+  '@sanity/react-loader@1.10.49':
+    resolution: {integrity: sha512-/O2FCfaWdxFYJI2HxAEwJwr94j1Ipf3xgJgRzATFtNaLUq5b8f5UqRDdB1mOJ9lF9PsFc/Uxm70q4po3B1ZiiQ==}
     engines: {node: '>=18'}
     peerDependencies:
       react: ^18.3 || >=19.0.0-rc
@@ -3746,8 +3760,8 @@ packages:
       '@sanity/types':
         optional: true
 
-  '@sanity/visual-editing@2.13.8':
-    resolution: {integrity: sha512-79Ej4vfhOqcWgKAykJLX4Pqrj7ieOLngBP1V+FZQyjBIc0/tvnM5xEN6K4b1KMc1f5JIBfAkXZWNo/W6sU50LQ==}
+  '@sanity/visual-editing@2.13.11':
+    resolution: {integrity: sha512-mcCncLToC10Qa3gaPm2AWxa3tYK57MAWVkblaGktSYyKKi7Jl71ZgD7P6EzvngimTtsFC2raZv8IIWUM+cCysg==}
     engines: {node: '>=18'}
     peerDependencies:
       '@remix-run/react': '>= 2'
@@ -3893,18 +3907,18 @@ packages:
     engines: {node: ^18.20.0 || >=20.10.0}
     os: [darwin, linux, win32]
 
-  '@shopify/polaris-icons@9.3.0':
-    resolution: {integrity: sha512-fnH5Lcd3WFZNjlxGYGNtnjeq3P2xonRV8vChW4PqBfxdKlY/GQ/3/rIuxHzIgmLL0zukeZUaqERUN0lwSU+Xmg==}
+  '@shopify/polaris-icons@9.3.1':
+    resolution: {integrity: sha512-16BIFAT93LJ8X4YRXz5cR9ZPHeErMg3DYS0gyTPNPkd0E5IBPoTxPINjn2b4Mr9Sc1x4RfI4AqPcV8ut0D1J5w==}
     engines: {node: '>=20.10.0'}
     peerDependencies:
       react: '*'
 
-  '@shopify/polaris-tokens@9.4.1':
-    resolution: {integrity: sha512-FgmoKz62+5gvP4l1tZcvhbgITU+PuqvQ7FLKoH71N3tdQgAyueMcyNNWjIT1snQPrJAyW0sjVqVa2OQWoFC52g==}
+  '@shopify/polaris-tokens@9.4.2':
+    resolution: {integrity: sha512-WNoDWLYFj38Cj0FolbNsLaY54JbjuYoO0qsLCj6yBb3Bkg4BEdAjOHji9AktL9IZGPsNhTcMp2/8CfzKtSHg2A==}
     engines: {node: '>=20.10.0'}
 
-  '@shopify/polaris@13.9.3':
-    resolution: {integrity: sha512-EoLVe/WF+xLze+jA4GEP65g2E8Sv7kjdq6w8otMFAfyFABZtQZ3ExjHEy5iTxWEL+1Ar4Cp22oeHLCGP/UTYJg==}
+  '@shopify/polaris@13.9.4':
+    resolution: {integrity: sha512-nGSXeNOSQfO1qRpuxCZ4S2H5aOG337jw7mqnhSIKuTH7WIp0PFusj1cpm9R5P5d0R/ACHlr7qfl+9U8pyvA8Bw==}
     engines: {node: '>=20.10.0'}
     peerDependencies:
       react: ^18.0.0
@@ -7360,8 +7374,8 @@ packages:
     resolution: {integrity: sha512-jumlc0BIUrS3qJGgIkWZsyfAM7NCWiBcCDhnd+3NNM5KbBmLTgHVfWBcg6W+rLUsIpzpERPsvwUP7CckAQSOoA==}
     engines: {node: '>=12'}
 
-  lucide-react@0.479.0:
-    resolution: {integrity: sha512-aBhNnveRhorBOK7uA4gDjgaf+YlHMdMhQ/3cupk6exM10hWlEU+2QtWYOfhXhjAsmdb6LeKR+NZnow4UxRRiTQ==}
+  lucide-react@0.482.0:
+    resolution: {integrity: sha512-XM8PzHzSrg8ATmmO+fzf+JyYlVVdQnJjuyLDj2p4V2zEtcKeBNAqAoJIGFv1x2HSBa7kT8gpYUxwdQ0g7nypfw==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
@@ -7776,13 +7790,13 @@ packages:
     resolution: {integrity: sha512-zoTNyBafxG0+F5PP3T3j1PKMr7gedriSdYRhLFLRFCz0OnQfQ6BkVk9peXVF30hz633Bw0Zh5McleOrXPjWYCQ==}
     engines: {node: '>=18'}
 
-  nanoid@3.3.9:
-    resolution: {integrity: sha512-SppoicMGpZvbF1l3z4x7No3OlIjP7QJvC9XR7AhZr1kL133KHnKPztkKDc+Ir4aJ/1VhTySrtKhrsycmrMQfvg==}
+  nanoid@3.3.10:
+    resolution: {integrity: sha512-vSJJTG+t/dIKAUhUDw/dLdZ9s//5OxcHqLaDWWrW4Cdq7o6tdLIczUkMXt2MBNmk6sJRZBZRXVixs7URY1CmIg==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
-  nanoid@5.1.3:
-    resolution: {integrity: sha512-zAbEOEr7u2CbxwoMRlz/pNSpRP0FdAU4pRaYunCdEezWohXFs+a0Xw7RfkKaezMsmSM1vttcLthJtwRnVtOfHQ==}
+  nanoid@5.1.4:
+    resolution: {integrity: sha512-GTFcMIDgR7tqji/LpSY8rtg464VnJl/j6ypoehYnuGb+Y8qZUdtKB8WVCXon0UEZgFDbuUxpIl//6FHLHgXSNA==}
     engines: {node: ^18 || >=20}
     hasBin: true
 
@@ -12610,7 +12624,7 @@ snapshots:
       '@sanity/icons': 3.7.0(react@18.3.1)
       '@sanity/incompatible-plugin': 1.0.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@sanity/ui': 2.15.6(@emotion/is-prop-valid@1.3.1)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
-      '@shopify/polaris': 13.9.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@shopify/polaris': 13.9.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       lodash: 4.17.21
       react: 18.3.1
       sanity: 3.79.0(@emotion/is-prop-valid@1.3.1)(@types/babel__core@7.20.5)(@types/node@22.13.10)(@types/react@18.3.18)(jiti@2.4.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.39.0)(typescript@5.8.2)(yaml@2.7.0)
@@ -12640,7 +12654,7 @@ snapshots:
       '@sanity/icons': 3.7.0(react@18.3.1)
       '@sanity/incompatible-plugin': 1.0.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@sanity/ui': 2.15.6(@emotion/is-prop-valid@1.3.1)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
-      '@shopify/polaris': 13.9.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@shopify/polaris': 13.9.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       lodash: 4.17.21
       react: 18.3.1
       sanity: 3.79.0(@emotion/is-prop-valid@1.3.1)(@types/babel__core@7.20.5)(@types/node@22.13.10)(@types/react@18.3.18)(jiti@2.4.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.39.0)(typescript@5.8.2)(yaml@2.7.0)
@@ -14547,7 +14561,7 @@ snapshots:
 
   '@sanity/bifur-client@0.4.1':
     dependencies:
-      nanoid: 3.3.9
+      nanoid: 3.3.10
       rxjs: 7.8.2
 
   '@sanity/browserslist-config@1.0.5': {}
@@ -14652,11 +14666,11 @@ snapshots:
       uuid: 11.1.0
       xstate: 5.19.2
 
-  '@sanity/core-loader@1.7.39(@sanity/types@3.79.0(@types/react@18.3.18))':
+  '@sanity/core-loader@1.7.40(@sanity/types@3.79.0(@types/react@18.3.18))':
     dependencies:
       '@sanity/client': 6.28.3(debug@4.4.0)
       '@sanity/comlink': 3.0.1
-      '@sanity/presentation-comlink': 1.0.10(@sanity/client@6.28.3)(@sanity/types@3.79.0(@types/react@18.3.18)(debug@4.4.0))
+      '@sanity/presentation-comlink': 1.0.11(@sanity/client@6.28.3)(@sanity/types@3.79.0(@types/react@18.3.18))
       '@sanity/visual-editing-csm': 2.0.8(@sanity/client@6.28.3)(@sanity/types@3.79.0(@types/react@18.3.18))
     transitivePeerDependencies:
       - '@sanity/types'
@@ -14810,7 +14824,7 @@ snapshots:
       hotscript: 1.0.13
       lodash: 4.17.21
       mendoza: 3.0.8
-      nanoid: 5.1.3
+      nanoid: 5.1.4
       rxjs: 7.8.2
     transitivePeerDependencies:
       - debug
@@ -14884,15 +14898,23 @@ snapshots:
     transitivePeerDependencies:
       - '@sanity/types'
 
+  '@sanity/presentation-comlink@1.0.11(@sanity/client@6.28.3)(@sanity/types@3.79.0(@types/react@18.3.18))':
+    dependencies:
+      '@sanity/client': 6.28.3(debug@4.4.0)
+      '@sanity/comlink': 3.0.1
+      '@sanity/visual-editing-types': 1.0.10(@sanity/client@6.28.3)(@sanity/types@3.79.0(@types/react@18.3.18)(debug@4.4.0))
+    transitivePeerDependencies:
+      - '@sanity/types'
+
   '@sanity/preview-url-secret@2.1.6(@sanity/client@6.28.3)':
     dependencies:
       '@sanity/client': 6.28.3(debug@4.4.0)
       '@sanity/uuid': 3.0.2
 
-  '@sanity/react-loader@1.10.48(@sanity/types@3.79.0(@types/react@18.3.18))(react@18.3.1)':
+  '@sanity/react-loader@1.10.49(@sanity/types@3.79.0(@types/react@18.3.18))(react@18.3.1)':
     dependencies:
       '@sanity/client': 6.28.3(debug@4.4.0)
-      '@sanity/core-loader': 1.7.39(@sanity/types@3.79.0(@types/react@18.3.18))
+      '@sanity/core-loader': 1.7.40(@sanity/types@3.79.0(@types/react@18.3.18))
       '@sanity/visual-editing-csm': 2.0.8(@sanity/client@6.28.3)(@sanity/types@3.79.0(@types/react@18.3.18))
       react: 18.3.1
     transitivePeerDependencies:
@@ -15055,13 +15077,13 @@ snapshots:
     optionalDependencies:
       '@sanity/types': 3.79.0(@types/react@18.3.18)(debug@4.4.0)
 
-  '@sanity/visual-editing@2.13.8(@emotion/is-prop-valid@1.3.1)(@remix-run/react@2.16.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.8.2))(@sanity/client@6.28.3)(@sanity/types@3.79.0(@types/react@18.3.18))(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react-router@6.30.0(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))':
+  '@sanity/visual-editing@2.13.11(@emotion/is-prop-valid@1.3.1)(@remix-run/react@2.16.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.8.2))(@sanity/client@6.28.3)(@sanity/types@3.79.0(@types/react@18.3.18))(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react-router@6.30.0(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))':
     dependencies:
       '@sanity/comlink': 3.0.1
       '@sanity/icons': 3.7.0(react@18.3.1)
       '@sanity/insert-menu': 1.1.5(@emotion/is-prop-valid@1.3.1)(@sanity/types@3.79.0(@types/react@18.3.18)(debug@4.4.0))(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       '@sanity/mutate': 0.11.0-canary.4(xstate@5.19.2)
-      '@sanity/presentation-comlink': 1.0.10(@sanity/client@6.28.3)(@sanity/types@3.79.0(@types/react@18.3.18)(debug@4.4.0))
+      '@sanity/presentation-comlink': 1.0.11(@sanity/client@6.28.3)(@sanity/types@3.79.0(@types/react@18.3.18))
       '@sanity/preview-url-secret': 2.1.6(@sanity/client@6.28.3)
       '@sanity/ui': 2.15.6(@emotion/is-prop-valid@1.3.1)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       '@sanity/visual-editing-csm': 2.0.8(@sanity/client@6.28.3)(@sanity/types@3.79.0(@types/react@18.3.18))
@@ -15335,18 +15357,18 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@shopify/polaris-icons@9.3.0(react@18.3.1)':
+  '@shopify/polaris-icons@9.3.1(react@18.3.1)':
     dependencies:
       react: 18.3.1
 
-  '@shopify/polaris-tokens@9.4.1':
+  '@shopify/polaris-tokens@9.4.2':
     dependencies:
       deepmerge: 4.3.1
 
-  '@shopify/polaris@13.9.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@shopify/polaris@13.9.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@shopify/polaris-icons': 9.3.0(react@18.3.1)
-      '@shopify/polaris-tokens': 9.4.1
+      '@shopify/polaris-icons': 9.3.1(react@18.3.1)
+      '@shopify/polaris-tokens': 9.4.2
       '@types/react': 18.3.18
       '@types/react-dom': 18.3.5(@types/react@18.3.18)
       '@types/react-transition-group': 4.4.12(@types/react@18.3.18)
@@ -19385,7 +19407,7 @@ snapshots:
 
   lru-cache@7.18.3: {}
 
-  lucide-react@0.479.0(react@18.3.1):
+  lucide-react@0.482.0(react@18.3.1):
     dependencies:
       react: 18.3.1
 
@@ -19975,9 +19997,9 @@ snapshots:
 
   nano-pubsub@3.0.0: {}
 
-  nanoid@3.3.9: {}
+  nanoid@3.3.10: {}
 
-  nanoid@5.1.3: {}
+  nanoid@5.1.4: {}
 
   natural-compare-lite@1.4.0: {}
 
@@ -20812,13 +20834,13 @@ snapshots:
 
   postcss@8.4.38:
     dependencies:
-      nanoid: 3.3.9
+      nanoid: 3.3.10
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
   postcss@8.5.3:
     dependencies:
-      nanoid: 3.3.9
+      nanoid: 3.3.10
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
@@ -21587,7 +21609,7 @@ snapshots:
       filesize: 9.0.11
       groq: 3.79.0
       is-hotkey-esm: 1.0.0
-      nanoid: 3.3.9
+      nanoid: 3.3.10
       pluralize: 8.0.0
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
@@ -21693,7 +21715,7 @@ snapshots:
       mendoza: 3.0.8
       module-alias: 2.2.3
       nano-pubsub: 3.0.0
-      nanoid: 3.3.9
+      nanoid: 3.3.10
       node-html-parser: 6.1.13
       observable-callback: 1.0.3(rxjs@7.8.2)
       oneline: 1.0.3

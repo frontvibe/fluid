@@ -11,7 +11,7 @@ import {useCallback, useEffect} from 'react';
 import {useIsInIframe} from '~/hooks/useIsInIframe';
 import {useRootLoaderData} from '~/root';
 
-export default function VisualEditing() {
+export function VisualEditing() {
   const isInIframe = useIsInIframe();
 
   return !isInIframe ? (

@@ -89,7 +89,7 @@ const BannerContent = forwardRef<
   return (
     <div
       className={cn(
-        'container relative z-3 flex h-full py-4',
+        'relative z-3 container flex h-full py-4',
         contentAlignmentVariants({
           required: cleanContentAlignement,
         }),

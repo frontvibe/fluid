@@ -77,14 +77,14 @@ export function ProductBadges({
       className={cn(
         'flex flex-wrap items-center gap-3',
         layout === 'card' && 'absolute z-5 m-2',
-        layout === 'card' && badgesPosition === 'top_left' && 'left-0 top-0',
-        layout === 'card' && badgesPosition === 'top_right' && 'right-0 top-0',
+        layout === 'card' && badgesPosition === 'top_left' && 'top-0 left-0',
+        layout === 'card' && badgesPosition === 'top_right' && 'top-0 right-0',
         layout === 'card' &&
           badgesPosition === 'bottom_left' &&
           'bottom-0 left-0',
         layout === 'card' &&
           badgesPosition === 'bottom_right' &&
-          'bottom-0 right-0',
+          'right-0 bottom-0',
         layout === 'card' && !badgesPosition && 'bottom-0 left-0',
       )}
     >

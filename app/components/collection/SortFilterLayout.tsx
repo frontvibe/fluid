@@ -69,7 +69,7 @@ export function SortFilter({
   return (
     <>
       {/* Desktop layout */}
-      <div className="hidden w-full touch:hidden lg:flex lg:items-center lg:justify-between">
+      <div className="touch:hidden hidden w-full lg:flex lg:items-center lg:justify-between">
         <div className="flex items-center gap-2">
           <IconButton onClick={() => setIsOpen(!isOpen)}>
             <span className="sr-only">
@@ -107,7 +107,7 @@ export function SortFilter({
         <div className="mt-6">
           <div
             className={cn([
-              'hidden touch:hidden lg:block',
+              'touch:hidden hidden lg:block',
               'transition-all duration-200',
               isOpen
                 ? 'sticky top-[calc(var(--desktopHeaderHeight)_+_1rem)] opacity-100 md:w-[240px] md:min-w-[240px] md:pr-8'

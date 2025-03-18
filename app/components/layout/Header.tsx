@@ -54,7 +54,7 @@ export function Header() {
           </Link>
           <div className="flex items-center">
             <DesktopNavigation data={header?.menu} />
-            <AccountLink className="relative flex items-center justify-center focus:ring-primary/5" />
+            <AccountLink className="focus:ring-primary/5 relative flex items-center justify-center" />
             <CartDrawer />
             <ClientOnly fallback={null}>
               {() => (

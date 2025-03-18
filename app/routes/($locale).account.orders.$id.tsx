@@ -113,7 +113,7 @@ export default function OrderRoute() {
               <thead>
                 <tr className="align-baseline">
                   <th
-                    className="pb-4 pl-0 pr-3 text-left font-semibold"
+                    className="pr-3 pb-4 pl-0 text-left font-semibold"
                     scope="col"
                   >
                     {themeContent?.account.product}
@@ -141,7 +141,7 @@ export default function OrderRoute() {
               <tbody className="divide-y divide-gray-200">
                 {lineItems.map((lineItem) => (
                   <tr key={lineItem.id}>
-                    <td className="w-full max-w-0 py-4 pl-0 pr-3 align-top sm:w-auto sm:max-w-none sm:align-middle">
+                    <td className="w-full max-w-0 py-4 pr-3 pl-0 align-top sm:w-auto sm:max-w-none sm:align-middle">
                       <div className="flex gap-6">
                         {lineItem?.image && (
                           <div className="card-image aspect-square w-24">
@@ -198,19 +198,19 @@ export default function OrderRoute() {
                   discountPercentage) && (
                   <tr>
                     <th
-                      className="hidden pl-6 pr-3 pt-6 text-right font-normal sm:table-cell md:pl-0"
+                      className="hidden pt-6 pr-3 pl-6 text-right font-normal sm:table-cell md:pl-0"
                       colSpan={3}
                       scope="row"
                     >
                       {themeContent?.account.discounts}
                     </th>
                     <th
-                      className="pr-3 pt-6 text-left font-normal sm:hidden"
+                      className="pt-6 pr-3 text-left font-normal sm:hidden"
                       scope="row"
                     >
                       {themeContent?.account.discounts}
                     </th>
-                    <td className="pl-3 pr-4 pt-6 text-right font-medium text-green-700 md:pr-3">
+                    <td className="pt-6 pr-4 pl-3 text-right font-medium text-green-700 md:pr-3">
                       {discountPercentage ? (
                         <span className="text-sm">
                           {themeContent?.account.discountsOff?.replace(
@@ -226,55 +226,55 @@ export default function OrderRoute() {
                 )}
                 <tr>
                   <th
-                    className="hidden pl-6 pr-3 pt-6 text-right font-normal sm:table-cell md:pl-0"
+                    className="hidden pt-6 pr-3 pl-6 text-right font-normal sm:table-cell md:pl-0"
                     colSpan={3}
                     scope="row"
                   >
                     {themeContent?.account.subtotal}
                   </th>
                   <th
-                    className="pr-3 pt-6 text-left font-normal sm:hidden"
+                    className="pt-6 pr-3 text-left font-normal sm:hidden"
                     scope="row"
                   >
                     {themeContent?.account.subtotal}
                   </th>
-                  <td className="pl-3 pr-4 pt-6 text-right md:pr-3">
+                  <td className="pt-6 pr-4 pl-3 text-right md:pr-3">
                     <Money data={order.subtotal!} />
                   </td>
                 </tr>
                 <tr>
                   <th
-                    className="hidden pl-6 pr-3 pt-4 text-right font-normal sm:table-cell md:pl-0"
+                    className="hidden pt-4 pr-3 pl-6 text-right font-normal sm:table-cell md:pl-0"
                     colSpan={3}
                     scope="row"
                   >
                     {themeContent?.account.tax}
                   </th>
                   <th
-                    className="pr-3 pt-4 text-left font-normal sm:hidden"
+                    className="pt-4 pr-3 text-left font-normal sm:hidden"
                     scope="row"
                   >
                     {themeContent?.account.tax}
                   </th>
-                  <td className="pl-3 pr-4 pt-4 text-right md:pr-3">
+                  <td className="pt-4 pr-4 pl-3 text-right md:pr-3">
                     <Money data={order.totalTax!} />
                   </td>
                 </tr>
                 <tr>
                   <th
-                    className="hidden pl-6 pr-3 pt-4 text-right font-semibold sm:table-cell md:pl-0"
+                    className="hidden pt-4 pr-3 pl-6 text-right font-semibold sm:table-cell md:pl-0"
                     colSpan={3}
                     scope="row"
                   >
                     {themeContent?.account.total}
                   </th>
                   <th
-                    className="pr-3 pt-4 text-left font-semibold sm:hidden"
+                    className="pt-4 pr-3 text-left font-semibold sm:hidden"
                     scope="row"
                   >
                     {themeContent?.account.total}
                   </th>
-                  <td className="pl-3 pr-4 pt-4 text-right font-semibold md:pr-3">
+                  <td className="pt-4 pr-4 pl-3 text-right font-semibold md:pr-3">
                     <Money data={order.totalPrice!} />
                   </td>
                 </tr>

@@ -114,9 +114,7 @@ function Item(props: AnnouncementBarProps) {
 function LinkWrapper({children}: {children: React.ReactNode}) {
   return (
     <p className="flex items-center text-sm underline-offset-4 group-hover:underline">
-      <span className="relative z-2 block bg-background pr-2">
-        {children}
-      </span>
+      <span className="bg-background relative z-2 block pr-2">{children}</span>
       <span className="-translate-x-[2px] transition-transform group-hover:translate-x-[-0.15px]">
         <IconArrowRight />
       </span>

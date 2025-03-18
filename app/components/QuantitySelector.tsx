@@ -37,8 +37,8 @@ const QuantityButton = forwardRef<
         'border-[rgb(var(--input)_/_var(--input-border-opacity))]',
         '[border-width:var(--input-border-thickness)]',
         symbol === 'decrease'
-          ? 'rounded-br-none rounded-tr-none border-r-0!'
-          : 'rounded-bl-none rounded-tl-none border-l-0!',
+          ? 'rounded-tr-none rounded-br-none border-r-0!'
+          : 'rounded-tl-none rounded-bl-none border-l-0!',
         className,
       ])}
       name={cx([
@@ -66,8 +66,8 @@ function Value(props: {children: React.ReactNode}) {
   return (
     <div
       className={cn(
-        'flex h-full min-w-[2.5rem] select-none items-center justify-center px-2 text-center',
-        'border-[rgb(var(--input)_/_var(--input-border-opacity))] [border-width:var(--input-border-thickness)_0]',
+        'flex h-full min-w-[2.5rem] items-center justify-center px-2 text-center select-none',
+        '[border-width:var(--input-border-thickness)_0] border-[rgb(var(--input)_/_var(--input-border-opacity))]',
       )}
     >
       {props.children}

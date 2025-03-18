@@ -68,18 +68,18 @@ const DrawerContent = forwardRef<
     <DrawerOverlay />
     <DrawerPrimitive.Content
       className={cn(
-        'fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-3xl border bg-background lg:rounded-none',
+        'bg-background fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-3xl border lg:rounded-none',
         className,
       )}
       ref={ref}
       {...props}
     >
-      <div className="mx-auto mt-4 h-2 w-[100px] rounded-full bg-muted md:hidden" />
+      <div className="bg-muted mx-auto mt-4 h-2 w-[100px] rounded-full md:hidden" />
       {children}
       <DrawerClose
         className={cn(
           iconButtonClass,
-          'absolute right-2 top-2 hidden lg:inline-flex',
+          'absolute top-2 right-2 hidden lg:inline-flex',
         )}
       >
         <IconClose className="size-6" strokeWidth={2} />
@@ -118,7 +118,7 @@ const DrawerTitle = forwardRef<
 >(({className, ...props}, ref) => (
   <DrawerPrimitive.Title
     className={cn(
-      'text-lg font-semibold leading-none tracking-tight',
+      'text-lg leading-none font-semibold tracking-tight',
       className,
     )}
     ref={ref}
@@ -132,7 +132,7 @@ const DrawerDescription = forwardRef<
   React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Description>
 >(({className, ...props}, ref) => (
   <DrawerPrimitive.Description
-    className={cn('text-sm text-muted-foreground', className)}
+    className={cn('text-muted-foreground text-sm', className)}
     ref={ref}
     {...props}
   />

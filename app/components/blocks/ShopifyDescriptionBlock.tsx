@@ -15,7 +15,7 @@ export function ShopifyDescriptionBlock(props: ShopifyDescriptionBlockProps) {
 
   return (
     <div
-      className="[&_a]:text-primary [&_a]:underline-offset-4 touch:[&_a]:active:underline notouch:[&_a]:hover:underline"
+      className="[&_a]:text-primary touch:[&_a]:active:underline notouch:[&_a]:hover:underline [&_a]:underline-offset-4"
       dangerouslySetInnerHTML={{
         __html: product.descriptionHtml,
       }}

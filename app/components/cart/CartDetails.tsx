@@ -149,7 +149,7 @@ function CartSummary({
       <div
         aria-labelledby="summary-heading"
         className={cn([
-          layout === 'drawer' && 'grid gap-4 border-t border-border p-6',
+          layout === 'drawer' && 'border-border grid gap-4 border-t p-6',
           layout === 'page' && 'grid gap-6',
         ])}
       >

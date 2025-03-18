@@ -26,7 +26,7 @@ export function OrderCard({order}: {order: OrderCardFragment}) {
         to={url}
       >
         {lineItems[0].image && (
-          <div className="card-image aspect-square bg-primary/5">
+          <div className="card-image bg-primary/5 aspect-square">
             <Image
               alt={lineItems[0].image?.altText ?? 'Order image'}
               className="fadeIn cover w-full"

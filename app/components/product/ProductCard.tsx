@@ -96,7 +96,7 @@ export function ProductCard(props: {
                   style === 'standard' &&
                     'rounded-(--product-card-border-corner-radius)',
                   style === 'standard' &&
-                    'border-[rgb(var(--border)_/_var(--product-card-border-opacity))] [border-width:var(--product-card-border-thickness)]',
+                    '[border-width:var(--product-card-border-thickness)] border-[rgb(var(--border)_/_var(--product-card-border-opacity))]',
                   style === 'standard' &&
                     '[box-shadow:rgb(var(--shadow)_/_var(--product-card-shadow-opacity))_var(--product-card-shadow-horizontal-offset)_var(--product-card-shadow-vertical-offset)_var(--product-card-shadow-blur-radius)_0px]',
                 )}
@@ -127,7 +127,7 @@ export function ProductCard(props: {
               <div className={priceClass}>
                 {firstVariant.compareAtPrice && (
                   <ShopifyMoney
-                    className="text-xs text-muted-foreground line-through md:text-sm"
+                    className="text-muted-foreground text-xs line-through md:text-sm"
                     data={firstVariant.compareAtPrice}
                   />
                 )}
@@ -144,14 +144,14 @@ export function ProductCard(props: {
           <CardMedia aspectRatio={aspectRatio}>
             <div
               className={cn(
-                'w-full bg-muted',
+                'bg-muted w-full',
                 aspectRatio === 'square' && 'aspect-square',
                 aspectRatio === 'video' && 'aspect-video',
                 aspectRatio === 'auto' && 'aspect-none',
               )}
             />
           </CardMedia>
-          <CardContent className="p-3 text-muted-foreground/0 md:px-6 md:py-4">
+          <CardContent className="text-muted-foreground/0 p-3 md:px-6 md:py-4">
             <div className="text-lg">
               <span className="rounded-sm">Skeleton product title</span>
             </div>

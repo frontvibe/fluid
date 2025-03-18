@@ -23,7 +23,7 @@ export function Logo(props: {
 
   if (!logo?._ref) {
     return (
-      <div className="flex h-11 items-center justify-center font-heading text-2xl notouch:group-hover:text-accent-foreground">
+      <div className="font-heading notouch:group-hover:text-accent-foreground flex h-11 items-center justify-center text-2xl">
         {siteName}
       </div>
     );

@@ -97,7 +97,7 @@ export default function CartRoute() {
   const {cart} = useLoaderData<typeof loader>();
 
   return (
-    <div className="cart flex-grow bg-background text-foreground">
+    <div className="cart bg-background text-foreground grow">
       <Cart cart={cart} layout="page" />
       <Analytics.CartView />
     </div>

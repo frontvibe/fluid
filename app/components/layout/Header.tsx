@@ -54,7 +54,7 @@ export function Header() {
           </Link>
           <div className="flex items-center">
             <DesktopNavigation data={header?.menu} />
-            <AccountLink className="relative flex items-center justify-center focus:ring-primary/5" />
+            <AccountLink className="focus:ring-primary/5 relative flex items-center justify-center" />
             <CartDrawer />
             <ClientOnly fallback={null}>
               {() => (
@@ -92,7 +92,7 @@ function HeaderWrapper(props: {children: React.ReactNode}) {
     'section-padding bg-background text-foreground',
     sticky !== 'none' && 'sticky top-0 z-50',
     blur &&
-      'bg-opacity-95 backdrop-blur supports-[backdrop-filter]:bg-opacity-85',
+      'bg-opacity-95 backdrop-blur-sm supports-backdrop-filter:bg-opacity-85',
     headerVariants({
       optional: showSeparatorLine ? 'separator-line' : null,
     }),

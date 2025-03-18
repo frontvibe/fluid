@@ -54,7 +54,7 @@ function Address({
 }) {
   const {themeContent} = useSanityThemeContent();
   return (
-    <div className="flex flex-col rounded border border-gray-200 p-6 lg:p-8">
+    <div className="flex flex-col rounded-sm border border-gray-200 p-6 lg:p-8">
       {defaultAddress && (
         <div className="mb-3">
           <Badge>{themeContent?.account.default}</Badge>
@@ -83,7 +83,7 @@ function Address({
         </Link>
         <Form action="address/delete" method="delete" preventScrollReset>
           <input name="addressId" type="hidden" value={address.id} />
-          <button className="ml-6 text-left text-sm text-primary/50 hover:underline">
+          <button className="text-primary/50 ml-6 text-left text-sm hover:underline">
             {themeContent?.account.remove}
           </button>
         </Form>

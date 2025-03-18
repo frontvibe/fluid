@@ -50,7 +50,7 @@ function ExitBanner() {
   }, [reload, handleReloadPage]);
 
   return (
-    <section className="bg-[--background] text-[--foreground] [--background:#16120C] [--foreground:#FFE7B3]">
+    <section className="bg-(--background) text-(--foreground) [--background:#16120C] [--foreground:#FFE7B3]">
       <div className="container py-6">
         <fetcher.Form action="/sanity-preview" method="POST">
           <input name="slug" type="hidden" value={location.pathname} />
@@ -58,8 +58,8 @@ function ExitBanner() {
             <small>Sanity Preview mode activated</small>
             <button
               className={cx(
-                'flex h-[2.5rem] shrink-0 items-center justify-center rounded-full border border-[--foreground] p-4 text-sm font-bold duration-200 ease-out',
-                'hover:bg-[--foreground] hover:text-[--background]',
+                'flex h-[2.5rem] shrink-0 items-center justify-center rounded-full border border-(--foreground) p-4 text-sm font-bold duration-200 ease-out',
+                'hover:bg-(--foreground) hover:text-(--background)',
                 'disabled:bg-opacity-100 disabled:opacity-20',
               )}
               disabled={fetcher.state === 'submitting'}

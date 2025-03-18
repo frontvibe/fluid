@@ -58,10 +58,10 @@ export function ProductCard(props: {
 
   const cardClass = cn(
     style === 'card'
-      ? 'overflow-hidden rounded-[--product-card-border-corner-radius]'
+      ? 'overflow-hidden rounded-(--product-card-border-corner-radius)'
       : 'rounded-t-[calc(var(--product-card-border-corner-radius)*1.2)]',
     style === 'card'
-      ? 'border-[rgb(var(--border)_/_var(--product-card-border-opacity))] [border-width:--product-card-border-thickness]'
+      ? 'border-[rgb(var(--border)_/_var(--product-card-border-opacity))] [border-width:var(--product-card-border-thickness)]'
       : 'border-0',
     style === 'card'
       ? '[box-shadow:rgb(var(--shadow)_/_var(--product-card-shadow-opacity))_var(--product-card-shadow-horizontal-offset)_var(--product-card-shadow-vertical-offset)_var(--product-card-shadow-blur-radius)_0px]'
@@ -75,7 +75,7 @@ export function ProductCard(props: {
   );
 
   const priceClass = cn(
-    'mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 md:gap-3 [&>*]:overflow-hidden [&>*]:text-ellipsis [&>*]:whitespace-nowrap',
+    'mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 md:gap-3 *:overflow-hidden *:text-ellipsis *:whitespace-nowrap',
     textAlignment === 'center'
       ? 'justify-center'
       : textAlignment === 'right'
@@ -94,9 +94,9 @@ export function ProductCard(props: {
                 className={cn(
                   'relative',
                   style === 'standard' &&
-                    'rounded-[--product-card-border-corner-radius]',
+                    'rounded-(--product-card-border-corner-radius)',
                   style === 'standard' &&
-                    'border-[rgb(var(--border)_/_var(--product-card-border-opacity))] [border-width:--product-card-border-thickness]',
+                    '[border-width:var(--product-card-border-thickness)] border-[rgb(var(--border)_/_var(--product-card-border-opacity))]',
                   style === 'standard' &&
                     '[box-shadow:rgb(var(--shadow)_/_var(--product-card-shadow-opacity))_var(--product-card-shadow-horizontal-offset)_var(--product-card-shadow-vertical-offset)_var(--product-card-shadow-blur-radius)_0px]',
                 )}
@@ -127,7 +127,7 @@ export function ProductCard(props: {
               <div className={priceClass}>
                 {firstVariant.compareAtPrice && (
                   <ShopifyMoney
-                    className="text-xs text-muted-foreground line-through md:text-sm"
+                    className="text-muted-foreground text-xs line-through md:text-sm"
                     data={firstVariant.compareAtPrice}
                   />
                 )}
@@ -144,19 +144,19 @@ export function ProductCard(props: {
           <CardMedia aspectRatio={aspectRatio}>
             <div
               className={cn(
-                'w-full bg-muted',
+                'bg-muted w-full',
                 aspectRatio === 'square' && 'aspect-square',
                 aspectRatio === 'video' && 'aspect-video',
                 aspectRatio === 'auto' && 'aspect-none',
               )}
             />
           </CardMedia>
-          <CardContent className="p-3 text-muted-foreground/0 md:px-6 md:py-4">
+          <CardContent className="text-muted-foreground/0 p-3 md:px-6 md:py-4">
             <div className="text-lg">
-              <span className="rounded">Skeleton product title</span>
+              <span className="rounded-sm">Skeleton product title</span>
             </div>
             <div className={priceClass}>
-              <span className="rounded text-sm md:text-base">
+              <span className="rounded-sm text-sm md:text-base">
                 Skeleton price
               </span>
             </div>

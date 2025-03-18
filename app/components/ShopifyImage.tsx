@@ -102,7 +102,7 @@ const ShopifyImage = React.forwardRef<
         aspectRatio={aspectRatio}
         className={cn(
           showBorder &&
-            'rounded-[--media-border-corner-radius] border-[rgb(var(--border)_/_var(--media-border-opacity))] [border-width:--media-border-thickness]',
+            'rounded-(--media-border-corner-radius) [border-width:var(--media-border-thickness)] border-[rgb(var(--border)_/_var(--media-border-opacity))]',
           showShadow &&
             '[box-shadow:rgb(var(--shadow)_/_var(--media-shadow-opacity))_var(--media-shadow-horizontal-offset)_var(--media-shadow-vertical-offset)_var(--media-shadow-blur-radius)_0px]',
           className,

@@ -23,8 +23,8 @@ export function CollectionListGrid(props: {
   return (
     <ul
       className={cx([
-        'grid gap-x-[--grid-horizontal-space] gap-y-[--grid-vertical-space]',
-        'lg:grid-cols-[repeat(var(--columns),_minmax(0,_1fr))]',
+        'grid gap-x-(--grid-horizontal-space) gap-y-(--grid-vertical-space)',
+        'lg:grid-cols-[repeat(var(--columns),minmax(0,1fr))]',
       ])}
       style={columnsVar}
     >

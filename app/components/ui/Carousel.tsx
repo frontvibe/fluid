@@ -193,7 +193,7 @@ const CarouselItem = React.forwardRef<
       aria-roledescription="slide"
       className={cn(
         'min-w-0 select-none',
-        'flex-[0_0_100%] pl-[--slide-spacing] md:flex-[0_0_var(--slide-size)]',
+        'flex-[0_0_100%] pl-(--slide-spacing) md:flex-[0_0_var(--slide-size)]',
         className,
       )}
       ref={ref}
@@ -215,7 +215,7 @@ const CarouselPrevious = React.forwardRef<
       className={cn(
         'absolute rounded-full',
         orientation === 'horizontal'
-          ? '-left-12 top-1/2 -translate-y-1/2'
+          ? 'top-1/2 -left-12 -translate-y-1/2'
           : '-top-12 left-1/2 -translate-x-1/2 rotate-90',
         className,
       )}
@@ -242,7 +242,7 @@ const CarouselNext = React.forwardRef<
       className={cn(
         'absolute rounded-full',
         orientation === 'horizontal'
-          ? '-right-12 top-1/2 -translate-y-1/2'
+          ? 'top-1/2 -right-12 -translate-y-1/2'
           : '-bottom-12 left-1/2 -translate-x-1/2 rotate-90',
         className,
       )}
@@ -299,7 +299,7 @@ const CarouselCounter = React.forwardRef<
   const {selectedIndex} = useCarouselPagination(api);
 
   return (
-    <div className="flex items-center gap-1 tabular-nums text-muted-foreground">
+    <div className="text-muted-foreground flex items-center gap-1 tabular-nums">
       <span className={cn(className)} ref={ref} {...props}>
         {selectedIndex + 1}
       </span>

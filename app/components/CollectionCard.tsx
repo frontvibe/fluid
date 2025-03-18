@@ -38,10 +38,10 @@ export function CollectionCard(props: {
 
   const cardClass = cn(
     style === 'card'
-      ? 'overflow-hidden rounded-[--collection-card-border-corner-radius]'
+      ? 'overflow-hidden rounded-(--collection-card-border-corner-radius)'
       : 'rounded-t-[calc(var(--collection-card-border-corner-radius)*1.2)]',
     style === 'card'
-      ? 'border-[rgb(var(--border)_/_var(--collection-card-border-opacity))] [border-width:--collection-card-border-thickness]'
+      ? 'border-[rgb(var(--border)_/_var(--collection-card-border-opacity))] [border-width:var(--collection-card-border-thickness)]'
       : 'border-0',
     style === 'card'
       ? '[box-shadow:rgb(var(--shadow)_/_var(--collection-card-shadow-opacity))_var(--collection-card-shadow-horizontal-offset)_var(--collection-card-shadow-vertical-offset)_var(--collection-card-shadow-blur-radius)_0px]'
@@ -71,9 +71,9 @@ export function CollectionCard(props: {
             aspectRatio={aspectRatio}
             className={cn(
               style === 'standard' &&
-                'rounded-[--collection-card-border-corner-radius]',
+                'rounded-(--collection-card-border-corner-radius)',
               style === 'standard' &&
-                'border-[rgb(var(--border)_/_var(--collection-card-border-opacity))] [border-width:--collection-card-border-thickness]',
+                '[border-width:var(--collection-card-border-thickness)] border-[rgb(var(--border)_/_var(--collection-card-border-opacity))]',
               style === 'standard' &&
                 '[box-shadow:rgb(var(--shadow)_/_var(--collection-card-shadow-opacity))_var(--collection-card-shadow-horizontal-offset)_var(--collection-card-shadow-vertical-offset)_var(--collection-card-shadow-blur-radius)_0px]',
             )}
@@ -95,9 +95,7 @@ export function CollectionCard(props: {
         )}
         <CardContent className={cardContentClass}>
           <div className="flex items-center text-lg">
-            <span className="relative z-[2] block pr-2">
-              {collection.title}
-            </span>
+            <span className="relative z-2 block pr-2">{collection.title}</span>
             <span className="-translate-x-[2px] transition-transform group-hover/card:translate-x-[-0.15px]">
               <IconArrowRight />
             </span>
@@ -110,7 +108,7 @@ export function CollectionCard(props: {
       <CardMedia>
         <div
           className={cn(
-            'h-auto w-full bg-muted',
+            'bg-muted h-auto w-full',
             aspectRatio === 'square' && 'aspect-square',
             aspectRatio === 'video' && 'aspect-video',
             aspectRatio === 'auto' && 'aspect-none',
@@ -119,7 +117,7 @@ export function CollectionCard(props: {
       </CardMedia>
       <CardContent className={cardContentClass}>
         <div className="flex items-center text-lg">
-          <span className="rounded text-muted-foreground/0">
+          <span className="text-muted-foreground/0 rounded-sm">
             Skeleton collection title
           </span>
         </div>

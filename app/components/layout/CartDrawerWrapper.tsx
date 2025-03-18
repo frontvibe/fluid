@@ -86,7 +86,7 @@ function Badge(props: {cart?: CartApiQueryFragment; count: number}) {
         {count > 0 && (
           <div
             className={cx([
-              'absolute right-[-12px] top-[-4px] flex items-center justify-center',
+              'absolute top-[-4px] right-[-12px] flex items-center justify-center',
               'bg-foreground text-background transition-colors',
               'group-active:bg-accent-foreground group-active:text-accent',
               'notouch:group-hover:bg-accent-foreground notouch:group-hover:text-accent',

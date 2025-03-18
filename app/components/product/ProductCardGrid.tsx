@@ -24,10 +24,10 @@ export function ProductCardGrid(props: {
   return (
     <ul
       className={cx([
-        'grid gap-x-[--grid-horizontal-space] gap-y-[--grid-vertical-space]',
-        'grid-cols-[repeat(var(--mobileColumns),_minmax(0,_1fr))]',
+        'grid gap-x-(--grid-horizontal-space) gap-y-(--grid-vertical-space)',
+        'grid-cols-[repeat(var(--mobileColumns),minmax(0,1fr))]',
         'sm:grid-cols-2',
-        'lg:grid-cols-[repeat(var(--columns),_minmax(0,_1fr))]',
+        'lg:grid-cols-[repeat(var(--columns),minmax(0,1fr))]',
       ])}
       style={columnsVar}
     >

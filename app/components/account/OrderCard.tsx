@@ -19,14 +19,14 @@ export function OrderCard({order}: {order: OrderCardFragment}) {
     : `/account/orders/${legacyOrderId}`;
 
   return (
-    <li className="grid rounded border text-center">
+    <li className="grid rounded-sm border text-center">
       <Link
         className="grid items-center gap-4 p-4 md:grid-cols-2 md:gap-6 md:p-6"
         prefetch="intent"
         to={url}
       >
         {lineItems[0].image && (
-          <div className="card-image aspect-square bg-primary/5">
+          <div className="card-image bg-primary/5 aspect-square">
             <Image
               alt={lineItems[0].image?.altText ?? 'Order image'}
               className="fadeIn cover w-full"

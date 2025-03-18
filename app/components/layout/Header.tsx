@@ -6,7 +6,7 @@ import {getImageDimensions} from '@sanity/asset-utils';
 import {stegaClean} from '@sanity/client/stega';
 import {cx} from 'class-variance-authority';
 import {m, transform, useMotionValueEvent, useTransform} from 'framer-motion';
-import React, {useEffect, useState} from 'react';
+import React, {Suspense, useEffect, useState} from 'react';
 
 import {useBoundedScroll} from '~/hooks/useBoundedScroll';
 import {useColorsCssVars} from '~/hooks/useColorsCssVars';
@@ -14,12 +14,13 @@ import {useLocalePath} from '~/hooks/useLocalePath';
 import {cn} from '~/lib/utils';
 import {useRootLoaderData} from '~/root';
 
+import {ClientOnly} from '../ClientOnly';
 import {headerVariants} from '../cva/header';
 import {IconAccount} from '../icons/IconAccount';
 import {DesktopNavigation} from '../navigation/DesktopNavigation';
-import {MobileNavigation} from '../navigation/MobileNavigation';
+import {MobileNavigation} from '../navigation/MobileNavigation.client';
 import {IconButton} from '../ui/Button';
-import {CartDrawer} from './CartDrawer';
+import CartDrawer from './CartDrawerWrapper';
 import {Logo} from './Logo';
 
 export function Header() {
@@ -55,7 +56,13 @@ export function Header() {
             <DesktopNavigation data={header?.menu} />
             <AccountLink className="relative flex items-center justify-center focus:ring-primary/5" />
             <CartDrawer />
-            <MobileNavigation data={header?.menu} />
+            <ClientOnly fallback={null}>
+              {() => (
+                <Suspense>
+                  <MobileNavigation data={header?.menu} />
+                </Suspense>
+              )}
+            </ClientOnly>
           </div>
         </div>
       </div>

@@ -1,20 +1,8 @@
-/*
- * Vercel doesn't inject all environment variables into the runtime
- * some are only available through the process.env object
- */
-
-import type {AppLoadContext} from '@shopify/remix-oxygen';
-
 export function envVariables(contextEnv: Env) {
-  let env: Env | NodeJS.ProcessEnv = contextEnv;
-
-  if (typeof process !== 'undefined') {
-    // Process is accessible in Vercel environment
-    env = process.env;
-  }
+  const env: Env | NodeJS.ProcessEnv = contextEnv;
 
   return {
-    NODE_ENV: env.NODE_ENV as AppLoadContext['env']['NODE_ENV'],
+    NODE_ENV: env.NODE_ENV,
     PRIVATE_STOREFRONT_API_TOKEN: checkRequiredEnv(
       env.PRIVATE_STOREFRONT_API_TOKEN,
       'PRIVATE_STOREFRONT_API_TOKEN',

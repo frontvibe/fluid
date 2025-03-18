@@ -1,14 +1,14 @@
 import {useNavigation} from '@remix-run/react';
-import {useNProgress} from '@tanem/react-nprogress';
+// import {useNProgress} from '@tanem/react-nprogress';
 import {AnimatePresence, m} from 'framer-motion';
 import {useEffect, useState} from 'react';
 
 export function NavigationProgressBar() {
   const navigation = useNavigation();
   const [isLoading, setIsLoading] = useState(false);
-  const {animationDuration, isFinished, progress} = useNProgress({
-    isAnimating: isLoading,
-  });
+  // const {animationDuration, isFinished, progress} = useNProgress({
+  //   isAnimating: isLoading,
+  // });
   const delay = 300;
 
   // Delay the progress bar apparing to avoid flickering when the page loads quickly
@@ -21,9 +21,10 @@ export function NavigationProgressBar() {
   }, [navigation.state]);
 
   return (
-    <Container animationDuration={animationDuration} isFinished={isFinished}>
-      <Bar animationDuration={animationDuration} progress={progress} />
-    </Container>
+    <></>
+    // <Container animationDuration={animationDuration} isFinished={isFinished}>
+    //   <Bar animationDuration={animationDuration} progress={progress} />
+    // </Container>
   );
 }
 

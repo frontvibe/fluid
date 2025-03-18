@@ -1,6 +1,5 @@
 import type {LoaderFunctionArgs, MetaFunction} from '@shopify/remix-oxygen';
 
-import {defer} from '@shopify/remix-oxygen';
 import {DEFAULT_LOCALE} from 'countries';
 
 import {mergeMeta} from '~/lib/meta';
@@ -54,13 +53,13 @@ export async function loader({context, request}: LoaderFunctionArgs) {
     },
   });
 
-  return defer({
+  return {
     collectionListPromise,
     featuredCollectionPromise,
     featuredProductPromise,
     page,
     seo,
-  });
+  };
 }
 
 /*

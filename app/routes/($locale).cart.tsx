@@ -7,8 +7,7 @@ import type {CartApiQueryFragment} from 'storefrontapi.generated';
 
 import {useLoaderData} from '@remix-run/react';
 import {Analytics, CartForm} from '@shopify/hydrogen';
-import {json, redirectDocument} from '@shopify/remix-oxygen';
-import invariant from 'tiny-invariant';
+import {redirectDocument, data as remixData} from '@shopify/remix-oxygen';
 
 import {Cart} from '~/components/cart/Cart';
 import {isLocalPath} from '~/lib/utils';
@@ -19,7 +18,10 @@ export async function action({context, request}: ActionFunctionArgs) {
   const [formData] = await Promise.all([request.formData()]);
 
   const {action, inputs} = CartForm.getFormInput(formData);
-  invariant(action, 'No cartAction defined');
+
+  if (!action) {
+    throw new Error('No action provided');
+  }
 
   const status = 200;
   let result: CartQueryDataReturn;
@@ -53,27 +55,33 @@ export async function action({context, request}: ActionFunctionArgs) {
       result = await cart.updateLines(inputs.lines);
       break;
     default:
-      invariant(false, `${action} cart action is not defined`);
+      throw new Error(`${action} cart action is not defined`);
   }
 
   /**
    * The Cart ID may change after each mutation. We need to update it each time in the session.
    */
-  const headers = cart.setCartId(result.cart.id);
+  const cartId = result?.cart?.id;
+  const headers = cartId ? cart.setCartId(cartId) : new Headers();
 
   const redirectTo = formData.get('redirectTo') ?? null;
+
   if (typeof redirectTo === 'string' && isLocalPath(redirectTo)) {
     return redirectDocument(redirectTo, 303);
   }
 
-  const {cart: cartResult, errors} = result;
+  const {cart: cartResult, errors, warnings} = result;
 
   headers.append('Set-Cookie', await context.session.commit());
 
-  return json(
+  return remixData(
     {
       cart: cartResult,
       errors,
+      warnings,
+      analytics: {
+        cartId,
+      },
     },
     {headers, status},
   );
@@ -82,7 +90,7 @@ export async function action({context, request}: ActionFunctionArgs) {
 export async function loader({context}: LoaderFunctionArgs) {
   const cart = (await context.cart.get()) as CartApiQueryFragment;
 
-  return json({cart});
+  return {cart};
 }
 
 export default function CartRoute() {

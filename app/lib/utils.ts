@@ -9,9 +9,9 @@ import {cx} from 'class-variance-authority';
 import {useMemo} from 'react';
 import {twMerge} from 'tailwind-merge';
 
+import type {aspectRatioValues} from '~/qroq/constant';
 import type {THEME_CONTENT_FRAGMENT} from '~/qroq/themeContent';
 
-import type {aspectRatioValues} from '../qroq/sections';
 import type {I18nLocale} from './type';
 
 export function useVariantUrl(

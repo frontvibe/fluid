@@ -6,26 +6,18 @@ import {cx} from 'class-variance-authority';
 import {Suspense, useCallback, useEffect, useMemo, useState} from 'react';
 
 import {useCartFetchers} from '~/hooks/useCartFetchers';
-import {useHydrated} from '~/hooks/useHydrated';
 import {useLocalePath} from '~/hooks/useLocalePath';
 import {useSanityThemeContent} from '~/hooks/useSanityThemeContent';
 import {cn} from '~/lib/utils';
 import {useRootLoaderData} from '~/root';
 
 import {useDevice} from '../../hooks/useDevice';
-import {Cart} from '../cart/Cart';
+import {ClientOnly} from '../ClientOnly';
 import {IconBag} from '../icons/IconBag';
 import {iconButtonClass} from '../ui/Button';
-import {
-  Drawer,
-  DrawerContent,
-  DrawerDescription,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from '../ui/Drawer';
+import {CartDrawer} from './CartDrawer.client';
 
-export function CartDrawer() {
+export default function CartDrawerWrapper() {
   const rootData = useRootLoaderData();
 
   return (
@@ -43,8 +35,7 @@ export function CartDrawer() {
 }
 
 function Badge(props: {cart?: CartApiQueryFragment; count: number}) {
-  const {count} = props;
-  const isHydrated = useHydrated();
+  const {count, cart} = props;
   const path = useLocalePath({path: '/cart'});
   const {themeContent} = useSanityThemeContent();
   const [cartOpen, setCartOpen] = useState(false);
@@ -113,37 +104,27 @@ function Badge(props: {cart?: CartApiQueryFragment; count: number}) {
 
   const buttonClass = cn(iconButtonClass, 'group');
 
-  return isHydrated ? (
-    <Drawer
-      direction={device === 'desktop' ? 'right' : 'bottom'}
-      onOpenChange={onOpenChange}
-      open={cartOpen}
+  return (
+    <ClientOnly
+      fallback={
+        <Link className={buttonClass} prefetch="intent" to={path}>
+          {BadgeCounter}
+        </Link>
+      }
     >
-      <DrawerTrigger className={buttonClass}>{BadgeCounter}</DrawerTrigger>
-      <DrawerContent
-        className="cart flex h-[97.5svh] max-h-screen w-screen flex-col gap-0 bg-background p-0 text-foreground lg:left-auto lg:right-0 lg:h-svh lg:max-w-lg"
-        onCloseAutoFocus={(e) => e.preventDefault()}
-        onOpenAutoFocus={(e) => e.preventDefault()}
-      >
-        <DrawerHeader className="px-6 py-5 shadow-sm shadow-foreground/10">
-          <DrawerTitle className="flex items-center gap-4 font-body font-bold">
-            <span>{themeContent?.cart?.heading}</span>
-          </DrawerTitle>
-        </DrawerHeader>
-        <DrawerDescription className="sr-only">
-          {themeContent?.cart?.heading}
-        </DrawerDescription>
-        <Cart
-          cart={props.cart}
-          layout="drawer"
-          loading={cartIsLoading}
-          onClose={handleClose}
-        />
-      </DrawerContent>
-    </Drawer>
-  ) : (
-    <Link className={buttonClass} prefetch="intent" to={path}>
-      {BadgeCounter}
-    </Link>
+      {() => (
+        <Suspense>
+          <CartDrawer
+            BadgeCounter={BadgeCounter}
+            buttonClass={buttonClass}
+            cart={cart}
+            cartIsLoading={cartIsLoading}
+            cartOpen={cartOpen}
+            onClose={handleClose}
+            onOpenChange={onOpenChange}
+          />
+        </Suspense>
+      )}
+    </ClientOnly>
   );
 }

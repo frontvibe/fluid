@@ -2,9 +2,9 @@ import type {Selection} from 'groqd';
 
 import {q, z} from 'groqd';
 
+import {contentAlignmentValues} from './constant';
 import {IMAGE_FRAGMENT} from './fragments';
 import {LINK_REFERENCE_FRAGMENT} from './links';
-import {contentAlignmentValues} from './sections';
 
 /*
 |--------------------------------------------------------------------------

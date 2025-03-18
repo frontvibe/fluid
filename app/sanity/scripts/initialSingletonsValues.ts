@@ -69,7 +69,7 @@ export const initialSingletonsValues = {
                     _key: nanoid(),
                     _type: 'span',
                     marks: ['em'],
-                    text: '/sanity/preview',
+                    text: '/sanity-preview',
                   },
                   {
                     _key: nanoid(),

@@ -103,27 +103,16 @@ importers:
         version: 3.76.2
       '@shopify/cli-hydrogen':
         specifier: ^9.0.8
-<<<<<<< HEAD
-        version: 9.0.8(@graphql-codegen/cli@5.0.5(@parcel/watcher@2.5.0)(@types/node@22.13.10)(graphql@16.10.0)(typescript@5.8.2))(@remix-run/dev@2.16.1(@remix-run/react@2.16.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.8.2))(@types/node@22.13.10)(babel-plugin-macros@3.1.0)(terser@5.39.0)(ts-node@10.9.2(@types/node@22.13.10)(typescript@5.8.2))(typescript@5.8.2)(vite@5.4.14(@types/node@22.13.10)(terser@5.39.0)))(@shopify/hydrogen-codegen@0.3.2(graphql@16.10.0))(@shopify/mini-oxygen@3.1.1(vite@5.4.14(@types/node@22.13.10)(terser@5.39.0)))(@types/react@18.3.18)(graphql-config@5.1.3(@types/node@22.13.10)(graphql@16.10.0)(typescript@5.8.2))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@5.4.14(@types/node@22.13.10)(terser@5.39.0))
+        version: 9.0.8(@graphql-codegen/cli@5.0.5(@parcel/watcher@2.5.0)(@types/node@22.13.10)(graphql@16.10.0)(typescript@5.8.2))(@remix-run/dev@2.16.1(@remix-run/react@2.16.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.8.2))(@types/node@22.13.10)(babel-plugin-macros@3.1.0)(lightningcss@1.29.2)(terser@5.39.0)(ts-node@10.9.2(@types/node@22.13.10)(typescript@5.8.2))(typescript@5.8.2)(vite@5.4.14(@types/node@22.13.10)(lightningcss@1.29.2)(terser@5.39.0)))(@shopify/hydrogen-codegen@0.3.2(graphql@16.10.0))(@shopify/mini-oxygen@3.1.1(vite@5.4.14(@types/node@22.13.10)(lightningcss@1.29.2)(terser@5.39.0)))(@types/react@18.3.18)(graphql-config@5.1.3(@types/node@22.13.10)(graphql@16.10.0)(typescript@5.8.2))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@5.4.14(@types/node@22.13.10)(lightningcss@1.29.2)(terser@5.39.0))
       '@shopify/hydrogen':
         specifier: ^2025.1.2
-        version: 2025.1.2(@remix-run/react@2.16.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.8.2))(@remix-run/server-runtime@2.16.1(typescript@5.8.2))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@5.4.14(@types/node@22.13.10)(terser@5.39.0))(xstate@5.19.2)
-=======
-        version: 9.0.8(@graphql-codegen/cli@5.0.5(@parcel/watcher@2.5.0)(@types/node@22.13.10)(graphql@16.10.0)(typescript@5.8.2))(@remix-run/dev@2.16.0(@remix-run/react@2.16.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.8.2))(@types/node@22.13.10)(babel-plugin-macros@3.1.0)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(ts-node@10.9.2(@types/node@22.13.10)(typescript@5.8.2))(typescript@5.8.2)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0))(yaml@2.7.0))(@shopify/hydrogen-codegen@0.3.2(graphql@16.10.0))(@shopify/mini-oxygen@3.1.1(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0)))(@types/react@18.3.18)(graphql-config@5.1.3(@types/node@22.13.10)(graphql@16.10.0)(typescript@5.8.2))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0))
-      '@shopify/hydrogen':
-        specifier: ^2025.1.2
-        version: 2025.1.2(@remix-run/react@2.16.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.8.2))(@remix-run/server-runtime@2.16.0(typescript@5.8.2))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0))(xstate@5.19.2)
->>>>>>> 3daa133 (V4 migration)
+        version: 2025.1.2(@remix-run/react@2.16.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.8.2))(@remix-run/server-runtime@2.16.1(typescript@5.8.2))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@5.4.14(@types/node@22.13.10)(lightningcss@1.29.2)(terser@5.39.0))(xstate@5.19.2)
       '@shopify/hydrogen-react':
         specifier: ^2025.1.2
         version: 2025.1.2(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(xstate@5.19.2)
       '@shopify/mini-oxygen':
         specifier: ^3.1.1
-<<<<<<< HEAD
-        version: 3.1.1(vite@5.4.14(@types/node@22.13.10)(terser@5.39.0))
-=======
-        version: 3.1.1(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0))
->>>>>>> 3daa133 (V4 migration)
+        version: 3.1.1(vite@5.4.14(@types/node@22.13.10)(lightningcss@1.29.2)(terser@5.39.0))
       '@shopify/polaris':
         specifier: ^13.9.4
         version: 13.9.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -198,11 +187,7 @@ importers:
         version: 3.1.2(@emotion/is-prop-valid@1.3.1)(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(sanity@3.79.0(@emotion/is-prop-valid@1.3.1)(@types/babel__core@7.20.5)(@types/node@22.13.10)(@types/react@18.3.18)(jiti@2.4.2)(lightningcss@1.29.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.39.0)(typescript@5.8.2)(yaml@2.7.0))(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       sanity-plugin-media:
         specifier: ^3.0.1
-<<<<<<< HEAD
-        version: 3.0.1(@sanity/ui@2.15.7(@emotion/is-prop-valid@1.3.1)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1)))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(sanity@3.79.0(@emotion/is-prop-valid@1.3.1)(@types/babel__core@7.20.5)(@types/node@22.13.10)(@types/react@18.3.18)(jiti@2.4.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.39.0)(typescript@5.8.2)(yaml@2.7.0))(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
-=======
-        version: 3.0.1(@sanity/ui@2.15.6(@emotion/is-prop-valid@1.3.1)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1)))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(sanity@3.79.0(@emotion/is-prop-valid@1.3.1)(@types/babel__core@7.20.5)(@types/node@22.13.10)(@types/react@18.3.18)(jiti@2.4.2)(lightningcss@1.29.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.39.0)(typescript@5.8.2)(yaml@2.7.0))(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
->>>>>>> 3daa133 (V4 migration)
+        version: 3.0.1(@sanity/ui@2.15.7(@emotion/is-prop-valid@1.3.1)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1)))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(sanity@3.79.0(@emotion/is-prop-valid@1.3.1)(@types/babel__core@7.20.5)(@types/node@22.13.10)(@types/react@18.3.18)(jiti@2.4.2)(lightningcss@1.29.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.39.0)(typescript@5.8.2)(yaml@2.7.0))(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       tailwind-merge:
         specifier: ^3.0.2
         version: 3.0.2
@@ -220,13 +205,8 @@ importers:
         specifier: ^2.0.13
         version: 2.0.13
       '@remix-run/dev':
-<<<<<<< HEAD
         specifier: 2.16.1
-        version: 2.16.1(@remix-run/react@2.16.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.8.2))(@types/node@22.13.10)(babel-plugin-macros@3.1.0)(terser@5.39.0)(ts-node@10.9.2(@types/node@22.13.10)(typescript@5.8.2))(typescript@5.8.2)(vite@5.4.14(@types/node@22.13.10)(terser@5.39.0))
-=======
-        specifier: 2.16.0
-        version: 2.16.0(@remix-run/react@2.16.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.8.2))(@types/node@22.13.10)(babel-plugin-macros@3.1.0)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(ts-node@10.9.2(@types/node@22.13.10)(typescript@5.8.2))(typescript@5.8.2)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0))(yaml@2.7.0)
->>>>>>> 3daa133 (V4 migration)
+        version: 2.16.1(@remix-run/react@2.16.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.8.2))(@types/node@22.13.10)(babel-plugin-macros@3.1.0)(lightningcss@1.29.2)(terser@5.39.0)(ts-node@10.9.2(@types/node@22.13.10)(typescript@5.8.2))(typescript@5.8.2)(vite@5.4.14(@types/node@22.13.10)(lightningcss@1.29.2)(terser@5.39.0))
       '@remix-run/eslint-config':
         specifier: ^2.16.1
         version: 2.16.1(eslint@8.57.1)(react@18.3.1)(typescript@5.8.2)
@@ -304,10 +284,10 @@ importers:
         version: 5.8.2
       vite:
         specifier: ^5.4.14
-        version: 5.4.14(@types/node@22.13.10)(terser@5.39.0)
+        version: 5.4.14(@types/node@22.13.10)(lightningcss@1.29.2)(terser@5.39.0)
       vite-tsconfig-paths:
         specifier: ^4.3.2
-        version: 4.3.2(typescript@5.8.2)(vite@5.4.14(@types/node@22.13.10)(terser@5.39.0))
+        version: 4.3.2(typescript@5.8.2)(vite@5.4.14(@types/node@22.13.10)(lightningcss@1.29.2)(terser@5.39.0))
 
 packages:
 
@@ -5745,6 +5725,10 @@ packages:
   end-of-stream@1.4.4:
     resolution: {integrity: sha512-+uw1inIHVPQoaVuHzRyXd21icM+cnt4CzD5rW+NC1wjOUSTOs+Te7FOv7AhN7vS9x/oIyhLP5PR1H+phQAHu5Q==}
 
+  enhanced-resolve@5.18.1:
+    resolution: {integrity: sha512-ZSW3ma5GkcQBIpwZTSRAI8N71Uuwgs93IezB7mf7R60tC8ZbJideoDNKjHn2O9KIlx6rkGTTEk1xUCK2E1Y2Yg==}
+    engines: {node: '>=10.13.0'}
+
   entities@4.5.0:
     resolution: {integrity: sha512-V0hjH4dGPh9Ao5p0MoRY6BVqtwCjhz6vI5LT8AJ55H+4g9/4vbHx1I54fS0XuclLhDHArPQCiMjDxjaL8fPxhw==}
     engines: {node: '>=0.12'}
@@ -10069,6 +10053,10 @@ packages:
 
   tailwindcss@4.0.14:
     resolution: {integrity: sha512-92YT2dpt671tFiHH/e1ok9D987N9fHD5VWoly1CdPD/Cd1HMglvZwP3nx2yTj2lbXDAHt8QssZkxTLCCTNL+xw==}
+
+  tapable@2.2.1:
+    resolution: {integrity: sha512-GNzQvQTOIP6RyTfE2Qxb8ZVlNmw0n88vp1szwWRimP02mnTsx3Wtn5qRdqY9w2XduFNUgvOwhNnQsjwCp+kqaQ==}
+    engines: {node: '>=6'}
 
   tar-fs@2.1.2:
     resolution: {integrity: sha512-EsaAXwxmx8UB7FRKqeozqEPop69DXcmYwTQwXvyAPF352HJsPdkVhvTaDPYqfNgruveJIJy3TA2l+2zj8LJIJA==}
@@ -14424,11 +14412,7 @@ snapshots:
       react: 18.3.1
       react-redux: 9.2.0(@types/react@18.3.18)(react@18.3.1)(redux@5.0.1)
 
-<<<<<<< HEAD
-  '@remix-run/dev@2.16.1(@remix-run/react@2.16.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.8.2))(@types/node@22.13.10)(babel-plugin-macros@3.1.0)(terser@5.39.0)(ts-node@10.9.2(@types/node@22.13.10)(typescript@5.8.2))(typescript@5.8.2)(vite@5.4.14(@types/node@22.13.10)(terser@5.39.0))':
-=======
-  '@remix-run/dev@2.16.0(@remix-run/react@2.16.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.8.2))(@types/node@22.13.10)(babel-plugin-macros@3.1.0)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(ts-node@10.9.2(@types/node@22.13.10)(typescript@5.8.2))(typescript@5.8.2)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0))(yaml@2.7.0)':
->>>>>>> 3daa133 (V4 migration)
+  '@remix-run/dev@2.16.1(@remix-run/react@2.16.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.8.2))(@types/node@22.13.10)(babel-plugin-macros@3.1.0)(lightningcss@1.29.2)(terser@5.39.0)(ts-node@10.9.2(@types/node@22.13.10)(typescript@5.8.2))(typescript@5.8.2)(vite@5.4.14(@types/node@22.13.10)(lightningcss@1.29.2)(terser@5.39.0))':
     dependencies:
       '@babel/core': 7.26.10
       '@babel/generator': 7.26.10
@@ -14485,19 +14469,11 @@ snapshots:
       tar-fs: 2.1.2
       tsconfig-paths: 4.2.0
       valibot: 0.41.0(typescript@5.8.2)
-<<<<<<< HEAD
-      vite-node: 3.0.0-beta.2(@types/node@22.13.10)(terser@5.39.0)
+      vite-node: 3.0.0-beta.2(@types/node@22.13.10)(lightningcss@1.29.2)(terser@5.39.0)
       ws: 7.5.10
     optionalDependencies:
       typescript: 5.8.2
-      vite: 5.4.14(@types/node@22.13.10)(terser@5.39.0)
-=======
-      vite-node: 3.0.0-beta.2(@types/node@22.13.10)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0)
-      ws: 7.5.10
-    optionalDependencies:
-      typescript: 5.8.2
-      vite: 6.2.1(@types/node@22.13.10)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0)
->>>>>>> 3daa133 (V4 migration)
+      vite: 5.4.14(@types/node@22.13.10)(lightningcss@1.29.2)(terser@5.39.0)
     transitivePeerDependencies:
       - '@types/node'
       - babel-plugin-macros
@@ -15360,11 +15336,7 @@ snapshots:
       hoist-non-react-statics: 3.3.2
       react: 18.3.1
 
-<<<<<<< HEAD
-  '@shopify/cli-hydrogen@9.0.8(@graphql-codegen/cli@5.0.5(@parcel/watcher@2.5.0)(@types/node@22.13.10)(graphql@16.10.0)(typescript@5.8.2))(@remix-run/dev@2.16.1(@remix-run/react@2.16.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.8.2))(@types/node@22.13.10)(babel-plugin-macros@3.1.0)(terser@5.39.0)(ts-node@10.9.2(@types/node@22.13.10)(typescript@5.8.2))(typescript@5.8.2)(vite@5.4.14(@types/node@22.13.10)(terser@5.39.0)))(@shopify/hydrogen-codegen@0.3.2(graphql@16.10.0))(@shopify/mini-oxygen@3.1.1(vite@5.4.14(@types/node@22.13.10)(terser@5.39.0)))(@types/react@18.3.18)(graphql-config@5.1.3(@types/node@22.13.10)(graphql@16.10.0)(typescript@5.8.2))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@5.4.14(@types/node@22.13.10)(terser@5.39.0))':
-=======
-  '@shopify/cli-hydrogen@9.0.8(@graphql-codegen/cli@5.0.5(@parcel/watcher@2.5.0)(@types/node@22.13.10)(graphql@16.10.0)(typescript@5.8.2))(@remix-run/dev@2.16.0(@remix-run/react@2.16.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.8.2))(@types/node@22.13.10)(babel-plugin-macros@3.1.0)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(ts-node@10.9.2(@types/node@22.13.10)(typescript@5.8.2))(typescript@5.8.2)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0))(yaml@2.7.0))(@shopify/hydrogen-codegen@0.3.2(graphql@16.10.0))(@shopify/mini-oxygen@3.1.1(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0)))(@types/react@18.3.18)(graphql-config@5.1.3(@types/node@22.13.10)(graphql@16.10.0)(typescript@5.8.2))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0))':
->>>>>>> 3daa133 (V4 migration)
+  '@shopify/cli-hydrogen@9.0.8(@graphql-codegen/cli@5.0.5(@parcel/watcher@2.5.0)(@types/node@22.13.10)(graphql@16.10.0)(typescript@5.8.2))(@remix-run/dev@2.16.1(@remix-run/react@2.16.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.8.2))(@types/node@22.13.10)(babel-plugin-macros@3.1.0)(lightningcss@1.29.2)(terser@5.39.0)(ts-node@10.9.2(@types/node@22.13.10)(typescript@5.8.2))(typescript@5.8.2)(vite@5.4.14(@types/node@22.13.10)(lightningcss@1.29.2)(terser@5.39.0)))(@shopify/hydrogen-codegen@0.3.2(graphql@16.10.0))(@shopify/mini-oxygen@3.1.1(vite@5.4.14(@types/node@22.13.10)(lightningcss@1.29.2)(terser@5.39.0)))(@types/react@18.3.18)(graphql-config@5.1.3(@types/node@22.13.10)(graphql@16.10.0)(typescript@5.8.2))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@5.4.14(@types/node@22.13.10)(lightningcss@1.29.2)(terser@5.39.0))':
     dependencies:
       '@ast-grep/napi': 0.11.0
       '@oclif/core': 3.26.5
@@ -15388,19 +15360,11 @@ snapshots:
       use-resize-observer: 9.1.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     optionalDependencies:
       '@graphql-codegen/cli': 5.0.5(@parcel/watcher@2.5.0)(@types/node@22.13.10)(graphql@16.10.0)(typescript@5.8.2)
-<<<<<<< HEAD
-      '@remix-run/dev': 2.16.1(@remix-run/react@2.16.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.8.2))(@types/node@22.13.10)(babel-plugin-macros@3.1.0)(terser@5.39.0)(ts-node@10.9.2(@types/node@22.13.10)(typescript@5.8.2))(typescript@5.8.2)(vite@5.4.14(@types/node@22.13.10)(terser@5.39.0))
+      '@remix-run/dev': 2.16.1(@remix-run/react@2.16.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.8.2))(@types/node@22.13.10)(babel-plugin-macros@3.1.0)(lightningcss@1.29.2)(terser@5.39.0)(ts-node@10.9.2(@types/node@22.13.10)(typescript@5.8.2))(typescript@5.8.2)(vite@5.4.14(@types/node@22.13.10)(lightningcss@1.29.2)(terser@5.39.0))
       '@shopify/hydrogen-codegen': 0.3.2(graphql@16.10.0)
-      '@shopify/mini-oxygen': 3.1.1(vite@5.4.14(@types/node@22.13.10)(terser@5.39.0))
+      '@shopify/mini-oxygen': 3.1.1(vite@5.4.14(@types/node@22.13.10)(lightningcss@1.29.2)(terser@5.39.0))
       graphql-config: 5.1.3(@types/node@22.13.10)(graphql@16.10.0)(typescript@5.8.2)
-      vite: 5.4.14(@types/node@22.13.10)(terser@5.39.0)
-=======
-      '@remix-run/dev': 2.16.0(@remix-run/react@2.16.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.8.2))(@types/node@22.13.10)(babel-plugin-macros@3.1.0)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(ts-node@10.9.2(@types/node@22.13.10)(typescript@5.8.2))(typescript@5.8.2)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0))(yaml@2.7.0)
-      '@shopify/hydrogen-codegen': 0.3.2(graphql@16.10.0)
-      '@shopify/mini-oxygen': 3.1.1(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0))
-      graphql-config: 5.1.3(@types/node@22.13.10)(graphql@16.10.0)(typescript@5.8.2)
-      vite: 6.2.1(@types/node@22.13.10)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0)
->>>>>>> 3daa133 (V4 migration)
+      vite: 5.4.14(@types/node@22.13.10)(lightningcss@1.29.2)(terser@5.39.0)
     transitivePeerDependencies:
       - '@types/react'
       - bufferutil
@@ -15518,11 +15482,7 @@ snapshots:
       - '@types/react'
       - xstate
 
-<<<<<<< HEAD
-  '@shopify/hydrogen@2025.1.2(@remix-run/react@2.16.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.8.2))(@remix-run/server-runtime@2.16.1(typescript@5.8.2))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@5.4.14(@types/node@22.13.10)(terser@5.39.0))(xstate@5.19.2)':
-=======
-  '@shopify/hydrogen@2025.1.2(@remix-run/react@2.16.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.8.2))(@remix-run/server-runtime@2.16.0(typescript@5.8.2))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0))(xstate@5.19.2)':
->>>>>>> 3daa133 (V4 migration)
+  '@shopify/hydrogen@2025.1.2(@remix-run/react@2.16.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.8.2))(@remix-run/server-runtime@2.16.1(typescript@5.8.2))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@5.4.14(@types/node@22.13.10)(lightningcss@1.29.2)(terser@5.39.0))(xstate@5.19.2)':
     dependencies:
       '@remix-run/react': 2.16.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.8.2)
       '@remix-run/server-runtime': 2.16.1(typescript@5.8.2)
@@ -15535,21 +15495,13 @@ snapshots:
       use-resize-observer: 9.1.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       worktop: 0.7.3
     optionalDependencies:
-<<<<<<< HEAD
-      vite: 5.4.14(@types/node@22.13.10)(terser@5.39.0)
-=======
-      vite: 6.2.1(@types/node@22.13.10)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0)
->>>>>>> 3daa133 (V4 migration)
+      vite: 5.4.14(@types/node@22.13.10)(lightningcss@1.29.2)(terser@5.39.0)
     transitivePeerDependencies:
       - '@types/react'
       - react-dom
       - xstate
 
-<<<<<<< HEAD
-  '@shopify/mini-oxygen@3.1.1(vite@5.4.14(@types/node@22.13.10)(terser@5.39.0))':
-=======
-  '@shopify/mini-oxygen@3.1.1(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0))':
->>>>>>> 3daa133 (V4 migration)
+  '@shopify/mini-oxygen@3.1.1(vite@5.4.14(@types/node@22.13.10)(lightningcss@1.29.2)(terser@5.39.0))':
     dependencies:
       '@miniflare/cache': 2.14.4
       '@miniflare/core': 2.14.4
@@ -15569,11 +15521,7 @@ snapshots:
       undici: 6.21.2
       ws: 8.18.1
     optionalDependencies:
-<<<<<<< HEAD
-      vite: 5.4.14(@types/node@22.13.10)(terser@5.39.0)
-=======
-      vite: 6.2.1(@types/node@22.13.10)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0)
->>>>>>> 3daa133 (V4 migration)
+      vite: 5.4.14(@types/node@22.13.10)(lightningcss@1.29.2)(terser@5.39.0)
     transitivePeerDependencies:
       - bufferutil
       - supports-color
@@ -16182,22 +16130,14 @@ snapshots:
 
   '@vercel/stega@0.1.2': {}
 
-<<<<<<< HEAD
-  '@vitejs/plugin-react@4.3.4(vite@6.2.2(@types/node@22.13.10)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0))':
-=======
-  '@vitejs/plugin-react@4.3.4(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0))':
->>>>>>> 3daa133 (V4 migration)
+  '@vitejs/plugin-react@4.3.4(vite@6.2.2(@types/node@22.13.10)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0))':
     dependencies:
       '@babel/core': 7.26.10
       '@babel/plugin-transform-react-jsx-self': 7.25.9(@babel/core@7.26.10)
       '@babel/plugin-transform-react-jsx-source': 7.25.9(@babel/core@7.26.10)
       '@types/babel__core': 7.20.5
       react-refresh: 0.14.2
-<<<<<<< HEAD
-      vite: 6.2.2(@types/node@22.13.10)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0)
-=======
-      vite: 6.2.1(@types/node@22.13.10)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0)
->>>>>>> 3daa133 (V4 migration)
+      vite: 6.2.2(@types/node@22.13.10)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -17590,6 +17530,11 @@ snapshots:
   end-of-stream@1.4.4:
     dependencies:
       once: 1.4.0
+
+  enhanced-resolve@5.18.1:
+    dependencies:
+      graceful-fs: 4.2.11
+      tapable: 2.2.1
 
   entities@4.5.0: {}
 
@@ -21950,13 +21895,8 @@ snapshots:
     dependencies:
       '@sanity/icons': 3.7.0(react@18.3.1)
       '@sanity/incompatible-plugin': 1.0.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-<<<<<<< HEAD
-      '@sanity/language-filter': 4.0.3(@emotion/is-prop-valid@1.3.1)(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(sanity@3.79.0(@emotion/is-prop-valid@1.3.1)(@types/babel__core@7.20.5)(@types/node@22.13.10)(@types/react@18.3.18)(jiti@2.4.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.39.0)(typescript@5.8.2)(yaml@2.7.0))(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
-      '@sanity/ui': 2.15.7(@emotion/is-prop-valid@1.3.1)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
-=======
       '@sanity/language-filter': 4.0.3(@emotion/is-prop-valid@1.3.1)(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(sanity@3.79.0(@emotion/is-prop-valid@1.3.1)(@types/babel__core@7.20.5)(@types/node@22.13.10)(@types/react@18.3.18)(jiti@2.4.2)(lightningcss@1.29.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.39.0)(typescript@5.8.2)(yaml@2.7.0))(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
-      '@sanity/ui': 2.15.6(@emotion/is-prop-valid@1.3.1)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
->>>>>>> 3daa133 (V4 migration)
+      '@sanity/ui': 2.15.7(@emotion/is-prop-valid@1.3.1)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       fast-deep-equal: 3.1.3
       lodash: 4.17.21
       react: 18.3.1
@@ -21970,11 +21910,7 @@ snapshots:
       - react-dom
       - react-is
 
-<<<<<<< HEAD
-  sanity-plugin-media@3.0.1(@sanity/ui@2.15.7(@emotion/is-prop-valid@1.3.1)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1)))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(sanity@3.79.0(@emotion/is-prop-valid@1.3.1)(@types/babel__core@7.20.5)(@types/node@22.13.10)(@types/react@18.3.18)(jiti@2.4.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.39.0)(typescript@5.8.2)(yaml@2.7.0))(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1)):
-=======
-  sanity-plugin-media@3.0.1(@sanity/ui@2.15.6(@emotion/is-prop-valid@1.3.1)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1)))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(sanity@3.79.0(@emotion/is-prop-valid@1.3.1)(@types/babel__core@7.20.5)(@types/node@22.13.10)(@types/react@18.3.18)(jiti@2.4.2)(lightningcss@1.29.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.39.0)(typescript@5.8.2)(yaml@2.7.0))(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1)):
->>>>>>> 3daa133 (V4 migration)
+  sanity-plugin-media@3.0.1(@sanity/ui@2.15.7(@emotion/is-prop-valid@1.3.1)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1)))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(sanity@3.79.0(@emotion/is-prop-valid@1.3.1)(@types/babel__core@7.20.5)(@types/node@22.13.10)(@types/react@18.3.18)(jiti@2.4.2)(lightningcss@1.29.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.39.0)(typescript@5.8.2)(yaml@2.7.0))(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1)):
     dependencies:
       '@hookform/resolvers': 3.10.0(react-hook-form@7.54.2(react@18.3.1))
       '@reduxjs/toolkit': 2.6.1(react-redux@9.2.0(@types/react@18.3.18)(react@18.3.1)(redux@5.0.1))(react@18.3.1)
@@ -22058,11 +21994,7 @@ snapshots:
       '@types/speakingurl': 13.0.6
       '@types/tar-stream': 3.1.3
       '@types/use-sync-external-store': 0.0.6
-<<<<<<< HEAD
-      '@vitejs/plugin-react': 4.3.4(vite@6.2.2(@types/node@22.13.10)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0))
-=======
-      '@vitejs/plugin-react': 4.3.4(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0))
->>>>>>> 3daa133 (V4 migration)
+      '@vitejs/plugin-react': 4.3.4(vite@6.2.2(@types/node@22.13.10)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0))
       archiver: 7.0.1
       arrify: 2.0.1
       async-mutex: 0.4.1
@@ -22145,11 +22077,7 @@ snapshots:
       use-sync-external-store: 1.4.0(react@18.3.1)
       uuid: 11.1.0
       valibot: 0.31.1
-<<<<<<< HEAD
-      vite: 6.2.2(@types/node@22.13.10)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0)
-=======
-      vite: 6.2.1(@types/node@22.13.10)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0)
->>>>>>> 3daa133 (V4 migration)
+      vite: 6.2.2(@types/node@22.13.10)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0)
       yargs: 17.7.2
     transitivePeerDependencies:
       - '@emotion/is-prop-valid'
@@ -22716,6 +22644,8 @@ snapshots:
       tailwindcss: 4.0.14
 
   tailwindcss@4.0.14: {}
+
+  tapable@2.2.1: {}
 
   tar-fs@2.1.2:
     dependencies:
@@ -23330,21 +23260,13 @@ snapshots:
       - supports-color
       - terser
 
-<<<<<<< HEAD
-  vite-node@3.0.0-beta.2(@types/node@22.13.10)(terser@5.39.0):
-=======
-  vite-node@3.0.0-beta.2(@types/node@22.13.10)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0):
->>>>>>> 3daa133 (V4 migration)
+  vite-node@3.0.0-beta.2(@types/node@22.13.10)(lightningcss@1.29.2)(terser@5.39.0):
     dependencies:
       cac: 6.7.14
       debug: 4.4.0(supports-color@8.1.1)
       es-module-lexer: 1.6.0
       pathe: 1.1.2
-<<<<<<< HEAD
-      vite: 5.4.14(@types/node@22.13.10)(terser@5.39.0)
-=======
-      vite: 6.2.1(@types/node@22.13.10)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0)
->>>>>>> 3daa133 (V4 migration)
+      vite: 5.4.14(@types/node@22.13.10)(lightningcss@1.29.2)(terser@5.39.0)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -23356,13 +23278,13 @@ snapshots:
       - supports-color
       - terser
 
-  vite-tsconfig-paths@4.3.2(typescript@5.8.2)(vite@5.4.14(@types/node@22.13.10)(terser@5.39.0)):
+  vite-tsconfig-paths@4.3.2(typescript@5.8.2)(vite@5.4.14(@types/node@22.13.10)(lightningcss@1.29.2)(terser@5.39.0)):
     dependencies:
       debug: 4.4.0(supports-color@8.1.1)
       globrex: 0.1.2
       tsconfck: 3.1.5(typescript@5.8.2)
     optionalDependencies:
-      vite: 5.4.14(@types/node@22.13.10)(terser@5.39.0)
+      vite: 5.4.14(@types/node@22.13.10)(lightningcss@1.29.2)(terser@5.39.0)
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -23378,11 +23300,7 @@ snapshots:
       lightningcss: 1.29.2
       terser: 5.39.0
 
-<<<<<<< HEAD
-  vite@6.2.2(@types/node@22.13.10)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0):
-=======
-  vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0):
->>>>>>> 3daa133 (V4 migration)
+  vite@6.2.2(@types/node@22.13.10)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0):
     dependencies:
       esbuild: 0.25.1
       postcss: 8.5.3

@@ -1,9 +1,9 @@
 import {CopyIcon} from '@sanity/icons';
 import {defineField, defineType} from 'sanity';
 
-import {ShopifyIcon} from '../../components/icons/ShopifyIcon';
-import {ProductVariantHiddenInput} from '../../components/shopify/ProductVariantInput';
-import {ShopifyDocumentStatus} from '../../components/shopify/ShopifyDocumentStatus';
+import ShopifyIcon from '../../components/icons/shopify-icon';
+import ProductVariantHiddenInput from '../../components/shopify/product-variant-input';
+import ShopifyDocumentStatus from '../../components/shopify/shopify-document-status';
 
 export default defineType({
   name: 'productVariant',

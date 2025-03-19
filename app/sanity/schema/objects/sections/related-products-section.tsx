@@ -1,7 +1,7 @@
 import {EyeOff} from 'lucide-react';
 import {defineField} from 'sanity';
 
-import {IconCollectionTag} from '../../../components/icons/CollectionTag';
+import IconCollectionTag from '../../../components/icons/collection-tag';
 
 export default defineField({
   name: 'relatedProductsSection',

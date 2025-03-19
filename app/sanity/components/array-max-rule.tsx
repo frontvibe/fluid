@@ -2,7 +2,7 @@ import type {ArrayOfObjectsInputProps} from 'sanity';
 
 import {Card, Text} from '@sanity/ui';
 
-export function ArrayMaxRule(props: ArrayOfObjectsInputProps) {
+function ArrayMaxRule(props: ArrayOfObjectsInputProps) {
   const validation = props?.schemaType?.validation;
   const valRules = Array.isArray(validation)
     ? (validation as any)?.[0]?._rules || []
@@ -32,3 +32,5 @@ export function ArrayMaxRule(props: ArrayOfObjectsInputProps) {
     ...props,
   });
 }
+
+export default ArrayMaxRule;

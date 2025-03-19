@@ -8,15 +8,15 @@ export default defineField({
     columns: 2,
   },
   fields: [
-    {
+    defineField({
       name: 'minVariantPrice',
       title: 'Min variant price',
       type: 'number',
-    },
-    {
+    }),
+    defineField({
       name: 'maxVariantPrice',
       title: 'Max variant price',
       type: 'number',
-    },
+    }),
   ],
 });

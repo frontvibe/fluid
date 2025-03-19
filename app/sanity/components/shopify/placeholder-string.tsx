@@ -5,7 +5,7 @@ import {useFormValue} from 'sanity';
 
 type Props = StringInputProps<StringSchemaType & {options?: {field?: string}}>;
 
-export const PlaceholderStringInput = (props: Props) => {
+function PlaceholderStringInput(props: Props) {
   const {schemaType} = props;
 
   const path = schemaType?.options?.field;
@@ -17,4 +17,6 @@ export const PlaceholderStringInput = (props: Props) => {
     ...props,
     elementProps: {...props.elementProps, placeholder: proxyValue},
   });
-};
+}
+
+export default PlaceholderStringInput;

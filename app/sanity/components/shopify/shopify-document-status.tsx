@@ -9,7 +9,7 @@ type Props = {
   url: string;
 };
 
-export const ShopifyDocumentStatus = forwardRef<HTMLDivElement, Props>(
+const ShopifyDocumentStatus = forwardRef<HTMLDivElement, Props>(
   (props, ref) => {
     const {isActive, isDeleted, type, url, title} = props;
 
@@ -82,3 +82,5 @@ export const ShopifyDocumentStatus = forwardRef<HTMLDivElement, Props>(
 );
 
 ShopifyDocumentStatus.displayName = 'ShopifyDocumentStatus';
+
+export default ShopifyDocumentStatus;

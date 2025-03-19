@@ -4,7 +4,7 @@ import {EarthGlobeIcon} from '@sanity/icons';
 
 import type {ShopifyDocument, ShopifyDocumentActionProps} from './types';
 
-import {usePluginContext} from './StudioLayout';
+import {usePluginContext} from './studio-layout';
 
 export default (
   props: ShopifyDocumentActionProps,

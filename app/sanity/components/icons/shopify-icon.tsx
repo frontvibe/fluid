@@ -1,4 +1,4 @@
-export function ShopifyIcon() {
+function ShopifyIcon() {
   return (
     <svg
       fill="none"
@@ -22,3 +22,5 @@ export function ShopifyIcon() {
     </svg>
   );
 }
+
+export default ShopifyIcon;

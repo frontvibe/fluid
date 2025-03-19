@@ -1,4 +1,4 @@
-export function IconPage() {
+function IconPage() {
   return (
     <svg
       fill="none"
@@ -17,3 +17,5 @@ export function IconPage() {
     </svg>
   );
 }
+
+export default IconPage;

@@ -22,19 +22,28 @@ export default defineField({
           {title: 'Strike-through', value: 'strike-through'},
         ],
         annotations: [
-          // {
-          //   name: 'internalLink',
-          //   type: 'object',
-          //   title: 'Internal link',
-          //   icon: () => (
-          //     <Link
-          //       aria-label="Internal link icon"
-          //       size="1em"
-          //       strokeWidth={1}
-          //     />
-          //   ),
-          //   fields: [...internalLinkFields],
-          // },
+          {
+            name: 'internalLink',
+            type: 'object',
+            title: 'Internal link',
+            icon: () => (
+              <Link
+                aria-label="Internal link icon"
+                size="1em"
+                strokeWidth={1}
+              />
+            ),
+            fields: [
+              defineField({
+                name: 'link',
+                type: 'link',
+              }),
+              defineField({
+                name: 'anchor',
+                type: 'anchor',
+              }),
+            ],
+          },
           {
             name: 'externalLink',
             type: 'object',

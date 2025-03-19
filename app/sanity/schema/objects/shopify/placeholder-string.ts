@@ -1,4 +1,4 @@
-import {PlaceholderStringInput} from '../../../components/shopify/PlaceholderString';
+import PlaceholderStringInput from '../../../components/shopify/placeholder-string';
 
 export default {
   name: 'placeholderString',

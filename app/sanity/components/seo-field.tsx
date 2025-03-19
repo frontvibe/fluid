@@ -2,7 +2,7 @@ import type {StringFieldProps} from 'sanity';
 
 import {Badge, Card, Flex, Text} from '@sanity/ui';
 
-export const SeoTitle = (props: StringFieldProps) => {
+function SeoTitle(props: StringFieldProps) {
   const {children, title, description, value = ''} = props;
   const maxLength = 70;
 
@@ -30,4 +30,6 @@ export const SeoTitle = (props: StringFieldProps) => {
       </Flex>
     </Card>
   );
-};
+}
+
+export default SeoTitle;

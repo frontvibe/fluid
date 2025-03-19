@@ -1,5 +1,7 @@
 import {MousePointerSquareDashed} from 'lucide-react';
 
-export function PreviewIcon() {
+function IconPreview() {
   return <MousePointerSquareDashed size={18} />;
 }
+
+export default IconPreview;

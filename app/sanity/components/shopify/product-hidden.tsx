@@ -4,7 +4,7 @@ import {WarningOutlineIcon} from '@sanity/icons';
 import {Box, Card, Flex, Stack, Text} from '@sanity/ui';
 import {useFormValue} from 'sanity';
 
-import {usePluginContext} from '~/sanity/plugins/customDocumentActions/StudioLayout';
+import {usePluginContext} from '~/sanity/plugins/custom-document-actions/studio-layout';
 
 type Store = {
   id: number;
@@ -12,7 +12,7 @@ type Store = {
   status: string;
 };
 
-export function ProductHiddenInput(props: StringFieldProps) {
+function ProductHiddenInput(props: StringFieldProps) {
   const store: Store = useFormValue(['store']) as Store;
   const {shopifyStoreDomain} = usePluginContext();
   const storeHandle = shopifyStoreDomain.replace('.myshopify.com', '');
@@ -68,3 +68,5 @@ export function ProductHiddenInput(props: StringFieldProps) {
     );
   }
 }
+
+export default ProductHiddenInput;

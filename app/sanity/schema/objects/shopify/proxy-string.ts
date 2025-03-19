@@ -1,6 +1,6 @@
 import {defineField} from 'sanity';
 
-import {ProxyStringInput} from '../../../components/shopify/ProxyString';
+import ProxyStringInput from '../../../components/shopify/proxy-string';
 
 export default defineField({
   name: 'proxyString',

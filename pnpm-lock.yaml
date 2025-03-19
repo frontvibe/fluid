@@ -8,15 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@frontvibe/sanity-color-picker':
-        specifier: ^1.0.12
-        version: 1.0.12(@emotion/is-prop-valid@1.3.1)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(sanity@3.80.0(@emotion/is-prop-valid@1.3.1)(@types/node@22.13.10)(@types/react@18.3.18)(jiti@2.4.2)(lightningcss@1.29.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.39.0)(yaml@2.7.0))(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
-      '@frontvibe/sanity-font-picker':
-        specifier: ^1.0.12
-        version: 1.0.12(@emotion/is-prop-valid@1.3.1)(@frontvibe/sanity-plugin-range-slider@1.0.12(@emotion/is-prop-valid@1.3.1)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(sanity@3.80.0(@emotion/is-prop-valid@1.3.1)(@types/node@22.13.10)(@types/react@18.3.18)(jiti@2.4.2)(lightningcss@1.29.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.39.0)(yaml@2.7.0))(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1)))(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(sanity@3.80.0(@emotion/is-prop-valid@1.3.1)(@types/node@22.13.10)(@types/react@18.3.18)(jiti@2.4.2)(lightningcss@1.29.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.39.0)(yaml@2.7.0))(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
-      '@frontvibe/sanity-plugin-range-slider':
-        specifier: ^1.0.12
-        version: 1.0.12(@emotion/is-prop-valid@1.3.1)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(sanity@3.80.0(@emotion/is-prop-valid@1.3.1)(@types/node@22.13.10)(@types/react@18.3.18)(jiti@2.4.2)(lightningcss@1.29.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.39.0)(yaml@2.7.0))(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       '@portabletext/react':
         specifier: ^3.2.1
         version: 3.2.1(react@18.3.1)
@@ -93,7 +84,7 @@ importers:
         specifier: ^3.0.2
         version: 3.0.2
       '@sanity/vision':
-        specifier: ^3.80.0
+        specifier: ^3.79.0
         version: 3.80.0(@babel/runtime@7.26.10)(@codemirror/lint@6.8.4)(@codemirror/theme-one-dark@6.1.2)(@emotion/is-prop-valid@1.3.1)(codemirror@6.0.1)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       '@sanity/visual-editing':
         specifier: ^2.13.12
@@ -150,7 +141,7 @@ importers:
         specifier: ^2.12.6
         version: 2.12.6(graphql@16.10.0)
       groq:
-        specifier: ^3.80.0
+        specifier: ^3.79.0
         version: 3.80.0
       groqd:
         specifier: ^0.15.12
@@ -158,6 +149,9 @@ importers:
       isbot:
         specifier: ^5.1.25
         version: 5.1.25
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
       lodash.get:
         specifier: ^4.4.2
         version: 4.4.2
@@ -180,7 +174,7 @@ importers:
         specifier: ^17.6.0
         version: 17.6.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       sanity:
-        specifier: ^3.80.0
+        specifier: ^3.79.0
         version: 3.80.0(@emotion/is-prop-valid@1.3.1)(@types/node@22.13.10)(@types/react@18.3.18)(jiti@2.4.2)(lightningcss@1.29.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.39.0)(yaml@2.7.0)
       sanity-plugin-internationalized-array:
         specifier: ^3.1.2
@@ -231,6 +225,9 @@ importers:
       '@types/eslint':
         specifier: ^8.56.12
         version: 8.56.12
+      '@types/lodash':
+        specifier: ^4.17.16
+        version: 4.17.16
       '@types/lodash.get':
         specifier: ^4.4.9
         version: 4.4.9
@@ -1840,28 +1837,6 @@ packages:
 
   '@floating-ui/utils@0.2.9':
     resolution: {integrity: sha512-MDWhGtE+eHw5JW7lq4qhc5yRLS11ERl1c7Z6Xd0a58DozHES6EnNNwUWbMiG4J9Cgj053Bhk8zvlhFYKVhULwg==}
-
-  '@frontvibe/sanity-color-picker@1.0.12':
-    resolution: {integrity: sha512-KCoZ0RL2NNXI1FG+6RTvskKCFh4OXxmdNpTI9AAUxYXh+j1V24cFzt4cRNudJrc2vGGiPH6hOJ5iD1XH2Wvn2w==}
-    engines: {node: '>=14'}
-    peerDependencies:
-      react: ^18.3.1
-      sanity: ^3.66.0
-
-  '@frontvibe/sanity-font-picker@1.0.12':
-    resolution: {integrity: sha512-HYhvi6Vms3pEiFEbTVtmvXZ4vu/ppzoJBgroyTtP6ch8m3HQNHJbDhKLYh/Bd1dMF+M6QgwtPZqDZI5J/gZwRw==}
-    engines: {node: '>=14'}
-    peerDependencies:
-      '@frontvibe/sanity-plugin-range-slider': ^1.0.12
-      react: ^18.3.1
-      sanity: ^3.66.0
-
-  '@frontvibe/sanity-plugin-range-slider@1.0.12':
-    resolution: {integrity: sha512-ez6VO5gIgsjs4qChRaN5EdZzmBL3bozhtm/5NLD14TyQrNF7t9o0LK+3K3qDF5RUBjf47dnKAuQzqcbDRP+gUQ==}
-    engines: {node: '>=14'}
-    peerDependencies:
-      react: ^18.3.1
-      sanity: ^3.66.0
 
   '@google/model-viewer@1.12.1':
     resolution: {integrity: sha512-GOf/By81rbxSmwWRVxBtlY5b3050msJ+BDWqonPj7M0/I7rNS/vVNjbLxTofbGjZObS3n0ELHj8TZ47UtkZbtg==}
@@ -11899,51 +11874,6 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
 
   '@floating-ui/utils@0.2.9': {}
-
-  '@frontvibe/sanity-color-picker@1.0.12(@emotion/is-prop-valid@1.3.1)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(sanity@3.80.0(@emotion/is-prop-valid@1.3.1)(@types/node@22.13.10)(@types/react@18.3.18)(jiti@2.4.2)(lightningcss@1.29.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.39.0)(yaml@2.7.0))(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))':
-    dependencies:
-      '@sanity/icons': 3.7.0(react@18.3.1)
-      '@sanity/incompatible-plugin': 1.0.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@sanity/ui': 2.15.7(@emotion/is-prop-valid@1.3.1)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
-      '@shopify/polaris': 13.9.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      lodash: 4.17.21
-      react: 18.3.1
-      sanity: 3.80.0(@emotion/is-prop-valid@1.3.1)(@types/node@22.13.10)(@types/react@18.3.18)(jiti@2.4.2)(lightningcss@1.29.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.39.0)(yaml@2.7.0)
-      zod: 3.24.2
-    transitivePeerDependencies:
-      - '@emotion/is-prop-valid'
-      - react-dom
-      - react-is
-      - styled-components
-
-  '@frontvibe/sanity-font-picker@1.0.12(@emotion/is-prop-valid@1.3.1)(@frontvibe/sanity-plugin-range-slider@1.0.12(@emotion/is-prop-valid@1.3.1)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(sanity@3.80.0(@emotion/is-prop-valid@1.3.1)(@types/node@22.13.10)(@types/react@18.3.18)(jiti@2.4.2)(lightningcss@1.29.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.39.0)(yaml@2.7.0))(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1)))(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(sanity@3.80.0(@emotion/is-prop-valid@1.3.1)(@types/node@22.13.10)(@types/react@18.3.18)(jiti@2.4.2)(lightningcss@1.29.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.39.0)(yaml@2.7.0))(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))':
-    dependencies:
-      '@frontvibe/sanity-plugin-range-slider': 1.0.12(@emotion/is-prop-valid@1.3.1)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(sanity@3.80.0(@emotion/is-prop-valid@1.3.1)(@types/node@22.13.10)(@types/react@18.3.18)(jiti@2.4.2)(lightningcss@1.29.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.39.0)(yaml@2.7.0))(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
-      '@sanity/icons': 3.7.0(react@18.3.1)
-      '@sanity/incompatible-plugin': 1.0.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@sanity/ui': 2.15.7(@emotion/is-prop-valid@1.3.1)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
-      react: 18.3.1
-      sanity: 3.80.0(@emotion/is-prop-valid@1.3.1)(@types/node@22.13.10)(@types/react@18.3.18)(jiti@2.4.2)(lightningcss@1.29.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.39.0)(yaml@2.7.0)
-    transitivePeerDependencies:
-      - '@emotion/is-prop-valid'
-      - react-dom
-      - react-is
-      - styled-components
-
-  '@frontvibe/sanity-plugin-range-slider@1.0.12(@emotion/is-prop-valid@1.3.1)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(sanity@3.80.0(@emotion/is-prop-valid@1.3.1)(@types/node@22.13.10)(@types/react@18.3.18)(jiti@2.4.2)(lightningcss@1.29.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.39.0)(yaml@2.7.0))(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))':
-    dependencies:
-      '@sanity/icons': 3.7.0(react@18.3.1)
-      '@sanity/incompatible-plugin': 1.0.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@sanity/ui': 2.15.7(@emotion/is-prop-valid@1.3.1)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
-      '@shopify/polaris': 13.9.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      lodash: 4.17.21
-      react: 18.3.1
-      sanity: 3.80.0(@emotion/is-prop-valid@1.3.1)(@types/node@22.13.10)(@types/react@18.3.18)(jiti@2.4.2)(lightningcss@1.29.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.39.0)(yaml@2.7.0)
-    transitivePeerDependencies:
-      - '@emotion/is-prop-valid'
-      - react-dom
-      - react-is
-      - styled-components
 
   '@google/model-viewer@1.12.1':
     dependencies:

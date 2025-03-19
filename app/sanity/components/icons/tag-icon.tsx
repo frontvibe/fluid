@@ -1,11 +1,11 @@
-export function IconCollectionTag() {
+function IconTag() {
   return (
     <svg
       fill="none"
       height="1.5em"
       stroke="currentColor"
       strokeWidth="1"
-      viewBox="0 0 19 20"
+      viewBox="0 0 18 18"
       width="1.5em"
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -21,24 +21,8 @@ export function IconCollectionTag() {
         strokeLinejoin="round"
         strokeWidth="0.75"
       />
-      <g clipPath="url(#clip0_2_9)">
-        <path
-          d="M17.68 5V8.2385C17.68 8.46028 17.6363 8.67989 17.5513 8.88477C17.4664 9.08965 17.3419 9.27577 17.185 9.4325L10 16.6175"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="0.75"
-        />
-      </g>
-      <defs>
-        <clipPath id="clip0_2_9">
-          <rect
-            fill="white"
-            height="18"
-            transform="matrix(0 1 -1 0 18.25 1.25)"
-            width="18"
-          />
-        </clipPath>
-      </defs>
     </svg>
   );
 }
+
+export default IconTag;

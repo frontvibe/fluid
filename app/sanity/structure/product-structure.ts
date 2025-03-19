@@ -2,7 +2,7 @@ import type {ListItemBuilder} from 'sanity/structure';
 
 import {InfoOutlineIcon} from '@sanity/icons';
 
-import {IconTag} from '../components/icons/Tag';
+import IconTag from '../components/icons/tag-icon';
 import {SANITY_API_VERSION} from '../constants';
 import defineStructure from '../utils/defineStructure';
 

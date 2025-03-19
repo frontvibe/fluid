@@ -9,22 +9,22 @@ export default defineField({
   },
   fields: [
     // Available
-    {
+    defineField({
       name: 'isAvailable',
       title: 'Available',
       type: 'boolean',
-    },
+    }),
     // Management
-    {
+    defineField({
       name: 'management',
       title: 'Management',
       type: 'string',
-    },
+    }),
     // Policy
-    {
+    defineField({
       name: 'policy',
       title: 'Policy',
       type: 'string',
-    },
+    }),
   ],
 });

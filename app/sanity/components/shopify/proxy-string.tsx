@@ -7,7 +7,7 @@ import {useFormValue} from 'sanity';
 
 type Props = StringInputProps<StringSchemaType & {options?: {field?: string}}>;
 
-export function ProxyStringInput(props: Props) {
+function ProxyStringInput(props: Props) {
   const {schemaType} = props;
 
   const path = schemaType?.options?.field;
@@ -30,3 +30,5 @@ export function ProxyStringInput(props: Props) {
     </Tooltip>
   );
 }
+
+export default ProxyStringInput;

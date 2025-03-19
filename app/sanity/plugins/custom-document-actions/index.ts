@@ -7,9 +7,9 @@ import type {
 import {definePlugin} from 'sanity';
 
 import {LOCKED_DOCUMENT_TYPES, SHOPIFY_DOCUMENT_TYPES} from './constants';
-import shopifyDelete from './shopifyDelete';
-import shopifyLink from './shopifyLink';
-import {createStudioLayout} from './StudioLayout';
+import shopifyDelete from './shopify-delete';
+import shopifyLink from './shopify-link';
+import {createStudioLayout} from './studio-layout';
 
 export const resolveDocumentActions: DocumentActionsResolver = (
   prev,

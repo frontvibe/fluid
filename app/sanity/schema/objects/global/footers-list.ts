@@ -1,7 +1,7 @@
 import {defineArrayMember, defineField} from 'sanity';
 
-import {ArrayMaxRule} from '../../../components/ArrayMaxRule';
-import {sectionOptionInsertMenu} from './sectionsList';
+import ArrayMaxRule from '../../../components/array-max-rule';
+import {sectionOptionInsertMenu} from './sections-list';
 export default defineField({
   title: 'Footers',
   name: 'footers',

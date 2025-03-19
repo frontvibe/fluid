@@ -1,4 +1,4 @@
-export function IconPalette() {
+function IconPalette() {
   return (
     <svg
       fill="none"
@@ -17,3 +17,5 @@ export function IconPalette() {
     </svg>
   );
 }
+
+export default IconPalette;

@@ -1,6 +1,6 @@
 import {Flex, Text} from '@sanity/ui';
 
-export function ColorSchemeMedia({
+function ColorSchemeMedia({
   foreground,
   background,
 }: {
@@ -50,3 +50,5 @@ function Pill({full, hex}: {full?: boolean; hex: string}) {
     ></div>
   );
 }
+
+export default ColorSchemeMedia;

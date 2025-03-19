@@ -18,8 +18,8 @@ export default defineField({
       name: 'childLinks',
       type: 'array',
       of: [
-        defineArrayMember({type: 'internalLink', name: 'internalLink'}),
-        defineArrayMember({type: 'externalLink', name: 'externalLink'}),
+        defineArrayMember({type: 'internalLink'}),
+        defineArrayMember({type: 'externalLink'}),
       ],
     }),
   ],

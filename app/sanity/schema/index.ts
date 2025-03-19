@@ -84,6 +84,14 @@ const sections = [
 ];
 const footers = [socialLinksOnly];
 const objects = [
+  link,
+  padding,
+  contentPosition,
+  richtext,
+  aspectRatios,
+  internalLink,
+  externalLink,
+  nestedNavigation,
   footersList,
   sectionsList,
   productSections,
@@ -96,10 +104,6 @@ const objects = [
   sectionSettings,
   anchor,
   headerNavigation,
-  internalLink,
-  externalLink,
-  nestedNavigation,
-  link,
   internalButton,
   announcementBar,
   rangeSlider,
@@ -113,10 +117,6 @@ const objects = [
   shopifyProductVariant,
   shopifyCollection,
   shopifyCollectionRule,
-  padding,
-  contentPosition,
-  richtext,
-  aspectRatios,
 ];
 
 export const schemaTypes = [

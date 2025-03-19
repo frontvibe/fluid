@@ -203,27 +203,3 @@ export const HEADER_FRAGMENT = defineQuery(`{
   showSeparatorLine,
   sticky 
 }`);
-
-// export const HEADER_QUERY = q('*')
-//   .filter("_type == 'header'")
-//   .grab({
-//     announcementBar: ANNOUNCEMENT_BAR_ARRAY_FRAGMENT,
-//     announcementBarColorScheme: q('announcementBarColorScheme')
-//       .deref()
-//       .grab(COLOR_SCHEME_FRAGMENT),
-//     autoRotateAnnouncements: q.boolean().nullable(),
-//     blur: q.boolean().nullable(),
-//     colorScheme: q('colorScheme').deref().grab(COLOR_SCHEME_FRAGMENT),
-//     desktopLogoWidth: q.number().nullable(),
-//     menu: MENU_FRAGMENT,
-//     padding: q
-//       .object({
-//         bottom: q.number().nullable(),
-//         top: q.number().nullable(),
-//       })
-//       .nullable(),
-//     showSeparatorLine: q.boolean().nullable(),
-//     sticky: z.enum(['none', 'always', 'onScrollUp']).nullable(),
-//   })
-//   .slice(0)
-//   .nullable();

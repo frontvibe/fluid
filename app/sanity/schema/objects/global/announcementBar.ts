@@ -1,8 +1,6 @@
 import {Megaphone} from 'lucide-react';
 import {defineArrayMember, defineField} from 'sanity';
 
-import {internalLinkField} from './headerNavigation';
-
 export default defineField({
   type: 'array',
   name: 'announcementBar',
@@ -16,7 +14,10 @@ export default defineField({
           name: 'text',
           type: 'string',
         }),
-        internalLinkField,
+        defineField({
+          name: 'link',
+          type: 'link',
+        }),
         defineField({
           name: 'externalLink',
           description: "Will be used if internal link isn't provided.",

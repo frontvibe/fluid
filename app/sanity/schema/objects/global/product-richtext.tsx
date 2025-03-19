@@ -8,8 +8,6 @@ import {
 } from 'lucide-react';
 import {defineArrayMember, defineField} from 'sanity';
 
-import {internalLinkFields} from './richtext';
-
 export default defineField({
   name: 'productRichtext',
   type: 'array',
@@ -24,19 +22,19 @@ export default defineField({
           {title: 'Strike-through', value: 'strike-through'},
         ],
         annotations: [
-          {
-            name: 'internalLink',
-            type: 'object',
-            title: 'Internal link',
-            icon: () => (
-              <Link
-                aria-label="Internal link icon"
-                size="1em"
-                strokeWidth={1}
-              />
-            ),
-            fields: [...internalLinkFields],
-          },
+          // {
+          //   name: 'internalLink',
+          //   type: 'object',
+          //   title: 'Internal link',
+          //   icon: () => (
+          //     <Link
+          //       aria-label="Internal link icon"
+          //       size="1em"
+          //       strokeWidth={1}
+          //     />
+          //   ),
+          //   fields: [...internalLinkFields],
+          // },
           {
             name: 'externalLink',
             type: 'object',

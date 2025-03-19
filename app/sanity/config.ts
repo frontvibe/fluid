@@ -1,8 +1,8 @@
 import type {SingleWorkspace} from 'sanity';
 
-import {colorPicker} from '@frontvibe/sanity-color-picker';
-import {fontPicker} from '@frontvibe/sanity-font-picker';
-import {rangeSlider} from '@frontvibe/sanity-plugin-range-slider';
+// import {colorPicker} from '@frontvibe/sanity-color-picker';
+// import {fontPicker} from '@frontvibe/sanity-font-picker';
+// import {rangeSlider} from '@frontvibe/sanity-plugin-range-slider';
 import {codeInput} from '@sanity/code-input';
 import {languageFilter} from '@sanity/language-filter';
 import {visionTool} from '@sanity/vision';
@@ -59,9 +59,9 @@ export function defineSanityConfig(
     basePath: SANITY_STUDIO_URL,
     ...config,
     plugins: [
-      fontPicker(),
-      rangeSlider(),
-      colorPicker(),
+      // fontPicker(),
+      // rangeSlider(),
+      // colorPicker(),
       codeInput(),
       structureTool({structure, defaultDocumentNode}),
       customDocumentActions({shopifyStoreDomain: config.shopifyStoreDomain}),
@@ -82,8 +82,8 @@ export function defineSanityConfig(
           'text',
           'slug',
           'headerNavigation',
-          'announcementBar',
-          'productRichtext',
+          // 'announcementBar',
+          // 'productRichtext',
           'richtext',
           'bannerRichtext',
         ],

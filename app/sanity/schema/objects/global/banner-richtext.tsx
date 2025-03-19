@@ -1,17 +1,6 @@
 import {SquareMousePointer} from 'lucide-react';
 import {defineArrayMember, defineField} from 'sanity';
 
-import {internalLinkField} from './headerNavigation';
-
-export const internalLinkFields = [
-  internalLinkField,
-  defineField({
-    name: 'anchor',
-    description: 'The ID of the element to scroll to, without the #.',
-    type: 'string',
-  }),
-];
-
 export default defineField({
   name: 'bannerRichtext',
   type: 'array',
@@ -40,25 +29,7 @@ export default defineField({
     }),
     defineArrayMember({
       name: 'button',
-      type: 'object',
-      fields: [
-        defineField({
-          name: 'label',
-          type: 'string',
-        }),
-        ...internalLinkFields,
-      ],
-      icon: () => <SquareMousePointer size="1em" />,
-      preview: {
-        select: {
-          title: 'label',
-        },
-        prepare: ({title}) => {
-          return {
-            title: title ? title : 'Button',
-          };
-        },
-      },
+      type: 'button',
     }),
   ],
 });

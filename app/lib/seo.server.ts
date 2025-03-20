@@ -10,11 +10,11 @@ import type {
   ShopPolicy,
 } from '@shopify/hydrogen/storefront-api-types';
 import type {BreadcrumbList, CollectionPage, Offer} from 'schema-dts';
+import type {SanityImage} from 'types';
 import type {
   PAGE_QUERYResult,
   ROOT_QUERYResult,
 } from 'types/sanity/sanity.generated';
-import type {SanityImage} from 'types';
 
 import {getImageDimensions} from '@sanity/asset-utils';
 import {stegaClean} from '@sanity/client/stega';

@@ -1,6 +1,6 @@
 import type {LoaderFunctionArgs, MetaFunction} from '@shopify/remix-oxygen';
-import type {PAGE_QUERYResult} from 'types/sanity/sanity.generated';
 import type {I18nLocale} from 'types';
+import type {PAGE_QUERYResult} from 'types/sanity/sanity.generated';
 
 import {useLoaderData} from '@remix-run/react';
 import {DEFAULT_LOCALE} from 'countries';

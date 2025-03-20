@@ -1,5 +1,6 @@
 /* eslint perfectionist/sort-objects: 0 */
-import type {I18nLocale, Localizations} from '../app/lib/type';
+
+import type {I18nLocale, Localizations} from 'types';
 
 export const countries: Localizations = {
   default: {

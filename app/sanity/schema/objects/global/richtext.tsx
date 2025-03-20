@@ -59,35 +59,19 @@ export default defineField({
     defineArrayMember({
       type: 'image',
       fields: [
-        {
+        defineField({
           name: 'maxWidth',
-          type: 'number',
+          type: 'rangeSlider',
           options: {
             min: 0,
             max: 3840,
             suffix: 'px',
           },
-        },
-        {
+        }),
+        defineField({
           name: 'alignment',
-          type: 'string',
-          options: {
-            list: [
-              {
-                title: 'Left',
-                value: 'left',
-              },
-              {
-                title: 'Center',
-                value: 'center',
-              },
-              {
-                title: 'Right',
-                value: 'right',
-              },
-            ],
-          },
-        },
+          type: 'contentAlignment',
+        }),
       ],
       options: {
         hotspot: true,

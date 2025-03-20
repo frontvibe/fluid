@@ -1,7 +1,15 @@
+import type {SectionOfType} from 'types';
+
 import {stegaClean} from '@sanity/client/stega';
 import {cva} from 'class-variance-authority';
 
 import {SanityImage} from '../../SanityImage';
+
+export type ImageBlockProps = NonNullable<
+  SectionOfType<'richtextSection'>['richtext']
+>[number] & {
+  _type: 'image';
+};
 
 export function ImageBlock(
   props: ImageBlockProps & {

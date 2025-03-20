@@ -1,15 +1,15 @@
-import type {TypeFromSelection} from 'groqd';
-
-import type {EXTERNAL_LINK_FRAGMENT} from '~/qroq/links';
-
 import {cn} from '~/lib/utils';
-
-type SanityExternalLinkProps = TypeFromSelection<typeof EXTERNAL_LINK_FRAGMENT>;
 
 export function SanityExternalLink(props: {
   children?: React.ReactNode;
   className?: string;
-  data?: SanityExternalLinkProps;
+  data?: {
+    _key: string;
+    _type: 'externalLink';
+    link?: null | string;
+    name?: null | string;
+    openInNewTab?: boolean | null;
+  };
 }) {
   const {children, className, data} = props;
 

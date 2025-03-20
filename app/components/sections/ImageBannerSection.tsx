@@ -1,9 +1,10 @@
 import type {PortableTextComponents} from '@portabletext/react';
-import type {PortableTextBlock} from '@portabletext/types';
 import type {SectionDefaultProps, SectionOfType} from 'types';
 
 import {PortableText} from '@portabletext/react';
 import {useMemo} from 'react';
+
+import type {ButtonBlockProps} from '../sanity/richtext/components/ButtonBlock';
 
 import {
   Banner,
@@ -45,13 +46,15 @@ export function ImageBannerSection(
         contentAlignment={contentAlignment}
         contentPosition={contentPosition}
       >
-        <BannerRichtext value={data.content as PortableTextBlock[]} />
+        <BannerRichtext value={data.content} />
       </BannerContent>
     </Banner>
   );
 }
 
-function BannerRichtext(props: {value?: null | PortableTextBlock[]}) {
+function BannerRichtext(props: {
+  value?: ImageBannerSectionProps['content'] | null;
+}) {
   const components = useMemo(
     () => ({
       types: {

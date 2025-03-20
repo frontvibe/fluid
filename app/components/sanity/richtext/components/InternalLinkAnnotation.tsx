@@ -1,6 +1,14 @@
+import type {RichTextBlock} from 'types';
+
 import {cx} from 'class-variance-authority';
 
 import {SanityInternalLink} from '../../link/SanityInternalLink';
+
+export type InternalLinkAnnotationProps = NonNullable<
+  RichTextBlock['markDefs']
+>[number] & {
+  _type: 'internalLink';
+};
 
 export const richTextLinkClassName = cx(
   'text-primary font-medium underline-offset-4 hover:underline focus-visible:rounded-md focus-visible:ring-ring focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-offset-2',

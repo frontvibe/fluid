@@ -1,9 +1,13 @@
 import type {PortableTextComponents} from '@portabletext/react';
-import type {PortableTextBlock} from '@portabletext/types';
 import type {SectionDefaultProps, SectionOfType} from 'types';
 
 import {PortableText} from '@portabletext/react';
 import {useMemo} from 'react';
+
+import type {ButtonBlockProps} from '../sanity/richtext/components/ButtonBlock';
+import type {ExternalLinkAnnotationProps} from '../sanity/richtext/components/ExternalLinkAnnotation';
+import type {ImageBlockProps} from '../sanity/richtext/components/ImageBlock';
+import type {InternalLinkAnnotationProps} from '../sanity/richtext/components/InternalLinkAnnotation';
 
 import {ButtonBlock} from '../sanity/richtext/components/ButtonBlock';
 import {ExternalLinkAnnotation} from '../sanity/richtext/components/ExternalLinkAnnotation';
@@ -65,7 +69,7 @@ export function RichtextSection(
         {data.richtext && (
           <PortableText
             components={components as PortableTextComponents}
-            value={data.richtext as PortableTextBlock[]}
+            value={data.richtext}
           />
         )}
       </RichtextLayout>

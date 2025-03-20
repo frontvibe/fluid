@@ -1,8 +1,16 @@
+import type {RichTextBlock} from 'types';
+
 import {IconExternal} from '~/components/icons/IconExternal';
 import {cn} from '~/lib/utils';
 
 import {SanityExternalLink} from '../../link/SanityExternalLink';
 import {richTextLinkClassName} from './InternalLinkAnnotation';
+
+export type ExternalLinkAnnotationProps = NonNullable<
+  RichTextBlock['markDefs']
+>[number] & {
+  _type: 'externalLink';
+};
 
 export function ExternalLinkAnnotation(
   props: ExternalLinkAnnotationProps & {children: React.ReactNode},

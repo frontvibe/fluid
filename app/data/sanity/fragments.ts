@@ -1,6 +1,11 @@
 import {defineQuery} from 'groq';
 
-import {LINK_REFERENCE_FRAGMENT, LINKS_LIST_SELECTION} from './links';
+import {
+  EXTERNAL_LINK_FRAGMENT,
+  INTERNAL_LINK_FRAGMENT,
+  LINK_REFERENCE_FRAGMENT,
+  LINKS_LIST_SELECTION,
+} from './links';
 import {getIntValue} from './utils';
 
 export const IMAGE_FRAGMENT = defineQuery(`{
@@ -225,7 +230,7 @@ export const FONT_FRAGMENT = defineQuery(`{
   font[] {
     antialiased,
     fontAssets[] {
-      fontName,
+      "fontName": ^.fontName,
       fontStyle,
       fontWeight,
       ttf ${FONT_ASSET_FRAGMENT},
@@ -237,4 +242,21 @@ export const FONT_FRAGMENT = defineQuery(`{
   },
   letterSpacing,
   lineHeight,
+}`);
+
+export const RICHTEXT_FRAGMENT = defineQuery(`{
+  ...,
+  _type == 'image' => ${IMAGE_FRAGMENT},
+  _type == 'button' => {
+    ...,
+    link -> ${LINK_REFERENCE_FRAGMENT},
+  },
+  _type == 'block' => {
+    ...,
+    markDefs[] {
+      ...,
+      _type == 'internalLink' => ${INTERNAL_LINK_FRAGMENT},
+      _type == 'externalLink' => ${EXTERNAL_LINK_FRAGMENT},
+    }
+  }
 }`);

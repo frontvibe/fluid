@@ -1,4 +1,5 @@
 import type {ProductVariantFragmentFragment} from 'storefrontapi.generated';
+import type {SectionOfType} from 'types';
 
 import {stegaClean} from '@sanity/client/stega';
 import {flattenConnection} from '@shopify/hydrogen';
@@ -12,6 +13,12 @@ import {useRootLoaderData} from '~/root';
 import {VariantPrice} from '../product/VariantPrice';
 import {useProductVariants} from '../sections/ProductInformationSection';
 import {Badge} from '../ui/Badge';
+
+export type PriceBlockProps = NonNullable<
+  SectionOfType<'productInformationSection'>['richtext']
+>[number] & {
+  _type: 'price';
+};
 
 export function PriceBlock(props: PriceBlockProps) {
   const {product} = useProduct();

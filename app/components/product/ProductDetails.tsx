@@ -1,5 +1,4 @@
 import type {PortableTextComponents} from '@portabletext/react';
-import type {PortableTextBlock} from '@portabletext/types';
 
 import {PortableText} from '@portabletext/react';
 import {useMemo} from 'react';
@@ -11,6 +10,7 @@ import type {ExternalLinkAnnotationProps} from '../sanity/richtext/components/Ex
 import type {InternalLinkAnnotationProps} from '../sanity/richtext/components/InternalLinkAnnotation';
 import type {FeaturedProductSectionProps} from '../sections/FeaturedProductSection';
 import type {ProductInformationSectionProps} from '../sections/ProductInformationSection';
+import type {AddToCartButtonBlockProps} from './ProductForm';
 
 import {PriceBlock} from '../blocks/PriceBlock';
 import {ShopifyDescriptionBlock} from '../blocks/ShopifyDescriptionBlock';
@@ -49,9 +49,9 @@ export function ProductDetails({
         },
       },
       types: {
-        addToCartButton: (props: {
-          value: TypeFromSelection<typeof ADD_TO_CART_BUTTON_BLOCK_FRAGMENT>;
-        }) => <ProductForm {...props.value} />,
+        addToCartButton: (props: {value: AddToCartButtonBlockProps}) => (
+          <ProductForm {...props.value} />
+        ),
         price: (props: {value: PriceBlockProps}) => (
           <PriceBlock {...props.value} />
         ),
@@ -71,7 +71,7 @@ export function ProductDetails({
       {data.richtext && (
         <PortableText
           components={Components as PortableTextComponents}
-          value={data.richtext as PortableTextBlock[]}
+          value={data.richtext}
         />
       )}
     </div>

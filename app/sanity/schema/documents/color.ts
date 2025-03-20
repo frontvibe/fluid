@@ -2,7 +2,7 @@ import type {StringRule, ValidationContext} from 'sanity';
 
 import {defineField, defineType} from 'sanity';
 
-import IconPalette from '~/sanity/components/icons/palette';
+import IconPalette from '~/sanity/components/icons/Palette';
 
 import ColorSchemeMedia from '../../components/color-scheme';
 import {validateDefaultStatus} from '../../utils/setAsDefaultValidation';

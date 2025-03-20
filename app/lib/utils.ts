@@ -2,6 +2,10 @@ import type {FulfillmentStatus} from '@shopify/hydrogen/customer-account-api-typ
 import type {SelectedOption} from '@shopify/hydrogen/storefront-api-types';
 import type {ClassValue} from 'class-variance-authority/types';
 import type {I18nLocale} from 'types';
+import type {
+  AspectRatios,
+  ROOT_QUERYResult,
+} from 'types/sanity/sanity.generated';
 
 import {useLocation} from '@remix-run/react';
 import {stegaClean} from '@sanity/client/stega';
@@ -94,7 +98,7 @@ export function cn(...inputs: ClassValue[]) {
 
 export type AspectRatioData = ReturnType<typeof getAspectRatioData>;
 export const getAspectRatioData = (
-  aspectRatio: (typeof aspectRatioValues)[number] | null,
+  aspectRatio: AspectRatios[number] | null,
 ) => {
   const cleanAspectRatio = stegaClean(aspectRatio);
   return cleanAspectRatio === 'video'
@@ -133,7 +137,7 @@ export function setShowTrailingZeroKeyValue(locale: I18nLocale) {
 
 export function statusMessage(
   status: FulfillmentStatus,
-  themeContent?: null | TypeFromSelection<typeof THEME_CONTENT_FRAGMENT>,
+  themeContent?: null | ROOT_QUERYResult['themeContent'],
 ) {
   const translations: Record<FulfillmentStatus, string> = {
     CANCELLED: themeContent?.account?.orderStatusCancelled || 'Cancelled',

@@ -1,6 +1,10 @@
-import groq, {defineQuery} from 'groq';
+import {defineQuery} from 'groq';
 
-import {COLOR_SCHEME_FRAGMENT, IMAGE_FRAGMENT} from './fragments';
+import {
+  COLOR_SCHEME_FRAGMENT,
+  IMAGE_FRAGMENT,
+  RICHTEXT_FRAGMENT,
+} from './fragments';
 import {getIntValue} from './utils';
 
 export const SECTION_SETTINGS_FRAGMENT = defineQuery(`{
@@ -26,8 +30,8 @@ export const PRODUCT_INFORMATION_SECTION_FRAGMENT = defineQuery(`{
   desktopMediaWidth,
   mediaAspectRatio,
   "richtext": coalesce(
-    richtext[_key == $language][0].value[],
-    richtext[_key == $defaultLanguage][0].value[]
+    richtext[_key == $language][0].value[] ${RICHTEXT_FRAGMENT},
+    richtext[_key == $defaultLanguage][0].value[] ${RICHTEXT_FRAGMENT},
   )[],
   settings ${SECTION_SETTINGS_FRAGMENT}
 }`);
@@ -62,8 +66,8 @@ export const RICHTEXT_SECTION_FRAGMENT = defineQuery(`{
   desktopContentPosition,
   maxWidth,
   "richtext": coalesce(
-    richtext[_key == $language][0].value[],
-    richtext[_key == $defaultLanguage][0].value[]
+    richtext[_key == $language][0].value[] ${RICHTEXT_FRAGMENT},
+    richtext[_key == $defaultLanguage][0].value[] ${RICHTEXT_FRAGMENT},
   )[],
   settings ${SECTION_SETTINGS_FRAGMENT}
 }`);
@@ -120,8 +124,8 @@ export const FEATURED_PRODUCT_SECTION_FRAGMENT = defineQuery(`{
     }
   },
   'richtext': coalesce(
-    richtext[_key == $language][0].value[],
-    richtext[_key == $defaultLanguage][0].value[]
+    richtext[_key == $language][0].value[] ${RICHTEXT_FRAGMENT},
+    richtext[_key == $defaultLanguage][0].value[] ${RICHTEXT_FRAGMENT},
   )[],
   settings ${SECTION_SETTINGS_FRAGMENT}
 }`);
@@ -149,8 +153,8 @@ export const IMAGE_BANNER_SECTION_FRAGMENT = defineQuery(`{
   backgroundImage ${IMAGE_FRAGMENT},
   bannerHeight,
   "content": coalesce(
-    content[_key == $language][0].value[],
-    content[_key == $defaultLanguage][0].value[]
+    content[_key == $language][0].value[] ${RICHTEXT_FRAGMENT},
+    content[_key == $defaultLanguage][0].value[] ${RICHTEXT_FRAGMENT},
   )[],
   contentAlignment,
   contentPosition,

@@ -1,14 +1,24 @@
+import type {FooterDataType, SectionDataType} from 'types';
+import type {ROOT_QUERYResult} from 'types/sanity/sanity.generated';
+
 import {darken, mix, readableColor, toRgba} from 'color2k';
 
 import {useRootLoaderData} from '~/root';
 
-export type CmsSectionSettings = InferType<typeof SECTION_SETTINGS_FRAGMENT>;
-export type FooterSettings = InferType<typeof FOOTER_SETTINGS_FRAGMENT>;
-type HeaderQuery = InferType<typeof HEADER_QUERY>;
+export type CmsSectionSettings = SectionDataType['settings'];
+export type FooterSettings = FooterDataType['settings'];
+type HeaderQuery = NonNullable<ROOT_QUERYResult['header']>;
 type CartColorScheme = {
-  colorScheme?: InferType<typeof SETTINGS_FRAGMENT.cartColorScheme>;
+  colorScheme?: NonNullable<ROOT_QUERYResult['settings']>['cartColorScheme'];
 };
-type Rgb = undefined | {b: number; g: number; r: number};
+type Rgb =
+  | null
+  | undefined
+  | {
+      b?: number;
+      g?: number;
+      r?: number;
+    };
 
 export function useColorsCssVars(props: {
   selector?: string;
@@ -64,7 +74,7 @@ export function useColorsCssVars(props: {
       --destructive-foreground: 250 250 250;
       --shadow: ${getDarkenColor(colorScheme.background?.rgb)};
     }
-  ` as const;
+  `;
 }
 
 export function useCardColorsCssVars(props: {
@@ -110,10 +120,10 @@ export function useCardColorsCssVars(props: {
       --secondary-foreground: ${toRgbString(primary?.rgb)};
       --shadow: ${getDarkenColor(colorScheme.card?.rgb)};
     }
-  ` as const;
+  `;
 }
 
-function toRgbString(rgb?: {b: number; g: number; r: number}) {
+function toRgbString(rgb?: Rgb) {
   if (!rgb) return 'null';
 
   return `${rgb.r} ${rgb.g} ${rgb.b}` as const;

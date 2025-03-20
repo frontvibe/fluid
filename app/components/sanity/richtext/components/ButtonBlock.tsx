@@ -1,6 +1,14 @@
+import type {SectionOfType} from 'types';
+
 import {Button} from '~/components/ui/Button';
 
 import {SanityInternalLink} from '../../link/SanityInternalLink';
+
+export type ButtonBlockProps = NonNullable<
+  SectionOfType<'richtextSection'>['richtext']
+>[number] & {
+  _type: 'button';
+};
 
 export function ButtonBlock(props: ButtonBlockProps) {
   return (

@@ -8685,7 +8685,8 @@
               "maxWidth": {
                 "type": "objectAttribute",
                 "value": {
-                  "type": "number"
+                  "type": "inline",
+                  "name": "rangeSlider"
                 },
                 "optional": true
               },

@@ -9,6 +9,7 @@ import type {
 import type {
   ALL_SECTIONS_QUERYResult,
   internalGroqTypeReferenceTo,
+  Richtext,
   SanityImageCrop,
   SanityImageHotspot,
 } from './sanity/sanity.generated';
@@ -67,6 +68,12 @@ export type FooterOfType<T extends AllFootersTypes> =
       ? S
       : never
     : never;
+
+export type RichTextBlock = NonNullable<
+  SectionOfType<'richtextSection'>['richtext']
+>[0] & {
+  _type: 'block';
+};
 
 export type SanityImage = null | {
   _ref: null | string;

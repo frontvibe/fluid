@@ -1,10 +1,9 @@
-import type {ROOT_QUERYResult} from 'types/sanity/sanity.generated';
-
 import {stegaClean} from '@sanity/client/stega';
+
+import type {FontsQuery} from '~/lib/fonts';
 
 import {useRootLoaderData} from '~/root';
 
-type FontsQuery = NonNullable<ROOT_QUERYResult['fonts']>;
 type FontAssetsFragment = NonNullable<
   NonNullable<NonNullable<FontsQuery['body']>['font']>[number]['fontAssets']
 >[number];

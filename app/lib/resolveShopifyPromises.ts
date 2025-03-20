@@ -1,15 +1,15 @@
 import type {Storefront} from '@shopify/hydrogen';
 import type {
-  CollectionsQuery,
-  FeaturedCollectionQuery,
-  FeaturedProductQuery,
-} from 'storefrontapi.generated';
-import type {
   COLLECTION_QUERYResult,
   PAGE_QUERYResult,
   PRODUCT_QUERYResult,
   ROOT_QUERYResult,
 } from 'types/sanity/sanity.generated';
+import type {
+  CollectionsQuery,
+  FeaturedCollectionQuery,
+  FeaturedProductQuery,
+} from 'types/shopify/storefrontapi.generated';
 
 import {getPaginationVariables, parseGid} from '@shopify/hydrogen';
 
@@ -19,7 +19,7 @@ import {
   FEATURED_COLLECTION_QUERY,
   FEATURED_PRODUCT_QUERY,
   RECOMMENDED_PRODUCTS_QUERY,
-} from '~/graphql/queries';
+} from '~/data/shopify/queries';
 
 import {getFiltersFromParam} from './shopifyCollection';
 

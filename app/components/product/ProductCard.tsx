@@ -1,4 +1,4 @@
-import type {ProductCardFragment} from 'storefrontapi.generated';
+import type {ProductCardFragment} from 'types/shopify/storefrontapi.generated';
 
 import {Link} from '@remix-run/react';
 import {stegaClean} from '@sanity/client/stega';

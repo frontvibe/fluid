@@ -1,5 +1,5 @@
 import type {CustomerAddress} from '@shopify/hydrogen/customer-account-api-types';
-import type {CustomerDetailsFragment} from 'customer-accountapi.generated';
+import type {CustomerDetailsFragment} from 'types/shopify/customeraccountapi.generated';
 
 import {Form, Link} from '@remix-run/react';
 

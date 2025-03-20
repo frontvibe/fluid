@@ -1,5 +1,5 @@
-import type {ProductVariantFragmentFragment} from 'storefrontapi.generated';
 import type {SectionDefaultProps, SectionOfType} from 'types';
+import type {ProductVariantFragmentFragment} from 'types/shopify/storefrontapi.generated';
 
 import {Await, useLoaderData} from '@remix-run/react';
 import {stegaClean} from '@sanity/client/stega';

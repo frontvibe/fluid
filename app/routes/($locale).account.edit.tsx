@@ -19,7 +19,7 @@ import invariant from 'tiny-invariant';
 
 import {Button} from '~/components/ui/Button';
 import {Input} from '~/components/ui/Input';
-import {CUSTOMER_UPDATE_MUTATION} from '~/graphql/customer-account/mutations';
+import {CUSTOMER_UPDATE_MUTATION} from '~/data/shopify/customer-account/mutations';
 import {useSanityThemeContent} from '~/hooks/useSanityThemeContent';
 
 import {doLogout} from './($locale).account_.logout';

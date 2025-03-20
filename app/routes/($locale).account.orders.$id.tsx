@@ -1,5 +1,5 @@
 import type {FulfillmentStatus} from '@shopify/hydrogen/customer-account-api-types';
-import type {OrderFragment} from 'customer-accountapi.generated';
+import type {OrderFragment} from 'types/shopify/customeraccountapi.generated';
 
 import {Link, type MetaFunction, useLoaderData} from '@remix-run/react';
 import {flattenConnection, Image, Money} from '@shopify/hydrogen';
@@ -11,7 +11,7 @@ import {
 
 import {Badge} from '~/components/ui/Badge';
 import {Button} from '~/components/ui/Button';
-import {CUSTOMER_ORDER_QUERY} from '~/graphql/customer-account/queries';
+import {CUSTOMER_ORDER_QUERY} from '~/data/shopify/customer-account/queries';
 import {useSanityThemeContent} from '~/hooks/useSanityThemeContent';
 import {statusMessage} from '~/lib/utils';
 

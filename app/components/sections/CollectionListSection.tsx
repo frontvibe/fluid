@@ -1,5 +1,5 @@
-import type {CollectionsQuery} from 'storefrontapi.generated';
 import type {SectionDefaultProps, SectionOfType} from 'types';
+import type {CollectionsQuery} from 'types/shopify/storefrontapi.generated';
 
 import {Await, useLoaderData} from '@remix-run/react';
 import {Suspense} from 'react';

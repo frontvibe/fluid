@@ -1,4 +1,4 @@
-import type {ProductRecommendationsQuery} from 'storefrontapi.generated';
+import type {ProductRecommendationsQuery} from 'types/shopify/storefrontapi.generated';
 
 import {ProductCardGrid} from './ProductCardGrid';
 

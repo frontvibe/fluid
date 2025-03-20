@@ -1,7 +1,7 @@
 import {createHydrogenContext, createWithCache} from '@shopify/hydrogen';
 import {getLocaleFromRequest} from 'countries';
 
-import {CART_QUERY_FRAGMENT} from '~/graphql/fragments';
+import {CART_QUERY_FRAGMENT} from '~/data/shopify/fragments';
 import {SANITY_API_VERSION, SANITY_STUDIO_URL} from '~/sanity/constants';
 
 import {envVariables} from './env.server';

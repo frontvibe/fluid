@@ -1,7 +1,7 @@
 import type {
   CustomerDetailsFragment,
   OrderCardFragment,
-} from 'customer-accountapi.generated';
+} from 'types/shopify/customeraccountapi.generated';
 
 import {
   Form,
@@ -23,8 +23,8 @@ import {AccountDetails} from '~/components/account/AccountDetails';
 import {OrderCard} from '~/components/account/OrderCard';
 import {Button} from '~/components/ui/Button';
 import {Dialog, DialogContent} from '~/components/ui/Dialog';
-import {CACHE_NONE, routeHeaders} from '~/data/shopify/cache';
-import {CUSTOMER_DETAILS_QUERY} from '~/graphql/customer-account/queries';
+import {routeHeaders} from '~/data/shopify/cache';
+import {CUSTOMER_DETAILS_QUERY} from '~/data/shopify/customer-account/queries';
 import {useLocalePath} from '~/hooks/useLocalePath';
 import {useSanityThemeContent} from '~/hooks/useSanityThemeContent';
 

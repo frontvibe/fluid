@@ -1,5 +1,5 @@
 import type {CSSProperties} from 'react';
-import type {CollectionsQuery} from 'storefrontapi.generated';
+import type {CollectionsQuery} from 'types/shopify/storefrontapi.generated';
 
 import {flattenConnection} from '@shopify/hydrogen';
 import {cx} from 'class-variance-authority';

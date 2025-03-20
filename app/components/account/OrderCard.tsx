@@ -1,4 +1,4 @@
-import type {OrderCardFragment} from 'customer-accountapi.generated';
+import type {OrderCardFragment} from 'types/shopify/customeraccountapi.generated';
 
 import {Link} from '@remix-run/react';
 import {flattenConnection, Image} from '@shopify/hydrogen';

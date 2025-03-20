@@ -1,7 +1,7 @@
 import type {
   CartApiQueryFragment,
   CartLineFragment,
-} from 'storefrontapi.generated';
+} from 'types/shopify/storefrontapi.generated';
 
 import {flattenConnection, useOptimisticData} from '@shopify/hydrogen';
 import {cx} from 'class-variance-authority';

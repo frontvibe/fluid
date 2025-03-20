@@ -1,5 +1,5 @@
 import type {CSSProperties} from 'react';
-import type {ProductCardFragment} from 'storefrontapi.generated';
+import type {ProductCardFragment} from 'types/shopify/storefrontapi.generated';
 
 import {cx} from 'class-variance-authority';
 

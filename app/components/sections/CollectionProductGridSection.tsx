@@ -1,9 +1,9 @@
 import type {Filter} from '@shopify/hydrogen/storefront-api-types';
+import type {SectionDefaultProps, SectionOfType} from 'types';
 import type {
   CollectionProductGridQuery,
   ProductCardFragment,
-} from 'storefrontapi.generated';
-import type {SectionDefaultProps, SectionOfType} from 'types';
+} from 'types/shopify/storefrontapi.generated';
 
 import {
   Await,

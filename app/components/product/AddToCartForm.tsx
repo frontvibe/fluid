@@ -1,4 +1,4 @@
-import type {ProductVariantFragmentFragment} from 'storefrontapi.generated';
+import type {ProductVariantFragmentFragment} from 'types/shopify/storefrontapi.generated';
 
 import {useNavigation} from '@remix-run/react';
 import {CartForm, OptimisticInput, ShopPayButton} from '@shopify/hydrogen';

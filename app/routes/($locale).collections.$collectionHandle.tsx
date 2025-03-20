@@ -1,6 +1,6 @@
 import type {LoaderFunctionArgs, MetaFunction} from '@shopify/remix-oxygen';
-import type {CollectionDetailsQuery} from 'storefrontapi.generated';
 import type {COLLECTION_QUERYResult} from 'types/sanity/sanity.generated';
+import type {CollectionDetailsQuery} from 'types/shopify/storefrontapi.generated';
 
 import {useLoaderData} from '@remix-run/react';
 import {Analytics} from '@shopify/hydrogen';
@@ -9,7 +9,7 @@ import invariant from 'tiny-invariant';
 
 import {CmsSection} from '~/components/CmsSection';
 import {COLLECTION_QUERY as CMS_COLLECTION_QUERY} from '~/data/sanity/queries';
-import {COLLECTION_QUERY} from '~/graphql/queries';
+import {COLLECTION_QUERY} from '~/data/shopify/queries';
 import {mergeMeta} from '~/lib/meta';
 import {resolveShopifyPromises} from '~/lib/resolveShopifyPromises';
 import {getSeoMetaFromMatches} from '~/lib/seo';

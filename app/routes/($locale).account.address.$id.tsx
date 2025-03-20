@@ -20,7 +20,7 @@ import {
   CREATE_ADDRESS_MUTATION,
   DELETE_ADDRESS_MUTATION,
   UPDATE_ADDRESS_MUTATION,
-} from '~/graphql/customer-account/mutations';
+} from '~/data/shopify/customer-account/mutations';
 import {useSanityThemeContent} from '~/hooks/useSanityThemeContent';
 
 import type {AccountOutletContext} from './($locale).account.edit';

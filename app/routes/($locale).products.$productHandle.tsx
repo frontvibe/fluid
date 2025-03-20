@@ -1,6 +1,6 @@
 import type {LoaderFunctionArgs, MetaFunction} from '@shopify/remix-oxygen';
-import type {ProductQuery} from 'storefrontapi.generated';
 import type {PRODUCT_QUERYResult} from 'types/sanity/sanity.generated';
+import type {ProductQuery} from 'types/shopify/storefrontapi.generated';
 
 import {useLoaderData} from '@remix-run/react';
 import {Analytics, getSelectedProductOptions} from '@shopify/hydrogen';
@@ -10,7 +10,7 @@ import invariant from 'tiny-invariant';
 
 import {CmsSection} from '~/components/CmsSection';
 import {PRODUCT_QUERY as CMS_PRODUCT_QUERY} from '~/data/sanity/queries';
-import {PRODUCT_QUERY, VARIANTS_QUERY} from '~/graphql/queries';
+import {PRODUCT_QUERY, VARIANTS_QUERY} from '~/data/shopify/queries';
 import {mergeMeta} from '~/lib/meta';
 import {resolveShopifyPromises} from '~/lib/resolveShopifyPromises';
 import {getSeoMetaFromMatches} from '~/lib/seo';

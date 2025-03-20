@@ -1,4 +1,4 @@
-import type {CustomerDetailsFragment} from 'customer-accountapi.generated';
+import type {CustomerDetailsFragment} from 'types/shopify/customeraccountapi.generated';
 
 import {Link} from '@remix-run/react';
 

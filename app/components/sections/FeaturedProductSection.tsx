@@ -1,7 +1,7 @@
 import type {ProductVariantConnection} from '@shopify/hydrogen/storefront-api-types';
-import type {FeaturedProductQuery} from 'storefrontapi.generated';
 import type {PartialObjectDeep} from 'type-fest/source/partial-deep';
 import type {SectionDefaultProps, SectionOfType} from 'types';
+import type {FeaturedProductQuery} from 'types/shopify/storefrontapi.generated';
 
 import {Await, useLoaderData} from '@remix-run/react';
 import {stegaClean} from '@sanity/client/stega';

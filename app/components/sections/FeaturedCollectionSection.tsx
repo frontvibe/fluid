@@ -1,8 +1,8 @@
+import type {SectionDefaultProps, SectionOfType} from 'types';
 import type {
   FeaturedCollectionQuery,
   ProductCardFragment,
-} from 'storefrontapi.generated';
-import type {SectionDefaultProps, SectionOfType} from 'types';
+} from 'types/shopify/storefrontapi.generated';
 
 import {Await, Link, useLoaderData} from '@remix-run/react';
 import {flattenConnection} from '@shopify/hydrogen';

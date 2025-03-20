@@ -1,5 +1,5 @@
-import type {ProductVariantFragmentFragment} from 'storefrontapi.generated';
 import type {SectionOfType} from 'types';
+import type {ProductVariantFragmentFragment} from 'types/shopify/storefrontapi.generated';
 
 import {flattenConnection, useProduct} from '@shopify/hydrogen-react';
 

@@ -1,7 +1,7 @@
 import type {ProductOption} from '@shopify/hydrogen/storefront-api-types';
-import type {ProductVariantFragmentFragment} from 'types/shopify/storefrontapi.generated';
 import type {PartialDeep} from 'type-fest';
 import type {PartialObjectDeep} from 'type-fest/source/partial-deep';
+import type {ProductVariantFragmentFragment} from 'types/shopify/storefrontapi.generated';
 
 import {Link, useNavigate} from '@remix-run/react';
 import {parseGid} from '@shopify/hydrogen';

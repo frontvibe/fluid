@@ -1,147 +1,148 @@
-import type {SanityClient} from '@sanity/client';
 import type {
-  ClientPerspective,
-  ContentSourceMap,
-  FilteredResponseQueryOptions,
+  ClientConfig,
   QueryParams,
-  UnfilteredResponseQueryOptions,
-} from '@sanity/client/stega';
-import type {BaseQuery, InferType, z} from 'groqd';
+  QueryWithoutParams,
+  ResponseQueryOptions,
+  SanityClient,
+} from '@sanity/client';
 
-import {loadQuery, setServerClient} from '@sanity/react-loader';
-import {CacheShort, createWithCache} from '@shopify/hydrogen';
+import {createClient} from '@sanity/client';
+import {
+  loadQuery,
+  type QueryResponseInitial,
+  setServerClient,
+} from '@sanity/react-loader';
+import {
+  CacheLong,
+  CacheNone,
+  type CachingStrategy,
+  type WithCache,
+} from '@shopify/hydrogen';
 
 import {getSanityClient} from './sanityClient';
+import {hashQuery} from './utils';
 
-type CreateSanityClientOptions = {
-  cache: Cache;
-  config: {
-    apiVersion: string | undefined;
-    dataset: string | undefined;
-    projectId: string | undefined;
-    studioUrl: string | undefined;
-    token: string | undefined;
-    useCdn: boolean | undefined;
+const DEFAULT_CACHE_STRATEGY = CacheLong();
+
+export type CreateSanityLoaderOptions = {
+  /**
+   * Sanity client or configuration to use.
+   */
+  clientConfig: ClientConfig & {
     useStega: string | undefined;
   };
-  isPreviewMode: boolean;
-  request: Request;
-  waitUntil: ExecutionContext['waitUntil'];
+  /**
+   * Configuration for enabling preview mode.
+   */
+  preview?: {enabled: boolean; studioUrl: string; token: string};
+  /**
+   * The default caching strategy to use for `loadQuery` subrequests.
+   * @see https://shopify.dev/docs/custom-storefronts/hydrogen/caching#caching-strategies
+   *
+   * Defaults to `CacheLong`
+   */
+  strategy?: CachingStrategy | null;
+  /**
+   * Cache control utility from `@shopify/hydrogen`.
+   * @see https://shopify.dev/docs/custom-storefronts/hydrogen/caching/third-party
+   */
+  withCache: WithCache;
 };
 
-type CachingStrategy = ReturnType<typeof CacheShort>;
-type BaseType<T = any> = z.ZodType<T>;
-type GroqdQuery = BaseQuery<BaseType<any>>;
-
-export type Sanity = {
-  client: SanityClient;
-  query<T extends GroqdQuery>(options: {
+interface RequestInit {
+  hydrogen?: {
+    /**
+     * The caching strategy to use for the subrequest.
+     * @see https://shopify.dev/docs/custom-storefronts/hydrogen/caching#caching-strategies
+     */
     cache?: CachingStrategy;
-    groqdQuery: T;
-    params?: QueryParams;
-    queryOptions?:
-      | FilteredResponseQueryOptions
-      | UnfilteredResponseQueryOptions;
-  }): Promise<{
-    data: InferType<T>;
-    perspective?: ClientPerspective;
-    sourceMap?: ContentSourceMap;
-  }>;
+    /**
+     * Optional debugging information to be displayed in the subrequest profiler.
+     * @see https://shopify.dev/docs/custom-storefronts/hydrogen/debugging/subrequest-profiler#how-to-provide-more-debug-information-for-a-request
+     */
+    debug?: {
+      displayName: string;
+    };
+  };
+}
+
+type HydrogenResponseQueryOptions = Omit<
+  ResponseQueryOptions,
+  'cache' | 'next'
+> & {
+  hydrogen?: 'hydrogen' extends keyof RequestInit
+    ? RequestInit['hydrogen']
+    : never;
 };
 
-export function createSanityClient(options: CreateSanityClientOptions) {
-  const {cache, config, isPreviewMode, request, waitUntil} = options;
-  const {apiVersion, dataset, projectId, studioUrl, token, useCdn, useStega} =
-    config;
+type LoadQueryOptions = Pick<
+  HydrogenResponseQueryOptions,
+  'headers' | 'hydrogen' | 'perspective' | 'stega' | 'tag' | 'useCdn'
+>;
 
-  if (
-    typeof projectId === 'undefined' ||
-    typeof apiVersion === 'undefined' ||
-    typeof dataset === 'undefined' ||
-    typeof studioUrl === 'undefined' ||
-    typeof token === 'undefined'
-  ) {
-    throw new Error('Missing required configuration for Sanity client');
-  }
+export type SanityLoader = {
+  client: SanityClient;
+  /**
+   * Query Sanity using the loader.
+   * @see https://www.sanity.io/docs/loaders
+   */
+  loadQuery<T = any>(
+    query: string,
+    params?: QueryParams,
+    options?: LoadQueryOptions,
+  ): Promise<QueryResponseInitial<T>>;
+  preview?: CreateSanityLoaderOptions['preview'];
+};
 
-  const {client} = getSanityClient({
-    apiVersion,
-    dataset,
-    projectId,
-    studioUrl,
-    token,
-    useCdn: useCdn ?? true,
-    useStega: isPreviewMode && useStega === 'true' ? useStega : 'false',
-  });
+export function createSanityContext(
+  options: CreateSanityLoaderOptions,
+): SanityLoader {
+  const {withCache, preview, strategy, clientConfig} = options;
+  const {client} = getSanityClient({config: clientConfig, preview});
 
   setServerClient(client);
 
-  const sanity: Sanity = {
-    client,
-    async query({
-      cache: strategy = CacheShort(),
-      groqdQuery,
-      params,
-      queryOptions,
-    }) {
-      const {query} = groqdQuery as GroqdQuery;
-      const queryHash = await hashQuery(query, params);
-      const withCache = createWithCache({
-        cache,
-        request,
-        waitUntil,
-      });
+  const sanity = {
+    async loadQuery<T>(
+      query: string,
+      params: QueryParams | QueryWithoutParams,
+      loaderOptions?: LoadQueryOptions,
+    ): Promise<QueryResponseInitial<T>> {
+      // Don't store response if preview is enabled
+      const cacheStrategy =
+        preview && preview.enabled
+          ? CacheNone()
+          : loaderOptions?.hydrogen?.cache ||
+            strategy ||
+            DEFAULT_CACHE_STRATEGY;
 
-      return withCache.run(
+      const queryHash = await hashQuery(query, params);
+
+      return await withCache.run(
         {
           cacheKey: queryHash,
-          cacheStrategy: strategy,
+          cacheStrategy,
+          // Cache if there are no data errors or a specific data that make this result not suited for caching
           shouldCacheResult: (result) => result.data !== null,
         },
-        () => {
-          if (!queryOptions) {
-            return loadQuery(query, params);
+        async ({addDebugData}) => {
+          if (process.env.NODE_ENV === 'development') {
+            // Name displayed in the subrequest profiler
+            const displayName =
+              loaderOptions?.hydrogen?.debug?.displayName || 'query Sanity';
+
+            addDebugData({
+              displayName,
+            });
           }
 
-          // NOTE: satisfy union type
-          if (queryOptions.filterResponse === false) {
-            return loadQuery(query, params, queryOptions);
-          }
-
-          return loadQuery(query, params, queryOptions);
+          return await loadQuery<T>(query, params, loaderOptions);
         },
       );
     },
+    client,
+    preview,
   };
 
   return sanity;
-}
-
-/**
- * Create an SHA-256 hash as a hex string
- * @see https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/digest#converting_a_digest_to_a_hex_string
- */
-export async function sha256(message: string): Promise<string> {
-  // encode as UTF-8
-  const messageBuffer = new TextEncoder().encode(message);
-  // hash the message
-  const hashBuffer = await crypto.subtle.digest('SHA-256', messageBuffer);
-  // convert bytes to hex string
-  return Array.from(new Uint8Array(hashBuffer))
-    .map((b) => b.toString(16).padStart(2, '0'))
-    .join('');
-}
-
-/**
- * Hash query and its parameters for use as cache key
- * NOTE: Oxygen deployment will break if the cache key is long or contains `\n`
- */
-function hashQuery(query: GroqdQuery['query'], params?: QueryParams) {
-  let hash = query;
-
-  if (params !== null) {
-    hash += JSON.stringify(params);
-  }
-
-  return sha256(hash);
 }

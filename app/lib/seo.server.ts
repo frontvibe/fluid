@@ -9,14 +9,15 @@ import type {
   ProductVariant,
   ShopPolicy,
 } from '@shopify/hydrogen/storefront-api-types';
-import type {InferType, TypeFromSelection} from 'groqd';
 import type {BreadcrumbList, CollectionPage, Offer} from 'schema-dts';
+import type {
+  PAGE_QUERYResult,
+  ROOT_QUERYResult,
+} from 'types/sanity/sanity.generated';
+import type {SanityImage} from 'types/sanity/types';
 
 import {getImageDimensions} from '@sanity/asset-utils';
 import {stegaClean} from '@sanity/client/stega';
-
-import type {IMAGE_FRAGMENT as SANITY_IMAGE_FRAGMENT} from '~/qroq/fragments';
-import type {PAGE_QUERY, ROOT_QUERY} from '~/qroq/queries';
 
 import {generateSanityImageUrl} from '~/components/sanity/SanityImage';
 
@@ -30,7 +31,7 @@ function root({
   sanity,
   url,
 }: {
-  root: InferType<typeof ROOT_QUERY>;
+  root: ROOT_QUERYResult;
   sanity: SanityConfig;
   url: Request['url'];
 }): SeoConfig {
@@ -39,13 +40,13 @@ function root({
     image: settings?.socialSharingImagePreview,
     sanity,
   });
-  const logoWidth = settings?.logo
-    ? getImageDimensions(settings.logo._ref).width
+  const logoWidth = settings?.logo?.asset?._ref
+    ? getImageDimensions({_ref: settings.logo.asset?._ref}).width
     : 0;
   const logoUrl = generateSanityImageUrl({
     dataset: sanity.dataset,
     projectId: sanity.projectId,
-    ref: settings?.logo?._ref,
+    ref: settings?.logo?.asset?._ref,
     width: logoWidth,
   });
 
@@ -92,7 +93,7 @@ function home({
   page,
   sanity,
 }: {
-  page: InferType<typeof PAGE_QUERY>;
+  page: PAGE_QUERYResult;
   sanity: SanityConfig;
 }): SeoConfig {
   const media = generateOGImageData({
@@ -531,7 +532,7 @@ function generateOGImageData({
   image,
   sanity,
 }: {
-  image?: null | TypeFromSelection<typeof SANITY_IMAGE_FRAGMENT>;
+  image?: SanityImage;
   sanity: SanityConfig;
 }): SeoConfig['media'] {
   if (!image) {
@@ -549,7 +550,7 @@ function generateOGImageData({
     dataset: sanity.dataset,
     height: size.height,
     projectId: sanity.projectId,
-    ref: socialImage?._ref,
+    ref: socialImage?.asset?._ref,
     width: size.width,
   });
 

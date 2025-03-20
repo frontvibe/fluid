@@ -1,19 +1,17 @@
 import type {Storefront} from '@shopify/hydrogen';
-import type {InferType} from 'groqd';
 import type {
   CollectionsQuery,
   FeaturedCollectionQuery,
   FeaturedProductQuery,
 } from 'storefrontapi.generated';
+import type {
+  COLLECTION_QUERYResult,
+  PAGE_QUERYResult,
+  PRODUCT_QUERYResult,
+  ROOT_QUERYResult,
+} from 'types/sanity/sanity.generated';
 
 import {getPaginationVariables, parseGid} from '@shopify/hydrogen';
-
-import type {
-  COLLECTION_QUERY,
-  PAGE_QUERY,
-  PRODUCT_QUERY,
-  ROOT_QUERY,
-} from '~/qroq/queries';
 
 import {
   COLLECTION_PRODUCT_GRID_QUERY,
@@ -25,10 +23,10 @@ import {
 
 import {getFiltersFromParam} from './shopifyCollection';
 
-type SanityPageData = InferType<typeof PAGE_QUERY>;
-type SanityProductData = InferType<typeof PRODUCT_QUERY>;
-type SanityCollectionData = InferType<typeof COLLECTION_QUERY>;
-type SanityRootData = InferType<typeof ROOT_QUERY>;
+type SanityPageData = PAGE_QUERYResult;
+type SanityProductData = PRODUCT_QUERYResult;
+type SanityCollectionData = COLLECTION_QUERYResult;
+type SanityRootData = ROOT_QUERYResult;
 type PromiseResolverArgs = {
   collectionId?: string;
   document: {
@@ -138,7 +136,7 @@ function resolveFeaturedCollectionPromise({
 
   for (const section of sections || []) {
     if (section._type === 'featuredCollectionSection') {
-      const gid = section.collection?.store.gid;
+      const gid = section.collection?.store?.gid;
       const first = section.maxProducts || 3;
 
       if (!gid) {
@@ -181,7 +179,7 @@ function resolveCollectionListPromise({
     if (section._type === 'collectionListSection') {
       const first = section.collections?.length;
       const ids = section.collections?.map(
-        (collection) => parseGid(collection.store.gid).id,
+        (collection) => parseGid(collection.store?.gid || undefined).id,
       );
       const query = ids?.map((id) => `(id:${id})`).join(' OR ');
 
@@ -223,7 +221,7 @@ function resolveFeaturedProductPromise({
 
   for (const section of sections || []) {
     if (section._type === 'featuredProductSection') {
-      const gid = section.product?.store.gid;
+      const gid = section.product?.store?.gid;
 
       if (!gid) {
         return undefined;

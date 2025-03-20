@@ -3,6 +3,15 @@ import {defineQuery} from 'groq';
 import {LINK_REFERENCE_FRAGMENT, LINKS_LIST_SELECTION} from './links';
 import {getIntValue} from './utils';
 
+export const IMAGE_FRAGMENT = defineQuery(`{
+  _type,
+  asset,
+  "altText": asset -> altText,
+  "_ref": asset._ref,
+  hotspot,
+  crop,
+}`);
+
 export const COLOR_FRAGMENT = defineQuery(`{
   alpha,
   hex,
@@ -153,13 +162,13 @@ export const SETTINGS_FRAGMENT = defineQuery(`{
   dropdownsAndPopupsBorder,
   dropdownsAndPopupsShadow,
   facebook,
-  favicon,
+  favicon ${IMAGE_FRAGMENT},
   grid,
   inputsBorder,
   inputsShadow,
   instagram,
   linkedin,
-  logo,
+  logo ${IMAGE_FRAGMENT},
   mediaBorder,
   mediaShadow,
   pinterest,
@@ -168,7 +177,7 @@ export const SETTINGS_FRAGMENT = defineQuery(`{
   showTrailingZeros,
   siteName,
   snapchat,
-  socialSharingImagePreview,
+  socialSharingImagePreview ${IMAGE_FRAGMENT},
   spaceBetweenTemplateSections,
   tiktok,
   tumblr,

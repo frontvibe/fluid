@@ -1,11 +1,4 @@
-import type {InferType} from 'groqd';
-
 import {darken, mix, readableColor, toRgba} from 'color2k';
-
-import type {FOOTER_SETTINGS_FRAGMENT} from '~/qroq/footers';
-import type {SETTINGS_FRAGMENT} from '~/qroq/fragments';
-import type {HEADER_QUERY} from '~/qroq/queries';
-import type {SECTION_SETTINGS_FRAGMENT} from '~/qroq/sections';
 
 import {useRootLoaderData} from '~/root';
 

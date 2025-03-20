@@ -1,12 +1,9 @@
 import type {PortableTextComponents} from '@portabletext/react';
 import type {PortableTextBlock} from '@portabletext/types';
-import type {TypeFromSelection} from 'groqd';
+import type {SectionDefaultProps, SectionOfType} from 'types/sanity/types';
 
 import {PortableText} from '@portabletext/react';
 import {useMemo} from 'react';
-
-import type {SectionDefaultProps} from '~/lib/type';
-import type {RICHTEXT_SECTION_FRAGMENT} from '~/qroq/sections';
 
 import type {ButtonBlockProps} from '../sanity/richtext/components/ButtonBlock';
 import type {ExternalLinkAnnotationProps} from '../sanity/richtext/components/ExternalLinkAnnotation';
@@ -19,7 +16,7 @@ import {ImageBlock} from '../sanity/richtext/components/ImageBlock';
 import {InternalLinkAnnotation} from '../sanity/richtext/components/InternalLinkAnnotation';
 import {RichtextLayout} from '../sanity/richtext/RichTextLayout';
 
-type RichtextSectionProps = TypeFromSelection<typeof RICHTEXT_SECTION_FRAGMENT>;
+type RichtextSectionProps = SectionOfType<'richtextSection'>;
 
 export function RichtextSection(
   props: SectionDefaultProps & {data: RichtextSectionProps},

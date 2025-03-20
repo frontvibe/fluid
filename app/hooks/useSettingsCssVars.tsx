@@ -1,7 +1,3 @@
-import type {TypeFromSelection} from 'groqd';
-
-import type {BORDER_FRAGMENT, SHADOW_FRAGMENT} from '~/qroq/fragments';
-
 import {useRootLoaderData} from '~/root';
 
 type BorderFragment = null | TypeFromSelection<typeof BORDER_FRAGMENT>;

@@ -1,18 +1,13 @@
 import type {FulfillmentStatus} from '@shopify/hydrogen/customer-account-api-types';
 import type {SelectedOption} from '@shopify/hydrogen/storefront-api-types';
 import type {ClassValue} from 'class-variance-authority/types';
-import type {TypeFromSelection} from 'groqd';
+import type {I18nLocale} from 'types/sanity/types';
 
 import {useLocation} from '@remix-run/react';
 import {stegaClean} from '@sanity/client/stega';
 import {cx} from 'class-variance-authority';
 import {useMemo} from 'react';
 import {twMerge} from 'tailwind-merge';
-
-import type {aspectRatioValues} from '~/qroq/constant';
-import type {THEME_CONTENT_FRAGMENT} from '~/qroq/themeContent';
-
-import type {I18nLocale} from './type';
 
 export function useVariantUrl(
   handle: string,
@@ -141,12 +136,12 @@ export function statusMessage(
   themeContent?: null | TypeFromSelection<typeof THEME_CONTENT_FRAGMENT>,
 ) {
   const translations: Record<FulfillmentStatus, string> = {
-    CANCELLED: themeContent?.account.orderStatusCancelled || 'Cancelled',
-    ERROR: themeContent?.account.orderStatusError || 'Error',
-    FAILURE: themeContent?.account.orderStatusFailure || 'Failed',
-    OPEN: themeContent?.account.orderStatusOpen || 'Open',
-    PENDING: themeContent?.account.orderStatusPending || 'Pending',
-    SUCCESS: themeContent?.account.orderStatusSuccess || 'Success',
+    CANCELLED: themeContent?.account?.orderStatusCancelled || 'Cancelled',
+    ERROR: themeContent?.account?.orderStatusError || 'Error',
+    FAILURE: themeContent?.account?.orderStatusFailure || 'Failed',
+    OPEN: themeContent?.account?.orderStatusOpen || 'Open',
+    PENDING: themeContent?.account?.orderStatusPending || 'Pending',
+    SUCCESS: themeContent?.account?.orderStatusSuccess || 'Success',
   };
   try {
     return translations?.[status];

@@ -1,19 +1,16 @@
-import type {TypeFromSelection} from 'groqd';
+import type {SectionDefaultProps, SectionOfType} from 'types/sanity/types';
 
 import {Await, useLoaderData} from '@remix-run/react';
 import {Suspense} from 'react';
 
-import type {SectionDefaultProps} from '~/lib/type';
-import type {RELATED_PRODUCTS_SECTION_FRAGMENT} from '~/qroq/sections';
 import type {loader} from '~/routes/($locale).products.$productHandle';
 
 import {ProductCardGrid} from '../product/ProductCardGrid';
 import {RelatedProducts} from '../product/RelatedProducts';
 import {Skeleton} from '../Skeleton';
 
-export type RelatedProductsSectionProps = TypeFromSelection<
-  typeof RELATED_PRODUCTS_SECTION_FRAGMENT
->;
+export type RelatedProductsSectionProps =
+  SectionOfType<'relatedProductsSection'>;
 
 export function RelatedProductsSection(
   props: SectionDefaultProps & {data: RelatedProductsSectionProps},

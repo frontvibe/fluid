@@ -94,18 +94,18 @@ export default function OrderRoute() {
   return (
     <div className="container py-20">
       <div>
-        <h1>{themeContent?.account.orderDetail}</h1>
+        <h1>{themeContent?.account?.orderDetail}</h1>
         <Button asChild className="mt-4 px-0" variant="link">
-          <Link to="/account">{themeContent?.account.returnToAccount}</Link>
+          <Link to="/account">{themeContent?.account?.returnToAccount}</Link>
         </Button>
       </div>
       <div className="mt-6 w-full sm:grid-cols-1">
         <div>
           <h3>
-            {themeContent?.account.orderNumber} {order.name}
+            {themeContent?.account?.orderNumber} {order.name}
           </h3>
           <p>
-            {themeContent?.account.placedOn}{' '}
+            {themeContent?.account?.placedOn}{' '}
             {new Date(order.processedAt!).toDateString()}
           </p>
           <div className="grid items-start gap-12 sm:grid-cols-1 sm:divide-y sm:divide-gray-200 md:grid-cols-4 md:gap-16">
@@ -116,25 +116,25 @@ export default function OrderRoute() {
                     className="pr-3 pb-4 pl-0 text-left font-semibold"
                     scope="col"
                   >
-                    {themeContent?.account.product}
+                    {themeContent?.account?.product}
                   </th>
                   <th
                     className="hidden px-4 pb-4 text-right font-semibold sm:table-cell md:table-cell"
                     scope="col"
                   >
-                    {themeContent?.account.price}
+                    {themeContent?.account?.price}
                   </th>
                   <th
                     className="hidden px-4 pb-4 text-right font-semibold sm:table-cell md:table-cell"
                     scope="col"
                   >
-                    {themeContent?.account.quantity}
+                    {themeContent?.account?.quantity}
                   </th>
                   <th
                     className="px-4 pb-4 text-right font-semibold"
                     scope="col"
                   >
-                    {themeContent?.account.total}
+                    {themeContent?.account?.total}
                   </th>
                 </tr>
               </thead>
@@ -158,14 +158,14 @@ export default function OrderRoute() {
                         </div>
                         <dl className="grid">
                           <dt className="sr-only">
-                            {themeContent?.account.product}
+                            {themeContent?.account?.product}
                           </dt>
                           <dd className="truncate lg:hidden">
                             <h3>{lineItem.title}</h3>
                             <p className="mt-1">{lineItem.variantTitle}</p>
                           </dd>
                           <dt className="sr-only">
-                            {themeContent?.account.price}
+                            {themeContent?.account?.price}
                           </dt>
                           <dd className="truncate sm:hidden">
                             <p className="mt-4">
@@ -173,7 +173,7 @@ export default function OrderRoute() {
                             </p>
                           </dd>
                           <dt className="sr-only">
-                            {themeContent?.account.quantity}
+                            {themeContent?.account?.quantity}
                           </dt>
                           <dd className="truncate sm:hidden">
                             <p className="mt-1">{lineItem.quantity}</p>
@@ -202,18 +202,18 @@ export default function OrderRoute() {
                       colSpan={3}
                       scope="row"
                     >
-                      {themeContent?.account.discounts}
+                      {themeContent?.account?.discounts}
                     </th>
                     <th
                       className="pt-6 pr-3 text-left font-normal sm:hidden"
                       scope="row"
                     >
-                      {themeContent?.account.discounts}
+                      {themeContent?.account?.discounts}
                     </th>
                     <td className="pt-6 pr-4 pl-3 text-right font-medium text-green-700 md:pr-3">
                       {discountPercentage ? (
                         <span className="text-sm">
-                          {themeContent?.account.discountsOff?.replace(
+                          {themeContent?.account?.discountsOff?.replace(
                             '{discount}',
                             `${discountPercentage}`,
                           )}
@@ -230,13 +230,13 @@ export default function OrderRoute() {
                     colSpan={3}
                     scope="row"
                   >
-                    {themeContent?.account.subtotal}
+                    {themeContent?.account?.subtotal}
                   </th>
                   <th
                     className="pt-6 pr-3 text-left font-normal sm:hidden"
                     scope="row"
                   >
-                    {themeContent?.account.subtotal}
+                    {themeContent?.account?.subtotal}
                   </th>
                   <td className="pt-6 pr-4 pl-3 text-right md:pr-3">
                     <Money data={order.subtotal!} />
@@ -248,13 +248,13 @@ export default function OrderRoute() {
                     colSpan={3}
                     scope="row"
                   >
-                    {themeContent?.account.tax}
+                    {themeContent?.account?.tax}
                   </th>
                   <th
                     className="pt-4 pr-3 text-left font-normal sm:hidden"
                     scope="row"
                   >
-                    {themeContent?.account.tax}
+                    {themeContent?.account?.tax}
                   </th>
                   <td className="pt-4 pr-4 pl-3 text-right md:pr-3">
                     <Money data={order.totalTax!} />
@@ -266,13 +266,13 @@ export default function OrderRoute() {
                     colSpan={3}
                     scope="row"
                   >
-                    {themeContent?.account.total}
+                    {themeContent?.account?.total}
                   </th>
                   <th
                     className="pt-4 pr-3 text-left font-semibold sm:hidden"
                     scope="row"
                   >
-                    {themeContent?.account.total}
+                    {themeContent?.account?.total}
                   </th>
                   <td className="pt-4 pr-4 pl-3 text-right font-semibold md:pr-3">
                     <Money data={order.totalPrice!} />
@@ -281,7 +281,7 @@ export default function OrderRoute() {
               </tfoot>
             </table>
             <div className="top-nav sticky border-none md:my-8">
-              <h3>{themeContent?.account.shippingAddress}</h3>
+              <h3>{themeContent?.account?.shippingAddress}</h3>
               {order?.shippingAddress ? (
                 <ul className="mt-6">
                   <li>{order.shippingAddress.name}</li>
@@ -295,7 +295,7 @@ export default function OrderRoute() {
                 </ul>
               ) : (
                 <p className="mt-3">
-                  {themeContent?.account.noShippingAddress}
+                  {themeContent?.account?.noShippingAddress}
                 </p>
               )}
               <h3 className="mt-8 font-semibold">Status</h3>

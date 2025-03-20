@@ -1,5 +1,6 @@
 import type {LoaderFunctionArgs, MetaFunction} from '@shopify/remix-oxygen';
 import type {ProductQuery} from 'storefrontapi.generated';
+import type {PRODUCT_QUERYResult} from 'types/sanity/sanity.generated';
 
 import {useLoaderData} from '@remix-run/react';
 import {Analytics, getSelectedProductOptions} from '@shopify/hydrogen';
@@ -8,12 +9,12 @@ import {DEFAULT_LOCALE} from 'countries';
 import invariant from 'tiny-invariant';
 
 import {CmsSection} from '~/components/CmsSection';
+import {PRODUCT_QUERY as CMS_PRODUCT_QUERY} from '~/data/sanity/queries';
 import {PRODUCT_QUERY, VARIANTS_QUERY} from '~/graphql/queries';
 import {mergeMeta} from '~/lib/meta';
 import {resolveShopifyPromises} from '~/lib/resolveShopifyPromises';
 import {getSeoMetaFromMatches} from '~/lib/seo';
 import {seoPayload} from '~/lib/seo.server';
-import {PRODUCT_QUERY as CMS_PRODUCT_QUERY} from '~/qroq/queries';
 
 export const meta: MetaFunction<typeof loader> = mergeMeta(({matches}) =>
   getSeoMetaFromMatches(matches),
@@ -35,10 +36,7 @@ export async function loader({context, params, request}: LoaderFunctionArgs) {
   };
 
   const productData = Promise.all([
-    sanity.query({
-      groqdQuery: CMS_PRODUCT_QUERY,
-      params: queryParams,
-    }),
+    sanity.loadQuery<PRODUCT_QUERYResult>(CMS_PRODUCT_QUERY, queryParams),
     storefront.query<ProductQuery>(PRODUCT_QUERY, {
       variables: {
         country: storefront.i18n.country,

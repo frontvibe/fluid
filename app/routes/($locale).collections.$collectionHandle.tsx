@@ -1,5 +1,6 @@
 import type {LoaderFunctionArgs, MetaFunction} from '@shopify/remix-oxygen';
 import type {CollectionDetailsQuery} from 'storefrontapi.generated';
+import type {COLLECTION_QUERYResult} from 'types/sanity/sanity.generated';
 
 import {useLoaderData} from '@remix-run/react';
 import {Analytics} from '@shopify/hydrogen';
@@ -7,12 +8,12 @@ import {DEFAULT_LOCALE} from 'countries';
 import invariant from 'tiny-invariant';
 
 import {CmsSection} from '~/components/CmsSection';
+import {COLLECTION_QUERY as CMS_COLLECTION_QUERY} from '~/data/sanity/queries';
 import {COLLECTION_QUERY} from '~/graphql/queries';
 import {mergeMeta} from '~/lib/meta';
 import {resolveShopifyPromises} from '~/lib/resolveShopifyPromises';
 import {getSeoMetaFromMatches} from '~/lib/seo';
 import {seoPayload} from '~/lib/seo.server';
-import {COLLECTION_QUERY as CMS_COLLECTION_QUERY} from '~/qroq/queries';
 
 export const meta: MetaFunction<typeof loader> = mergeMeta(({matches}) =>
   getSeoMetaFromMatches(matches),
@@ -31,10 +32,7 @@ export async function loader({context, params, request}: LoaderFunctionArgs) {
   };
 
   const collectionData = Promise.all([
-    sanity.query({
-      groqdQuery: CMS_COLLECTION_QUERY,
-      params: queryParams,
-    }),
+    sanity.loadQuery<COLLECTION_QUERYResult>(CMS_COLLECTION_QUERY, queryParams),
     storefront.query<CollectionDetailsQuery>(COLLECTION_QUERY, {
       variables: {
         country: storefront.i18n.country,

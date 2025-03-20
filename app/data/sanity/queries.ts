@@ -4,6 +4,7 @@ import {FOOTERS_FRAGMENT} from './footers';
 import {
   COLOR_SCHEME_FRAGMENT,
   HEADER_FRAGMENT,
+  IMAGE_FRAGMENT,
   SETTINGS_FRAGMENT,
   THEME_CONTENT_FRAGMENT,
 } from './fragments';
@@ -46,13 +47,13 @@ export const ROOT_QUERY = defineQuery(`{
 }`);
 
 export const COLLECTION_QUERY = defineQuery(`{
-  _type,
+  '_type': 'collection',
   "collection": *[_type == "collection" && store.slug.current == $collectionHandle][0] {
     store {
       gid,
     },
     template -> {
-      sections[] ${SECTIONS_FRAGMENT},
+      sections[] ${COLLECTION_SECTIONS_FRAGMENT},
     },
   },
   "defaultCollectionTemplate": ${DEFAULT_COLLECTION_TEMPLATE},
@@ -67,7 +68,7 @@ export const PAGE_QUERY =
     seo {
       "title": ${getIntValue('title')},
       "description": ${getIntValue('description')},
-      image,
+      image ${IMAGE_FRAGMENT},
     },
   }`);
 

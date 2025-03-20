@@ -1,15 +1,12 @@
-import type {TypeFromSelection} from 'groqd';
 import type {
   FeaturedCollectionQuery,
   ProductCardFragment,
 } from 'storefrontapi.generated';
+import type {SectionDefaultProps, SectionOfType} from 'types/sanity/types';
 
 import {Await, Link, useLoaderData} from '@remix-run/react';
 import {flattenConnection} from '@shopify/hydrogen';
 import {Suspense} from 'react';
-
-import type {SectionDefaultProps} from '~/lib/type';
-import type {FEATURED_COLLECTION_SECTION_FRAGMENT} from '~/qroq/sections';
 
 import {useLocalePath} from '~/hooks/useLocalePath';
 import {useSanityThemeContent} from '~/hooks/useSanityThemeContent';
@@ -20,9 +17,8 @@ import {ProductCardGrid} from '../product/ProductCardGrid';
 import {Skeleton} from '../Skeleton';
 import {Button} from '../ui/Button';
 
-type FeaturedCollectionSectionProps = TypeFromSelection<
-  typeof FEATURED_COLLECTION_SECTION_FRAGMENT
->;
+type FeaturedCollectionSectionProps =
+  SectionOfType<'featuredCollectionSection'>;
 
 /**
  * `FeaturedCollectionSection` is a section that displays a collection of products.
@@ -34,14 +30,14 @@ export function FeaturedCollectionSection(
   props: SectionDefaultProps & {data: FeaturedCollectionSectionProps},
 ) {
   const collectionHandle = useLocalePath({
-    path: `/collections/${props.data.collection?.store.slug?.current}`,
+    path: `/collections/${props.data.collection?.store?.slug?.current}`,
   });
   const {themeContent} = useSanityThemeContent();
 
   return (
     <div className="container space-y-4">
       <div className="flex justify-between">
-        <h2>{props.data.heading || props.data.collection?.store.title}</h2>
+        <h2>{props.data.heading || props.data.collection?.store?.title}</h2>
         {props.data.viewAll && (
           <Button asChild className="hidden md:inline-flex" variant="ghost">
             <Link to={collectionHandle}>
@@ -111,7 +107,7 @@ function AwaitFeaturedCollection(props: {
 }) {
   const loaderData = useLoaderData<typeof indexLoader>();
   const featuredCollectionPromise = loaderData?.featuredCollectionPromise;
-  const sanityCollectionGid = props.sanityData?.collection?.store.gid;
+  const sanityCollectionGid = props.sanityData?.collection?.store?.gid;
 
   if (!featuredCollectionPromise) {
     console.warn(

@@ -4,6 +4,7 @@ import type {
   LoaderFunctionArgs,
   MetaFunction,
 } from '@shopify/remix-oxygen';
+import type {ROOT_QUERYResult} from 'types/sanity/sanity.generated';
 
 import {
   isRouteErrorResponse,
@@ -29,12 +30,12 @@ import {CustomAnalytics} from './components/CustomAnalytics';
 import {Fonts} from './components/Fonts';
 import {generateSanityImageUrl} from './components/sanity/SanityImage';
 import {Button} from './components/ui/Button';
+import {ROOT_QUERY} from './data/sanity/queries';
 import {useLocalePath} from './hooks/useLocalePath';
 import {useSanityThemeContent} from './hooks/useSanityThemeContent';
 import {generateFontsPreloadLinks} from './lib/fonts';
 import {resolveShopifyPromises} from './lib/resolveShopifyPromises';
 import {seoPayload} from './lib/seo.server';
-import {ROOT_QUERY} from './qroq/queries';
 import tailwindCss from './styles/tailwind.css?url';
 
 import faviconAsset from '/favicon.ico?url';
@@ -117,10 +118,7 @@ export async function loader({context, request}: LoaderFunctionArgs) {
   };
 
   const rootData = Promise.all([
-    sanity.query({
-      groqdQuery: ROOT_QUERY,
-      params: queryParams,
-    }),
+    sanity.loadQuery<ROOT_QUERYResult>(ROOT_QUERY, queryParams),
     storefront.query(`#graphql
       query layout {
         shop {

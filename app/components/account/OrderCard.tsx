@@ -47,20 +47,20 @@ export function OrderCard({order}: {order: OrderCardFragment}) {
               : lineItems[0].title}
           </div>
           <dl className="grid-gap-1 grid">
-            <dt className="sr-only">{themeContent?.account.orderId}</dt>
+            <dt className="sr-only">{themeContent?.account?.orderId}</dt>
             <dd>
               <p>
-                {themeContent?.account.orderNumber} {order.number}
+                {themeContent?.account?.orderNumber} {order.number}
               </p>
             </dd>
-            <dt className="sr-only">{themeContent?.account.orderDate}</dt>
+            <dt className="sr-only">{themeContent?.account?.orderDate}</dt>
             <dd>
               <p>{new Date(order.processedAt).toDateString()}</p>
             </dd>
             {fulfillmentStatus && (
               <>
                 <dt className="sr-only">
-                  {themeContent?.account.fulfillmentStatus}
+                  {themeContent?.account?.fulfillmentStatus}
                 </dt>
                 <dd className="mt-2">
                   <span
@@ -84,7 +84,7 @@ export function OrderCard({order}: {order: OrderCardFragment}) {
           prefetch="intent"
           to={url}
         >
-          <p>{themeContent?.account.viewDetails}</p>
+          <p>{themeContent?.account?.viewDetails}</p>
         </Link>
       </div>
     </li>

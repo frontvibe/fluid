@@ -1,7 +1,7 @@
 import type {ProductVariantConnection} from '@shopify/hydrogen/storefront-api-types';
-import type {TypeFromSelection} from 'groqd';
 import type {FeaturedProductQuery} from 'storefrontapi.generated';
 import type {PartialObjectDeep} from 'type-fest/source/partial-deep';
+import type {SectionDefaultProps, SectionOfType} from 'types/sanity/types';
 
 import {Await, useLoaderData} from '@remix-run/react';
 import {stegaClean} from '@sanity/client/stega';
@@ -9,9 +9,7 @@ import {flattenConnection} from '@shopify/hydrogen';
 import {ProductProvider} from '@shopify/hydrogen-react';
 import {Suspense} from 'react';
 
-import type {SectionDefaultProps} from '~/lib/type';
 import type {AspectRatioData} from '~/lib/utils';
-import type {FEATURED_PRODUCT_SECTION_FRAGMENT} from '~/qroq/sections';
 
 import {
   cn,
@@ -26,9 +24,8 @@ import {ProductDetails} from '../product/ProductDetails';
 import {ShopifyImage} from '../ShopifyImage';
 import {Skeleton} from '../Skeleton';
 
-export type FeaturedProductSectionProps = TypeFromSelection<
-  typeof FEATURED_PRODUCT_SECTION_FRAGMENT
->;
+export type FeaturedProductSectionProps =
+  SectionOfType<'featuredProductSection'>;
 
 /**
  * `FeaturedProductSection` is a section that displays a product.
@@ -127,16 +124,16 @@ function FeaturedProductSkeleton({
     nodes: [],
   };
   const imageUrl =
-    sanityProduct?.firstVariant?.store.previewImageUrl ||
+    sanityProduct?.firstVariant?.store?.previewImageUrl ||
     sanityProduct?.previewImageUrl;
   const thumbnailUrl = generateShopifyImageThumbnail(imageUrl);
 
   // While waiting for Shopify data, we render a skeleton filled with sanity data
   if (sanityProduct) {
     variants.nodes?.push({
-      id: sanityProduct.firstVariant?.store.gid,
+      id: sanityProduct.firstVariant?.store?.gid,
       price: {
-        amount: sanityProduct?.firstVariant?.store.price.toString() || '0',
+        amount: sanityProduct?.firstVariant?.store?.price.toString() || '0',
         currencyCode: locale.currency,
       },
       selectedOptions: [],
@@ -187,7 +184,7 @@ function AwaitFeaturedProduct(props: {
 }) {
   const loaderData = useLoaderData<typeof indexLoader>();
   const featuredProductPromise = loaderData?.featuredProductPromise;
-  const sanityProductGid = props.sanityData?.product?.store.gid;
+  const sanityProductGid = props.sanityData?.product?.store?.gid;
 
   if (!featuredProductPromise) {
     console.warn(

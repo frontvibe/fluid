@@ -1,13 +1,11 @@
-import type {TypeFromSelection} from 'groqd';
 import type {ProductVariantFragmentFragment} from 'storefrontapi.generated';
+import type {SectionDefaultProps, SectionOfType} from 'types/sanity/types';
 
 import {Await, useLoaderData} from '@remix-run/react';
 import {stegaClean} from '@sanity/client/stega';
 import {flattenConnection} from '@shopify/hydrogen-react';
 import {createContext, Suspense, useContext} from 'react';
 
-import type {SectionDefaultProps} from '~/lib/type';
-import type {PRODUCT_INFORMATION_SECTION_FRAGMENT} from '~/qroq/sections';
 import type {loader} from '~/routes/($locale).products.$productHandle';
 
 import {cn, getAspectRatioData} from '~/lib/utils';
@@ -16,9 +14,8 @@ import {MediaGallery} from '../product/MediaGallery';
 import {ProductDetails} from '../product/ProductDetails';
 import {Skeleton} from '../Skeleton';
 
-export type ProductInformationSectionProps = TypeFromSelection<
-  typeof PRODUCT_INFORMATION_SECTION_FRAGMENT
->;
+export type ProductInformationSectionProps =
+  SectionOfType<'productInformationSection'>;
 
 type ProductVariantsContextType = {
   variants: ProductVariantFragmentFragment[];

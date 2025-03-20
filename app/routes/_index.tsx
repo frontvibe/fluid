@@ -1,12 +1,13 @@
 import type {LoaderFunctionArgs, MetaFunction} from '@shopify/remix-oxygen';
+import type {PAGE_QUERYResult} from 'types/sanity/sanity.generated';
 
 import {DEFAULT_LOCALE} from 'countries';
 
+import {PAGE_QUERY} from '~/data/sanity/queries';
 import {mergeMeta} from '~/lib/meta';
 import {resolveShopifyPromises} from '~/lib/resolveShopifyPromises';
 import {getSeoMetaFromMatches} from '~/lib/seo';
 import {seoPayload} from '~/lib/seo.server';
-import {PAGE_QUERY} from '~/qroq/queries';
 
 import PageRoute from './($locale).$';
 
@@ -23,10 +24,10 @@ export async function loader({context, request}: LoaderFunctionArgs) {
     language,
   };
 
-  const page = await sanity.query({
-    groqdQuery: PAGE_QUERY,
-    params: queryParams,
-  });
+  const page = await sanity.loadQuery<PAGE_QUERYResult>(
+    PAGE_QUERY,
+    queryParams,
+  );
 
   const {
     collectionListPromise,

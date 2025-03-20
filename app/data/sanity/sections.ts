@@ -1,6 +1,6 @@
 import {defineQuery} from 'groq';
 
-import {COLOR_SCHEME_FRAGMENT} from './fragments';
+import {COLOR_SCHEME_FRAGMENT, IMAGE_FRAGMENT} from './fragments';
 import {getIntValue} from './utils';
 
 export const SECTION_SETTINGS_FRAGMENT = defineQuery(`{
@@ -76,7 +76,10 @@ export const CAROUSEL_SECTION_FRAGMENT = defineQuery(`{
   "title": ${getIntValue('title')},
   loop,
   pagination,
-  slides,
+  slides[] {
+    _key,
+    image ${IMAGE_FRAGMENT},
+  },
   slidesPerViewDesktop,
   settings ${SECTION_SETTINGS_FRAGMENT}
 }`);
@@ -143,7 +146,7 @@ export const FEATURED_COLLECTION_SECTION_FRAGMENT = defineQuery(`{
 export const IMAGE_BANNER_SECTION_FRAGMENT = defineQuery(`{
   _key,
   _type,
-  backgroundImage,
+  backgroundImage ${IMAGE_FRAGMENT},
   bannerHeight,
   "content": coalesce(
     content[_key == $language][0].value[],
@@ -171,6 +174,8 @@ export const PRODUCT_SECTIONS_FRAGMENT = defineQuery(`{
   _type,
   _type == 'productInformationSection' => ${PRODUCT_INFORMATION_SECTION_FRAGMENT},
   _type == 'relatedProductsSection' => ${RELATED_PRODUCTS_SECTION_FRAGMENT},
+  _type == 'richtextSection' => ${RICHTEXT_SECTION_FRAGMENT},
+  _type == 'carouselSection' => ${CAROUSEL_SECTION_FRAGMENT},
   _type == 'collectionListSection' => ${COLLECTION_LIST_SECTION_FRAGMENT},
   _type == 'featuredProductSection' => ${FEATURED_PRODUCT_SECTION_FRAGMENT},
   _type == 'featuredCollectionSection' => ${FEATURED_COLLECTION_SECTION_FRAGMENT},
@@ -182,6 +187,8 @@ export const COLLECTION_SECTIONS_FRAGMENT = defineQuery(`{
   _type,
   _type == 'collectionBannerSection' => ${COLLECTION_BANNER_SECTION_FRAGMENT},
   _type == 'collectionProductGridSection' => ${COLLECTION_PRODUCT_GRID_SECTION_FRAGMENT},
+  _type == 'richtextSection' => ${RICHTEXT_SECTION_FRAGMENT},
+  _type == 'carouselSection' => ${CAROUSEL_SECTION_FRAGMENT},
   _type == 'collectionListSection' => ${COLLECTION_LIST_SECTION_FRAGMENT},
   _type == 'featuredProductSection' => ${FEATURED_PRODUCT_SECTION_FRAGMENT},
   _type == 'featuredCollectionSection' => ${FEATURED_COLLECTION_SECTION_FRAGMENT},

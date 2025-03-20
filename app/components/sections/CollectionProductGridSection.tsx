@@ -1,9 +1,9 @@
 import type {Filter} from '@shopify/hydrogen/storefront-api-types';
-import type {TypeFromSelection} from 'groqd';
 import type {
   CollectionProductGridQuery,
   ProductCardFragment,
 } from 'storefrontapi.generated';
+import type {SectionDefaultProps, SectionOfType} from 'types/sanity/types';
 
 import {
   Await,
@@ -15,8 +15,6 @@ import {
 import {Pagination} from '@shopify/hydrogen';
 import {Suspense, useCallback, useEffect, useMemo} from 'react';
 
-import type {SectionDefaultProps} from '~/lib/type';
-import type {COLLECTION_PRODUCT_GRID_SECTION_FRAGMENT} from '~/qroq/sections';
 import type {loader} from '~/routes/($locale).collections.$collectionHandle';
 
 import {useOptimisticNavigationData} from '~/hooks/useOptimisticNavigationData';
@@ -32,9 +30,8 @@ import {ProductCardGrid} from '../product/ProductCardGrid';
 import {Skeleton} from '../Skeleton';
 import {Button} from '../ui/Button';
 
-type CollectionProductGridSectionProps = TypeFromSelection<
-  typeof COLLECTION_PRODUCT_GRID_SECTION_FRAGMENT
->;
+type CollectionProductGridSectionProps =
+  SectionOfType<'collectionProductGridSection'>;
 
 export type ShopifyCollection = CollectionProductGridQuery['collection'];
 

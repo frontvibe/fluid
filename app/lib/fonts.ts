@@ -1,7 +1,3 @@
-import type {InferType} from 'groqd';
-
-import type {FONTS_QUERY} from '~/qroq/queries';
-
 import {getFonts} from '~/components/Fonts';
 
 type PreloadLink = {

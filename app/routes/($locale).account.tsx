@@ -111,19 +111,19 @@ function Account({customer}: AccountType) {
 
   const heading = customer
     ? customer.firstName
-      ? themeContent?.account.welcome?.replace(
+      ? themeContent?.account?.welcome?.replace(
           '{firstName}',
           customer.firstName,
         )
-      : themeContent?.account.welcomeToYourAccount
-    : themeContent?.account.accountDetails;
+      : themeContent?.account?.welcomeToYourAccount
+    : themeContent?.account?.accountDetails;
 
   return (
     <div className="container py-20">
       <h1>{heading}</h1>
       <Form action={path} className="mt-4" method="post">
         <Button className="px-0" type="submit" variant="link">
-          {themeContent?.account.signOut}
+          {themeContent?.account?.signOut}
         </Button>
       </Form>
       {orders && <AccountOrderHistory orders={orders} />}
@@ -142,7 +142,7 @@ function AccountOrderHistory({orders}: OrderCardsProps) {
   return (
     <div className="mt-6">
       <div className="grid w-full gap-4 py-6 md:gap-8">
-        <h2 className="text-lead">{themeContent?.account.orderHistory}</h2>
+        <h2 className="text-lead">{themeContent?.account?.orderHistory}</h2>
         {orders?.length ? <Orders orders={orders} /> : <EmptyOrders />}
       </div>
     </div>
@@ -154,10 +154,10 @@ function EmptyOrders() {
   const {themeContent} = useSanityThemeContent();
   return (
     <div>
-      <p>{themeContent?.account.noOrdersMessage}</p>
+      <p>{themeContent?.account?.noOrdersMessage}</p>
       <div className="w-48">
         <Button asChild className="mt-2 w-full text-sm" variant="secondary">
-          <Link to={path}>{themeContent?.account.startShopping}</Link>
+          <Link to={path}>{themeContent?.account?.startShopping}</Link>
         </Button>
       </div>
     </div>

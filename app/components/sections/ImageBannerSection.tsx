@@ -1,12 +1,9 @@
 import type {PortableTextComponents} from '@portabletext/react';
 import type {PortableTextBlock} from '@portabletext/types';
-import type {TypeFromSelection} from 'groqd';
+import type {SectionDefaultProps, SectionOfType} from 'types/sanity/types';
 
 import {PortableText} from '@portabletext/react';
 import {useMemo} from 'react';
-
-import type {SectionDefaultProps} from '~/lib/type';
-import type {IMAGE_BANNER_SECTION_FRAGMENT} from '~/qroq/sections';
 
 import type {ButtonBlockProps} from '../sanity/richtext/components/ButtonBlock';
 
@@ -20,9 +17,7 @@ import {useSection} from '../CmsSection';
 import {ButtonBlock} from '../sanity/richtext/components/ButtonBlock';
 import {SanityImage} from '../sanity/SanityImage';
 
-type ImageBannerSectionProps = TypeFromSelection<
-  typeof IMAGE_BANNER_SECTION_FRAGMENT
->;
+type ImageBannerSectionProps = SectionOfType<'imageBannerSection'>;
 
 export function ImageBannerSection(
   props: SectionDefaultProps & {data: ImageBannerSectionProps},

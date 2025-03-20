@@ -18,13 +18,13 @@ export function AccountAddressBook({
   const {themeContent} = useSanityThemeContent();
   return (
     <div className="mt-10 grid w-full gap-4">
-      <h3>{themeContent?.account.addressBook}</h3>
+      <h3>{themeContent?.account?.addressBook}</h3>
       <div>
-        {!addresses?.length && <p>{themeContent?.account.noAddress}</p>}
+        {!addresses?.length && <p>{themeContent?.account?.noAddress}</p>}
         <div className="mt-2 w-48">
           <Button asChild className="mb-6 w-full text-sm" variant="secondary">
             <Link preventScrollReset to="address/add">
-              {themeContent?.account.addAddress}
+              {themeContent?.account?.addAddress}
             </Link>
           </Button>
         </div>
@@ -57,7 +57,7 @@ function Address({
     <div className="flex flex-col rounded-sm border border-gray-200 p-6 lg:p-8">
       {defaultAddress && (
         <div className="mb-3">
-          <Badge>{themeContent?.account.default}</Badge>
+          <Badge>{themeContent?.account?.default}</Badge>
         </div>
       )}
       <ul className="flex-1 flex-row">
@@ -79,12 +79,12 @@ function Address({
           preventScrollReset
           to={`/account/address/${encodeURIComponent(address.id)}`}
         >
-          {themeContent?.account.edit}
+          {themeContent?.account?.edit}
         </Link>
         <Form action="address/delete" method="delete" preventScrollReset>
           <input name="addressId" type="hidden" value={address.id} />
           <button className="text-primary/50 ml-6 text-left text-sm hover:underline">
-            {themeContent?.account.remove}
+            {themeContent?.account?.remove}
           </button>
         </Form>
       </div>

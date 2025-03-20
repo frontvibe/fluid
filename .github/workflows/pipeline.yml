@@ -3,6 +3,11 @@ name: Typecheck/Build
 on:
   pull_request:
 
+env:
+  PUBLIC_SANITY_STUDIO_PROJECT_ID: ${{ secrets.PUBLIC_SANITY_STUDIO_PROJECT_ID }}
+  PUBLIC_SANITY_STUDIO_DATASET: ${{ secrets.PUBLIC_SANITY_STUDIO_DATASET }}
+  PUBLIC_STORE_DOMAIN: ${{ secrets.PUBLIC_STORE_DOMAIN }}
+
 jobs:
   test:
     runs-on: ubuntu-latest

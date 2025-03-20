@@ -17,9 +17,7 @@ export function Footer() {
           ))
         : null}
       {/* Footer Section */}
-      {footer ? (
-        <CmsSection data={footer} key={footer._key} type="footer" />
-      ) : null}
+      {footer ? <CmsSection data={footer} type="footer" /> : null}
     </>
   );
 }

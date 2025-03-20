@@ -1,5 +1,6 @@
 import type {CropMode} from '@sanity/image-url/lib/types/types';
 import type {ImageUrlBuilder} from 'sanity';
+import type {SanityImage as SanityImageData} from 'types';
 
 import {getExtension, getImageDimensions} from '@sanity/asset-utils';
 import imageUrlBuilder from '@sanity/image-url';
@@ -32,15 +33,7 @@ export type SanityImageProps = React.ComponentPropsWithRef<'img'> & {
    */
   aspectRatio?: string;
   className?: string;
-  data: null | {
-    alt?: string;
-    asset?: {
-      _ref: string;
-      _type: 'reference';
-    };
-    crop?: ImageCrop;
-    hotspot?: ImageHotspot;
-  };
+  data: SanityImageData;
   dataSanity?: string;
   /**
    * Set to `true` to enable LQIP (Low Quality Image Placeholder).
@@ -216,7 +209,7 @@ const SanityImage = React.forwardRef<HTMLImageElement, SanityImageProps>(
 
     return (
       <img
-        alt={data.alt || ''}
+        alt={data.altText || ''}
         className={cn(
           showBorder &&
             'rounded-(--media-border-corner-radius) [border-width:var(--media-border-thickness)] border-[rgb(var(--border)_/_var(--media-border-opacity))]',

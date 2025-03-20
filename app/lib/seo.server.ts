@@ -14,7 +14,7 @@ import type {
   PAGE_QUERYResult,
   ROOT_QUERYResult,
 } from 'types/sanity/sanity.generated';
-import type {SanityImage} from 'types/sanity/types';
+import type {SanityImage} from 'types';
 
 import {getImageDimensions} from '@sanity/asset-utils';
 import {stegaClean} from '@sanity/client/stega';

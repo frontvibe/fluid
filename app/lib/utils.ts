@@ -1,7 +1,7 @@
 import type {FulfillmentStatus} from '@shopify/hydrogen/customer-account-api-types';
 import type {SelectedOption} from '@shopify/hydrogen/storefront-api-types';
 import type {ClassValue} from 'class-variance-authority/types';
-import type {I18nLocale} from 'types/sanity/types';
+import type {I18nLocale} from 'types';
 
 import {useLocation} from '@remix-run/react';
 import {stegaClean} from '@sanity/client/stega';

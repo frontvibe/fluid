@@ -1,11 +1,8 @@
 import type {PortableTextComponents} from '@portabletext/react';
 import type {PortableTextBlock} from '@portabletext/types';
-import type {TypeFromSelection} from 'groqd';
 
 import {PortableText} from '@portabletext/react';
 import {useMemo} from 'react';
-
-import type {ADD_TO_CART_BUTTON_BLOCK_FRAGMENT} from '~/qroq/blocks';
 
 import type {PriceBlockProps} from '../blocks/PriceBlock';
 import type {ShopifyDescriptionBlockProps} from '../blocks/ShopifyDescriptionBlock';

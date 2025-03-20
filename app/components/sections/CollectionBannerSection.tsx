@@ -1,4 +1,4 @@
-import type {SectionDefaultProps, SectionOfType} from 'types/sanity/types';
+import type {SectionDefaultProps, SectionOfType} from 'types';
 
 import {useLoaderData} from '@remix-run/react';
 

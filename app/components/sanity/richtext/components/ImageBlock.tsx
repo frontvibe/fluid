@@ -1,13 +1,7 @@
-import type {TypeFromSelection} from 'groqd';
-
 import {stegaClean} from '@sanity/client/stega';
 import {cva} from 'class-variance-authority';
 
-import type {IMAGE_BLOCK_FRAGMENT} from '~/qroq/blocks';
-
 import {SanityImage} from '../../SanityImage';
-
-export type ImageBlockProps = TypeFromSelection<typeof IMAGE_BLOCK_FRAGMENT>;
 
 export function ImageBlock(
   props: ImageBlockProps & {

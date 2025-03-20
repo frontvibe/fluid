@@ -11,7 +11,7 @@ import type {
   internalGroqTypeReferenceTo,
   SanityImageCrop,
   SanityImageHotspot,
-} from './sanity.generated';
+} from './sanity/sanity.generated';
 export type I18nLocale = Locale & {
   default: boolean;
   pathPrefix: string;
@@ -40,14 +40,29 @@ type AllSectionsTypes = NonNullable<
   NonNullable<ALL_SECTIONS_QUERYResult>['sections']
 >[number]['_type'];
 
+type AllFootersTypes = NonNullable<
+  NonNullable<ALL_SECTIONS_QUERYResult>['footers']
+>[number]['_type'];
+
 export type SectionDataType = NonNullable<
   NonNullable<ALL_SECTIONS_QUERYResult>['sections']
+>[0];
+
+export type FooterDataType = NonNullable<
+  NonNullable<ALL_SECTIONS_QUERYResult>['footers']
 >[0];
 
 export type SectionOfType<T extends AllSectionsTypes> =
   NonNullable<ALL_SECTIONS_QUERYResult>['sections'] extends Array<
     infer S
   > | null
+    ? S extends {_type: T}
+      ? S
+      : never
+    : never;
+
+export type FooterOfType<T extends AllFootersTypes> =
+  NonNullable<ALL_SECTIONS_QUERYResult>['footers'] extends Array<infer S> | null
     ? S extends {_type: T}
       ? S
       : never

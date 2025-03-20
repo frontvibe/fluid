@@ -1,8 +1,6 @@
-import type {InferType} from 'groqd';
+import type {ROOT_QUERYResult} from 'types/sanity/sanity.generated';
 
 import {useEffect, useRef, useState} from 'react';
-
-import type {HEADER_QUERY} from '~/qroq/queries';
 
 import {SanityExternalLink} from '../sanity/link/SanityExternalLink';
 import {SanityInternalLink} from '../sanity/link/SanityInternalLink';
@@ -14,8 +12,7 @@ import {
 } from '../ui/NavigationMenu';
 import {NestedNavigation} from './NestedNavigation';
 
-type HeaderQuery = InferType<typeof HEADER_QUERY>;
-export type NavigationProps = NonNullable<HeaderQuery>['menu'];
+export type NavigationProps = NonNullable<ROOT_QUERYResult['header']>['menu'];
 
 export function DesktopNavigation(props: {data?: NavigationProps}) {
   const menuRef = useRef<HTMLUListElement>(null);

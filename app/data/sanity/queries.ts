@@ -3,6 +3,7 @@ import {defineQuery} from 'groq';
 import {FOOTERS_FRAGMENT} from './footers';
 import {
   COLOR_SCHEME_FRAGMENT,
+  FONT_FRAGMENT,
   HEADER_FRAGMENT,
   IMAGE_FRAGMENT,
   SETTINGS_FRAGMENT,
@@ -19,27 +20,45 @@ export const DEFAULT_PRODUCT_TEMPLATE =
   defineQuery(`*[_type == 'productTemplate' && default == true][0] {
     _type,
     name,
-    sections[] ${PRODUCT_SECTIONS_FRAGMENT},
+    sections[] {
+      _key,
+      _type,
+      ${SECTIONS_FRAGMENT()}
+      ${PRODUCT_SECTIONS_FRAGMENT()}
+    },
   }`);
 
 export const DEFAULT_COLLECTION_TEMPLATE =
   defineQuery(`*[_type == 'collectionTemplate' && default == true][0] {
     _type,
     name,
-    sections[] ${COLLECTION_SECTIONS_FRAGMENT},
+    sections[] {
+      _key,
+      _type,
+      ${SECTIONS_FRAGMENT()}
+      ${COLLECTION_SECTIONS_FRAGMENT()}
+    },
   }`);
 
 export const ROOT_QUERY = defineQuery(`{
   '_type': 'root',
   "defaultColorScheme": *[_type == "colorScheme" && default == true][0] ${COLOR_SCHEME_FRAGMENT},
-  "fonts": *[_type == "typography"][0] | order(_createdAt asc) {
-    body,
-    extra,
-    heading,
+  "fonts": *[_type == "typography"][0] {
+    body ${FONT_FRAGMENT},
+    heading ${FONT_FRAGMENT},
+    extra ${FONT_FRAGMENT},
   },
   "footer": *[_type == 'footer'][0] {
-    "footer": footers[] ${FOOTERS_FRAGMENT},
-    sections[] ${SECTIONS_FRAGMENT},
+    "footer": footers[0] {
+      _key,
+      _type,
+      ${FOOTERS_FRAGMENT()}
+    },
+    sections[] {
+      _key,
+      _type,
+      ${SECTIONS_FRAGMENT()}
+    },
   },
   "header": *[_type == "header"][0] ${HEADER_FRAGMENT},
   "settings": *[_type == "settings"][0] ${SETTINGS_FRAGMENT},
@@ -53,7 +72,12 @@ export const COLLECTION_QUERY = defineQuery(`{
       gid,
     },
     template -> {
-      sections[] ${COLLECTION_SECTIONS_FRAGMENT},
+      sections[] {
+        _key,
+        _type,
+        ${SECTIONS_FRAGMENT()}
+        ${COLLECTION_SECTIONS_FRAGMENT()}
+      },
     },
   },
   "defaultCollectionTemplate": ${DEFAULT_COLLECTION_TEMPLATE},
@@ -64,7 +88,11 @@ export const PAGE_QUERY =
     _type == "home" && $handle == "home"
   )][0] {
     _type,
-    sections[] ${SECTIONS_FRAGMENT},
+    sections[] {
+      _key,
+      _type,
+      ${SECTIONS_FRAGMENT()}
+    },
     seo {
       "title": ${getIntValue('title')},
       "description": ${getIntValue('description')},
@@ -79,17 +107,32 @@ export const PRODUCT_QUERY = defineQuery(`{
       gid,
     },
     template -> {
-      sections[] ${PRODUCT_SECTIONS_FRAGMENT},
+      sections[] {
+        _key,
+        _type,
+        ${SECTIONS_FRAGMENT()}
+        ${PRODUCT_SECTIONS_FRAGMENT()}
+      },
     },
   },
   "defaultProductTemplate": ${DEFAULT_PRODUCT_TEMPLATE},
 }`);
 
 /**
- * Used by Typegen to generate the ALL_SECTIONS_QUERYResult type
+ * Used by Typegen to generate the ALL_SECTIONS_QUERYResult type.
+ * This query is used to generate the `SectionOfType` type.
  */
 export const ALL_SECTIONS_QUERY = defineQuery(`*[][0] {
-  sections[] ${SECTIONS_FRAGMENT},
-  productSections[] ${PRODUCT_SECTIONS_FRAGMENT},
-  collectionSections[] ${COLLECTION_SECTIONS_FRAGMENT},
+  sections[] {
+    _key,
+    _type,
+    ${SECTIONS_FRAGMENT()}
+    ${PRODUCT_SECTIONS_FRAGMENT()}
+    ${COLLECTION_SECTIONS_FRAGMENT()}
+  },
+  footers[] {
+    _key,
+    _type,
+    ${FOOTERS_FRAGMENT()}
+  },
 }`);

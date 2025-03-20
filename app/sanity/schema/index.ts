@@ -15,6 +15,7 @@ import socialLinksOnly from './objects/footers/social-links-only';
 import announcementBar from './objects/global/announcement-bar';
 import aspectRatios from './objects/global/aspect-ratios';
 import bannerRichtext from './objects/global/banner-richtext';
+import contentAlignment from './objects/global/content-alignment';
 import contentPosition from './objects/global/content-position';
 import footersList from './objects/global/footers-list';
 import padding from './objects/global/padding';
@@ -87,6 +88,7 @@ const objects = [
   link,
   padding,
   contentPosition,
+  contentAlignment,
   richtext,
   aspectRatios,
   internalLink,

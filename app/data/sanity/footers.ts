@@ -17,6 +17,7 @@ export const FOOTER_SOCIAL_LINKS_ONLY_FRAGMENT = defineQuery(`{
   "settings": ${FOOTER_SETTINGS_FRAGMENT},
 }`);
 
-export const FOOTERS_FRAGMENT = defineQuery(`{
-  _type == 'socialLinksOnly' => ${FOOTER_SOCIAL_LINKS_ONLY_FRAGMENT},
-}`);
+export const FOOTERS_FRAGMENT = () =>
+  defineQuery(`
+    _type == 'socialLinksOnly' => ${FOOTER_SOCIAL_LINKS_ONLY_FRAGMENT},
+  `);

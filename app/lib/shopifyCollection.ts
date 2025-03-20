@@ -2,7 +2,7 @@ import type {
   ProductCollectionSortKeys,
   ProductFilter,
 } from '@shopify/hydrogen/storefront-api-types';
-import type {I18nLocale} from 'types/sanity/types';
+import type {I18nLocale} from 'types';
 
 import type {ShopifyCollection} from '~/components/sections/CollectionProductGridSection';
 

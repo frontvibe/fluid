@@ -1,7 +1,7 @@
 import type {ProductVariantConnection} from '@shopify/hydrogen/storefront-api-types';
 import type {FeaturedProductQuery} from 'storefrontapi.generated';
 import type {PartialObjectDeep} from 'type-fest/source/partial-deep';
-import type {SectionDefaultProps, SectionOfType} from 'types/sanity/types';
+import type {SectionDefaultProps, SectionOfType} from 'types';
 
 import {Await, useLoaderData} from '@remix-run/react';
 import {stegaClean} from '@sanity/client/stega';
@@ -131,9 +131,9 @@ function FeaturedProductSkeleton({
   // While waiting for Shopify data, we render a skeleton filled with sanity data
   if (sanityProduct) {
     variants.nodes?.push({
-      id: sanityProduct.firstVariant?.store?.gid,
+      id: sanityProduct.firstVariant?.store?.gid || '',
       price: {
-        amount: sanityProduct?.firstVariant?.store?.price.toString() || '0',
+        amount: sanityProduct?.firstVariant?.store?.price?.toString() || '0',
         currencyCode: locale.currency,
       },
       selectedOptions: [],
@@ -149,7 +149,7 @@ function FeaturedProductSkeleton({
               aspectRatio={imageAspectRatio.value}
               className={cn('h-auto object-cover', imageAspectRatio.className)}
               data={{
-                id: data.product?.store.gid,
+                id: data.product?.store?.gid,
                 url: imageUrl,
               }}
               sizes="(min-width: 1024px) 50vw, 100vw"
@@ -159,10 +159,14 @@ function FeaturedProductSkeleton({
         <div>
           <ProductProvider
             data={{
-              descriptionHtml: sanityProduct?.descriptionHtml,
-              id: sanityProduct?.gid,
-              options: sanityProduct?.options || [],
-              title: sanityProduct?.title,
+              descriptionHtml: sanityProduct?.descriptionHtml || '',
+              id: sanityProduct?.gid || '',
+              options:
+                sanityProduct?.options?.map((option) => ({
+                  name: option.name || '',
+                  values: option.values || [],
+                })) || [],
+              title: sanityProduct?.title || '',
               variants,
             }}
           >

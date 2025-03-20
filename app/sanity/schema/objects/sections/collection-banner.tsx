@@ -23,23 +23,7 @@ export default defineField({
     }),
     defineField({
       name: 'contentAlignment',
-      type: 'string',
-      options: {
-        list: [
-          {
-            title: 'Left',
-            value: 'left',
-          },
-          {
-            title: 'Center',
-            value: 'center',
-          },
-          {
-            title: 'Right',
-            value: 'right',
-          },
-        ],
-      },
+      type: 'contentAlignment',
     }),
     defineField({
       name: 'bannerHeight',

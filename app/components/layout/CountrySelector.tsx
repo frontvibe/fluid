@@ -1,11 +1,11 @@
+import type {I18nLocale} from 'types';
+
 import {DropdownMenuTrigger} from '@radix-ui/react-dropdown-menu';
 import {useLocation} from '@remix-run/react';
 import {CartForm} from '@shopify/hydrogen';
 import {cx} from 'class-variance-authority';
 import {getAllLocales} from 'countries';
 import {useMemo} from 'react';
-
-import type {I18nLocale} from '~/lib/type';
 
 import {useLocalePath} from '~/hooks/useLocalePath';
 import {useRootLoaderData} from '~/root';

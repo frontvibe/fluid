@@ -1,4 +1,4 @@
-import type {SectionDefaultProps, SectionOfType} from 'types/sanity/types';
+import type {SectionDefaultProps, SectionOfType} from 'types';
 
 import Autoplay from 'embla-carousel-autoplay';
 import {useInView} from 'framer-motion';

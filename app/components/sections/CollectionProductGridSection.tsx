@@ -3,7 +3,7 @@ import type {
   CollectionProductGridQuery,
   ProductCardFragment,
 } from 'storefrontapi.generated';
-import type {SectionDefaultProps, SectionOfType} from 'types/sanity/types';
+import type {SectionDefaultProps, SectionOfType} from 'types';
 
 import {
   Await,

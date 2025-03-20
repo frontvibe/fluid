@@ -212,3 +212,29 @@ export const HEADER_FRAGMENT = defineQuery(`{
   showSeparatorLine,
   sticky 
 }`);
+
+const FONT_ASSET_FRAGMENT = defineQuery(`{
+  "extension": asset -> extension,
+  "mimeType": asset -> mimeType,
+  "url": asset -> url,
+}`);
+
+export const FONT_FRAGMENT = defineQuery(`{
+  baseSize,
+  capitalize,
+  font[] {
+    antialiased,
+    fontAssets[] {
+      fontName,
+      fontStyle,
+      fontWeight,
+      ttf ${FONT_ASSET_FRAGMENT},
+      woff ${FONT_ASSET_FRAGMENT},
+      woff2 ${FONT_ASSET_FRAGMENT},
+    },
+    fontName,
+    fontType,
+  },
+  letterSpacing,
+  lineHeight,
+}`);

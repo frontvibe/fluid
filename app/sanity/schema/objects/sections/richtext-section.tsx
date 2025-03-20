@@ -13,43 +13,11 @@ export default defineField({
     defineField({
       name: 'desktopContentPosition',
       description: 'Position is automatically optimized for mobile.',
-      type: 'string',
-      options: {
-        list: [
-          {
-            title: 'Left',
-            value: 'left',
-          },
-          {
-            title: 'Center',
-            value: 'center',
-          },
-          {
-            title: 'Right',
-            value: 'right',
-          },
-        ],
-      },
+      type: 'contentAlignment',
     }),
     defineField({
       name: 'contentAlignment',
-      type: 'string',
-      options: {
-        list: [
-          {
-            title: 'Left',
-            value: 'left',
-          },
-          {
-            title: 'Center',
-            value: 'center',
-          },
-          {
-            title: 'Right',
-            value: 'right',
-          },
-        ],
-      },
+      type: 'contentAlignment',
     }),
     defineField({
       name: 'maxWidth',

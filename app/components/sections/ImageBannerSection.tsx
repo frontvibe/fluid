@@ -1,11 +1,9 @@
 import type {PortableTextComponents} from '@portabletext/react';
 import type {PortableTextBlock} from '@portabletext/types';
-import type {SectionDefaultProps, SectionOfType} from 'types/sanity/types';
+import type {SectionDefaultProps, SectionOfType} from 'types';
 
 import {PortableText} from '@portabletext/react';
 import {useMemo} from 'react';
-
-import type {ButtonBlockProps} from '../sanity/richtext/components/ButtonBlock';
 
 import {
   Banner,

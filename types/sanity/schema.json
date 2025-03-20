@@ -8750,6 +8750,27 @@
     }
   },
   {
+    "name": "contentAlignment",
+    "type": "type",
+    "value": {
+      "type": "union",
+      "of": [
+        {
+          "type": "string",
+          "value": "left"
+        },
+        {
+          "type": "string",
+          "value": "center"
+        },
+        {
+          "type": "string",
+          "value": "right"
+        }
+      ]
+    }
+  },
+  {
     "name": "contentPosition",
     "type": "type",
     "value": {

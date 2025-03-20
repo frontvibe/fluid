@@ -1,4 +1,4 @@
-import {defineQuery} from 'groq';
+import groq, {defineQuery} from 'groq';
 
 import {COLOR_SCHEME_FRAGMENT, IMAGE_FRAGMENT} from './fragments';
 import {getIntValue} from './utils';
@@ -103,7 +103,7 @@ export const FEATURED_PRODUCT_SECTION_FRAGMENT = defineQuery(`{
   product -> {
     store {
       descriptionHtml,
-      "firstVariant": variants[] -> {
+      "firstVariant": variants[0] -> {
         store {
           gid,
           previewImageUrl,
@@ -158,39 +158,24 @@ export const IMAGE_BANNER_SECTION_FRAGMENT = defineQuery(`{
   settings ${SECTION_SETTINGS_FRAGMENT}
 }`);
 
-export const SECTIONS_FRAGMENT = defineQuery(`{
-  _key,
-  _type,
-  _type == 'richtextSection' => ${RICHTEXT_SECTION_FRAGMENT},
-  _type == 'carouselSection' => ${CAROUSEL_SECTION_FRAGMENT},
-  _type == 'collectionListSection' => ${COLLECTION_LIST_SECTION_FRAGMENT},
-  _type == 'featuredProductSection' => ${FEATURED_PRODUCT_SECTION_FRAGMENT},
-  _type == 'featuredCollectionSection' => ${FEATURED_COLLECTION_SECTION_FRAGMENT},
-  _type == 'imageBannerSection' => ${IMAGE_BANNER_SECTION_FRAGMENT},
-}`);
+export const SECTIONS_FRAGMENT = () =>
+  defineQuery(`
+    _type == 'richtextSection' => ${RICHTEXT_SECTION_FRAGMENT},
+    _type == 'carouselSection' => ${CAROUSEL_SECTION_FRAGMENT},
+    _type == 'collectionListSection' => ${COLLECTION_LIST_SECTION_FRAGMENT},
+    _type == 'featuredProductSection' => ${FEATURED_PRODUCT_SECTION_FRAGMENT},
+    _type == 'featuredCollectionSection' => ${FEATURED_COLLECTION_SECTION_FRAGMENT},
+    _type == 'imageBannerSection' => ${IMAGE_BANNER_SECTION_FRAGMENT},
+  `);
 
-export const PRODUCT_SECTIONS_FRAGMENT = defineQuery(`{
-  _key,
-  _type,
-  _type == 'productInformationSection' => ${PRODUCT_INFORMATION_SECTION_FRAGMENT},
-  _type == 'relatedProductsSection' => ${RELATED_PRODUCTS_SECTION_FRAGMENT},
-  _type == 'richtextSection' => ${RICHTEXT_SECTION_FRAGMENT},
-  _type == 'carouselSection' => ${CAROUSEL_SECTION_FRAGMENT},
-  _type == 'collectionListSection' => ${COLLECTION_LIST_SECTION_FRAGMENT},
-  _type == 'featuredProductSection' => ${FEATURED_PRODUCT_SECTION_FRAGMENT},
-  _type == 'featuredCollectionSection' => ${FEATURED_COLLECTION_SECTION_FRAGMENT},
-  _type == 'imageBannerSection' => ${IMAGE_BANNER_SECTION_FRAGMENT},
-}`);
+export const COLLECTION_SECTIONS_FRAGMENT = () =>
+  defineQuery(`
+    _type == 'collectionBannerSection' => ${COLLECTION_BANNER_SECTION_FRAGMENT},
+    _type == 'collectionProductGridSection' => ${COLLECTION_PRODUCT_GRID_SECTION_FRAGMENT},
+  `);
 
-export const COLLECTION_SECTIONS_FRAGMENT = defineQuery(`{
-  _key,
-  _type,
-  _type == 'collectionBannerSection' => ${COLLECTION_BANNER_SECTION_FRAGMENT},
-  _type == 'collectionProductGridSection' => ${COLLECTION_PRODUCT_GRID_SECTION_FRAGMENT},
-  _type == 'richtextSection' => ${RICHTEXT_SECTION_FRAGMENT},
-  _type == 'carouselSection' => ${CAROUSEL_SECTION_FRAGMENT},
-  _type == 'collectionListSection' => ${COLLECTION_LIST_SECTION_FRAGMENT},
-  _type == 'featuredProductSection' => ${FEATURED_PRODUCT_SECTION_FRAGMENT},
-  _type == 'featuredCollectionSection' => ${FEATURED_COLLECTION_SECTION_FRAGMENT},
-  _type == 'imageBannerSection' => ${IMAGE_BANNER_SECTION_FRAGMENT},
-}`);
+export const PRODUCT_SECTIONS_FRAGMENT = () =>
+  defineQuery(`
+    _type == 'productInformationSection' => ${PRODUCT_INFORMATION_SECTION_FRAGMENT},
+    _type == 'relatedProductsSection' => ${RELATED_PRODUCTS_SECTION_FRAGMENT},
+  `);

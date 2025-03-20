@@ -32,7 +32,7 @@ jobs:
         run: pnpm install
 
       - name: Typecheck
-        run: pnpm run typecheck
+        run: pnpm run codegen && pnpm run sanity:typegen && tsc --noEmit
 
       - name: Lint
         run: pnpm run lint

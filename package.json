@@ -12,7 +12,7 @@
     "lint:fix": "npm run lint -- --fix",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
-    "typecheck": "npm run codegen && npm run sanity:typegen && tsc --noEmit",
+    "typecheck": "tsc --noEmit",
     "create:initial": "sanity exec ./scripts/createInitialDocuments.ts --with-user-token",
     "codegen": "shopify hydrogen codegen",
     "sanity:typegen": "npm run sanity:extract && npm run sanity:generate",

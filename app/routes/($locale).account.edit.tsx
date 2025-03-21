@@ -17,10 +17,10 @@ import {
 } from '@shopify/remix-oxygen';
 import invariant from 'tiny-invariant';
 
-import {Button} from '~/components/ui/Button';
-import {Input} from '~/components/ui/Input';
+import {Button} from '~/components/ui/button_';
+import {Input} from '~/components/ui/input_';
 import {CUSTOMER_UPDATE_MUTATION} from '~/data/shopify/customer-account/mutations';
-import {useSanityThemeContent} from '~/hooks/useSanityThemeContent';
+import {useSanityThemeContent} from '~/hooks/use-sanity-theme-content';
 
 import {doLogout} from './($locale).account_.logout';
 

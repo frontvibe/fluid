@@ -5,7 +5,7 @@ import {defineField} from 'sanity';
 import {SANITY_API_VERSION} from '~/sanity/constants';
 
 import ShopifyDocumentStatus from '../../../components/shopify/shopify-document-status';
-import {getPriceRange} from '../../../utils/getPriceRange';
+import {getPriceRange} from '../../../utils/get-price-range';
 
 export default defineField({
   name: 'productWithVariant',

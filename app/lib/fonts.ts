@@ -1,6 +1,6 @@
 import type {ROOT_QUERYResult} from 'types/sanity/sanity.generated';
 
-import {getFonts} from '~/components/Fonts';
+import {getFonts} from '~/components/fonts_';
 
 export type FontsQuery = NonNullable<ROOT_QUERYResult['fonts']>;
 

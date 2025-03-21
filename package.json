@@ -13,7 +13,7 @@
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
     "typecheck": "tsc --noEmit",
-    "create:initial": "sanity exec ./scripts/createInitialDocuments.ts --with-user-token",
+    "create:initial": "sanity exec ./scripts/create-initial-documents.ts --with-user-token",
     "codegen": "shopify hydrogen codegen",
     "sanity:typegen": "npm run sanity:extract && npm run sanity:generate",
     "sanity:extract": "sanity schema extract --path ./types/sanity/schema.json",

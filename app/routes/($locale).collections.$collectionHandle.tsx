@@ -7,11 +7,11 @@ import {Analytics} from '@shopify/hydrogen';
 import {DEFAULT_LOCALE} from 'countries';
 import invariant from 'tiny-invariant';
 
-import {CmsSection} from '~/components/CmsSection';
+import {CmsSection} from '~/components/cms-section';
 import {COLLECTION_QUERY as CMS_COLLECTION_QUERY} from '~/data/sanity/queries';
 import {COLLECTION_QUERY} from '~/data/shopify/queries';
 import {mergeMeta} from '~/lib/meta';
-import {resolveShopifyPromises} from '~/lib/resolveShopifyPromises';
+import {resolveShopifyPromises} from '~/lib/resolve-shopify-promises';
 import {getSeoMetaFromMatches} from '~/lib/seo';
 import {seoPayload} from '~/lib/seo.server';
 

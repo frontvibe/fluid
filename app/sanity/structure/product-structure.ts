@@ -4,7 +4,7 @@ import {InfoOutlineIcon} from '@sanity/icons';
 
 import IconTag from '../components/icons/tag-icon';
 import {SANITY_API_VERSION} from '../constants';
-import defineStructure from '../utils/defineStructure';
+import defineStructure from '../utils/define-structure';
 
 export const products = defineStructure<ListItemBuilder>((S) =>
   S.listItem()

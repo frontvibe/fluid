@@ -23,17 +23,17 @@ import {
 import {Analytics, getShopAnalytics, useNonce} from '@shopify/hydrogen';
 import {DEFAULT_LOCALE} from 'countries';
 
-import {Layout as AppLayout} from '~/components/layout/Layout';
+import {Layout as AppLayout} from '~/components/layout';
 
-import {CssVars} from './components/CssVars';
-import {CustomAnalytics} from './components/CustomAnalytics';
-import {Fonts} from './components/Fonts';
-import {Button} from './components/ui/Button';
+import {CssVars} from './components/css-vars';
+import {CustomAnalytics} from './components/custom-analytics';
+import {Fonts} from './components/fonts_';
+import {Button} from './components/ui/button_';
 import {ROOT_QUERY} from './data/sanity/queries';
-import {useLocalePath} from './hooks/useLocalePath';
-import {useSanityThemeContent} from './hooks/useSanityThemeContent';
+import {useLocalePath} from './hooks/use-locale-path';
+import {useSanityThemeContent} from './hooks/use-sanity-theme-content';
 import {generateFontsPreloadLinks} from './lib/fonts';
-import {resolveShopifyPromises} from './lib/resolveShopifyPromises';
+import {resolveShopifyPromises} from './lib/resolve-shopify-promises';
 import {seoPayload} from './lib/seo.server';
 import {generateSanityImageUrl} from './lib/utils';
 import tailwindCss from './styles/tailwind.css?url';

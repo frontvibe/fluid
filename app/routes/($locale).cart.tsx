@@ -9,7 +9,7 @@ import {useLoaderData} from '@remix-run/react';
 import {Analytics, CartForm} from '@shopify/hydrogen';
 import {redirectDocument, data as remixData} from '@shopify/remix-oxygen';
 
-import {Cart} from '~/components/cart/Cart';
+import {Cart} from '~/components/cart';
 import {isLocalPath} from '~/lib/utils';
 
 export async function action({context, request}: ActionFunctionArgs) {

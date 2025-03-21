@@ -3,7 +3,7 @@ import type {StringRule, ValidationContext} from 'sanity';
 import {LayoutTemplate} from 'lucide-react';
 import {defineField, defineType} from 'sanity';
 
-import {validateDefaultStatus} from '../../utils/setAsDefaultValidation';
+import {validateDefaultStatus} from '../../utils/set-as-default-validation';
 
 export default defineType({
   name: 'collectionTemplate',

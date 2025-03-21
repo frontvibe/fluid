@@ -5,6 +5,8 @@ import tailwindcss from '@tailwindcss/vite';
 import {defineConfig} from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
+import {typegenWatcher} from './types/plugin';
+
 declare module '@remix-run/server-runtime' {
   interface Future {
     v3_singleFetch: true;
@@ -35,6 +37,7 @@ export default defineConfig({
     }),
     tsconfigPaths(),
     tailwindcss(),
+    typegenWatcher(),
   ],
   build: {
     // Allow a strict Content-Security-Policy

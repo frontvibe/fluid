@@ -1,6 +1,4 @@
-import type {TypeFromSelection} from 'groqd';
-
-import type {EXTERNAL_LINK_BLOCK_ANNOTATION_FRAGMENT} from '~/qroq/blocks';
+import type {RichTextBlock} from 'types';
 
 import {IconExternal} from '~/components/icons/IconExternal';
 import {cn} from '~/lib/utils';
@@ -8,9 +6,11 @@ import {cn} from '~/lib/utils';
 import {SanityExternalLink} from '../../link/SanityExternalLink';
 import {richTextLinkClassName} from './InternalLinkAnnotation';
 
-export type ExternalLinkAnnotationProps = TypeFromSelection<
-  typeof EXTERNAL_LINK_BLOCK_ANNOTATION_FRAGMENT
->;
+export type ExternalLinkAnnotationProps = NonNullable<
+  RichTextBlock['markDefs']
+>[number] & {
+  _type: 'externalLink';
+};
 
 export function ExternalLinkAnnotation(
   props: ExternalLinkAnnotationProps & {children: React.ReactNode},

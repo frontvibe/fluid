@@ -2,9 +2,9 @@ import {PackageIcon} from '@sanity/icons';
 import pluralize from 'pluralize-esm';
 import {defineField, defineType} from 'sanity';
 
-import {ShopifyIcon} from '../../components/icons/ShopifyIcon';
-import {CollectionHiddenInput} from '../../components/shopify/CollectionHidden';
-import {ShopifyDocumentStatus} from '../../components/shopify/ShopifyDocumentStatus';
+import ShopifyIcon from '../../components/icons/shopify-icon';
+import CollectionHiddenInput from '../../components/shopify/collection-hidden';
+import ShopifyDocumentStatus from '../../components/shopify/shopify-document-status';
 
 const GROUPS = [
   {

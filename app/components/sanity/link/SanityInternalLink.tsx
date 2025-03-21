@@ -1,20 +1,49 @@
-import type {LinkProps} from '@remix-run/react';
-import type {TypeFromSelection} from 'groqd';
+import type {Anchor} from 'types/sanity/sanity.generated';
 
 import {Link} from '@remix-run/react';
 import {stegaClean} from '@sanity/client/stega';
 
-import type {INTERNAL_LINK_FRAGMENT} from '~/qroq/links';
-
 import {cn} from '~/lib/utils';
 import {useRootLoaderData} from '~/root';
 
-type SanityInternalLinkProps = TypeFromSelection<typeof INTERNAL_LINK_FRAGMENT>;
+type Slug = null | {
+  _type: 'slug';
+  current?: null | string;
+};
+
+type SanityInternalLinkDataProps = {
+  _key: null | string;
+  _type: 'internalLink';
+  anchor?: Anchor | null;
+  link?:
+    | null
+    | {
+        documentType: 'blogPost';
+        slug: Slug;
+      }
+    | {
+        documentType: 'collection';
+        slug: Slug;
+      }
+    | {
+        documentType: 'home';
+        slug: Slug;
+      }
+    | {
+        documentType: 'page';
+        slug: Slug;
+      }
+    | {
+        documentType: 'product';
+        slug: Slug;
+      };
+  name: null | string;
+};
 
 export function SanityInternalLink(props: {
   children?: React.ReactNode;
   className?: string;
-  data?: SanityInternalLinkProps;
+  data?: SanityInternalLinkDataProps;
   onClick?: () => void;
 }) {
   const {locale} = useRootLoaderData();

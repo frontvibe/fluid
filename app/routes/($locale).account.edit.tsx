@@ -19,7 +19,7 @@ import invariant from 'tiny-invariant';
 
 import {Button} from '~/components/ui/Button';
 import {Input} from '~/components/ui/Input';
-import {CUSTOMER_UPDATE_MUTATION} from '~/graphql/customer-account/mutations';
+import {CUSTOMER_UPDATE_MUTATION} from '~/data/shopify/customer-account/mutations';
 import {useSanityThemeContent} from '~/hooks/useSanityThemeContent';
 
 import {doLogout} from './($locale).account_.logout';
@@ -119,12 +119,12 @@ export default function AccountDetailsEdit() {
   const {customer} = useOutletContext<AccountOutletContext>();
   const {state} = useNavigation();
   const {themeContent} = useSanityThemeContent();
-  const firstName = themeContent?.account.firstName ?? 'First name';
-  const lastName = themeContent?.account.lastName ?? 'Last name';
+  const firstName = themeContent?.account?.firstName ?? 'First name';
+  const lastName = themeContent?.account?.lastName ?? 'Last name';
 
   return (
     <div className="container">
-      <h3>{themeContent?.account.updateYourProfile}</h3>
+      <h3>{themeContent?.account?.updateYourProfile}</h3>
       <Form method="post">
         {actionData?.formError && (
           <div className="mb-6 flex items-center justify-center rounded-sm bg-red-100">
@@ -156,11 +156,11 @@ export default function AccountDetailsEdit() {
         <div className="mt-6 flex items-center gap-3">
           <Button disabled={state !== 'idle'} type="submit">
             {state !== 'idle'
-              ? themeContent?.account.saving
-              : themeContent?.account.save}
+              ? themeContent?.account?.saving
+              : themeContent?.account?.save}
           </Button>
           <Button asChild variant="secondary">
-            <Link to="..">{themeContent?.account.cancel}</Link>
+            <Link to="..">{themeContent?.account?.cancel}</Link>
           </Button>
         </div>
       </Form>

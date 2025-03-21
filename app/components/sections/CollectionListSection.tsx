@@ -1,20 +1,15 @@
-import type {TypeFromSelection} from 'groqd';
-import type {CollectionsQuery} from 'storefrontapi.generated';
+import type {SectionDefaultProps, SectionOfType} from 'types';
+import type {CollectionsQuery} from 'types/shopify/storefrontapi.generated';
 
 import {Await, useLoaderData} from '@remix-run/react';
 import {Suspense} from 'react';
-
-import type {SectionDefaultProps} from '~/lib/type';
-import type {COLLECTION_LIST_SECTION_FRAGMENT} from '~/qroq/sections';
 
 import type {loader as indexLoader} from '../../routes/_index';
 
 import {CollectionListGrid} from '../CollectionListGrid';
 import {Skeleton} from '../Skeleton';
 
-type CollectionListSectionProps = TypeFromSelection<
-  typeof COLLECTION_LIST_SECTION_FRAGMENT
->;
+type CollectionListSectionProps = SectionOfType<'collectionListSection'>;
 
 /**
  * `CollectionListSection` is a section that displays a list of collections.
@@ -74,7 +69,7 @@ function AwaitCollectionList(props: {
   const loaderData = useLoaderData<typeof indexLoader>();
   const collectionListPromise = loaderData?.collectionListPromise;
   const sanityCollectionListGids = props.sanityData.collections
-    ?.map((collection) => collection.store.gid)
+    ?.map((collection) => collection.store?.gid)
     .sort()
     .join(',');
 

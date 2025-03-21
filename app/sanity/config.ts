@@ -1,8 +1,5 @@
 import type {SingleWorkspace} from 'sanity';
 
-import {colorPicker} from '@frontvibe/sanity-color-picker';
-import {fontPicker} from '@frontvibe/sanity-font-picker';
-import {rangeSlider} from '@frontvibe/sanity-plugin-range-slider';
 import {codeInput} from '@sanity/code-input';
 import {languageFilter} from '@sanity/language-filter';
 import {visionTool} from '@sanity/vision';
@@ -13,13 +10,13 @@ import {media, mediaAssetSource} from 'sanity-plugin-media';
 import {presentationTool} from 'sanity/presentation';
 import {structureTool} from 'sanity/structure';
 
-import {PreviewIcon} from './components/icons/Preview';
+import IconPreview from './components/icons/preview-icon';
 import {
   SANITY_API_VERSION,
   SANITY_STUDIO_PREVIEW_URL,
   SANITY_STUDIO_URL,
 } from './constants';
-import {customDocumentActions} from './plugins/customDocumentActions';
+import {customDocumentActions} from './plugins/custom-document-actions';
 import {locations} from './presentation/locations';
 import {schemaTypes} from './schema';
 import {defaultDocumentNode, structure} from './structure';
@@ -59,9 +56,6 @@ export function defineSanityConfig(
     basePath: SANITY_STUDIO_URL,
     ...config,
     plugins: [
-      fontPicker(),
-      rangeSlider(),
-      colorPicker(),
       codeInput(),
       structureTool({structure, defaultDocumentNode}),
       customDocumentActions({shopifyStoreDomain: config.shopifyStoreDomain}),
@@ -71,7 +65,7 @@ export function defineSanityConfig(
         resolve: {
           locations,
         },
-        icon: PreviewIcon,
+        icon: IconPreview,
         title: 'Preview',
       }),
       internationalizedArray({

@@ -1,12 +1,6 @@
-import type {InferType} from 'groqd';
-
-import type {SETTINGS_FRAGMENT} from '~/qroq/fragments';
-
 import {useRootLoaderData} from '~/root';
 
 import {SanityImage} from '../sanity/SanityImage';
-
-type Logo = InferType<typeof SETTINGS_FRAGMENT.logo>;
 
 export function Logo(props: {
   className?: string;
@@ -33,7 +27,7 @@ export function Logo(props: {
     <SanityImage
       data={{
         ...logo,
-        alt: siteName || '',
+        altText: siteName || '',
       }}
       {...props}
     />

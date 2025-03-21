@@ -1,39 +1,29 @@
 import type {EncodeDataAttributeCallback} from '@sanity/react-loader';
-import type {InferType} from 'groqd';
+import type {FooterDataType, SectionDataType} from 'types';
 
 import {createContext, useContext, useMemo} from 'react';
-
-import type {FOOTERS_FRAGMENT} from '~/qroq/footers';
-import type {
-  COLLECTION_SECTIONS_FRAGMENT,
-  PRODUCT_SECTIONS_FRAGMENT,
-  SECTIONS_FRAGMENT,
-} from '~/qroq/sections';
 
 import {useCardColorsCssVars, useColorsCssVars} from '~/hooks/useColorsCssVars';
 import {useIsDev} from '~/hooks/useIsDev';
 import {sections} from '~/lib/sectionResolver';
 
-type CmsSectionsProps =
-  | NonNullable<InferType<typeof COLLECTION_SECTIONS_FRAGMENT>>[0]
-  | NonNullable<InferType<typeof FOOTERS_FRAGMENT>>
-  | NonNullable<InferType<typeof PRODUCT_SECTIONS_FRAGMENT>>[0]
-  | NonNullable<InferType<typeof SECTIONS_FRAGMENT>>[0];
-
 type CmsSectionType = 'footer' | 'section';
 
+type CmsSectionProps = FooterDataType | SectionDataType;
+
 export function CmsSection(props: {
-  data: CmsSectionsProps;
+  data: CmsSectionProps;
   encodeDataAttribute?: EncodeDataAttributeCallback;
   index?: number;
   type?: CmsSectionType;
 }) {
   const {data, encodeDataAttribute} = props;
+  const {_type, settings} = data;
   const isDev = useIsDev();
-  const type = data._type;
+  const type = _type;
   const Section = useMemo(() => sections[type], [type]);
 
-  if (data.settings?.hide) return null;
+  if (settings?.hide) return null;
 
   return Section ? (
     <SectionWrapper
@@ -51,26 +41,27 @@ export function CmsSection(props: {
 
 function SectionWrapper(props: {
   children: React.ReactNode;
-  data: CmsSectionsProps;
+  data: CmsSectionProps;
   encodeDataAttribute?: EncodeDataAttributeCallback;
   index?: number;
   type?: CmsSectionType;
 }) {
   const {children, data} = props;
+  const {_key, _type, settings} = data;
   const isDev = useIsDev();
   const colorsCssVars = useColorsCssVars({
-    selector: props.type === 'footer' ? 'footer' : `#section-${data._key}`,
-    settings: data?.settings,
+    selector: props.type === 'footer' ? 'footer' : `#section-${_key}`,
+    settings,
   });
   const cardColorsCssVars = useCardColorsCssVars({
-    selector: `#section-${data._key} [data-type="card"]`,
-    settings: props.data.settings,
+    selector: `#section-${_key} [data-type="card"]`,
+    settings,
   });
-  const sectionSelector = `#section-${data._key}`;
-  const customCss = data.settings?.customCss?.code
-    ? `${sectionSelector} ${data.settings.customCss.code}`
+  const sectionSelector = `#section-${_key}`;
+  const customCss = settings?.customCss?.code
+    ? `${sectionSelector} ${settings.customCss.code}`
     : '';
-  const sectionType = data._type;
+  const sectionType = _type;
 
   return props.type === 'footer' ? (
     <footer
@@ -87,19 +78,19 @@ function SectionWrapper(props: {
     <SectionContext.Provider
       value={{
         encodeDataAttribute: props.encodeDataAttribute,
-        id: data._key,
+        id: _key,
         index: props.index,
       }}
     >
       <section
         className="section-padding bg-background text-foreground relative [content-visibility:auto]"
         data-section-type={isDev ? sectionType : null}
-        id={`section-${data._key}`}
+        id={`section-${_key}`}
       >
         <style dangerouslySetInnerHTML={{__html: colorsCssVars}} />
         <style dangerouslySetInnerHTML={{__html: cardColorsCssVars}} />
         {children}
-        {data.settings?.customCss && (
+        {settings?.customCss && (
           <style dangerouslySetInnerHTML={{__html: customCss}} />
         )}
       </section>

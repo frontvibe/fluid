@@ -1,10 +1,10 @@
+import type {
+  ContentAlignment,
+  ContentPosition,
+} from 'types/sanity/sanity.generated';
+
 import {stegaClean} from '@sanity/client/stega';
 import {forwardRef} from 'react';
-
-import type {
-  contentAlignmentValues,
-  contentPositionValues,
-} from '~/qroq/constant';
 
 import {cn} from '~/lib/utils';
 
@@ -58,7 +58,7 @@ const BannerMediaOverlay = forwardRef<
   }
 >(({className, opacity, ...props}, ref) => {
   const style = {
-    '--tw-bg-opacity': opacity ? opacity / 100 : 0,
+    opacity: opacity ? opacity / 100 : 0,
   } as React.CSSProperties;
 
   if (opacity === 0) return null;
@@ -78,8 +78,8 @@ BannerMediaOverlay.displayName = 'BannerMediaOverlay';
 const BannerContent = forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement> & {
-    contentAlignment: (typeof contentAlignmentValues)[number] | null;
-    contentPosition: (typeof contentPositionValues)[number] | null;
+    contentAlignment: ContentAlignment | null;
+    contentPosition: ContentPosition | null;
   }
 >(({className, contentAlignment, contentPosition, ...props}, ref) => {
   // Remove all stega encoded data

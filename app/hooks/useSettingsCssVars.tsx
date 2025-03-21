@@ -1,11 +1,17 @@
-import type {TypeFromSelection} from 'groqd';
-
-import type {BORDER_FRAGMENT, SHADOW_FRAGMENT} from '~/qroq/fragments';
-
 import {useRootLoaderData} from '~/root';
 
-type BorderFragment = null | TypeFromSelection<typeof BORDER_FRAGMENT>;
-type ShadowFragment = null | TypeFromSelection<typeof SHADOW_FRAGMENT>;
+type Border = null | {
+  cornerRadius?: number;
+  opacity?: number;
+  thickness?: number;
+};
+
+type Shadow = null | {
+  blur?: number;
+  horizontalOffset?: number;
+  opacity?: number;
+  verticalOffset?: number;
+};
 
 export function useSettingsCssVars() {
   const {sanityRoot} = useRootLoaderData();
@@ -38,7 +44,7 @@ export function useSettingsCssVars() {
   return cssVars.trim();
 }
 
-function borderCssVars(name: string, border?: BorderFragment) {
+function borderCssVars(name: string, border?: Border) {
   return `
     --${name}-border-corner-radius: ${border?.cornerRadius || 0}px;
     --${name}-border-thickness: ${border?.thickness || 0}px;
@@ -46,7 +52,7 @@ function borderCssVars(name: string, border?: BorderFragment) {
   `.trim();
 }
 
-function shadowCssVars(name: string, shadow?: ShadowFragment) {
+function shadowCssVars(name: string, shadow?: Shadow) {
   return `
     --${name}-shadow-opacity: ${shadow?.opacity ? shadow?.opacity / 100 : 0};
     --${name}-shadow-horizontal-offset: ${shadow?.horizontalOffset || 0}px;

@@ -92,7 +92,7 @@ function HeaderWrapper(props: {children: React.ReactNode}) {
     'section-padding bg-background text-foreground',
     sticky !== 'none' && 'sticky top-0 z-50',
     blur &&
-      'bg-opacity-95 backdrop-blur-sm supports-backdrop-filter:bg-opacity-85',
+      'bg-background/95 backdrop-blur-sm supports-backdrop-filter:bg-background/85',
     headerVariants({
       optional: showSeparatorLine ? 'separator-line' : null,
     }),
@@ -213,8 +213,8 @@ function useHeaderHeigth() {
   const headerBorder = data?.header?.showSeparatorLine ? 1 : 0;
   const sanitySettings = data?.settings;
   const logo = sanitySettings?.logo;
-  const width = logo ? getImageDimensions(logo._ref).width : 0;
-  const height = logo ? getImageDimensions(logo._ref).height : 0;
+  const width = logo?._ref ? getImageDimensions(logo._ref).width : 0;
+  const height = logo?._ref ? getImageDimensions(logo._ref).height : 0;
   const desktopLogoHeight =
     logo?._ref && width && height ? (desktopLogoWidth * height) / width : 44;
 

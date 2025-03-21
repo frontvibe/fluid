@@ -1,4 +1,4 @@
-import type {ProductVariantFragmentFragment} from 'storefrontapi.generated';
+import type {ProductVariantFragmentFragment} from 'types/shopify/storefrontapi.generated';
 
 import {useSelectedVariant} from '~/hooks/useSelectedVariant';
 

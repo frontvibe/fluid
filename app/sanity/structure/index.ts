@@ -5,8 +5,8 @@ import type {
 
 import {LayoutTemplate, PanelsTopLeft} from 'lucide-react';
 
-import {collections} from './collectionStructure';
-import {products} from './productStructure';
+import {collections} from './collection-structure';
+import {products} from './product-structure';
 import {singleton, SINGLETONS} from './singletons';
 
 export const defaultDocumentNode: DefaultDocumentNodeResolver = (S) => {

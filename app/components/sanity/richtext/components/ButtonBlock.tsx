@@ -1,12 +1,14 @@
-import type {TypeFromSelection} from 'groqd';
-
-import type {BUTTON_BLOCK_FRAGMENT} from '~/qroq/blocks';
+import type {SectionOfType} from 'types';
 
 import {Button} from '~/components/ui/Button';
 
 import {SanityInternalLink} from '../../link/SanityInternalLink';
 
-export type ButtonBlockProps = TypeFromSelection<typeof BUTTON_BLOCK_FRAGMENT>;
+export type ButtonBlockProps = NonNullable<
+  SectionOfType<'richtextSection'>['richtext']
+>[number] & {
+  _type: 'button';
+};
 
 export function ButtonBlock(props: ButtonBlockProps) {
   return (

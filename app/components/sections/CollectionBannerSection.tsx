@@ -1,9 +1,7 @@
-import type {TypeFromSelection} from 'groqd';
+import type {SectionDefaultProps, SectionOfType} from 'types';
 
 import {useLoaderData} from '@remix-run/react';
 
-import type {SectionDefaultProps} from '~/lib/type';
-import type {COLLECTION_BANNER_SECTION_FRAGMENT} from '~/qroq/sections';
 import type {loader} from '~/routes/($locale).collections.$collectionHandle';
 
 import {
@@ -14,12 +12,8 @@ import {
 } from '../Banner';
 import {ShopifyImage} from '../ShopifyImage';
 
-type CollectionBannerSectionProps = TypeFromSelection<
-  typeof COLLECTION_BANNER_SECTION_FRAGMENT
->;
-
 export function CollectionBannerSection(
-  props: SectionDefaultProps & {data: CollectionBannerSectionProps},
+  props: SectionDefaultProps & {data: SectionOfType<'collectionBannerSection'>},
 ) {
   const loaderData = useLoaderData<typeof loader>();
   const collection = loaderData.collection;

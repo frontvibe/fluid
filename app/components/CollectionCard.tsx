@@ -1,4 +1,4 @@
-import type {CollectionsQuery} from 'storefrontapi.generated';
+import type {CollectionsQuery} from 'types/shopify/storefrontapi.generated';
 
 import {Link} from '@remix-run/react';
 import {stegaClean} from '@sanity/client/stega';

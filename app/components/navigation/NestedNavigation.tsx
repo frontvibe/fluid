@@ -1,9 +1,6 @@
-import type {TypeFromSelection} from 'groqd';
+import type {ROOT_QUERYResult} from 'types/sanity/sanity.generated';
 
-import {cx} from 'class-variance-authority';
 import {useCallback} from 'react';
-
-import type {NESTED_NAVIGATION_FRAGMENT} from '~/qroq/links';
 
 import {cn} from '~/lib/utils';
 
@@ -16,9 +13,13 @@ import {
   navigationMenuTriggerStyle,
 } from '../ui/NavigationMenu';
 
-export type SanityNestedNavigationProps = TypeFromSelection<
-  typeof NESTED_NAVIGATION_FRAGMENT
->;
+type NestedNavigationType = NonNullable<
+  NonNullable<ROOT_QUERYResult['header']>['menu']
+>[number] & {
+  _type: 'nestedNavigation';
+};
+
+export type SanityNestedNavigationProps = NestedNavigationType;
 
 export function NestedNavigation(props: {
   data?: SanityNestedNavigationProps;
@@ -80,7 +81,9 @@ export function NestedNavigation(props: {
   ) : null;
 }
 
-function ListItem(props: SanityNestedNavigationProps['childLinks'][0]) {
+function ListItem(
+  props: NonNullable<NestedNavigationType['childLinks']>[number],
+) {
   return (
     <NavigationMenuLink asChild>
       <div>

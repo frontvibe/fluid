@@ -2,6 +2,7 @@ import type {
   ProductCollectionSortKeys,
   ProductFilter,
 } from '@shopify/hydrogen/storefront-api-types';
+import type {I18nLocale} from 'types';
 
 import type {ShopifyCollection} from '~/components/sections/CollectionProductGridSection';
 
@@ -9,8 +10,6 @@ import {
   FILTER_URL_PREFIX,
   type SortParam,
 } from '~/components/collection/SortFilterLayout';
-
-import type {I18nLocale} from './type';
 
 import {parseAsCurrency} from './utils';
 

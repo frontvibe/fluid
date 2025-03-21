@@ -1,4 +1,4 @@
-import type {CartApiQueryFragment} from 'storefrontapi.generated';
+import type {CartApiQueryFragment} from 'types/shopify/storefrontapi.generated';
 
 import {Await, Link} from '@remix-run/react';
 import {CartForm} from '@shopify/hydrogen';

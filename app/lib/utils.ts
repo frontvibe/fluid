@@ -1,18 +1,20 @@
+import type {CropMode} from '@sanity/image-url/lib/types/types';
 import type {FulfillmentStatus} from '@shopify/hydrogen/customer-account-api-types';
 import type {SelectedOption} from '@shopify/hydrogen/storefront-api-types';
 import type {ClassValue} from 'class-variance-authority/types';
-import type {TypeFromSelection} from 'groqd';
+import type {ImageUrlBuilder} from 'sanity';
+import type {I18nLocale} from 'types';
+import type {
+  AspectRatios,
+  ROOT_QUERYResult,
+} from 'types/sanity/sanity.generated';
 
 import {useLocation} from '@remix-run/react';
 import {stegaClean} from '@sanity/client/stega';
+import imageUrlBuilder from '@sanity/image-url';
 import {cx} from 'class-variance-authority';
 import {useMemo} from 'react';
 import {twMerge} from 'tailwind-merge';
-
-import type {aspectRatioValues} from '~/qroq/constant';
-import type {THEME_CONTENT_FRAGMENT} from '~/qroq/themeContent';
-
-import type {I18nLocale} from './type';
 
 export function useVariantUrl(
   handle: string,
@@ -99,7 +101,7 @@ export function cn(...inputs: ClassValue[]) {
 
 export type AspectRatioData = ReturnType<typeof getAspectRatioData>;
 export const getAspectRatioData = (
-  aspectRatio: (typeof aspectRatioValues)[number] | null,
+  aspectRatio: AspectRatios[number] | null,
 ) => {
   const cleanAspectRatio = stegaClean(aspectRatio);
   return cleanAspectRatio === 'video'
@@ -138,19 +140,89 @@ export function setShowTrailingZeroKeyValue(locale: I18nLocale) {
 
 export function statusMessage(
   status: FulfillmentStatus,
-  themeContent?: null | TypeFromSelection<typeof THEME_CONTENT_FRAGMENT>,
+  themeContent?: null | ROOT_QUERYResult['themeContent'],
 ) {
   const translations: Record<FulfillmentStatus, string> = {
-    CANCELLED: themeContent?.account.orderStatusCancelled || 'Cancelled',
-    ERROR: themeContent?.account.orderStatusError || 'Error',
-    FAILURE: themeContent?.account.orderStatusFailure || 'Failed',
-    OPEN: themeContent?.account.orderStatusOpen || 'Open',
-    PENDING: themeContent?.account.orderStatusPending || 'Pending',
-    SUCCESS: themeContent?.account.orderStatusSuccess || 'Success',
+    CANCELLED: themeContent?.account?.orderStatusCancelled || 'Cancelled',
+    ERROR: themeContent?.account?.orderStatusError || 'Error',
+    FAILURE: themeContent?.account?.orderStatusFailure || 'Failed',
+    OPEN: themeContent?.account?.orderStatusOpen || 'Open',
+    PENDING: themeContent?.account?.orderStatusPending || 'Pending',
+    SUCCESS: themeContent?.account?.orderStatusSuccess || 'Success',
   };
   try {
     return translations?.[status];
   } catch (error) {
     return status;
   }
+}
+
+export function generateImageUrl(args: {
+  aspectRatioHeight?: number;
+  aspectRatioWidth?: number;
+  blur?: number;
+  urlBuilder: ImageUrlBuilder;
+  width: number;
+}) {
+  const {
+    aspectRatioHeight,
+    aspectRatioWidth,
+    blur = 0,
+    urlBuilder,
+    width,
+  } = args;
+  let imageUrl = urlBuilder.width(width);
+  const imageHeight =
+    aspectRatioHeight && aspectRatioWidth
+      ? Math.round((width / aspectRatioWidth) * aspectRatioHeight)
+      : undefined;
+
+  if (imageHeight) {
+    imageUrl = imageUrl.height(imageHeight);
+  }
+
+  if (blur && blur > 0) {
+    imageUrl = imageUrl.blur(blur);
+  }
+
+  return imageUrl.url();
+}
+
+export function generateSanityImageUrl({
+  crop,
+  dataset,
+  height,
+  projectId,
+  ref,
+  width,
+}: {
+  crop?: CropMode;
+  dataset: string;
+  height?: number;
+  projectId: string;
+  ref?: null | string;
+  width: number;
+}) {
+  if (!ref) return null;
+  const urlBuilder = imageUrlBuilder({
+    dataset,
+    projectId,
+  })
+    .image({
+      _ref: ref,
+    })
+    .auto('format')
+    .width(width);
+
+  let imageUrl = urlBuilder.url();
+
+  if (height) {
+    imageUrl = urlBuilder.height(height).url();
+  }
+
+  if (crop) {
+    imageUrl = urlBuilder.crop(crop).url();
+  }
+
+  return imageUrl;
 }

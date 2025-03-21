@@ -1,16 +1,14 @@
+import type {ContentAlignment} from 'types/sanity/sanity.generated';
+
 import {stegaClean} from '@sanity/client/stega';
 import {cx} from 'class-variance-authority';
 
-import type {contentAlignmentValues} from '~/qroq/constant';
-
 import {contentAlignment} from '~/components/cva/contentAlignment';
-
-type AlignmentValues = (typeof contentAlignmentValues)[number];
 
 export function RichtextLayout(props: {
   children: React.ReactNode;
-  contentAligment?: AlignmentValues | null;
-  desktopContentPosition?: AlignmentValues | null;
+  contentAligment?: ContentAlignment | null;
+  desktopContentPosition?: ContentAlignment | null;
   maxWidth?: null | number;
 }) {
   const style = {

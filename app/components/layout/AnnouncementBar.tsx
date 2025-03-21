@@ -1,11 +1,9 @@
-import type {TypeFromSelection} from 'groqd';
+import type {ROOT_QUERYResult} from 'types/sanity/sanity.generated';
 
 import {Link} from '@remix-run/react';
 import {cx} from 'class-variance-authority';
 import Autoplay from 'embla-carousel-autoplay';
 import {useMemo} from 'react';
-
-import type {ANNOUNCEMENT_BAR_FRAGMENT} from '~/qroq/fragments';
 
 import {useColorsCssVars} from '~/hooks/useColorsCssVars';
 import {useRootLoaderData} from '~/root';
@@ -20,7 +18,9 @@ import {
   CarouselPrevious,
 } from '../ui/Carousel';
 
-type AnnouncementBarProps = TypeFromSelection<typeof ANNOUNCEMENT_BAR_FRAGMENT>;
+type AnnouncementBarProps = NonNullable<
+  NonNullable<ROOT_QUERYResult['header']>['announcementBar']
+>[number];
 
 export function AnnouncementBar() {
   const {sanityRoot} = useRootLoaderData();
@@ -88,7 +88,7 @@ function Item(props: AnnouncementBarProps) {
     <SanityInternalLink
       className={cx(['group', className])}
       data={{
-        _key: props.link.slug.current,
+        _key: props.link.slug?.current ?? '',
         _type: 'internalLink',
         anchor: null,
         link: props.link,

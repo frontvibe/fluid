@@ -1,16 +1,11 @@
-import type {TypeFromSelection} from 'groqd';
-
-import type {SectionDefaultProps} from '~/lib/type';
-import type {FOOTER_SOCIAL_LINKS_ONLY_FRAGMENT} from '~/qroq/footers';
+import type {FooterOfType, SectionDefaultProps} from 'types';
 
 import {useColorsCssVars} from '~/hooks/useColorsCssVars';
 
 import {CountrySelector} from '../layout/CountrySelector';
 import {SocialMediaButtons} from '../SocialMedia';
 
-type FooterSocialLinksOnlyProps = TypeFromSelection<
-  typeof FOOTER_SOCIAL_LINKS_ONLY_FRAGMENT
->;
+type FooterSocialLinksOnlyProps = FooterOfType<'socialLinksOnly'>;
 
 export function FooterSocialLinksOnly(
   props: SectionDefaultProps & {data: FooterSocialLinksOnlyProps},

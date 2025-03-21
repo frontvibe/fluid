@@ -2,9 +2,9 @@ import {uuid} from '@sanity/uuid';
 import pluralize from 'pluralize-esm';
 import {defineField, defineType} from 'sanity';
 
-import {ShopifyIcon} from '../../components/icons/ShopifyIcon';
-import {ProductHiddenInput} from '../../components/shopify/ProductHidden';
-import {ShopifyDocumentStatus} from '../../components/shopify/ShopifyDocumentStatus';
+import ShopifyIcon from '../../components/icons/shopify-icon';
+import ProductHiddenInput from '../../components/shopify/product-hidden';
+import ShopifyDocumentStatus from '../../components/shopify/shopify-document-status';
 import {getPriceRange} from '../../utils/getPriceRange';
 
 const GROUPS = [

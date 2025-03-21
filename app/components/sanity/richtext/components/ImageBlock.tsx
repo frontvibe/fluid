@@ -1,13 +1,15 @@
-import type {TypeFromSelection} from 'groqd';
+import type {SectionOfType} from 'types';
 
 import {stegaClean} from '@sanity/client/stega';
 import {cva} from 'class-variance-authority';
 
-import type {IMAGE_BLOCK_FRAGMENT} from '~/qroq/blocks';
-
 import {SanityImage} from '../../SanityImage';
 
-export type ImageBlockProps = TypeFromSelection<typeof IMAGE_BLOCK_FRAGMENT>;
+export type ImageBlockProps = NonNullable<
+  SectionOfType<'richtextSection'>['richtext']
+>[number] & {
+  _type: 'image';
+};
 
 export function ImageBlock(
   props: ImageBlockProps & {
@@ -26,7 +28,7 @@ export function ImageBlock(
   const sizes = maxWidth ? `(min-width: 1024px) ${maxWidth}px, 100vw` : '100vw';
   const alignment = props.alignment ? stegaClean(props.alignment) : 'center';
 
-  const alignmentVariants = cva('w-[var(--maxWidth)] max-w-full h-auto', {
+  const alignmentVariants = cva('w-(--maxWidth) max-w-full h-auto', {
     variants: {
       required: {
         center: 'mx-auto',

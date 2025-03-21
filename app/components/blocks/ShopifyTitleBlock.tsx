@@ -1,13 +1,13 @@
-import type {TypeFromSelection} from 'groqd';
+import type {SectionOfType} from 'types';
 
 import {useParams} from '@remix-run/react';
 import {useProduct} from '@shopify/hydrogen-react';
 
-import type {SHOPIFY_TITLE_BLOCK_FRAGMENT} from '~/qroq/blocks';
-
-export type ShopifyTitleBlockProps = TypeFromSelection<
-  typeof SHOPIFY_TITLE_BLOCK_FRAGMENT
->;
+export type ShopifyTitleBlockProps = NonNullable<
+  SectionOfType<'productInformationSection'>['richtext']
+>[number] & {
+  _type: 'shopifyTitle';
+};
 
 export function ShopifyTitleBlock(props: ShopifyTitleBlockProps) {
   const {product} = useProduct();

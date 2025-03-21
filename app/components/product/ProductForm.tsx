@@ -1,17 +1,19 @@
-import type {TypeFromSelection} from 'groqd';
-import type {ProductVariantFragmentFragment} from 'storefrontapi.generated';
+import type {SectionOfType} from 'types';
+import type {ProductVariantFragmentFragment} from 'types/shopify/storefrontapi.generated';
 
 import {flattenConnection, useProduct} from '@shopify/hydrogen-react';
-
-import type {ADD_TO_CART_BUTTON_BLOCK_FRAGMENT} from '~/qroq/blocks';
 
 import {useProductVariants} from '../sections/ProductInformationSection';
 import {AddToCartForm} from './AddToCartForm';
 import {VariantSelector} from './VariantSelector';
 
-export function ProductForm(
-  props: TypeFromSelection<typeof ADD_TO_CART_BUTTON_BLOCK_FRAGMENT>,
-) {
+export type AddToCartButtonBlockProps = NonNullable<
+  SectionOfType<'productInformationSection'>['richtext']
+>[number] & {
+  _type: 'addToCartButton';
+};
+
+export function ProductForm(props: AddToCartButtonBlockProps) {
   const {product} = useProduct();
   const variantsContextData = useProductVariants();
   const showQuantitySelector = props.quantitySelector;

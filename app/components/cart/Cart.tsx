@@ -1,7 +1,7 @@
 import type {
   CartApiQueryFragment,
   CartLineFragment,
-} from 'storefrontapi.generated';
+} from 'types/shopify/storefrontapi.generated';
 
 import {useOptimisticData} from '@shopify/hydrogen';
 

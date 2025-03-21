@@ -9,18 +9,18 @@ export default defineField({
   readOnly: true,
   fields: [
     // Name
-    {
+    defineField({
       title: 'Name',
       name: 'name',
       type: 'string',
-    },
+    }),
     // Values
-    {
+    defineField({
       title: 'Values',
       name: 'values',
       type: 'array',
       of: [defineArrayMember({type: 'string'})],
-    },
+    }),
   ],
   preview: {
     select: {

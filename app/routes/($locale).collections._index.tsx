@@ -4,7 +4,7 @@ import {useLoaderData} from '@remix-run/react';
 import {getPaginationVariables} from '@shopify/hydrogen';
 
 import {CollectionListGrid} from '~/components/CollectionListGrid';
-import {COLLECTIONS_QUERY} from '~/graphql/queries';
+import {COLLECTIONS_QUERY} from '~/data/shopify/queries';
 import {useSanityThemeContent} from '~/hooks/useSanityThemeContent';
 import {mergeMeta} from '~/lib/meta';
 import {getSeoMetaFromMatches} from '~/lib/seo';

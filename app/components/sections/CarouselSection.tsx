@@ -1,11 +1,8 @@
-import type {TypeFromSelection} from 'groqd';
+import type {SectionDefaultProps, SectionOfType} from 'types';
 
 import Autoplay from 'embla-carousel-autoplay';
 import {useInView} from 'framer-motion';
 import {useMemo, useRef} from 'react';
-
-import type {SectionDefaultProps} from '~/lib/type';
-import type {CAROUSEL_SECTION_FRAGMENT} from '~/qroq/sections';
 
 import {useDevice} from '~/hooks/useDevice';
 
@@ -19,10 +16,8 @@ import {
   CarouselPrevious,
 } from '../ui/Carousel';
 
-type CarouselSectionProps = TypeFromSelection<typeof CAROUSEL_SECTION_FRAGMENT>;
-
 export function CarouselSection(
-  props: SectionDefaultProps & {data: CarouselSectionProps},
+  props: SectionDefaultProps & {data: SectionOfType<'carouselSection'>},
 ) {
   const {data} = props;
   const {arrows, autoplay, loop, pagination, slides, title} = data;

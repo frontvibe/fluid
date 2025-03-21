@@ -20,7 +20,7 @@ import {
   CREATE_ADDRESS_MUTATION,
   DELETE_ADDRESS_MUTATION,
   UPDATE_ADDRESS_MUTATION,
-} from '~/graphql/customer-account/mutations';
+} from '~/data/shopify/customer-account/mutations';
 import {useSanityThemeContent} from '~/hooks/useSanityThemeContent';
 
 import type {AccountOutletContext} from './($locale).account.edit';
@@ -218,24 +218,24 @@ export default function EditAddress() {
         : actionData.formError
     : null;
 
-  const firstName = themeContent?.account.firstName ?? 'First name';
-  const lastName = themeContent?.account.lastName ?? 'Last name';
-  const company = themeContent?.account.company ?? 'Company';
-  const addressLine1 = themeContent?.account.addressLine1 ?? 'Address line 1';
-  const addressLine2 = themeContent?.account.addressLine2 ?? 'Address line 2';
-  const city = themeContent?.account.city ?? 'City';
+  const firstName = themeContent?.account?.firstName ?? 'First name';
+  const lastName = themeContent?.account?.lastName ?? 'Last name';
+  const company = themeContent?.account?.company ?? 'Company';
+  const addressLine1 = themeContent?.account?.addressLine1 ?? 'Address line 1';
+  const addressLine2 = themeContent?.account?.addressLine2 ?? 'Address line 2';
+  const city = themeContent?.account?.city ?? 'City';
   const stateProvince =
-    themeContent?.account.stateProvince ?? 'State / Province';
-  const country = themeContent?.account.country ?? 'Country';
-  const postalCode = themeContent?.account.postalCode ?? 'Postal code';
-  const phoneNumber = themeContent?.account.phoneNumber ?? 'Phone number';
+    themeContent?.account?.stateProvince ?? 'State / Province';
+  const country = themeContent?.account?.country ?? 'Country';
+  const postalCode = themeContent?.account?.postalCode ?? 'Postal code';
+  const phoneNumber = themeContent?.account?.phoneNumber ?? 'Phone number';
 
   return (
     <>
       <h3>
         {isNewAddress
-          ? themeContent?.account.addAddress
-          : themeContent?.account.editAddress}
+          ? themeContent?.account?.addAddress
+          : themeContent?.account?.editAddress}
       </h3>
       <div className="max-w-lg">
         <Form method="post">
@@ -376,17 +376,17 @@ export default function EditAddress() {
               className="ml-2 inline-block cursor-pointer text-sm"
               htmlFor="defaultAddress"
             >
-              {themeContent?.account.defaultAddress}
+              {themeContent?.account?.defaultAddress}
             </label>
           </div>
           <div className="mt-8 flex items-center gap-3">
             <Button disabled={state !== 'idle'} type="submit">
               {state !== 'idle'
-                ? themeContent?.account.saving
-                : themeContent?.account.save}
+                ? themeContent?.account?.saving
+                : themeContent?.account?.save}
             </Button>
             <Button asChild variant="secondary">
-              <Link to="..">{themeContent?.account.cancel}</Link>
+              <Link to="..">{themeContent?.account?.cancel}</Link>
             </Button>
           </div>
         </Form>

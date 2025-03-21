@@ -3,7 +3,7 @@ import type {
   Media_MediaImage_Fragment,
   Media_Model3d_Fragment,
   Media_Video_Fragment,
-} from 'storefrontapi.generated';
+} from 'types/shopify/storefrontapi.generated';
 
 import {useLoaderData} from '@remix-run/react';
 import {flattenConnection} from '@shopify/hydrogen';

@@ -1,11 +1,9 @@
-import type {TypeFromSelection} from 'groqd';
-import type {ProductVariantFragmentFragment} from 'storefrontapi.generated';
+import type {SectionOfType} from 'types';
+import type {ProductVariantFragmentFragment} from 'types/shopify/storefrontapi.generated';
 
 import {stegaClean} from '@sanity/client/stega';
 import {flattenConnection} from '@shopify/hydrogen';
 import {useProduct} from '@shopify/hydrogen-react';
-
-import type {PRICE_BLOCK_FRAGMENT} from '~/qroq/blocks';
 
 import {useSanityThemeContent} from '~/hooks/useSanityThemeContent';
 import {useSelectedVariant} from '~/hooks/useSelectedVariant';
@@ -16,7 +14,11 @@ import {VariantPrice} from '../product/VariantPrice';
 import {useProductVariants} from '../sections/ProductInformationSection';
 import {Badge} from '../ui/Badge';
 
-export type PriceBlockProps = TypeFromSelection<typeof PRICE_BLOCK_FRAGMENT>;
+export type PriceBlockProps = NonNullable<
+  SectionOfType<'productInformationSection'>['richtext']
+>[number] & {
+  _type: 'price';
+};
 
 export function PriceBlock(props: PriceBlockProps) {
   const {product} = useProduct();

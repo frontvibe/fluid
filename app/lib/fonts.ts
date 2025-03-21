@@ -1,8 +1,8 @@
-import type {InferType} from 'groqd';
-
-import type {FONTS_QUERY} from '~/qroq/queries';
+import type {ROOT_QUERYResult} from 'types/sanity/sanity.generated';
 
 import {getFonts} from '~/components/Fonts';
+
+export type FontsQuery = NonNullable<ROOT_QUERYResult['fonts']>;
 
 type PreloadLink = {
   as: string;
@@ -13,12 +13,10 @@ type PreloadLink = {
   type: string;
 };
 
-type FontsData = InferType<typeof FONTS_QUERY>;
-
 export function generateFontsPreloadLinks({
   fontsData,
 }: {
-  fontsData?: FontsData;
+  fontsData?: FontsQuery | null;
 }) {
   const fonts = fontsData ? getFonts({fontsData}) : [];
   const preloadLinks: Array<PreloadLink> = [];

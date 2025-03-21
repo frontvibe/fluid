@@ -13,15 +13,15 @@ import {flattenConnection} from '@shopify/hydrogen';
 import {redirect, data as remixData} from '@shopify/remix-oxygen';
 import invariant from 'tiny-invariant';
 
-import {Button} from '~/components/ui/Button';
-import {Checkbox} from '~/components/ui/Checkbox';
-import {Input} from '~/components/ui/Input';
+import {Button} from '~/components/ui/button';
+import {Checkbox} from '~/components/ui/checkbox';
+import {Input} from '~/components/ui/input';
 import {
   CREATE_ADDRESS_MUTATION,
   DELETE_ADDRESS_MUTATION,
   UPDATE_ADDRESS_MUTATION,
 } from '~/data/shopify/customer-account/mutations';
-import {useSanityThemeContent} from '~/hooks/useSanityThemeContent';
+import {useSanityThemeContent} from '~/hooks/use-sanity-theme-content';
 
 import type {AccountOutletContext} from './($locale).account.edit';
 

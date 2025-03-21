@@ -18,15 +18,15 @@ import {
   data as remixData,
 } from '@shopify/remix-oxygen';
 
-import {AccountAddressBook} from '~/components/account/AccountAddressBook';
-import {AccountDetails} from '~/components/account/AccountDetails';
-import {OrderCard} from '~/components/account/OrderCard';
-import {Button} from '~/components/ui/Button';
-import {Dialog, DialogContent} from '~/components/ui/Dialog';
+import {AccountAddressBook} from '~/components/account/account-address-book';
+import {AccountDetails} from '~/components/account/account-details';
+import {OrderCard} from '~/components/account/order-card';
+import {Button} from '~/components/ui/button';
+import {Dialog, DialogContent} from '~/components/ui/dialog';
 import {routeHeaders} from '~/data/shopify/cache';
 import {CUSTOMER_DETAILS_QUERY} from '~/data/shopify/customer-account/queries';
-import {useLocalePath} from '~/hooks/useLocalePath';
-import {useSanityThemeContent} from '~/hooks/useSanityThemeContent';
+import {useLocalePath} from '~/hooks/use-locale-path';
+import {useSanityThemeContent} from '~/hooks/use-sanity-theme-content';
 
 import {doLogout} from './($locale).account_.logout';
 

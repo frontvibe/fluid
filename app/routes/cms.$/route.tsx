@@ -9,7 +9,7 @@ import {useLoaderData} from '@remix-run/react';
 import polarisCss from '@shopify/polaris/build/esm/styles.css?url';
 import {lazy, Suspense} from 'react';
 
-import {ClientOnly} from '~/components/ClientOnly';
+import {ClientOnly} from '~/components/client-only';
 
 import studioStyles from './studio.css?url';
 
@@ -33,7 +33,7 @@ const SanityStudio =
            * `lazy` expects the component as the default export
            * @see https://react.dev/reference/react/lazy
            */
-          import('./SanityStudio.client'),
+          import('./sanity-studio.client'),
       );
 
 export const meta: MetaFunction = () => [

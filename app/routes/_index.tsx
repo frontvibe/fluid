@@ -5,7 +5,7 @@ import {DEFAULT_LOCALE} from 'countries';
 
 import {PAGE_QUERY} from '~/data/sanity/queries';
 import {mergeMeta} from '~/lib/meta';
-import {resolveShopifyPromises} from '~/lib/resolveShopifyPromises';
+import {resolveShopifyPromises} from '~/lib/resolve-shopify-promises';
 import {getSeoMetaFromMatches} from '~/lib/seo';
 import {seoPayload} from '~/lib/seo.server';
 

@@ -1,6 +1,6 @@
 import colorPicker from '../plugins/color-picker';
 import rangeSlider from '../plugins/range-slider';
-import blogPost from './documents/blogPost';
+import blogPost from './documents/blog-post';
 import collection from './documents/collection';
 import collectionTemplate from './documents/collection-template';
 import color from './documents/color';
@@ -57,7 +57,7 @@ import footer from './singletons/footer';
 import header from './singletons/header';
 import home from './singletons/home';
 import settings from './singletons/settings';
-import themeContent from './singletons/themeContent';
+import themeContent from './singletons/theme-content';
 
 const singletons = [home, header, footer, settings, themeContent];
 const documents = [

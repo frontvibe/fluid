@@ -3,9 +3,9 @@ import type {LoaderFunctionArgs, MetaFunction} from '@shopify/remix-oxygen';
 import {useLoaderData} from '@remix-run/react';
 import {flattenConnection, getPaginationVariables} from '@shopify/hydrogen';
 
-import {ProductCardGrid} from '~/components/product/ProductCardGrid';
+import {ProductCardGrid} from '~/components/product/product-card-grid';
 import {ALL_PRODUCTS_QUERY} from '~/data/shopify/queries';
-import {useSanityThemeContent} from '~/hooks/useSanityThemeContent';
+import {useSanityThemeContent} from '~/hooks/use-sanity-theme-content';
 import {mergeMeta} from '~/lib/meta';
 import {getSeoMetaFromMatches} from '~/lib/seo';
 import {seoPayload} from '~/lib/seo.server';

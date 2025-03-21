@@ -5,7 +5,7 @@ import {defineField, defineType} from 'sanity';
 import IconPalette from '~/sanity/components/icons/palette-icon';
 
 import ColorSchemeMedia from '../../components/color-scheme';
-import {validateDefaultStatus} from '../../utils/setAsDefaultValidation';
+import {validateDefaultStatus} from '../../utils/set-as-default-validation';
 
 export default defineType({
   name: 'colorScheme',

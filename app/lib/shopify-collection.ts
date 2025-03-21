@@ -74,7 +74,6 @@ export function getAppliedFilters({
         );
       });
       if (!foundValue) {
-         
         console.error('Could not find filter value for filter', filter);
         return null;
       }

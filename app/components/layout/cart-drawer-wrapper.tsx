@@ -13,7 +13,7 @@ import {useRootLoaderData} from '~/root';
 
 import {useDevice} from '../../hooks/use-device';
 import {ClientOnly} from '../client-only';
-import {IconBag} from '../icons/IconBag';
+import {IconBag} from '../icons/icon-bag';
 import {iconButtonClass} from '../ui/button';
 import {CartDrawer} from './cart-drawer.client';
 

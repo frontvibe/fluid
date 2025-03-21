@@ -2,9 +2,9 @@ import {Link} from '@remix-run/react';
 
 import {useRootLoaderData} from '~/root';
 
-import type {Socials} from './icons/IconSocial';
+import type {Socials} from './icons/icon-social';
 
-import {IconSocial, socials} from './icons/IconSocial';
+import {IconSocial, socials} from './icons/icon-social';
 import {IconButton} from './ui/button';
 
 export function SocialMediaButtons() {

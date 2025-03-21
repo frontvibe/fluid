@@ -8,7 +8,7 @@ import {useLocalePath} from '~/hooks/use-locale-path';
 import {cn} from '~/lib/utils';
 import {useRootLoaderData} from '~/root';
 
-import {IconArrowRight} from './icons/IconArrowRight';
+import {IconArrowRight} from './icons/icon-arrow-right';
 import {ShopifyImage} from './shopify-image';
 import {Card, CardContent, CardMedia} from './ui/card';
 

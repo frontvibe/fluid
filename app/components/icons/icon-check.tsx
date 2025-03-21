@@ -1,10 +1,10 @@
 import {cn} from '~/lib/utils';
 
-import type {IconProps} from './Icon';
+import type {IconProps} from '.';
 
-import {Icon} from './Icon';
+import {Icon} from '.';
 
-export function IconCircle(props: IconProps) {
+export function IconCheck(props: IconProps) {
   return (
     <Icon
       className={cn('size-5', props.className)}
@@ -15,8 +15,8 @@ export function IconCircle(props: IconProps) {
       strokeWidth="2"
       viewBox="0 0 24 24"
     >
-      <title>Circle</title>
-      <circle cx="12" cy="12" r="10" />
+      <title>Check</title>
+      <path d="M20 6 9 17l-5-5" />
     </Icon>
   );
 }

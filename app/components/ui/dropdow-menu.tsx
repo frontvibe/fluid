@@ -3,9 +3,9 @@ import {forwardRef} from 'react';
 
 import {cn} from '~/lib/utils';
 
-import {IconCheck} from '../icons/IconCheck';
-import {IconChevron} from '../icons/IconChevron';
-import {IconCircle} from '../icons/IconCircle';
+import {IconCheck} from '../icons/icon-check';
+import {IconChevron} from '../icons/icon-chevron';
+import {IconCircle} from '../icons/icon-circle';
 
 const DropdownMenu = DropdownMenuPrimitive.Root;
 

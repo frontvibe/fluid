@@ -3,7 +3,7 @@ import * as React from 'react';
 import {forwardRef} from 'react';
 import {Drawer as DrawerPrimitive} from 'vaul';
 
-import {IconClose} from '../icons/IconClose';
+import {IconClose} from '../icons/icon-close';
 import {iconButtonClass} from './button';
 
 const Drawer = ({

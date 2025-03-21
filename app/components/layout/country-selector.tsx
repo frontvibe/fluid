@@ -10,8 +10,8 @@ import {useMemo} from 'react';
 import {useLocalePath} from '~/hooks/use-locale-path';
 import {useRootLoaderData} from '~/root';
 
-import {IconCheck} from '../icons/IconCheck';
-import {IconChevron} from '../icons/IconChevron';
+import {IconCheck} from '../icons/icon-check';
+import {IconChevron} from '../icons/icon-chevron';
 import {Button} from '../ui/button';
 import {
   DropdownMenu,

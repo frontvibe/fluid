@@ -8,7 +8,7 @@ import * as React from 'react';
 
 import {cn} from '~/lib/utils';
 
-import {IconChevron} from '../icons/IconChevron';
+import {IconChevron} from '../icons/icon-chevron';
 import {Button, IconButton} from './button';
 
 type CarouselApi = UseEmblaCarouselType[1];

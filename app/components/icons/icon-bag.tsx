@@ -1,6 +1,6 @@
-import type {IconProps} from './Icon';
+import type {IconProps} from '.';
 
-import {Icon} from './Icon';
+import {Icon} from '.';
 
 export function IconBag(props: IconProps) {
   return (

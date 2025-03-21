@@ -6,8 +6,8 @@ import {cn} from '~/lib/utils';
 import type {NavigationProps} from './desktop-navigation';
 import type {SanityNestedNavigationProps} from './nested-navigation';
 
-import {IconChevron} from '../icons/IconChevron';
-import {IconMenu} from '../icons/IconMenu';
+import {IconChevron} from '../icons/icon-chevron';
+import {IconMenu} from '../icons/icon-menu';
 import {SanityExternalLink} from '../sanity/link/sanity-external-link';
 import {SanityInternalLink} from '../sanity/link/sanity-internal-link';
 import {iconButtonClass} from '../ui/button';

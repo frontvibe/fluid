@@ -12,7 +12,7 @@ import {cn} from '~/lib/utils';
 
 import type {CartLayouts} from '.';
 
-import {IconLoader} from '../icons/IconLoader';
+import {IconLoader} from '../icons/icon-loader';
 import {ProgressiveMotionDiv} from '../progressive-motion';
 import {ShopifyMoney} from '../shopify-money';
 import {Button} from '../ui/button';

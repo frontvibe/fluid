@@ -7,7 +7,7 @@ import {useLocalePath} from '~/hooks/use-locale-path';
 import {useSanityThemeContent} from '~/hooks/use-sanity-theme-content';
 import {cn} from '~/lib/utils';
 
-import {IconRemove} from '../icons/IconRemove';
+import {IconRemove} from '../icons/icon-remove';
 import {Button} from '../ui/button';
 import {Input} from '../ui/input';
 

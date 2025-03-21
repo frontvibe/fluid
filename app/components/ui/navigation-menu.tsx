@@ -3,7 +3,7 @@ import {cn} from 'app/lib/utils';
 import {cva} from 'class-variance-authority';
 import {forwardRef} from 'react';
 
-import {IconChevron} from '../icons/IconChevron';
+import {IconChevron} from '../icons/icon-chevron';
 
 const NavigationMenu = forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Root>,

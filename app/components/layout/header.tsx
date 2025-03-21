@@ -16,7 +16,7 @@ import {useRootLoaderData} from '~/root';
 
 import {ClientOnly} from '../client-only';
 import {headerVariants} from '../cva/header';
-import {IconAccount} from '../icons/IconAccount';
+import {IconAccount} from '../icons/icon-account';
 import {DesktopNavigation} from '../navigation/desktop-navigation';
 import {MobileNavigation} from '../navigation/mobile-navigation.client';
 import {IconButton} from '../ui/button';

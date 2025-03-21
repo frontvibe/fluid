@@ -1,8 +1,8 @@
 import {cn} from '~/lib/utils';
 
-import type {IconProps} from './Icon';
+import type {IconProps} from '.';
 
-import {Icon} from './Icon';
+import {Icon} from '.';
 
 export function IconSort(props: IconProps) {
   return (

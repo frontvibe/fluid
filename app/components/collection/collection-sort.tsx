@@ -18,7 +18,7 @@ import {cn} from '~/lib/utils';
 
 import type {SortParam} from './sort-filter-layout';
 
-import {IconSort} from '../icons/IconSort';
+import {IconSort} from '../icons/icon-sort';
 import {iconButtonClass} from '../ui/button';
 import {
   DropdownMenu,

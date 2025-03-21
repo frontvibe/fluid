@@ -17,7 +17,7 @@ import {cn} from '~/lib/utils';
 
 import type {CartLayouts} from '.';
 
-import {IconRemove} from '../icons/IconRemove';
+import {IconRemove} from '../icons/icon-remove';
 import {ProgressiveMotionDiv} from '../progressive-motion';
 import {QuantitySelector} from '../quantity-selector';
 import {ShopifyImage} from '../shopify-image';

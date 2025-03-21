@@ -9,7 +9,7 @@ import {cn} from '~/lib/utils';
 
 import type {AppliedFilter} from './sort-filter-layout';
 
-import {IconFilters} from '../icons/IconFilters';
+import {IconFilters} from '../icons/icon-filters';
 import {Button, iconButtonClass} from '../ui/button';
 import {
   Drawer,

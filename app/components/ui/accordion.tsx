@@ -3,7 +3,7 @@ import {forwardRef} from 'react';
 
 import {cn} from '~/lib/utils';
 
-import {IconChevron} from '../icons/IconChevron';
+import {IconChevron} from '../icons/icon-chevron';
 
 const Accordion = AccordionPrimitive.Root;
 

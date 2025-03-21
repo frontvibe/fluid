@@ -8,7 +8,7 @@ import {useMemo} from 'react';
 import {useColorsCssVars} from '~/hooks/use-colors-css-vars';
 import {useRootLoaderData} from '~/root';
 
-import {IconArrowRight} from '../icons/IconArrowRight';
+import {IconArrowRight} from '../icons/icon-arrow-right';
 import {SanityInternalLink} from '../sanity/link/sanity-internal-link';
 import {
   Carousel,

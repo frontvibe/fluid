@@ -13,7 +13,7 @@ import {useSanityThemeContent} from '~/hooks/use-sanity-theme-content';
 import {cn} from '~/lib/utils';
 
 import {ClientOnly} from '../client-only';
-import {IconFilters} from '../icons/IconFilters';
+import {IconFilters} from '../icons/icon-filters';
 import {
   Accordion,
   AccordionContent,

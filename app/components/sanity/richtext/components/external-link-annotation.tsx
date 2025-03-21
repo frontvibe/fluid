@@ -1,6 +1,6 @@
 import type {RichTextBlock} from 'types';
 
-import {IconExternal} from '~/components/icons/IconExternal';
+import {IconExternal} from '~/components/icons/icon-external';
 import {cn} from '~/lib/utils';
 
 import {SanityExternalLink} from '../../link/sanity-external-link';

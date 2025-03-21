@@ -33,7 +33,7 @@ export default defineField({
         max: 2000,
         suffix: 'px',
       },
-      validation: (Rule: any) => Rule.min(0).max(2000),
+      validation: (Rule) => Rule.min(0).max(2000),
     }),
     defineField({
       name: 'overlayOpacity',
@@ -43,7 +43,7 @@ export default defineField({
         max: 100,
         suffix: '%',
       },
-      validation: (Rule: any) => Rule.min(0).max(100),
+      validation: (Rule) => Rule.min(0).max(100),
     }),
     defineField({
       type: 'sectionSettings',
@@ -65,7 +65,7 @@ export default defineField({
     select: {
       settings: 'settings',
     },
-    prepare({settings}: any) {
+    prepare({settings}) {
       return {
         title: 'Collection Banner',
         media: () => (settings?.hide ? <EyeOff /> : <Image />),

@@ -19,7 +19,7 @@ export default defineType({
           type: 'array',
           of: [defineArrayMember({type: 'fontCategory'})],
           components: {input: ArrayMaxItems},
-          validation: (Rule: any) => Rule.max(1),
+          validation: (Rule) => Rule.max(1),
         }),
         defineField({
           type: 'boolean',
@@ -74,7 +74,7 @@ export default defineType({
           type: 'array',
           of: [defineArrayMember({type: 'fontCategory'})],
           components: {input: ArrayMaxItems},
-          validation: (Rule: any) => Rule.max(1),
+          validation: (Rule) => Rule.max(1),
         }),
         defineField({
           type: 'rangeSlider',
@@ -125,7 +125,7 @@ export default defineType({
           type: 'array',
           of: [defineArrayMember({type: 'fontCategory'})],
           components: {input: ArrayMaxItems},
-          validation: (Rule: any) => Rule.max(1),
+          validation: (Rule) => Rule.max(1),
         }),
         defineField({
           type: 'boolean',

@@ -11,7 +11,7 @@ export default defineField({
       name: 'product',
       type: 'reference',
       to: [{type: 'product'}],
-      validation: (Rule: any) => Rule.required(),
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'richtext',
@@ -31,7 +31,7 @@ export default defineField({
       product: 'product.store',
       settings: 'settings',
     },
-    prepare({product, settings}: any) {
+    prepare({product, settings}) {
       return {
         title: product.title,
         subtitle: 'Featured Product',

@@ -22,7 +22,7 @@ export default defineField({
         min: 1,
         max: 5,
       },
-      validation: (Rule: any) => Rule.required().min(1).max(5),
+      validation: (Rule) => Rule.required().min(1).max(5),
     }),
     defineField({
       name: 'mobileColumns',
@@ -32,7 +32,7 @@ export default defineField({
         min: 1,
         max: 2,
       },
-      validation: (Rule: any) => Rule.required().min(1).max(2),
+      validation: (Rule) => Rule.required().min(1).max(2),
     }),
     defineField({
       name: 'enableFiltering',
@@ -59,7 +59,7 @@ export default defineField({
     select: {
       settings: 'settings',
     },
-    prepare({settings}: any) {
+    prepare({settings}) {
       return {
         title: 'Collection Product Grid',
         media: () => (settings?.hide ? <EyeOff /> : <LayoutGrid />),

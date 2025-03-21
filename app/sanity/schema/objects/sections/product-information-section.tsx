@@ -63,7 +63,7 @@ export default defineField({
     select: {
       settings: 'settings',
     },
-    prepare({settings}: any) {
+    prepare({settings}) {
       return {
         title: 'Product Information',
         media: () => (settings?.hide ? <EyeOff /> : <IconTag />),

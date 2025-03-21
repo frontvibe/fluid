@@ -96,7 +96,7 @@ export default defineType({
         suffix: 'px',
       },
       initialValue: 100,
-      validation: (Rule: any) => Rule.min(0).max(400),
+      validation: (Rule) => Rule.min(0).max(400),
     }),
   ],
   preview: {

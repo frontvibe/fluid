@@ -19,8 +19,8 @@ export default defineField({
           to: [{type: 'collection'}],
         }),
       ],
-      validation: (Rule: any) =>
-        Rule.custom((array: any) => {
+      validation: (Rule) =>
+        Rule.custom((array) => {
           return checkForDuplicates(array);
         }),
     }),
@@ -32,7 +32,7 @@ export default defineField({
         min: 1,
         max: 5,
       },
-      validation: (Rule: any) => Rule.required().min(1).max(5),
+      validation: (Rule) => Rule.required().min(1).max(5),
     }),
     defineField({
       type: 'sectionSettings',
@@ -43,7 +43,7 @@ export default defineField({
     select: {
       settings: 'settings',
     },
-    prepare({settings}: any) {
+    prepare({settings}) {
       return {
         title: 'Collection List',
         media: () => (settings?.hide ? <EyeOff /> : <LayoutGrid />),

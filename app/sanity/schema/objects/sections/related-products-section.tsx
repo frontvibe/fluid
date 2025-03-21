@@ -20,7 +20,7 @@ export default defineField({
         min: 1,
         max: 25,
       },
-      validation: (Rule: any) => Rule.required().min(1).max(25),
+      validation: (Rule) => Rule.required().min(1).max(25),
     }),
     defineField({
       name: 'desktopColumns',
@@ -30,7 +30,7 @@ export default defineField({
         min: 1,
         max: 5,
       },
-      validation: (Rule: any) => Rule.required().min(1).max(5),
+      validation: (Rule) => Rule.required().min(1).max(5),
     }),
     defineField({
       type: 'sectionSettings',
@@ -45,7 +45,7 @@ export default defineField({
     select: {
       settings: 'settings',
     },
-    prepare({settings}: any) {
+    prepare({settings}) {
       return {
         title: 'Related Products',
         media: () => (settings?.hide ? <EyeOff /> : <IconCollectionTag />),

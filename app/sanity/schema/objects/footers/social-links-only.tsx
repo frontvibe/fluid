@@ -19,7 +19,7 @@ export default defineField({
     select: {
       title: 'copyright',
     },
-    prepare({title}: any) {
+    prepare({title}) {
       return {
         title: title?.[0]?.value || 'Missing title',
       };

@@ -1,4 +1,4 @@
-import type {File} from 'sanity';
+import type {File, FileRule} from 'sanity';
 
 import {StringIcon} from '@sanity/icons';
 import {defineField} from 'sanity';
@@ -15,10 +15,13 @@ const fontWeights = [
   {title: 'Black - 900', value: 900},
 ];
 
-function validateFont(args: {mimeType: 'ttf' | 'woff2' | 'woff'; Rule: any}) {
+function validateFont(args: {
+  mimeType: 'ttf' | 'woff2' | 'woff';
+  Rule: FileRule;
+}) {
   const {Rule, mimeType} = args;
 
-  return Rule.custom((file: File) => {
+  return Rule.custom((file) => {
     if (!file || !file.asset) {
       return true;
     }
@@ -44,7 +47,7 @@ export default defineField({
       title: 'WOFF2 file',
       description:
         'Used in priority, it is the most modern font format, lighter and faster to load.',
-      validation: (Rule: any) =>
+      validation: (Rule) =>
         validateFont({
           mimeType: 'woff2',
           Rule,
@@ -56,7 +59,7 @@ export default defineField({
       title: 'WOFF file',
       description:
         "Used as a fallback for older browsers that don't support WOFF2.",
-      validation: (Rule: any) =>
+      validation: (Rule) =>
         validateFont({
           mimeType: 'woff',
           Rule,
@@ -68,7 +71,7 @@ export default defineField({
       title: 'TTF file',
       description:
         'TTF can be useful for extending support to some older browsers, especially on mobile, if you need it.',
-      validation: (Rule: any) =>
+      validation: (Rule) =>
         validateFont({
           mimeType: 'ttf',
           Rule,
@@ -78,7 +81,7 @@ export default defineField({
       type: 'string',
       name: 'fontStyle',
       title: 'Font style',
-      validation: (Rule: any) => Rule.required(),
+      validation: (Rule) => Rule.required(),
       options: {
         list: [
           {title: 'Normal', value: 'normal'},
@@ -91,7 +94,7 @@ export default defineField({
       type: 'number',
       name: 'fontWeight',
       title: 'Font weight',
-      validation: (Rule: any) => Rule.required(),
+      validation: (Rule) => Rule.required(),
       options: {
         list: fontWeights,
         layout: 'dropdown',

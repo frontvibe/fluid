@@ -10,7 +10,7 @@ export default defineField({
       title: 'title',
       settings: 'settings',
     },
-    prepare({title, settings}: any) {
+    prepare({title, settings}) {
       return {
         title: title?.[0]?.value || 'Missing title',
         media: settings.hide ? EyeOff : GalleryHorizontal,

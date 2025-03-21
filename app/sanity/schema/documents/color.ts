@@ -20,7 +20,7 @@ export default defineType({
       background: 'background',
       foreground: 'foreground',
     },
-    prepare({title, subtitle, background, foreground}: any) {
+    prepare({title, subtitle, background, foreground}) {
       return {
         title,
         subtitle: subtitle ? 'Default template' : undefined,

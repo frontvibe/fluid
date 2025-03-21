@@ -17,5 +17,5 @@ export default defineField({
   components: {
     input: ArrayMaxRule,
   },
-  validation: (Rule: any) => Rule.min(0).max(1),
+  validation: (Rule) => Rule.min(0).max(1),
 });

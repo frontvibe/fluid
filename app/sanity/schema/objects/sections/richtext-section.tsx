@@ -43,7 +43,7 @@ export default defineField({
     select: {
       settings: 'settings',
     },
-    prepare({settings}: any) {
+    prepare({settings}) {
       return {
         title: 'Richtext',
         media: () => (settings?.hide ? <EyeOff /> : <TextSelect />),

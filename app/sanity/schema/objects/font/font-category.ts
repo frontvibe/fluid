@@ -10,7 +10,7 @@ export default defineField({
       type: 'string',
       name: 'fontName',
       title: 'Font name',
-      validation: (Rule: any) => Rule.required(),
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       type: 'string',
@@ -44,10 +44,11 @@ export default defineField({
       title: 'Font assets',
       type: 'array',
       of: [defineArrayMember({type: 'fontAsset'})],
-      validation: (Rule: any) =>
+      validation: (Rule) =>
         Rule.custom(
-          (value: any) =>
-            value?.length > 0 || 'At least one font asset is required.',
+          (value) =>
+            (value && value?.length > 0) ||
+            'At least one font asset is required.',
         ),
     }),
   ],

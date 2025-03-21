@@ -26,7 +26,7 @@ export default defineField({
         min: 1,
         max: 25,
       },
-      validation: (Rule: any) => Rule.required().min(1).max(25),
+      validation: (Rule) => Rule.required().min(1).max(25),
     }),
     defineField({
       name: 'desktopColumns',
@@ -36,7 +36,7 @@ export default defineField({
         min: 1,
         max: 5,
       },
-      validation: (Rule: any) => Rule.required().min(1).max(5),
+      validation: (Rule) => Rule.required().min(1).max(5),
     }),
     defineField({
       name: 'viewAll',
@@ -58,7 +58,7 @@ export default defineField({
       collection: 'collection.store',
       settings: 'settings',
     },
-    prepare({collection, settings}: any) {
+    prepare({collection, settings}) {
       return {
         title: collection.title,
         subtitle: 'Featured Collection',

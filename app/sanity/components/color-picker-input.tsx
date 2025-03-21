@@ -132,9 +132,9 @@ export function ColorPickerInput(props: ObjectInputProps) {
 }
 
 function ColorPickerDialog(props: {
-  onChange: (value: any) => void;
+  onChange: ObjectInputProps['onChange'];
   toggleDialog: () => void;
-  value: any;
+  value: ObjectInputProps['value'];
 }) {
   const {toggleDialog, onChange, value} = props;
   const colorUtils = useColorUtils();
@@ -230,10 +230,10 @@ function ColorPickerDialog(props: {
 function HexInput(props: {
   color: HSBColor;
   hexInputValue: string;
-  onChange: (value: any) => void;
-  setColor: (value: any) => void;
-  setHexInputValue: (value: any) => void;
-  value: any;
+  onChange: ObjectInputProps['onChange'];
+  setColor: (value: HSBColor) => void;
+  setHexInputValue: (value: string) => void;
+  value: ObjectInputProps['value'];
 }) {
   const {value, color, onChange, hexInputValue, setHexInputValue, setColor} =
     props;

@@ -18,7 +18,7 @@ export default defineField({
         max: 200,
         suffix: 'px',
       },
-      validation: (Rule: any) => Rule.min(0).max(200),
+      validation: (Rule) => Rule.min(0).max(200),
     }),
     defineField({
       name: 'bottom',
@@ -29,7 +29,7 @@ export default defineField({
         max: 200,
         suffix: 'px',
       },
-      validation: (Rule: any) => Rule.min(0).max(200),
+      validation: (Rule) => Rule.min(0).max(200),
     }),
   ],
   initialValue: {

@@ -1,6 +1,6 @@
 import type {ListItemBuilder} from 'sanity/structure';
 
-import IconCollectionTag from '../components/icons/collection-tag';
+import IconCollectionTag from '../components/icons/collection-tag-icon';
 import defineStructure from '../utils/defineStructure';
 
 export const collections = defineStructure<ListItemBuilder>((S) =>

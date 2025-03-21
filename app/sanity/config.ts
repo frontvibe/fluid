@@ -10,7 +10,7 @@ import {media, mediaAssetSource} from 'sanity-plugin-media';
 import {presentationTool} from 'sanity/presentation';
 import {structureTool} from 'sanity/structure';
 
-import IconPreview from './components/icons/Preview';
+import IconPreview from './components/icons/preview-icon';
 import {
   SANITY_API_VERSION,
   SANITY_STUDIO_PREVIEW_URL,

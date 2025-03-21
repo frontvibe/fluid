@@ -19,7 +19,7 @@ const Banner = forwardRef<
     height: null | number;
   }
 >(({className, height, ...props}, ref) => {
-  const bannerHeight = `${height}px` || '200px';
+  const bannerHeight = `${height ?? 200}px`;
   return (
     <div
       className={cn('relative h-[var(--banner-height)]', className)}

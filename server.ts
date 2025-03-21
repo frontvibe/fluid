@@ -1,7 +1,8 @@
 import {storefrontRedirect} from '@shopify/hydrogen';
 import {createRequestHandler} from '@shopify/remix-oxygen';
 // Virtual entry point for the app
-// @ts-ignore
+// @ts-expect-error remixBuild is not typed
+// eslint-disable-next-line import/no-unresolved
 import * as remixBuild from 'virtual:remix/server-build';
 
 import {createAppLoadContext} from '~/lib/context';
@@ -63,7 +64,6 @@ export default {
         message = 'Missing environment variable';
       }
 
-      // eslint-disable-next-line no-console
       console.error(error);
       return new Response(message, {status: 500});
     }

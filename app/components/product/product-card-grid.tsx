@@ -45,7 +45,7 @@ export function ProductCardGrid(props: {
           ))
         : skeleton
           ? [...Array(skeleton.cardsNumber ?? 3)].map((_, i) => (
-              <li key={i}>
+              <li key={crypto.randomUUID()}>
                 <ProductCard
                   columns={{
                     desktop: props.columns?.desktop,

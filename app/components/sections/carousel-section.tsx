@@ -33,8 +33,8 @@ export function CarouselSection(
   const device = useDevice();
   const isActive =
     device === 'mobile'
-      ? slides?.length! > 1
-      : slides?.length! > slidesPerViewDesktop;
+      ? (slides?.length ?? 0) > 1
+      : (slides?.length ?? 0) > slidesPerViewDesktop;
 
   return (
     <div className="container" ref={ref}>

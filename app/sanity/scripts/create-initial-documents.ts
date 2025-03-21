@@ -34,6 +34,7 @@ const projectId = client.config().projectId;
 const JSON_FILE_PATH = './app/sanity/scripts/cache.json';
 
 if (!projectId) {
+  // eslint-disable-next-line no-console
   console.log('❌ Project ID not found. Exiting...');
   process.exit(0);
 }

@@ -2,8 +2,8 @@ import {
   Image,
   parseAspectRatio,
   shopifyLoader,
-} from '@shopify/hydrogen-react/Image';
-import React from 'react';
+} from '@shopify/hydrogen-react/Image'; // eslint-disable-line import/no-unresolved
+import React, {forwardRef} from 'react';
 
 import {cn} from '~/lib/utils';
 
@@ -42,7 +42,7 @@ import {cn} from '~/lib/utils';
  *
  * @link https://shopify.dev/docs/api/hydrogen-react/components/image
  */
-const ShopifyImage = React.forwardRef<
+const ShopifyImage = forwardRef<
   HTMLImageElement,
   React.ComponentProps<typeof Image> & {
     /**
@@ -97,7 +97,6 @@ const ShopifyImage = React.forwardRef<
       } as React.CSSProperties);
 
     return (
-      // eslint-disable-next-line jsx-a11y/alt-text
       <Image
         aspectRatio={aspectRatio}
         className={cn(

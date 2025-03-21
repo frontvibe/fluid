@@ -160,7 +160,6 @@ function getDarkenColor(color: Rgb) {
     .replaceAll(',', '');
 }
 
-/* eslint perfectionist/sort-objects: 0 */
 export const useFallbackColorScheme = () => ({
   background: {
     hex: '#FBFDFC',

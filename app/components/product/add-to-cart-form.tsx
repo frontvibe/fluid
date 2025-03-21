@@ -55,7 +55,7 @@ export function AddToCartForm(props: {
           inputs={{
             lines: [
               {
-                merchandiseId: selectedVariant?.id!,
+                merchandiseId: selectedVariant.id as string,
                 quantity,
               },
             ],
@@ -171,7 +171,7 @@ function ShopPay(props: {
             variantIdsAndQuantities={[
               {
                 id: variantId,
-                quantity: quantity,
+                quantity,
               },
             ]}
             width="100%"

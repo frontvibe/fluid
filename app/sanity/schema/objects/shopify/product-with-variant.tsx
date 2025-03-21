@@ -27,8 +27,8 @@ export default defineField({
       description: 'First variant will be selected if left empty',
       options: {
         filter: ({parent}) => {
-          // @ts-expect-error
-          const productId = parent?.product?._ref;
+          const productId = (parent as {product?: {_ref: string}})?.product
+            ?._ref;
           const shopifyProductId = Number(
             productId?.replace('shopifyProduct-', ''),
           );
@@ -54,8 +54,8 @@ export default defineField({
       validation: (Rule) =>
         Rule.custom(async (value, {parent, getClient}) => {
           // Selected product in adjacent `product` field
-          // @ts-expect-error
-          const productId = parent?.product?._ref;
+          const productId = (parent as {product?: {_ref: string}})?.product
+            ?._ref;
 
           // Selected product variant
           const productVariantId = value?._ref;

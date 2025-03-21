@@ -130,7 +130,7 @@ function AwaitFeaturedCollection(props: {
             if (result.status === 'fulfilled') {
               const {collection: resultCollection} = result.value;
               // Check if the gid from Sanity is the same as the gid from Shopify
-              if (sanityCollectionGid === resultCollection?.id!) {
+              if (sanityCollectionGid === resultCollection?.id) {
                 collection = resultCollection;
                 break;
               }

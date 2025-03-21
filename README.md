@@ -31,7 +31,6 @@ Fluid is built with amazing technologies:
 - [Embla Carousel](https://www.embla-carousel.com/get-started/)
 - [color2k](https://github.com/ricokahler/color2k)
 - [@vercel/stega](https://www.npmjs.com/package/@vercel/stega)
-- [GROQD](https://commerce.nearform.com/open-source/groqd/)
 
 The project is heavily inspired by:
 

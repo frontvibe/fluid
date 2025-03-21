@@ -19,7 +19,7 @@ import {cn} from '~/lib/utils';
 import type {SortParam} from './sort-filter-layout';
 
 import {IconSort} from '../icons/IconSort';
-import {iconButtonClass} from '../ui/button_';
+import {iconButtonClass} from '../ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -27,7 +27,7 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from '../ui/dropdow-menu';
-import {Label} from '../ui/label_';
+import {Label} from '../ui/label';
 import {RadioGroup, RadioGroupItem} from '../ui/radio-group';
 
 type SortItem = {

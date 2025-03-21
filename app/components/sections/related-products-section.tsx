@@ -7,7 +7,7 @@ import type {loader} from '~/routes/($locale).products.$productHandle';
 
 import {ProductCardGrid} from '../product/product-card-grid';
 import {RelatedProducts} from '../product/related-products';
-import {Skeleton} from '../skeleton_';
+import {Skeleton} from '../skeleton';
 
 export type RelatedProductsSectionProps =
   SectionOfType<'relatedProductsSection'>;

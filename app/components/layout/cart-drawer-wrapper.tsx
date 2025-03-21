@@ -14,7 +14,7 @@ import {useRootLoaderData} from '~/root';
 import {useDevice} from '../../hooks/use-device';
 import {ClientOnly} from '../client-only';
 import {IconBag} from '../icons/IconBag';
-import {iconButtonClass} from '../ui/button_';
+import {iconButtonClass} from '../ui/button';
 import {CartDrawer} from './cart-drawer.client';
 
 export default function CartDrawerWrapper() {

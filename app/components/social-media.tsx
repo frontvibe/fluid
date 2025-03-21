@@ -5,7 +5,7 @@ import {useRootLoaderData} from '~/root';
 import type {Socials} from './icons/IconSocial';
 
 import {IconSocial, socials} from './icons/IconSocial';
-import {IconButton} from './ui/button_';
+import {IconButton} from './ui/button';
 
 export function SocialMediaButtons() {
   return (

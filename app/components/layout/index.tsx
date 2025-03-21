@@ -8,9 +8,9 @@ import {TogglePreviewMode} from '../sanity/toggle-preview-mode';
 import {VisualEditing} from '../sanity/visual-editing.client';
 import {TailwindIndicator} from '../tailwind-indicator';
 import {AnnouncementBar} from './announcement-bar';
-import {Footer} from './footer_';
+import {Footer} from './footer';
 import {FramerMotion} from './framer-motion';
-import {Header} from './header_';
+import {Header} from './header';
 // import {NavigationProgressBar} from './NavigationProgressBar';
 
 export type LayoutProps = {

@@ -12,7 +12,7 @@ import {useRootLoaderData} from '~/root';
 
 import {VariantPrice} from '../product/variant-price';
 import {useProductVariants} from '../sections/product-information-section';
-import {Badge} from '../ui/badge_';
+import {Badge} from '../ui/badge';
 
 export type PriceBlockProps = NonNullable<
   SectionOfType<'productInformationSection'>['richtext']

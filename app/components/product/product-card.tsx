@@ -11,7 +11,7 @@ import {useRootLoaderData} from '~/root';
 import {ProductBadges} from '../blocks/price-block';
 import {ShopifyImage} from '../shopify-image';
 import {ShopifyMoney} from '../shopify-money';
-import {Card, CardContent, CardMedia} from '../ui/card_';
+import {Card, CardContent, CardMedia} from '../ui/card';
 
 export function ProductCard(props: {
   className?: string;

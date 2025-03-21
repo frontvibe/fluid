@@ -22,7 +22,7 @@ import type {loader as indexLoader} from '../../routes/_index';
 
 import {ProductDetails} from '../product/product-details';
 import {ShopifyImage} from '../shopify-image';
-import {Skeleton} from '../skeleton_';
+import {Skeleton} from '../skeleton';
 
 export type FeaturedProductSectionProps =
   SectionOfType<'featuredProductSection'>;

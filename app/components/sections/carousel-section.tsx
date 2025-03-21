@@ -14,7 +14,7 @@ import {
   CarouselNext,
   CarouselPagination,
   CarouselPrevious,
-} from '../ui/carousel_';
+} from '../ui/carousel';
 
 export function CarouselSection(
   props: SectionDefaultProps & {data: SectionOfType<'carouselSection'>},

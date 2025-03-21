@@ -8,8 +8,8 @@ import {useSanityThemeContent} from '~/hooks/use-sanity-theme-content';
 import {cn} from '~/lib/utils';
 
 import {IconRemove} from '../icons/IconRemove';
-import {Button} from '../ui/button_';
-import {Input} from '../ui/input_';
+import {Button} from '../ui/button';
+import {Input} from '../ui/input';
 
 /**
  * Temporary discount UI

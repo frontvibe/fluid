@@ -27,8 +27,8 @@ import type {AppliedFilter} from '../collection/sort-filter-layout';
 
 import {SortFilter} from '../collection/sort-filter-layout';
 import {ProductCardGrid} from '../product/product-card-grid';
-import {Skeleton} from '../skeleton_';
-import {Button} from '../ui/button_';
+import {Skeleton} from '../skeleton';
+import {Button} from '../ui/button';
 
 type CollectionProductGridSectionProps =
   SectionOfType<'collectionProductGridSection'>;

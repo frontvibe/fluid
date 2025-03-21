@@ -14,7 +14,7 @@ import {useRootLoaderData} from '~/root';
 
 import {QuantitySelector} from '../quantity-selector';
 import CleanString from '../sanity/clean-string';
-import {Button} from '../ui/button_';
+import {Button} from '../ui/button';
 
 export function AddToCartForm(props: {
   showQuantitySelector?: boolean | null;

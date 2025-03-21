@@ -10,7 +10,7 @@ import {useRootLoaderData} from '~/root';
 
 import {IconArrowRight} from './icons/IconArrowRight';
 import {ShopifyImage} from './shopify-image';
-import {Card, CardContent, CardMedia} from './ui/card_';
+import {Card, CardContent, CardMedia} from './ui/card';
 
 export function CollectionCard(props: {
   className?: string;

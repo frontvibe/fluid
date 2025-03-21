@@ -19,8 +19,8 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '../ui/accordion_';
-import {Button, IconButton} from '../ui/button_';
+} from '../ui/accordion';
+import {Button, IconButton} from '../ui/button';
 import {ScrollArea} from '../ui/scroll-area';
 import {DesktopSort} from './collection-sort';
 import {FilterMarkup} from './filter-markup';

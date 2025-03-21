@@ -12,7 +12,7 @@ import {useRootLoaderData} from '~/root';
 
 import {IconCheck} from '../icons/IconCheck';
 import {IconChevron} from '../icons/IconChevron';
-import {Button} from '../ui/button_';
+import {Button} from '../ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,

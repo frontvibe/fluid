@@ -4,7 +4,7 @@ import {forwardRef} from 'react';
 import {Drawer as DrawerPrimitive} from 'vaul';
 
 import {IconClose} from '../icons/IconClose';
-import {iconButtonClass} from './button_';
+import {iconButtonClass} from './button';
 
 const Drawer = ({
   onOpenChange,

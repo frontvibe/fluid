@@ -9,7 +9,7 @@ import {
   BannerContent,
   BannerMedia,
   BannerMediaOverlay,
-} from '../banner_';
+} from '../banner';
 import {ShopifyImage} from '../shopify-image';
 
 export function CollectionBannerSection(

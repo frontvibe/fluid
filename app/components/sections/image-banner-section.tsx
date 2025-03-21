@@ -11,7 +11,7 @@ import {
   BannerContent,
   BannerMedia,
   BannerMediaOverlay,
-} from '../banner_';
+} from '../banner';
 import {useSection} from '../cms-section';
 import {ButtonBlock} from '../sanity/richtext/components/button-block';
 import {SanityImage} from '../sanity/sanity-image';

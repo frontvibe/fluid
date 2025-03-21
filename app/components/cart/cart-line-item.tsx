@@ -22,7 +22,7 @@ import {ProgressiveMotionDiv} from '../progressive-motion';
 import {QuantitySelector} from '../quantity-selector';
 import {ShopifyImage} from '../shopify-image';
 import {ShopifyMoney} from '../shopify-money';
-import {IconButton} from '../ui/button_';
+import {IconButton} from '../ui/button';
 
 type OptimisticData = {
   action?: string;

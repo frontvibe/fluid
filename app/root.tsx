@@ -27,8 +27,8 @@ import {Layout as AppLayout} from '~/components/layout';
 
 import {CssVars} from './components/css-vars';
 import {CustomAnalytics} from './components/custom-analytics';
-import {Fonts} from './components/fonts_';
-import {Button} from './components/ui/button_';
+import {Fonts} from './components/fonts';
+import {Button} from './components/ui/button';
 import {ROOT_QUERY} from './data/sanity/queries';
 import {useLocalePath} from './hooks/use-locale-path';
 import {useSanityThemeContent} from './hooks/use-sanity-theme-content';

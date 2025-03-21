@@ -17,8 +17,8 @@ import {
 } from '@shopify/remix-oxygen';
 import invariant from 'tiny-invariant';
 
-import {Button} from '~/components/ui/button_';
-import {Input} from '~/components/ui/input_';
+import {Button} from '~/components/ui/button';
+import {Input} from '~/components/ui/input';
 import {CUSTOMER_UPDATE_MUTATION} from '~/data/shopify/customer-account/mutations';
 import {useSanityThemeContent} from '~/hooks/use-sanity-theme-content';
 

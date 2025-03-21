@@ -16,7 +16,7 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from '../ui/carousel_';
+} from '../ui/carousel';
 
 type AnnouncementBarProps = NonNullable<
   NonNullable<ROOT_QUERYResult['header']>['announcementBar']

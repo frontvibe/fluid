@@ -11,7 +11,7 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from '../ui/drawer_';
+} from '../ui/drawer';
 
 export function CartDrawer(props: {
   BadgeCounter: React.ReactNode;

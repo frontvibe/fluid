@@ -20,9 +20,9 @@ import {cn} from '~/lib/utils';
 
 import type {AppliedFilter} from './sort-filter-layout';
 
-import {Checkbox} from '../ui/checkbox_';
-import {Input} from '../ui/input_';
-import {Label} from '../ui/label_';
+import {Checkbox} from '../ui/checkbox';
+import {Input} from '../ui/input';
+import {Label} from '../ui/label';
 import {FILTER_URL_PREFIX} from './sort-filter-layout';
 
 export function DefaultFilter(props: {

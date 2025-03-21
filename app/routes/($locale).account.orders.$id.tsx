@@ -9,8 +9,8 @@ import {
   data as remixData,
 } from '@shopify/remix-oxygen';
 
-import {Badge} from '~/components/ui/badge_';
-import {Button} from '~/components/ui/button_';
+import {Badge} from '~/components/ui/badge';
+import {Button} from '~/components/ui/button';
 import {CUSTOMER_ORDER_QUERY} from '~/data/shopify/customer-account/queries';
 import {useSanityThemeContent} from '~/hooks/use-sanity-theme-content';
 import {statusMessage} from '~/lib/utils';

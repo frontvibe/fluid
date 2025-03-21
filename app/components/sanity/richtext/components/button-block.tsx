@@ -1,6 +1,6 @@
 import type {SectionOfType} from 'types';
 
-import {Button} from '~/components/ui/button_';
+import {Button} from '~/components/ui/button';
 
 import {SanityInternalLink} from '../../link/sanity-internal-link';
 

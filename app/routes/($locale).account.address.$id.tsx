@@ -13,9 +13,9 @@ import {flattenConnection} from '@shopify/hydrogen';
 import {redirect, data as remixData} from '@shopify/remix-oxygen';
 import invariant from 'tiny-invariant';
 
-import {Button} from '~/components/ui/button_';
-import {Checkbox} from '~/components/ui/checkbox_';
-import {Input} from '~/components/ui/input_';
+import {Button} from '~/components/ui/button';
+import {Checkbox} from '~/components/ui/checkbox';
+import {Input} from '~/components/ui/input';
 import {
   CREATE_ADDRESS_MUTATION,
   DELETE_ADDRESS_MUTATION,

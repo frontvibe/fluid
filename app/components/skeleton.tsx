@@ -2,7 +2,7 @@ import {useNavigate} from '@remix-run/react';
 
 import {useSanityThemeContent} from '~/hooks/use-sanity-theme-content';
 
-import {Button} from './ui/button_';
+import {Button} from './ui/button';
 
 /**
  * Skeleton wrapper to conditionnaly render an error message and a button to reload the page.

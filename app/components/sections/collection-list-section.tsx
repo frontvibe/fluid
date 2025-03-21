@@ -7,7 +7,7 @@ import {Suspense} from 'react';
 import type {loader as indexLoader} from '../../routes/_index';
 
 import {CollectionListGrid} from '../collection-list-grid';
-import {Skeleton} from '../skeleton_';
+import {Skeleton} from '../skeleton';
 
 type CollectionListSectionProps = SectionOfType<'collectionListSection'>;
 

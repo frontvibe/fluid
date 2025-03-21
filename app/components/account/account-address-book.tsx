@@ -5,8 +5,8 @@ import {Form, Link} from '@remix-run/react';
 
 import {useSanityThemeContent} from '~/hooks/use-sanity-theme-content';
 
-import {Badge} from '../ui/badge_';
-import {Button} from '../ui/button_';
+import {Badge} from '../ui/badge';
+import {Button} from '../ui/button';
 
 export function AccountAddressBook({
   addresses,

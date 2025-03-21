@@ -19,7 +19,7 @@ import {headerVariants} from '../cva/header';
 import {IconAccount} from '../icons/IconAccount';
 import {DesktopNavigation} from '../navigation/desktop-navigation';
 import {MobileNavigation} from '../navigation/mobile-navigation.client';
-import {IconButton} from '../ui/button_';
+import {IconButton} from '../ui/button';
 import CartDrawer from './cart-drawer-wrapper';
 import {Logo} from './header-logo';
 

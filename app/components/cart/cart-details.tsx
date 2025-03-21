@@ -15,8 +15,8 @@ import type {CartLayouts} from '.';
 import {IconLoader} from '../icons/IconLoader';
 import {ProgressiveMotionDiv} from '../progressive-motion';
 import {ShopifyMoney} from '../shopify-money';
-import {Button} from '../ui/button_';
-import {Card, CardContent} from '../ui/card_';
+import {Button} from '../ui/button';
+import {Card, CardContent} from '../ui/card';
 import {CartDiscounts} from './cart-discounts';
 import {CartLines} from './cart-lines';
 

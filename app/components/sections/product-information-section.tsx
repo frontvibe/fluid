@@ -12,7 +12,7 @@ import {cn, getAspectRatioData} from '~/lib/utils';
 
 import {MediaGallery} from '../product/media-gallery';
 import {ProductDetails} from '../product/product-details';
-import {Skeleton} from '../skeleton_';
+import {Skeleton} from '../skeleton';
 
 export type ProductInformationSectionProps =
   SectionOfType<'productInformationSection'>;

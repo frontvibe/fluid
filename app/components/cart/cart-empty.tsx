@@ -9,7 +9,7 @@ import {cn} from '~/lib/utils';
 import type {CartLayouts} from '.';
 
 import {ProgressiveMotionDiv} from '../progressive-motion';
-import {Button} from '../ui/button_';
+import {Button} from '../ui/button';
 
 export function CartEmpty({
   layout = 'drawer',

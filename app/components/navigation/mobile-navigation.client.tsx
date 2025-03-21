@@ -10,13 +10,13 @@ import {IconChevron} from '../icons/IconChevron';
 import {IconMenu} from '../icons/IconMenu';
 import {SanityExternalLink} from '../sanity/link/sanity-external-link';
 import {SanityInternalLink} from '../sanity/link/sanity-internal-link';
-import {iconButtonClass} from '../ui/button_';
+import {iconButtonClass} from '../ui/button';
 import {
   Drawer,
   DrawerContent,
   DrawerNestedRoot,
   DrawerTrigger,
-} from '../ui/drawer_';
+} from '../ui/drawer';
 import {ScrollArea} from '../ui/scroll-area';
 
 const mobileMenuLinkClass = cn(

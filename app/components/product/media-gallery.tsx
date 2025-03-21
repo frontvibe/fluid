@@ -14,16 +14,16 @@ import type {loader} from '~/routes/($locale).products.$productHandle';
 import {useDevice} from '~/hooks/use-device';
 import {type AspectRatioData, cn} from '~/lib/utils';
 
-import type {CarouselApi} from '../ui/carousel_';
+import type {CarouselApi} from '../ui/carousel';
 
 import {ShopifyImage} from '../shopify-image';
-import {Badge} from '../ui/badge_';
+import {Badge} from '../ui/badge';
 import {
   Carousel,
   CarouselContent,
   CarouselCounter,
   CarouselItem,
-} from '../ui/carousel_';
+} from '../ui/carousel';
 
 type Media =
   | Media_ExternalVideo_Fragment

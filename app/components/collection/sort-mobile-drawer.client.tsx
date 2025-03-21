@@ -10,14 +10,14 @@ import {cn} from '~/lib/utils';
 import type {AppliedFilter} from './sort-filter-layout';
 
 import {IconFilters} from '../icons/IconFilters';
-import {Button, iconButtonClass} from '../ui/button_';
+import {Button, iconButtonClass} from '../ui/button';
 import {
   Drawer,
   DrawerContent,
   DrawerFooter,
   DrawerHeader,
   DrawerTrigger,
-} from '../ui/drawer_';
+} from '../ui/drawer';
 import {ScrollArea} from '../ui/scroll-area';
 import {MobileSort} from './collection-sort';
 import {FilterMarkup} from './filter-markup';

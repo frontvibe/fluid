@@ -92,7 +92,7 @@ function HeaderWrapper(props: {children: React.ReactNode}) {
     'section-padding bg-background text-foreground',
     sticky !== 'none' && 'sticky top-0 z-50',
     blur &&
-      'bg-opacity-95 backdrop-blur-sm supports-backdrop-filter:bg-opacity-85',
+      'bg-background/95 backdrop-blur-sm supports-backdrop-filter:bg-background/85',
     headerVariants({
       optional: showSeparatorLine ? 'separator-line' : null,
     }),

@@ -12,18 +12,23 @@ export function CustomAnalytics() {
 
     // Standard events
     subscribe('page_viewed', (data) => {
+      // eslint-disable-next-line no-console
       console.log('CustomAnalytics - Page viewed:', data);
     });
     subscribe('product_viewed', (data) => {
+      // eslint-disable-next-line no-console
       console.log('CustomAnalytics - Product viewed:', data);
     });
     subscribe('collection_viewed', (data) => {
+      // eslint-disable-next-line no-console
       console.log('CustomAnalytics - Collection viewed:', data);
     });
     subscribe('cart_viewed', (data) => {
+      // eslint-disable-next-line no-console
       console.log('CustomAnalytics - Cart viewed:', data);
     });
     subscribe('cart_updated', (data) => {
+      // eslint-disable-next-line no-console
       console.log('CustomAnalytics - Cart updated:', data);
     });
   }, [subscribe, isDev]);

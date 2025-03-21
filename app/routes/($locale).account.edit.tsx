@@ -65,10 +65,12 @@ export const action: ActionFunction = async ({context, params, request}) => {
   try {
     const customer: CustomerUpdateInput = {};
 
-    formDataHas(formData, 'firstName') &&
-      (customer.firstName = formData.get('firstName') as string);
-    formDataHas(formData, 'lastName') &&
-      (customer.lastName = formData.get('lastName') as string);
+    if (formDataHas(formData, 'firstName')) {
+      customer.firstName = formData.get('firstName') as string;
+    }
+    if (formDataHas(formData, 'lastName')) {
+      customer.lastName = formData.get('lastName') as string;
+    }
 
     const {data, errors} = await context.customerAccount.mutate(
       CUSTOMER_UPDATE_MUTATION,

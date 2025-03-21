@@ -39,7 +39,9 @@ export default (
       label: 'Edit in Shopify',
       icon: EarthGlobeIcon,
       onHandle: () => {
-        url ? window.open(url) : void 'No URL';
+        if (url) {
+          window.open(url);
+        }
       },
       shortcut: 'Ctrl+Alt+E',
     };

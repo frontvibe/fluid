@@ -74,7 +74,6 @@ export function getAppliedFilters({
         );
       });
       if (!foundValue) {
-        // eslint-disable-next-line no-console
         console.error('Could not find filter value for filter', filter);
         return null;
       }

@@ -37,8 +37,7 @@ import {resolveShopifyPromises} from './lib/resolve-shopify-promises';
 import {seoPayload} from './lib/seo.server';
 import {generateSanityImageUrl} from './lib/utils';
 import tailwindCss from './styles/tailwind.css?url';
-
-import faviconAsset from '/favicon.ico?url';
+import faviconAsset from '~/assets/favicon.ico?url';
 
 export type RootLoader = typeof loader;
 
@@ -177,7 +176,7 @@ export async function loader({context, request}: LoaderFunctionArgs) {
     seo,
     shop: getShopAnalytics({
       publicStorefrontId: env.PUBLIC_STOREFRONT_ID,
-      storefront: storefront,
+      storefront,
     }),
   };
 }

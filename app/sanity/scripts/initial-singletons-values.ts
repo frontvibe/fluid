@@ -412,7 +412,7 @@ function generateIntString(value: string) {
     {
       _key: locale.language.toLowerCase(),
       _type: 'internationalizedArrayStringValue',
-      value: value,
+      value,
     },
   ];
 }

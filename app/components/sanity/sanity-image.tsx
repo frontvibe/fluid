@@ -2,7 +2,7 @@ import type {SanityImage as SanityImageData} from 'types';
 
 import {getExtension, getImageDimensions} from '@sanity/asset-utils';
 import imageUrlBuilder from '@sanity/image-url';
-import React from 'react';
+import React, {forwardRef} from 'react';
 
 import {useIsDev} from '~/hooks/use-is-dev';
 import {cn, generateImageUrl} from '~/lib/utils';
@@ -55,7 +55,7 @@ export type SanityImageProps = React.ComponentPropsWithRef<'img'> & {
  * />
  * ```
  */
-const SanityImage = React.forwardRef<HTMLImageElement, SanityImageProps>(
+const SanityImage = forwardRef<HTMLImageElement, SanityImageProps>(
   (
     {
       aspectRatio,

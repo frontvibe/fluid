@@ -82,9 +82,10 @@ function generateFontFaces({fontsData}: {fontsData: FontsQuery}) {
 function resolveFontAssetUrls(font: FontAssetsFragment) {
   const fontAssetUrls = [];
 
-  font.woff2 && fontAssetUrls.push(`url("${font.woff2.url}") format("woff2")`);
-  font.woff && fontAssetUrls.push(`url("${font.woff.url}") format("woff")`);
-  font.ttf && fontAssetUrls.push(`url("${font.ttf.url}") format("truetype")`);
+  if (font.woff2)
+    fontAssetUrls.push(`url("${font.woff2.url}") format("woff2")`);
+  if (font.woff) fontAssetUrls.push(`url("${font.woff.url}") format("woff")`);
+  if (font.ttf) fontAssetUrls.push(`url("${font.ttf.url}") format("truetype")`);
 
   return fontAssetUrls.join(', ');
 }

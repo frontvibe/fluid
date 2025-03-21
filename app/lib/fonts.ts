@@ -28,7 +28,7 @@ export function generateFontsPreloadLinks({
         preloadLinks.push({
           as: 'font',
           crossOrigin: 'anonymous',
-          href: font[fontType]?.url!,
+          href: font[fontType].url as string,
           rel: 'preload',
           tagName: 'link',
           type: `font/${fontType}`,

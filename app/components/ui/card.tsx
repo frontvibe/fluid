@@ -65,7 +65,9 @@ const CardTitle = forwardRef<
     )}
     ref={ref}
     {...props}
-  />
+  >
+    {props.children}
+  </h3>
 ));
 CardTitle.displayName = 'CardTitle';
 

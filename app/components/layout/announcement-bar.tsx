@@ -38,14 +38,14 @@ export function AnnouncementBar() {
   const colorsCssVars = useColorsCssVars({
     selector: `#announcement-bar`,
     settings: {
-      colorScheme: header?.announcementBarColorScheme!,
+      colorScheme: header?.announcementBarColorScheme ?? null,
       customCss: null,
       hide: null,
       padding: null,
     },
   });
 
-  const isActive = announcementBar?.length! > 1;
+  const isActive = (announcementBar?.length ?? 0) > 1;
 
   if (!announcementBar) return null;
 

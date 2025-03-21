@@ -36,7 +36,7 @@ export function CollectionListGrid(props: {
           ))
         : props.skeleton
           ? [...Array(props.skeleton.cardsNumber ?? 3)].map((_, i) => (
-              <li key={i}>
+              <li key={crypto.randomUUID()}>
                 <CollectionCard
                   columns={props.columns}
                   skeleton={{

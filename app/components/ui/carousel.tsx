@@ -130,7 +130,7 @@ const Carousel = React.forwardRef<
     return (
       <CarouselContext.Provider
         value={{
-          api: api,
+          api,
           canScrollNext,
           canScrollPrev,
           carouselRef,
@@ -271,7 +271,7 @@ const CarouselPagination = React.forwardRef<
       {scrollSnaps.map((_, index) => (
         <Button
           className={cn(className, 'p-1')}
-          key={index}
+          key={crypto.randomUUID()}
           onClick={() => onDotButtonClick(index)}
           ref={ref}
           size="primitive"

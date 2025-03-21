@@ -89,6 +89,12 @@ export function ColorPickerInput(props: ObjectInputProps) {
       <Flex align="center" gap={3}>
         <div
           onClick={toggleDialog}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              toggleDialog();
+            }
+          }}
+          tabIndex={0}
           role="button"
           style={{
             cursor: 'pointer',

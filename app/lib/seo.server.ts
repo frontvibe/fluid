@@ -19,7 +19,7 @@ import type {
 import {getImageDimensions} from '@sanity/asset-utils';
 import {stegaClean} from '@sanity/client/stega';
 
-import {generateSanityImageUrl} from '~/components/sanity/SanityImage';
+import {generateSanityImageUrl} from './utils';
 
 type SanityConfig = {
   dataset: string;

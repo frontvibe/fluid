@@ -1,5 +1,3 @@
-import type {CropMode} from '@sanity/image-url/lib/types/types';
-import type {ImageUrlBuilder} from 'sanity';
 import type {SanityImage as SanityImageData} from 'types';
 
 import {getExtension, getImageDimensions} from '@sanity/asset-utils';
@@ -7,22 +5,9 @@ import imageUrlBuilder from '@sanity/image-url';
 import React from 'react';
 
 import {useIsDev} from '~/hooks/useIsDev';
-import {cn} from '~/lib/utils';
+import {cn, generateImageUrl} from '~/lib/utils';
 import {useRootLoaderData} from '~/root';
 
-type ImageCrop = null | {
-  bottom?: null | number;
-  left?: null | number;
-  right?: null | number;
-  top?: null | number;
-};
-
-type ImageHotspot = null | {
-  height?: null | number;
-  width?: null | number;
-  x?: null | number;
-  y?: null | number;
-};
 export type SanityImageProps = React.ComponentPropsWithRef<'img'> & {
   /** The aspect ratio of the image, in the format of `width/height`.
    *
@@ -211,6 +196,7 @@ const SanityImage = React.forwardRef<HTMLImageElement, SanityImageProps>(
       <img
         alt={data.altText || ''}
         className={cn(
+          'w-full',
           showBorder &&
             'rounded-(--media-border-corner-radius) [border-width:var(--media-border-thickness)] border-[rgb(var(--border)_/_var(--media-border-opacity))]',
           showShadow &&
@@ -232,7 +218,6 @@ const SanityImage = React.forwardRef<HTMLImageElement, SanityImageProps>(
             aspectRatio: `${aspectRatioWidth || width}/${
               aspectRatioHeight || height
             }`,
-            width: '100%',
           } as React.CSSProperties
         }
         width={aspectRatioWidth ? aspectRatioWidth * 100 : width}
@@ -245,73 +230,3 @@ const SanityImage = React.forwardRef<HTMLImageElement, SanityImageProps>(
 SanityImage.displayName = 'SanityImage';
 
 export {SanityImage};
-
-function generateImageUrl(args: {
-  aspectRatioHeight?: number;
-  aspectRatioWidth?: number;
-  blur?: number;
-  urlBuilder: ImageUrlBuilder;
-  width: number;
-}) {
-  const {
-    aspectRatioHeight,
-    aspectRatioWidth,
-    blur = 0,
-    urlBuilder,
-    width,
-  } = args;
-  let imageUrl = urlBuilder.width(width);
-  const imageHeight =
-    aspectRatioHeight && aspectRatioWidth
-      ? Math.round((width / aspectRatioWidth) * aspectRatioHeight)
-      : undefined;
-
-  if (imageHeight) {
-    imageUrl = imageUrl.height(imageHeight);
-  }
-
-  if (blur && blur > 0) {
-    imageUrl = imageUrl.blur(blur);
-  }
-
-  return imageUrl.url();
-}
-
-export function generateSanityImageUrl({
-  crop,
-  dataset,
-  height,
-  projectId,
-  ref,
-  width,
-}: {
-  crop?: CropMode;
-  dataset: string;
-  height?: number;
-  projectId: string;
-  ref?: null | string;
-  width: number;
-}) {
-  if (!ref) return null;
-  const urlBuilder = imageUrlBuilder({
-    dataset,
-    projectId,
-  })
-    .image({
-      _ref: ref,
-    })
-    .auto('format')
-    .width(width);
-
-  let imageUrl = urlBuilder.url();
-
-  if (height) {
-    imageUrl = urlBuilder.height(height).url();
-  }
-
-  if (crop) {
-    imageUrl = urlBuilder.crop(crop).url();
-  }
-
-  return imageUrl;
-}

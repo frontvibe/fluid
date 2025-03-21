@@ -1,6 +1,8 @@
+import type {CropMode} from '@sanity/image-url/lib/types/types';
 import type {FulfillmentStatus} from '@shopify/hydrogen/customer-account-api-types';
 import type {SelectedOption} from '@shopify/hydrogen/storefront-api-types';
 import type {ClassValue} from 'class-variance-authority/types';
+import type {ImageUrlBuilder} from 'sanity';
 import type {I18nLocale} from 'types';
 import type {
   AspectRatios,
@@ -9,6 +11,7 @@ import type {
 
 import {useLocation} from '@remix-run/react';
 import {stegaClean} from '@sanity/client/stega';
+import imageUrlBuilder from '@sanity/image-url';
 import {cx} from 'class-variance-authority';
 import {useMemo} from 'react';
 import {twMerge} from 'tailwind-merge';
@@ -152,4 +155,74 @@ export function statusMessage(
   } catch (error) {
     return status;
   }
+}
+
+export function generateImageUrl(args: {
+  aspectRatioHeight?: number;
+  aspectRatioWidth?: number;
+  blur?: number;
+  urlBuilder: ImageUrlBuilder;
+  width: number;
+}) {
+  const {
+    aspectRatioHeight,
+    aspectRatioWidth,
+    blur = 0,
+    urlBuilder,
+    width,
+  } = args;
+  let imageUrl = urlBuilder.width(width);
+  const imageHeight =
+    aspectRatioHeight && aspectRatioWidth
+      ? Math.round((width / aspectRatioWidth) * aspectRatioHeight)
+      : undefined;
+
+  if (imageHeight) {
+    imageUrl = imageUrl.height(imageHeight);
+  }
+
+  if (blur && blur > 0) {
+    imageUrl = imageUrl.blur(blur);
+  }
+
+  return imageUrl.url();
+}
+
+export function generateSanityImageUrl({
+  crop,
+  dataset,
+  height,
+  projectId,
+  ref,
+  width,
+}: {
+  crop?: CropMode;
+  dataset: string;
+  height?: number;
+  projectId: string;
+  ref?: null | string;
+  width: number;
+}) {
+  if (!ref) return null;
+  const urlBuilder = imageUrlBuilder({
+    dataset,
+    projectId,
+  })
+    .image({
+      _ref: ref,
+    })
+    .auto('format')
+    .width(width);
+
+  let imageUrl = urlBuilder.url();
+
+  if (height) {
+    imageUrl = urlBuilder.height(height).url();
+  }
+
+  if (crop) {
+    imageUrl = urlBuilder.crop(crop).url();
+  }
+
+  return imageUrl;
 }

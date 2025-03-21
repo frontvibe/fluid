@@ -28,7 +28,7 @@ export function ImageBlock(
   const sizes = maxWidth ? `(min-width: 1024px) ${maxWidth}px, 100vw` : '100vw';
   const alignment = props.alignment ? stegaClean(props.alignment) : 'center';
 
-  const alignmentVariants = cva('w-[var(--maxWidth)] max-w-full h-auto', {
+  const alignmentVariants = cva('w-(--maxWidth) max-w-full h-auto', {
     variants: {
       required: {
         center: 'mx-auto',

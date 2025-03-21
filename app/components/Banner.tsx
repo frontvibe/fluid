@@ -58,7 +58,7 @@ const BannerMediaOverlay = forwardRef<
   }
 >(({className, opacity, ...props}, ref) => {
   const style = {
-    '--tw-bg-opacity': opacity ? opacity / 100 : 0,
+    opacity: opacity ? opacity / 100 : 0,
   } as React.CSSProperties;
 
   if (opacity === 0) return null;

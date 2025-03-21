@@ -28,7 +28,6 @@ import {Layout as AppLayout} from '~/components/layout/Layout';
 import {CssVars} from './components/CssVars';
 import {CustomAnalytics} from './components/CustomAnalytics';
 import {Fonts} from './components/Fonts';
-import {generateSanityImageUrl} from './components/sanity/SanityImage';
 import {Button} from './components/ui/Button';
 import {ROOT_QUERY} from './data/sanity/queries';
 import {useLocalePath} from './hooks/useLocalePath';
@@ -36,6 +35,7 @@ import {useSanityThemeContent} from './hooks/useSanityThemeContent';
 import {generateFontsPreloadLinks} from './lib/fonts';
 import {resolveShopifyPromises} from './lib/resolveShopifyPromises';
 import {seoPayload} from './lib/seo.server';
+import {generateSanityImageUrl} from './lib/utils';
 import tailwindCss from './styles/tailwind.css?url';
 
 import faviconAsset from '/favicon.ico?url';

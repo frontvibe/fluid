@@ -119,7 +119,7 @@ function FeaturedProductSkeleton({
   const sanityProduct = stegaClean(data.product?.store);
   const variants: PartialObjectDeep<
     ProductVariantConnection,
-    {recurseIntoArrays: true}
+    {recurseIntoArrays: true; allowUndefinedInNonTupleArrays: true}
   > = {
     nodes: [],
   };

@@ -29,6 +29,7 @@ export function VariantSelector(props: {
             ProductOption,
             {
               recurseIntoArrays: true;
+              allowUndefinedInNonTupleArrays: true;
             }
           >
         | undefined

@@ -16,6 +16,7 @@ export function ShopifyMoney({
     MoneyV2,
     {
       recurseIntoArrays: true;
+      allowUndefinedInNonTupleArrays: true;
     }
   >;
 }) {

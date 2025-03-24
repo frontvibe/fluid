@@ -117,7 +117,7 @@
     "schema-dts": "^1.1.5",
     "tailwindcss": "^4.0.15",
     "tailwindcss-animate": "^1.0.7",
-    "type-fest": "^4.37.0",
+    "type-fest": "^4.38.0",
     "typescript": "^5.8.2",
     "vite": "^5.4.14",
     "vite-tsconfig-paths": "^4.3.2"

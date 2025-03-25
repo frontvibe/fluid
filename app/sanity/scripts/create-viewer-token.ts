@@ -48,10 +48,9 @@ async function create() {
     throw new Error('No token in response');
   }
 
-  // Write key to .env
   const envPath = `.env`;
   const env = fs.readFileSync(envPath, 'utf8');
-  fs.writeFileSync(envPath, `${env}SANITY_STUDIO_TOKEN="${token}"\n`);
+  fs.writeFileSync(envPath, `${env}\nSANITY_STUDIO_TOKEN=${token}\n`);
 }
 
 create();

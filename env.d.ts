@@ -25,9 +25,9 @@ declare global {
   /**
    * A global `process` object is only available during build to access NODE_ENV.
    */
-  const process: {env: {NODE_ENV: 'development' | 'production'}};
+  const process: {env: {NODE_ENV: NodeJS.ProcessEnv['NODE_ENV']}};
   interface Env extends HydrogenEnv {
-    NODE_ENV: 'development' | 'production';
+    NODE_ENV: NodeJS.ProcessEnv['NODE_ENV'];
     PRIVATE_STOREFRONT_API_TOKEN: string;
     PUBLIC_STORE_DOMAIN: string;
     PUBLIC_STOREFRONT_API_TOKEN: string;

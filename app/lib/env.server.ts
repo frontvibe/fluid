@@ -1,8 +1,8 @@
 export function envVariables(contextEnv: Env) {
-  const env: Env | NodeJS.ProcessEnv = contextEnv;
+  const env: Env = contextEnv;
 
   return {
-    NODE_ENV: env.NODE_ENV,
+    NODE_ENV: process.env.NODE_ENV,
     PRIVATE_STOREFRONT_API_TOKEN: checkRequiredEnv(
       env.PRIVATE_STOREFRONT_API_TOKEN,
       'PRIVATE_STOREFRONT_API_TOKEN',

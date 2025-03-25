@@ -13,11 +13,13 @@
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
     "typecheck": "tsc --noEmit",
-    "create:initial": "sanity exec ./scripts/create-initial-documents.ts --with-user-token",
     "codegen": "shopify hydrogen codegen",
     "sanity:typegen": "npm run sanity:extract && npm run sanity:generate",
     "sanity:extract": "sanity schema extract --path ./types/sanity/schema.json",
-    "sanity:generate": "sanity typegen generate"
+    "sanity:generate": "sanity typegen generate",
+    "create:initial": "sanity exec app/sanity/scripts/create-initial-documents.ts --with-user-token",
+    "create:cors": "sanity exec app/sanity/scripts/create-cors-origin.ts --with-user-token",
+    "create:token": "sanity exec app/sanity/scripts/create-viewer-token.ts --with-user-token"
   },
   "dependencies": {
     "@portabletext/react": "^3.2.1",

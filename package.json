@@ -91,6 +91,8 @@
     "@graphql-codegen/cli": "^5.0.5",
     "@portabletext/types": "^2.0.13",
     "@remix-run/dev": "2.16.2",
+    "@remix-run/fs-routes": "^2.16.2",
+    "@remix-run/route-config": "^2.16.2",
     "@shopify/hydrogen-codegen": "^0.3.3",
     "@shopify/oxygen-workers-types": "^4.1.6",
     "@tailwindcss/forms": "^0.5.10",

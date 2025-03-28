@@ -9,25 +9,14 @@ import type {ROOT_QUERYResult} from 'types/sanity/sanity.generated';
 import {
   isRouteErrorResponse,
   Link,
-  Links,
-  Meta,
   Outlet,
-  Scripts,
-  ScrollRestoration,
-  useLocation,
   useMatches,
   useNavigate,
   useRouteError,
-  useRouteLoaderData,
 } from '@remix-run/react';
-import {Analytics, getShopAnalytics, useNonce} from '@shopify/hydrogen';
+import {getShopAnalytics} from '@shopify/hydrogen';
 import {DEFAULT_LOCALE} from 'countries';
 
-import {Layout as AppLayout} from '~/components/layout';
-
-import {CssVars} from './components/css-vars';
-import {CustomAnalytics} from './components/custom-analytics';
-import {Fonts} from './components/fonts';
 import {Button} from './components/ui/button';
 import {ROOT_QUERY} from './data/sanity/queries';
 import {useLocalePath} from './hooks/use-locale-path';
@@ -35,9 +24,9 @@ import {useSanityThemeContent} from './hooks/use-sanity-theme-content';
 import {generateFontsPreloadLinks} from './lib/fonts';
 import {resolveShopifyPromises} from './lib/resolve-shopify-promises';
 import {seoPayload} from './lib/seo.server';
-import {generateSanityImageUrl} from './lib/utils';
+import {generateFaviconUrls} from './lib/generate-favicon-urls';
+
 import tailwindCss from './styles/tailwind.css?url';
-import faviconAsset from '~/assets/favicon.ico?url';
 
 export type RootLoader = typeof loader;
 
@@ -181,45 +170,6 @@ export async function loader({context, request}: LoaderFunctionArgs) {
   };
 }
 
-export function Layout({children}: {children?: React.ReactNode}) {
-  const nonce = useNonce();
-  const data = useRouteLoaderData<RootLoader>('root');
-  const {pathname} = useLocation();
-
-  const isCmsRoute = pathname.includes('/cms');
-
-  return (
-    <html lang={data?.locale.language.toLowerCase()}>
-      <head>
-        <meta charSet="utf-8" />
-        <meta content="width=device-width,initial-scale=1" name="viewport" />
-        <Meta />
-        <Fonts />
-        <Links />
-        <CssVars />
-      </head>
-      <body className="bg-background text-foreground flex min-h-screen flex-col overflow-x-hidden">
-        {isCmsRoute ? (
-          children
-        ) : data ? (
-          <Analytics.Provider
-            cart={data.cart}
-            consent={data.consent}
-            shop={data.shop}
-          >
-            <AppLayout>{children}</AppLayout>
-            <CustomAnalytics />
-          </Analytics.Provider>
-        ) : (
-          <AppLayout>{children}</AppLayout>
-        )}
-        <ScrollRestoration nonce={nonce} />
-        <Scripts nonce={nonce} />
-      </body>
-    </html>
-  );
-}
-
 export default function App() {
   return <Outlet />;
 }
@@ -267,61 +217,5 @@ export function ErrorBoundary() {
 
 export const useRootLoaderData = () => {
   const [root] = useMatches();
-  return root?.data as Awaited<ReturnType<typeof loader>>;
+  return root?.data as Awaited<ReturnType<RootLoader>>;
 };
-
-function generateFaviconUrls({
-  sanityRoot,
-  env,
-}: {
-  env: NonNullable<Awaited<ReturnType<typeof loader>>>['env'];
-  sanityRoot: NonNullable<Awaited<ReturnType<typeof loader>>>['sanityRoot'];
-}) {
-  const favicon = sanityRoot.data?.settings?.favicon;
-
-  if (!favicon) {
-    return [
-      {
-        href: faviconAsset,
-        rel: 'icon',
-        tagName: 'link',
-        type: 'image/x-icon',
-      },
-    ];
-  }
-
-  const faviconUrl = generateSanityImageUrl({
-    dataset: env.PUBLIC_SANITY_STUDIO_DATASET,
-    height: 32,
-    projectId: env.PUBLIC_SANITY_STUDIO_PROJECT_ID,
-    ref: favicon?._ref,
-    width: 32,
-  });
-
-  const appleTouchIconUrl = generateSanityImageUrl({
-    dataset: env.PUBLIC_SANITY_STUDIO_DATASET,
-    height: 180,
-    projectId: env.PUBLIC_SANITY_STUDIO_PROJECT_ID,
-    ref: favicon?._ref,
-    width: 180,
-  });
-
-  return [
-    {
-      href: faviconUrl,
-      rel: 'icon',
-      tagName: 'link',
-      type: 'image/x-icon',
-    },
-    {
-      href: appleTouchIconUrl,
-      rel: 'apple-touch-icon',
-      tagName: 'link',
-    },
-    {
-      href: appleTouchIconUrl,
-      rel: 'apple-touch-icon-precomposed',
-      tagName: 'link',
-    },
-  ];
-}

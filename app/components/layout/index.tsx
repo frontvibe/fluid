@@ -17,7 +17,7 @@ export type LayoutProps = {
   children?: React.ReactNode;
 };
 
-export function Layout({children = null}: LayoutProps) {
+export function AppLayout({children = null}: LayoutProps) {
   const {env, locale, sanityPreviewMode} = useRootLoaderData();
 
   return (

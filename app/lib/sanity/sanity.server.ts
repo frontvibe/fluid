@@ -6,7 +6,6 @@ import type {
   SanityClient,
 } from '@sanity/client';
 
-import {createClient} from '@sanity/client';
 import {
   loadQuery,
   type QueryResponseInitial,
@@ -19,7 +18,7 @@ import {
   type WithCache,
 } from '@shopify/hydrogen';
 
-import {getSanityClient} from './sanityClient';
+import {getSanityClient} from './sanity-client.server';
 import {hashQuery} from './utils';
 
 const DEFAULT_CACHE_STRATEGY = CacheLong();

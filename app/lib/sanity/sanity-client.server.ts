@@ -2,7 +2,6 @@ import {createClient} from '@sanity/client';
 
 import type {CreateSanityLoaderOptions} from './sanity.server';
 
-// Do not import this into client-side components unless lazy-loaded
 export const getSanityClient = ({
   config,
   preview,

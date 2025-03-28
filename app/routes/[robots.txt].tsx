@@ -20,6 +20,7 @@ function robotsTxtData({url}: {url: string}) {
 User-agent: *
 Disallow: /admin
 Disallow: /cart
+Disallow: /cms/
 Disallow: /orders
 Disallow: /checkouts/
 Disallow: /checkout
@@ -30,6 +31,7 @@ ${sitemapUrl ? `Sitemap: ${sitemapUrl}` : ''}
 # Google adsbot ignores robots.txt unless specifically named!
 User-agent: adsbot-google
 Disallow: /checkouts/
+Disallow: /cms/
 Disallow: /checkout
 Disallow: /carts
 Disallow: /orders

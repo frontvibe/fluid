@@ -144,7 +144,7 @@ export function ProductCard(props: {
           <CardMedia aspectRatio={aspectRatio}>
             <div
               className={cn(
-                'bg-muted w-full',
+                'bg-muted w-full rounded-(--product-card-border-corner-radius)',
                 aspectRatio === 'square' && 'aspect-square',
                 aspectRatio === 'video' && 'aspect-video',
                 aspectRatio === 'auto' && 'aspect-none',

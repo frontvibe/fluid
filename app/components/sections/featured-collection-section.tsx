@@ -52,10 +52,10 @@ export function FeaturedCollectionSection(
             <div aria-hidden className="animate-pulse">
               <ProductCardGrid
                 columns={{
-                  desktop: props.data.maxProducts || 3,
+                  desktop: props.data.desktopColumns || 3,
                 }}
                 skeleton={{
-                  cardsNumber: props.data.desktopColumns || 3,
+                  cardsNumber: props.data.maxProducts || 3,
                 }}
               />
             </div>
@@ -66,10 +66,10 @@ export function FeaturedCollectionSection(
             <div aria-hidden className="animate-pulse">
               <ProductCardGrid
                 columns={{
-                  desktop: props.data.maxProducts || 3,
+                  desktop: props.data.desktopColumns || 3,
                 }}
                 skeleton={{
-                  cardsNumber: props.data.desktopColumns || 3,
+                  cardsNumber: props.data.maxProducts || 3,
                 }}
               />
             </div>

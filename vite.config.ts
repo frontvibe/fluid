@@ -44,7 +44,13 @@ export default defineConfig({
     // withtout inlining assets as base64:
     assetsInlineLimit: 0,
   },
+  resolve: {
+    mainFields: ['browser', 'module', 'main'],
+  },
   ssr: {
+    resolve: {
+      conditions: ['workerd', 'worker', 'browser'],
+    },
     optimizeDeps: {
       /**
        * Include dependencies here if they throw CJS<>ESM errors.

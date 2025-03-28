@@ -11,7 +11,7 @@ import {AnnouncementBar} from './announcement-bar';
 import {Footer} from './footer';
 import {FramerMotion} from './framer-motion';
 import {Header} from './header';
-// import {NavigationProgressBar} from './NavigationProgressBar';
+import {NavigationProgressBar} from './navigation-progress-bar.client';
 
 export type LayoutProps = {
   children?: React.ReactNode;
@@ -29,7 +29,9 @@ export function Layout({children = null}: LayoutProps) {
       storefrontToken={env.PUBLIC_STOREFRONT_API_TOKEN}
     >
       <FramerMotion>
-        {/* <NavigationProgressBar /> */}
+        <ClientOnly fallback={null}>
+          {() => <NavigationProgressBar />}
+        </ClientOnly>
         <AnnouncementBar />
         <Header />
         <main className="flex min-h-[90vh] grow flex-col gap-y-[calc(var(--space-between-template-sections)*.75)] sm:gap-y-(--space-between-template-sections)">

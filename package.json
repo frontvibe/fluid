@@ -118,7 +118,7 @@
     "globals": "^16.0.0",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "0.6.11",
-    "react-compiler-runtime": "19.0.0-beta-aeaed83-20250323",
+    "react-compiler-runtime": "19.0.0-beta-e993439-20250328",
     "schema-dts": "^1.1.5",
     "tailwindcss": "^4.0.17",
     "tailwindcss-animate": "^1.0.7",

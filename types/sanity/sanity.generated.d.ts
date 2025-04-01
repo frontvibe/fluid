@@ -579,6 +579,7 @@ export type Settings = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: 'image';
@@ -590,6 +591,7 @@ export type Settings = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: 'image';
@@ -601,6 +603,7 @@ export type Settings = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: 'image';
@@ -884,6 +887,7 @@ export type CarouselSection = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
       };
+      media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       _type: 'image';
@@ -993,6 +997,7 @@ export type ImageBannerSection = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: 'image';
@@ -1262,6 +1267,7 @@ export type FontAsset = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: 'sanity.fileAsset';
     };
+    media?: unknown;
     _type: 'file';
   };
   woff?: {
@@ -1271,6 +1277,7 @@ export type FontAsset = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: 'sanity.fileAsset';
     };
+    media?: unknown;
     _type: 'file';
   };
   ttf?: {
@@ -1280,6 +1287,7 @@ export type FontAsset = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: 'sanity.fileAsset';
     };
+    media?: unknown;
     _type: 'file';
   };
   fontStyle?: 'normal' | 'italic';
@@ -1645,6 +1653,7 @@ export type Richtext = Array<
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
       };
+      media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       maxWidth?: RangeSlider;
@@ -1944,6 +1953,7 @@ export type Seo = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: 'image';
@@ -3414,6 +3424,7 @@ export type DEFAULT_PRODUCT_TEMPLATEResult = {
                 _weak?: boolean;
                 [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
               } | null;
+              media?: unknown;
               hotspot: SanityImageHotspot | null;
               crop: SanityImageCrop | null;
               maxWidth?: RangeSlider;
@@ -4669,6 +4680,7 @@ export type DEFAULT_COLLECTION_TEMPLATEResult = {
                 _weak?: boolean;
                 [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
               } | null;
+              media?: unknown;
               hotspot: SanityImageHotspot | null;
               crop: SanityImageCrop | null;
               maxWidth?: RangeSlider;
@@ -6020,6 +6032,7 @@ export type ROOT_QUERYResult = {
                   _weak?: boolean;
                   [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
                 } | null;
+                media?: unknown;
                 hotspot: SanityImageHotspot | null;
                 crop: SanityImageCrop | null;
                 maxWidth?: RangeSlider;
@@ -8230,6 +8243,7 @@ export type COLLECTION_QUERYResult = {
                     _weak?: boolean;
                     [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
                   } | null;
+                  media?: unknown;
                   hotspot: SanityImageHotspot | null;
                   crop: SanityImageCrop | null;
                   maxWidth?: RangeSlider;
@@ -9484,6 +9498,7 @@ export type COLLECTION_QUERYResult = {
                   _weak?: boolean;
                   [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
                 } | null;
+                media?: unknown;
                 hotspot: SanityImageHotspot | null;
                 crop: SanityImageCrop | null;
                 maxWidth?: RangeSlider;
@@ -10501,6 +10516,7 @@ export type PAGE_QUERYResult =
                     _weak?: boolean;
                     [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
                   } | null;
+                  media?: unknown;
                   hotspot: SanityImageHotspot | null;
                   crop: SanityImageCrop | null;
                   maxWidth?: RangeSlider;
@@ -11531,6 +11547,7 @@ export type PAGE_QUERYResult =
                     _weak?: boolean;
                     [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
                   } | null;
+                  media?: unknown;
                   hotspot: SanityImageHotspot | null;
                   crop: SanityImageCrop | null;
                   maxWidth?: RangeSlider;
@@ -12883,6 +12900,7 @@ export type PRODUCT_QUERYResult = {
                     _weak?: boolean;
                     [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
                   } | null;
+                  media?: unknown;
                   hotspot: SanityImageHotspot | null;
                   crop: SanityImageCrop | null;
                   maxWidth?: RangeSlider;
@@ -14212,6 +14230,7 @@ export type PRODUCT_QUERYResult = {
                   _weak?: boolean;
                   [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
                 } | null;
+                media?: unknown;
                 hotspot: SanityImageHotspot | null;
                 crop: SanityImageCrop | null;
                 maxWidth?: RangeSlider;
@@ -15471,6 +15490,7 @@ export type ALL_SECTIONS_QUERYResult =
                     _weak?: boolean;
                     [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
                   } | null;
+                  media?: unknown;
                   hotspot: SanityImageHotspot | null;
                   crop: SanityImageCrop | null;
                   maxWidth?: RangeSlider;
@@ -16798,6 +16818,7 @@ export type ALL_SECTIONS_QUERYResult =
                     _weak?: boolean;
                     [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
                   } | null;
+                  media?: unknown;
                   hotspot: SanityImageHotspot | null;
                   crop: SanityImageCrop | null;
                   maxWidth?: RangeSlider;
@@ -17811,6 +17832,7 @@ export type ALL_SECTIONS_QUERYResult =
                     _weak?: boolean;
                     [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
                   } | null;
+                  media?: unknown;
                   hotspot: SanityImageHotspot | null;
                   crop: SanityImageCrop | null;
                   maxWidth?: RangeSlider;
@@ -18824,6 +18846,7 @@ export type ALL_SECTIONS_QUERYResult =
                     _weak?: boolean;
                     [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
                   } | null;
+                  media?: unknown;
                   hotspot: SanityImageHotspot | null;
                   crop: SanityImageCrop | null;
                   maxWidth?: RangeSlider;

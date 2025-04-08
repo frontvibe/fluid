@@ -13,10 +13,20 @@ import {
   useMatches,
   useNavigate,
   useRouteError,
+  Links,
+  Meta,
+  Scripts,
+  ScrollRestoration,
+  useLocation,
+  useRouteLoaderData,
 } from '@remix-run/react';
-import {getShopAnalytics} from '@shopify/hydrogen';
+import {getShopAnalytics, Analytics, useNonce} from '@shopify/hydrogen';
 import {DEFAULT_LOCALE} from 'countries';
 
+import {Fonts} from './components/fonts';
+import {CssVars} from './components/css-vars';
+import {CustomAnalytics} from './components/custom-analytics';
+import {AppLayout} from './components/layout';
 import {Button} from './components/ui/button';
 import {ROOT_QUERY} from './data/sanity/queries';
 import {useLocalePath} from './hooks/use-locale-path';
@@ -168,6 +178,45 @@ export async function loader({context, request}: LoaderFunctionArgs) {
       storefront,
     }),
   };
+}
+
+export function Layout({children}: {children: React.ReactNode}) {
+  const nonce = useNonce();
+  const data = useRouteLoaderData<RootLoader>('root');
+  const {pathname} = useLocation();
+
+  const isCmsRoute = pathname.includes('/cms');
+
+  return (
+    <html lang={data?.locale.language.toLowerCase()}>
+      <head>
+        <meta charSet="utf-8" />
+        <meta content="width=device-width,initial-scale=1" name="viewport" />
+        <Meta />
+        <Fonts />
+        <Links />
+        <CssVars />
+      </head>
+      <body className="bg-background text-foreground flex min-h-screen flex-col overflow-x-hidden">
+        {isCmsRoute ? (
+          children
+        ) : data ? (
+          <Analytics.Provider
+            cart={data.cart}
+            consent={data.consent}
+            shop={data.shop}
+          >
+            <AppLayout>{children}</AppLayout>
+            <CustomAnalytics />
+          </Analytics.Provider>
+        ) : (
+          <AppLayout>{children}</AppLayout>
+        )}
+        <ScrollRestoration nonce={nonce} />
+        <Scripts nonce={nonce} />
+      </body>
+    </html>
+  );
 }
 
 export default function App() {

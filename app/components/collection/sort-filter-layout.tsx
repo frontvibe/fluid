@@ -3,7 +3,7 @@ import type {
   ProductFilter,
 } from '@shopify/hydrogen/storefront-api-types';
 
-import {AnimatePresence, m} from 'framer-motion';
+import {AnimatePresence, m} from 'motion/react';
 import {Suspense, useState} from 'react';
 
 import type {CmsSectionSettings} from '~/hooks/use-colors-css-vars';

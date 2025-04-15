@@ -1,11 +1,11 @@
-import type {Variants} from 'framer-motion';
+import type {Variants} from 'motion/react';
 import type {CSSProperties} from 'react';
 
 import {Link, useLocation} from '@remix-run/react';
 import {getImageDimensions} from '@sanity/asset-utils';
 import {stegaClean} from '@sanity/client/stega';
 import {cx} from 'class-variance-authority';
-import {m, transform, useMotionValueEvent, useTransform} from 'framer-motion';
+import {m, transform, useMotionValueEvent, useTransform} from 'motion/react';
 import React, {Suspense, useEffect, useState} from 'react';
 
 import {useBoundedScroll} from '~/hooks/use-bounded-scroll';

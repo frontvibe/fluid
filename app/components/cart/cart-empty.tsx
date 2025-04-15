@@ -1,6 +1,6 @@
 import {Link} from '@remix-run/react';
 import {cx} from 'class-variance-authority';
-import {AnimatePresence, m} from 'framer-motion';
+import {AnimatePresence} from 'motion/react';
 
 import {useLocalePath} from '~/hooks/use-locale-path';
 import {useSanityThemeContent} from '~/hooks/use-sanity-theme-content';

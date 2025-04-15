@@ -1,4 +1,4 @@
-import {useMotionValue, useScroll, useTransform} from 'framer-motion';
+import {useMotionValue, useScroll, useTransform} from 'motion/react';
 import {useEffect} from 'react';
 
 export function useBoundedScroll(threshold: number) {

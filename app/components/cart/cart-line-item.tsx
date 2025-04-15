@@ -1,5 +1,5 @@
 import type {CartLineUpdateInput} from '@shopify/hydrogen-react/storefront-api-types';
-import type {Variants} from 'framer-motion';
+import type {Variants} from 'motion/react';
 import type {CartLineFragment} from 'types/shopify/storefrontapi.generated';
 
 import {Link} from '@remix-run/react';

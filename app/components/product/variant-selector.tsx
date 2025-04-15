@@ -6,7 +6,7 @@ import type {ProductVariantFragmentFragment} from 'types/shopify/storefrontapi.g
 import {Link, useNavigate} from '@remix-run/react';
 import {parseGid} from '@shopify/hydrogen';
 import {cx} from 'class-variance-authority';
-import {m} from 'framer-motion';
+import {m} from 'motion/react';
 import {useCallback, useMemo} from 'react';
 
 import {useHydrated} from '~/hooks/use-hydrated';

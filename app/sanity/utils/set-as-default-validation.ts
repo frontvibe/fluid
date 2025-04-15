@@ -19,14 +19,14 @@ export async function validateDefaultStatus(
       _type == $type &&
       default == true
     ][0] {
-
+      _id
     }
   `;
 
   const result = await client.fetch(query, params);
 
-  if (result?.name && value) {
-    return `A default template already exists. (${result.name})`;
+  if (result?._id && value) {
+    return `A default document of type ${document?._type} already exists. (ID: ${result._id})`;
   }
 
   return true;

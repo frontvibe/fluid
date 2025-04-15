@@ -25,8 +25,9 @@ export default defineType({
       title: 'Set as default color scheme',
       type: 'boolean',
       validation: (Rule) =>
-        Rule.required().custom(async (value, context: ValidationContext) =>
-          validateDefaultStatus(value, context),
+        Rule.required().custom(
+          async (value, context: ValidationContext) =>
+            await validateDefaultStatus(value, context),
         ),
       initialValue: false,
     }),

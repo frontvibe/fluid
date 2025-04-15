@@ -23,7 +23,7 @@ Fluid is built with amazing technologies:
 - [React](https://reactjs.org/)
 - [Tailwind](https://tailwindcss.com/)
 - [Sanity](https://github.com/sanity-io/sanity)
-- [Framer Motion](https://www.framer.com/motion/)
+- [Motion](https://motion.dev/docs/react-quick-start)
 - [Radix](https://www.radix-ui.com/primitives/docs/overview/introduction)
 - [shadcn/ui](https://ui.shadcn.com/)
 - [Vaul](https://vaul.emilkowal.ski/)

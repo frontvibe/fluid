@@ -9,7 +9,7 @@ import {VisualEditing} from '../sanity/visual-editing.client';
 import {TailwindIndicator} from '../tailwind-indicator';
 import {AnnouncementBar} from './announcement-bar';
 import {Footer} from './footer';
-import {FramerMotion} from './framer-motion';
+import {Motion} from './motion';
 import {Header} from './header';
 import {NavigationProgressBar} from './navigation-progress-bar.client';
 
@@ -28,7 +28,7 @@ export function AppLayout({children = null}: LayoutProps) {
       storefrontApiVersion={env.PUBLIC_STOREFRONT_API_VERSION}
       storefrontToken={env.PUBLIC_STOREFRONT_API_TOKEN}
     >
-      <FramerMotion>
+      <Motion>
         <ClientOnly fallback={null}>
           {() => <NavigationProgressBar />}
         </ClientOnly>
@@ -50,7 +50,7 @@ export function AppLayout({children = null}: LayoutProps) {
         ) : (
           <TogglePreviewMode />
         )}
-      </FramerMotion>
+      </Motion>
     </ShopifyProvider>
   );
 }

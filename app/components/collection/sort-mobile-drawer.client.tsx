@@ -1,6 +1,6 @@
 import type {Filter} from '@shopify/hydrogen/storefront-api-types';
 
-import {AnimatePresence, m} from 'framer-motion';
+import {AnimatePresence, m} from 'motion/react';
 import {useState} from 'react';
 
 import {useOptimisticNavigationData} from '~/hooks/use-optimistic-navigation-data';

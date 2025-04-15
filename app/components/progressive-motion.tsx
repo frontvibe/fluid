@@ -1,4 +1,4 @@
-import {type HTMLMotionProps, m} from 'framer-motion';
+import {type HTMLMotionProps, m} from 'motion/react';
 
 import {useHydrated} from '~/hooks/use-hydrated';
 

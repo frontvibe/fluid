@@ -1,9 +1,9 @@
 import type {Cart as CartType} from '@shopify/hydrogen/storefront-api-types';
-import type {Variants} from 'framer-motion';
+import type {Variants} from 'motion/react';
 import type {CartApiQueryFragment} from 'types/shopify/storefrontapi.generated';
 
 import {CartForm} from '@shopify/hydrogen';
-import {AnimatePresence} from 'framer-motion';
+import {AnimatePresence} from 'motion/react';
 import {useMemo} from 'react';
 
 import {useCartFetchers} from '~/hooks/use-cart-fetchers';

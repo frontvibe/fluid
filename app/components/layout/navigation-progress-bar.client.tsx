@@ -1,6 +1,6 @@
 import {useNavigation} from '@remix-run/react';
 import {useNProgress} from '@tanem/react-nprogress';
-import {AnimatePresence, m} from 'framer-motion';
+import {AnimatePresence, m} from 'motion/react';
 import {useEffect, useState} from 'react';
 
 export function NavigationProgressBar() {

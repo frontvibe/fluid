@@ -1,7 +1,7 @@
 import type {SectionDefaultProps, SectionOfType} from 'types';
 
 import Autoplay from 'embla-carousel-autoplay';
-import {useInView} from 'framer-motion';
+import {useInView} from 'motion/react';
 import {useMemo, useRef} from 'react';
 
 import {useDevice} from '~/hooks/use-device';

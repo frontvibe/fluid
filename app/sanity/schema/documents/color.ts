@@ -13,21 +13,6 @@ export default defineType({
   type: 'document',
   __experimental_formPreviewTitle: false,
   icon: IconPalette,
-  preview: {
-    select: {
-      title: 'name',
-      subtitle: 'default',
-      background: 'background',
-      foreground: 'foreground',
-    },
-    prepare({title, subtitle, background, foreground}) {
-      return {
-        title,
-        subtitle: subtitle ? 'Default template' : undefined,
-        media: ColorSchemeMedia({background, foreground}),
-      };
-    },
-  },
   fields: [
     defineField({
       name: 'name',
@@ -37,7 +22,7 @@ export default defineType({
     }),
     defineField({
       name: 'default',
-      title: 'Set as default template',
+      title: 'Set as default color scheme',
       type: 'boolean',
       validation: (Rule) =>
         Rule.required().custom(async (value, context: ValidationContext) =>
@@ -76,4 +61,19 @@ export default defineType({
       type: 'colorPicker',
     }),
   ],
+  preview: {
+    select: {
+      title: 'name',
+      subtitle: 'default',
+      background: 'background',
+      foreground: 'foreground',
+    },
+    prepare({title, subtitle, background, foreground}) {
+      return {
+        title,
+        subtitle: subtitle ? 'Default color scheme' : undefined,
+        media: ColorSchemeMedia({background, foreground}),
+      };
+    },
+  },
 });

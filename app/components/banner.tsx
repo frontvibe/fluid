@@ -58,7 +58,7 @@ const BannerMediaOverlay = forwardRef<
   }
 >(({className, opacity, ...props}, ref) => {
   const style = {
-    opacity: opacity ? opacity / 100 : 0,
+    '--opacity': Number(opacity) ? `${opacity}%` : '0%',
   } as React.CSSProperties;
 
   if (opacity === 0) return null;
@@ -66,7 +66,7 @@ const BannerMediaOverlay = forwardRef<
   return (
     <div
       aria-hidden
-      className={cn('absolute inset-0 z-2 bg-black', className)}
+      className={cn('absolute inset-0 z-2 bg-black/(--opacity)', className)}
       ref={ref}
       style={style}
       {...props}

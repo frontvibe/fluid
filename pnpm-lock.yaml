@@ -292,8 +292,8 @@ importers:
         specifier: 0.6.11
         version: 0.6.11(prettier@3.5.3)
       react-compiler-runtime:
-        specifier: 19.0.0-beta-ebf51a3-20250411
-        version: 19.0.0-beta-ebf51a3-20250411(react@18.3.1)
+        specifier: 19.1.0-rc.1
+        version: 19.1.0-rc.1(react@18.3.1)
       schema-dts:
         specifier: ^1.1.5
         version: 1.1.5
@@ -7698,6 +7698,7 @@ packages:
   node-domexception@1.0.0:
     resolution: {integrity: sha512-/jKZoMpw0F8GRwl4/eLROPA3cfcXtLApP0QzLmUT/HuPCZWyB7IY9ZrMeKw2O/nFIqPQB3PVM9aYm0F312AXDQ==}
     engines: {node: '>=10.5.0'}
+    deprecated: Use your platform's native DOMException instead
 
   node-fetch@2.7.0:
     resolution: {integrity: sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==}
@@ -8401,8 +8402,8 @@ packages:
     peerDependencies:
       react: ^17.0.0 || ^18.0.0 || ^19.0.0 || ^0.0.0-experimental
 
-  react-compiler-runtime@19.0.0-beta-ebf51a3-20250411:
-    resolution: {integrity: sha512-CetwBv7Wny+4Re6TZRPtVbNMx65CvLNDMkMp2KJ/pRmEc6WLPUoSSBuyY0bML9GPWiO/3LcWQ4iDGKitFU0qng==}
+  react-compiler-runtime@19.1.0-rc.1:
+    resolution: {integrity: sha512-wCt6g+cRh8g32QT18/9blfQHywGjYu+4FlEc3CW1mx3pPxYzZZl1y+VtqxRgnKKBCFLIGUYxog4j4rs5YS86hw==}
     peerDependencies:
       react: ^17.0.0 || ^18.0.0 || ^19.0.0 || ^0.0.0-experimental
 
@@ -19637,7 +19638,7 @@ snapshots:
     dependencies:
       react: 18.3.1
 
-  react-compiler-runtime@19.0.0-beta-ebf51a3-20250411(react@18.3.1):
+  react-compiler-runtime@19.1.0-rc.1(react@18.3.1):
     dependencies:
       react: 18.3.1
 

@@ -38,7 +38,7 @@
     "@remix-run/react": "2.16.5",
     "@remix-run/server-runtime": "^2.16.5",
     "@sanity/asset-utils": "^2.2.1",
-    "@sanity/client": "^7.1.0",
+    "@sanity/client": "^7.2.1",
     "@sanity/code-input": "^5.1.2",
     "@sanity/core-loader": "^1.8.5",
     "@sanity/icons": "^3.7.0",
@@ -76,7 +76,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-use": "^17.6.0",
-    "sanity": "^3.86.1",
+    "sanity": "^3.88.2",
     "sanity-plugin-internationalized-array": "^3.1.2",
     "sanity-plugin-media": "^3.0.2",
     "styled-components": "^6.1.17",
@@ -124,7 +124,7 @@
     "tailwindcss-animate": "^1.0.7",
     "type-fest": "^4.40.0",
     "typescript": "^5.8.3",
-    "vite": "^6.3.3",
+    "vite": "^6.3.5",
     "vite-tsconfig-paths": "^4.3.2"
   },
   "engines": {

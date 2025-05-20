@@ -5,6 +5,7 @@ import {stegaClean} from '@sanity/client/stega';
 
 import {cn} from '~/lib/utils';
 import {useRootLoaderData} from '~/root';
+import * as React from 'react';
 
 type Slug = null | {
   _type: 'slug';
@@ -40,12 +41,18 @@ type SanityInternalLinkDataProps = {
   name: null | string;
 };
 
-export function SanityInternalLink(props: {
+interface SanityInternalLinkProps
+  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   children?: React.ReactNode;
   className?: string;
   data?: SanityInternalLinkDataProps;
   onClick?: () => void;
-}) {
+}
+
+const SanityInternalLink = React.forwardRef<
+  HTMLAnchorElement,
+  SanityInternalLinkProps
+>((props, ref) => {
   const {locale} = useRootLoaderData();
   const {children, className, data} = props;
 
@@ -80,6 +87,7 @@ export function SanityInternalLink(props: {
   // Todo: add Navlink support
   return (
     <Link
+      ref={ref}
       className={cn([
         'focus-visible:ring-ring focus-visible:rounded-md focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-hidden',
         className,
@@ -91,4 +99,8 @@ export function SanityInternalLink(props: {
       {children ? children : name}
     </Link>
   );
-}
+});
+
+SanityInternalLink.displayName = 'SanityInternalLink';
+
+export {SanityInternalLink};

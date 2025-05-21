@@ -1,4 +1,4 @@
-import {useFetchers} from '@remix-run/react';
+import { useFetchers } from 'react-router';
 import {CartForm} from '@shopify/hydrogen';
 
 export function useCartFetchers(actionName: string) {

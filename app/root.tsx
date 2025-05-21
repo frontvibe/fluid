@@ -1,4 +1,4 @@
-import type {ShouldRevalidateFunction} from '@remix-run/react';
+import type {ShouldRevalidateFunction} from 'react-router';
 import type {
   LinksFunction,
   LoaderFunctionArgs,
@@ -19,7 +19,7 @@ import {
   ScrollRestoration,
   useLocation,
   useRouteLoaderData,
-} from '@remix-run/react';
+} from 'react-router';
 import {getShopAnalytics, Analytics, useNonce} from '@shopify/hydrogen';
 import {DEFAULT_LOCALE} from 'countries';
 

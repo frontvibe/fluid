@@ -1,6 +1,6 @@
 import type {ROOT_QUERYResult} from 'types/sanity/sanity.generated';
 
-import {Link} from '@remix-run/react';
+import { Link } from 'react-router';
 import {cx} from 'class-variance-authority';
 import Autoplay from 'embla-carousel-autoplay';
 import {useMemo} from 'react';

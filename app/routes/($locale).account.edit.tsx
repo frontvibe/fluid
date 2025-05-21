@@ -3,13 +3,7 @@ import type {
   CustomerUpdateInput,
 } from '@shopify/hydrogen/customer-account-api-types';
 
-import {
-  Form,
-  Link,
-  useActionData,
-  useNavigation,
-  useOutletContext,
-} from '@remix-run/react';
+import { Form, Link, useActionData, useNavigation, useOutletContext } from 'react-router';
 import {
   type ActionFunction,
   redirect,

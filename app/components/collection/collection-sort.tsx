@@ -1,11 +1,6 @@
-import type {Location} from '@remix-run/react';
+import type { Location } from 'react-router';
 
-import {
-  PrefetchPageLinks,
-  useLocation,
-  useNavigate,
-  useSearchParams,
-} from '@remix-run/react';
+import { PrefetchPageLinks, useLocation, useNavigate, useSearchParams } from 'react-router';
 import {useCallback, useMemo, useState} from 'react';
 
 import {

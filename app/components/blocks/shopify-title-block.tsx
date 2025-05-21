@@ -1,6 +1,6 @@
 import type {SectionOfType} from 'types';
 
-import {useParams} from '@remix-run/react';
+import { useParams } from 'react-router';
 import {useProduct} from '@shopify/hydrogen-react';
 
 export type ShopifyTitleBlockProps = NonNullable<

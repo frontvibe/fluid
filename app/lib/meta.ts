@@ -14,12 +14,12 @@ export const mergeMeta = <
     const leafMeta = leafMetaFn(arg);
     return arg.matches.reduceRight((acc, match) => {
       for (const parentMeta of match.meta) {
-        const index = acc.findIndex(
+        const index = acc?.findIndex(
           (meta) => JSON.stringify(meta) === JSON.stringify(parentMeta),
         );
         if (index == -1) {
           // Parent meta not found in acc, so add it
-          acc.push(parentMeta);
+          acc?.push(parentMeta);
         }
       }
       return acc;

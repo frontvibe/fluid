@@ -1,6 +1,6 @@
 import type {ProductCardFragment} from 'types/shopify/storefrontapi.generated';
 
-import {Link} from '@remix-run/react';
+import { Link } from 'react-router';
 import {stegaClean} from '@sanity/client/stega';
 import {flattenConnection} from '@shopify/hydrogen';
 

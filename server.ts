@@ -1,10 +1,5 @@
 import {storefrontRedirect} from '@shopify/hydrogen';
 import {createRequestHandler} from '@shopify/remix-oxygen';
-// Virtual entry point for the app
-// @ts-expect-error remixBuild is not typed
-// eslint-disable-next-line import/no-unresolved
-import * as remixBuild from 'virtual:remix/server-build';
-
 import {createAppLoadContext} from '~/lib/context';
 
 /*
@@ -24,11 +19,12 @@ export default {
       );
 
       /*
-       * Create a Remix request handler and pass
+       * Create a request handler and pass
        * Hydrogen's Storefront client to the loader context.
        */
       const handleRequest = createRequestHandler({
-        build: remixBuild,
+        // eslint-disable-next-line import/no-unresolved
+        build: await import('virtual:react-router/server-build'),
         getLoadContext: () => appLoadContext,
         mode: process.env.NODE_ENV,
       });

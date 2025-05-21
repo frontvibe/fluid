@@ -2,7 +2,7 @@ import type {LoaderFunctionArgs, MetaFunction} from '@shopify/remix-oxygen';
 import type {I18nLocale} from 'types';
 import type {PAGE_QUERYResult} from 'types/sanity/sanity.generated';
 
-import {useLoaderData} from '@remix-run/react';
+import { useLoaderData } from 'react-router';
 import {DEFAULT_LOCALE} from 'countries';
 
 import {CmsSection} from '~/components/cms-section';

@@ -1,7 +1,7 @@
 import type {Variants} from 'motion/react';
 import type {CSSProperties} from 'react';
 
-import {Link, useLocation} from '@remix-run/react';
+import { Link, useLocation } from 'react-router';
 import {getImageDimensions} from '@sanity/asset-utils';
 import {stegaClean} from '@sanity/client/stega';
 import {cx} from 'class-variance-authority';

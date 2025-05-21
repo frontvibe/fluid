@@ -1,6 +1,6 @@
 import type {EmblaCarouselType} from 'embla-carousel';
 
-import {useLocation} from '@remix-run/react';
+import { useLocation } from 'react-router';
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from 'embla-carousel-react';

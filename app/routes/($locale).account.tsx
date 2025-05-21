@@ -3,15 +3,7 @@ import type {
   OrderCardFragment,
 } from 'types/shopify/customeraccountapi.generated';
 
-import {
-  Form,
-  Link,
-  Outlet,
-  useLoaderData,
-  useMatches,
-  useNavigate,
-  useOutlet,
-} from '@remix-run/react';
+import { Form, Link, Outlet, useLoaderData, useMatches, useNavigate, useOutlet } from 'react-router';
 import {flattenConnection} from '@shopify/hydrogen';
 import {
   type LoaderFunctionArgs,

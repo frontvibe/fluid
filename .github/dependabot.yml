@@ -15,9 +15,10 @@ updates:
         update-types:
           - 'minor'
           - 'patch'
-      remix:
+      react-router:
         patterns:
-          - '@remix-run/*'
+          - '@react-router/*'
+          - 'react-router'
         applies-to: version-updates
         update-types:
           - 'major'

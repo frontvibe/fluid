@@ -5,13 +5,7 @@ import type {
   ProductCardFragment,
 } from 'types/shopify/storefrontapi.generated';
 
-import {
-  Await,
-  useLoaderData,
-  useLocation,
-  useNavigate,
-  useSearchParams,
-} from '@remix-run/react';
+import { Await, useLoaderData, useLocation, useNavigate, useSearchParams } from 'react-router';
 import {Pagination} from '@shopify/hydrogen';
 import {Suspense, useCallback, useEffect, useMemo} from 'react';
 

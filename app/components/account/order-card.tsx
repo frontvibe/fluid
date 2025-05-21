@@ -1,6 +1,6 @@
 import type {OrderCardFragment} from 'types/shopify/customeraccountapi.generated';
 
-import { Link } from 'react-router';
+import {Link} from 'react-router';
 import {flattenConnection, Image} from '@shopify/hydrogen';
 
 import {useSanityThemeContent} from '~/hooks/use-sanity-theme-content';

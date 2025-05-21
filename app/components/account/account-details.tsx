@@ -1,6 +1,6 @@
 import type {CustomerDetailsFragment} from 'types/shopify/customeraccountapi.generated';
 
-import { Link } from 'react-router';
+import {Link} from 'react-router';
 
 import {useSanityThemeContent} from '~/hooks/use-sanity-theme-content';
 

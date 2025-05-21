@@ -1,4 +1,4 @@
-import { Link } from 'react-router';
+import {Link} from 'react-router';
 import {cx} from 'class-variance-authority';
 import {AnimatePresence} from 'motion/react';
 

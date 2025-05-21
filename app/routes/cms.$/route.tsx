@@ -5,7 +5,7 @@ import type {
 } from '@shopify/remix-oxygen';
 import type {ReactElement} from 'react';
 
-import { useLoaderData } from 'react-router';
+import {useLoaderData} from 'react-router';
 import polarisCss from '@shopify/polaris/build/esm/styles.css?url';
 import {lazy, Suspense} from 'react';
 

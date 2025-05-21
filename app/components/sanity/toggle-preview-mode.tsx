@@ -1,4 +1,4 @@
-import { useFetcher, useLocation } from 'react-router';
+import {useFetcher, useLocation} from 'react-router';
 import {useCallback, useEffect} from 'react';
 
 /*

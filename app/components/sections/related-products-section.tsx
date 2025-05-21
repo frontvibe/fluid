@@ -1,6 +1,6 @@
 import type {SectionDefaultProps, SectionOfType} from 'types';
 
-import { Await, useLoaderData } from 'react-router';
+import {Await, useLoaderData} from 'react-router';
 import {Suspense} from 'react';
 
 import type {loader} from '~/routes/($locale).products.$productHandle';

@@ -2,7 +2,7 @@ import type {LoaderFunctionArgs, MetaFunction} from '@shopify/remix-oxygen';
 import type {PRODUCT_QUERYResult} from 'types/sanity/sanity.generated';
 import type {ProductQuery} from 'types/shopify/storefrontapi.generated';
 
-import { useLoaderData } from 'react-router';
+import {useLoaderData} from 'react-router';
 import {Analytics, getSelectedProductOptions} from '@shopify/hydrogen';
 import {ProductProvider} from '@shopify/hydrogen-react';
 import {DEFAULT_LOCALE} from 'countries';

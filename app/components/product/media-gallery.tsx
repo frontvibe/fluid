@@ -5,7 +5,7 @@ import type {
   Media_Video_Fragment,
 } from 'types/shopify/storefrontapi.generated';
 
-import { useLoaderData } from 'react-router';
+import {useLoaderData} from 'react-router';
 import {flattenConnection} from '@shopify/hydrogen';
 import React, {useCallback, useState} from 'react';
 

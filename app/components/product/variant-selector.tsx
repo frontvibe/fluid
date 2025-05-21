@@ -3,7 +3,7 @@ import type {PartialDeep} from 'type-fest';
 import type {PartialObjectDeep} from 'type-fest/source/partial-deep';
 import type {ProductVariantFragmentFragment} from 'types/shopify/storefrontapi.generated';
 
-import { Link, useNavigate } from 'react-router';
+import {Link, useNavigate} from 'react-router';
 import {parseGid} from '@shopify/hydrogen';
 import {cx} from 'class-variance-authority';
 import {m} from 'motion/react';

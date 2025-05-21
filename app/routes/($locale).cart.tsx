@@ -5,7 +5,7 @@ import type {
 } from '@shopify/remix-oxygen';
 import type {CartApiQueryFragment} from 'types/shopify/storefrontapi.generated';
 
-import { useLoaderData } from 'react-router';
+import {useLoaderData} from 'react-router';
 import {Analytics, CartForm} from '@shopify/hydrogen';
 import {redirectDocument, data as remixData} from '@shopify/remix-oxygen';
 

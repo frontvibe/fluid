@@ -1,7 +1,7 @@
 import type {ProductVariant} from '@shopify/hydrogen/storefront-api-types';
 import type {PartialDeep} from 'type-fest';
 
-import { useLocation } from 'react-router';
+import {useLocation} from 'react-router';
 import {useMemo} from 'react';
 
 export function useSelectedVariant(props: {

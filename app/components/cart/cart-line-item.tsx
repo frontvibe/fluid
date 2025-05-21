@@ -2,7 +2,7 @@ import type {CartLineUpdateInput} from '@shopify/hydrogen-react/storefront-api-t
 import type {Variants} from 'motion/react';
 import type {CartLineFragment} from 'types/shopify/storefrontapi.generated';
 
-import { Link } from 'react-router';
+import {Link} from 'react-router';
 import {
   CartForm,
   OptimisticInput,

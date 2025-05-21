@@ -1,4 +1,4 @@
-import { useNavigation } from 'react-router';
+import {useNavigation} from 'react-router';
 
 /**
  * Get navigation optimistic data and pending state.

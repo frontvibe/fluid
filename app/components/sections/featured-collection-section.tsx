@@ -4,7 +4,7 @@ import type {
   ProductCardFragment,
 } from 'types/shopify/storefrontapi.generated';
 
-import { Await, Link, useLoaderData } from 'react-router';
+import {Await, Link, useLoaderData} from 'react-router';
 import {flattenConnection} from '@shopify/hydrogen';
 import {Suspense} from 'react';
 

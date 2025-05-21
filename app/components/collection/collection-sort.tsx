@@ -1,6 +1,11 @@
-import type { Location } from 'react-router';
+import type {Location} from 'react-router';
 
-import { PrefetchPageLinks, useLocation, useNavigate, useSearchParams } from 'react-router';
+import {
+  PrefetchPageLinks,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from 'react-router';
 import {useCallback, useMemo, useState} from 'react';
 
 import {

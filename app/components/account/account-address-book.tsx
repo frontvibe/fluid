@@ -1,7 +1,7 @@
 import type {CustomerAddress} from '@shopify/hydrogen/customer-account-api-types';
 import type {CustomerDetailsFragment} from 'types/shopify/customeraccountapi.generated';
 
-import { Form, Link } from 'react-router';
+import {Form, Link} from 'react-router';
 
 import {useSanityThemeContent} from '~/hooks/use-sanity-theme-content';
 

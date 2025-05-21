@@ -3,7 +3,7 @@ import type {PartialObjectDeep} from 'type-fest/source/partial-deep';
 import type {SectionDefaultProps, SectionOfType} from 'types';
 import type {FeaturedProductQuery} from 'types/shopify/storefrontapi.generated';
 
-import { Await, useLoaderData } from 'react-router';
+import {Await, useLoaderData} from 'react-router';
 import {stegaClean} from '@sanity/client/stega';
 import {flattenConnection} from '@shopify/hydrogen';
 import {ProductProvider} from '@shopify/hydrogen-react';

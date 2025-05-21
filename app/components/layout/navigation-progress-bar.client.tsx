@@ -1,4 +1,4 @@
-import { useNavigation } from 'react-router';
+import {useNavigation} from 'react-router';
 import {useNProgress} from '@tanem/react-nprogress';
 import {AnimatePresence, m} from 'motion/react';
 import {useEffect, useState} from 'react';

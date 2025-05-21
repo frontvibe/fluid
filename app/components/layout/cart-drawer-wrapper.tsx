@@ -1,6 +1,6 @@
 import type {CartApiQueryFragment} from 'types/shopify/storefrontapi.generated';
 
-import { Await, Link } from 'react-router';
+import {Await, Link} from 'react-router';
 import {CartForm} from '@shopify/hydrogen';
 import {cx} from 'class-variance-authority';
 import {Suspense, useCallback, useEffect, useMemo, useState} from 'react';

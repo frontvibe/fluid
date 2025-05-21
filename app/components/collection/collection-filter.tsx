@@ -1,11 +1,16 @@
-import type { Location } from 'react-router';
+import type {Location} from 'react-router';
 import type {
   Filter,
   ProductFilter,
 } from '@shopify/hydrogen/storefront-api-types';
 import type {SyntheticEvent} from 'react';
 
-import { PrefetchPageLinks, useLocation, useNavigate, useSearchParams } from 'react-router';
+import {
+  PrefetchPageLinks,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from 'react-router';
 import {useCallback, useEffect, useMemo, useState} from 'react';
 import useDebounce from 'react-use/esm/useDebounce';
 

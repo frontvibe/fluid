@@ -18,7 +18,7 @@ Visit [fluid.frontvibe.com](https://fluid.frontvibe.com/) to read the documentat
 
 Fluid is built with amazing technologies:
 
-- [Remix](https://remix.run/)
+- [React Router V7](https://reactrouter.com)
 - [Hydrogen](https://hydrogen.shopify.dev)
 - [React](https://reactjs.org/)
 - [Tailwind](https://tailwindcss.com/)

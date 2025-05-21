@@ -1,6 +1,6 @@
 import type {SectionDefaultProps, SectionOfType} from 'types';
 
-import {useLoaderData} from '@remix-run/react';
+import {useLoaderData} from 'react-router';
 
 import type {loader} from '~/routes/($locale).collections.$collectionHandle';
 

@@ -11,7 +11,7 @@ import {
   useMatches,
   useNavigate,
   useOutlet,
-} from '@remix-run/react';
+} from 'react-router';
 import {flattenConnection} from '@shopify/hydrogen';
 import {
   type LoaderFunctionArgs,

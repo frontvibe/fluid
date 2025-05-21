@@ -1,4 +1,4 @@
-import {useNavigation} from '@remix-run/react';
+import {useNavigation} from 'react-router';
 
 /**
  * Get navigation optimistic data and pending state.

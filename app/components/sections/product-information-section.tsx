@@ -1,7 +1,7 @@
 import type {SectionDefaultProps, SectionOfType} from 'types';
 import type {ProductVariantFragmentFragment} from 'types/shopify/storefrontapi.generated';
 
-import {Await, useLoaderData} from '@remix-run/react';
+import {Await, useLoaderData} from 'react-router';
 import {stegaClean} from '@sanity/client/stega';
 import {flattenConnection} from '@shopify/hydrogen-react';
 import {createContext, Suspense, useContext} from 'react';

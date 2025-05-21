@@ -11,7 +11,7 @@ import {
   useLocation,
   useNavigate,
   useSearchParams,
-} from '@remix-run/react';
+} from 'react-router';
 import {Pagination} from '@shopify/hydrogen';
 import {Suspense, useCallback, useEffect, useMemo} from 'react';
 

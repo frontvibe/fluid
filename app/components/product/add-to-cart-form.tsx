@@ -1,6 +1,6 @@
 import type {ProductVariantFragmentFragment} from 'types/shopify/storefrontapi.generated';
 
-import {useNavigation} from '@remix-run/react';
+import {useNavigation} from 'react-router';
 import {CartForm, OptimisticInput, ShopPayButton} from '@shopify/hydrogen';
 import {useEffect, useState} from 'react';
 import useIdle from 'react-use/esm/useIdle';

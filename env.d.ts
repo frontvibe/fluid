@@ -1,8 +1,9 @@
 /// <reference types="vite/client" />
-/// <reference types="@shopify/remix-oxygen" />
+/// <reference types="react-router" />
 /// <reference types="@shopify/oxygen-workers-types" />
 
 // Enhance TypeScript's built-in typings.
+import '@total-typescript/ts-reset';
 
 import type {
   HydrogenCart,
@@ -13,13 +14,6 @@ import type {
 } from '@shopify/hydrogen';
 import type {createAppLoadContext} from '~/lib/context';
 import type {AriaAttributes, DOMAttributes} from 'react';
-
-import '@total-typescript/ts-reset';
-
-import type {SanitySession} from '~/lib/sanity/sanity.session.server';
-import type {I18nLocale} from '~/lib/type';
-
-import type {Sanity} from './app/lib/sanity/sanity.server';
 
 declare global {
   /**
@@ -45,9 +39,21 @@ declare global {
   }
 }
 
-declare module '@shopify/remix-oxygen' {
+declare module 'react-router' {
   interface AppLoadContext
     extends Awaited<ReturnType<typeof createAppLoadContext>> {}
+
+  interface LoaderFunctionArgs {
+    context: AppLoadContext;
+  }
+
+  interface ActionFunctionArgs {
+    context: AppLoadContext;
+  }
+
+  interface SessionData extends HydrogenSessionData {
+    // declare local additions to the Hydrogen session data here
+  }
 }
 
 declare module 'react' {

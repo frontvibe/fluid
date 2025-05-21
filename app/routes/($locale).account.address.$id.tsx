@@ -8,7 +8,7 @@ import {
   useNavigation,
   useOutletContext,
   useParams,
-} from '@remix-run/react';
+} from 'react-router';
 import {flattenConnection} from '@shopify/hydrogen';
 import {redirect, data as remixData} from '@shopify/remix-oxygen';
 import invariant from 'tiny-invariant';

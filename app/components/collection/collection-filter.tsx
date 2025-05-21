@@ -1,4 +1,4 @@
-import type {Location} from '@remix-run/react';
+import type {Location} from 'react-router';
 import type {
   Filter,
   ProductFilter,
@@ -10,7 +10,7 @@ import {
   useLocation,
   useNavigate,
   useSearchParams,
-} from '@remix-run/react';
+} from 'react-router';
 import {useCallback, useEffect, useMemo, useState} from 'react';
 import useDebounce from 'react-use/esm/useDebounce';
 

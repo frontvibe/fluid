@@ -9,7 +9,7 @@ import type {
   ROOT_QUERYResult,
 } from 'types/sanity/sanity.generated';
 
-import {useLocation} from '@remix-run/react';
+import {useLocation} from 'react-router';
 import {stegaClean} from '@sanity/client/stega';
 import imageUrlBuilder from '@sanity/image-url';
 import {cx} from 'class-variance-authority';

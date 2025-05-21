@@ -2,7 +2,7 @@ import type {LoaderFunctionArgs, MetaFunction} from '@shopify/remix-oxygen';
 import type {COLLECTION_QUERYResult} from 'types/sanity/sanity.generated';
 import type {CollectionDetailsQuery} from 'types/shopify/storefrontapi.generated';
 
-import {useLoaderData} from '@remix-run/react';
+import {useLoaderData} from 'react-router';
 import {Analytics} from '@shopify/hydrogen';
 import {DEFAULT_LOCALE} from 'countries';
 import invariant from 'tiny-invariant';

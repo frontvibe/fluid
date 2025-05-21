@@ -1,6 +1,6 @@
 import type {LoaderFunctionArgs, MetaFunction} from '@shopify/remix-oxygen';
 
-import {useLoaderData} from '@remix-run/react';
+import {useLoaderData} from 'react-router';
 import {getPaginationVariables} from '@shopify/hydrogen';
 
 import {CollectionListGrid} from '~/components/collection-list-grid';

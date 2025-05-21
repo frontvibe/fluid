@@ -87,8 +87,8 @@ importers:
         specifier: 3.80.4
         version: 3.80.4
       '@shopify/cli-hydrogen':
-        specifier: ^11.0.1
-        version: 11.0.1(@graphql-codegen/cli@5.0.6(@parcel/watcher@2.5.0)(@types/node@22.15.21)(graphql-sock@1.0.1(graphql@16.11.0))(graphql@16.11.0)(typescript@5.8.3))(@react-router/dev@7.6.0(@types/node@22.15.21)(babel-plugin-macros@3.1.0)(jiti@2.4.2)(lightningcss@1.30.1)(react-router@7.6.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.39.0)(typescript@5.8.3)(vite@6.3.5(@types/node@22.15.21)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.39.0)(yaml@2.8.0))(yaml@2.8.0))(@shopify/hydrogen-codegen@0.3.3(graphql-sock@1.0.1(graphql@16.11.0))(graphql@16.11.0))(@shopify/mini-oxygen@3.2.1(vite@6.3.5(@types/node@22.15.21)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.39.0)(yaml@2.8.0)))(@types/react@18.3.20)(graphql-config@5.1.5(@types/node@22.15.21)(graphql@16.11.0)(typescript@5.8.3))(graphql@16.11.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@6.3.5(@types/node@22.15.21)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.39.0)(yaml@2.8.0))
+        specifier: ^11.1.0
+        version: 11.1.0(@graphql-codegen/cli@5.0.6(@parcel/watcher@2.5.0)(@types/node@22.15.21)(graphql-sock@1.0.1(graphql@16.11.0))(graphql@16.11.0)(typescript@5.8.3))(@react-router/dev@7.6.0(@types/node@22.15.21)(babel-plugin-macros@3.1.0)(jiti@2.4.2)(lightningcss@1.30.1)(react-router@7.6.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.39.0)(typescript@5.8.3)(vite@6.3.5(@types/node@22.15.21)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.39.0)(yaml@2.8.0))(yaml@2.8.0))(@shopify/hydrogen-codegen@0.3.3(graphql-sock@1.0.1(graphql@16.11.0))(graphql@16.11.0))(@shopify/mini-oxygen@3.2.1(vite@6.3.5(@types/node@22.15.21)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.39.0)(yaml@2.8.0)))(@types/react@18.3.20)(graphql-config@5.1.5(@types/node@22.15.21)(graphql@16.11.0)(typescript@5.8.3))(graphql@16.11.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@6.3.5(@types/node@22.15.21)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.39.0)(yaml@2.8.0))
       '@shopify/hydrogen':
         specifier: ^2025.5.0
         version: 2025.5.0(@react-router/dev@7.6.0(@types/node@22.15.21)(babel-plugin-macros@3.1.0)(jiti@2.4.2)(lightningcss@1.30.1)(react-router@7.6.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.39.0)(typescript@5.8.3)(vite@6.3.5(@types/node@22.15.21)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.39.0)(yaml@2.8.0))(yaml@2.8.0))(@types/react@18.3.20)(react-dom@18.3.1(react@18.3.1))(react-router@7.6.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(three@0.139.2)(vite@6.3.5(@types/node@22.15.21)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.39.0)(yaml@2.8.0))(xstate@5.19.3)
@@ -3260,8 +3260,8 @@ packages:
     peerDependencies:
       react: ^16.14.0 || 17.x || 18.x || 19.x
 
-  '@shopify/cli-hydrogen@11.0.1':
-    resolution: {integrity: sha512-dgmnQxlI0MW6t2M9kpXfSkparWuKAOlf2hoBSm0AGFGtsNHMD5flp65p8NZKK/0KIs+2RqaZguJvrR7vwkgoWA==, tarball: https://registry.npmjs.org/@shopify/cli-hydrogen/-/cli-hydrogen-11.0.1.tgz}
+  '@shopify/cli-hydrogen@11.1.0':
+    resolution: {integrity: sha512-/N1VSI1z4y9QjTETymTOWAc4VhUJLHsoAyNI6ArrvoNk2MgrboSX80AvplS96MN/3XRIftlzAa4HxbT14U4zrA==, tarball: https://registry.npmjs.org/@shopify/cli-hydrogen/-/cli-hydrogen-11.1.0.tgz}
     engines: {node: '>=18.0.0'}
     hasBin: true
     peerDependencies:
@@ -13110,7 +13110,7 @@ snapshots:
       hoist-non-react-statics: 3.3.2
       react: 18.3.1
 
-  '@shopify/cli-hydrogen@11.0.1(@graphql-codegen/cli@5.0.6(@parcel/watcher@2.5.0)(@types/node@22.15.21)(graphql-sock@1.0.1(graphql@16.11.0))(graphql@16.11.0)(typescript@5.8.3))(@react-router/dev@7.6.0(@types/node@22.15.21)(babel-plugin-macros@3.1.0)(jiti@2.4.2)(lightningcss@1.30.1)(react-router@7.6.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.39.0)(typescript@5.8.3)(vite@6.3.5(@types/node@22.15.21)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.39.0)(yaml@2.8.0))(yaml@2.8.0))(@shopify/hydrogen-codegen@0.3.3(graphql-sock@1.0.1(graphql@16.11.0))(graphql@16.11.0))(@shopify/mini-oxygen@3.2.1(vite@6.3.5(@types/node@22.15.21)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.39.0)(yaml@2.8.0)))(@types/react@18.3.20)(graphql-config@5.1.5(@types/node@22.15.21)(graphql@16.11.0)(typescript@5.8.3))(graphql@16.11.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@6.3.5(@types/node@22.15.21)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.39.0)(yaml@2.8.0))':
+  '@shopify/cli-hydrogen@11.1.0(@graphql-codegen/cli@5.0.6(@parcel/watcher@2.5.0)(@types/node@22.15.21)(graphql-sock@1.0.1(graphql@16.11.0))(graphql@16.11.0)(typescript@5.8.3))(@react-router/dev@7.6.0(@types/node@22.15.21)(babel-plugin-macros@3.1.0)(jiti@2.4.2)(lightningcss@1.30.1)(react-router@7.6.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.39.0)(typescript@5.8.3)(vite@6.3.5(@types/node@22.15.21)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.39.0)(yaml@2.8.0))(yaml@2.8.0))(@shopify/hydrogen-codegen@0.3.3(graphql-sock@1.0.1(graphql@16.11.0))(graphql@16.11.0))(@shopify/mini-oxygen@3.2.1(vite@6.3.5(@types/node@22.15.21)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.39.0)(yaml@2.8.0)))(@types/react@18.3.20)(graphql-config@5.1.5(@types/node@22.15.21)(graphql@16.11.0)(typescript@5.8.3))(graphql@16.11.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@6.3.5(@types/node@22.15.21)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.39.0)(yaml@2.8.0))':
     dependencies:
       '@ast-grep/napi': 0.11.0
       '@oclif/core': 3.26.5

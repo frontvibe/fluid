@@ -49,6 +49,9 @@ export default defineConfig({
        */
       include: [
         'rxjs',
+        'set-cookie-parser',
+        'cookie',
+        'react-router',
         'react-compiler-runtime',
         '@sanity/image-url',
         '@sanity/client',

@@ -47,7 +47,7 @@
     "@sanity/uuid": "^3.0.2",
     "@sanity/vision": "^3.89.0",
     "@sanity/visual-editing": "^2.13.22",
-    "@shopify/cli": "3.80.4",
+    "@shopify/cli": "3.80.7",
     "@shopify/cli-hydrogen": "^11.1.0",
     "@shopify/hydrogen": "^2025.5.0",
     "@shopify/hydrogen-react": "^2025.5.0",

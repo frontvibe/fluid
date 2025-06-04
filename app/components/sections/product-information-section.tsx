@@ -6,10 +6,8 @@ import {stegaClean} from '@sanity/client/stega';
 import {flattenConnection} from '@shopify/hydrogen-react';
 import {createContext, Suspense, useContext} from 'react';
 
-import type {loader} from '~/routes/($locale).products.$productHandle';
-
+import type {Route} from '../../routes/+types/($locale).products.$productHandle';
 import {cn, getAspectRatioData} from '~/lib/utils';
-
 import {MediaGallery} from '../product/media-gallery';
 import {ProductDetails} from '../product/product-details';
 import {Skeleton} from '../skeleton';
@@ -26,7 +24,7 @@ export function ProductInformationSection(
     data: ProductInformationSectionProps;
   },
 ) {
-  const loaderData = useLoaderData<typeof loader>();
+  const loaderData = useLoaderData<Route.ComponentProps['loaderData']>();
   const {data} = props;
   const variantsPromise = loaderData.variants;
   const aspectRatio = getAspectRatioData(data.mediaAspectRatio);

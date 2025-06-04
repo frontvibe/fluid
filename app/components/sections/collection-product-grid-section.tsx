@@ -15,16 +15,14 @@ import {
 import {Pagination} from '@shopify/hydrogen';
 import {Suspense, useCallback, useEffect, useMemo} from 'react';
 
-import type {loader} from '~/routes/($locale).collections.$collectionHandle';
+import type {Route} from '../../routes/+types/($locale).collections.$collectionHandle';
+import type {AppliedFilter} from '../collection/sort-filter-layout';
 
 import {useOptimisticNavigationData} from '~/hooks/use-optimistic-navigation-data';
 import {useSanityThemeContent} from '~/hooks/use-sanity-theme-content';
 import {getAppliedFilters} from '~/lib/shopify-collection';
 import {cn} from '~/lib/utils';
 import {useRootLoaderData} from '~/root';
-
-import type {AppliedFilter} from '../collection/sort-filter-layout';
-
 import {SortFilter} from '../collection/sort-filter-layout';
 import {ProductCardGrid} from '../product/product-card-grid';
 import {Skeleton} from '../skeleton';
@@ -40,7 +38,7 @@ export function CollectionProductGridSection(
 ) {
   const {locale} = useRootLoaderData();
   const [searchParams] = useSearchParams();
-  const loaderData = useLoaderData<typeof loader>();
+  const loaderData = useLoaderData<Route.ComponentProps['loaderData']>();
   const navigate = useNavigate();
   const {pathname} = useLocation();
   const collectionProductGridPromise = loaderData?.collectionProductGridPromise;

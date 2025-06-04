@@ -1,16 +1,11 @@
-import type {
-  LinksFunction,
-  LoaderFunctionArgs,
-  MetaFunction,
-} from '@shopify/remix-oxygen';
 import type {ReactElement} from 'react';
 
-import {useLoaderData} from 'react-router';
 import polarisCss from '@shopify/polaris/build/esm/styles.css?url';
 import {lazy, Suspense} from 'react';
 
-import {ClientOnly} from '~/components/client-only';
+import type {Route} from './+types/route';
 
+import {ClientOnly} from '~/components/client-only';
 import studioStyles from './studio.css?url';
 
 /**
@@ -36,7 +31,7 @@ const SanityStudio =
           import('./sanity-studio.client'),
       );
 
-export const meta: MetaFunction = () => [
+export const meta: Route.MetaFunction = () => [
   {
     content: 'width=device-width,initial-scale=1,viewport-fit=cover',
     name: 'viewport',
@@ -51,20 +46,20 @@ export const meta: MetaFunction = () => [
   },
 ];
 
-export function headers(): HeadersInit {
+export function headers(_: Route.HeadersArgs) {
   return {
     'Cache-Control': 'no-store',
   };
 }
 
-export const links: LinksFunction = () => {
+export const links: Route.LinksFunction = () => {
   return [
     {href: studioStyles, rel: 'stylesheet'},
     {href: polarisCss, rel: 'stylesheet'},
   ];
 };
 
-export function loader({context}: LoaderFunctionArgs) {
+export function loader({context}: Route.LoaderArgs) {
   const {env} = context;
   const projectId = env.PUBLIC_SANITY_STUDIO_PROJECT_ID;
   const dataset = env.PUBLIC_SANITY_STUDIO_DATASET;
@@ -77,9 +72,8 @@ export function loader({context}: LoaderFunctionArgs) {
   };
 }
 
-export default function Studio() {
-  const {dataset, projectId, shopifyStoreDomain} =
-    useLoaderData<typeof loader>();
+export default function Studio({loaderData}: Route.ComponentProps) {
+  const {dataset, projectId, shopifyStoreDomain} = loaderData;
 
   return (
     <ClientOnly>

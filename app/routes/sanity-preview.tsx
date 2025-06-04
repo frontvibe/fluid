@@ -1,15 +1,12 @@
-import type {
-  ActionFunctionArgs,
-  LoaderFunctionArgs,
-} from '@shopify/remix-oxygen';
-
 import {redirectDocument} from '@shopify/remix-oxygen';
+
+import type {Route} from './+types/sanity-preview';
 
 import {notFound} from '~/lib/utils';
 
 const ROOT_PATH = '/' as const;
 
-export async function action({context, request}: ActionFunctionArgs) {
+export async function action({context, request}: Route.ActionArgs) {
   const {sanitySession} = context;
 
   if (!(request.method === 'POST' && sanitySession)) {
@@ -27,7 +24,7 @@ export async function action({context, request}: ActionFunctionArgs) {
   });
 }
 
-export async function loader({context, request}: LoaderFunctionArgs) {
+export async function loader({context, request}: Route.LoaderArgs) {
   const {env, sanitySession} = context;
   const useStega = env.SANITY_STUDIO_USE_PREVIEW_MODE === 'true';
 

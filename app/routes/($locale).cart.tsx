@@ -1,18 +1,16 @@
 import type {CartQueryDataReturn} from '@shopify/hydrogen';
-import type {
-  ActionFunctionArgs,
-  LoaderFunctionArgs,
-} from '@shopify/remix-oxygen';
+
 import type {CartApiQueryFragment} from 'types/shopify/storefrontapi.generated';
 
-import {useLoaderData} from 'react-router';
 import {Analytics, CartForm} from '@shopify/hydrogen';
 import {redirectDocument, data as remixData} from '@shopify/remix-oxygen';
+
+import type {Route} from './+types/($locale).cart';
 
 import {Cart} from '~/components/cart';
 import {isLocalPath} from '~/lib/utils';
 
-export async function action({context, request}: ActionFunctionArgs) {
+export async function action({context, request}: Route.ActionArgs) {
   const {cart} = context;
 
   const [formData] = await Promise.all([request.formData()]);
@@ -87,14 +85,14 @@ export async function action({context, request}: ActionFunctionArgs) {
   );
 }
 
-export async function loader({context}: LoaderFunctionArgs) {
+export async function loader({context}: Route.LoaderArgs) {
   const cart = (await context.cart.get()) as CartApiQueryFragment;
 
   return {cart};
 }
 
-export default function CartRoute() {
-  const {cart} = useLoaderData<typeof loader>();
+export default function CartRoute({loaderData}: Route.ComponentProps) {
+  const {cart} = loaderData;
 
   return (
     <div className="cart bg-background text-foreground grow">

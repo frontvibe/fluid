@@ -1,24 +1,24 @@
-import type {LoaderFunctionArgs, MetaFunction} from '@shopify/remix-oxygen';
 import type {COLLECTION_QUERYResult} from 'types/sanity/sanity.generated';
 import type {CollectionDetailsQuery} from 'types/shopify/storefrontapi.generated';
 
-import {useLoaderData} from 'react-router';
 import {Analytics} from '@shopify/hydrogen';
 import {DEFAULT_LOCALE} from 'countries';
 import invariant from 'tiny-invariant';
 
+import type {Route} from './+types/($locale).collections.$collectionHandle';
+
 import {CmsSection} from '~/components/cms-section';
 import {COLLECTION_QUERY as CMS_COLLECTION_QUERY} from '~/data/sanity/queries';
 import {COLLECTION_QUERY} from '~/data/shopify/queries';
-import {mergeMeta} from '~/lib/meta';
+import {mergeRouteModuleMeta} from '~/lib/meta';
 import {resolveShopifyPromises} from '~/lib/resolve-shopify-promises';
 import {getSeoMetaFromMatches} from '~/lib/seo';
 import {seoPayload} from '~/lib/seo.server';
 
-export const meta: MetaFunction<typeof loader> = mergeMeta(({matches}) =>
+export const meta: Route.MetaFunction = mergeRouteModuleMeta(({matches}) =>
   getSeoMetaFromMatches(matches),
 );
-export async function loader({context, params, request}: LoaderFunctionArgs) {
+export async function loader({context, params, request}: Route.LoaderArgs) {
   const {collectionHandle} = params;
   const {locale, sanity, storefront} = context;
   const language = locale?.language.toLowerCase();
@@ -73,11 +73,11 @@ export async function loader({context, params, request}: LoaderFunctionArgs) {
   };
 }
 
-export default function Collection() {
+export default function Collection({loaderData}: Route.ComponentProps) {
   const {
     cmsCollection: {data},
     collection,
-  } = useLoaderData<typeof loader>();
+  } = loaderData;
   const template =
     data?.collection?.template || data?.defaultCollectionTemplate;
 

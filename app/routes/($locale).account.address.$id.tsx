@@ -1,10 +1,9 @@
 import type {CustomerAddressInput} from '@shopify/hydrogen/customer-account-api-types';
-import type {ActionFunction} from '@shopify/remix-oxygen';
+import type {Route} from './+types/($locale).account.address.$id';
 
 import {
   Form,
   Link,
-  useActionData,
   useNavigation,
   useOutletContext,
   useParams,
@@ -27,15 +26,11 @@ import type {AccountOutletContext} from './($locale).account.edit';
 
 import {doLogout} from './($locale).account_.logout';
 
-interface ActionData {
-  formError?: string;
-}
-
 export const handle = {
   renderInModal: true,
 };
 
-export const action: ActionFunction = async ({context, params, request}) => {
+export const action = async ({context, params, request}: Route.ActionArgs) => {
   const {customerAccount} = context;
   const formData = await request.formData();
 
@@ -189,10 +184,9 @@ export const action: ActionFunction = async ({context, params, request}) => {
   }
 };
 
-export default function EditAddress() {
+export default function EditAddress({actionData}: Route.ComponentProps) {
   const {id: addressId} = useParams();
   const isNewAddress = addressId === 'add';
-  const actionData = useActionData<ActionData>();
   const {state} = useNavigation();
   const {customer} = useOutletContext<AccountOutletContext>();
   const addresses = flattenConnection(customer.addresses);

@@ -1,25 +1,24 @@
-import type {LoaderFunctionArgs, MetaFunction} from '@shopify/remix-oxygen';
-
-import {useLoaderData} from 'react-router';
 import {flattenConnection, getPaginationVariables} from '@shopify/hydrogen';
+
+import type {Route} from './+types/($locale).products._index';
 
 import {ProductCardGrid} from '~/components/product/product-card-grid';
 import {ALL_PRODUCTS_QUERY} from '~/data/shopify/queries';
 import {useSanityThemeContent} from '~/hooks/use-sanity-theme-content';
-import {mergeMeta} from '~/lib/meta';
 import {getSeoMetaFromMatches} from '~/lib/seo';
 import {seoPayload} from '~/lib/seo.server';
+import {mergeRouteModuleMeta} from '~/lib/meta';
 
 const PAGE_BY = 9;
 
-export const meta: MetaFunction<typeof loader> = mergeMeta(({matches}) =>
+export const meta: Route.MetaFunction = mergeRouteModuleMeta(({matches}) =>
   getSeoMetaFromMatches(matches),
 );
 
 export async function loader({
   context: {storefront},
   request,
-}: LoaderFunctionArgs) {
+}: Route.LoaderArgs) {
   const variables = getPaginationVariables(request, {pageBy: PAGE_BY});
 
   const data = await storefront.query(ALL_PRODUCTS_QUERY, {
@@ -51,8 +50,8 @@ export async function loader({
   return {products: data.products, seo};
 }
 
-export default function AllProducts() {
-  const data = useLoaderData<typeof loader>();
+export default function AllProducts({loaderData}: Route.ComponentProps) {
+  const data = loaderData;
   const {themeContent} = useSanityThemeContent();
   const products = data.products?.nodes.length
     ? flattenConnection(data.products)

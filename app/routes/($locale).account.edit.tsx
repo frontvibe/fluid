@@ -3,19 +3,11 @@ import type {
   CustomerUpdateInput,
 } from '@shopify/hydrogen/customer-account-api-types';
 
-import {
-  Form,
-  Link,
-  useActionData,
-  useNavigation,
-  useOutletContext,
-} from 'react-router';
-import {
-  type ActionFunction,
-  redirect,
-  data as remixData,
-} from '@shopify/remix-oxygen';
+import {Form, Link, useNavigation, useOutletContext} from 'react-router';
+import {redirect, data as remixData} from '@shopify/remix-oxygen';
 import invariant from 'tiny-invariant';
+
+import type {Route} from './+types/($locale).account.edit';
 
 import {Button} from '~/components/ui/button';
 import {Input} from '~/components/ui/input';
@@ -53,7 +45,7 @@ export const handle = {
   renderInModal: true,
 };
 
-export const action: ActionFunction = async ({context, params, request}) => {
+export const action = async ({context, params, request}: Route.ActionArgs) => {
   const formData = await request.formData();
 
   // Double-check current user is logged in.
@@ -116,8 +108,7 @@ export const action: ActionFunction = async ({context, params, request}) => {
  * - return a simple `redirect()` from this action to close the modal :mindblown: (no useState/useEffect)
  * - use the presence of outlet data (in `account.tsx`) to open/close the modal (no useState)
  */
-export default function AccountDetailsEdit() {
-  const actionData = useActionData<ActionData>();
+export default function AccountDetailsEdit({actionData}: Route.ComponentProps) {
   const {customer} = useOutletContext<AccountOutletContext>();
   const {state} = useNavigation();
   const {themeContent} = useSanityThemeContent();

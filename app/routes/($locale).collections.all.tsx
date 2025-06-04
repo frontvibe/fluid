@@ -1,7 +1,7 @@
-import type {LoaderFunctionArgs} from '@shopify/remix-oxygen';
-
 import {redirect} from '@shopify/remix-oxygen';
 
-export async function loader({params}: LoaderFunctionArgs) {
+import type {Route} from './+types/($locale).collections.all';
+
+export async function loader({params}: Route.LoaderArgs) {
   return redirect(params?.locale ? `${params.locale}/products` : '/products');
 }

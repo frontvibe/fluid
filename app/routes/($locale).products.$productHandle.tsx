@@ -1,26 +1,26 @@
-import type {LoaderFunctionArgs, MetaFunction} from '@shopify/remix-oxygen';
 import type {PRODUCT_QUERYResult} from 'types/sanity/sanity.generated';
 import type {ProductQuery} from 'types/shopify/storefrontapi.generated';
 
-import {useLoaderData} from 'react-router';
 import {Analytics, getSelectedProductOptions} from '@shopify/hydrogen';
 import {ProductProvider} from '@shopify/hydrogen-react';
 import {DEFAULT_LOCALE} from 'countries';
 import invariant from 'tiny-invariant';
 
+import type {Route} from './+types/($locale).products.$productHandle';
+
 import {CmsSection} from '~/components/cms-section';
 import {PRODUCT_QUERY as CMS_PRODUCT_QUERY} from '~/data/sanity/queries';
 import {PRODUCT_QUERY, VARIANTS_QUERY} from '~/data/shopify/queries';
-import {mergeMeta} from '~/lib/meta';
 import {resolveShopifyPromises} from '~/lib/resolve-shopify-promises';
 import {getSeoMetaFromMatches} from '~/lib/seo';
 import {seoPayload} from '~/lib/seo.server';
+import {mergeRouteModuleMeta} from '~/lib/meta';
 
-export const meta: MetaFunction<typeof loader> = mergeMeta(({matches}) =>
+export const meta: Route.MetaFunction = mergeRouteModuleMeta(({matches}) =>
   getSeoMetaFromMatches(matches),
 );
 
-export async function loader({context, params, request}: LoaderFunctionArgs) {
+export async function loader({context, params, request}: Route.LoaderArgs) {
   const {productHandle} = params;
   const {locale, sanity, storefront} = context;
   const language = locale?.language.toLowerCase();
@@ -96,11 +96,11 @@ export async function loader({context, params, request}: LoaderFunctionArgs) {
   };
 }
 
-export default function Product() {
+export default function Product({loaderData}: Route.ComponentProps) {
   const {
     cmsProduct: {data},
     product,
-  } = useLoaderData<typeof loader>();
+  } = loaderData;
 
   const template = data?.product?.template || data?.defaultProductTemplate;
   const selectedVariant = product.variants.nodes[0];

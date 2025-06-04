@@ -1,21 +1,21 @@
-import type {LoaderFunctionArgs, MetaFunction} from '@shopify/remix-oxygen';
 import type {PAGE_QUERYResult} from 'types/sanity/sanity.generated';
+import type {Route} from './+types/($locale).$';
 
 import {DEFAULT_LOCALE} from 'countries';
 
 import {PAGE_QUERY} from '~/data/sanity/queries';
-import {mergeMeta} from '~/lib/meta';
+import {mergeRouteModuleMeta} from '~/lib/meta';
 import {resolveShopifyPromises} from '~/lib/resolve-shopify-promises';
 import {getSeoMetaFromMatches} from '~/lib/seo';
 import {seoPayload} from '~/lib/seo.server';
 
 import PageRoute from './($locale).$';
 
-export const meta: MetaFunction<typeof loader> = mergeMeta(({matches}) =>
+export const meta: Route.MetaFunction = mergeRouteModuleMeta(({matches}) =>
   getSeoMetaFromMatches(matches),
 );
 
-export async function loader({context, request}: LoaderFunctionArgs) {
+export async function loader({context, request}: Route.LoaderArgs) {
   const {env, locale, sanity, storefront} = context;
   const language = locale?.language.toLowerCase();
   const queryParams = {

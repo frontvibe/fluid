@@ -1,20 +1,16 @@
-import {
-  type ActionFunction,
-  type ActionFunctionArgs,
-  type AppLoadContext,
-  type LoaderFunctionArgs,
-  redirect,
-} from '@shopify/remix-oxygen';
+import {redirect} from '@shopify/remix-oxygen';
 
-export async function doLogout(context: AppLoadContext) {
+import type {Route} from './+types/($locale).account_.logout';
+
+export async function doLogout(context: Route.ActionArgs['context']) {
   return context.customerAccount.logout();
 }
 
-export async function loader({params}: LoaderFunctionArgs) {
+export async function loader({params}: Route.LoaderArgs) {
   const locale = params.locale;
   return redirect(locale ? `/${locale}` : '/');
 }
 
-export const action: ActionFunction = async ({context}: ActionFunctionArgs) => {
+export const action = async ({context}: Route.ActionArgs) => {
   return doLogout(context);
 };

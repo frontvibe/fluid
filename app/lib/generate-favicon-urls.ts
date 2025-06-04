@@ -1,4 +1,4 @@
-import {RootLoader} from '~/root';
+import {RootLoaderData} from '~/root';
 import faviconAsset from '~/assets/favicon.ico?url';
 import {generateSanityImageUrl} from './utils';
 
@@ -6,8 +6,8 @@ export function generateFaviconUrls({
   sanityRoot,
   env,
 }: {
-  env: NonNullable<Awaited<ReturnType<RootLoader>>>['env'];
-  sanityRoot: NonNullable<Awaited<ReturnType<RootLoader>>>['sanityRoot'];
+  env: RootLoaderData['env'];
+  sanityRoot: RootLoaderData['sanityRoot'];
 }) {
   const favicon = sanityRoot.data?.settings?.favicon;
 

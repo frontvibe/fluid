@@ -7,16 +7,12 @@ import {
   Form,
   Link,
   Outlet,
-  useLoaderData,
   useMatches,
   useNavigate,
   useOutlet,
 } from 'react-router';
 import {flattenConnection} from '@shopify/hydrogen';
-import {
-  type LoaderFunctionArgs,
-  data as remixData,
-} from '@shopify/remix-oxygen';
+import {data as remixData} from '@shopify/remix-oxygen';
 
 import {AccountAddressBook} from '~/components/account/account-address-book';
 import {AccountDetails} from '~/components/account/account-details';
@@ -28,11 +24,13 @@ import {CUSTOMER_DETAILS_QUERY} from '~/data/shopify/customer-account/queries';
 import {useLocalePath} from '~/hooks/use-locale-path';
 import {useSanityThemeContent} from '~/hooks/use-sanity-theme-content';
 
+import type {Route} from './+types/($locale).account';
+
 import {doLogout} from './($locale).account_.logout';
 
 export const headers = routeHeaders;
 
-export async function loader({context}: LoaderFunctionArgs) {
+export async function loader({context}: Route.LoaderArgs) {
   const {customerAccount} = context;
   const {data, errors} = await customerAccount.query(CUSTOMER_DETAILS_QUERY);
 
@@ -55,8 +53,8 @@ export async function loader({context}: LoaderFunctionArgs) {
   );
 }
 
-export default function Authenticated() {
-  const data = useLoaderData<typeof loader>();
+export default function Authenticated({loaderData}: Route.ComponentProps) {
+  const data = loaderData;
   const outlet = useOutlet();
   const matches = useMatches();
 
@@ -68,7 +66,7 @@ export default function Authenticated() {
 
   if (outlet) {
     if (renderOutletInModal) {
-      return <AccountDialog />;
+      return <AccountDialog data={data} />;
     } else {
       return <Outlet context={{customer: data.customer}} />;
     }
@@ -77,8 +75,7 @@ export default function Authenticated() {
   return <Account {...data} />;
 }
 
-function AccountDialog() {
-  const data = useLoaderData<typeof loader>();
+function AccountDialog({data}: {data: Route.ComponentProps['loaderData']}) {
   const navigate = useNavigate();
 
   const handleOpenChange = () => {

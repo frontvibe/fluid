@@ -1,13 +1,11 @@
 import type {FulfillmentStatus} from '@shopify/hydrogen/customer-account-api-types';
 import type {OrderFragment} from 'types/shopify/customeraccountapi.generated';
 
-import {Link, type MetaFunction, useLoaderData} from 'react-router';
+import {Link} from 'react-router';
 import {flattenConnection, Image, Money} from '@shopify/hydrogen';
-import {
-  type LoaderFunctionArgs,
-  redirect,
-  data as remixData,
-} from '@shopify/remix-oxygen';
+import {redirect, data as remixData} from '@shopify/remix-oxygen';
+
+import type {Route} from './+types/($locale).account.orders.$id';
 
 import {Badge} from '~/components/ui/badge';
 import {Button} from '~/components/ui/button';
@@ -15,11 +13,11 @@ import {CUSTOMER_ORDER_QUERY} from '~/data/shopify/customer-account/queries';
 import {useSanityThemeContent} from '~/hooks/use-sanity-theme-content';
 import {statusMessage} from '~/lib/utils';
 
-export const meta: MetaFunction<typeof loader> = ({data}) => {
+export const meta = ({data}: Route.MetaArgs) => {
   return [{title: `Order ${data?.order?.name}`}];
 };
 
-export async function loader({context, params, request}: LoaderFunctionArgs) {
+export async function loader({context, params, request}: Route.LoaderArgs) {
   const {customerAccount, locale, session} = context;
   if (!params.id) {
     return redirect(
@@ -82,14 +80,14 @@ export async function loader({context, params, request}: LoaderFunctionArgs) {
   }
 }
 
-export default function OrderRoute() {
+export default function OrderRoute({loaderData}: Route.ComponentProps) {
   const {
     discountPercentage,
     discountValue,
     fulfillmentStatus,
     lineItems,
     order,
-  } = useLoaderData<typeof loader>();
+  } = loaderData;
   const {themeContent} = useSanityThemeContent();
   return (
     <div className="container py-20">

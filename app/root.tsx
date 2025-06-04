@@ -1,9 +1,5 @@
 import type {ShouldRevalidateFunction} from 'react-router';
-import type {
-  LinksFunction,
-  LoaderFunctionArgs,
-  MetaFunction,
-} from '@shopify/remix-oxygen';
+
 import type {ROOT_QUERYResult} from 'types/sanity/sanity.generated';
 
 import {
@@ -18,10 +14,11 @@ import {
   Scripts,
   ScrollRestoration,
   useLocation,
-  useRouteLoaderData,
 } from 'react-router';
 import {getShopAnalytics, Analytics, useNonce} from '@shopify/hydrogen';
 import {DEFAULT_LOCALE} from 'countries';
+
+import type {Route} from './+types/root';
 
 import {Fonts} from './components/fonts';
 import {CssVars} from './components/css-vars';
@@ -35,7 +32,6 @@ import {generateFontsPreloadLinks} from './lib/fonts';
 import {resolveShopifyPromises} from './lib/resolve-shopify-promises';
 import {seoPayload} from './lib/seo.server';
 import {generateFaviconUrls} from './lib/generate-favicon-urls';
-
 import tailwindCss from './styles/tailwind.css?url';
 
 export type RootLoader = typeof loader;
@@ -62,7 +58,7 @@ export const shouldRevalidate: ShouldRevalidateFunction = ({
   return false;
 };
 
-export const links: LinksFunction = () => {
+export const links: Route.LinksFunction = () => {
   return [
     {
       href: 'https://cdn.shopify.com',
@@ -76,8 +72,7 @@ export const links: LinksFunction = () => {
   ];
 };
 
-export const meta: MetaFunction<RootLoader> = (loaderData) => {
-  const {data} = loaderData;
+export const meta: Route.MetaFunction = ({data}) => {
   // Preload fonts files to avoid FOUT (flash of unstyled text)
   const fontsPreloadLinks = generateFontsPreloadLinks({
     fontsData: data?.sanityRoot.data?.fonts,
@@ -97,7 +92,7 @@ export const meta: MetaFunction<RootLoader> = (loaderData) => {
   ];
 };
 
-export async function loader({context, request}: LoaderFunctionArgs) {
+export async function loader({context, request}: Route.LoaderArgs) {
   const {
     cart,
     customerAccount,
@@ -180,9 +175,12 @@ export async function loader({context, request}: LoaderFunctionArgs) {
   };
 }
 
-export function Layout({children}: {children: React.ReactNode}) {
+export function Layout({
+  children,
+  loaderData,
+}: {children: React.ReactNode} & Route.ComponentProps) {
   const nonce = useNonce();
-  const data = useRouteLoaderData<RootLoader>('root');
+  const data = loaderData;
   const {pathname} = useLocation();
 
   const isCmsRoute = pathname.includes('/cms');

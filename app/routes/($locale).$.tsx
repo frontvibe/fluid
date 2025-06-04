@@ -1,22 +1,23 @@
-import type {LoaderFunctionArgs, MetaFunction} from '@shopify/remix-oxygen';
+import type {MetaFunction} from '@shopify/remix-oxygen';
 import type {I18nLocale} from 'types';
 import type {PAGE_QUERYResult} from 'types/sanity/sanity.generated';
+import type {Route} from './+types/($locale).$';
 
-import {useLoaderData} from 'react-router';
 import {DEFAULT_LOCALE} from 'countries';
 
 import {CmsSection} from '~/components/cms-section';
 import {PAGE_QUERY} from '~/data/sanity/queries';
-import {mergeMeta} from '~/lib/meta';
+
 import {resolveShopifyPromises} from '~/lib/resolve-shopify-promises';
 import {getSeoMetaFromMatches} from '~/lib/seo';
 import {seoPayload} from '~/lib/seo.server';
+import {mergeRouteModuleMeta} from '~/lib/meta';
 
-export const meta: MetaFunction<typeof loader> = mergeMeta(({matches}) =>
+export const meta: Route.MetaFunction = mergeRouteModuleMeta(({matches}) =>
   getSeoMetaFromMatches(matches),
 );
 
-export async function loader({context, params, request}: LoaderFunctionArgs) {
+export async function loader({context, params, request}: Route.LoaderArgs) {
   const {env, locale, sanity, storefront} = context;
   const pathname = new URL(request.url).pathname;
   const handle = getPageHandle({locale, params, pathname});
@@ -67,10 +68,8 @@ export async function loader({context, params, request}: LoaderFunctionArgs) {
   };
 }
 
-export default function PageRoute() {
-  const {
-    page: {data},
-  } = useLoaderData<typeof loader>();
+export default function PageRoute({loaderData}: Route.ComponentProps) {
+  const data = loaderData.page.data;
 
   return data?.sections && data.sections.length > 0
     ? data.sections.map((section, index) => (
@@ -81,7 +80,7 @@ export default function PageRoute() {
 
 function getPageHandle(args: {
   locale: I18nLocale;
-  params: LoaderFunctionArgs['params'];
+  params: Route.LoaderArgs['params'];
   pathname: string;
 }) {
   const {locale, params, pathname} = args;

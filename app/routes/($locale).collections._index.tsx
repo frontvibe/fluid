@@ -1,25 +1,24 @@
-import type {LoaderFunctionArgs, MetaFunction} from '@shopify/remix-oxygen';
-
-import {useLoaderData} from 'react-router';
 import {getPaginationVariables} from '@shopify/hydrogen';
+
+import type {Route} from './+types/($locale).collections._index';
 
 import {CollectionListGrid} from '~/components/collection-list-grid';
 import {COLLECTIONS_QUERY} from '~/data/shopify/queries';
 import {useSanityThemeContent} from '~/hooks/use-sanity-theme-content';
-import {mergeMeta} from '~/lib/meta';
+import {mergeRouteModuleMeta} from '~/lib/meta';
 import {getSeoMetaFromMatches} from '~/lib/seo';
 import {seoPayload} from '~/lib/seo.server';
 
 const PAGINATION_SIZE = 4;
 
-export const meta: MetaFunction<typeof loader> = mergeMeta(({matches}) =>
+export const meta: Route.MetaFunction = mergeRouteModuleMeta(({matches}) =>
   getSeoMetaFromMatches(matches),
 );
 
 export const loader = async ({
   context: {storefront},
   request,
-}: LoaderFunctionArgs) => {
+}: Route.LoaderArgs) => {
   const variables = getPaginationVariables(request, {
     pageBy: PAGINATION_SIZE,
   });
@@ -39,8 +38,8 @@ export const loader = async ({
   return {collections, seo};
 };
 
-export default function Collections() {
-  const data = useLoaderData<typeof loader>();
+export default function Collections({loaderData}: Route.ComponentProps) {
+  const data = loaderData;
   const {themeContent} = useSanityThemeContent();
 
   return (

@@ -34,7 +34,7 @@ import {seoPayload} from './lib/seo.server';
 import {generateFaviconUrls} from './lib/generate-favicon-urls';
 import tailwindCss from './styles/tailwind.css?url';
 
-export type RootLoader = typeof loader;
+export type RootLoaderData = Route.ComponentProps['loaderData'];
 
 /**
  * This is important to avoid re-fetching root queries on sub-navigations
@@ -264,5 +264,5 @@ export function ErrorBoundary() {
 
 export const useRootLoaderData = () => {
   const [root] = useMatches();
-  return root?.data as Awaited<ReturnType<RootLoader>>;
+  return root?.data as RootLoaderData;
 };

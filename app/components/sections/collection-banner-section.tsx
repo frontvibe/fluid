@@ -1,8 +1,7 @@
 import type {SectionDefaultProps, SectionOfType} from 'types';
+import type {Route} from '../../routes/+types/($locale).collections.$collectionHandle';
 
 import {useLoaderData} from 'react-router';
-
-import type {loader} from '~/routes/($locale).collections.$collectionHandle';
 
 import {
   Banner,
@@ -15,7 +14,7 @@ import {ShopifyImage} from '../shopify-image';
 export function CollectionBannerSection(
   props: SectionDefaultProps & {data: SectionOfType<'collectionBannerSection'>},
 ) {
-  const loaderData = useLoaderData<typeof loader>();
+  const loaderData = useLoaderData<Route.ComponentProps['loaderData']>();
   const collection = loaderData.collection;
 
   if (!collection) return null;

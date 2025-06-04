@@ -3,7 +3,7 @@ import type {SectionDefaultProps, SectionOfType} from 'types';
 import {Await, useLoaderData} from 'react-router';
 import {Suspense} from 'react';
 
-import type {loader} from '~/routes/($locale).products.$productHandle';
+import type {Route} from '../../routes/+types/($locale).products.$productHandle';
 
 import {ProductCardGrid} from '../product/product-card-grid';
 import {RelatedProducts} from '../product/related-products';
@@ -16,7 +16,7 @@ export function RelatedProductsSection(
   props: SectionDefaultProps & {data: RelatedProductsSectionProps},
 ) {
   const {data} = props;
-  const loaderData = useLoaderData<typeof loader>();
+  const loaderData = useLoaderData<Route.ComponentProps['loaderData']>();
   const relatedProductsPromise = loaderData?.relatedProductsPromise;
 
   // Todo => Add carousel

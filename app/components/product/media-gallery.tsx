@@ -9,13 +9,11 @@ import {useLoaderData} from 'react-router';
 import {flattenConnection} from '@shopify/hydrogen';
 import React, {useCallback, useState} from 'react';
 
-import type {loader} from '~/routes/($locale).products.$productHandle';
-
-import {useDevice} from '~/hooks/use-device';
+import type {Route} from '../../routes/+types/($locale).products.$productHandle';
 import {type AspectRatioData, cn} from '~/lib/utils';
-
 import type {CarouselApi} from '../ui/carousel';
 
+import {useDevice} from '~/hooks/use-device';
 import {ShopifyImage} from '../shopify-image';
 import {Badge} from '../ui/badge';
 import {
@@ -32,7 +30,7 @@ type Media =
   | Media_Video_Fragment;
 
 export function MediaGallery(props: {aspectRatio?: AspectRatioData}) {
-  const {product} = useLoaderData<typeof loader>();
+  const {product} = useLoaderData<Route.ComponentProps['loaderData']>();
   const medias = product?.media?.nodes.length
     ? flattenConnection(product.media)
     : [];

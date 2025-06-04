@@ -5,13 +5,7 @@
 // Enhance TypeScript's built-in typings.
 import '@total-typescript/ts-reset';
 
-import type {
-  HydrogenCart,
-  Storefront,
-  HydrogenSessionData,
-  CustomerAccount,
-  HydrogenEnv,
-} from '@shopify/hydrogen';
+import type {HydrogenSessionData, HydrogenEnv} from '@shopify/hydrogen';
 import type {createAppLoadContext} from '~/lib/context';
 import type {AriaAttributes, DOMAttributes} from 'react';
 
@@ -42,14 +36,6 @@ declare global {
 declare module 'react-router' {
   interface AppLoadContext
     extends Awaited<ReturnType<typeof createAppLoadContext>> {}
-
-  interface LoaderFunctionArgs {
-    context: AppLoadContext;
-  }
-
-  interface ActionFunctionArgs {
-    context: AppLoadContext;
-  }
 
   interface SessionData extends HydrogenSessionData {
     // declare local additions to the Hydrogen session data here

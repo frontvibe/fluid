@@ -5,8 +5,6 @@ import type {FeaturedProductQuery} from 'types/shopify/storefrontapi.generated';
 
 import {Await, useLoaderData} from 'react-router';
 import {stegaClean} from '@sanity/client/stega';
-import {flattenConnection} from '@shopify/hydrogen';
-import {ProductProvider} from '@shopify/hydrogen-react';
 import {Suspense} from 'react';
 
 import type {AspectRatioData} from '~/lib/utils';
@@ -23,6 +21,7 @@ import type {loader as indexLoader} from '../../routes/_index';
 import {ProductDetails} from '../product/product-details';
 import {ShopifyImage} from '../shopify-image';
 import {Skeleton} from '../skeleton';
+import {ProductProvider} from '../product/product-provider';
 
 export type FeaturedProductSectionProps =
   SectionOfType<'featuredProductSection'>;
@@ -56,16 +55,9 @@ export function FeaturedProductSection(
         sanityData={props.data}
       >
         {(product) => {
-          const variants = product.variants.nodes.length
-            ? flattenConnection(product.variants)
-            : [];
-          const firstAvailableVariant = variants.find(
-            (variant) => variant.availableForSale,
-          );
-          const image = firstAvailableVariant?.image;
-
+          const image = product.selectedOrFirstAvailableVariant?.image;
           return (
-            <ProductProvider data={product}>
+            <ProductProvider product={product}>
               <Grid>
                 <div>
                   {image && (
@@ -158,16 +150,23 @@ function FeaturedProductSkeleton({
         </div>
         <div>
           <ProductProvider
-            data={{
+            product={{
+              adjacentVariants: [],
               descriptionHtml: sanityProduct?.descriptionHtml || '',
               id: sanityProduct?.gid || '',
-              options:
-                sanityProduct?.options?.map((option) => ({
-                  name: option.name || '',
-                  values: option.values || [],
-                })) || [],
               title: sanityProduct?.title || '',
-              variants,
+              handle: '',
+              vendor: '',
+              description: '',
+              encodedVariantExistence: '',
+              encodedVariantAvailability: '',
+              media: {nodes: []},
+              options: [],
+              priceRange: {
+                minVariantPrice: {amount: '0', currencyCode: 'USD'},
+                maxVariantPrice: {amount: '0', currencyCode: 'USD'},
+              },
+              seo: {description: '', title: ''},
             }}
           >
             <ProductDetails data={data} />

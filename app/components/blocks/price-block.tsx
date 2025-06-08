@@ -1,18 +1,15 @@
 import type {SectionOfType} from 'types';
-import type {ProductVariantFragmentFragment} from 'types/shopify/storefrontapi.generated';
+import type {ProductCardFragment} from 'types/shopify/storefrontapi.generated';
 
 import {stegaClean} from '@sanity/client/stega';
-import {flattenConnection} from '@shopify/hydrogen';
-import {useProduct} from '@shopify/hydrogen-react';
 
 import {useSanityThemeContent} from '~/hooks/use-sanity-theme-content';
-import {useSelectedVariant} from '~/hooks/use-selected-variant';
 import {cn} from '~/lib/utils';
 import {useRootLoaderData} from '~/root';
 
-import {VariantPrice} from '../product/variant-price';
-import {useProductVariants} from '../sections/product-information-section';
 import {Badge} from '../ui/badge';
+import {VariantPrice} from '../product/variant-price';
+import {useProduct} from '../product/product-provider';
 
 export type PriceBlockProps = NonNullable<
   SectionOfType<'productInformationSection'>['richtext']
@@ -21,28 +18,14 @@ export type PriceBlockProps = NonNullable<
 };
 
 export function PriceBlock(props: PriceBlockProps) {
-  const {product} = useProduct();
-  const variantsContextData = useProductVariants();
+  const {product, selectedVariant} = useProduct();
 
   if (!product) return null;
 
-  if (variantsContextData?.variants) {
-    return (
-      <Layout>
-        <VariantPrice variants={variantsContextData?.variants} />
-        <ProductBadges variants={variantsContextData?.variants} />
-      </Layout>
-    );
-  }
-
-  const variants = product?.variants?.nodes?.length
-    ? (flattenConnection(product.variants) as ProductVariantFragmentFragment[])
-    : [];
-
   return (
     <Layout>
-      <VariantPrice variants={variants} />
-      <ProductBadges variants={variants} />
+      <VariantPrice selectedVariant={selectedVariant} />
+      <ProductBadges selectedVariant={selectedVariant} />
     </Layout>
   );
 }
@@ -53,15 +36,14 @@ function Layout({children}: {children: React.ReactNode}) {
 
 export function ProductBadges({
   layout,
-  variants,
+  selectedVariant,
 }: {
   layout?: 'card';
-  variants: ProductVariantFragmentFragment[];
+  selectedVariant?: ProductCardFragment['selectedOrFirstAvailableVariant'];
 }) {
   const {sanityRoot} = useRootLoaderData();
   const data = sanityRoot?.data;
   const {themeContent} = useSanityThemeContent();
-  const selectedVariant = useSelectedVariant({variants});
   const isSoldOut = !selectedVariant?.availableForSale;
   const isOnSale =
     selectedVariant?.price?.amount &&

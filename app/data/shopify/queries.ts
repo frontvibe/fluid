@@ -1,8 +1,7 @@
 import {
   IMAGE_FRAGMENT,
-  MEDIA_FRAGMENT,
   PRODUCT_CARD_FRAGMENT,
-  PRODUCT_VARIANT_FRAGMENT,
+  PRODUCT_FRAGMENT,
 } from './fragments';
 
 /*
@@ -15,46 +14,13 @@ query Product(
   $country: CountryCode
   $language: LanguageCode
   $handle: String!
+  $selectedOptions: [SelectedOptionInput!]!
 ) @inContext(country: $country, language: $language) {
   product(handle: $handle) {
-    id
-    title
-    vendor
-    handle
-    descriptionHtml
-    description
-    priceRange {
-      minVariantPrice {
-        amount
-        currencyCode
-      }
-      maxVariantPrice {
-        amount
-        currencyCode
-      }
-    }
-    options {
-      name
-      values
-    }
-    media(first: 7) {
-      nodes {
-        ...Media
-      }
-    }
-    variants(first: 1) {
-      nodes {
-        ...ProductVariantFragment
-      }
-    }
-    seo {
-      description
-      title
-    }
+    ...Product
   }
 }
-${MEDIA_FRAGMENT}
-${PRODUCT_VARIANT_FRAGMENT}
+${PRODUCT_FRAGMENT}
 ` as const;
 
 export const FEATURED_PRODUCT_QUERY = `#graphql
@@ -62,27 +28,13 @@ query FeaturedProduct(
   $country: CountryCode
   $language: LanguageCode
   $id: ID!
+  $selectedOptions: [SelectedOptionInput!]!
 ) @inContext(country: $country, language: $language) {
   product(id: $id) {
-    id
-    title
-    vendor
-    handle
-    descriptionHtml
-    options {
-      name
-      values
-    }
-    # There is a lot of variants to fetch but this query is deferred
-    # so it won't block the main page from loading.
-    variants(first: 250) {
-      nodes {
-        ...ProductVariantFragment
-      }
-    }
+   ...Product
   }
 }
-${PRODUCT_VARIANT_FRAGMENT}
+${PRODUCT_FRAGMENT}
 ` as const;
 
 export const RECOMMENDED_PRODUCTS_QUERY = `#graphql
@@ -91,6 +43,7 @@ export const RECOMMENDED_PRODUCTS_QUERY = `#graphql
     $country: CountryCode
     $language: LanguageCode
     $productId: ID!
+    $selectedOptions: [SelectedOptionInput!]!
   ) @inContext(country: $country, language: $language) {
     mainProduct: product(id: $productId) {
       id
@@ -115,6 +68,7 @@ export const ALL_PRODUCTS_QUERY = `#graphql
     $last: Int
     $startCursor: String
     $endCursor: String
+    $selectedOptions: [SelectedOptionInput!]!
   ) @inContext(country: $country, language: $language) {
     products(first: $first, last: $last, before: $startCursor, after: $endCursor) {
       nodes {
@@ -129,28 +83,6 @@ export const ALL_PRODUCTS_QUERY = `#graphql
     }
   }
   ${PRODUCT_CARD_FRAGMENT}
-` as const;
-
-/*
-|--------------------------------------------------------------------------
-| Variants Queries
-|--------------------------------------------------------------------------
-*/
-export const VARIANTS_QUERY = `#graphql
-  query variants(
-    $country: CountryCode
-    $language: LanguageCode
-    $handle: String!
-  ) @inContext(country: $country, language: $language) {
-    product(handle: $handle) {
-      variants(first: 250) {
-        nodes {
-          ...ProductVariantFragment
-        }
-      }
-    }
-  }
-  ${PRODUCT_VARIANT_FRAGMENT}
 ` as const;
 
 /*
@@ -233,6 +165,7 @@ export const COLLECTION_PRODUCT_GRID_QUERY = `#graphql
     $last: Int
     $startCursor: String
     $endCursor: String
+    $selectedOptions: [SelectedOptionInput!]!
   ) @inContext(country: $country, language: $language) {
     collection(id: $id) {
       id
@@ -278,6 +211,7 @@ export const FEATURED_COLLECTION_QUERY = `#graphql
     $country: CountryCode
     $language: LanguageCode
     $first: Int
+    $selectedOptions: [SelectedOptionInput!]!
   ) @inContext(country: $country, language: $language) {
     collection(id: $id) {
       id

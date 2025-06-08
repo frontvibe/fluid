@@ -1,4 +1,4 @@
-import type {ProductVariantFragmentFragment} from 'types/shopify/storefrontapi.generated';
+import type {ProductFragment} from 'types/shopify/storefrontapi.generated';
 
 import {useNavigation} from 'react-router';
 import {CartForm, OptimisticInput, ShopPayButton} from '@shopify/hydrogen';
@@ -8,23 +8,23 @@ import useSessionStorage from 'react-use/esm/useSessionStorage';
 
 import {useLocalePath} from '~/hooks/use-locale-path';
 import {useSanityThemeContent} from '~/hooks/use-sanity-theme-content';
-import {useSelectedVariant} from '~/hooks/use-selected-variant';
 import {cn} from '~/lib/utils';
 import {useRootLoaderData} from '~/root';
-
 import {QuantitySelector} from '../quantity-selector';
 import CleanString from '../sanity/clean-string';
 import {Button} from '../ui/button';
 
-export function AddToCartForm(props: {
+export function AddToCartForm({
+  selectedVariant,
+  showQuantitySelector,
+  showShopPay,
+}: {
   showQuantitySelector?: boolean | null;
   showShopPay?: boolean | null;
-  variants: ProductVariantFragmentFragment[];
+  selectedVariant: ProductFragment['selectedOrFirstAvailableVariant'];
 }) {
   const navigation = useNavigation();
-  const {showQuantitySelector, showShopPay, variants} = props;
   const {themeContent} = useSanityThemeContent();
-  const selectedVariant = useSelectedVariant({variants});
   const isOutOfStock = !selectedVariant?.availableForSale;
   const [quantity, setQuantity] = useState(1);
   const cartPath = useLocalePath({path: '/cart'});

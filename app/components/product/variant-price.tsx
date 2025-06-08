@@ -1,15 +1,11 @@
-import type {ProductVariantFragmentFragment} from 'types/shopify/storefrontapi.generated';
-
-import {useSelectedVariant} from '~/hooks/use-selected-variant';
-
+import type {ProductVariantFragment} from 'types/shopify/storefrontapi.generated';
 import {ShopifyMoney} from '../shopify-money';
 
 export function VariantPrice({
-  variants,
+  selectedVariant,
 }: {
-  variants: ProductVariantFragmentFragment[];
+  selectedVariant?: ProductVariantFragment | null;
 }) {
-  const selectedVariant = useSelectedVariant({variants});
   const price = selectedVariant?.price;
   const compareAtPrice = selectedVariant?.compareAtPrice;
 

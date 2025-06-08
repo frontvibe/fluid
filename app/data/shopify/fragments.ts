@@ -69,13 +69,13 @@ export const MEDIA_FRAGMENT = `#graphql
 `;
 
 export const PRODUCT_VARIANT_FRAGMENT = `#graphql
-  fragment ProductVariantFragment on ProductVariant {
-    id
+  fragment ProductVariant on ProductVariant {
     availableForSale
-    selectedOptions {
-      name
-      value
+    compareAtPrice {
+      amount
+      currencyCode
     }
+    id
     image {
       ...ProductVariantImageFragment
     }
@@ -83,9 +83,13 @@ export const PRODUCT_VARIANT_FRAGMENT = `#graphql
       amount
       currencyCode
     }
-    compareAtPrice {
-      amount
-      currencyCode
+    product {
+      title
+      handle
+    }
+    selectedOptions {
+      name
+      value
     }
     sku
     title
@@ -93,13 +97,66 @@ export const PRODUCT_VARIANT_FRAGMENT = `#graphql
       amount
       currencyCode
     }
-    product {
-      title
-      handle
-    }
   }
   ${PRODUCT_VARIANT_IMAGE_FRAGMENT}
 `;
+
+export const PRODUCT_FRAGMENT = `#graphql
+  fragment Product on Product {
+    id
+    title
+    vendor
+    handle
+    descriptionHtml
+    description
+    encodedVariantExistence
+    encodedVariantAvailability
+    media(first: 7) {
+      nodes {
+        ...Media
+      }
+    }
+    options {
+      name
+      optionValues {
+        name
+        firstSelectableVariant {
+          ...ProductVariant
+        }
+        swatch {
+          color
+          image {
+            previewImage {
+              url
+            }
+          }
+        }
+      }
+    }
+    priceRange {
+      minVariantPrice {
+        amount
+        currencyCode
+      }
+      maxVariantPrice {
+        amount
+        currencyCode
+      }
+    }
+    selectedOrFirstAvailableVariant(selectedOptions: $selectedOptions, ignoreUnknownOptions: true, caseInsensitiveMatch: true) {
+      ...ProductVariant
+    }
+    adjacentVariants (selectedOptions: $selectedOptions) {
+      ...ProductVariant
+    }
+    seo {
+      description
+      title
+    }
+  }
+  ${MEDIA_FRAGMENT}
+  ${PRODUCT_VARIANT_FRAGMENT}
+` as const;
 
 export const PRODUCT_CARD_FRAGMENT = `#graphql
   fragment ProductCard on Product {
@@ -108,34 +165,11 @@ export const PRODUCT_CARD_FRAGMENT = `#graphql
     publishedAt
     handle
     vendor
-    variants(first: 1) {
-      nodes {
-        id
-        title
-        availableForSale
-        image {
-          ...ProductCardImageFragment
-        }
-        price {
-          amount
-          currencyCode
-        }
-        compareAtPrice {
-          amount
-          currencyCode
-        }
-        selectedOptions {
-          name
-          value
-        }
-        product {
-          handle
-          title
-        }
-      }
+    selectedOrFirstAvailableVariant(selectedOptions: $selectedOptions, ignoreUnknownOptions: true, caseInsensitiveMatch: true) {
+      ...ProductVariant
     }
   }
-  ${PRODUCT_CARD_IMAGE_FRAGMENT}
+  ${PRODUCT_VARIANT_FRAGMENT}
 `;
 
 export const CART_QUERY_FRAGMENT = `#graphql

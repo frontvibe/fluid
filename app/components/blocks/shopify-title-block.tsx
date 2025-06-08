@@ -1,7 +1,7 @@
 import type {SectionOfType} from 'types';
 
 import {useParams} from 'react-router';
-import {useProduct} from '@shopify/hydrogen-react';
+import {useProduct} from '../product/product-provider';
 
 export type ShopifyTitleBlockProps = NonNullable<
   SectionOfType<'productInformationSection'>['richtext']

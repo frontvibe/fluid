@@ -1,4 +1,4 @@
-import type {CartLineUpdateInput} from '@shopify/hydrogen-react/storefront-api-types';
+import type {CartLineUpdateInput} from '@shopify/hydrogen/storefront-api-types';
 import type {Variants} from 'motion/react';
 import type {CartLineFragment} from 'types/shopify/storefrontapi.generated';
 

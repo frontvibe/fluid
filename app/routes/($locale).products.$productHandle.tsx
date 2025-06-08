@@ -6,8 +6,6 @@ import {
   getSelectedProductOptions,
   getAdjacentAndFirstAvailableVariants,
   useSelectedOptionInUrlParam,
-  useOptimisticVariant,
-  getProductOptions,
 } from '@shopify/hydrogen';
 import {DEFAULT_LOCALE} from 'countries';
 import invariant from 'tiny-invariant';

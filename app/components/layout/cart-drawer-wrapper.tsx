@@ -1,4 +1,4 @@
-import type {CartApiQueryFragment} from 'types/shopify/storefrontapi.generated';
+import type {CartReturn} from '@shopify/hydrogen';
 
 import {Await, Link} from 'react-router';
 import {CartForm} from '@shopify/hydrogen';
@@ -11,7 +11,6 @@ import {useSanityThemeContent} from '~/hooks/use-sanity-theme-content';
 import {cn} from '~/lib/utils';
 import {useRootLoaderData} from '~/root';
 
-import {useDevice} from '../../hooks/use-device';
 import {ClientOnly} from '../client-only';
 import {IconBag} from '../icons/icon-bag';
 import {iconButtonClass} from '../ui/button';
@@ -23,24 +22,18 @@ export default function CartDrawerWrapper() {
   return (
     <Suspense fallback={<Badge count={0} />}>
       <Await resolve={rootData?.cart}>
-        {(cart) => (
-          <Badge
-            cart={cart as CartApiQueryFragment}
-            count={cart?.totalQuantity || 0}
-          />
-        )}
+        {(cart) => <Badge cart={cart} count={cart?.totalQuantity || 0} />}
       </Await>
     </Suspense>
   );
 }
 
-function Badge(props: {cart?: CartApiQueryFragment; count: number}) {
+function Badge(props: {cart?: CartReturn | null; count: number}) {
   const {count, cart} = props;
   const path = useLocalePath({path: '/cart'});
   const {themeContent} = useSanityThemeContent();
   const [cartOpen, setCartOpen] = useState(false);
   const addToCartFetchers = useCartFetchers(CartForm.ACTIONS.LinesAdd);
-  const device = useDevice();
   const cartIsLoading = Boolean(addToCartFetchers.length);
   /**
    * Whether the user has manually closed the cart drawer,

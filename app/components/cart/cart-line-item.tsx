@@ -1,19 +1,14 @@
 import type {CartLineUpdateInput} from '@shopify/hydrogen/storefront-api-types';
 import type {Variants} from 'motion/react';
-import type {CartLineFragment} from 'types/shopify/storefrontapi.generated';
+import type {CartReturn, OptimisticCartLine} from '@shopify/hydrogen';
 
 import {Link} from 'react-router';
-import {
-  CartForm,
-  OptimisticInput,
-  parseGid,
-  useOptimisticData,
-} from '@shopify/hydrogen';
+import {CartForm} from '@shopify/hydrogen';
 
 import {useCartFetchers} from '~/hooks/use-cart-fetchers';
 import {useLocalePath} from '~/hooks/use-locale-path';
 import {useSanityThemeContent} from '~/hooks/use-sanity-theme-content';
-import {cn} from '~/lib/utils';
+import {cn, useVariantUrl} from '~/lib/utils';
 
 import type {CartLayouts} from '.';
 
@@ -24,11 +19,7 @@ import {ShopifyImage} from '../shopify-image';
 import {ShopifyMoney} from '../shopify-money';
 import {IconButton} from '../ui/button';
 
-type OptimisticData = {
-  action?: string;
-  lineId?: string;
-  quantity?: number;
-};
+type CartLine = OptimisticCartLine<CartReturn>;
 
 const base = 4;
 const t = (n: number) => base * n;
@@ -39,20 +30,15 @@ export function CartLineItem({
   onClose,
 }: {
   layout: CartLayouts;
-  line: CartLineFragment;
+  line: CartLine;
   onClose?: () => void;
 }) {
-  const optimisticData = useOptimisticData<OptimisticData>('cart-line-item');
   const {id, merchandise} = line;
-  const variantId = parseGid(merchandise?.id)?.id;
-  const productPath = useLocalePath({
-    path: `/products/${merchandise.product.handle}?variant=${variantId}`,
-  });
+  const {id: lineId, isOptimistic} = line;
+  const {product, selectedOptions} = merchandise;
+  const lineItemUrl = useVariantUrl(product.handle, selectedOptions);
   const addToCartFetchers = useCartFetchers(CartForm.ACTIONS.LinesAdd);
   const cartIsLoading = Boolean(addToCartFetchers.length);
-
-  const remove =
-    optimisticData?.action === 'remove' && optimisticData?.lineId === id;
 
   const variants: Variants = {
     hidden: {
@@ -77,11 +63,6 @@ export function CartLineItem({
   // Credit to the Build UI team for the awesome List animation.
   return (
     <ProgressiveMotionDiv
-      animate={
-        // Hide the line item if the optimistic data action is remove
-        // Do not remove the form from the DOM
-        remove && 'hidden'
-      }
       className="overflow-hidden px-6"
       forceMotion={layout === 'drawer'}
       initial="visible"
@@ -107,7 +88,7 @@ export function CartLineItem({
           <div className="grid gap-1">
             <h3 className="font-body text-xl font-medium">
               {merchandise?.product?.handle ? (
-                <Link onClick={onClose} to={productPath}>
+                <Link onClick={onClose} to={lineItemUrl}>
                   {merchandise?.product?.title || ''}
                 </Link>
               ) : (
@@ -130,7 +111,7 @@ export function CartLineItem({
               <div className="flex justify-start">
                 <CartLineQuantityAdjust line={line} loading={cartIsLoading} />
               </div>
-              <ItemRemoveButton lineId={id} loading={cartIsLoading} />
+              <ItemRemoveButton lineIds={[lineId]} disabled={!!isOptimistic} />
             </div>
           </div>
           <span>
@@ -143,21 +124,20 @@ export function CartLineItem({
 }
 
 function ItemRemoveButton({
-  lineId,
-  loading,
+  lineIds,
+  disabled,
 }: {
-  lineId: CartLineFragment['id'];
-  loading: boolean;
+  lineIds: string[];
+  disabled: boolean;
 }) {
   const cartPath = useLocalePath({path: '/cart'});
   const {themeContent} = useSanityThemeContent();
 
   return (
     <CartForm
+      fetcherKey={getUpdateKey(lineIds)}
       action={CartForm.ACTIONS.LinesRemove}
-      inputs={{
-        lineIds: [lineId],
-      }}
+      inputs={{lineIds}}
       route={cartPath}
     >
       <IconButton
@@ -167,13 +147,12 @@ function ItemRemoveButton({
           '[border-width:var(--input-border-thickness)] border-[rgb(var(--input)_/_var(--input-border-opacity))]',
           '[box-shadow:rgb(var(--shadow)_/_var(--input-shadow-opacity))_var(--input-shadow-horizontal-offset)_var(--input-shadow-vertical-offset)_var(--input-shadow-blur-radius)_0px]',
         )}
-        disabled={loading}
+        disabled={disabled}
         type="submit"
       >
         <span className="sr-only">{themeContent?.cart?.remove}</span>
         <IconRemove aria-hidden="true" />
       </IconButton>
-      <OptimisticInput data={{action: 'remove', lineId}} id="cart-line-item" />
     </CartForm>
   );
 }
@@ -184,7 +163,7 @@ function CartLinePrice({
   ...passthroughProps
 }: {
   [key: string]: any;
-  line: CartLineFragment;
+  line: CartLine;
   priceType?: 'compareAt' | 'regular';
 }) {
   if (!line?.cost?.amountPerQuantity || !line?.cost?.totalAmount) return null;
@@ -209,14 +188,14 @@ function UpdateCartForm({
   lines: CartLineUpdateInput[];
 }) {
   const cartPath = useLocalePath({path: '/cart'});
+  const lineIds = lines.map((line) => line.id);
 
   return (
     <CartForm
-      action={CartForm.ACTIONS.LinesUpdate}
-      inputs={{
-        lines,
-      }}
+      fetcherKey={getUpdateKey(lineIds)}
       route={cartPath}
+      action={CartForm.ACTIONS.LinesUpdate}
+      inputs={{lines}}
     >
       {children}
     </CartForm>
@@ -227,53 +206,51 @@ function CartLineQuantityAdjust({
   line,
   loading,
 }: {
-  line: CartLineFragment;
+  line: CartLine;
   loading: boolean;
 }) {
-  const optimisticId = line?.id;
-  const optimisticData = useOptimisticData<OptimisticData>(optimisticId);
   const {themeContent} = useSanityThemeContent();
+  const {quantity} = line;
 
   if (!line || typeof line?.quantity === 'undefined') return null;
 
-  const optimisticQuantity = optimisticData?.quantity || line.quantity;
-
   const {id: lineId} = line;
-  const prevQuantity = Number(Math.max(0, optimisticQuantity - 1).toFixed(0));
-  const nextQuantity = Number((optimisticQuantity + 1).toFixed(0));
+  const prevQuantity = Number(Math.max(0, quantity - 1).toFixed(0));
+  const nextQuantity = Number((quantity + 1).toFixed(0));
 
   return (
     <>
       <label className="sr-only" htmlFor={`quantity-${lineId}`}>
-        {themeContent?.cart?.quantity}, {optimisticQuantity}
+        {themeContent?.cart?.quantity}, {quantity}
       </label>
       <QuantitySelector>
         <UpdateCartForm lines={[{id: lineId, quantity: prevQuantity}]}>
           <QuantitySelector.Button
-            disabled={optimisticQuantity <= 1 || loading}
+            disabled={quantity <= 1 || loading}
             symbol="decrease"
             value={prevQuantity}
-          >
-            <OptimisticInput
-              data={{quantity: prevQuantity}}
-              id={optimisticId}
-            />
-          </QuantitySelector.Button>
+          />
         </UpdateCartForm>
-        <QuantitySelector.Value>{optimisticQuantity}</QuantitySelector.Value>
+        <QuantitySelector.Value>{quantity}</QuantitySelector.Value>
         <UpdateCartForm lines={[{id: lineId, quantity: nextQuantity}]}>
           <QuantitySelector.Button
             disabled={loading}
             symbol="increase"
             value={nextQuantity}
-          >
-            <OptimisticInput
-              data={{quantity: nextQuantity}}
-              id={optimisticId}
-            />
-          </QuantitySelector.Button>
+          />
         </UpdateCartForm>
       </QuantitySelector>
     </>
   );
+}
+
+/**
+ * Returns a unique key for the update action. This is used to make sure actions modifying the same line
+ * items are not run concurrently, but cancel each other. For example, if the user clicks "Increase quantity"
+ * and "Decrease quantity" in rapid succession, the actions will cancel each other and only the last one will run.
+ * @param lineIds - line ids affected by the update
+ * @returns
+ */
+function getUpdateKey(lineIds: string[]) {
+  return [CartForm.ACTIONS.LinesUpdate, ...lineIds].join('-');
 }

@@ -35,10 +35,6 @@ export function CartDrawer(props: {
   const device = useDevice();
   const {themeContent} = useSanityThemeContent();
 
-  if (!cart) {
-    return null;
-  }
-
   return (
     <Drawer
       direction={device === 'desktop' ? 'right' : 'bottom'}

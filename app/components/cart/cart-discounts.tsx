@@ -19,10 +19,10 @@ export function CartDiscounts({
   cart,
   layout,
 }: {
-  cart: OptimisticCartReturn;
+  cart: OptimisticCartReturn | null;
   layout: 'drawer' | 'page';
 }) {
-  const discountCodes = cart.discountCodes;
+  const discountCodes = cart?.discountCodes;
   const {themeContent} = useSanityThemeContent();
   const addToCartFetchers = useCartFetchers(CartForm.ACTIONS.LinesAdd);
   const cartIsLoading = Boolean(addToCartFetchers.length);

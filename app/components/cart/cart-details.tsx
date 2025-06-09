@@ -26,7 +26,7 @@ export function CartDetails({
   layout,
   onClose,
 }: {
-  cart: OptimisticCartReturn;
+  cart: OptimisticCartReturn | null;
   layout: CartLayouts;
   onClose?: () => void;
 }) {
@@ -56,7 +56,7 @@ export function CartDetails({
 
   return (
     <CartDetailsLayout layout={layout}>
-      <CartLines layout={layout} lines={cart.lines} onClose={onClose} />
+      <CartLines layout={layout} lines={cart?.lines} onClose={onClose} />
       <div>
         <AnimatePresence>
           {cartHasItems && (
@@ -132,11 +132,11 @@ function CartSummary({
   layout,
 }: {
   children?: React.ReactNode;
-  cart: OptimisticCartReturn;
+  cart: OptimisticCartReturn | null;
   layout: CartLayouts;
 }) {
   const {themeContent} = useSanityThemeContent();
-  const cost = cart.cost;
+  const cost = cart?.cost;
 
   const Content = useMemo(
     () => (

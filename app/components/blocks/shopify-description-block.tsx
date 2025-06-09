@@ -1,6 +1,5 @@
 import type {SectionOfType} from 'types';
-
-import {useProduct} from '@shopify/hydrogen-react';
+import {useProduct} from '../product/product-provider';
 
 export type ShopifyDescriptionBlockProps = NonNullable<
   SectionOfType<'productInformationSection'>['richtext']

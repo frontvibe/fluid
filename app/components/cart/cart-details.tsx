@@ -1,6 +1,5 @@
-import type {Cart as CartType} from '@shopify/hydrogen/storefront-api-types';
 import type {Variants} from 'motion/react';
-import type {CartApiQueryFragment} from 'types/shopify/storefrontapi.generated';
+import type {CartReturn, OptimisticCart} from '@shopify/hydrogen';
 
 import {CartForm} from '@shopify/hydrogen';
 import {AnimatePresence} from 'motion/react';
@@ -20,24 +19,18 @@ import {Card, CardContent} from '../ui/card';
 import {CartDiscounts} from './cart-discounts';
 import {CartLines} from './cart-lines';
 
+export type OptimisticCartReturn = OptimisticCart<CartReturn | null>;
+
 export function CartDetails({
-  checkoutUrl,
-  cost,
-  discountCodes,
+  cart,
   layout,
-  lines,
   onClose,
-  totalQuantity,
 }: {
-  checkoutUrl?: string;
-  cost?: CartApiQueryFragment['cost'];
-  discountCodes: CartType['discountCodes'];
+  cart: OptimisticCartReturn | null;
   layout: CartLayouts;
-  lines?: CartApiQueryFragment['lines'];
   onClose?: () => void;
-  totalQuantity?: number;
 }) {
-  // @todo: get optimistic cart cost
+  const totalQuantity = cart?.totalQuantity;
   const cartHasItems = totalQuantity && totalQuantity > 0;
 
   const drawerMotionVariants: Variants = {
@@ -63,7 +56,7 @@ export function CartDetails({
 
   return (
     <CartDetailsLayout layout={layout}>
-      <CartLines layout={layout} lines={lines} onClose={onClose} />
+      <CartLines layout={layout} lines={cart?.lines} onClose={onClose} />
       <div>
         <AnimatePresence>
           {cartHasItems && (
@@ -80,9 +73,9 @@ export function CartDetails({
                 layout === 'drawer' ? drawerMotionVariants : pageMotionVariants
               }
             >
-              <CartSummary cost={cost} layout={layout}>
-                <CartDiscounts discountCodes={discountCodes} layout={layout} />
-                <CartCheckoutActions checkoutUrl={checkoutUrl} />
+              <CartSummary cart={cart} layout={layout}>
+                <CartDiscounts cart={cart} layout={layout} />
+                <CartCheckoutActions checkoutUrl={cart.checkoutUrl} />
               </CartSummary>
             </ProgressiveMotionDiv>
           )}
@@ -135,14 +128,15 @@ function CartCheckoutActions({checkoutUrl}: {checkoutUrl?: string}) {
 
 function CartSummary({
   children = null,
-  cost,
+  cart,
   layout,
 }: {
   children?: React.ReactNode;
-  cost?: CartApiQueryFragment['cost'];
+  cart: OptimisticCartReturn | null;
   layout: CartLayouts;
 }) {
   const {themeContent} = useSanityThemeContent();
+  const cost = cart?.cost;
 
   const Content = useMemo(
     () => (
@@ -158,7 +152,7 @@ function CartSummary({
           <div className="flex items-center justify-between font-medium">
             <span>{themeContent?.cart?.subtotal}</span>
             {cost?.subtotalAmount &&
-              parseFloat(cost.subtotalAmount.amount) > 0 && (
+              parseFloat(cost.subtotalAmount.amount ?? '0') > 0 && (
                 <span>
                   <ShopifyMoney data={cost?.subtotalAmount} />
                 </span>

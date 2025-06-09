@@ -1,30 +1,30 @@
-import type {ProductVariantFragmentFragment} from 'types/shopify/storefrontapi.generated';
+import type {ProductFragment} from 'types/shopify/storefrontapi.generated';
 
 import {useNavigation} from 'react-router';
-import {CartForm, OptimisticInput, ShopPayButton} from '@shopify/hydrogen';
+import {CartForm, ShopPayButton} from '@shopify/hydrogen';
 import {useEffect, useState} from 'react';
 import useIdle from 'react-use/esm/useIdle';
 import useSessionStorage from 'react-use/esm/useSessionStorage';
 
 import {useLocalePath} from '~/hooks/use-locale-path';
 import {useSanityThemeContent} from '~/hooks/use-sanity-theme-content';
-import {useSelectedVariant} from '~/hooks/use-selected-variant';
 import {cn} from '~/lib/utils';
 import {useRootLoaderData} from '~/root';
-
 import {QuantitySelector} from '../quantity-selector';
 import CleanString from '../sanity/clean-string';
 import {Button} from '../ui/button';
 
-export function AddToCartForm(props: {
+export function AddToCartForm({
+  selectedVariant,
+  showQuantitySelector,
+  showShopPay,
+}: {
   showQuantitySelector?: boolean | null;
   showShopPay?: boolean | null;
-  variants: ProductVariantFragmentFragment[];
+  selectedVariant: ProductFragment['selectedOrFirstAvailableVariant'];
 }) {
   const navigation = useNavigation();
-  const {showQuantitySelector, showShopPay, variants} = props;
   const {themeContent} = useSanityThemeContent();
-  const selectedVariant = useSelectedVariant({variants});
   const isOutOfStock = !selectedVariant?.availableForSale;
   const [quantity, setQuantity] = useState(1);
   const cartPath = useLocalePath({path: '/cart'});
@@ -53,12 +53,15 @@ export function AddToCartForm(props: {
         <CartForm
           action={CartForm.ACTIONS.LinesAdd}
           inputs={{
-            lines: [
-              {
-                merchandiseId: selectedVariant.id as string,
-                quantity,
-              },
-            ],
+            lines: selectedVariant
+              ? [
+                  {
+                    merchandiseId: selectedVariant.id,
+                    quantity,
+                    selectedVariant,
+                  },
+                ]
+              : [],
           }}
           route={cartPath}
         >
@@ -70,28 +73,6 @@ export function AddToCartForm(props: {
             // to prevent adding the wrong variant to the cart.
             return (
               <div className="grid gap-3">
-                <OptimisticInput
-                  data={{
-                    action: 'add',
-                    line: {
-                      cost: {
-                        amountPerQuantity: selectedVariant.price,
-                        totalAmount: selectedVariant.price,
-                      },
-                      id: selectedVariant.id,
-                      merchandise: {
-                        image: selectedVariant.image,
-                        product: {
-                          handle: selectedVariant.product?.handle,
-                          title: selectedVariant.product?.title,
-                        },
-                        selectedOptions: selectedVariant.selectedOptions,
-                      },
-                      quantity,
-                    },
-                  }}
-                  id="cart-line-item"
-                />
                 <Button
                   className={cn([
                     isOutOfStock && 'opacity-50',

@@ -1,5 +1,3 @@
-import type {Cart as CartType} from '@shopify/hydrogen/storefront-api-types';
-
 import {CartForm} from '@shopify/hydrogen';
 
 import {useCartFetchers} from '~/hooks/use-cart-fetchers';
@@ -10,6 +8,7 @@ import {cn} from '~/lib/utils';
 import {IconRemove} from '../icons/icon-remove';
 import {Button} from '../ui/button';
 import {Input} from '../ui/input';
+import {OptimisticCartReturn} from './cart-details';
 
 /**
  * Temporary discount UI
@@ -17,12 +16,13 @@ import {Input} from '../ui/input';
  * @todo rework when a design is ready
  */
 export function CartDiscounts({
-  discountCodes,
+  cart,
   layout,
 }: {
-  discountCodes: CartType['discountCodes'];
+  cart: OptimisticCartReturn | null;
   layout: 'drawer' | 'page';
 }) {
+  const discountCodes = cart?.discountCodes;
   const {themeContent} = useSanityThemeContent();
   const addToCartFetchers = useCartFetchers(CartForm.ACTIONS.LinesAdd);
   const cartIsLoading = Boolean(addToCartFetchers.length);

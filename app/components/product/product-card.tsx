@@ -2,7 +2,6 @@ import type {ProductCardFragment} from 'types/shopify/storefrontapi.generated';
 
 import {Link} from 'react-router';
 import {stegaClean} from '@sanity/client/stega';
-import {flattenConnection} from '@shopify/hydrogen';
 
 import {useLocalePath} from '~/hooks/use-locale-path';
 import {cn} from '~/lib/utils';
@@ -30,10 +29,7 @@ export function ProductCard(props: {
   const style = data?.settings?.productCards?.style;
   const textAlignment = data?.settings?.productCards?.textAlignment || 'left';
   const aspectRatio = data?.settings?.productCards?.imageAspectRatio || 'video';
-  const variants = product?.variants?.nodes.length
-    ? flattenConnection(product?.variants)
-    : null;
-  const firstVariant = variants?.[0];
+  const selectedVariant = product?.selectedOrFirstAvailableVariant;
   const sizes = [
     '(min-width: 1024px)',
     columns?.desktop ? `${100 / columns.desktop}vw` : '33vw',
@@ -85,10 +81,10 @@ export function ProductCard(props: {
 
   return (
     <>
-      {!skeleton && product && firstVariant ? (
+      {!skeleton && product && selectedVariant ? (
         <Link prefetch="intent" to={path}>
           <Card className={cardClass}>
-            {firstVariant?.image && (
+            {selectedVariant?.image && (
               <CardMedia
                 aspectRatio={aspectRatio}
                 className={cn(
@@ -106,17 +102,17 @@ export function ProductCard(props: {
                     aspectRatio === 'square' && '1/1',
                     aspectRatio === 'video' && '16/9',
                     aspectRatio === 'auto' &&
-                      `${firstVariant.image.width}/${firstVariant.image.height}`,
+                      `${selectedVariant.image.width}/${selectedVariant.image.height}`,
                   )}
                   crop="center"
-                  data={firstVariant.image}
+                  data={selectedVariant.image}
                   showBorder={false}
                   showShadow={false}
                   sizes={sizes}
                 />
                 <ProductBadges
                   layout="card"
-                  variants={product?.variants.nodes}
+                  selectedVariant={selectedVariant}
                 />
               </CardMedia>
             )}
@@ -125,15 +121,15 @@ export function ProductCard(props: {
                 {product.title}
               </div>
               <div className={priceClass}>
-                {firstVariant.compareAtPrice && (
+                {selectedVariant.compareAtPrice && (
                   <ShopifyMoney
                     className="text-muted-foreground text-xs line-through md:text-sm"
-                    data={firstVariant.compareAtPrice}
+                    data={selectedVariant.compareAtPrice}
                   />
                 )}
                 <ShopifyMoney
                   className="text-sm md:text-base"
-                  data={firstVariant.price}
+                  data={selectedVariant.price}
                 />
               </div>
             </CardContent>

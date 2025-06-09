@@ -11,7 +11,11 @@ import type {
   FeaturedProductQuery,
 } from 'types/shopify/storefrontapi.generated';
 
-import {getPaginationVariables, parseGid} from '@shopify/hydrogen';
+import {
+  getPaginationVariables,
+  getSelectedProductOptions,
+  parseGid,
+} from '@shopify/hydrogen';
 
 import {
   COLLECTION_PRODUCT_GRID_QUERY,
@@ -149,6 +153,7 @@ function resolveFeaturedCollectionPromise({
           first,
           id: gid,
           language: storefront.i18n.language,
+          selectedOptions: [],
         },
       });
 
@@ -214,10 +219,13 @@ function resolveCollectionListPromise({
 function resolveFeaturedProductPromise({
   document,
   storefront,
+  request,
 }: PromiseResolverArgs) {
   const promises: Promise<FeaturedProductQuery>[] = [];
 
   const sections = getSections(document);
+
+  const selectedOptions = getSelectedProductOptions(request);
 
   for (const section of sections || []) {
     if (section._type === 'featuredProductSection') {
@@ -232,6 +240,7 @@ function resolveFeaturedProductPromise({
           country: storefront.i18n.country,
           id: gid,
           language: storefront.i18n.language,
+          selectedOptions,
         },
       });
 
@@ -271,6 +280,7 @@ async function resolveRelatedProductsPromise({
           country: storefront.i18n.country,
           language: storefront.i18n.language,
           productId,
+          selectedOptions: [],
         },
       });
     }
@@ -310,6 +320,7 @@ async function resolveCollectionProductGridPromise({
           language: storefront.i18n.language,
           reverse,
           sortKey,
+          selectedOptions: [],
         },
       });
     }

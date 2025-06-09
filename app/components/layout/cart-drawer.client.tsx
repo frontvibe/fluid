@@ -1,4 +1,4 @@
-import type {CartApiQueryFragment} from 'types/shopify/storefrontapi.generated';
+import type {CartReturn} from '@shopify/hydrogen';
 
 import {useDevice} from '~/hooks/use-device';
 import {useSanityThemeContent} from '~/hooks/use-sanity-theme-content';
@@ -16,7 +16,7 @@ import {
 export function CartDrawer(props: {
   BadgeCounter: React.ReactNode;
   buttonClass: string;
-  cart?: CartApiQueryFragment;
+  cart?: CartReturn | null;
   cartIsLoading: boolean;
   cartOpen: boolean;
   onClose: () => void;

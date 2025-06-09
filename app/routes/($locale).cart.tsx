@@ -1,7 +1,5 @@
 import type {CartQueryDataReturn} from '@shopify/hydrogen';
 
-import type {CartApiQueryFragment} from 'types/shopify/storefrontapi.generated';
-
 import {Analytics, CartForm} from '@shopify/hydrogen';
 import {redirectDocument, data as remixData} from '@shopify/remix-oxygen';
 
@@ -86,7 +84,7 @@ export async function action({context, request}: Route.ActionArgs) {
 }
 
 export async function loader({context}: Route.LoaderArgs) {
-  const cart = (await context.cart.get()) as CartApiQueryFragment;
+  const cart = await context.cart.get();
 
   return {cart};
 }

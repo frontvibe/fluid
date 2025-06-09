@@ -26,6 +26,7 @@ export async function loader({
       ...variables,
       country: storefront.i18n.country,
       language: storefront.i18n.language,
+      selectedOptions: [],
     },
   });
 

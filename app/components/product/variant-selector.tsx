@@ -66,7 +66,7 @@ function Pill({
   const navigate = useNavigate();
   const isHydrated = useHydrated();
   const section = useSection();
-  const layoutId = optionName + section?.id;
+  const layoutId = productHandle + optionName + section?.id;
 
   const buttonClass = cx([
     'select-none rounded-full py-[.375rem] text-sm font-medium disabled:cursor-pointer',

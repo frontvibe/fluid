@@ -1,4 +1,4 @@
-import * as SelectPrimitive from '@radix-ui/react-select';
+import {Select as SelectPrimitive} from 'radix-ui';
 import {cn} from 'app/lib/utils';
 import {forwardRef} from 'react';
 

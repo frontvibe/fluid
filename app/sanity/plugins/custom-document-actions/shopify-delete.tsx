@@ -8,7 +8,7 @@ import {
 } from 'sanity';
 import {useRouter} from 'sanity/router';
 
-import {SANITY_API_VERSION} from '~/sanity/constants';
+import {SANITY_API_VERSION, SANITY_STUDIO_URL} from '~/sanity/constants';
 
 import type {ShopifyDocument, ShopifyDocumentActionProps} from './types';
 
@@ -86,7 +86,7 @@ export default (
         try {
           await transaction.commit();
           // Navigate back to products root
-          router.navigateUrl({path: '/structure/products'});
+          router.navigateUrl({path: `${SANITY_STUDIO_URL}/structure/products`});
         } catch (err) {
           let message = 'Unknown Error';
           if (err instanceof Error) message = err.message;
@@ -130,7 +130,9 @@ export default (
         try {
           await transaction.commit();
           // Navigate back to collections root
-          router.navigateUrl({path: '/structure/collections'});
+          router.navigateUrl({
+            path: `${SANITY_STUDIO_URL}/structure/collections`,
+          });
         } catch (err) {
           let message = 'Unknown Error';
           if (err instanceof Error) message = err.message;

@@ -1,6 +1,5 @@
 import type {I18nLocale} from 'types';
 
-import {DropdownMenuTrigger} from '@radix-ui/react-dropdown-menu';
 import {useLocation} from 'react-router';
 import {CartForm} from '@shopify/hydrogen';
 import {cx} from 'class-variance-authority';
@@ -17,6 +16,7 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuTrigger,
 } from '../ui/dropdow-menu';
 
 export function CountrySelector() {

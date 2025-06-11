@@ -1,4 +1,4 @@
-import { DropdownMenu as DropdownMenuPrimitive } from 'radix-ui';
+import {DropdownMenu as DropdownMenuPrimitive} from 'radix-ui';
 import {forwardRef} from 'react';
 
 import {cn} from '~/lib/utils';

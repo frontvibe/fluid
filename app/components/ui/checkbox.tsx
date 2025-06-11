@@ -1,4 +1,4 @@
-import { Checkbox as CheckboxPrimitive } from 'radix-ui';
+import {Checkbox as CheckboxPrimitive} from 'radix-ui';
 import {cn} from 'app/lib/utils';
 import * as React from 'react';
 

@@ -1,4 +1,4 @@
-import { ScrollArea as ScrollAreaPrimitive } from 'radix-ui';
+import {ScrollArea as ScrollAreaPrimitive} from 'radix-ui';
 import {cn} from 'app/lib/utils';
 import * as React from 'react';
 

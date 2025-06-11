@@ -1,4 +1,4 @@
-import { Accordion as AccordionPrimitive } from 'radix-ui';
+import {Accordion as AccordionPrimitive} from 'radix-ui';
 import {forwardRef} from 'react';
 
 import {cn} from '~/lib/utils';

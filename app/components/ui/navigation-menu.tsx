@@ -1,4 +1,4 @@
-import { NavigationMenu as NavigationMenuPrimitive } from 'radix-ui';
+import {NavigationMenu as NavigationMenuPrimitive} from 'radix-ui';
 import {cn} from 'app/lib/utils';
 import {cva} from 'class-variance-authority';
 import {forwardRef} from 'react';

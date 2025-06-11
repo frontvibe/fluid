@@ -1,4 +1,4 @@
-import { Label as LabelPrimitive } from 'radix-ui';
+import {Label as LabelPrimitive} from 'radix-ui';
 import {cn} from 'app/lib/utils';
 import {cva, type VariantProps} from 'class-variance-authority';
 import {forwardRef} from 'react';

@@ -1,4 +1,4 @@
-import { Dialog as DialogPrimitive } from 'radix-ui';
+import {Dialog as DialogPrimitive} from 'radix-ui';
 import {cn} from 'app/lib/utils';
 import * as React from 'react';
 

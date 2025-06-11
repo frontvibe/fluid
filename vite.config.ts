@@ -48,6 +48,7 @@ export default defineConfig({
        * @see https://vitejs.dev/config/dep-optimization-options
        */
       include: [
+        'radix-ui',
         'rxjs',
         'set-cookie-parser',
         'cookie',

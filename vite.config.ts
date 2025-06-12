@@ -59,4 +59,9 @@ export default defineConfig({
       ],
     },
   },
+  server: {
+    watch: {
+      ignored: ['**/types/{sanity,shopify}/**', '**/types/index.ts'],
+    },
+  },
 });

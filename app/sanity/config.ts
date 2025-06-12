@@ -14,7 +14,7 @@ import IconPreview from './components/icons/preview-icon';
 import {
   SANITY_API_VERSION,
   SANITY_STUDIO_PREVIEW_URL,
-  SANITY_STUDIO_URL,
+  SANITY_STUDIO_PATH,
 } from './constants';
 import {customDocumentActions} from './plugins/custom-document-actions';
 import {locations} from './presentation/locations';
@@ -53,7 +53,7 @@ export function defineSanityConfig(
   return defineConfig({
     name: 'default',
     title: 'Fluid',
-    basePath: SANITY_STUDIO_URL,
+    basePath: SANITY_STUDIO_PATH,
     ...config,
     plugins: [
       codeInput(),

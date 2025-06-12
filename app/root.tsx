@@ -33,6 +33,7 @@ import {resolveShopifyPromises} from './lib/resolve-shopify-promises';
 import {seoPayload} from './lib/seo.server';
 import {generateFaviconUrls} from './lib/generate-favicon-urls';
 import tailwindCss from './styles/tailwind.css?url';
+import {SANITY_STUDIO_PATH} from './sanity/constants';
 
 export type RootLoaderData = Route.ComponentProps['loaderData'];
 
@@ -183,7 +184,7 @@ export function Layout({
   const data = loaderData;
   const {pathname} = useLocation();
 
-  const isCmsRoute = pathname.includes('/cms');
+  const isCmsRoute = pathname.includes(SANITY_STUDIO_PATH);
 
   return (
     <html lang={data?.locale.language.toLowerCase()}>

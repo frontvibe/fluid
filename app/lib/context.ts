@@ -2,7 +2,7 @@ import {createHydrogenContext, createWithCache} from '@shopify/hydrogen';
 import {getLocaleFromRequest} from 'countries';
 
 import {CART_QUERY_FRAGMENT} from '~/data/shopify/fragments';
-import {SANITY_API_VERSION, SANITY_STUDIO_URL} from '~/sanity/constants';
+import {SANITY_API_VERSION, SANITY_STUDIO_PATH} from '~/sanity/constants';
 
 import {envVariables} from './env.server';
 import {AppSession} from './hydrogen.session.server';
@@ -60,7 +60,7 @@ export async function createAppLoadContext(
     },
     preview: {
       enabled: sanityPreviewMode,
-      studioUrl: SANITY_STUDIO_URL,
+      studioUrl: SANITY_STUDIO_PATH,
       token: env.SANITY_STUDIO_TOKEN,
     },
   });

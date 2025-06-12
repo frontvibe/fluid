@@ -4,6 +4,7 @@ import type {CartReturn, OptimisticCartLine} from '@shopify/hydrogen';
 
 import {Link} from 'react-router';
 import {CartForm} from '@shopify/hydrogen';
+import {useIsPresent} from 'motion/react';
 
 import {useCartFetchers} from '~/hooks/use-cart-fetchers';
 import {useLocalePath} from '~/hooks/use-locale-path';
@@ -33,6 +34,7 @@ export function CartLineItem({
   line: CartLine;
   onClose?: () => void;
 }) {
+  const isPresent = useIsPresent();
   const {id, merchandise} = line;
   const {id: lineId, isOptimistic} = line;
   const {product, selectedOptions} = merchandise;
@@ -44,14 +46,17 @@ export function CartLineItem({
     hidden: {
       height: 0,
       opacity: 0,
-      transition: {
-        bounce: 0,
-        duration: t(0.15),
-        opacity: {
-          delay: t(0.03),
-        },
-        type: 'spring',
-      },
+      transition:
+        !isPresent && isOptimistic
+          ? {duration: 0}
+          : {
+              bounce: 0,
+              duration: t(0.15),
+              opacity: {
+                delay: t(0.03),
+              },
+              type: 'spring',
+            },
     },
     visible: {
       opacity: 1,
@@ -65,7 +70,8 @@ export function CartLineItem({
     <ProgressiveMotionDiv
       className="overflow-hidden px-6"
       forceMotion={layout === 'drawer'}
-      initial="visible"
+      exit="hidden"
+      initial={'visible'}
       animate={!isOptimistic && 'visible'}
       key={id}
       variants={variants}

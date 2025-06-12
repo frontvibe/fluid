@@ -5,6 +5,7 @@ import {cx} from 'class-variance-authority';
 
 import {ScrollArea} from '../ui/scroll-area';
 import {CartLineItem} from './cart-line-item';
+import {AnimatePresence} from 'motion/react';
 
 export function CartLines({
   layout = 'drawer',
@@ -23,11 +24,13 @@ export function CartLines({
     <Layout layout={layout}>
       <section aria-labelledby="cart-contents" className={className}>
         <ul className="grid">
-          {lines?.nodes.map((line) => (
-            <li key={line.id}>
-              <CartLineItem layout={layout} line={line} onClose={onClose} />
-            </li>
-          ))}
+          <AnimatePresence>
+            {lines?.nodes.map((line) => (
+              <li key={line.id}>
+                <CartLineItem layout={layout} line={line} onClose={onClose} />
+              </li>
+            ))}
+          </AnimatePresence>
         </ul>
       </section>
     </Layout>

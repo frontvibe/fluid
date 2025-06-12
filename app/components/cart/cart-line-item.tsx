@@ -66,6 +66,7 @@ export function CartLineItem({
       className="overflow-hidden px-6"
       forceMotion={layout === 'drawer'}
       initial="visible"
+      animate={!isOptimistic && 'visible'}
       key={id}
       variants={variants}
     >

@@ -34,7 +34,7 @@ export async function loader({context, request}: Route.LoaderArgs) {
 
   const {searchParams} = new URL(request.url);
   const slug = searchParams.get('slug') ?? ROOT_PATH;
-  const redirectTo = slug + '?reload=true';
+  const redirectTo = slug;
 
   sanitySession.set('previewMode', true);
 

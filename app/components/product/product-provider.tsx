@@ -4,7 +4,7 @@ import {
   getProductOptions,
   MappedProductOptions,
 } from '@shopify/hydrogen-react';
-import {createContext, useContext} from 'react';
+import {createContext, useContext, useMemo} from 'react';
 
 import {ProductFragment} from 'types/shopify/storefrontapi.generated';
 
@@ -21,17 +21,25 @@ export const ProductProvider = ({
   children: React.ReactNode;
   product: ProductFragment;
 }) => {
-  const variants = getAdjacentAndFirstAvailableVariants(product);
+  const variants = product.selectedOrFirstAvailableVariant
+    ? getAdjacentAndFirstAvailableVariants(product)
+    : [];
   // Optimistically selects a variant with given available variant information
   const selectedVariant = useOptimisticVariant(
     product?.selectedOrFirstAvailableVariant,
     variants,
   );
-  // Get the product options array
-  const productOptions = getProductOptions({
-    ...product,
-    selectedOrFirstAvailableVariant: selectedVariant,
-  });
+  const test = Boolean(
+    selectedVariant && product.selectedOrFirstAvailableVariant,
+  );
+
+  const productOptions =
+    selectedVariant && product.selectedOrFirstAvailableVariant
+      ? getProductOptions({
+          ...product,
+          selectedOrFirstAvailableVariant: selectedVariant,
+        })
+      : [];
 
   return (
     <ProductContext.Provider value={{product, productOptions, selectedVariant}}>

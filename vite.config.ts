@@ -15,6 +15,7 @@ export default defineConfig({
       'react-use/esm/useDebounce',
       'react-use/esm/useSessionStorage',
     ],
+    needsInterop: ['@shopify/hydrogen'],
   },
   plugins: [
     hydrogen(),
@@ -49,9 +50,6 @@ export default defineConfig({
        */
       include: [
         'radix-ui',
-        'rxjs',
-        'set-cookie-parser',
-        'cookie',
         'react-router',
         'react-compiler-runtime',
         '@sanity/image-url',

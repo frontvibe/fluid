@@ -15,7 +15,6 @@ export default defineConfig({
       'react-use/esm/useDebounce',
       'react-use/esm/useSessionStorage',
     ],
-    needsInterop: ['@shopify/hydrogen'],
   },
   plugins: [
     hydrogen(),

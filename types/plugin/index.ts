@@ -1,10 +1,49 @@
 import type {FilterPattern, Plugin} from 'vite';
 
-import {exec} from 'child_process';
-import {promisify} from 'util';
+import {spawn} from 'child_process';
 import {createFilter} from 'vite';
 
-const execPromise = promisify(exec);
+// Track ongoing processes to cancel them
+let schemaController: AbortController | null = null;
+let queriesController: AbortController | null = null;
+
+function runCommand(
+  command: string,
+  abortController: AbortController,
+): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const [cmd, ...args] = command.split(' ');
+    const child = spawn(cmd, args, {
+      stdio: 'pipe',
+      signal: abortController.signal,
+    });
+
+    let stdout = '';
+    let stderr = '';
+
+    child.stdout?.on('data', (data) => {
+      stdout += data.toString();
+    });
+
+    child.stderr?.on('data', (data) => {
+      stderr += data.toString();
+    });
+
+    child.on('close', (code) => {
+      if (code === 0) {
+        if (stdout) console.log(stdout); // eslint-disable-line no-console
+        if (stderr) console.error(stderr);
+        resolve();
+      } else {
+        reject(new Error(`Process exited with code ${code}`));
+      }
+    });
+
+    child.on('error', (error) => {
+      reject(error);
+    });
+  });
+}
 
 /**
  * @description This plugin is used to watch for changes in the Sanity schema and GROQ queries to generate the types.
@@ -27,31 +66,56 @@ export function typegenWatcher(options?: {
     name: 'vite-plugin-typegen-watcher',
     handleHotUpdate({file}) {
       if (schemaFilter(file)) {
-        return execPromise('npm run sanity:extract && npm run sanity:generate')
-          .then(({stdout, stderr}) => {
-            if (stdout) console.log(stdout); // eslint-disable-line no-console
-            if (stderr) console.error(stderr);
+        // Cancel ongoing schema process if it exists
+        if (schemaController) {
+          schemaController.abort();
+        }
+
+        schemaController = new AbortController();
+
+        const promise = runCommand(
+          'npm run sanity:extract && npm run sanity:generate',
+          schemaController,
+        )
+          .then(() => {
+            schemaController = null;
           })
           .catch((error: Error) => {
-            console.error(
-              '\x1b[31m%s\x1b[0m',
-              `\nError executing script:\n\nThe Sanity schema is not valid and Typegen failed to extract the schema.\n\n${error.message}`,
-            );
+            if (error.name !== 'AbortError') {
+              console.error(
+                '\x1b[31m%s\x1b[0m',
+                `\nError executing script:\n\nThe Sanity schema is not valid and Typegen failed to extract the schema.\n\n${error.message}`,
+              );
+            }
+            schemaController = null;
           });
+
+        return promise;
       }
 
       if (queriesFilter(file)) {
-        return execPromise('npm run sanity:generate')
-          .then(({stdout, stderr}) => {
-            if (stdout) console.log(stdout); // eslint-disable-line no-console
-            if (stderr) console.error(stderr);
+        // Cancel ongoing queries process if it exists
+        if (queriesController) {
+          queriesController.abort();
+        }
+
+        queriesController = new AbortController();
+
+        const promise = runCommand('npm run sanity:generate', queriesController)
+          .then(() => {
+            queriesController = null;
           })
           .catch((error: Error) => {
-            console.error(
-              '\x1b[31m%s\x1b[0m',
-              `\nError executing script:\n\nA Sanity GROQ query is not valid and Typegen failed to generate the types.\n\n${error.message}`,
-            );
+            if (error.name !== 'AbortError') {
+              console.error(
+                '\x1b[31m%s\x1b[0m',
+                `\nError executing script:\n\nA Sanity GROQ query is not valid and Typegen failed to generate the types.\n\n${error.message}`,
+              );
+            }
+            queriesController = null;
           });
+
+        return promise;
       }
     },
   };

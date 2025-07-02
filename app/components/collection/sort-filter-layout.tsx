@@ -25,6 +25,7 @@ import {ScrollArea} from '../ui/scroll-area';
 import {DesktopSort} from './collection-sort';
 import {FilterMarkup} from './filter-markup';
 import {MobileDrawer} from './sort-mobile-drawer.client';
+import {SortMobileTrigger} from './sort-mobile-trigger';
 export type AppliedFilter = {
   filter: ProductFilter;
   label: string;
@@ -120,7 +121,7 @@ export function SortFilter({
             />
           </div>
         </div>
-        <ClientOnly fallback={null}>
+        <ClientOnly fallback={<SortMobileTrigger />}>
           {() => (
             <Suspense>
               <MobileDrawer

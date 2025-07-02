@@ -7,10 +7,8 @@ import type {NavigationProps} from './desktop-navigation';
 import type {SanityNestedNavigationProps} from './nested-navigation';
 
 import {IconChevron} from '../icons/icon-chevron';
-import {IconMenu} from '../icons/icon-menu';
 import {SanityExternalLink} from '../sanity/link/sanity-external-link';
 import {SanityInternalLink} from '../sanity/link/sanity-internal-link';
-import {iconButtonClass} from '../ui/button';
 import {
   Drawer,
   DrawerContent,
@@ -18,6 +16,7 @@ import {
   DrawerTrigger,
 } from '../ui/drawer';
 import {ScrollArea} from '../ui/scroll-area';
+import {MobileNavigationTrigger} from './mobile-navigation-trigger';
 
 const mobileMenuLinkClass = cn(
   'flex rounded-xs px-4 py-2 items-center gap-2 w-full transition-colors notouch:hover:bg-accent notouch:hover:text-accent-foreground touch:active:bg-accent touch:active:text-accent-foreground',
@@ -38,8 +37,8 @@ export function MobileNavigation(props: {data?: NavigationProps}) {
         onOpenChange={setOpen}
         open={open}
       >
-        <DrawerTrigger className={cn(iconButtonClass, '-mr-2 lg:mr-0')}>
-          <IconMenu className="size-7" strokeWidth={1.5} />
+        <DrawerTrigger asChild>
+          <MobileNavigationTrigger />
         </DrawerTrigger>
         <MobileNavigationContent>
           {props.data &&

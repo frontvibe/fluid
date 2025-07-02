@@ -22,6 +22,7 @@ import {MobileNavigation} from '../navigation/mobile-navigation.client';
 import {IconButton} from '../ui/button';
 import CartDrawer from './cart-drawer-wrapper';
 import {Logo} from './header-logo';
+import {MobileNavigationTrigger} from '../navigation/mobile-navigation-trigger';
 
 export function Header() {
   const {sanityRoot} = useRootLoaderData();
@@ -56,7 +57,7 @@ export function Header() {
             <DesktopNavigation data={header?.menu} />
             <AccountLink className="focus:ring-primary/5 relative flex items-center justify-center" />
             <CartDrawer />
-            <ClientOnly fallback={null}>
+            <ClientOnly fallback={<MobileNavigationTrigger />}>
               {() => (
                 <Suspense>
                   <MobileNavigation data={header?.menu} />

@@ -9,8 +9,7 @@ import {cn} from '~/lib/utils';
 
 import type {AppliedFilter} from './sort-filter-layout';
 
-import {IconFilters} from '../icons/icon-filters';
-import {Button, iconButtonClass} from '../ui/button';
+import {Button} from '../ui/button';
 import {
   Drawer,
   DrawerContent,
@@ -21,6 +20,7 @@ import {
 import {ScrollArea} from '../ui/scroll-area';
 import {MobileSort} from './collection-sort';
 import {FilterMarkup} from './filter-markup';
+import {SortMobileTrigger} from './sort-mobile-trigger';
 
 export function MobileDrawer({
   appliedFilters,
@@ -41,9 +41,8 @@ export function MobileDrawer({
   return (
     <div className="touch:block lg:hidden">
       <Drawer onOpenChange={setOpen} open={open}>
-        <DrawerTrigger className={cn(iconButtonClass, 'w-auto gap-2 px-2')}>
-          <IconFilters />
-          <span>{heading}</span>
+        <DrawerTrigger asChild>
+          <SortMobileTrigger />
         </DrawerTrigger>
         <DrawerContent
           className={cn([

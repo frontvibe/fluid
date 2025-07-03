@@ -10,10 +10,8 @@ import {typegenWatcher} from './types/plugin';
 export default defineConfig({
   optimizeDeps: {
     include: [
-      'react-use/esm/useIdle',
       'react-use/esm/useMedia',
       'react-use/esm/useDebounce',
-      'react-use/esm/useSessionStorage',
       '@shopify/hydrogen-react',
       'radix-ui',
       'class-variance-authority',

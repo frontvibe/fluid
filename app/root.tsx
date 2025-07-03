@@ -14,6 +14,7 @@ import {
   Scripts,
   ScrollRestoration,
   useLocation,
+  useRouteLoaderData,
 } from 'react-router';
 import {getShopAnalytics, Analytics, useNonce} from '@shopify/hydrogen';
 import {DEFAULT_LOCALE} from 'countries';
@@ -176,14 +177,10 @@ export async function loader({context, request}: Route.LoaderArgs) {
   };
 }
 
-export function Layout({
-  children,
-  loaderData,
-}: {children: React.ReactNode} & Route.ComponentProps) {
+export function Layout({children}: {children: React.ReactNode}) {
+  const data = useRouteLoaderData<RootLoaderData>('root');
   const nonce = useNonce();
-  const data = loaderData;
   const {pathname} = useLocation();
-
   const isCmsRoute = pathname.includes(SANITY_STUDIO_PATH);
 
   return (

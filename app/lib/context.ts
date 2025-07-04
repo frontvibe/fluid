@@ -1,13 +1,13 @@
 import {createHydrogenContext, createWithCache} from '@shopify/hydrogen';
 import {getLocaleFromRequest} from 'countries';
 
-import {CART_QUERY_FRAGMENT} from '~/data/shopify/fragments';
 import {SANITY_API_VERSION, SANITY_STUDIO_PATH} from '~/sanity/constants';
 
 import {envVariables} from './env.server';
 import {AppSession} from './hydrogen.session.server';
 import {createSanityContext} from './sanity/sanity.server';
 import {SanitySession} from './sanity/sanity.session.server';
+import {CART_QUERY_FRAGMENT} from '~/data/shopify/queries';
 
 /**
  * The context implementation is separate from server.ts

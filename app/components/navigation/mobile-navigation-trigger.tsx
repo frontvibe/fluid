@@ -13,6 +13,7 @@ export const MobileNavigationTrigger = React.forwardRef<
       className="touch:block -mr-2 lg:mr-0 lg:hidden"
       {...props}
     >
+      <span className="sr-only">Menu</span>
       <IconMenu className="size-7" strokeWidth={1.5} />
     </IconButton>
   );

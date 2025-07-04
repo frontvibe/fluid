@@ -23,6 +23,7 @@ import {IconButton} from '../ui/button';
 import CartDrawer from './cart-drawer-wrapper';
 import {Logo} from './header-logo';
 import {MobileNavigationTrigger} from '../navigation/mobile-navigation-trigger';
+import {useSanityThemeContent} from '~/hooks/use-sanity-theme-content';
 
 export function Header() {
   const {sanityRoot} = useRootLoaderData();
@@ -72,9 +73,11 @@ export function Header() {
 }
 
 function AccountLink({className}: {className?: string}) {
+  const {themeContent} = useSanityThemeContent();
   return (
     <IconButton asChild>
       <Link className={className} to="/account">
+        <span className="sr-only">{themeContent?.account?.accountDetails}</span>
         <IconAccount className="size-6" />
       </Link>
     </IconButton>

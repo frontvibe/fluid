@@ -21,15 +21,15 @@ function runCommand(
     let stdout = '';
     let stderr = '';
 
-    child.stdout?.on('data', (data) => {
+    child.stdout?.on('data', (data: Buffer) => {
       stdout += data.toString();
     });
 
-    child.stderr?.on('data', (data) => {
+    child.stderr?.on('data', (data: Buffer) => {
       stderr += data.toString();
     });
 
-    child.on('close', (code) => {
+    child.on('close', (code: number | null) => {
       if (code === 0) {
         if (stdout) console.log(stdout); // eslint-disable-line no-console
         if (stderr) console.error(stderr);
@@ -39,10 +39,21 @@ function runCommand(
       }
     });
 
-    child.on('error', (error) => {
+    child.on('error', (error: Error) => {
       reject(error);
     });
   });
+}
+
+function runCommandsSequentially(
+  commands: string[],
+  abortController: AbortController,
+): Promise<void> {
+  return commands.reduce(
+    (promise, command) =>
+      promise.then(() => runCommand(command, abortController)),
+    Promise.resolve(),
+  );
 }
 
 /**
@@ -73,8 +84,8 @@ export function typegenWatcher(options?: {
 
         schemaController = new AbortController();
 
-        const promise = runCommand(
-          'npm run sanity:extract && npm run sanity:generate',
+        const promise = runCommandsSequentially(
+          ['npm run sanity:extract', 'npm run sanity:generate'],
           schemaController,
         )
           .then(() => {

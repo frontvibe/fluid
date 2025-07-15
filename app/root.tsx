@@ -89,18 +89,10 @@ export async function loader({context, request}: Route.LoaderArgs) {
     language,
   };
 
-  const rootData = Promise.all([
-    sanity.loadQuery<ROOT_QUERYResult>(ROOT_QUERY, queryParams),
-    storefront.query(`#graphql
-      query layout {
-        shop {
-          id
-        } 
-      }
-    `),
-  ]);
-
-  const [sanityRoot, layout] = await rootData;
+  const sanityRoot = await sanity.loadQuery<ROOT_QUERYResult>(
+    ROOT_QUERY,
+    queryParams,
+  );
 
   const seo = seoPayload.root({
     root: sanityRoot.data,

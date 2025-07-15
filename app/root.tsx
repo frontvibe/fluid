@@ -60,19 +60,6 @@ export const shouldRevalidate: ShouldRevalidateFunction = ({
   return false;
 };
 
-export const links: Route.LinksFunction = () => {
-  return [
-    {
-      href: 'https://cdn.shopify.com',
-      rel: 'preconnect',
-    },
-    {
-      href: 'https://shop.app',
-      rel: 'preconnect',
-    },
-  ];
-};
-
 export const meta: Route.MetaFunction = ({data}) => {
   // Preload fonts files to avoid FOUT (flash of unstyled text)
   const fontsPreloadLinks = generateFontsPreloadLinks({
@@ -81,16 +68,7 @@ export const meta: Route.MetaFunction = ({data}) => {
 
   const faviconUrls = data ? generateFaviconUrls(data) : [];
 
-  return [
-    {
-      // Preconnect to the Sanity CDN before loading fonts
-      href: 'https://cdn.sanity.io',
-      rel: 'preconnect',
-      tagName: 'link',
-    },
-    ...faviconUrls,
-    ...fontsPreloadLinks,
-  ];
+  return [...faviconUrls, ...fontsPreloadLinks];
 };
 
 export async function loader({context, request}: Route.LoaderArgs) {
@@ -111,18 +89,10 @@ export async function loader({context, request}: Route.LoaderArgs) {
     language,
   };
 
-  const rootData = Promise.all([
-    sanity.loadQuery<ROOT_QUERYResult>(ROOT_QUERY, queryParams),
-    storefront.query(`#graphql
-      query layout {
-        shop {
-          id
-        } 
-      }
-    `),
-  ]);
-
-  const [sanityRoot, layout] = await rootData;
+  const sanityRoot = await sanity.loadQuery<ROOT_QUERYResult>(
+    ROOT_QUERY,
+    queryParams,
+  );
 
   const seo = seoPayload.root({
     root: sanityRoot.data,
@@ -187,9 +157,13 @@ export function Layout({children}: {children: React.ReactNode}) {
       <head>
         <meta charSet="utf-8" />
         <meta content="width=device-width,initial-scale=1" name="viewport" />
-        <link rel="stylesheet" href={tailwindCss} />
+        <link rel="preconnect" href="https://cdn.shopify.com" />
+        <link rel="preconnect" href="https://cdn.sanity.io" />
+        <link rel="preload" as="style" href={tailwindCss} />
+        <link rel="preconnect" href="https://shop.app" />
         <Meta />
         <Fonts />
+        <link rel="stylesheet" href={tailwindCss} />
         <Links />
         <CssVars />
       </head>

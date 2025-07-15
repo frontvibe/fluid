@@ -158,12 +158,12 @@ export function Layout({children}: {children: React.ReactNode}) {
         <meta charSet="utf-8" />
         <meta content="width=device-width,initial-scale=1" name="viewport" />
         <link rel="preconnect" href="https://cdn.shopify.com" />
-        <link rel="preload" as="style" href={tailwindCss} />
         <link rel="preconnect" href="https://cdn.sanity.io" />
+        <link rel="preload" as="style" href={tailwindCss} />
         <link rel="preconnect" href="https://shop.app" />
-        <link rel="stylesheet" href={tailwindCss} />
         <Meta />
         <Fonts />
+        <link rel="stylesheet" href={tailwindCss} />
         <Links />
         <CssVars />
       </head>

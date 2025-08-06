@@ -1,7 +1,7 @@
 import type {VariantProps} from 'class-variance-authority';
 
 import {Slot as SlotPrimitive} from 'radix-ui';
-import {cva, cx} from 'class-variance-authority';
+import {cva} from 'class-variance-authority';
 import * as React from 'react';
 
 import {cn} from '~/lib/utils';
@@ -20,26 +20,26 @@ const buttonVariants = cva(
     variants: {
       size: {
         default: 'h-11 px-4 py-2',
-        icon: 'size-11',
+        icon: 'size-9 touch-hitbox',
         lg: 'h-12 rounded-md px-8',
         primitive: 'h-auto p-0',
         sm: 'h-9 rounded-md px-3',
       },
       variant: {
         default:
-          'bg-primary text-primary-foreground notouch:hover:bg-primary/90 hover:active:bg-primary/80',
+          'bg-primary text-primary-foreground pointer-fine:hover:bg-primary/90 hover:active:bg-primary/80',
         destructive:
-          'bg-destructive text-destructive-foreground notouch:hover:bg-destructive/90 hover:active:bg-destructive/80',
+          'bg-destructive text-destructive-foreground pointer-fine:hover:bg-destructive/90 hover:active:bg-destructive/80',
         ghost:
-          'notouch:hover:bg-accent/55 shadow-none notouch:hover:text-accent-foreground hover:active:bg-accent active:text-accent-foreground [box-shadow:0_0_#0000]',
-        link: 'text-primary underline-offset-4 notouch:hover:underline touch:active:underline [box-shadow:0_0_#0000]',
+          'pointer-fine:hover:bg-accent/55 shadow-none pointer-fine:hover:text-accent-foreground hover:active:bg-accent active:text-accent-foreground [box-shadow:0_0_#0000]',
+        link: 'text-primary underline-offset-4 pointer-fine:hover:underline pointer-coarse:active:underline [box-shadow:0_0_#0000]',
         outline: [
-          'bg-background notouch:hover:bg-accent/55 hover:active:bg-accent notouch:hover:text-accent-foreground active:text-accent-foreground',
+          'bg-background pointer-fine:hover:bg-accent/55 hover:active:bg-accent pointer-fine:hover:text-accent-foreground active:text-accent-foreground',
           '[border-width:var(--button-border-thickness)] border-[rgb(var(--input)_/_var(--button-border-opacity))]',
         ],
         primitive: '[box-shadow:0_0_#0000]',
         secondary:
-          'bg-secondary text-secondary-foreground notouch:hover:bg-secondary/55 hover:active:bg-secondary/30',
+          'bg-secondary text-secondary-foreground pointer-fine:hover:bg-secondary/55 hover:active:bg-secondary/30',
       },
     },
   },

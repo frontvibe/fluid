@@ -2,7 +2,6 @@ import type {CartReturn} from '@shopify/hydrogen';
 
 import {Await, Link} from 'react-router';
 import {CartForm} from '@shopify/hydrogen';
-import {cx} from 'class-variance-authority';
 import {Suspense, useCallback, useEffect, useMemo, useState} from 'react';
 
 import {useCartFetchers} from '~/hooks/use-cart-fetchers';
@@ -73,16 +72,16 @@ function Badge(props: {cart?: CartReturn | null; count: number}) {
 
   const BadgeCounter = useMemo(
     () => (
-      <span className="relative">
+      <span className={cn('relative', count > 0 && 'mr-4 lg:mr-0')}>
         <span className="sr-only">{themeContent?.cart?.heading}</span>
         <IconBag className="size-6" />
         {count > 0 && (
           <div
-            className={cx([
+            className={cn([
               'absolute top-[-4px] right-[-12px] flex items-center justify-center',
               'bg-foreground text-background transition-colors',
               'group-active:bg-accent-foreground group-active:text-accent',
-              'notouch:group-hover:bg-accent-foreground notouch:group-hover:text-accent',
+              'pointer-fine:group-hover:bg-accent-foreground pointer-fine:group-hover:text-accent',
               'aspect-square h-auto min-w-[1.35rem] rounded-full p-1',
               'text-center text-[.7rem] leading-[0] subpixel-antialiased',
             ])}

@@ -14,7 +14,7 @@ export const SortMobileTrigger = React.forwardRef<
   return (
     <IconButton
       ref={ref}
-      className="touch:block w-auto flex-nowrap gap-2 px-2 lg:hidden"
+      className="w-auto flex-nowrap gap-2 px-2 lg:hidden pointer-coarse:flex"
       {...props}
     >
       <IconFilters />

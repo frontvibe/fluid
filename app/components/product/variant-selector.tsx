@@ -74,7 +74,7 @@ function Pill({
   ]);
   const bubbleClass = cx(['absolute inset-0 z-0 bg-accent']);
   const foregroundClass = cx([
-    'inline-flex items-center relative z-2 justify-center whitespace-nowrap px-3 py-1.5 transition-colors notouch:hover:text-accent-foreground',
+    'inline-flex items-center relative z-2 justify-center whitespace-nowrap px-3 py-1.5 transition-colors pointer-fine:hover:text-accent-foreground',
     selected && 'text-accent-foreground',
     !available && 'opacity-50',
   ]);

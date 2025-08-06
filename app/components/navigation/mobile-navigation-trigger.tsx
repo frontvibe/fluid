@@ -10,7 +10,7 @@ export const MobileNavigationTrigger = React.forwardRef<
   return (
     <IconButton
       ref={ref}
-      className="touch:block -mr-2 lg:mr-0 lg:hidden"
+      className="-mr-2 lg:mr-0 lg:hidden pointer-coarse:block"
       {...props}
     >
       <span className="sr-only">Menu</span>

@@ -39,7 +39,7 @@ export function MobileDrawer({
   const {pending} = useOptimisticNavigationData<boolean>('clear-all-filters');
 
   return (
-    <div className="touch:block lg:hidden">
+    <div className="lg:hidden pointer-coarse:block">
       <Drawer onOpenChange={setOpen} open={open}>
         <DrawerTrigger asChild>
           <SortMobileTrigger />

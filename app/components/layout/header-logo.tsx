@@ -17,7 +17,7 @@ export function Logo(props: {
 
   if (!logo?._ref) {
     return (
-      <div className="font-heading notouch:group-hover:text-accent-foreground flex h-11 items-center justify-center text-2xl">
+      <div className="font-heading pointer-fine:group-hover:text-accent-foreground flex h-11 items-center justify-center text-2xl">
         {siteName}
       </div>
     );

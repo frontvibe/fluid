@@ -82,7 +82,7 @@ function Badge(props: {cart?: CartReturn | null; count: number}) {
               'absolute top-[-4px] right-[-12px] flex items-center justify-center',
               'bg-foreground text-background transition-colors',
               'group-active:bg-accent-foreground group-active:text-accent',
-              'notouch:group-hover:bg-accent-foreground notouch:group-hover:text-accent',
+              'pointer-fine:group-hover:bg-accent-foreground pointer-fine:group-hover:text-accent',
               'aspect-square h-auto min-w-[1.35rem] rounded-full p-1',
               'text-center text-[.7rem] leading-[0] subpixel-antialiased',
             ])}

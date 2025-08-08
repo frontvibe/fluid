@@ -1,6 +1,5 @@
 import type {FilterPattern, Plugin} from 'vite';
 
-import path from 'node:path';
 import {createFilter} from 'vite';
 import {execa, type ExecaChildProcess} from 'execa';
 
@@ -25,12 +24,7 @@ export function typegenWatcher(options?: {
   const queriesFilter = createFilter(queriesPath);
   const schemaFilter = createFilter(schemaPath);
 
-  const sanityBin = path.resolve(
-    process.cwd(),
-    'node_modules',
-    '.bin',
-    process.platform === 'win32' ? 'sanity.cmd' : 'sanity',
-  );
+  let projectRoot: string = '';
 
   let timer: NodeJS.Timeout | null = null;
   let needSchema = false;
@@ -52,13 +46,18 @@ export function typegenWatcher(options?: {
     try {
       if (runExtract) {
         await execa(
-          sanityBin,
+          'sanity',
           ['schema', 'extract', '--path', './types/sanity/schema.json'],
-          {stdio: 'inherit'},
+          {stdio: 'inherit', preferLocal: true, localDir: projectRoot, cwd: projectRoot},
         );
       }
       if (runGenerate) {
-        current = execa(sanityBin, ['typegen', 'generate'], {stdio: 'inherit'});
+        current = execa('sanity', ['typegen', 'generate'], {
+          stdio: 'inherit',
+          preferLocal: true,
+          localDir: projectRoot,
+          cwd: projectRoot,
+        });
         await current;
       }
     } catch (err) {
@@ -84,6 +83,9 @@ export function typegenWatcher(options?: {
 
   return {
     name: 'vite-plugin-sanity-typegen-watcher',
+    configResolved(config) {
+      projectRoot = config.root;
+    },
     handleHotUpdate(ctx) {
       const f = ctx.file;
       if (schemaFilter(f)) schedule('schema');

@@ -1,133 +1,93 @@
 import type {FilterPattern, Plugin} from 'vite';
 
-import {spawn} from 'child_process';
+import path from 'node:path';
 import {createFilter} from 'vite';
-
-// Track ongoing processes to cancel them
-let schemaController: AbortController | null = null;
-let queriesController: AbortController | null = null;
-
-function runCommand(
-  command: string,
-  abortController: AbortController,
-): Promise<void> {
-  return new Promise((resolve, reject) => {
-    const [cmd, ...args] = command.split(' ');
-    const child = spawn(cmd, args, {
-      stdio: 'pipe',
-      signal: abortController.signal,
-    });
-
-    let stdout = '';
-    let stderr = '';
-
-    child.stdout?.on('data', (data: Buffer) => {
-      stdout += data.toString();
-    });
-
-    child.stderr?.on('data', (data: Buffer) => {
-      stderr += data.toString();
-    });
-
-    child.on('close', (code: number | null) => {
-      if (code === 0) {
-        if (stdout) console.log(stdout); // eslint-disable-line no-console
-        if (stderr) console.error(stderr);
-        resolve();
-      } else {
-        reject(new Error(`Process exited with code ${code}`));
-      }
-    });
-
-    child.on('error', (error: Error) => {
-      reject(error);
-    });
-  });
-}
-
-function runCommandsSequentially(
-  commands: string[],
-  abortController: AbortController,
-): Promise<void> {
-  return commands.reduce(
-    (promise, command) =>
-      promise.then(() => runCommand(command, abortController)),
-    Promise.resolve(),
-  );
-}
+import {execa, type ExecaChildProcess} from 'execa';
 
 /**
- * @description This plugin is used to watch for changes in the Sanity schema and GROQ queries to generate the types.
- * @param options - The options for the plugin.
- * @param options.queriesPath - The path to the queries.
- * @param options.schemaPath - The path to the schema.
+ * Watch Sanity schema and GROQ queries to auto-run typegen.
+ *
+ * Performance goals:
+ * - Debounce rapid file changes and batch work.
+ * - Non-blocking HMR (do not return a promise from handleHotUpdate).
+ * - Avoid npm/pnpm wrapper shells; call the local Sanity bin directly.
+ * - Kill in-flight runs cleanly before starting a new one.
  */
 export function typegenWatcher(options?: {
   queriesPath?: FilterPattern;
   schemaPath?: FilterPattern;
+  debounceMs?: number;
 }): Plugin {
-  const queriesPath = options?.queriesPath ?? [
-    './app/data/sanity/**/*.{ts,tsx}',
-  ];
+  const queriesPath = options?.queriesPath ?? ['./app/data/sanity/**/*.{ts,tsx}'];
   const schemaPath = options?.schemaPath ?? ['./app/sanity/**/*.{ts,tsx}'];
+  const debounceMs = options?.debounceMs ?? 200;
+
   const queriesFilter = createFilter(queriesPath);
   const schemaFilter = createFilter(schemaPath);
 
+  const sanityBin = path.resolve(
+    process.cwd(),
+    'node_modules',
+    '.bin',
+    process.platform === 'win32' ? 'sanity.cmd' : 'sanity',
+  );
+
+  let timer: NodeJS.Timeout | null = null;
+  let needSchema = false;
+  let needQueries = false;
+  let current: ExecaChildProcess | null = null;
+
+  async function runTasks({schema, queries}: {schema: boolean; queries: boolean}) {
+    // Cancel any in-flight run to avoid overlap
+    if (current) {
+      try {
+        current.kill('SIGTERM', {forceKillAfterTimeout: 2000});
+      } catch {}
+      current = null;
+    }
+
+    const runExtract = schema;
+    const runGenerate = schema || queries;
+
+    try {
+      if (runExtract) {
+        await execa(
+          sanityBin,
+          ['schema', 'extract', '--path', './types/sanity/schema.json'],
+          {stdio: 'inherit'},
+        );
+      }
+      if (runGenerate) {
+        current = execa(sanityBin, ['typegen', 'generate'], {stdio: 'inherit'});
+        await current;
+      }
+    } catch (err) {
+      console.error('\x1b[31m%s\x1b[0m', '[sanity-typegen] Error', err);
+    } finally {
+      current = null;
+    }
+  }
+
+  function schedule(kind: 'schema' | 'queries') {
+    if (kind === 'schema') needSchema = true;
+    else needQueries = true;
+
+    if (timer) clearTimeout(timer);
+    timer = setTimeout(() => {
+      const tasks = {schema: needSchema, queries: needQueries};
+      needSchema = false;
+      needQueries = false;
+      // Fire-and-forget; do not block HMR cycle
+      void runTasks(tasks);
+    }, debounceMs);
+  }
+
   return {
-    name: 'vite-plugin-typegen-watcher',
-    handleHotUpdate({file}) {
-      if (schemaFilter(file)) {
-        // Cancel ongoing schema process if it exists
-        if (schemaController) {
-          schemaController.abort();
-        }
-
-        schemaController = new AbortController();
-
-        const promise = runCommandsSequentially(
-          ['npm run sanity:extract', 'npm run sanity:generate'],
-          schemaController,
-        )
-          .then(() => {
-            schemaController = null;
-          })
-          .catch((error: Error) => {
-            if (error.name !== 'AbortError') {
-              console.error(
-                '\x1b[31m%s\x1b[0m',
-                `\nError executing script:\n\nThe Sanity schema is not valid and Typegen failed to extract the schema.\n\n${error.message}`,
-              );
-            }
-            schemaController = null;
-          });
-
-        return promise;
-      }
-
-      if (queriesFilter(file)) {
-        // Cancel ongoing queries process if it exists
-        if (queriesController) {
-          queriesController.abort();
-        }
-
-        queriesController = new AbortController();
-
-        const promise = runCommand('npm run sanity:generate', queriesController)
-          .then(() => {
-            queriesController = null;
-          })
-          .catch((error: Error) => {
-            if (error.name !== 'AbortError') {
-              console.error(
-                '\x1b[31m%s\x1b[0m',
-                `\nError executing script:\n\nA Sanity GROQ query is not valid and Typegen failed to generate the types.\n\n${error.message}`,
-              );
-            }
-            queriesController = null;
-          });
-
-        return promise;
-      }
+    name: 'vite-plugin-sanity-typegen-watcher',
+    handleHotUpdate(ctx) {
+      const f = ctx.file;
+      if (schemaFilter(f)) schedule('schema');
+      else if (queriesFilter(f)) schedule('queries');
     },
   };
 }

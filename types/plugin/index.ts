@@ -39,7 +39,10 @@ export function typegenWatcher(options?: {
     if (current) {
       try {
         current.kill('SIGTERM', {forceKillAfterTimeout: 2000});
-      } catch {}
+      } catch {
+        // ignore kill errors (process may have already exited)
+        void 0;
+      }
       current = null;
     }
 

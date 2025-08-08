@@ -1,0 +1,34 @@
+---
+description: Always run typecheck, lint, and prettier checks after edits
+globs:
+  - '**/*'
+alwaysApply: true
+---
+
+# Typecheck, Lint, and Prettier Checks
+
+## What to do after every code edit
+
+After you make any code change (edits to files like `*.ts`, `*.tsx`, configuration, build scripts, etc.), immediately run these quality checks in the project root:
+
+```bash
+pnpm typecheck
+pnpm lint
+pnpm format:check
+```
+
+- If the Prettier check fails, run `pnpm format` to auto-fix formatting, then re-run the three checks.
+- If typecheck or lint fails, stop and fix issues before proceeding.
+
+## Rationale
+
+This repository uses TypeScript, ESLint, and Prettier. Running these checks early avoids broken builds and inconsistent formatting.
+
+## Notes
+
+- Use `pnpm` (there is a `pnpm-lock.yaml`), not `npm` or `yarn`.
+- Relevant scripts (from `package.json`):
+  - `typecheck`: `tsc --noEmit`
+  - `lint`: `eslint --no-error-on-unmatched-pattern .`
+  - `format:check`: `prettier --check --ignore-unknown .`
+  - `format`: `prettier --write --ignore-unknown .`

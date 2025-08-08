@@ -1,0 +1,28 @@
+---
+description: Enforce kebab-case for all newly created filenames
+globs:
+  - '**/*'
+alwaysApply: true
+---
+
+# Filename Convention: kebab-case
+
+## Rule
+
+When creating new files or directories, use kebab-case naming:
+
+- Use lowercase letters, numbers, and hyphens only
+- No spaces, underscores, or camelCase/PascalCase
+- Examples:
+  - Correct: `product-card.tsx`, `user-settings-modal.ts`, `order-list-item.css`
+  - Incorrect: `ProductCard.tsx`, `user_settings.ts`, `orderListItem.css`
+
+## Rationale
+
+Kebab-case filenames are consistent and avoid cross-platform casing pitfalls.
+
+## Tips
+
+- Convert separators to hyphens
+- Lowercase all words
+- Keep names descriptive and concise

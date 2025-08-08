@@ -45,11 +45,13 @@ export function typegenWatcher(options?: {
 
     try {
       if (runExtract) {
-        await execa(
+        current = execa(
           'sanity',
           ['schema', 'extract', '--path', './types/sanity/schema.json'],
           {stdio: 'inherit', preferLocal: true, localDir: projectRoot, cwd: projectRoot},
         );
+        const proc = current;
+        await proc;
       }
       if (runGenerate) {
         current = execa('sanity', ['typegen', 'generate'], {
@@ -58,10 +60,14 @@ export function typegenWatcher(options?: {
           localDir: projectRoot,
           cwd: projectRoot,
         });
-        await current;
+        const proc = current;
+        await proc;
       }
     } catch (err) {
-      console.error('\x1b[31m%s\x1b[0m', '[sanity-typegen] Error', err);
+      const e = err as any;
+      if (!(e?.killed && (e?.signal === 'SIGTERM' || e?.signalDescription === 'Termination'))) {
+        console.error('\x1b[31m%s\x1b[0m', '[sanity-typegen] Error', err);
+      }
     } finally {
       current = null;
     }

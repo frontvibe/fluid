@@ -19,7 +19,9 @@ export function typegenWatcher(options?: {
   schemaPath?: FilterPattern;
   debounceMs?: number;
 }): Plugin {
-  const queriesPath = options?.queriesPath ?? ['./app/data/sanity/**/*.{ts,tsx}'];
+  const queriesPath = options?.queriesPath ?? [
+    './app/data/sanity/**/*.{ts,tsx}',
+  ];
   const schemaPath = options?.schemaPath ?? ['./app/sanity/**/*.{ts,tsx}'];
   const debounceMs = options?.debounceMs ?? 200;
 
@@ -34,7 +36,13 @@ export function typegenWatcher(options?: {
   let current: ExecaChildProcess | null = null;
   const fileHashCache = new Map<string, string>();
 
-  async function runTasks({schema, queries}: {schema: boolean; queries: boolean}) {
+  async function runTasks({
+    schema,
+    queries,
+  }: {
+    schema: boolean;
+    queries: boolean;
+  }) {
     // Cancel any in-flight run to avoid overlap
     if (current) {
       try {
@@ -54,7 +62,12 @@ export function typegenWatcher(options?: {
         current = execa(
           'sanity',
           ['schema', 'extract', '--path', './types/sanity/schema.json'],
-          {stdio: 'inherit', preferLocal: true, localDir: projectRoot, cwd: projectRoot},
+          {
+            stdio: 'inherit',
+            preferLocal: true,
+            localDir: projectRoot,
+            cwd: projectRoot,
+          },
         );
         const proc = current;
         await proc;
@@ -71,7 +84,12 @@ export function typegenWatcher(options?: {
       }
     } catch (err) {
       const e = err as any;
-      if (!(e?.killed && (e?.signal === 'SIGTERM' || e?.signalDescription === 'Termination'))) {
+      if (
+        !(
+          e?.killed &&
+          (e?.signal === 'SIGTERM' || e?.signalDescription === 'Termination')
+        )
+      ) {
         console.error('\x1b[31m%s\x1b[0m', '[sanity-typegen] Error', err);
       }
     } finally {

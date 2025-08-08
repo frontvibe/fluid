@@ -3,7 +3,7 @@ import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 
 import {createFilter} from 'vite';
-import {execa, type ExecaChildProcess} from 'execa';
+import {execa} from 'execa';
 
 /**
  * Watch Sanity schema and GROQ queries to auto-run typegen.
@@ -33,7 +33,7 @@ export function typegenWatcher(options?: {
   let timer: NodeJS.Timeout | null = null;
   let needSchema = false;
   let needQueries = false;
-  let current: ExecaChildProcess | null = null;
+  let current: ReturnType<typeof execa> | null = null;
   const fileHashCache = new Map<string, string>();
 
   async function runTasks({
@@ -46,7 +46,7 @@ export function typegenWatcher(options?: {
     // Cancel any in-flight run to avoid overlap
     if (current) {
       try {
-        current.kill('SIGTERM', {forceKillAfterTimeout: 2000});
+        current.kill('SIGTERM');
       } catch {
         // ignore kill errors (process may have already exited)
         void 0;

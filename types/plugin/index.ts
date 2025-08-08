@@ -1,4 +1,6 @@
 import type {FilterPattern, Plugin} from 'vite';
+import {readFile} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
 
 import {createFilter} from 'vite';
 import {execa, type ExecaChildProcess} from 'execa';
@@ -30,6 +32,7 @@ export function typegenWatcher(options?: {
   let needSchema = false;
   let needQueries = false;
   let current: ExecaChildProcess | null = null;
+  const fileHashCache = new Map<string, string>();
 
   async function runTasks({schema, queries}: {schema: boolean; queries: boolean}) {
     // Cancel any in-flight run to avoid overlap
@@ -93,9 +96,23 @@ export function typegenWatcher(options?: {
       projectRoot = config.root;
     },
     handleHotUpdate(ctx) {
-      const f = ctx.file;
-      if (schemaFilter(f)) schedule('schema');
-      else if (queriesFilter(f)) schedule('queries');
+      const filePath = ctx.file;
+      // Fire-and-forget content check; do not block HMR
+      void (async () => {
+        try {
+          const content = await readFile(filePath);
+          const hash = createHash('sha1').update(content).digest('hex');
+          const previousHash = fileHashCache.get(filePath);
+          if (previousHash === hash) return; // no-op save, ignore
+          fileHashCache.set(filePath, hash);
+          if (schemaFilter(filePath)) schedule('schema');
+          else if (queriesFilter(filePath)) schedule('queries');
+        } catch {
+          // If we can't read the file for any reason, fall back to scheduling
+          if (schemaFilter(filePath)) schedule('schema');
+          else if (queriesFilter(filePath)) schedule('queries');
+        }
+      })();
     },
   };
 }

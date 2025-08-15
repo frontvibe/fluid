@@ -19,7 +19,7 @@ import {ScrollArea} from '../ui/scroll-area';
 import {MobileNavigationTrigger} from './mobile-navigation-trigger';
 
 const mobileMenuLinkClass = cn(
-  'flex rounded-xs px-4 py-2 items-center gap-2 w-full transition-colors pointer-fine:hover:bg-accent pointer-fine:hover:text-accent-foreground pointer-coarse:active:bg-accent pointer-coarse:active:text-accent-foreground',
+  'flex w-full items-center gap-2 rounded-xs px-4 py-2 transition-colors pointer-coarse:active:bg-accent pointer-coarse:active:text-accent-foreground pointer-fine:hover:bg-accent pointer-fine:hover:text-accent-foreground',
 );
 
 export function MobileNavigation(props: {data?: NavigationProps}) {
@@ -73,7 +73,7 @@ function MobileNavigationContent(props: {
   return (
     <DrawerContent
       className={cn([
-        'bg-background text-foreground h-(--dialog-content-height) max-h-screen w-screen p-0',
+        'h-(--dialog-content-height) max-h-screen w-screen bg-background p-0 text-foreground',
         '[--dialog-content-height:calc(100svh_*_.75)] [--dialog-content-max-width:calc(32rem)]',
         'lg:right-0 lg:left-auto lg:max-w-(--dialog-content-max-width) lg:[--dialog-content-height:100svh]',
         props.className,

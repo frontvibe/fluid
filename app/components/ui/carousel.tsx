@@ -299,7 +299,7 @@ const CarouselCounter = React.forwardRef<
   const {selectedIndex} = useCarouselPagination(api);
 
   return (
-    <div className="text-muted-foreground flex items-center gap-1 tabular-nums">
+    <div className="flex items-center gap-1 text-muted-foreground tabular-nums">
       <span className={cn(className)} ref={ref} {...props}>
         {selectedIndex + 1}
       </span>

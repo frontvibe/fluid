@@ -23,10 +23,10 @@ export function CartEmpty({
   const {themeContent} = useSanityThemeContent();
   const container = {
     drawer: cx([
-      'p-5 content-start gap-4 h-full pb-8 flex justify-center items-center md:gap-12 md:pb-12',
+      'flex h-full content-start items-center justify-center gap-4 p-5 pb-8 md:gap-12 md:pb-12',
     ]),
     page: cx([
-      `container py-12 w-full flex-1 flex text-center md:text-left items-center justify-center md:justify-start md:items-start gap-4 md:gap-8 lg:gap-12`,
+      `container flex w-full flex-1 items-center justify-center gap-4 py-12 text-center md:items-start md:justify-start md:gap-8 md:text-left lg:gap-12`,
     ]),
   };
 

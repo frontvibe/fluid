@@ -83,7 +83,7 @@ function Address({
         </Link>
         <Form action="address/delete" method="delete" preventScrollReset>
           <input name="addressId" type="hidden" value={address.id} />
-          <button className="text-primary/50 ml-6 text-left text-sm hover:underline">
+          <button className="ml-6 text-left text-sm text-primary/50 hover:underline">
             {themeContent?.account?.remove}
           </button>
         </Form>

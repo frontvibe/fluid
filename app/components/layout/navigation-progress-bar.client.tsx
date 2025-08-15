@@ -59,7 +59,7 @@ function Bar(props: {animationDuration: number; progress: number}) {
   return (
     <m.div
       aria-hidden
-      className="bg-primary fixed top-0 left-0 z-1041 h-[3px] w-full rounded-r-full"
+      className="fixed top-0 left-0 z-1041 h-[3px] w-full rounded-r-full bg-primary"
       style={{
         marginLeft,
         transition: `margin-left ${animationDuration}ms linear`,

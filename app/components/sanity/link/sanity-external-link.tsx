@@ -20,7 +20,7 @@ export function SanityExternalLink(props: {
   return link ? (
     <a
       className={cn([
-        'focus-visible:ring-ring focus-visible:rounded-md focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-hidden',
+        'focus-visible:rounded-md focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-hidden',
         className,
       ])}
       href={link}

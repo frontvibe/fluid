@@ -68,13 +68,13 @@ const DrawerContent = forwardRef<
     <DrawerOverlay />
     <DrawerPrimitive.Content
       className={cn(
-        'bg-background fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-3xl lg:rounded-none',
+        'fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-3xl bg-background lg:rounded-none',
         className,
       )}
       ref={ref}
       {...props}
     >
-      <div className="bg-muted mx-auto mt-4 h-2 w-[100px] rounded-full md:hidden" />
+      <div className="mx-auto mt-4 h-2 w-[100px] rounded-full bg-muted md:hidden" />
       {children}
       <DrawerClose
         className={cn(
@@ -132,7 +132,7 @@ const DrawerDescription = forwardRef<
   React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Description>
 >(({className, ...props}, ref) => (
   <DrawerPrimitive.Description
-    className={cn('text-muted-foreground text-sm', className)}
+    className={cn('text-sm text-muted-foreground', className)}
     ref={ref}
     {...props}
   />

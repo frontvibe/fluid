@@ -93,7 +93,7 @@ export default function CartRoute({loaderData}: Route.ComponentProps) {
   const {cart} = loaderData;
 
   return (
-    <div className="cart bg-background text-foreground grow">
+    <div className="cart grow bg-background text-foreground">
       <Cart cart={cart} layout="page" />
       <Analytics.CartView />
     </div>

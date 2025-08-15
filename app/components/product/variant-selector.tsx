@@ -69,12 +69,12 @@ function Pill({
   const layoutId = productHandle + optionName + section?.id;
 
   const buttonClass = cx([
-    'select-none rounded-full py-[.375rem] text-sm font-medium disabled:cursor-pointer',
-    'focus-visible:outline-hidden focus-visible:outline-2 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
+    'rounded-full py-[.375rem] text-sm font-medium select-none disabled:cursor-pointer',
+    'focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-hidden focus-visible:outline-2',
   ]);
   const bubbleClass = cx(['absolute inset-0 z-0 bg-accent']);
   const foregroundClass = cx([
-    'inline-flex items-center relative z-2 justify-center whitespace-nowrap px-3 py-1.5 transition-colors pointer-fine:hover:text-accent-foreground',
+    'relative z-2 inline-flex items-center justify-center px-3 py-1.5 whitespace-nowrap transition-colors pointer-fine:hover:text-accent-foreground',
     selected && 'text-accent-foreground',
     !available && 'opacity-50',
   ]);

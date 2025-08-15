@@ -91,7 +91,7 @@ function ListItem(
           <SanityInternalLink
             className={cn(
               navigationMenuTriggerStyle(),
-              'hover:bg-accent w-full justify-start rounded-xs',
+              'w-full justify-start rounded-xs hover:bg-accent',
             )}
             data={props}
           />
@@ -99,7 +99,7 @@ function ListItem(
           <SanityExternalLink
             className={cn(
               navigationMenuTriggerStyle(),
-              'hover:bg-accent w-full justify-start rounded-xs',
+              'w-full justify-start rounded-xs hover:bg-accent',
             )}
             data={props}
           />

@@ -46,7 +46,7 @@ export function MobileDrawer({
         </DrawerTrigger>
         <DrawerContent
           className={cn([
-            'bg-background text-foreground h-(--dialog-content-height) max-h-screen w-screen p-0',
+            'h-(--dialog-content-height) max-h-screen w-screen bg-background p-0 text-foreground',
             '[--dialog-content-height:calc(100svh_*_.95)] [--dialog-content-max-width:calc(32rem)]',
             'lg:right-0 lg:left-auto lg:max-w-(--dialog-content-max-width) lg:[--dialog-content-height:100svh]',
           ])}

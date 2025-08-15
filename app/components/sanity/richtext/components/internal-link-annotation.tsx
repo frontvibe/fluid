@@ -11,7 +11,7 @@ export type InternalLinkAnnotationProps = NonNullable<
 };
 
 export const richTextLinkClassName = cx(
-  'text-primary font-medium underline-offset-4 hover:underline focus-visible:rounded-md focus-visible:ring-ring focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-offset-2',
+  'font-medium text-primary underline-offset-4 hover:underline focus-visible:rounded-md focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-hidden',
 );
 
 export function InternalLinkAnnotation(

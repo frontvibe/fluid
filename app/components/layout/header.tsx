@@ -56,7 +56,7 @@ export function Header() {
           </Link>
           <div className="flex items-center">
             <DesktopNavigation data={header?.menu} />
-            <AccountLink className="focus:ring-primary/5 relative flex items-center justify-center" />
+            <AccountLink className="relative flex items-center justify-center focus:ring-primary/5" />
             <CartDrawer />
             <ClientOnly fallback={<MobileNavigationTrigger />}>
               {() => (
@@ -93,7 +93,7 @@ function HeaderWrapper(props: {children: React.ReactNode}) {
   const sticky = stegaClean(header?.sticky);
 
   const headerClassName = cx([
-    'section-padding bg-background text-foreground',
+    'bg-background section-padding text-foreground',
     sticky !== 'none' && 'sticky top-0 z-50',
     blur &&
       'bg-background/95 backdrop-blur-sm supports-backdrop-filter:bg-background/85',

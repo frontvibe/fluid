@@ -191,8 +191,8 @@ function ThumbnailCarousel({
                   {media.__typename === 'MediaImage' && media.image && (
                     <button
                       className={cn(
-                        'border-primary/0 pointer-fine:hover:border-primary/100 overflow-hidden rounded-(--media-border-corner-radius) border-2 transition-opacity',
-                        'ring-offset-background focus-visible:ring-ring transition focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-hidden',
+                        'overflow-hidden rounded-(--media-border-corner-radius) border-2 border-primary/0 transition-opacity pointer-fine:hover:border-primary/100',
+                        'ring-offset-background transition focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-hidden',
                         media.id === selectedImage.id && 'border-primary/100',
                       )}
                       key={media.id}

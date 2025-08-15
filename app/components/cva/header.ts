@@ -6,7 +6,7 @@ export type HeaderVariantsProps = VariantProps<typeof header>;
 
 export const header = cva([''], {
   variants: {
-    optional: {'separator-line': 'border-foreground/10 border-b'},
+    optional: {'separator-line': 'border-b border-foreground/10'},
   },
 });
 

@@ -43,12 +43,12 @@ export function CartDrawer(props: {
     >
       <DrawerTrigger className={buttonClass}>{BadgeCounter}</DrawerTrigger>
       <DrawerContent
-        className="cart bg-background text-foreground flex h-[97.5svh] max-h-screen w-screen flex-col gap-0 p-0 lg:right-0 lg:left-auto lg:h-svh lg:max-w-lg"
+        className="cart flex h-[97.5svh] max-h-screen w-screen flex-col gap-0 bg-background p-0 text-foreground lg:right-0 lg:left-auto lg:h-svh lg:max-w-lg"
         onCloseAutoFocus={(e) => e.preventDefault()}
         onOpenAutoFocus={(e) => e.preventDefault()}
       >
-        <DrawerHeader className="shadow-foreground/10 px-6 py-5 shadow-xs">
-          <DrawerTitle className="font-body flex items-center gap-4 font-bold">
+        <DrawerHeader className="px-6 py-5 shadow-xs shadow-foreground/10">
+          <DrawerTitle className="flex items-center gap-4 font-body font-bold">
             <span>{themeContent?.cart?.heading}</span>
           </DrawerTitle>
         </DrawerHeader>

@@ -167,7 +167,7 @@ export function Layout({children}: {children: React.ReactNode}) {
         <Links />
         <CssVars />
       </head>
-      <body className="bg-background text-foreground flex min-h-screen flex-col overflow-x-hidden">
+      <body className="flex min-h-screen flex-col overflow-x-hidden bg-background text-foreground">
         {isCmsRoute ? (
           children
         ) : data ? (

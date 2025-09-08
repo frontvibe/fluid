@@ -8,9 +8,9 @@
  */
 import {defineSanityConfig} from '~/sanity/config';
 
-const projectId = (process.env as Env).PUBLIC_SANITY_STUDIO_PROJECT_ID!;
-const dataset = (process.env as Env).PUBLIC_SANITY_STUDIO_DATASET!;
-const shopifyStoreDomain = (process.env as Env).PUBLIC_STORE_DOMAIN!;
+const projectId = process.env.PUBLIC_SANITY_STUDIO_PROJECT_ID!;
+const dataset = process.env.PUBLIC_SANITY_STUDIO_DATASET!;
+const shopifyStoreDomain = process.env.PUBLIC_STORE_DOMAIN!;
 
 export default defineSanityConfig({
   projectId,

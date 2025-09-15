@@ -108,7 +108,7 @@
     "graphql-config": "^5.1.5",
     "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "0.6.14",
-    "react-compiler-runtime": "19.1.0-rc.2",
+    "react-compiler-runtime": "19.1.0-rc.3",
     "schema-dts": "^1.1.5",
     "tailwindcss": "^4.1.13",
     "tailwindcss-animate": "^1.0.7",

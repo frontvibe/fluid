@@ -262,8 +262,8 @@ importers:
         specifier: 0.6.14
         version: 0.6.14(prettier@3.6.2)
       react-compiler-runtime:
-        specifier: 19.1.0-rc.2
-        version: 19.1.0-rc.2(react@18.3.1)
+        specifier: 19.1.0-rc.3
+        version: 19.1.0-rc.3(react@18.3.1)
       schema-dts:
         specifier: ^1.1.5
         version: 1.1.5
@@ -2266,6 +2266,9 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.30':
     resolution: {integrity: sha512-GQ7Nw5G2lTu/BtHTKfXhKHok2WGetd4XYcVKGx00SjAk8GMwgJM3zr6zORiPGuOE+/vkc90KtTosSSvaCjKb2Q==}
+
+  '@jridgewell/trace-mapping@0.3.31':
+    resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
   '@jridgewell/trace-mapping@0.3.9':
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
@@ -8529,11 +8532,6 @@ packages:
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^19.0.0-rc
 
-  react-compiler-runtime@19.1.0-rc.2:
-    resolution: {integrity: sha512-852AwyIsbWJ5o1LkQVAZsVK3iLjMxOfKZuxqeGd/RfD+j1GqHb6j3DSHLtpu4HhFbQHsP2DzxjJyKR6luv4D8w==}
-    peerDependencies:
-      react: ^17.0.0 || ^18.0.0 || ^19.0.0 || ^0.0.0-experimental
-
   react-compiler-runtime@19.1.0-rc.3:
     resolution: {integrity: sha512-Cssogys2XZu6SqxRdX2xd8cQAf57BBvFbLEBlIa77161lninbKUn/EqbecCe7W3eqDQfg3rIoOwzExzgCh7h/g==}
     peerDependencies:
@@ -12623,7 +12621,7 @@ snapshots:
   '@jridgewell/source-map@0.3.11':
     dependencies:
       '@jridgewell/gen-mapping': 0.3.13
-      '@jridgewell/trace-mapping': 0.3.30
+      '@jridgewell/trace-mapping': 0.3.31
     optional: true
 
   '@jridgewell/sourcemap-codec@1.5.4': {}
@@ -12639,6 +12637,12 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
+
+  '@jridgewell/trace-mapping@0.3.31':
+    dependencies:
+      '@jridgewell/resolve-uri': 3.1.2
+      '@jridgewell/sourcemap-codec': 1.5.5
+    optional: true
 
   '@jridgewell/trace-mapping@0.3.9':
     dependencies:
@@ -19811,10 +19815,6 @@ snapshots:
   react-clientside-effect@1.2.8(react@18.3.1):
     dependencies:
       '@babel/runtime': 7.28.4
-      react: 18.3.1
-
-  react-compiler-runtime@19.1.0-rc.2(react@18.3.1):
-    dependencies:
       react: 18.3.1
 
   react-compiler-runtime@19.1.0-rc.3(react@18.3.1):

@@ -10,7 +10,7 @@ type MatchData =
   | undefined;
 
 export function getSeoMetaFromMatches(
-  matches: GetAnnotations<any>['MetaArgs']['matches'],
+  matches: GetAnnotations<any, any>['MetaArgs']['matches'],
 ) {
   const seoData = [
     ...matches

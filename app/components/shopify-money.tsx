@@ -1,5 +1,5 @@
 import type {MoneyV2} from '@shopify/hydrogen/storefront-api-types';
-import type {PartialObjectDeep} from 'type-fest/source/partial-deep';
+import type {PartialDeep} from 'type-fest';
 
 import {stegaClean} from '@sanity/client/stega';
 import {Money} from '@shopify/hydrogen';
@@ -12,7 +12,7 @@ export function ShopifyMoney({
   data,
 }: {
   className?: string;
-  data: PartialObjectDeep<
+  data: PartialDeep<
     MoneyV2,
     {
       recurseIntoArrays: true;

@@ -1,5 +1,5 @@
 import type {ProductVariantConnection} from '@shopify/hydrogen/storefront-api-types';
-import type {PartialObjectDeep} from 'type-fest/source/partial-deep';
+import type {PartialDeep} from 'type-fest';
 import type {SectionDefaultProps, SectionOfType} from 'types';
 import type {FeaturedProductQuery} from 'types/shopify/storefrontapi.generated';
 
@@ -109,7 +109,7 @@ function FeaturedProductSkeleton({
 }) {
   const {locale} = useRootLoaderData();
   const sanityProduct = stegaClean(data.product?.store);
-  const variants: PartialObjectDeep<
+  const variants: PartialDeep<
     ProductVariantConnection,
     {recurseIntoArrays: true; allowUndefinedInNonTupleArrays: true}
   > = {

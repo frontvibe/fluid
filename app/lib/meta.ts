@@ -6,7 +6,7 @@ import type {GetAnnotations} from 'react-router/internal';
 type MetaDescriptors = MetaDescriptor[];
 
 export function mergeRouteModuleMeta<
-  TMetaArgs extends GetAnnotations<any>['MetaArgs'],
+  TMetaArgs extends GetAnnotations<any, any>['MetaArgs'],
 >(
   leafMetaFn: (args: TMetaArgs) => MetaDescriptors,
 ): (args: TMetaArgs) => MetaDescriptors {

@@ -99,8 +99,8 @@ importers:
         specifier: ^2.12.6
         version: 2.12.6(graphql@16.11.0)
       groq:
-        specifier: ^4.8.1
-        version: 4.8.1
+        specifier: ^4.10.0
+        version: 4.10.0
       isbot:
         specifier: ^5.1.30
         version: 5.1.30
@@ -6924,10 +6924,6 @@ packages:
 
   groq@4.10.0:
     resolution: {integrity: sha512-RnnDfo15fz8WdZm380R+oiUXs6yFVlZ14g4eao3rjlzaKmzD/kaXf/OhGQ+k+jjKnYeK5iJdGCesFY1IYTev4w==}
-    engines: {node: '>=20.19 <22 || >=22.12'}
-
-  groq@4.8.1:
-    resolution: {integrity: sha512-H9Osf37VA6jkqZFmZdG/XAZ19quo+CcYo/qvFu3+rYgtSqS7j2QNgiW4xpXUzFvlXHI0cLEZVhy/tShytVcSoA==}
     engines: {node: '>=20.19 <22 || >=22.12'}
 
   gunzip-maybe@1.4.2:
@@ -18618,8 +18614,6 @@ snapshots:
   groq@3.99.0: {}
 
   groq@4.10.0: {}
-
-  groq@4.8.1: {}
 
   gunzip-maybe@1.4.2:
     dependencies:

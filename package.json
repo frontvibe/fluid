@@ -52,7 +52,7 @@
     "embla-carousel-react": "8.6.0",
     "graphql": "^16.11.0",
     "graphql-tag": "^2.12.6",
-    "groq": "^4.8.1",
+    "groq": "^4.10.0",
     "isbot": "^5.1.30",
     "lodash": "^4.17.21",
     "lodash.get": "^4.4.2",

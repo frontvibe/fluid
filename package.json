@@ -12,7 +12,7 @@
     "lint:fix": "npm run lint -- --fix",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "react-router typegen && tsc --noEmit",
     "codegen": "shopify hydrogen codegen",
     "sanity:typegen": "npm run sanity:extract && npm run sanity:generate",
     "sanity:extract": "sanity schema extract --path ./types/sanity/schema.json",

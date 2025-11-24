@@ -36,8 +36,8 @@ importers:
         specifier: ^4.0.5
         version: 4.0.5(@emotion/is-prop-valid@1.3.1)(@types/react@18.3.23)(react-dom@18.3.1(react@18.3.1))(react-is@19.2.0)(react@18.3.1)(sanity@4.14.2(@emotion/is-prop-valid@1.3.1)(@portabletext/sanity-bridge@1.2.2(@sanity/schema@4.14.2(@types/react@18.3.23)(debug@4.4.3))(@sanity/types@4.14.2(@types/react@18.3.23)))(@types/node@24.10.0)(@types/react-dom@18.3.7(@types/react@18.3.23))(@types/react@18.3.23)(immer@10.2.0)(jiti@2.6.1)(lightningcss@1.30.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.19(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.39.0)(typescript@5.9.3)(yaml@2.8.1))(styled-components@6.1.19(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       '@sanity/react-loader':
-        specifier: ^1.11.19
-        version: 1.11.19(@sanity/types@4.14.2(@types/react@18.3.23))(react@18.3.1)(typescript@5.9.3)
+        specifier: ^2.0.0
+        version: 2.0.0(@sanity/types@4.14.2(@types/react@18.3.23))(react@18.3.1)(typescript@5.9.3)
       '@sanity/ui':
         specifier: ^3.1.11
         version: 3.1.11(@emotion/is-prop-valid@1.3.1)(react-dom@18.3.1(react@18.3.1))(react-is@19.2.0)(react@18.3.1)(styled-components@6.1.19(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
@@ -3979,6 +3979,10 @@ packages:
     resolution: {integrity: sha512-rDqYEWCAEpq5Cd1luNwRCjqHQdU1jImFoy5ed9tCl3KWomwfO13XdSVQ6aGUOOlxrg3FPioDZHzDJll5vOLZ5Q==}
     engines: {node: '>=18'}
 
+  '@sanity/core-loader@2.0.0':
+    resolution: {integrity: sha512-KhxRuCtJeZXxX8NGkNaBBgFfbIK3PYBDh2nnFrvw90QOl1Hm0P7SP/D1Sf64FCwUz6H73sq4iBhNKxFZWiwRpw==}
+    engines: {node: '>=18'}
+
   '@sanity/descriptors@1.1.1':
     resolution: {integrity: sha512-pTqpyLhH3z4NDhjKHyfL+quVN0ixA8NikcdqxRmL2iqPZuJavi81eKm631PaUqJGbY1kh1+vHnO1/GgWIcjgxw==}
     engines: {node: '>=18.0.0'}
@@ -4131,8 +4135,8 @@ packages:
       sanity:
         optional: true
 
-  '@sanity/react-loader@1.11.19':
-    resolution: {integrity: sha512-vMsW9rWF9qeudCRi2L0MGEQyz6uQ8mOJxFIsRczNsVTcV7K16zDbfNVNeo3LmMyautaLEhftxj3gbo9AkG7rmw==}
+  '@sanity/react-loader@2.0.0':
+    resolution: {integrity: sha512-DXrcdsqQc6kAY15cXvpr6YmaL+Lw8eng7/gV5teM9nwjGe74N1VID8Vc62E6qJ0v73oM0iX80OUnBGbzh4T14g==}
     engines: {node: '>=18'}
     peerDependencies:
       react: ^18.3 || ^19
@@ -4210,6 +4214,12 @@ packages:
     engines: {node: '>=18'}
     peerDependencies:
       '@sanity/client': ^7.8.2
+
+  '@sanity/visual-editing-csm@2.0.26':
+    resolution: {integrity: sha512-u4Rgy526YIJ6kDjM76UdnBGDEW+b+4vtHBVmXgiqYo5PGpgmWn1Tly+5uhqZLbYJ63dqyh1iFLlM0+S7ljrzPQ==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      '@sanity/client': ^7.11.2
 
   '@sanity/visual-editing-types@1.1.6':
     resolution: {integrity: sha512-CJlbFdQa0PeMhdX6mzmnu1QAhojrd/vLpPaeOFlGNXwCEgQTEoK9nR4510SQqkX6skx0uvb0YICc8M0nWVCsbw==}
@@ -6712,6 +6722,7 @@ packages:
 
   get-random-values-esm@1.0.2:
     resolution: {integrity: sha512-HMSDTgj1HPFAuZG0FqxzHbYt5JeEGDUeT9r1RLXhS6RZQS8rLRjokgjZ0Pd28CN0lhXlRwfH6eviZqZEJ2kIoA==}
+    deprecated: use crypto.getRandomValues() instead
 
   get-random-values@1.2.2:
     resolution: {integrity: sha512-lMyPjQyl0cNNdDf2oR+IQ/fM3itDvpoHy45Ymo2r0L1EjazeSl13SfbKZs7KtZ/3MDCeueiaJiuOEfKqRTsSgA==}
@@ -14851,6 +14862,17 @@ snapshots:
       - debug
       - typescript
 
+  '@sanity/core-loader@2.0.0(@sanity/types@4.14.2(@types/react@18.3.23))(typescript@5.9.3)':
+    dependencies:
+      '@sanity/client': 7.12.1(debug@4.4.3)
+      '@sanity/comlink': 4.0.0
+      '@sanity/presentation-comlink': 2.0.0(@sanity/client@7.12.1)(@sanity/types@4.14.2(@types/react@18.3.23))
+      '@sanity/visual-editing-csm': 2.0.26(@sanity/client@7.12.1)(@sanity/types@4.14.2(@types/react@18.3.23))(typescript@5.9.3)
+    transitivePeerDependencies:
+      - '@sanity/types'
+      - debug
+      - typescript
+
   '@sanity/descriptors@1.1.1':
     dependencies:
       sha256-uint8array: 0.10.7
@@ -15105,11 +15127,11 @@ snapshots:
       '@sanity/icons': 3.7.4(react@18.3.1)
       sanity: 4.14.2(@emotion/is-prop-valid@1.3.1)(@portabletext/sanity-bridge@1.2.2(@sanity/schema@4.14.2(@types/react@18.3.23)(debug@4.4.3))(@sanity/types@4.14.2(@types/react@18.3.23)))(@types/node@24.10.0)(@types/react-dom@18.3.7(@types/react@18.3.23))(@types/react@18.3.23)(immer@10.2.0)(jiti@2.6.1)(lightningcss@1.30.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.19(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.39.0)(typescript@5.9.3)(yaml@2.8.1)
 
-  '@sanity/react-loader@1.11.19(@sanity/types@4.14.2(@types/react@18.3.23))(react@18.3.1)(typescript@5.9.3)':
+  '@sanity/react-loader@2.0.0(@sanity/types@4.14.2(@types/react@18.3.23))(react@18.3.1)(typescript@5.9.3)':
     dependencies:
       '@sanity/client': 7.12.1(debug@4.4.3)
-      '@sanity/core-loader': 1.8.18(@sanity/types@4.14.2(@types/react@18.3.23))(typescript@5.9.3)
-      '@sanity/visual-editing-csm': 2.0.24(@sanity/client@7.12.1)(@sanity/types@4.14.2(@types/react@18.3.23))(typescript@5.9.3)
+      '@sanity/core-loader': 2.0.0(@sanity/types@4.14.2(@types/react@18.3.23))(typescript@5.9.3)
+      '@sanity/visual-editing-csm': 2.0.26(@sanity/client@7.12.1)(@sanity/types@4.14.2(@types/react@18.3.23))(typescript@5.9.3)
       react: 18.3.1
     transitivePeerDependencies:
       - '@sanity/types'
@@ -15337,6 +15359,15 @@ snapshots:
     dependencies:
       '@sanity/client': 7.12.1(debug@4.4.3)
       '@sanity/visual-editing-types': 1.1.6(@sanity/client@7.12.1)(@sanity/types@4.14.2(@types/react@18.3.23))
+      valibot: 1.1.0(typescript@5.9.3)
+    transitivePeerDependencies:
+      - '@sanity/types'
+      - typescript
+
+  '@sanity/visual-editing-csm@2.0.26(@sanity/client@7.12.1)(@sanity/types@4.14.2(@types/react@18.3.23))(typescript@5.9.3)':
+    dependencies:
+      '@sanity/client': 7.12.1(debug@4.4.3)
+      '@sanity/visual-editing-types': 1.1.8(@sanity/client@7.12.1)(@sanity/types@4.14.2(@types/react@18.3.23))
       valibot: 1.1.0(typescript@5.9.3)
     transitivePeerDependencies:
       - '@sanity/types'

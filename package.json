@@ -31,7 +31,7 @@
     "@sanity/icons": "^3.7.4",
     "@sanity/image-url": "^1.2.0",
     "@sanity/language-filter": "^4.0.5",
-    "@sanity/react-loader": "^1.11.19",
+    "@sanity/react-loader": "^2.0.0",
     "@sanity/ui": "^3.1.11",
     "@sanity/uuid": "^3.0.2",
     "@sanity/vision": "^4.14.2",

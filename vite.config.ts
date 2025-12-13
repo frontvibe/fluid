@@ -28,6 +28,7 @@ export default defineConfig({
       'vaul',
       '@shopify/hydrogen-react/Image',
       '@vercel/stega',
+      '@sanity/uuid',
     ],
   },
   plugins: [
@@ -67,6 +68,7 @@ export default defineConfig({
         'react-compiler-runtime',
         '@sanity/image-url',
         '@sanity/client',
+        '@sanity/uuid',
       ],
     },
   },

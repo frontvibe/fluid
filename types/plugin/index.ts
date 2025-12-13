@@ -1,6 +1,6 @@
 import type {FilterPattern, Plugin} from 'vite';
 import {readFile} from 'node:fs/promises';
-import {createHash} from 'node:crypto';
+// import {createHash} from 'node:crypto';
 
 import {createFilter} from 'vite';
 import {execa} from 'execa';
@@ -122,7 +122,7 @@ export function typegenWatcher(options?: {
       void (async () => {
         try {
           const content = await readFile(filePath);
-          const hash = createHash('sha1').update(content).digest('hex');
+          const hash = 'test';
           const previousHash = fileHashCache.get(filePath);
           if (previousHash === hash) return; // no-op save, ignore
           fileHashCache.set(filePath, hash);

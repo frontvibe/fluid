@@ -41,8 +41,7 @@ type SanityInternalLinkDataProps = {
   name: null | string;
 };
 
-interface SanityInternalLinkProps
-  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+interface SanityInternalLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   children?: React.ReactNode;
   className?: string;
   data?: SanityInternalLinkDataProps;

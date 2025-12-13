@@ -1,7 +1,7 @@
 import type {SanityImage as SanityImageData} from 'types';
 
 import {getExtension, getImageDimensions} from '@sanity/asset-utils';
-import imageUrlBuilder from '@sanity/image-url';
+import {createImageUrlBuilder} from '@sanity/image-url';
 import React, {forwardRef} from 'react';
 
 import {useIsDev} from '~/hooks/use-is-dev';
@@ -101,7 +101,7 @@ const SanityImage = forwardRef<HTMLImageElement, SanityImageProps>(
       ? parseFloat(aspectRatioValues[1])
       : undefined;
 
-    const urlBuilder = imageUrlBuilder({
+    const urlBuilder = createImageUrlBuilder({
       dataset: config.dataset,
       projectId: config.projectId,
     })

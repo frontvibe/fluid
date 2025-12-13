@@ -1,4 +1,4 @@
-import type {CropMode} from '@sanity/image-url/lib/types/types';
+import type {CropMode} from '@sanity/image-url';
 import type {FulfillmentStatus} from '@shopify/hydrogen/customer-account-api-types';
 import type {SelectedOption} from '@shopify/hydrogen/storefront-api-types';
 import type {ClassValue} from 'class-variance-authority/types';
@@ -11,7 +11,7 @@ import type {
 
 import {useLocation} from 'react-router';
 import {stegaClean} from '@sanity/client/stega';
-import imageUrlBuilder from '@sanity/image-url';
+import {createImageUrlBuilder} from '@sanity/image-url';
 import {cx} from 'class-variance-authority';
 import {useMemo} from 'react';
 import {twMerge} from 'tailwind-merge';
@@ -203,7 +203,7 @@ export function generateSanityImageUrl({
   width: number;
 }) {
   if (!ref) return null;
-  const urlBuilder = imageUrlBuilder({
+  const urlBuilder = createImageUrlBuilder({
     dataset,
     projectId,
   })

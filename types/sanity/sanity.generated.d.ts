@@ -20,516 +20,122 @@ export type ThemeContent = {
   _updatedAt: string;
   _rev: string;
   account?: {
-    welcome?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    welcomeToYourAccount?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    accountDetails?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    signOut?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    orderHistory?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    noOrdersMessage?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    startShopping?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    orderDetail?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    returnToAccount?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    orderNumber?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    placedOn?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    product?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    price?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    quantity?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    total?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    subtotal?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    discounts?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    discountsOff?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    tax?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    shippingAddress?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    noShippingAddress?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    status?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    updateYourProfile?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    firstName?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    lastName?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    company?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    addressLine1?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    addressLine2?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    city?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    stateProvince?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    postalCode?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    country?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    phone?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    defaultAddress?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    saving?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    save?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    cancel?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    addName?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    addAddress?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    editAddress?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    addressBook?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    noAddress?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    default?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    edit?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    remove?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    profile?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    name?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    phoneNumber?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    emailAddress?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    orderId?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    orderDate?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    fulfillmentStatus?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    viewDetails?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    orderStatusCancelled?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    orderStatusError?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    orderStatusFailure?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    orderStatusOpen?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    orderStatusPending?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    orderStatusSuccess?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
+    welcome?: InternationalizedArrayString;
+    welcomeToYourAccount?: InternationalizedArrayString;
+    accountDetails?: InternationalizedArrayString;
+    signOut?: InternationalizedArrayString;
+    orderHistory?: InternationalizedArrayString;
+    noOrdersMessage?: InternationalizedArrayString;
+    startShopping?: InternationalizedArrayString;
+    orderDetail?: InternationalizedArrayString;
+    returnToAccount?: InternationalizedArrayString;
+    orderNumber?: InternationalizedArrayString;
+    placedOn?: InternationalizedArrayString;
+    product?: InternationalizedArrayString;
+    price?: InternationalizedArrayString;
+    quantity?: InternationalizedArrayString;
+    total?: InternationalizedArrayString;
+    subtotal?: InternationalizedArrayString;
+    discounts?: InternationalizedArrayString;
+    discountsOff?: InternationalizedArrayString;
+    tax?: InternationalizedArrayString;
+    shippingAddress?: InternationalizedArrayString;
+    noShippingAddress?: InternationalizedArrayString;
+    status?: InternationalizedArrayString;
+    updateYourProfile?: InternationalizedArrayString;
+    firstName?: InternationalizedArrayString;
+    lastName?: InternationalizedArrayString;
+    company?: InternationalizedArrayString;
+    addressLine1?: InternationalizedArrayString;
+    addressLine2?: InternationalizedArrayString;
+    city?: InternationalizedArrayString;
+    stateProvince?: InternationalizedArrayString;
+    postalCode?: InternationalizedArrayString;
+    country?: InternationalizedArrayString;
+    phone?: InternationalizedArrayString;
+    defaultAddress?: InternationalizedArrayString;
+    saving?: InternationalizedArrayString;
+    save?: InternationalizedArrayString;
+    cancel?: InternationalizedArrayString;
+    addName?: InternationalizedArrayString;
+    addAddress?: InternationalizedArrayString;
+    editAddress?: InternationalizedArrayString;
+    addressBook?: InternationalizedArrayString;
+    noAddress?: InternationalizedArrayString;
+    default?: InternationalizedArrayString;
+    edit?: InternationalizedArrayString;
+    remove?: InternationalizedArrayString;
+    profile?: InternationalizedArrayString;
+    name?: InternationalizedArrayString;
+    phoneNumber?: InternationalizedArrayString;
+    emailAddress?: InternationalizedArrayString;
+    orderId?: InternationalizedArrayString;
+    orderDate?: InternationalizedArrayString;
+    fulfillmentStatus?: InternationalizedArrayString;
+    viewDetails?: InternationalizedArrayString;
+    orderStatusCancelled?: InternationalizedArrayString;
+    orderStatusError?: InternationalizedArrayString;
+    orderStatusFailure?: InternationalizedArrayString;
+    orderStatusOpen?: InternationalizedArrayString;
+    orderStatusPending?: InternationalizedArrayString;
+    orderStatusSuccess?: InternationalizedArrayString;
   };
   cart?: {
-    heading?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    proceedToCheckout?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    orderSummary?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    subtotal?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    discounts?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    applyDiscount?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    discountCode?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    remove?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    quantity?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    continueShopping?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    emptyMessage?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
+    heading?: InternationalizedArrayString;
+    proceedToCheckout?: InternationalizedArrayString;
+    orderSummary?: InternationalizedArrayString;
+    subtotal?: InternationalizedArrayString;
+    discounts?: InternationalizedArrayString;
+    applyDiscount?: InternationalizedArrayString;
+    discountCode?: InternationalizedArrayString;
+    remove?: InternationalizedArrayString;
+    quantity?: InternationalizedArrayString;
+    continueShopping?: InternationalizedArrayString;
+    emptyMessage?: InternationalizedArrayString;
   };
   collection?: {
-    sortBy?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    sortFeatured?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    sortLowHigh?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    sortHighLow?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    sortBestSelling?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    sortNewest?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    filterAndSort?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    from?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    to?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    filterInStock?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    filterOutOfStock?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    viewAll?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    clearFilters?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    clear?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    apply?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    loading?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    loadPrevious?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    loadMoreProducts?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    noProductFound?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    noCollectionFound?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
+    sortBy?: InternationalizedArrayString;
+    sortFeatured?: InternationalizedArrayString;
+    sortLowHigh?: InternationalizedArrayString;
+    sortHighLow?: InternationalizedArrayString;
+    sortBestSelling?: InternationalizedArrayString;
+    sortNewest?: InternationalizedArrayString;
+    filterAndSort?: InternationalizedArrayString;
+    from?: InternationalizedArrayString;
+    to?: InternationalizedArrayString;
+    filterInStock?: InternationalizedArrayString;
+    filterOutOfStock?: InternationalizedArrayString;
+    viewAll?: InternationalizedArrayString;
+    clearFilters?: InternationalizedArrayString;
+    clear?: InternationalizedArrayString;
+    apply?: InternationalizedArrayString;
+    loading?: InternationalizedArrayString;
+    loadPrevious?: InternationalizedArrayString;
+    loadMoreProducts?: InternationalizedArrayString;
+    noProductFound?: InternationalizedArrayString;
+    noCollectionFound?: InternationalizedArrayString;
   };
   product?: {
-    addToCart?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    sale?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    soldOut?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    quantitySelector?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
+    addToCart?: InternationalizedArrayString;
+    sale?: InternationalizedArrayString;
+    soldOut?: InternationalizedArrayString;
+    quantitySelector?: InternationalizedArrayString;
   };
   error?: {
-    pageNotFound?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    serverError?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    sectionError?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    reloadPage?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    missingAddressId?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
-    addressCreation?: Array<
-      {
-        _key: string;
-      } & InternationalizedArrayStringValue
-    >;
+    pageNotFound?: InternationalizedArrayString;
+    serverError?: InternationalizedArrayString;
+    sectionError?: InternationalizedArrayString;
+    reloadPage?: InternationalizedArrayString;
+    missingAddressId?: InternationalizedArrayString;
+    addressCreation?: InternationalizedArrayString;
   };
 };
+
+export type InternationalizedArrayString = Array<
+  {
+    _key: string;
+  } & InternationalizedArrayStringValue
+>;
 
 export type Settings = {
   _id: string;
@@ -575,101 +181,101 @@ export type Settings = {
     crop?: SanityImageCrop;
     _type: 'image';
   };
-  spaceBetweenTemplateSections?: number;
+  spaceBetweenTemplateSections?: RangeSlider;
   buttonsBorder?: {
-    thickness?: number;
-    opacity?: number;
-    cornerRadius?: number;
+    thickness?: RangeSlider;
+    opacity?: RangeSlider;
+    cornerRadius?: RangeSlider;
   };
   buttonsShadow?: {
-    opacity?: number;
-    horizontalOffset?: number;
-    verticalOffset?: number;
-    blur?: number;
+    opacity?: RangeSlider;
+    horizontalOffset?: RangeSlider;
+    verticalOffset?: RangeSlider;
+    blur?: RangeSlider;
   };
   inputsBorder?: {
-    thickness?: number;
-    opacity?: number;
-    cornerRadius?: number;
+    thickness?: RangeSlider;
+    opacity?: RangeSlider;
+    cornerRadius?: RangeSlider;
   };
   inputsShadow?: {
-    opacity?: number;
-    horizontalOffset?: number;
-    verticalOffset?: number;
-    blur?: number;
+    opacity?: RangeSlider;
+    horizontalOffset?: RangeSlider;
+    verticalOffset?: RangeSlider;
+    blur?: RangeSlider;
   };
   productCards?: {
     style?: 'standard' | 'card';
-    imageAspectRatio?: 'square' | 'video' | 'auto';
+    imageAspectRatio?: AspectRatios;
     textAlignment?: 'left' | 'center' | 'right';
     border?: {
-      thickness?: number;
-      opacity?: number;
-      cornerRadius?: number;
+      thickness?: RangeSlider;
+      opacity?: RangeSlider;
+      cornerRadius?: RangeSlider;
     };
     shadow?: {
-      opacity?: number;
-      horizontalOffset?: number;
-      verticalOffset?: number;
-      blur?: number;
+      opacity?: RangeSlider;
+      horizontalOffset?: RangeSlider;
+      verticalOffset?: RangeSlider;
+      blur?: RangeSlider;
     };
   };
   collectionCards?: {
     style?: 'standard' | 'card';
-    imageAspectRatio?: 'square' | 'video' | 'auto';
+    imageAspectRatio?: AspectRatios;
     textAlignment?: 'left' | 'center' | 'right';
     border?: {
-      thickness?: number;
-      opacity?: number;
-      cornerRadius?: number;
+      thickness?: RangeSlider;
+      opacity?: RangeSlider;
+      cornerRadius?: RangeSlider;
     };
     shadow?: {
-      opacity?: number;
-      horizontalOffset?: number;
-      verticalOffset?: number;
-      blur?: number;
+      opacity?: RangeSlider;
+      horizontalOffset?: RangeSlider;
+      verticalOffset?: RangeSlider;
+      blur?: RangeSlider;
     };
   };
   blogCards?: {
     style?: 'standard' | 'card';
-    imageAspectRatio?: 'square' | 'video' | 'auto';
+    imageAspectRatio?: AspectRatios;
     textAlignment?: 'left' | 'center' | 'right';
     border?: {
-      thickness?: number;
-      opacity?: number;
-      cornerRadius?: number;
+      thickness?: RangeSlider;
+      opacity?: RangeSlider;
+      cornerRadius?: RangeSlider;
     };
     shadow?: {
-      opacity?: number;
-      horizontalOffset?: number;
-      verticalOffset?: number;
-      blur?: number;
+      opacity?: RangeSlider;
+      horizontalOffset?: RangeSlider;
+      verticalOffset?: RangeSlider;
+      blur?: RangeSlider;
     };
   };
   mediaBorder?: {
-    thickness?: number;
-    opacity?: number;
-    cornerRadius?: number;
+    thickness?: RangeSlider;
+    opacity?: RangeSlider;
+    cornerRadius?: RangeSlider;
   };
   mediaShadow?: {
-    opacity?: number;
-    horizontalOffset?: number;
-    verticalOffset?: number;
-    blur?: number;
+    opacity?: RangeSlider;
+    horizontalOffset?: RangeSlider;
+    verticalOffset?: RangeSlider;
+    blur?: RangeSlider;
   };
   dropdownsAndPopupsBorder?: {
-    thickness?: number;
-    opacity?: number;
-    cornerRadius?: number;
+    thickness?: RangeSlider;
+    opacity?: RangeSlider;
+    cornerRadius?: RangeSlider;
   };
   dropdownsAndPopupsShadow?: {
-    opacity?: number;
-    horizontalOffset?: number;
-    verticalOffset?: number;
-    blur?: number;
+    opacity?: RangeSlider;
+    horizontalOffset?: RangeSlider;
+    verticalOffset?: RangeSlider;
+    blur?: RangeSlider;
   };
   badgesPosition?: 'bottom_left' | 'bottom_right' | 'top_left' | 'top_right';
-  badgesCornerRadius?: number;
+  badgesCornerRadius?: RangeSlider;
   badgesSaleColorScheme?: {
     _ref: string;
     _type: 'reference';
@@ -697,8 +303,8 @@ export type Settings = {
     [internalGroqTypeReferenceTo]?: 'colorScheme';
   };
   grid?: {
-    horizontalSpace?: number;
-    verticalSpace?: number;
+    horizontalSpace?: RangeSlider;
+    verticalSpace?: RangeSlider;
   };
   facebook?: string;
   instagram?: string;
@@ -712,38 +318,62 @@ export type Settings = {
   vimeo?: string;
 };
 
+export type RangeSlider = number;
+
+export type AspectRatios = 'square' | 'video' | 'auto';
+
+export type SanityImageCrop = {
+  _type: 'sanity.imageCrop';
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
+export type SanityImageHotspot = {
+  _type: 'sanity.imageHotspot';
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
+};
+
 export type Footer = {
   _id: string;
   _type: 'footer';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  sections?: Array<
-    | ({
-        _key: string;
-      } & ImageBannerSection)
-    | ({
-        _key: string;
-      } & FeaturedCollectionSection)
-    | ({
-        _key: string;
-      } & FeaturedProductSection)
-    | ({
-        _key: string;
-      } & CollectionListSection)
-    | ({
-        _key: string;
-      } & CarouselSection)
-    | ({
-        _key: string;
-      } & RichtextSection)
-  >;
-  footers?: Array<
-    {
-      _key: string;
-    } & SocialLinksOnly
-  >;
+  sections?: Sections;
+  footers?: Footers;
 };
+
+export type Footers = Array<
+  {
+    _key: string;
+  } & SocialLinksOnly
+>;
+
+export type Sections = Array<
+  | ({
+      _key: string;
+    } & ImageBannerSection)
+  | ({
+      _key: string;
+    } & FeaturedCollectionSection)
+  | ({
+      _key: string;
+    } & FeaturedProductSection)
+  | ({
+      _key: string;
+    } & CollectionListSection)
+  | ({
+      _key: string;
+    } & CarouselSection)
+  | ({
+      _key: string;
+    } & RichtextSection)
+>;
 
 export type Header = {
   _id: string;
@@ -751,11 +381,7 @@ export type Header = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  announcementBar?: Array<
-    {
-      _key: string;
-    } & InternationalizedArrayAnnouncementBarValue
-  >;
+  announcementBar?: InternationalizedArrayAnnouncementBar;
   announcementBarColorScheme?: {
     _ref: string;
     _type: 'reference';
@@ -763,11 +389,7 @@ export type Header = {
     [internalGroqTypeReferenceTo]?: 'colorScheme';
   };
   autoRotateAnnouncements?: boolean;
-  menu?: Array<
-    {
-      _key: string;
-    } & InternationalizedArrayHeaderNavigationValue
-  >;
+  menu?: InternationalizedArrayHeaderNavigation;
   colorScheme?: {
     _ref: string;
     _type: 'reference';
@@ -778,16 +400,30 @@ export type Header = {
   sticky?: 'none' | 'onScrollUp' | 'always';
   showSeparatorLine?: boolean;
   padding?: Padding;
-  desktopLogoWidth?: number;
+  desktopLogoWidth?: RangeSlider;
 };
+
+export type Padding = {
+  _type: 'padding';
+  top?: RangeSlider;
+  bottom?: RangeSlider;
+};
+
+export type InternationalizedArrayHeaderNavigation = Array<
+  {
+    _key: string;
+  } & InternationalizedArrayHeaderNavigationValue
+>;
+
+export type InternationalizedArrayAnnouncementBar = Array<
+  {
+    _key: string;
+  } & InternationalizedArrayAnnouncementBarValue
+>;
 
 export type SocialLinksOnly = {
   _type: 'socialLinksOnly';
-  copyright?: Array<
-    {
-      _key: string;
-    } & InternationalizedArrayStringValue
-  >;
+  copyright?: InternationalizedArrayString;
   settings?: SectionSettings;
 };
 
@@ -795,27 +431,18 @@ export type CollectionBannerSection = {
   _type: 'collectionBannerSection';
   showImage?: boolean;
   showDescription?: boolean;
-  contentPosition?:
-    | 'top_left'
-    | 'top_center'
-    | 'top_right'
-    | 'middle_left'
-    | 'middle_center'
-    | 'middle_right'
-    | 'bottom_left'
-    | 'bottom_center'
-    | 'bottom_right';
-  contentAlignment?: 'left' | 'center' | 'right';
-  bannerHeight?: number;
-  overlayOpacity?: number;
+  contentPosition?: ContentPosition;
+  contentAlignment?: ContentAlignment;
+  bannerHeight?: RangeSlider;
+  overlayOpacity?: RangeSlider;
   settings?: SectionSettings;
 };
 
 export type CollectionProductGridSection = {
   _type: 'collectionProductGridSection';
-  productsPerPage?: number;
-  desktopColumns?: number;
-  mobileColumns?: number;
+  productsPerPage?: RangeSlider;
+  desktopColumns?: RangeSlider;
+  mobileColumns?: RangeSlider;
   enableFiltering?: boolean;
   enableSorting?: boolean;
   settings?: SectionSettings;
@@ -823,29 +450,21 @@ export type CollectionProductGridSection = {
 
 export type RichtextSection = {
   _type: 'richtextSection';
-  richtext?: Array<
-    {
-      _key: string;
-    } & InternationalizedArrayRichtextValue
-  >;
-  desktopContentPosition?: 'left' | 'center' | 'right';
-  contentAlignment?: 'left' | 'center' | 'right';
-  maxWidth?: number;
+  richtext?: InternationalizedArrayRichtext;
+  desktopContentPosition?: ContentAlignment;
+  contentAlignment?: ContentAlignment;
+  maxWidth?: RangeSlider;
   settings?: SectionSettings;
 };
 
 export type CarouselSection = {
   _type: 'carouselSection';
-  title?: Array<
-    {
-      _key: string;
-    } & InternationalizedArrayStringValue
-  >;
+  title?: InternationalizedArrayString;
   pagination?: boolean;
   arrows?: boolean;
   autoplay?: boolean;
   loop?: boolean;
-  slidesPerViewDesktop?: number;
+  slidesPerViewDesktop?: RangeSlider;
   slides?: Array<{
     image?: {
       asset?: {
@@ -867,26 +486,18 @@ export type CarouselSection = {
 
 export type RelatedProductsSection = {
   _type: 'relatedProductsSection';
-  heading?: Array<
-    {
-      _key: string;
-    } & InternationalizedArrayStringValue
-  >;
-  maxProducts?: number;
-  desktopColumns?: number;
+  heading?: InternationalizedArrayString;
+  maxProducts?: RangeSlider;
+  desktopColumns?: RangeSlider;
   settings?: SectionSettings;
 };
 
 export type ProductInformationSection = {
   _type: 'productInformationSection';
-  richtext?: Array<
-    {
-      _key: string;
-    } & InternationalizedArrayProductRichtextValue
-  >;
+  richtext?: InternationalizedArrayProductRichtext;
   desktopMediaWidth?: 'small' | 'medium' | 'large';
   desktopMediaPosition?: 'left' | 'right';
-  mediaAspectRatio?: 'square' | 'video' | 'auto';
+  mediaAspectRatio?: AspectRatios;
   settings?: SectionSettings;
 };
 
@@ -899,7 +510,7 @@ export type CollectionListSection = {
     _key: string;
     [internalGroqTypeReferenceTo]?: 'collection';
   }>;
-  desktopColumns?: number;
+  desktopColumns?: RangeSlider;
   settings?: SectionSettings;
 };
 
@@ -911,52 +522,31 @@ export type FeaturedProductSection = {
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: 'product';
   };
-  richtext?: Array<
-    {
-      _key: string;
-    } & InternationalizedArrayProductRichtextValue
-  >;
-  mediaAspectRatio?: 'square' | 'video' | 'auto';
+  richtext?: InternationalizedArrayProductRichtext;
+  mediaAspectRatio?: AspectRatios;
   settings?: SectionSettings;
 };
 
 export type FeaturedCollectionSection = {
   _type: 'featuredCollectionSection';
-  heading?: Array<
-    {
-      _key: string;
-    } & InternationalizedArrayStringValue
-  >;
+  heading?: InternationalizedArrayString;
   collection?: {
     _ref: string;
     _type: 'reference';
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: 'collection';
   };
-  maxProducts?: number;
-  desktopColumns?: number;
+  maxProducts?: RangeSlider;
+  desktopColumns?: RangeSlider;
   viewAll?: boolean;
   settings?: SectionSettings;
 };
 
 export type ImageBannerSection = {
   _type: 'imageBannerSection';
-  content?: Array<
-    {
-      _key: string;
-    } & InternationalizedArrayBannerRichtextValue
-  >;
-  contentPosition?:
-    | 'top_left'
-    | 'top_center'
-    | 'top_right'
-    | 'middle_left'
-    | 'middle_center'
-    | 'middle_right'
-    | 'bottom_left'
-    | 'bottom_center'
-    | 'bottom_right';
-  contentAlignment?: 'left' | 'center' | 'right';
+  content?: InternationalizedArrayBannerRichtext;
+  contentPosition?: ContentPosition;
+  contentAlignment?: ContentAlignment;
   backgroundImage?: {
     asset?: {
       _ref: string;
@@ -969,8 +559,8 @@ export type ImageBannerSection = {
     crop?: SanityImageCrop;
     _type: 'image';
   };
-  bannerHeight?: number;
-  overlayOpacity?: number;
+  bannerHeight?: RangeSlider;
+  overlayOpacity?: RangeSlider;
   settings?: SectionSettings;
 };
 
@@ -987,9 +577,9 @@ export type Typography = {
       } & FontCategory
     >;
     capitalize?: boolean;
-    baseSize?: number;
-    letterSpacing?: number;
-    lineHeight?: number;
+    baseSize?: RangeSlider;
+    letterSpacing?: RangeSlider;
+    lineHeight?: RangeSlider;
   };
   body?: {
     font?: Array<
@@ -997,9 +587,9 @@ export type Typography = {
         _key: string;
       } & FontCategory
     >;
-    baseSize?: number;
-    letterSpacing?: number;
-    lineHeight?: number;
+    baseSize?: RangeSlider;
+    letterSpacing?: RangeSlider;
+    lineHeight?: RangeSlider;
   };
   extra?: {
     font?: Array<
@@ -1008,9 +598,9 @@ export type Typography = {
       } & FontCategory
     >;
     capitalize?: boolean;
-    baseSize?: number;
-    letterSpacing?: number;
-    lineHeight?: number;
+    baseSize?: RangeSlider;
+    letterSpacing?: RangeSlider;
+    lineHeight?: RangeSlider;
   };
 };
 
@@ -1021,15 +611,8 @@ export type ProductVariant = {
   _updatedAt: string;
   _rev: string;
   hidden?: string;
-  titleProxy?: string;
+  titleProxy?: ProxyString;
   store?: ShopifyProductVariant;
-};
-
-export type CollectionRule = {
-  _type: 'collectionRule';
-  column?: string;
-  relation?: string;
-  condition?: string;
 };
 
 export type ShopifyProductVariant = {
@@ -1055,6 +638,70 @@ export type ShopifyProductVariant = {
 
 export type ProxyString = string;
 
+export type CollectionRule = {
+  _type: 'collectionRule';
+  column?: string;
+  relation?: string;
+  condition?: string;
+};
+
+export type ShopifyCollection = {
+  _type: 'shopifyCollection';
+  createdAt?: string;
+  updatedAt?: string;
+  isDeleted?: boolean;
+  title?: string;
+  id?: number;
+  gid?: string;
+  slug?: Slug;
+  descriptionHtml?: string;
+  imageUrl?: string;
+  rules?: Array<
+    {
+      _key: string;
+    } & CollectionRule
+  >;
+  disjunctive?: boolean;
+  sortOrder?: string;
+};
+
+export type Inventory = {
+  _type: 'inventory';
+  isAvailable?: boolean;
+  management?: string;
+  policy?: string;
+};
+
+export type ShopifyProduct = {
+  _type: 'shopifyProduct';
+  createdAt?: string;
+  updatedAt?: string;
+  status?: 'active' | 'archived' | 'draft';
+  isDeleted?: boolean;
+  title?: string;
+  id?: number;
+  gid?: string;
+  slug?: Slug;
+  descriptionHtml?: string;
+  productType?: string;
+  vendor?: string;
+  tags?: string;
+  priceRange?: PriceRange;
+  previewImageUrl?: string;
+  options?: Array<
+    {
+      _key: string;
+    } & Option
+  >;
+  variants?: Array<{
+    _ref: string;
+    _type: 'reference';
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: 'productVariant';
+  }>;
+};
+
 export type PriceRange = {
   _type: 'priceRange';
   minVariantPrice?: number;
@@ -1069,48 +716,24 @@ export type Option = {
   values?: Array<string>;
 };
 
-export type Inventory = {
-  _type: 'inventory';
-  isAvailable?: boolean;
-  management?: string;
-  policy?: string;
+export type ColorPicker = {
+  _type: 'colorPicker';
+  hex?: string;
+  hsl?: {
+    h?: number;
+    s?: number;
+    l?: number;
+  };
+  rgb?: {
+    r?: number;
+    g?: number;
+    b?: number;
+  };
 };
-
-export type RangeSlider = number;
 
 export type AnnouncementBar = Array<{
   text?: string;
-  link?:
-    | {
-        _ref: string;
-        _type: 'reference';
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: 'home';
-      }
-    | {
-        _ref: string;
-        _type: 'reference';
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: 'page';
-      }
-    | {
-        _ref: string;
-        _type: 'reference';
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: 'product';
-      }
-    | {
-        _ref: string;
-        _type: 'reference';
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: 'collection';
-      }
-    | {
-        _ref: string;
-        _type: 'reference';
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: 'blogPost';
-      };
+  link?: Link;
   externalLink?: string;
   openInNewTab?: boolean;
   _type: 'announcement';
@@ -1120,38 +743,8 @@ export type AnnouncementBar = Array<{
 export type Button = {
   _type: 'button';
   label?: string;
-  link?:
-    | {
-        _ref: string;
-        _type: 'reference';
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: 'home';
-      }
-    | {
-        _ref: string;
-        _type: 'reference';
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: 'page';
-      }
-    | {
-        _ref: string;
-        _type: 'reference';
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: 'product';
-      }
-    | {
-        _ref: string;
-        _type: 'reference';
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: 'collection';
-      }
-    | {
-        _ref: string;
-        _type: 'reference';
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: 'blogPost';
-      };
-  anchor?: string;
+  link?: Link;
+  anchor?: Anchor;
 };
 
 export type HeaderNavigation = Array<
@@ -1198,18 +791,21 @@ export type ColorScheme = {
   cardForeground?: ColorPicker;
 };
 
-export type ColorPicker = {
-  _type: 'colorPicker';
-  hex?: string;
-  hsl?: {
-    h?: number;
-    s?: number;
-    l?: number;
-  };
-  rgb?: {
-    r?: number;
-    g?: number;
-    b?: number;
+export type Seo = {
+  _type: 'seo';
+  title?: InternationalizedArrayString;
+  description?: InternationalizedArrayText;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: 'image';
   };
 };
 
@@ -1293,37 +889,7 @@ export type ProductRichtext = Array<
       listItem?: 'bullet' | 'number';
       markDefs?: Array<
         | {
-            link?:
-              | {
-                  _ref: string;
-                  _type: 'reference';
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: 'home';
-                }
-              | {
-                  _ref: string;
-                  _type: 'reference';
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: 'page';
-                }
-              | {
-                  _ref: string;
-                  _type: 'reference';
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: 'product';
-                }
-              | {
-                  _ref: string;
-                  _type: 'reference';
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: 'collection';
-                }
-              | {
-                  _ref: string;
-                  _type: 'reference';
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: 'blogPost';
-                };
+            link?: Link;
             anchor?: Anchor;
             _type: 'internalLink';
             _key: string;
@@ -1416,67 +982,10 @@ export type ProductSections = Array<
     } & RichtextSection)
 >;
 
-export type Sections = Array<
-  | ({
-      _key: string;
-    } & ImageBannerSection)
-  | ({
-      _key: string;
-    } & FeaturedCollectionSection)
-  | ({
-      _key: string;
-    } & FeaturedProductSection)
-  | ({
-      _key: string;
-    } & CollectionListSection)
-  | ({
-      _key: string;
-    } & CarouselSection)
-  | ({
-      _key: string;
-    } & RichtextSection)
->;
-
-export type Footers = Array<
-  {
-    _key: string;
-  } & SocialLinksOnly
->;
-
 export type NestedNavigation = {
   _type: 'nestedNavigation';
   name?: string;
-  link?:
-    | {
-        _ref: string;
-        _type: 'reference';
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: 'home';
-      }
-    | {
-        _ref: string;
-        _type: 'reference';
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: 'page';
-      }
-    | {
-        _ref: string;
-        _type: 'reference';
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: 'product';
-      }
-    | {
-        _ref: string;
-        _type: 'reference';
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: 'collection';
-      }
-    | {
-        _ref: string;
-        _type: 'reference';
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: 'blogPost';
-      };
+  link?: Link;
   childLinks?: Array<
     | ({
         _key: string;
@@ -1497,41 +1006,9 @@ export type ExternalLink = {
 export type InternalLink = {
   _type: 'internalLink';
   name?: string;
-  link?:
-    | {
-        _ref: string;
-        _type: 'reference';
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: 'home';
-      }
-    | {
-        _ref: string;
-        _type: 'reference';
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: 'page';
-      }
-    | {
-        _ref: string;
-        _type: 'reference';
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: 'product';
-      }
-    | {
-        _ref: string;
-        _type: 'reference';
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: 'collection';
-      }
-    | {
-        _ref: string;
-        _type: 'reference';
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: 'blogPost';
-      };
+  link?: Link;
   anchor?: Anchor;
 };
-
-export type AspectRatios = 'square' | 'video' | 'auto';
 
 export type Richtext = Array<
   | {
@@ -1545,37 +1022,7 @@ export type Richtext = Array<
       listItem?: 'bullet' | 'number';
       markDefs?: Array<
         | {
-            link?:
-              | {
-                  _ref: string;
-                  _type: 'reference';
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: 'home';
-                }
-              | {
-                  _ref: string;
-                  _type: 'reference';
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: 'page';
-                }
-              | {
-                  _ref: string;
-                  _type: 'reference';
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: 'product';
-                }
-              | {
-                  _ref: string;
-                  _type: 'reference';
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: 'collection';
-                }
-              | {
-                  _ref: string;
-                  _type: 'reference';
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: 'blogPost';
-                };
+            link?: Link;
             anchor?: Anchor;
             _type: 'internalLink';
             _key: string;
@@ -1602,7 +1049,7 @@ export type Richtext = Array<
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       maxWidth?: RangeSlider;
-      alignment?: 'left' | 'center' | 'right';
+      alignment?: ContentAlignment;
       _type: 'image';
       _key: string;
     }
@@ -1623,12 +1070,6 @@ export type ContentPosition =
   | 'bottom_left'
   | 'bottom_center'
   | 'bottom_right';
-
-export type Padding = {
-  _type: 'padding';
-  top?: RangeSlider;
-  bottom?: RangeSlider;
-};
 
 export type Link =
   | {
@@ -1720,12 +1161,6 @@ export type InternationalizedArrayProductRichtext = Array<
   } & InternationalizedArrayProductRichtextValue
 >;
 
-export type InternationalizedArrayAnnouncementBar = Array<
-  {
-    _key: string;
-  } & InternationalizedArrayAnnouncementBarValue
->;
-
 export type Home = {
   _id: string;
   _type: 'home';
@@ -1742,14 +1177,16 @@ export type Page = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title?: Array<
-    {
-      _key: string;
-    } & InternationalizedArrayStringValue
-  >;
+  title?: InternationalizedArrayString;
   sections?: Sections;
   seo?: Seo;
   slug?: Slug;
+};
+
+export type Slug = {
+  _type: 'slug';
+  current?: string;
+  source?: string;
 };
 
 export type Product = {
@@ -1768,36 +1205,6 @@ export type Product = {
   titleProxy?: ProxyString;
   slugProxy?: ProxyString;
   store?: ShopifyProduct;
-};
-
-export type ShopifyProduct = {
-  _type: 'shopifyProduct';
-  createdAt?: string;
-  updatedAt?: string;
-  status?: 'active' | 'archived' | 'draft';
-  isDeleted?: boolean;
-  title?: string;
-  id?: number;
-  gid?: string;
-  slug?: Slug;
-  descriptionHtml?: string;
-  productType?: string;
-  vendor?: string;
-  tags?: string;
-  priceRange?: PriceRange;
-  previewImageUrl?: string;
-  options?: Array<
-    {
-      _key: string;
-    } & Option
-  >;
-  variants?: Array<{
-    _ref: string;
-    _type: 'reference';
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: 'productVariant';
-  }>;
 };
 
 export type ProductTemplate = {
@@ -1829,26 +1236,6 @@ export type Collection = {
   store?: ShopifyCollection;
 };
 
-export type ShopifyCollection = {
-  _type: 'shopifyCollection';
-  createdAt?: string;
-  updatedAt?: string;
-  isDeleted?: boolean;
-  title?: string;
-  id?: number;
-  gid?: string;
-  slug?: Slug;
-  descriptionHtml?: string;
-  imageUrl?: string;
-  rules?: Array<
-    {
-      _key: string;
-    } & CollectionRule
-  >;
-  disjunctive?: boolean;
-  sortOrder?: string;
-};
-
 export type CollectionTemplate = {
   _id: string;
   _type: 'collectionTemplate';
@@ -1866,50 +1253,10 @@ export type BlogPost = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title?: Array<
-    {
-      _key: string;
-    } & InternationalizedArrayStringValue
-  >;
+  title?: InternationalizedArrayString;
   seo?: Seo;
-  slug?: Array<
-    {
-      _key: string;
-    } & InternationalizedArraySlugValue
-  >;
+  slug?: InternationalizedArraySlug;
 };
-
-export type Seo = {
-  _type: 'seo';
-  title?: Array<
-    {
-      _key: string;
-    } & InternationalizedArrayStringValue
-  >;
-  description?: Array<
-    {
-      _key: string;
-    } & InternationalizedArrayTextValue
-  >;
-  image?: {
-    asset?: {
-      _ref: string;
-      _type: 'reference';
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: 'image';
-  };
-};
-
-export type InternationalizedArrayHeaderNavigation = Array<
-  {
-    _key: string;
-  } & InternationalizedArrayHeaderNavigationValue
->;
 
 export type InternationalizedArraySlug = Array<
   {
@@ -1923,11 +1270,13 @@ export type InternationalizedArrayText = Array<
   } & InternationalizedArrayTextValue
 >;
 
-export type InternationalizedArrayString = Array<
-  {
-    _key: string;
-  } & InternationalizedArrayStringValue
->;
+export type Code = {
+  _type: 'code';
+  language?: string;
+  filename?: string;
+  code?: string;
+  highlightedLines?: Array<number>;
+};
 
 export type MediaTag = {
   _id: string;
@@ -1936,14 +1285,6 @@ export type MediaTag = {
   _updatedAt: string;
   _rev: string;
   name?: Slug;
-};
-
-export type Code = {
-  _type: 'code';
-  language?: string;
-  filename?: string;
-  code?: string;
-  highlightedLines?: Array<number>;
 };
 
 export type SanityImagePaletteSwatch = {
@@ -1972,20 +1313,15 @@ export type SanityImageDimensions = {
   aspectRatio?: number;
 };
 
-export type SanityImageHotspot = {
-  _type: 'sanity.imageHotspot';
-  x?: number;
-  y?: number;
-  height?: number;
-  width?: number;
-};
-
-export type SanityImageCrop = {
-  _type: 'sanity.imageCrop';
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
+export type SanityImageMetadata = {
+  _type: 'sanity.imageMetadata';
+  location?: Geopoint;
+  dimensions?: SanityImageDimensions;
+  palette?: SanityImagePalette;
+  lqip?: string;
+  blurHash?: string;
+  hasAlpha?: boolean;
+  isOpaque?: boolean;
 };
 
 export type SanityFileAsset = {
@@ -2008,6 +1344,13 @@ export type SanityFileAsset = {
   path?: string;
   url?: string;
   source?: SanityAssetSourceData;
+};
+
+export type SanityAssetSourceData = {
+  _type: 'sanity.assetSourceData';
+  name?: string;
+  id?: string;
+  url?: string;
 };
 
 export type SanityImageAsset = {
@@ -2033,17 +1376,6 @@ export type SanityImageAsset = {
   source?: SanityAssetSourceData;
 };
 
-export type SanityImageMetadata = {
-  _type: 'sanity.imageMetadata';
-  location?: Geopoint;
-  dimensions?: SanityImageDimensions;
-  palette?: SanityImagePalette;
-  lqip?: string;
-  blurHash?: string;
-  hasAlpha?: boolean;
-  isOpaque?: boolean;
-};
-
 export type Geopoint = {
   _type: 'geopoint';
   lat?: number;
@@ -2051,24 +1383,21 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type Slug = {
-  _type: 'slug';
-  current?: string;
-  source?: string;
-};
-
-export type SanityAssetSourceData = {
-  _type: 'sanity.assetSourceData';
-  name?: string;
-  id?: string;
-  url?: string;
-};
-
 export type AllSanitySchemaTypes =
   | ThemeContent
+  | InternationalizedArrayString
   | Settings
+  | RangeSlider
+  | AspectRatios
+  | SanityImageCrop
+  | SanityImageHotspot
   | Footer
+  | Footers
+  | Sections
   | Header
+  | Padding
+  | InternationalizedArrayHeaderNavigation
+  | InternationalizedArrayAnnouncementBar
   | SocialLinksOnly
   | CollectionBannerSection
   | CollectionProductGridSection
@@ -2082,37 +1411,35 @@ export type AllSanitySchemaTypes =
   | ImageBannerSection
   | Typography
   | ProductVariant
-  | CollectionRule
   | ShopifyProductVariant
   | ProxyString
+  | CollectionRule
+  | ShopifyCollection
+  | Inventory
+  | ShopifyProduct
   | PriceRange
   | PlaceholderString
   | Option
-  | Inventory
-  | RangeSlider
+  | ColorPicker
   | AnnouncementBar
   | Button
   | HeaderNavigation
   | Anchor
   | SectionSettings
   | ColorScheme
-  | ColorPicker
+  | Seo
   | FontCategory
   | FontAsset
   | BannerRichtext
   | ProductRichtext
   | CollectionSections
   | ProductSections
-  | Sections
-  | Footers
   | NestedNavigation
   | ExternalLink
   | InternalLink
-  | AspectRatios
   | Richtext
   | ContentAlignment
   | ContentPosition
-  | Padding
   | Link
   | InternationalizedArrayBannerRichtextValue
   | InternationalizedArrayRichtextValue
@@ -2125,34 +1452,26 @@ export type AllSanitySchemaTypes =
   | InternationalizedArrayBannerRichtext
   | InternationalizedArrayRichtext
   | InternationalizedArrayProductRichtext
-  | InternationalizedArrayAnnouncementBar
   | Home
   | Page
+  | Slug
   | Product
-  | ShopifyProduct
   | ProductTemplate
   | Collection
-  | ShopifyCollection
   | CollectionTemplate
   | BlogPost
-  | Seo
-  | InternationalizedArrayHeaderNavigation
   | InternationalizedArraySlug
   | InternationalizedArrayText
-  | InternationalizedArrayString
-  | MediaTag
   | Code
+  | MediaTag
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
-  | SanityImageHotspot
-  | SanityImageCrop
-  | SanityFileAsset
-  | SanityImageAsset
   | SanityImageMetadata
-  | Geopoint
-  | Slug
-  | SanityAssetSourceData;
+  | SanityFileAsset
+  | SanityAssetSourceData
+  | SanityImageAsset
+  | Geopoint;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./app/data/sanity/footers.ts
 // Variable: FOOTER_SOCIAL_LINKS_ONLY_FRAGMENT
@@ -2346,7 +1665,7 @@ export type DEFAULT_PRODUCT_TEMPLATEResult = {
             crop: SanityImageCrop | null;
           } | null;
         }> | null;
-        slidesPerViewDesktop: number | null;
+        slidesPerViewDesktop: RangeSlider | null;
         settings: {
           colorScheme: {
             background: {
@@ -2461,7 +1780,7 @@ export type DEFAULT_PRODUCT_TEMPLATEResult = {
             gid: string | null;
           } | null;
         }> | null;
-        desktopColumns: number | null;
+        desktopColumns: RangeSlider | null;
         settings: {
           colorScheme: {
             background: {
@@ -2578,9 +1897,9 @@ export type DEFAULT_PRODUCT_TEMPLATEResult = {
             title: string | null;
           } | null;
         } | null;
-        desktopColumns: number | null;
+        desktopColumns: RangeSlider | null;
         heading: string | null;
-        maxProducts: number | null;
+        maxProducts: RangeSlider | null;
         settings: {
           colorScheme: {
             background: {
@@ -2691,7 +2010,7 @@ export type DEFAULT_PRODUCT_TEMPLATEResult = {
     | {
         _key: string;
         _type: 'featuredProductSection';
-        mediaAspectRatio: 'auto' | 'square' | 'video' | null;
+        mediaAspectRatio: AspectRatios | null;
         product: {
           store: {
             descriptionHtml: string | null;
@@ -2923,7 +2242,7 @@ export type DEFAULT_PRODUCT_TEMPLATEResult = {
           hotspot: SanityImageHotspot | null;
           crop: SanityImageCrop | null;
         } | null;
-        bannerHeight: number | null;
+        bannerHeight: RangeSlider | null;
         content: Array<
           | {
               children?: Array<{
@@ -2974,22 +2293,12 @@ export type DEFAULT_PRODUCT_TEMPLATEResult = {
                     } | null;
                   }
                 | null;
-              anchor?: string;
+              anchor?: Anchor;
             }
         > | null;
-        contentAlignment: 'center' | 'left' | 'right' | null;
-        contentPosition:
-          | 'bottom_center'
-          | 'bottom_left'
-          | 'bottom_right'
-          | 'middle_center'
-          | 'middle_left'
-          | 'middle_right'
-          | 'top_center'
-          | 'top_left'
-          | 'top_right'
-          | null;
-        overlayOpacity: number | null;
+        contentAlignment: ContentAlignment | null;
+        contentPosition: ContentPosition | null;
+        overlayOpacity: RangeSlider | null;
         settings: {
           colorScheme: {
             background: {
@@ -3101,7 +2410,7 @@ export type DEFAULT_PRODUCT_TEMPLATEResult = {
         _type: 'productInformationSection';
         desktopMediaPosition: 'left' | 'right' | null;
         desktopMediaWidth: 'large' | 'medium' | 'small' | null;
-        mediaAspectRatio: 'auto' | 'square' | 'video' | null;
+        mediaAspectRatio: AspectRatios | null;
         richtext: Array<
           | {
               quantitySelector?: boolean;
@@ -3301,9 +2610,9 @@ export type DEFAULT_PRODUCT_TEMPLATEResult = {
     | {
         _key: string;
         _type: 'relatedProductsSection';
-        desktopColumns: number | null;
+        desktopColumns: RangeSlider | null;
         heading: string | null;
-        maxProducts: number | null;
+        maxProducts: RangeSlider | null;
         settings: {
           colorScheme: {
             background: {
@@ -3413,9 +2722,9 @@ export type DEFAULT_PRODUCT_TEMPLATEResult = {
     | {
         _key: string;
         _type: 'richtextSection';
-        contentAlignment: 'center' | 'left' | 'right' | null;
-        desktopContentPosition: 'center' | 'left' | 'right' | null;
-        maxWidth: number | null;
+        contentAlignment: ContentAlignment | null;
+        desktopContentPosition: ContentAlignment | null;
+        maxWidth: RangeSlider | null;
         richtext: Array<
           | {
               asset: {
@@ -3428,7 +2737,7 @@ export type DEFAULT_PRODUCT_TEMPLATEResult = {
               hotspot: SanityImageHotspot | null;
               crop: SanityImageCrop | null;
               maxWidth?: RangeSlider;
-              alignment?: 'center' | 'left' | 'right';
+              alignment?: ContentAlignment;
               _type: 'image';
               _key: string;
               altText: string | null;
@@ -3536,7 +2845,7 @@ export type DEFAULT_PRODUCT_TEMPLATEResult = {
                     } | null;
                   }
                 | null;
-              anchor?: string;
+              anchor?: Anchor;
             }
         > | null;
         settings: {
@@ -3677,7 +2986,7 @@ export type DEFAULT_COLLECTION_TEMPLATEResult = {
             crop: SanityImageCrop | null;
           } | null;
         }> | null;
-        slidesPerViewDesktop: number | null;
+        slidesPerViewDesktop: RangeSlider | null;
         settings: {
           colorScheme: {
             background: {
@@ -3787,20 +3096,10 @@ export type DEFAULT_COLLECTION_TEMPLATEResult = {
     | {
         _key: string;
         _type: 'collectionBannerSection';
-        bannerHeight: number | null;
-        contentAlignment: 'center' | 'left' | 'right' | null;
-        contentPosition:
-          | 'bottom_center'
-          | 'bottom_left'
-          | 'bottom_right'
-          | 'middle_center'
-          | 'middle_left'
-          | 'middle_right'
-          | 'top_center'
-          | 'top_left'
-          | 'top_right'
-          | null;
-        overlayOpacity: number | null;
+        bannerHeight: RangeSlider | null;
+        contentAlignment: ContentAlignment | null;
+        contentPosition: ContentPosition | null;
+        overlayOpacity: RangeSlider | null;
         showDescription: boolean | null;
         showImage: boolean | null;
         settings: {
@@ -3917,7 +3216,7 @@ export type DEFAULT_COLLECTION_TEMPLATEResult = {
             gid: string | null;
           } | null;
         }> | null;
-        desktopColumns: number | null;
+        desktopColumns: RangeSlider | null;
         settings: {
           colorScheme: {
             background: {
@@ -4027,11 +3326,11 @@ export type DEFAULT_COLLECTION_TEMPLATEResult = {
     | {
         _key: string;
         _type: 'collectionProductGridSection';
-        desktopColumns: number | null;
+        desktopColumns: RangeSlider | null;
         enableFiltering: boolean | null;
         enableSorting: boolean | null;
-        mobileColumns: number | null;
-        productsPerPage: number | null;
+        mobileColumns: RangeSlider | null;
+        productsPerPage: RangeSlider | null;
         settings: {
           colorScheme: {
             background: {
@@ -4148,9 +3447,9 @@ export type DEFAULT_COLLECTION_TEMPLATEResult = {
             title: string | null;
           } | null;
         } | null;
-        desktopColumns: number | null;
+        desktopColumns: RangeSlider | null;
         heading: string | null;
-        maxProducts: number | null;
+        maxProducts: RangeSlider | null;
         settings: {
           colorScheme: {
             background: {
@@ -4261,7 +3560,7 @@ export type DEFAULT_COLLECTION_TEMPLATEResult = {
     | {
         _key: string;
         _type: 'featuredProductSection';
-        mediaAspectRatio: 'auto' | 'square' | 'video' | null;
+        mediaAspectRatio: AspectRatios | null;
         product: {
           store: {
             descriptionHtml: string | null;
@@ -4493,7 +3792,7 @@ export type DEFAULT_COLLECTION_TEMPLATEResult = {
           hotspot: SanityImageHotspot | null;
           crop: SanityImageCrop | null;
         } | null;
-        bannerHeight: number | null;
+        bannerHeight: RangeSlider | null;
         content: Array<
           | {
               children?: Array<{
@@ -4544,22 +3843,12 @@ export type DEFAULT_COLLECTION_TEMPLATEResult = {
                     } | null;
                   }
                 | null;
-              anchor?: string;
+              anchor?: Anchor;
             }
         > | null;
-        contentAlignment: 'center' | 'left' | 'right' | null;
-        contentPosition:
-          | 'bottom_center'
-          | 'bottom_left'
-          | 'bottom_right'
-          | 'middle_center'
-          | 'middle_left'
-          | 'middle_right'
-          | 'top_center'
-          | 'top_left'
-          | 'top_right'
-          | null;
-        overlayOpacity: number | null;
+        contentAlignment: ContentAlignment | null;
+        contentPosition: ContentPosition | null;
+        overlayOpacity: RangeSlider | null;
         settings: {
           colorScheme: {
             background: {
@@ -4669,9 +3958,9 @@ export type DEFAULT_COLLECTION_TEMPLATEResult = {
     | {
         _key: string;
         _type: 'richtextSection';
-        contentAlignment: 'center' | 'left' | 'right' | null;
-        desktopContentPosition: 'center' | 'left' | 'right' | null;
-        maxWidth: number | null;
+        contentAlignment: ContentAlignment | null;
+        desktopContentPosition: ContentAlignment | null;
+        maxWidth: RangeSlider | null;
         richtext: Array<
           | {
               asset: {
@@ -4684,7 +3973,7 @@ export type DEFAULT_COLLECTION_TEMPLATEResult = {
               hotspot: SanityImageHotspot | null;
               crop: SanityImageCrop | null;
               maxWidth?: RangeSlider;
-              alignment?: 'center' | 'left' | 'right';
+              alignment?: ContentAlignment;
               _type: 'image';
               _key: string;
               altText: string | null;
@@ -4792,7 +4081,7 @@ export type DEFAULT_COLLECTION_TEMPLATEResult = {
                     } | null;
                   }
                 | null;
-              anchor?: string;
+              anchor?: Anchor;
             }
         > | null;
         settings: {
@@ -5009,7 +4298,7 @@ export type ROOT_QUERYResult = {
   } | null;
   fonts: {
     body: {
-      baseSize: number | null;
+      baseSize: RangeSlider | null;
       capitalize: null;
       font: Array<{
         antialiased: boolean | null;
@@ -5046,11 +4335,11 @@ export type ROOT_QUERYResult = {
         fontName: string | null;
         fontType: 'sans-serif' | 'serif' | null;
       }> | null;
-      letterSpacing: number | null;
-      lineHeight: number | null;
+      letterSpacing: RangeSlider | null;
+      lineHeight: RangeSlider | null;
     } | null;
     heading: {
-      baseSize: number | null;
+      baseSize: RangeSlider | null;
       capitalize: boolean | null;
       font: Array<{
         antialiased: boolean | null;
@@ -5087,11 +4376,11 @@ export type ROOT_QUERYResult = {
         fontName: string | null;
         fontType: 'sans-serif' | 'serif' | null;
       }> | null;
-      letterSpacing: number | null;
-      lineHeight: number | null;
+      letterSpacing: RangeSlider | null;
+      lineHeight: RangeSlider | null;
     } | null;
     extra: {
-      baseSize: number | null;
+      baseSize: RangeSlider | null;
       capitalize: boolean | null;
       font: Array<{
         antialiased: boolean | null;
@@ -5128,8 +4417,8 @@ export type ROOT_QUERYResult = {
         fontName: string | null;
         fontType: 'sans-serif' | 'serif' | null;
       }> | null;
-      letterSpacing: number | null;
-      lineHeight: number | null;
+      letterSpacing: RangeSlider | null;
+      lineHeight: RangeSlider | null;
     } | null;
   } | null;
   footer: {
@@ -5268,7 +4557,7 @@ export type ROOT_QUERYResult = {
               crop: SanityImageCrop | null;
             } | null;
           }> | null;
-          slidesPerViewDesktop: number | null;
+          slidesPerViewDesktop: RangeSlider | null;
           settings: {
             colorScheme: {
               background: {
@@ -5383,7 +4672,7 @@ export type ROOT_QUERYResult = {
               gid: string | null;
             } | null;
           }> | null;
-          desktopColumns: number | null;
+          desktopColumns: RangeSlider | null;
           settings: {
             colorScheme: {
               background: {
@@ -5500,9 +4789,9 @@ export type ROOT_QUERYResult = {
               title: string | null;
             } | null;
           } | null;
-          desktopColumns: number | null;
+          desktopColumns: RangeSlider | null;
           heading: string | null;
-          maxProducts: number | null;
+          maxProducts: RangeSlider | null;
           settings: {
             colorScheme: {
               background: {
@@ -5613,7 +4902,7 @@ export type ROOT_QUERYResult = {
       | {
           _key: string;
           _type: 'featuredProductSection';
-          mediaAspectRatio: 'auto' | 'square' | 'video' | null;
+          mediaAspectRatio: AspectRatios | null;
           product: {
             store: {
               descriptionHtml: string | null;
@@ -5845,7 +5134,7 @@ export type ROOT_QUERYResult = {
             hotspot: SanityImageHotspot | null;
             crop: SanityImageCrop | null;
           } | null;
-          bannerHeight: number | null;
+          bannerHeight: RangeSlider | null;
           content: Array<
             | {
                 children?: Array<{
@@ -5896,22 +5185,12 @@ export type ROOT_QUERYResult = {
                       } | null;
                     }
                   | null;
-                anchor?: string;
+                anchor?: Anchor;
               }
           > | null;
-          contentAlignment: 'center' | 'left' | 'right' | null;
-          contentPosition:
-            | 'bottom_center'
-            | 'bottom_left'
-            | 'bottom_right'
-            | 'middle_center'
-            | 'middle_left'
-            | 'middle_right'
-            | 'top_center'
-            | 'top_left'
-            | 'top_right'
-            | null;
-          overlayOpacity: number | null;
+          contentAlignment: ContentAlignment | null;
+          contentPosition: ContentPosition | null;
+          overlayOpacity: RangeSlider | null;
           settings: {
             colorScheme: {
               background: {
@@ -6021,9 +5300,9 @@ export type ROOT_QUERYResult = {
       | {
           _key: string;
           _type: 'richtextSection';
-          contentAlignment: 'center' | 'left' | 'right' | null;
-          desktopContentPosition: 'center' | 'left' | 'right' | null;
-          maxWidth: number | null;
+          contentAlignment: ContentAlignment | null;
+          desktopContentPosition: ContentAlignment | null;
+          maxWidth: RangeSlider | null;
           richtext: Array<
             | {
                 asset: {
@@ -6036,7 +5315,7 @@ export type ROOT_QUERYResult = {
                 hotspot: SanityImageHotspot | null;
                 crop: SanityImageCrop | null;
                 maxWidth?: RangeSlider;
-                alignment?: 'center' | 'left' | 'right';
+                alignment?: ContentAlignment;
                 _type: 'image';
                 _key: string;
                 altText: string | null;
@@ -6144,7 +5423,7 @@ export type ROOT_QUERYResult = {
                       } | null;
                     }
                   | null;
-                anchor?: string;
+                anchor?: Anchor;
               }
           > | null;
           settings: {
@@ -6495,7 +5774,7 @@ export type ROOT_QUERYResult = {
         } | null;
       } | null;
     } | null;
-    desktopLogoWidth: number | null;
+    desktopLogoWidth: RangeSlider | null;
     menu: Array<
       | {
           _key: string;
@@ -6629,7 +5908,7 @@ export type ROOT_QUERYResult = {
     sticky: 'always' | 'none' | 'onScrollUp' | null;
   } | null;
   settings: {
-    badgesCornerRadius: number | null;
+    badgesCornerRadius: RangeSlider | null;
     badgesPosition:
       | 'bottom_left'
       | 'bottom_right'
@@ -6838,30 +6117,30 @@ export type ROOT_QUERYResult = {
     } | null;
     blogCards: {
       style?: 'card' | 'standard';
-      imageAspectRatio?: 'auto' | 'square' | 'video';
+      imageAspectRatio?: AspectRatios;
       textAlignment?: 'center' | 'left' | 'right';
       border?: {
-        thickness?: number;
-        opacity?: number;
-        cornerRadius?: number;
+        thickness?: RangeSlider;
+        opacity?: RangeSlider;
+        cornerRadius?: RangeSlider;
       };
       shadow?: {
-        opacity?: number;
-        horizontalOffset?: number;
-        verticalOffset?: number;
-        blur?: number;
+        opacity?: RangeSlider;
+        horizontalOffset?: RangeSlider;
+        verticalOffset?: RangeSlider;
+        blur?: RangeSlider;
       };
     } | null;
     buttonsBorder: {
-      thickness?: number;
-      opacity?: number;
-      cornerRadius?: number;
+      thickness?: RangeSlider;
+      opacity?: RangeSlider;
+      cornerRadius?: RangeSlider;
     } | null;
     buttonsShadow: {
-      opacity?: number;
-      horizontalOffset?: number;
-      verticalOffset?: number;
-      blur?: number;
+      opacity?: RangeSlider;
+      horizontalOffset?: RangeSlider;
+      verticalOffset?: RangeSlider;
+      blur?: RangeSlider;
     } | null;
     cartCollection: {
       store: {
@@ -6971,31 +6250,31 @@ export type ROOT_QUERYResult = {
     } | null;
     collectionCards: {
       style?: 'card' | 'standard';
-      imageAspectRatio?: 'auto' | 'square' | 'video';
+      imageAspectRatio?: AspectRatios;
       textAlignment?: 'center' | 'left' | 'right';
       border?: {
-        thickness?: number;
-        opacity?: number;
-        cornerRadius?: number;
+        thickness?: RangeSlider;
+        opacity?: RangeSlider;
+        cornerRadius?: RangeSlider;
       };
       shadow?: {
-        opacity?: number;
-        horizontalOffset?: number;
-        verticalOffset?: number;
-        blur?: number;
+        opacity?: RangeSlider;
+        horizontalOffset?: RangeSlider;
+        verticalOffset?: RangeSlider;
+        blur?: RangeSlider;
       };
     } | null;
     description: null;
     dropdownsAndPopupsBorder: {
-      thickness?: number;
-      opacity?: number;
-      cornerRadius?: number;
+      thickness?: RangeSlider;
+      opacity?: RangeSlider;
+      cornerRadius?: RangeSlider;
     } | null;
     dropdownsAndPopupsShadow: {
-      opacity?: number;
-      horizontalOffset?: number;
-      verticalOffset?: number;
-      blur?: number;
+      opacity?: RangeSlider;
+      horizontalOffset?: RangeSlider;
+      verticalOffset?: RangeSlider;
+      blur?: RangeSlider;
     } | null;
     facebook: string | null;
     favicon: {
@@ -7012,19 +6291,19 @@ export type ROOT_QUERYResult = {
       crop: SanityImageCrop | null;
     } | null;
     grid: {
-      horizontalSpace?: number;
-      verticalSpace?: number;
+      horizontalSpace?: RangeSlider;
+      verticalSpace?: RangeSlider;
     } | null;
     inputsBorder: {
-      thickness?: number;
-      opacity?: number;
-      cornerRadius?: number;
+      thickness?: RangeSlider;
+      opacity?: RangeSlider;
+      cornerRadius?: RangeSlider;
     } | null;
     inputsShadow: {
-      opacity?: number;
-      horizontalOffset?: number;
-      verticalOffset?: number;
-      blur?: number;
+      opacity?: RangeSlider;
+      horizontalOffset?: RangeSlider;
+      verticalOffset?: RangeSlider;
+      blur?: RangeSlider;
     } | null;
     instagram: string | null;
     linkedin: string | null;
@@ -7042,31 +6321,31 @@ export type ROOT_QUERYResult = {
       crop: SanityImageCrop | null;
     } | null;
     mediaBorder: {
-      thickness?: number;
-      opacity?: number;
-      cornerRadius?: number;
+      thickness?: RangeSlider;
+      opacity?: RangeSlider;
+      cornerRadius?: RangeSlider;
     } | null;
     mediaShadow: {
-      opacity?: number;
-      horizontalOffset?: number;
-      verticalOffset?: number;
-      blur?: number;
+      opacity?: RangeSlider;
+      horizontalOffset?: RangeSlider;
+      verticalOffset?: RangeSlider;
+      blur?: RangeSlider;
     } | null;
     pinterest: string | null;
     productCards: {
       style?: 'card' | 'standard';
-      imageAspectRatio?: 'auto' | 'square' | 'video';
+      imageAspectRatio?: AspectRatios;
       textAlignment?: 'center' | 'left' | 'right';
       border?: {
-        thickness?: number;
-        opacity?: number;
-        cornerRadius?: number;
+        thickness?: RangeSlider;
+        opacity?: RangeSlider;
+        cornerRadius?: RangeSlider;
       };
       shadow?: {
-        opacity?: number;
-        horizontalOffset?: number;
-        verticalOffset?: number;
-        blur?: number;
+        opacity?: RangeSlider;
+        horizontalOffset?: RangeSlider;
+        verticalOffset?: RangeSlider;
+        blur?: RangeSlider;
       };
     } | null;
     showCurrencyCodes: boolean | null;
@@ -7086,7 +6365,7 @@ export type ROOT_QUERYResult = {
       hotspot: SanityImageHotspot | null;
       crop: SanityImageCrop | null;
     } | null;
-    spaceBetweenTemplateSections: number | null;
+    spaceBetweenTemplateSections: RangeSlider | null;
     tiktok: string | null;
     tumblr: string | null;
     twitter: string | null;
@@ -7240,7 +6519,7 @@ export type COLLECTION_QUERYResult = {
                 crop: SanityImageCrop | null;
               } | null;
             }> | null;
-            slidesPerViewDesktop: number | null;
+            slidesPerViewDesktop: RangeSlider | null;
             settings: {
               colorScheme: {
                 background: {
@@ -7350,20 +6629,10 @@ export type COLLECTION_QUERYResult = {
         | {
             _key: string;
             _type: 'collectionBannerSection';
-            bannerHeight: number | null;
-            contentAlignment: 'center' | 'left' | 'right' | null;
-            contentPosition:
-              | 'bottom_center'
-              | 'bottom_left'
-              | 'bottom_right'
-              | 'middle_center'
-              | 'middle_left'
-              | 'middle_right'
-              | 'top_center'
-              | 'top_left'
-              | 'top_right'
-              | null;
-            overlayOpacity: number | null;
+            bannerHeight: RangeSlider | null;
+            contentAlignment: ContentAlignment | null;
+            contentPosition: ContentPosition | null;
+            overlayOpacity: RangeSlider | null;
             showDescription: boolean | null;
             showImage: boolean | null;
             settings: {
@@ -7480,7 +6749,7 @@ export type COLLECTION_QUERYResult = {
                 gid: string | null;
               } | null;
             }> | null;
-            desktopColumns: number | null;
+            desktopColumns: RangeSlider | null;
             settings: {
               colorScheme: {
                 background: {
@@ -7590,11 +6859,11 @@ export type COLLECTION_QUERYResult = {
         | {
             _key: string;
             _type: 'collectionProductGridSection';
-            desktopColumns: number | null;
+            desktopColumns: RangeSlider | null;
             enableFiltering: boolean | null;
             enableSorting: boolean | null;
-            mobileColumns: number | null;
-            productsPerPage: number | null;
+            mobileColumns: RangeSlider | null;
+            productsPerPage: RangeSlider | null;
             settings: {
               colorScheme: {
                 background: {
@@ -7711,9 +6980,9 @@ export type COLLECTION_QUERYResult = {
                 title: string | null;
               } | null;
             } | null;
-            desktopColumns: number | null;
+            desktopColumns: RangeSlider | null;
             heading: string | null;
-            maxProducts: number | null;
+            maxProducts: RangeSlider | null;
             settings: {
               colorScheme: {
                 background: {
@@ -7824,7 +7093,7 @@ export type COLLECTION_QUERYResult = {
         | {
             _key: string;
             _type: 'featuredProductSection';
-            mediaAspectRatio: 'auto' | 'square' | 'video' | null;
+            mediaAspectRatio: AspectRatios | null;
             product: {
               store: {
                 descriptionHtml: string | null;
@@ -8056,7 +7325,7 @@ export type COLLECTION_QUERYResult = {
               hotspot: SanityImageHotspot | null;
               crop: SanityImageCrop | null;
             } | null;
-            bannerHeight: number | null;
+            bannerHeight: RangeSlider | null;
             content: Array<
               | {
                   children?: Array<{
@@ -8107,22 +7376,12 @@ export type COLLECTION_QUERYResult = {
                         } | null;
                       }
                     | null;
-                  anchor?: string;
+                  anchor?: Anchor;
                 }
             > | null;
-            contentAlignment: 'center' | 'left' | 'right' | null;
-            contentPosition:
-              | 'bottom_center'
-              | 'bottom_left'
-              | 'bottom_right'
-              | 'middle_center'
-              | 'middle_left'
-              | 'middle_right'
-              | 'top_center'
-              | 'top_left'
-              | 'top_right'
-              | null;
-            overlayOpacity: number | null;
+            contentAlignment: ContentAlignment | null;
+            contentPosition: ContentPosition | null;
+            overlayOpacity: RangeSlider | null;
             settings: {
               colorScheme: {
                 background: {
@@ -8232,9 +7491,9 @@ export type COLLECTION_QUERYResult = {
         | {
             _key: string;
             _type: 'richtextSection';
-            contentAlignment: 'center' | 'left' | 'right' | null;
-            desktopContentPosition: 'center' | 'left' | 'right' | null;
-            maxWidth: number | null;
+            contentAlignment: ContentAlignment | null;
+            desktopContentPosition: ContentAlignment | null;
+            maxWidth: RangeSlider | null;
             richtext: Array<
               | {
                   asset: {
@@ -8247,7 +7506,7 @@ export type COLLECTION_QUERYResult = {
                   hotspot: SanityImageHotspot | null;
                   crop: SanityImageCrop | null;
                   maxWidth?: RangeSlider;
-                  alignment?: 'center' | 'left' | 'right';
+                  alignment?: ContentAlignment;
                   _type: 'image';
                   _key: string;
                   altText: string | null;
@@ -8355,7 +7614,7 @@ export type COLLECTION_QUERYResult = {
                         } | null;
                       }
                     | null;
-                  anchor?: string;
+                  anchor?: Anchor;
                 }
             > | null;
             settings: {
@@ -8495,7 +7754,7 @@ export type COLLECTION_QUERYResult = {
               crop: SanityImageCrop | null;
             } | null;
           }> | null;
-          slidesPerViewDesktop: number | null;
+          slidesPerViewDesktop: RangeSlider | null;
           settings: {
             colorScheme: {
               background: {
@@ -8605,20 +7864,10 @@ export type COLLECTION_QUERYResult = {
       | {
           _key: string;
           _type: 'collectionBannerSection';
-          bannerHeight: number | null;
-          contentAlignment: 'center' | 'left' | 'right' | null;
-          contentPosition:
-            | 'bottom_center'
-            | 'bottom_left'
-            | 'bottom_right'
-            | 'middle_center'
-            | 'middle_left'
-            | 'middle_right'
-            | 'top_center'
-            | 'top_left'
-            | 'top_right'
-            | null;
-          overlayOpacity: number | null;
+          bannerHeight: RangeSlider | null;
+          contentAlignment: ContentAlignment | null;
+          contentPosition: ContentPosition | null;
+          overlayOpacity: RangeSlider | null;
           showDescription: boolean | null;
           showImage: boolean | null;
           settings: {
@@ -8735,7 +7984,7 @@ export type COLLECTION_QUERYResult = {
               gid: string | null;
             } | null;
           }> | null;
-          desktopColumns: number | null;
+          desktopColumns: RangeSlider | null;
           settings: {
             colorScheme: {
               background: {
@@ -8845,11 +8094,11 @@ export type COLLECTION_QUERYResult = {
       | {
           _key: string;
           _type: 'collectionProductGridSection';
-          desktopColumns: number | null;
+          desktopColumns: RangeSlider | null;
           enableFiltering: boolean | null;
           enableSorting: boolean | null;
-          mobileColumns: number | null;
-          productsPerPage: number | null;
+          mobileColumns: RangeSlider | null;
+          productsPerPage: RangeSlider | null;
           settings: {
             colorScheme: {
               background: {
@@ -8966,9 +8215,9 @@ export type COLLECTION_QUERYResult = {
               title: string | null;
             } | null;
           } | null;
-          desktopColumns: number | null;
+          desktopColumns: RangeSlider | null;
           heading: string | null;
-          maxProducts: number | null;
+          maxProducts: RangeSlider | null;
           settings: {
             colorScheme: {
               background: {
@@ -9079,7 +8328,7 @@ export type COLLECTION_QUERYResult = {
       | {
           _key: string;
           _type: 'featuredProductSection';
-          mediaAspectRatio: 'auto' | 'square' | 'video' | null;
+          mediaAspectRatio: AspectRatios | null;
           product: {
             store: {
               descriptionHtml: string | null;
@@ -9311,7 +8560,7 @@ export type COLLECTION_QUERYResult = {
             hotspot: SanityImageHotspot | null;
             crop: SanityImageCrop | null;
           } | null;
-          bannerHeight: number | null;
+          bannerHeight: RangeSlider | null;
           content: Array<
             | {
                 children?: Array<{
@@ -9362,22 +8611,12 @@ export type COLLECTION_QUERYResult = {
                       } | null;
                     }
                   | null;
-                anchor?: string;
+                anchor?: Anchor;
               }
           > | null;
-          contentAlignment: 'center' | 'left' | 'right' | null;
-          contentPosition:
-            | 'bottom_center'
-            | 'bottom_left'
-            | 'bottom_right'
-            | 'middle_center'
-            | 'middle_left'
-            | 'middle_right'
-            | 'top_center'
-            | 'top_left'
-            | 'top_right'
-            | null;
-          overlayOpacity: number | null;
+          contentAlignment: ContentAlignment | null;
+          contentPosition: ContentPosition | null;
+          overlayOpacity: RangeSlider | null;
           settings: {
             colorScheme: {
               background: {
@@ -9487,9 +8726,9 @@ export type COLLECTION_QUERYResult = {
       | {
           _key: string;
           _type: 'richtextSection';
-          contentAlignment: 'center' | 'left' | 'right' | null;
-          desktopContentPosition: 'center' | 'left' | 'right' | null;
-          maxWidth: number | null;
+          contentAlignment: ContentAlignment | null;
+          desktopContentPosition: ContentAlignment | null;
+          maxWidth: RangeSlider | null;
           richtext: Array<
             | {
                 asset: {
@@ -9502,7 +8741,7 @@ export type COLLECTION_QUERYResult = {
                 hotspot: SanityImageHotspot | null;
                 crop: SanityImageCrop | null;
                 maxWidth?: RangeSlider;
-                alignment?: 'center' | 'left' | 'right';
+                alignment?: ContentAlignment;
                 _type: 'image';
                 _key: string;
                 altText: string | null;
@@ -9610,7 +8849,7 @@ export type COLLECTION_QUERYResult = {
                       } | null;
                     }
                   | null;
-                anchor?: string;
+                anchor?: Anchor;
               }
           > | null;
           settings: {
@@ -9752,7 +8991,7 @@ export type PAGE_QUERYResult =
                 crop: SanityImageCrop | null;
               } | null;
             }> | null;
-            slidesPerViewDesktop: number | null;
+            slidesPerViewDesktop: RangeSlider | null;
             settings: {
               colorScheme: {
                 background: {
@@ -9867,7 +9106,7 @@ export type PAGE_QUERYResult =
                 gid: string | null;
               } | null;
             }> | null;
-            desktopColumns: number | null;
+            desktopColumns: RangeSlider | null;
             settings: {
               colorScheme: {
                 background: {
@@ -9984,9 +9223,9 @@ export type PAGE_QUERYResult =
                 title: string | null;
               } | null;
             } | null;
-            desktopColumns: number | null;
+            desktopColumns: RangeSlider | null;
             heading: string | null;
-            maxProducts: number | null;
+            maxProducts: RangeSlider | null;
             settings: {
               colorScheme: {
                 background: {
@@ -10097,7 +9336,7 @@ export type PAGE_QUERYResult =
         | {
             _key: string;
             _type: 'featuredProductSection';
-            mediaAspectRatio: 'auto' | 'square' | 'video' | null;
+            mediaAspectRatio: AspectRatios | null;
             product: {
               store: {
                 descriptionHtml: string | null;
@@ -10329,7 +9568,7 @@ export type PAGE_QUERYResult =
               hotspot: SanityImageHotspot | null;
               crop: SanityImageCrop | null;
             } | null;
-            bannerHeight: number | null;
+            bannerHeight: RangeSlider | null;
             content: Array<
               | {
                   children?: Array<{
@@ -10380,22 +9619,12 @@ export type PAGE_QUERYResult =
                         } | null;
                       }
                     | null;
-                  anchor?: string;
+                  anchor?: Anchor;
                 }
             > | null;
-            contentAlignment: 'center' | 'left' | 'right' | null;
-            contentPosition:
-              | 'bottom_center'
-              | 'bottom_left'
-              | 'bottom_right'
-              | 'middle_center'
-              | 'middle_left'
-              | 'middle_right'
-              | 'top_center'
-              | 'top_left'
-              | 'top_right'
-              | null;
-            overlayOpacity: number | null;
+            contentAlignment: ContentAlignment | null;
+            contentPosition: ContentPosition | null;
+            overlayOpacity: RangeSlider | null;
             settings: {
               colorScheme: {
                 background: {
@@ -10505,9 +9734,9 @@ export type PAGE_QUERYResult =
         | {
             _key: string;
             _type: 'richtextSection';
-            contentAlignment: 'center' | 'left' | 'right' | null;
-            desktopContentPosition: 'center' | 'left' | 'right' | null;
-            maxWidth: number | null;
+            contentAlignment: ContentAlignment | null;
+            desktopContentPosition: ContentAlignment | null;
+            maxWidth: RangeSlider | null;
             richtext: Array<
               | {
                   asset: {
@@ -10520,7 +9749,7 @@ export type PAGE_QUERYResult =
                   hotspot: SanityImageHotspot | null;
                   crop: SanityImageCrop | null;
                   maxWidth?: RangeSlider;
-                  alignment?: 'center' | 'left' | 'right';
+                  alignment?: ContentAlignment;
                   _type: 'image';
                   _key: string;
                   altText: string | null;
@@ -10628,7 +9857,7 @@ export type PAGE_QUERYResult =
                         } | null;
                       }
                     | null;
-                  anchor?: string;
+                  anchor?: Anchor;
                 }
             > | null;
             settings: {
@@ -10783,7 +10012,7 @@ export type PAGE_QUERYResult =
                 crop: SanityImageCrop | null;
               } | null;
             }> | null;
-            slidesPerViewDesktop: number | null;
+            slidesPerViewDesktop: RangeSlider | null;
             settings: {
               colorScheme: {
                 background: {
@@ -10898,7 +10127,7 @@ export type PAGE_QUERYResult =
                 gid: string | null;
               } | null;
             }> | null;
-            desktopColumns: number | null;
+            desktopColumns: RangeSlider | null;
             settings: {
               colorScheme: {
                 background: {
@@ -11015,9 +10244,9 @@ export type PAGE_QUERYResult =
                 title: string | null;
               } | null;
             } | null;
-            desktopColumns: number | null;
+            desktopColumns: RangeSlider | null;
             heading: string | null;
-            maxProducts: number | null;
+            maxProducts: RangeSlider | null;
             settings: {
               colorScheme: {
                 background: {
@@ -11128,7 +10357,7 @@ export type PAGE_QUERYResult =
         | {
             _key: string;
             _type: 'featuredProductSection';
-            mediaAspectRatio: 'auto' | 'square' | 'video' | null;
+            mediaAspectRatio: AspectRatios | null;
             product: {
               store: {
                 descriptionHtml: string | null;
@@ -11360,7 +10589,7 @@ export type PAGE_QUERYResult =
               hotspot: SanityImageHotspot | null;
               crop: SanityImageCrop | null;
             } | null;
-            bannerHeight: number | null;
+            bannerHeight: RangeSlider | null;
             content: Array<
               | {
                   children?: Array<{
@@ -11411,22 +10640,12 @@ export type PAGE_QUERYResult =
                         } | null;
                       }
                     | null;
-                  anchor?: string;
+                  anchor?: Anchor;
                 }
             > | null;
-            contentAlignment: 'center' | 'left' | 'right' | null;
-            contentPosition:
-              | 'bottom_center'
-              | 'bottom_left'
-              | 'bottom_right'
-              | 'middle_center'
-              | 'middle_left'
-              | 'middle_right'
-              | 'top_center'
-              | 'top_left'
-              | 'top_right'
-              | null;
-            overlayOpacity: number | null;
+            contentAlignment: ContentAlignment | null;
+            contentPosition: ContentPosition | null;
+            overlayOpacity: RangeSlider | null;
             settings: {
               colorScheme: {
                 background: {
@@ -11536,9 +10755,9 @@ export type PAGE_QUERYResult =
         | {
             _key: string;
             _type: 'richtextSection';
-            contentAlignment: 'center' | 'left' | 'right' | null;
-            desktopContentPosition: 'center' | 'left' | 'right' | null;
-            maxWidth: number | null;
+            contentAlignment: ContentAlignment | null;
+            desktopContentPosition: ContentAlignment | null;
+            maxWidth: RangeSlider | null;
             richtext: Array<
               | {
                   asset: {
@@ -11551,7 +10770,7 @@ export type PAGE_QUERYResult =
                   hotspot: SanityImageHotspot | null;
                   crop: SanityImageCrop | null;
                   maxWidth?: RangeSlider;
-                  alignment?: 'center' | 'left' | 'right';
+                  alignment?: ContentAlignment;
                   _type: 'image';
                   _key: string;
                   altText: string | null;
@@ -11659,7 +10878,7 @@ export type PAGE_QUERYResult =
                         } | null;
                       }
                     | null;
-                  anchor?: string;
+                  anchor?: Anchor;
                 }
             > | null;
             settings: {
@@ -11822,7 +11041,7 @@ export type PRODUCT_QUERYResult = {
                 crop: SanityImageCrop | null;
               } | null;
             }> | null;
-            slidesPerViewDesktop: number | null;
+            slidesPerViewDesktop: RangeSlider | null;
             settings: {
               colorScheme: {
                 background: {
@@ -11937,7 +11156,7 @@ export type PRODUCT_QUERYResult = {
                 gid: string | null;
               } | null;
             }> | null;
-            desktopColumns: number | null;
+            desktopColumns: RangeSlider | null;
             settings: {
               colorScheme: {
                 background: {
@@ -12054,9 +11273,9 @@ export type PRODUCT_QUERYResult = {
                 title: string | null;
               } | null;
             } | null;
-            desktopColumns: number | null;
+            desktopColumns: RangeSlider | null;
             heading: string | null;
-            maxProducts: number | null;
+            maxProducts: RangeSlider | null;
             settings: {
               colorScheme: {
                 background: {
@@ -12167,7 +11386,7 @@ export type PRODUCT_QUERYResult = {
         | {
             _key: string;
             _type: 'featuredProductSection';
-            mediaAspectRatio: 'auto' | 'square' | 'video' | null;
+            mediaAspectRatio: AspectRatios | null;
             product: {
               store: {
                 descriptionHtml: string | null;
@@ -12399,7 +11618,7 @@ export type PRODUCT_QUERYResult = {
               hotspot: SanityImageHotspot | null;
               crop: SanityImageCrop | null;
             } | null;
-            bannerHeight: number | null;
+            bannerHeight: RangeSlider | null;
             content: Array<
               | {
                   children?: Array<{
@@ -12450,22 +11669,12 @@ export type PRODUCT_QUERYResult = {
                         } | null;
                       }
                     | null;
-                  anchor?: string;
+                  anchor?: Anchor;
                 }
             > | null;
-            contentAlignment: 'center' | 'left' | 'right' | null;
-            contentPosition:
-              | 'bottom_center'
-              | 'bottom_left'
-              | 'bottom_right'
-              | 'middle_center'
-              | 'middle_left'
-              | 'middle_right'
-              | 'top_center'
-              | 'top_left'
-              | 'top_right'
-              | null;
-            overlayOpacity: number | null;
+            contentAlignment: ContentAlignment | null;
+            contentPosition: ContentPosition | null;
+            overlayOpacity: RangeSlider | null;
             settings: {
               colorScheme: {
                 background: {
@@ -12577,7 +11786,7 @@ export type PRODUCT_QUERYResult = {
             _type: 'productInformationSection';
             desktopMediaPosition: 'left' | 'right' | null;
             desktopMediaWidth: 'large' | 'medium' | 'small' | null;
-            mediaAspectRatio: 'auto' | 'square' | 'video' | null;
+            mediaAspectRatio: AspectRatios | null;
             richtext: Array<
               | {
                   quantitySelector?: boolean;
@@ -12777,9 +11986,9 @@ export type PRODUCT_QUERYResult = {
         | {
             _key: string;
             _type: 'relatedProductsSection';
-            desktopColumns: number | null;
+            desktopColumns: RangeSlider | null;
             heading: string | null;
-            maxProducts: number | null;
+            maxProducts: RangeSlider | null;
             settings: {
               colorScheme: {
                 background: {
@@ -12889,9 +12098,9 @@ export type PRODUCT_QUERYResult = {
         | {
             _key: string;
             _type: 'richtextSection';
-            contentAlignment: 'center' | 'left' | 'right' | null;
-            desktopContentPosition: 'center' | 'left' | 'right' | null;
-            maxWidth: number | null;
+            contentAlignment: ContentAlignment | null;
+            desktopContentPosition: ContentAlignment | null;
+            maxWidth: RangeSlider | null;
             richtext: Array<
               | {
                   asset: {
@@ -12904,7 +12113,7 @@ export type PRODUCT_QUERYResult = {
                   hotspot: SanityImageHotspot | null;
                   crop: SanityImageCrop | null;
                   maxWidth?: RangeSlider;
-                  alignment?: 'center' | 'left' | 'right';
+                  alignment?: ContentAlignment;
                   _type: 'image';
                   _key: string;
                   altText: string | null;
@@ -13012,7 +12221,7 @@ export type PRODUCT_QUERYResult = {
                         } | null;
                       }
                     | null;
-                  anchor?: string;
+                  anchor?: Anchor;
                 }
             > | null;
             settings: {
@@ -13152,7 +12361,7 @@ export type PRODUCT_QUERYResult = {
               crop: SanityImageCrop | null;
             } | null;
           }> | null;
-          slidesPerViewDesktop: number | null;
+          slidesPerViewDesktop: RangeSlider | null;
           settings: {
             colorScheme: {
               background: {
@@ -13267,7 +12476,7 @@ export type PRODUCT_QUERYResult = {
               gid: string | null;
             } | null;
           }> | null;
-          desktopColumns: number | null;
+          desktopColumns: RangeSlider | null;
           settings: {
             colorScheme: {
               background: {
@@ -13384,9 +12593,9 @@ export type PRODUCT_QUERYResult = {
               title: string | null;
             } | null;
           } | null;
-          desktopColumns: number | null;
+          desktopColumns: RangeSlider | null;
           heading: string | null;
-          maxProducts: number | null;
+          maxProducts: RangeSlider | null;
           settings: {
             colorScheme: {
               background: {
@@ -13497,7 +12706,7 @@ export type PRODUCT_QUERYResult = {
       | {
           _key: string;
           _type: 'featuredProductSection';
-          mediaAspectRatio: 'auto' | 'square' | 'video' | null;
+          mediaAspectRatio: AspectRatios | null;
           product: {
             store: {
               descriptionHtml: string | null;
@@ -13729,7 +12938,7 @@ export type PRODUCT_QUERYResult = {
             hotspot: SanityImageHotspot | null;
             crop: SanityImageCrop | null;
           } | null;
-          bannerHeight: number | null;
+          bannerHeight: RangeSlider | null;
           content: Array<
             | {
                 children?: Array<{
@@ -13780,22 +12989,12 @@ export type PRODUCT_QUERYResult = {
                       } | null;
                     }
                   | null;
-                anchor?: string;
+                anchor?: Anchor;
               }
           > | null;
-          contentAlignment: 'center' | 'left' | 'right' | null;
-          contentPosition:
-            | 'bottom_center'
-            | 'bottom_left'
-            | 'bottom_right'
-            | 'middle_center'
-            | 'middle_left'
-            | 'middle_right'
-            | 'top_center'
-            | 'top_left'
-            | 'top_right'
-            | null;
-          overlayOpacity: number | null;
+          contentAlignment: ContentAlignment | null;
+          contentPosition: ContentPosition | null;
+          overlayOpacity: RangeSlider | null;
           settings: {
             colorScheme: {
               background: {
@@ -13907,7 +13106,7 @@ export type PRODUCT_QUERYResult = {
           _type: 'productInformationSection';
           desktopMediaPosition: 'left' | 'right' | null;
           desktopMediaWidth: 'large' | 'medium' | 'small' | null;
-          mediaAspectRatio: 'auto' | 'square' | 'video' | null;
+          mediaAspectRatio: AspectRatios | null;
           richtext: Array<
             | {
                 quantitySelector?: boolean;
@@ -14107,9 +13306,9 @@ export type PRODUCT_QUERYResult = {
       | {
           _key: string;
           _type: 'relatedProductsSection';
-          desktopColumns: number | null;
+          desktopColumns: RangeSlider | null;
           heading: string | null;
-          maxProducts: number | null;
+          maxProducts: RangeSlider | null;
           settings: {
             colorScheme: {
               background: {
@@ -14219,9 +13418,9 @@ export type PRODUCT_QUERYResult = {
       | {
           _key: string;
           _type: 'richtextSection';
-          contentAlignment: 'center' | 'left' | 'right' | null;
-          desktopContentPosition: 'center' | 'left' | 'right' | null;
-          maxWidth: number | null;
+          contentAlignment: ContentAlignment | null;
+          desktopContentPosition: ContentAlignment | null;
+          maxWidth: RangeSlider | null;
           richtext: Array<
             | {
                 asset: {
@@ -14234,7 +13433,7 @@ export type PRODUCT_QUERYResult = {
                 hotspot: SanityImageHotspot | null;
                 crop: SanityImageCrop | null;
                 maxWidth?: RangeSlider;
-                alignment?: 'center' | 'left' | 'right';
+                alignment?: ContentAlignment;
                 _type: 'image';
                 _key: string;
                 altText: string | null;
@@ -14342,7 +13541,7 @@ export type PRODUCT_QUERYResult = {
                       } | null;
                     }
                   | null;
-                anchor?: string;
+                anchor?: Anchor;
               }
           > | null;
           settings: {
@@ -14487,7 +13686,7 @@ export type ALL_SECTIONS_QUERYResult =
                 crop: SanityImageCrop | null;
               } | null;
             }> | null;
-            slidesPerViewDesktop: number | null;
+            slidesPerViewDesktop: RangeSlider | null;
             settings: {
               colorScheme: {
                 background: {
@@ -14597,20 +13796,10 @@ export type ALL_SECTIONS_QUERYResult =
         | {
             _key: string;
             _type: 'collectionBannerSection';
-            bannerHeight: number | null;
-            contentAlignment: 'center' | 'left' | 'right' | null;
-            contentPosition:
-              | 'bottom_center'
-              | 'bottom_left'
-              | 'bottom_right'
-              | 'middle_center'
-              | 'middle_left'
-              | 'middle_right'
-              | 'top_center'
-              | 'top_left'
-              | 'top_right'
-              | null;
-            overlayOpacity: number | null;
+            bannerHeight: RangeSlider | null;
+            contentAlignment: ContentAlignment | null;
+            contentPosition: ContentPosition | null;
+            overlayOpacity: RangeSlider | null;
             showDescription: boolean | null;
             showImage: boolean | null;
             settings: {
@@ -14727,7 +13916,7 @@ export type ALL_SECTIONS_QUERYResult =
                 gid: string | null;
               } | null;
             }> | null;
-            desktopColumns: number | null;
+            desktopColumns: RangeSlider | null;
             settings: {
               colorScheme: {
                 background: {
@@ -14837,11 +14026,11 @@ export type ALL_SECTIONS_QUERYResult =
         | {
             _key: string;
             _type: 'collectionProductGridSection';
-            desktopColumns: number | null;
+            desktopColumns: RangeSlider | null;
             enableFiltering: boolean | null;
             enableSorting: boolean | null;
-            mobileColumns: number | null;
-            productsPerPage: number | null;
+            mobileColumns: RangeSlider | null;
+            productsPerPage: RangeSlider | null;
             settings: {
               colorScheme: {
                 background: {
@@ -14958,9 +14147,9 @@ export type ALL_SECTIONS_QUERYResult =
                 title: string | null;
               } | null;
             } | null;
-            desktopColumns: number | null;
+            desktopColumns: RangeSlider | null;
             heading: string | null;
-            maxProducts: number | null;
+            maxProducts: RangeSlider | null;
             settings: {
               colorScheme: {
                 background: {
@@ -15071,7 +14260,7 @@ export type ALL_SECTIONS_QUERYResult =
         | {
             _key: string;
             _type: 'featuredProductSection';
-            mediaAspectRatio: 'auto' | 'square' | 'video' | null;
+            mediaAspectRatio: AspectRatios | null;
             product: {
               store: {
                 descriptionHtml: string | null;
@@ -15303,7 +14492,7 @@ export type ALL_SECTIONS_QUERYResult =
               hotspot: SanityImageHotspot | null;
               crop: SanityImageCrop | null;
             } | null;
-            bannerHeight: number | null;
+            bannerHeight: RangeSlider | null;
             content: Array<
               | {
                   children?: Array<{
@@ -15354,22 +14543,12 @@ export type ALL_SECTIONS_QUERYResult =
                         } | null;
                       }
                     | null;
-                  anchor?: string;
+                  anchor?: Anchor;
                 }
             > | null;
-            contentAlignment: 'center' | 'left' | 'right' | null;
-            contentPosition:
-              | 'bottom_center'
-              | 'bottom_left'
-              | 'bottom_right'
-              | 'middle_center'
-              | 'middle_left'
-              | 'middle_right'
-              | 'top_center'
-              | 'top_left'
-              | 'top_right'
-              | null;
-            overlayOpacity: number | null;
+            contentAlignment: ContentAlignment | null;
+            contentPosition: ContentPosition | null;
+            overlayOpacity: RangeSlider | null;
             settings: {
               colorScheme: {
                 background: {
@@ -15479,9 +14658,9 @@ export type ALL_SECTIONS_QUERYResult =
         | {
             _key: string;
             _type: 'richtextSection';
-            contentAlignment: 'center' | 'left' | 'right' | null;
-            desktopContentPosition: 'center' | 'left' | 'right' | null;
-            maxWidth: number | null;
+            contentAlignment: ContentAlignment | null;
+            desktopContentPosition: ContentAlignment | null;
+            maxWidth: RangeSlider | null;
             richtext: Array<
               | {
                   asset: {
@@ -15494,7 +14673,7 @@ export type ALL_SECTIONS_QUERYResult =
                   hotspot: SanityImageHotspot | null;
                   crop: SanityImageCrop | null;
                   maxWidth?: RangeSlider;
-                  alignment?: 'center' | 'left' | 'right';
+                  alignment?: ContentAlignment;
                   _type: 'image';
                   _key: string;
                   altText: string | null;
@@ -15602,7 +14781,7 @@ export type ALL_SECTIONS_QUERYResult =
                         } | null;
                       }
                     | null;
-                  anchor?: string;
+                  anchor?: Anchor;
                 }
             > | null;
             settings: {
@@ -15740,7 +14919,7 @@ export type ALL_SECTIONS_QUERYResult =
                 crop: SanityImageCrop | null;
               } | null;
             }> | null;
-            slidesPerViewDesktop: number | null;
+            slidesPerViewDesktop: RangeSlider | null;
             settings: {
               colorScheme: {
                 background: {
@@ -15855,7 +15034,7 @@ export type ALL_SECTIONS_QUERYResult =
                 gid: string | null;
               } | null;
             }> | null;
-            desktopColumns: number | null;
+            desktopColumns: RangeSlider | null;
             settings: {
               colorScheme: {
                 background: {
@@ -15972,9 +15151,9 @@ export type ALL_SECTIONS_QUERYResult =
                 title: string | null;
               } | null;
             } | null;
-            desktopColumns: number | null;
+            desktopColumns: RangeSlider | null;
             heading: string | null;
-            maxProducts: number | null;
+            maxProducts: RangeSlider | null;
             settings: {
               colorScheme: {
                 background: {
@@ -16085,7 +15264,7 @@ export type ALL_SECTIONS_QUERYResult =
         | {
             _key: string;
             _type: 'featuredProductSection';
-            mediaAspectRatio: 'auto' | 'square' | 'video' | null;
+            mediaAspectRatio: AspectRatios | null;
             product: {
               store: {
                 descriptionHtml: string | null;
@@ -16317,7 +15496,7 @@ export type ALL_SECTIONS_QUERYResult =
               hotspot: SanityImageHotspot | null;
               crop: SanityImageCrop | null;
             } | null;
-            bannerHeight: number | null;
+            bannerHeight: RangeSlider | null;
             content: Array<
               | {
                   children?: Array<{
@@ -16368,22 +15547,12 @@ export type ALL_SECTIONS_QUERYResult =
                         } | null;
                       }
                     | null;
-                  anchor?: string;
+                  anchor?: Anchor;
                 }
             > | null;
-            contentAlignment: 'center' | 'left' | 'right' | null;
-            contentPosition:
-              | 'bottom_center'
-              | 'bottom_left'
-              | 'bottom_right'
-              | 'middle_center'
-              | 'middle_left'
-              | 'middle_right'
-              | 'top_center'
-              | 'top_left'
-              | 'top_right'
-              | null;
-            overlayOpacity: number | null;
+            contentAlignment: ContentAlignment | null;
+            contentPosition: ContentPosition | null;
+            overlayOpacity: RangeSlider | null;
             settings: {
               colorScheme: {
                 background: {
@@ -16495,7 +15664,7 @@ export type ALL_SECTIONS_QUERYResult =
             _type: 'productInformationSection';
             desktopMediaPosition: 'left' | 'right' | null;
             desktopMediaWidth: 'large' | 'medium' | 'small' | null;
-            mediaAspectRatio: 'auto' | 'square' | 'video' | null;
+            mediaAspectRatio: AspectRatios | null;
             richtext: Array<
               | {
                   quantitySelector?: boolean;
@@ -16695,9 +15864,9 @@ export type ALL_SECTIONS_QUERYResult =
         | {
             _key: string;
             _type: 'relatedProductsSection';
-            desktopColumns: number | null;
+            desktopColumns: RangeSlider | null;
             heading: string | null;
-            maxProducts: number | null;
+            maxProducts: RangeSlider | null;
             settings: {
               colorScheme: {
                 background: {
@@ -16807,9 +15976,9 @@ export type ALL_SECTIONS_QUERYResult =
         | {
             _key: string;
             _type: 'richtextSection';
-            contentAlignment: 'center' | 'left' | 'right' | null;
-            desktopContentPosition: 'center' | 'left' | 'right' | null;
-            maxWidth: number | null;
+            contentAlignment: ContentAlignment | null;
+            desktopContentPosition: ContentAlignment | null;
+            maxWidth: RangeSlider | null;
             richtext: Array<
               | {
                   asset: {
@@ -16822,7 +15991,7 @@ export type ALL_SECTIONS_QUERYResult =
                   hotspot: SanityImageHotspot | null;
                   crop: SanityImageCrop | null;
                   maxWidth?: RangeSlider;
-                  alignment?: 'center' | 'left' | 'right';
+                  alignment?: ContentAlignment;
                   _type: 'image';
                   _key: string;
                   altText: string | null;
@@ -16930,7 +16099,7 @@ export type ALL_SECTIONS_QUERYResult =
                         } | null;
                       }
                     | null;
-                  anchor?: string;
+                  anchor?: Anchor;
                 }
             > | null;
             settings: {
@@ -17068,7 +16237,7 @@ export type ALL_SECTIONS_QUERYResult =
                 crop: SanityImageCrop | null;
               } | null;
             }> | null;
-            slidesPerViewDesktop: number | null;
+            slidesPerViewDesktop: RangeSlider | null;
             settings: {
               colorScheme: {
                 background: {
@@ -17183,7 +16352,7 @@ export type ALL_SECTIONS_QUERYResult =
                 gid: string | null;
               } | null;
             }> | null;
-            desktopColumns: number | null;
+            desktopColumns: RangeSlider | null;
             settings: {
               colorScheme: {
                 background: {
@@ -17300,9 +16469,9 @@ export type ALL_SECTIONS_QUERYResult =
                 title: string | null;
               } | null;
             } | null;
-            desktopColumns: number | null;
+            desktopColumns: RangeSlider | null;
             heading: string | null;
-            maxProducts: number | null;
+            maxProducts: RangeSlider | null;
             settings: {
               colorScheme: {
                 background: {
@@ -17413,7 +16582,7 @@ export type ALL_SECTIONS_QUERYResult =
         | {
             _key: string;
             _type: 'featuredProductSection';
-            mediaAspectRatio: 'auto' | 'square' | 'video' | null;
+            mediaAspectRatio: AspectRatios | null;
             product: {
               store: {
                 descriptionHtml: string | null;
@@ -17645,7 +16814,7 @@ export type ALL_SECTIONS_QUERYResult =
               hotspot: SanityImageHotspot | null;
               crop: SanityImageCrop | null;
             } | null;
-            bannerHeight: number | null;
+            bannerHeight: RangeSlider | null;
             content: Array<
               | {
                   children?: Array<{
@@ -17696,22 +16865,12 @@ export type ALL_SECTIONS_QUERYResult =
                         } | null;
                       }
                     | null;
-                  anchor?: string;
+                  anchor?: Anchor;
                 }
             > | null;
-            contentAlignment: 'center' | 'left' | 'right' | null;
-            contentPosition:
-              | 'bottom_center'
-              | 'bottom_left'
-              | 'bottom_right'
-              | 'middle_center'
-              | 'middle_left'
-              | 'middle_right'
-              | 'top_center'
-              | 'top_left'
-              | 'top_right'
-              | null;
-            overlayOpacity: number | null;
+            contentAlignment: ContentAlignment | null;
+            contentPosition: ContentPosition | null;
+            overlayOpacity: RangeSlider | null;
             settings: {
               colorScheme: {
                 background: {
@@ -17821,9 +16980,9 @@ export type ALL_SECTIONS_QUERYResult =
         | {
             _key: string;
             _type: 'richtextSection';
-            contentAlignment: 'center' | 'left' | 'right' | null;
-            desktopContentPosition: 'center' | 'left' | 'right' | null;
-            maxWidth: number | null;
+            contentAlignment: ContentAlignment | null;
+            desktopContentPosition: ContentAlignment | null;
+            maxWidth: RangeSlider | null;
             richtext: Array<
               | {
                   asset: {
@@ -17836,7 +16995,7 @@ export type ALL_SECTIONS_QUERYResult =
                   hotspot: SanityImageHotspot | null;
                   crop: SanityImageCrop | null;
                   maxWidth?: RangeSlider;
-                  alignment?: 'center' | 'left' | 'right';
+                  alignment?: ContentAlignment;
                   _type: 'image';
                   _key: string;
                   altText: string | null;
@@ -17944,7 +17103,7 @@ export type ALL_SECTIONS_QUERYResult =
                         } | null;
                       }
                     | null;
-                  anchor?: string;
+                  anchor?: Anchor;
                 }
             > | null;
             settings: {
@@ -18082,7 +17241,7 @@ export type ALL_SECTIONS_QUERYResult =
                 crop: SanityImageCrop | null;
               } | null;
             }> | null;
-            slidesPerViewDesktop: number | null;
+            slidesPerViewDesktop: RangeSlider | null;
             settings: {
               colorScheme: {
                 background: {
@@ -18197,7 +17356,7 @@ export type ALL_SECTIONS_QUERYResult =
                 gid: string | null;
               } | null;
             }> | null;
-            desktopColumns: number | null;
+            desktopColumns: RangeSlider | null;
             settings: {
               colorScheme: {
                 background: {
@@ -18314,9 +17473,9 @@ export type ALL_SECTIONS_QUERYResult =
                 title: string | null;
               } | null;
             } | null;
-            desktopColumns: number | null;
+            desktopColumns: RangeSlider | null;
             heading: string | null;
-            maxProducts: number | null;
+            maxProducts: RangeSlider | null;
             settings: {
               colorScheme: {
                 background: {
@@ -18427,7 +17586,7 @@ export type ALL_SECTIONS_QUERYResult =
         | {
             _key: string;
             _type: 'featuredProductSection';
-            mediaAspectRatio: 'auto' | 'square' | 'video' | null;
+            mediaAspectRatio: AspectRatios | null;
             product: {
               store: {
                 descriptionHtml: string | null;
@@ -18659,7 +17818,7 @@ export type ALL_SECTIONS_QUERYResult =
               hotspot: SanityImageHotspot | null;
               crop: SanityImageCrop | null;
             } | null;
-            bannerHeight: number | null;
+            bannerHeight: RangeSlider | null;
             content: Array<
               | {
                   children?: Array<{
@@ -18710,22 +17869,12 @@ export type ALL_SECTIONS_QUERYResult =
                         } | null;
                       }
                     | null;
-                  anchor?: string;
+                  anchor?: Anchor;
                 }
             > | null;
-            contentAlignment: 'center' | 'left' | 'right' | null;
-            contentPosition:
-              | 'bottom_center'
-              | 'bottom_left'
-              | 'bottom_right'
-              | 'middle_center'
-              | 'middle_left'
-              | 'middle_right'
-              | 'top_center'
-              | 'top_left'
-              | 'top_right'
-              | null;
-            overlayOpacity: number | null;
+            contentAlignment: ContentAlignment | null;
+            contentPosition: ContentPosition | null;
+            overlayOpacity: RangeSlider | null;
             settings: {
               colorScheme: {
                 background: {
@@ -18835,9 +17984,9 @@ export type ALL_SECTIONS_QUERYResult =
         | {
             _key: string;
             _type: 'richtextSection';
-            contentAlignment: 'center' | 'left' | 'right' | null;
-            desktopContentPosition: 'center' | 'left' | 'right' | null;
-            maxWidth: number | null;
+            contentAlignment: ContentAlignment | null;
+            desktopContentPosition: ContentAlignment | null;
+            maxWidth: RangeSlider | null;
             richtext: Array<
               | {
                   asset: {
@@ -18850,7 +17999,7 @@ export type ALL_SECTIONS_QUERYResult =
                   hotspot: SanityImageHotspot | null;
                   crop: SanityImageCrop | null;
                   maxWidth?: RangeSlider;
-                  alignment?: 'center' | 'left' | 'right';
+                  alignment?: ContentAlignment;
                   _type: 'image';
                   _key: string;
                   altText: string | null;
@@ -18958,7 +18107,7 @@ export type ALL_SECTIONS_QUERYResult =
                         } | null;
                       }
                     | null;
-                  anchor?: string;
+                  anchor?: Anchor;
                 }
             > | null;
             settings: {

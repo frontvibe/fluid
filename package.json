@@ -114,13 +114,13 @@
     "tailwindcss-animate": "^1.0.7",
     "type-fest": "^5.2.0",
     "typescript": "^5.9.3",
-    "vite": "^6.3.5",
+    "vite": "^6.4.1",
     "vite-tsconfig-paths": "^4.3.2"
   },
   "engines": {
     "node": "20.x"
   },
-  "packageManager": "pnpm@10.22.0",
+  "packageManager": "pnpm@10.25.0",
   "browserslist": [
     "defaults"
   ],

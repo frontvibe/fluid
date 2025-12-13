@@ -1,4 +1,4 @@
-import {uuid} from '@sanity/uuid';
+// import {uuid} from '@sanity/uuid';
 import pluralize from 'pluralize-esm';
 import {defineField, defineType} from 'sanity';
 
@@ -71,14 +71,14 @@ export default defineType({
       group: 'shopifySync',
     }),
   ],
-  initialValue: () => ({
-    sections: [
-      {
-        _type: 'productInformationSection',
-        _key: uuid(),
-      },
-    ],
-  }),
+  // initialValue: () => ({
+  //   sections: [
+  //     {
+  //       _type: 'productInformationSection',
+  //       _key: uuid(),
+  //     },
+  //   ],
+  // }),
   orderings: [
     {
       name: 'titleAsc',

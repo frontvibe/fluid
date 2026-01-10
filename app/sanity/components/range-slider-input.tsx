@@ -109,7 +109,15 @@ function NumberInput(props: {
   suffix?: string;
   value: number;
 }) {
-  const {suffix, min, max, value, setValue, onChange, step} = props;
+  const {
+    suffix = '',
+    min = 0,
+    max = 100,
+    value,
+    setValue,
+    onChange,
+    step,
+  } = props;
 
   const emitSetValue = useCallback(
     (nextValue: number) => onChange(set(nextValue)),
@@ -146,9 +154,3 @@ function NumberInput(props: {
     />
   );
 }
-
-NumberInput.defaultProps = {
-  suffix: '',
-  min: 0,
-  max: 100,
-};

@@ -19,9 +19,9 @@ export function createStudioLayout({
 }) {
   return function CustomStudioLayout(props: LayoutProps) {
     return (
-      <PluginContext.Provider value={{shopifyStoreDomain}}>
+      <PluginContext value={{shopifyStoreDomain}}>
         {props.renderDefault(props)}
-      </PluginContext.Provider>
+      </PluginContext>
     );
   };
 }

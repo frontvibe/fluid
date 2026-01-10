@@ -42,9 +42,9 @@ export const ProductProvider = ({
       : [];
 
   return (
-    <ProductContext.Provider value={{product, productOptions, selectedVariant}}>
+    <ProductContext value={{product, productOptions, selectedVariant}}>
       {children}
-    </ProductContext.Provider>
+    </ProductContext>
   );
 };
 

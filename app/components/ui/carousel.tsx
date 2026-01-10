@@ -121,7 +121,7 @@ function Carousel({
   }, [api, onSelect]);
 
   return (
-    <CarouselContext.Provider
+    <CarouselContext
       value={{
         api,
         canScrollNext,
@@ -147,7 +147,7 @@ function Carousel({
       >
         {children}
       </div>
-    </CarouselContext.Provider>
+    </CarouselContext>
   );
 }
 

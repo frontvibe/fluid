@@ -2,7 +2,6 @@ import type {VariantProps} from 'class-variance-authority';
 
 import {Slot as SlotPrimitive} from 'radix-ui';
 import {cva} from 'class-variance-authority';
-import * as React from 'react';
 
 import {cn} from '~/lib/utils';
 
@@ -46,40 +45,35 @@ const buttonVariants = cva(
 );
 
 export interface ButtonProps
-  extends
-    React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+  extends React.ComponentProps<'button'>, VariantProps<typeof buttonVariants> {
   asChild?: boolean;
 }
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({asChild = false, className, size, variant, ...props}, ref) => {
-    const Comp = asChild ? SlotPrimitive.Slot : 'button';
-    return (
-      <Comp
-        className={cn(buttonVariants({className, size, variant}))}
-        ref={ref}
-        {...props}
-      />
-    );
-  },
-);
-Button.displayName = 'Button';
+function Button({
+  asChild = false,
+  className,
+  size,
+  variant,
+  ...props
+}: ButtonProps) {
+  const Comp = asChild ? SlotPrimitive.Slot : 'button';
+  return (
+    <Comp
+      className={cn(buttonVariants({className, size, variant}))}
+      {...props}
+    />
+  );
+}
 
-export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface IconButtonProps extends React.ComponentProps<'button'> {
   asChild?: boolean;
 }
 
 export const iconButtonClass = buttonVariants({size: 'icon', variant: 'ghost'});
 
-const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
-  ({asChild = false, className, ...props}, ref) => {
-    const Comp = asChild ? SlotPrimitive.Slot : 'button';
-    return (
-      <Comp className={cn(iconButtonClass, className)} ref={ref} {...props} />
-    );
-  },
-);
-IconButton.displayName = 'IconButton';
+function IconButton({asChild = false, className, ...props}: IconButtonProps) {
+  const Comp = asChild ? SlotPrimitive.Slot : 'button';
+  return <Comp className={cn(iconButtonClass, className)} {...props} />;
+}
 
 export {Button, buttonVariants, IconButton};

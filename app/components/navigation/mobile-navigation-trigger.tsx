@@ -1,15 +1,9 @@
-import * as React from 'react';
-
 import {IconMenu} from '../icons/icon-menu';
 import {IconButton} from '../ui/button';
 
-export const MobileNavigationTrigger = React.forwardRef<
-  HTMLButtonElement,
-  React.ButtonHTMLAttributes<HTMLButtonElement>
->((props, ref) => {
+export function MobileNavigationTrigger(props: React.ComponentProps<'button'>) {
   return (
     <IconButton
-      ref={ref}
       className="-mr-2 lg:mr-0 lg:hidden pointer-coarse:block"
       {...props}
     >
@@ -17,6 +11,4 @@ export const MobileNavigationTrigger = React.forwardRef<
       <IconMenu className="size-7" strokeWidth={1.5} />
     </IconButton>
   );
-});
-
-MobileNavigationTrigger.displayName = 'MobileNavigationTrigger';
+}

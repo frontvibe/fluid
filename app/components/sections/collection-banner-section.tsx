@@ -28,7 +28,7 @@ export function CollectionBannerSection(
             crop="center"
             data={collection.image}
             decoding="sync"
-            fetchpriority="high"
+            fetchPriority="high"
             loading="eager"
             showBorder={false}
             showShadow={false}

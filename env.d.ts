@@ -42,9 +42,3 @@ declare module 'react-router' {
     // declare local additions to the Hydrogen session data here
   }
 }
-
-declare module 'react' {
-  interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
-    fetchpriority?: 'high' | 'low' | 'auto';
-  }
-}

@@ -1,11 +1,11 @@
 import {cx} from 'class-variance-authority';
-import {forwardRef} from 'react';
 
 import {cn} from '~/lib/utils';
 
 import type {ButtonProps} from './ui/button';
 
 import {IconButton} from './ui/button';
+
 export function QuantitySelector(props: {children: React.ReactNode}) {
   return (
     <div
@@ -20,12 +20,14 @@ export function QuantitySelector(props: {children: React.ReactNode}) {
   );
 }
 
-const QuantityButton = forwardRef<
-  HTMLButtonElement,
-  ButtonProps & {
-    symbol: 'decrease' | 'increase';
-  }
->(({className, symbol, variant, ...props}, ref) => {
+function QuantityButton({
+  className,
+  symbol,
+  variant,
+  ...props
+}: ButtonProps & {
+  symbol: 'decrease' | 'increase';
+}) {
   return (
     <IconButton
       aria-label={cx([
@@ -45,7 +47,6 @@ const QuantityButton = forwardRef<
         symbol === 'decrease' && 'decrease-quantity',
         symbol === 'increase' && 'increase-quantity',
       ])}
-      ref={ref}
       {...props}
     >
       <span className="group-disabled:opacity-40">
@@ -59,8 +60,7 @@ const QuantityButton = forwardRef<
       {props.children}
     </IconButton>
   );
-});
-QuantityButton.displayName = 'QuantityButton';
+}
 
 function Value(props: {children: React.ReactNode}) {
   return (

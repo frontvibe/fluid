@@ -3,15 +3,14 @@ import {
   parseAspectRatio,
   shopifyLoader,
 } from '@shopify/hydrogen-react/Image'; // eslint-disable-line import/no-unresolved
-import React, {forwardRef} from 'react';
 
 import {cn} from '~/lib/utils';
 
 /**
- * Shopify’s Image component is a wrapper around the HTML image element.
+ * Shopify's Image component is a wrapper around the HTML image element.
  * It supports the same props as the HTML `img` element, but automatically
  * generates the srcSet and sizes attributes for you. For most use cases,
- * you’ll want to set the `aspectRatio` prop to ensure the image is sized
+ * you'll want to set the `aspectRatio` prop to ensure the image is sized
  * correctly.
  *
  * @remarks
@@ -42,83 +41,72 @@ import {cn} from '~/lib/utils';
  *
  * @link https://shopify.dev/docs/api/hydrogen-react/components/image
  */
-const ShopifyImage = forwardRef<
-  HTMLImageElement,
-  React.ComponentProps<typeof Image> & {
-    /**
-     * Set to `true` to enable LQIP (Low Quality Image Placeholder).
-     * The LQIP image is used as a placeholder for images that are too large to load and
-     * is cropped to the aspect ratio of the original image.
-     * It renders as a blurred background while the original image is loading.
-     */
-    lqip?: boolean;
-    showBorder?: boolean;
-    showShadow?: boolean;
+function ShopifyImage({
+  aspectRatio,
+  className,
+  crop,
+  data,
+  lqip = true,
+  showBorder = true,
+  showShadow = true,
+  style,
+  ...passthroughProps
+}: React.ComponentProps<typeof Image> & {
+  /**
+   * Set to `true` to enable LQIP (Low Quality Image Placeholder).
+   * The LQIP image is used as a placeholder for images that are too large to load and
+   * is cropped to the aspect ratio of the original image.
+   * It renders as a blurred background while the original image is loading.
+   */
+  lqip?: boolean;
+  showBorder?: boolean;
+  showShadow?: boolean;
+}) {
+  const lqipWidth = 30;
+
+  const lqipUrl = shopifyLoader({
+    crop: crop || 'center',
+    height: aspectRatio
+      ? lqipWidth * (parseAspectRatio(aspectRatio) ?? 1)
+      : undefined,
+    src: data?.url,
+    width: lqipWidth,
+  });
+
+  const {pathname: lqipPathname} = new URL(lqipUrl);
+
+  // Don't use LQIP if the image is a PNG or SVG
+  if (lqipPathname.includes('.png') || lqipPathname.includes('.svg')) {
+    lqip = false;
   }
->(
-  (
-    {
-      aspectRatio,
-      className,
-      crop,
-      data,
-      lqip = true,
-      showBorder = true,
-      showShadow = true,
-      style,
-      ...passthroughProps
-    },
-    ref,
-  ) => {
-    const lqipWidth = 30;
 
-    const lqipUrl = shopifyLoader({
-      crop: crop || 'center',
-      height: aspectRatio
-        ? lqipWidth * (parseAspectRatio(aspectRatio) ?? 1)
-        : undefined,
-      src: data?.url,
-      width: lqipWidth,
-    });
+  const LQIP =
+    lqip &&
+    ({
+      backgroundImage: `url(${lqipUrl})`,
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover',
+    } as React.CSSProperties);
 
-    const {pathname: lqipPathname} = new URL(lqipUrl);
-
-    // Don't use LQIP if the image is a PNG or SVG
-    if (lqipPathname.includes('.png') || lqipPathname.includes('.svg')) {
-      lqip = false;
-    }
-
-    const LQIP =
-      lqip &&
-      ({
-        backgroundImage: `url(${lqipUrl})`,
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
-      } as React.CSSProperties);
-
-    return (
-      <Image
-        aspectRatio={aspectRatio}
-        className={cn(
-          showBorder &&
-            'rounded-(--media-border-corner-radius) [border-width:var(--media-border-thickness)] border-[rgb(var(--border)_/_var(--media-border-opacity))]',
-          showShadow &&
-            '[box-shadow:rgb(var(--shadow)_/_var(--media-shadow-opacity))_var(--media-shadow-horizontal-offset)_var(--media-shadow-vertical-offset)_var(--media-shadow-blur-radius)_0px]',
-          className,
-        )}
-        crop={crop}
-        data={data}
-        ref={ref}
-        style={{
-          ...LQIP,
-          ...style,
-        }}
-        {...passthroughProps}
-      />
-    );
-  },
-);
-
-ShopifyImage.displayName = 'ShopifyImage';
+  return (
+    <Image
+      aspectRatio={aspectRatio}
+      className={cn(
+        showBorder &&
+          'rounded-(--media-border-corner-radius) [border-width:var(--media-border-thickness)] border-[rgb(var(--border)_/_var(--media-border-opacity))]',
+        showShadow &&
+          '[box-shadow:rgb(var(--shadow)_/_var(--media-shadow-opacity))_var(--media-shadow-horizontal-offset)_var(--media-shadow-vertical-offset)_var(--media-shadow-blur-radius)_0px]',
+        className,
+      )}
+      crop={crop}
+      data={data}
+      style={{
+        ...LQIP,
+        ...style,
+      }}
+      {...passthroughProps}
+    />
+  );
+}
 
 export {ShopifyImage};

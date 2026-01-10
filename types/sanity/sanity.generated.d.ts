@@ -12,7 +12,34 @@
  * ---------------------------------------------------------------------------------
  */
 
-// Source: schema.json
+// Source: types/sanity/schema.json
+export type SanityImageAssetReference = {
+  _ref: string;
+  _type: 'reference';
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+};
+
+export type SlideImage = {
+  asset?: SanityImageAssetReference;
+  media?: unknown; // Unable to locate the referenced type "image.media" in schema
+  hotspot?: SanityImageHotspot;
+  crop?: SanityImageCrop;
+  _type: 'image';
+};
+
+export type Hsl = {
+  h?: number;
+  s?: number;
+  l?: number;
+};
+
+export type Rgb = {
+  r?: number;
+  g?: number;
+  b?: number;
+};
+
 export type ThemeContent = {
   _id: string;
   _type: 'themeContent';
@@ -137,6 +164,20 @@ export type InternationalizedArrayString = Array<
   } & InternationalizedArrayStringValue
 >;
 
+export type ColorSchemeReference = {
+  _ref: string;
+  _type: 'reference';
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: 'colorScheme';
+};
+
+export type CollectionReference = {
+  _ref: string;
+  _type: 'reference';
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: 'collection';
+};
+
 export type Settings = {
   _id: string;
   _type: 'settings';
@@ -146,36 +187,21 @@ export type Settings = {
   siteName?: string;
   siteDescription?: string;
   logo?: {
-    asset?: {
-      _ref: string;
-      _type: 'reference';
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: 'image';
   };
   favicon?: {
-    asset?: {
-      _ref: string;
-      _type: 'reference';
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: 'image';
   };
   socialSharingImagePreview?: {
-    asset?: {
-      _ref: string;
-      _type: 'reference';
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -276,32 +302,12 @@ export type Settings = {
   };
   badgesPosition?: 'bottom_left' | 'bottom_right' | 'top_left' | 'top_right';
   badgesCornerRadius?: RangeSlider;
-  badgesSaleColorScheme?: {
-    _ref: string;
-    _type: 'reference';
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: 'colorScheme';
-  };
-  badgesSoldOutColorScheme?: {
-    _ref: string;
-    _type: 'reference';
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: 'colorScheme';
-  };
+  badgesSaleColorScheme?: ColorSchemeReference;
+  badgesSoldOutColorScheme?: ColorSchemeReference;
   showCurrencyCodes?: boolean;
   showTrailingZeros?: Array<string>;
-  cartCollection?: {
-    _ref: string;
-    _type: 'reference';
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: 'collection';
-  };
-  cartColorScheme?: {
-    _ref: string;
-    _type: 'reference';
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: 'colorScheme';
-  };
+  cartCollection?: CollectionReference;
+  cartColorScheme?: ColorSchemeReference;
   grid?: {
     horizontalSpace?: RangeSlider;
     verticalSpace?: RangeSlider;
@@ -382,20 +388,10 @@ export type Header = {
   _updatedAt: string;
   _rev: string;
   announcementBar?: InternationalizedArrayAnnouncementBar;
-  announcementBarColorScheme?: {
-    _ref: string;
-    _type: 'reference';
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: 'colorScheme';
-  };
+  announcementBarColorScheme?: ColorSchemeReference;
   autoRotateAnnouncements?: boolean;
   menu?: InternationalizedArrayHeaderNavigation;
-  colorScheme?: {
-    _ref: string;
-    _type: 'reference';
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: 'colorScheme';
-  };
+  colorScheme?: ColorSchemeReference;
   blur?: boolean;
   sticky?: 'none' | 'onScrollUp' | 'always';
   showSeparatorLine?: boolean;
@@ -466,18 +462,7 @@ export type CarouselSection = {
   loop?: boolean;
   slidesPerViewDesktop?: RangeSlider;
   slides?: Array<{
-    image?: {
-      asset?: {
-        _ref: string;
-        _type: 'reference';
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: 'image';
-    };
+    image?: SlideImage;
     _type: 'slide';
     _key: string;
   }>;
@@ -503,25 +488,25 @@ export type ProductInformationSection = {
 
 export type CollectionListSection = {
   _type: 'collectionListSection';
-  collections?: Array<{
-    _ref: string;
-    _type: 'reference';
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: 'collection';
-  }>;
+  collections?: Array<
+    {
+      _key: string;
+    } & CollectionReference
+  >;
   desktopColumns?: RangeSlider;
   settings?: SectionSettings;
 };
 
+export type ProductReference = {
+  _ref: string;
+  _type: 'reference';
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: 'product';
+};
+
 export type FeaturedProductSection = {
   _type: 'featuredProductSection';
-  product?: {
-    _ref: string;
-    _type: 'reference';
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: 'product';
-  };
+  product?: ProductReference;
   richtext?: InternationalizedArrayProductRichtext;
   mediaAspectRatio?: AspectRatios;
   settings?: SectionSettings;
@@ -530,12 +515,7 @@ export type FeaturedProductSection = {
 export type FeaturedCollectionSection = {
   _type: 'featuredCollectionSection';
   heading?: InternationalizedArrayString;
-  collection?: {
-    _ref: string;
-    _type: 'reference';
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: 'collection';
-  };
+  collection?: CollectionReference;
   maxProducts?: RangeSlider;
   desktopColumns?: RangeSlider;
   viewAll?: boolean;
@@ -548,12 +528,7 @@ export type ImageBannerSection = {
   contentPosition?: ContentPosition;
   contentAlignment?: ContentAlignment;
   backgroundImage?: {
-    asset?: {
-      _ref: string;
-      _type: 'reference';
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -672,6 +647,13 @@ export type Inventory = {
   policy?: string;
 };
 
+export type ProductVariantReference = {
+  _ref: string;
+  _type: 'reference';
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: 'productVariant';
+};
+
 export type ShopifyProduct = {
   _type: 'shopifyProduct';
   createdAt?: string;
@@ -693,13 +675,11 @@ export type ShopifyProduct = {
       _key: string;
     } & Option
   >;
-  variants?: Array<{
-    _ref: string;
-    _type: 'reference';
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: 'productVariant';
-  }>;
+  variants?: Array<
+    {
+      _key: string;
+    } & ProductVariantReference
+  >;
 };
 
 export type PriceRange = {
@@ -719,16 +699,8 @@ export type Option = {
 export type ColorPicker = {
   _type: 'colorPicker';
   hex?: string;
-  hsl?: {
-    h?: number;
-    s?: number;
-    l?: number;
-  };
-  rgb?: {
-    r?: number;
-    g?: number;
-    b?: number;
-  };
+  hsl?: Hsl;
+  rgb?: Rgb;
 };
 
 export type AnnouncementBar = Array<{
@@ -764,12 +736,7 @@ export type Anchor = string;
 export type SectionSettings = {
   _type: 'sectionSettings';
   hide?: boolean;
-  colorScheme?: {
-    _ref: string;
-    _type: 'reference';
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: 'colorScheme';
-  };
+  colorScheme?: ColorSchemeReference;
   padding?: Padding;
   customCss?: Code;
 };
@@ -796,12 +763,7 @@ export type Seo = {
   title?: InternationalizedArrayString;
   description?: InternationalizedArrayText;
   image?: {
-    asset?: {
-      _ref: string;
-      _type: 'reference';
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -821,35 +783,27 @@ export type FontCategory = {
   >;
 };
 
+export type SanityFileAssetReference = {
+  _ref: string;
+  _type: 'reference';
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: 'sanity.fileAsset';
+};
+
 export type FontAsset = {
   _type: 'fontAsset';
   woff2?: {
-    asset?: {
-      _ref: string;
-      _type: 'reference';
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: 'sanity.fileAsset';
-    };
+    asset?: SanityFileAssetReference;
     media?: unknown;
     _type: 'file';
   };
   woff?: {
-    asset?: {
-      _ref: string;
-      _type: 'reference';
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: 'sanity.fileAsset';
-    };
+    asset?: SanityFileAssetReference;
     media?: unknown;
     _type: 'file';
   };
   ttf?: {
-    asset?: {
-      _ref: string;
-      _type: 'reference';
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: 'sanity.fileAsset';
-    };
+    asset?: SanityFileAssetReference;
     media?: unknown;
     _type: 'file';
   };
@@ -1039,12 +993,7 @@ export type Richtext = Array<
       _key: string;
     }
   | {
-      asset?: {
-        _ref: string;
-        _type: 'reference';
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-      };
+      asset?: SanityImageAssetReference;
       media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
@@ -1071,37 +1020,33 @@ export type ContentPosition =
   | 'bottom_center'
   | 'bottom_right';
 
+export type HomeReference = {
+  _ref: string;
+  _type: 'reference';
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: 'home';
+};
+
+export type PageReference = {
+  _ref: string;
+  _type: 'reference';
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: 'page';
+};
+
+export type BlogPostReference = {
+  _ref: string;
+  _type: 'reference';
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: 'blogPost';
+};
+
 export type Link =
-  | {
-      _ref: string;
-      _type: 'reference';
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: 'home';
-    }
-  | {
-      _ref: string;
-      _type: 'reference';
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: 'page';
-    }
-  | {
-      _ref: string;
-      _type: 'reference';
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: 'product';
-    }
-  | {
-      _ref: string;
-      _type: 'reference';
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: 'collection';
-    }
-  | {
-      _ref: string;
-      _type: 'reference';
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: 'blogPost';
-    };
+  | HomeReference
+  | PageReference
+  | ProductReference
+  | CollectionReference
+  | BlogPostReference;
 
 export type InternationalizedArrayBannerRichtextValue = {
   _type: 'internationalizedArrayBannerRichtextValue';
@@ -1189,6 +1134,13 @@ export type Slug = {
   source?: string;
 };
 
+export type ProductTemplateReference = {
+  _ref: string;
+  _type: 'reference';
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: 'productTemplate';
+};
+
 export type Product = {
   _id: string;
   _type: 'product';
@@ -1196,12 +1148,7 @@ export type Product = {
   _updatedAt: string;
   _rev: string;
   hidden?: string;
-  template?: {
-    _ref: string;
-    _type: 'reference';
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: 'productTemplate';
-  };
+  template?: ProductTemplateReference;
   titleProxy?: ProxyString;
   slugProxy?: ProxyString;
   store?: ShopifyProduct;
@@ -1218,6 +1165,13 @@ export type ProductTemplate = {
   sections?: ProductSections;
 };
 
+export type CollectionTemplateReference = {
+  _ref: string;
+  _type: 'reference';
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: 'collectionTemplate';
+};
+
 export type Collection = {
   _id: string;
   _type: 'collection';
@@ -1227,12 +1181,7 @@ export type Collection = {
   hidden?: string;
   titleProxy?: ProxyString;
   slugProxy?: ProxyString;
-  template?: {
-    _ref: string;
-    _type: 'reference';
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: 'collectionTemplate';
-  };
+  template?: CollectionTemplateReference;
   store?: ShopifyCollection;
 };
 
@@ -1384,8 +1333,14 @@ export type Geopoint = {
 };
 
 export type AllSanitySchemaTypes =
+  | SanityImageAssetReference
+  | SlideImage
+  | Hsl
+  | Rgb
   | ThemeContent
   | InternationalizedArrayString
+  | ColorSchemeReference
+  | CollectionReference
   | Settings
   | RangeSlider
   | AspectRatios
@@ -1406,6 +1361,7 @@ export type AllSanitySchemaTypes =
   | RelatedProductsSection
   | ProductInformationSection
   | CollectionListSection
+  | ProductReference
   | FeaturedProductSection
   | FeaturedCollectionSection
   | ImageBannerSection
@@ -1416,6 +1372,7 @@ export type AllSanitySchemaTypes =
   | CollectionRule
   | ShopifyCollection
   | Inventory
+  | ProductVariantReference
   | ShopifyProduct
   | PriceRange
   | PlaceholderString
@@ -1429,6 +1386,7 @@ export type AllSanitySchemaTypes =
   | ColorScheme
   | Seo
   | FontCategory
+  | SanityFileAssetReference
   | FontAsset
   | BannerRichtext
   | ProductRichtext
@@ -1440,6 +1398,9 @@ export type AllSanitySchemaTypes =
   | Richtext
   | ContentAlignment
   | ContentPosition
+  | HomeReference
+  | PageReference
+  | BlogPostReference
   | Link
   | InternationalizedArrayBannerRichtextValue
   | InternationalizedArrayRichtextValue
@@ -1455,8 +1416,10 @@ export type AllSanitySchemaTypes =
   | Home
   | Page
   | Slug
+  | ProductTemplateReference
   | Product
   | ProductTemplate
+  | CollectionTemplateReference
   | Collection
   | CollectionTemplate
   | BlogPost
@@ -1472,21 +1435,23 @@ export type AllSanitySchemaTypes =
   | SanityAssetSourceData
   | SanityImageAsset
   | Geopoint;
+
 export declare const internalGroqTypeReferenceTo: unique symbol;
-// Source: ./app/data/sanity/footers.ts
+
+// Source: app/data/sanity/footers.ts
 // Variable: FOOTER_SOCIAL_LINKS_ONLY_FRAGMENT
 // Query: {  _key,  _type,  "copyright": coalesce(    copyright[_key == $language][0].value,    copyright[_key == $defaultLanguage][0].value,  ),  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding},}
-export type FOOTER_SOCIAL_LINKS_ONLY_FRAGMENTResult = {
+export type FOOTER_SOCIAL_LINKS_ONLY_FRAGMENT_RESULT = {
   _key: never;
   _type: never;
   copyright: null;
   settings: never;
 };
 
-// Source: ./app/data/sanity/fragments.ts
+// Source: app/data/sanity/fragments.ts
 // Variable: IMAGE_FRAGMENT
 // Query: {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,}
-export type IMAGE_FRAGMENTResult = {
+export type IMAGE_FRAGMENT_RESULT = {
   _type: never;
   asset: never;
   altText: never;
@@ -1494,17 +1459,21 @@ export type IMAGE_FRAGMENTResult = {
   hotspot: never;
   crop: never;
 };
+
+// Source: app/data/sanity/fragments.ts
 // Variable: COLOR_FRAGMENT
 // Query: {  alpha,  hex,  hsl,  rgb,}
-export type COLOR_FRAGMENTResult = {
+export type COLOR_FRAGMENT_RESULT = {
   alpha: never;
   hex: never;
   hsl: never;
   rgb: never;
 };
+
+// Source: app/data/sanity/fragments.ts
 // Variable: COLOR_SCHEME_FRAGMENT
 // Query: {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},}
-export type COLOR_SCHEME_FRAGMENTResult = {
+export type COLOR_SCHEME_FRAGMENT_RESULT = {
   background: never;
   border: never;
   card: never;
@@ -1513,18 +1482,22 @@ export type COLOR_SCHEME_FRAGMENTResult = {
   primary: never;
   primaryForeground: never;
 };
+
+// Source: app/data/sanity/fragments.ts
 // Variable: THEME_CONTENT_FRAGMENT
 // Query: {  account {    "accountDetails": coalesce(    accountDetails[_key == $language][0].value,    accountDetails[_key == $defaultLanguage][0].value,  ),    "addAddress": coalesce(    addAddress[_key == $language][0].value,    addAddress[_key == $defaultLanguage][0].value,  ),    "addName": coalesce(    addName[_key == $language][0].value,    addName[_key == $defaultLanguage][0].value,  ),    "addressBook": coalesce(    addressBook[_key == $language][0].value,    addressBook[_key == $defaultLanguage][0].value,  ),    "addressLine1": coalesce(    addressLine1[_key == $language][0].value,    addressLine1[_key == $defaultLanguage][0].value,  ),    "addressLine2": coalesce(    addressLine2[_key == $language][0].value,    addressLine2[_key == $defaultLanguage][0].value,  ),    "cancel": coalesce(    cancel[_key == $language][0].value,    cancel[_key == $defaultLanguage][0].value,  ),    "city": coalesce(    city[_key == $language][0].value,    city[_key == $defaultLanguage][0].value,  ),     "company": coalesce(    company[_key == $language][0].value,    company[_key == $defaultLanguage][0].value,  ),    "country": coalesce(    country[_key == $language][0].value,    country[_key == $defaultLanguage][0].value,  ),    "default": coalesce(    default[_key == $language][0].value,    default[_key == $defaultLanguage][0].value,  ),    "defaultAddress": coalesce(    defaultAddress[_key == $language][0].value,    defaultAddress[_key == $defaultLanguage][0].value,  ),    "discounts": coalesce(    discounts[_key == $language][0].value,    discounts[_key == $defaultLanguage][0].value,  ),    "discountsOff": coalesce(    discountsOff[_key == $language][0].value,    discountsOff[_key == $defaultLanguage][0].value,  ),    "edit": coalesce(    edit[_key == $language][0].value,    edit[_key == $defaultLanguage][0].value,  ),    "editAddress": coalesce(    editAddress[_key == $language][0].value,    editAddress[_key == $defaultLanguage][0].value,  ),    "emailAddress": coalesce(    emailAddress[_key == $language][0].value,    emailAddress[_key == $defaultLanguage][0].value,  ),    "firstName": coalesce(    firstName[_key == $language][0].value,    firstName[_key == $defaultLanguage][0].value,  ),    "fulfillmentStatus": coalesce(    fulfillmentStatus[_key == $language][0].value,    fulfillmentStatus[_key == $defaultLanguage][0].value,  ),    "lastName": coalesce(    lastName[_key == $language][0].value,    lastName[_key == $defaultLanguage][0].value,  ),    "name": coalesce(    name[_key == $language][0].value,    name[_key == $defaultLanguage][0].value,  ),    "noAddress": coalesce(    noAddress[_key == $language][0].value,    noAddress[_key == $defaultLanguage][0].value,  ),    "noOrdersMessage": coalesce(    noOrdersMessage[_key == $language][0].value,    noOrdersMessage[_key == $defaultLanguage][0].value,  ),    "noShippingAddress": coalesce(    noShippingAddress[_key == $language][0].value,    noShippingAddress[_key == $defaultLanguage][0].value,  ),    "orderDate": coalesce(    orderDate[_key == $language][0].value,    orderDate[_key == $defaultLanguage][0].value,  ),    "orderDetail": coalesce(    orderDetail[_key == $language][0].value,    orderDetail[_key == $defaultLanguage][0].value,  ),    "orderHistory": coalesce(    orderHistory[_key == $language][0].value,    orderHistory[_key == $defaultLanguage][0].value,  ),    "orderId": coalesce(    orderId[_key == $language][0].value,    orderId[_key == $defaultLanguage][0].value,  ),    "orderNumber": coalesce(    orderNumber[_key == $language][0].value,    orderNumber[_key == $defaultLanguage][0].value,  ),    "orderStatusCancelled": coalesce(    orderStatusCancelled[_key == $language][0].value,    orderStatusCancelled[_key == $defaultLanguage][0].value,  ),    "orderStatusError": coalesce(    orderStatusError[_key == $language][0].value,    orderStatusError[_key == $defaultLanguage][0].value,  ),    "orderStatusFailure": coalesce(    orderStatusFailure[_key == $language][0].value,    orderStatusFailure[_key == $defaultLanguage][0].value,  ),    "orderStatusOpen": coalesce(    orderStatusOpen[_key == $language][0].value,    orderStatusOpen[_key == $defaultLanguage][0].value,  ),    "orderStatusPending": coalesce(    orderStatusPending[_key == $language][0].value,    orderStatusPending[_key == $defaultLanguage][0].value,  ),    "orderStatusSuccess": coalesce(    orderStatusSuccess[_key == $language][0].value,    orderStatusSuccess[_key == $defaultLanguage][0].value,  ),    "phone": coalesce(    phone[_key == $language][0].value,    phone[_key == $defaultLanguage][0].value,  ),    "phoneNumber": coalesce(    phoneNumber[_key == $language][0].value,    phoneNumber[_key == $defaultLanguage][0].value,  ),    "placedOn": coalesce(    placedOn[_key == $language][0].value,    placedOn[_key == $defaultLanguage][0].value,  ),    "postalCode": coalesce(    postalCode[_key == $language][0].value,    postalCode[_key == $defaultLanguage][0].value,  ),    "price": coalesce(    price[_key == $language][0].value,    price[_key == $defaultLanguage][0].value,  ),    "product": coalesce(    product[_key == $language][0].value,    product[_key == $defaultLanguage][0].value,  ),    "profile": coalesce(    profile[_key == $language][0].value,    profile[_key == $defaultLanguage][0].value,  ),    "quantity": coalesce(    quantity[_key == $language][0].value,    quantity[_key == $defaultLanguage][0].value,  ),    "remove": coalesce(    remove[_key == $language][0].value,    remove[_key == $defaultLanguage][0].value,  ),    "returnToAccount": coalesce(    returnToAccount[_key == $language][0].value,    returnToAccount[_key == $defaultLanguage][0].value,  ),    "save": coalesce(    save[_key == $language][0].value,    save[_key == $defaultLanguage][0].value,  ),    "saving": coalesce(    saving[_key == $language][0].value,    saving[_key == $defaultLanguage][0].value,  ),    "shippingAddress": coalesce(    shippingAddress[_key == $language][0].value,    shippingAddress[_key == $defaultLanguage][0].value,  ),    "signOut": coalesce(    signOut[_key == $language][0].value,    signOut[_key == $defaultLanguage][0].value,  ),    "startShopping": coalesce(    startShopping[_key == $language][0].value,    startShopping[_key == $defaultLanguage][0].value,  ),    "stateProvince": coalesce(    stateProvince[_key == $language][0].value,    stateProvince[_key == $defaultLanguage][0].value,  ),    "status": coalesce(    status[_key == $language][0].value,    status[_key == $defaultLanguage][0].value,  ),    "subtotal": coalesce(    subtotal[_key == $language][0].value,    subtotal[_key == $defaultLanguage][0].value,  ),    "tax": coalesce(    tax[_key == $language][0].value,    tax[_key == $defaultLanguage][0].value,  ),    "total": coalesce(    total[_key == $language][0].value,    total[_key == $defaultLanguage][0].value,  ),    "updateYourProfile": coalesce(    updateYourProfile[_key == $language][0].value,    updateYourProfile[_key == $defaultLanguage][0].value,  ),    "viewDetails": coalesce(    viewDetails[_key == $language][0].value,    viewDetails[_key == $defaultLanguage][0].value,  ),    "welcome": coalesce(    welcome[_key == $language][0].value,    welcome[_key == $defaultLanguage][0].value,  ),    "welcomeToYourAccount": coalesce(    welcomeToYourAccount[_key == $language][0].value,    welcomeToYourAccount[_key == $defaultLanguage][0].value,  ),  },  cart {    "applyDiscount": coalesce(    applyDiscount[_key == $language][0].value,    applyDiscount[_key == $defaultLanguage][0].value,  ),    "continueShopping": coalesce(    continueShopping[_key == $language][0].value,    continueShopping[_key == $defaultLanguage][0].value,  ),    "discountCode": coalesce(    discountCode[_key == $language][0].value,    discountCode[_key == $defaultLanguage][0].value,  ),    "discounts": coalesce(    discounts[_key == $language][0].value,    discounts[_key == $defaultLanguage][0].value,  ),    "emptyMessage": coalesce(    emptyMessage[_key == $language][0].value,    emptyMessage[_key == $defaultLanguage][0].value,  ),    "heading": coalesce(    heading[_key == $language][0].value,    heading[_key == $defaultLanguage][0].value,  ),    "orderSummary": coalesce(    orderSummary[_key == $language][0].value,    orderSummary[_key == $defaultLanguage][0].value,  ),    "proceedToCheckout": coalesce(    proceedToCheckout[_key == $language][0].value,    proceedToCheckout[_key == $defaultLanguage][0].value,  ),    "quantity": coalesce(    quantity[_key == $language][0].value,    quantity[_key == $defaultLanguage][0].value,  ),    "remove": coalesce(    remove[_key == $language][0].value,    remove[_key == $defaultLanguage][0].value,  ),    "subtotal": coalesce(    subtotal[_key == $language][0].value,    subtotal[_key == $defaultLanguage][0].value,  ),  },  collection {    "apply": coalesce(    apply[_key == $language][0].value,    apply[_key == $defaultLanguage][0].value,  ),    "clear": coalesce(    clear[_key == $language][0].value,    clear[_key == $defaultLanguage][0].value,  ),    "clearFilters": coalesce(    clearFilters[_key == $language][0].value,    clearFilters[_key == $defaultLanguage][0].value,  ),    "filterAndSort": coalesce(    filterAndSort[_key == $language][0].value,    filterAndSort[_key == $defaultLanguage][0].value,  ),    "filterInStock": coalesce(    filterInStock[_key == $language][0].value,    filterInStock[_key == $defaultLanguage][0].value,  ),    "filterOutOfStock": coalesce(    filterOutOfStock[_key == $language][0].value,    filterOutOfStock[_key == $defaultLanguage][0].value,  ),    "from": coalesce(    from[_key == $language][0].value,    from[_key == $defaultLanguage][0].value,  ),    "loading": coalesce(    loading[_key == $language][0].value,    loading[_key == $defaultLanguage][0].value,  ),    "loadMoreProducts": coalesce(    loadMoreProducts[_key == $language][0].value,    loadMoreProducts[_key == $defaultLanguage][0].value,  ),    "loadPrevious": coalesce(    loadPrevious[_key == $language][0].value,    loadPrevious[_key == $defaultLanguage][0].value,  ),    "noCollectionFound": coalesce(    noCollectionFound[_key == $language][0].value,    noCollectionFound[_key == $defaultLanguage][0].value,  ),    "noProductFound": coalesce(    noProductFound[_key == $language][0].value,    noProductFound[_key == $defaultLanguage][0].value,  ),    "sortBestSelling": coalesce(    sortBestSelling[_key == $language][0].value,    sortBestSelling[_key == $defaultLanguage][0].value,  ),    "sortBy": coalesce(    sortBy[_key == $language][0].value,    sortBy[_key == $defaultLanguage][0].value,  ),    "sortFeatured": coalesce(    sortFeatured[_key == $language][0].value,    sortFeatured[_key == $defaultLanguage][0].value,  ),    "sortHighLow": coalesce(    sortHighLow[_key == $language][0].value,    sortHighLow[_key == $defaultLanguage][0].value,  ),    "sortLowHigh": coalesce(    sortLowHigh[_key == $language][0].value,    sortLowHigh[_key == $defaultLanguage][0].value,  ),    "sortNewest": coalesce(    sortNewest[_key == $language][0].value,    sortNewest[_key == $defaultLanguage][0].value,  ),    "to": coalesce(    to[_key == $language][0].value,    to[_key == $defaultLanguage][0].value,  ),     "viewAll": coalesce(    viewAll[_key == $language][0].value,    viewAll[_key == $defaultLanguage][0].value,  ),  },  error {    "addressCreation": coalesce(    addressCreation[_key == $language][0].value,    addressCreation[_key == $defaultLanguage][0].value,  ),    "missingAddressId": coalesce(    missingAddressId[_key == $language][0].value,    missingAddressId[_key == $defaultLanguage][0].value,  ),    "pageNotFound": coalesce(    pageNotFound[_key == $language][0].value,    pageNotFound[_key == $defaultLanguage][0].value,  ),    "reloadPage": coalesce(    reloadPage[_key == $language][0].value,    reloadPage[_key == $defaultLanguage][0].value,  ),    "sectionError": coalesce(    sectionError[_key == $language][0].value,    sectionError[_key == $defaultLanguage][0].value,  ),    "serverError": coalesce(    serverError[_key == $language][0].value,    serverError[_key == $defaultLanguage][0].value,  ),  },  product {    "addToCart": coalesce(    addToCart[_key == $language][0].value,    addToCart[_key == $defaultLanguage][0].value,  ),    "quantitySelector": coalesce(    quantitySelector[_key == $language][0].value,    quantitySelector[_key == $defaultLanguage][0].value,  ),    "sale": coalesce(    sale[_key == $language][0].value,    sale[_key == $defaultLanguage][0].value,  ),    "soldOut": coalesce(    soldOut[_key == $language][0].value,    soldOut[_key == $defaultLanguage][0].value,  ),  },}
-export type THEME_CONTENT_FRAGMENTResult = {
+export type THEME_CONTENT_FRAGMENT_RESULT = {
   account: never;
   cart: never;
   collection: never;
   error: never;
   product: never;
 };
+
+// Source: app/data/sanity/fragments.ts
 // Variable: SETTINGS_FRAGMENT
 // Query: {  badgesCornerRadius,  badgesPosition,  badgesSaleColorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  badgesSoldOutColorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  blogCards,  buttonsBorder,  buttonsShadow,  cartCollection -> {    store {      gid,      title,    },  },  cartColorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  collectionCards,  description,  dropdownsAndPopupsBorder,  dropdownsAndPopupsShadow,  facebook,  favicon {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  grid,  inputsBorder,  inputsShadow,  instagram,  linkedin,  logo {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  mediaBorder,  mediaShadow,  pinterest,  productCards,  showCurrencyCodes,  showTrailingZeros,  siteName,  snapchat,  socialSharingImagePreview {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  spaceBetweenTemplateSections,  tiktok,  tumblr,  twitter,  vimeo,  youtube,}
-export type SETTINGS_FRAGMENTResult = {
+export type SETTINGS_FRAGMENT_RESULT = {
   badgesCornerRadius: never;
   badgesPosition: never;
   badgesSaleColorScheme: never;
@@ -1562,9 +1535,11 @@ export type SETTINGS_FRAGMENTResult = {
   vimeo: never;
   youtube: never;
 };
+
+// Source: app/data/sanity/fragments.ts
 // Variable: HEADER_FRAGMENT
 // Query: {  "announcementBar": coalesce(    announcementBar[_key == $language][0].value[],    announcementBar[_key == $defaultLanguage][0].value[],  )[] {    _type == "announcement" => {      _key,      externalLink,      link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},      openInNewTab,      text,    },  },  announcementBarColorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  autoRotateAnnouncements,  blur,  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  desktopLogoWidth,  "menu": coalesce(    menu[_key == $language][0].value[],    menu[_key == $defaultLanguage][0].value[],  )[] {  _type == "externalLink" => {  _key,  _type,  link,  name,  openInNewTab,},  _type == "internalLink" => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},  _type == "nestedNavigation" => {  _key,  _type,  childLinks[] {    _type == "externalLink" => {  _key,  _type,  link,  name,  openInNewTab,},    _type == "internalLink" => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},  },  link -> {    'documentType': _type,    'slug': coalesce(      slug,      store.slug    ) {      _type,      current    },  },  name,},},  padding,  showSeparatorLine,  sticky }
-export type HEADER_FRAGMENTResult = {
+export type HEADER_FRAGMENT_RESULT = {
   announcementBar: null;
   announcementBarColorScheme: never;
   autoRotateAnnouncements: never;
@@ -1576,68 +1551,82 @@ export type HEADER_FRAGMENTResult = {
   showSeparatorLine: never;
   sticky: never;
 };
+
+// Source: app/data/sanity/fragments.ts
 // Variable: FONT_ASSET_FRAGMENT
 // Query: {  "extension": asset -> extension,  "mimeType": asset -> mimeType,  "url": asset -> url,}
-export type FONT_ASSET_FRAGMENTResult = {
+export type FONT_ASSET_FRAGMENT_RESULT = {
   extension: never;
   mimeType: never;
   url: never;
 };
+
+// Source: app/data/sanity/fragments.ts
 // Variable: FONT_FRAGMENT
 // Query: {  baseSize,  capitalize,  font[] {    antialiased,    fontAssets[] {      "fontName": ^.fontName,      fontStyle,      fontWeight,      ttf {  "extension": asset -> extension,  "mimeType": asset -> mimeType,  "url": asset -> url,},      woff {  "extension": asset -> extension,  "mimeType": asset -> mimeType,  "url": asset -> url,},      woff2 {  "extension": asset -> extension,  "mimeType": asset -> mimeType,  "url": asset -> url,},    },    fontName,    fontType,  },  letterSpacing,  lineHeight,}
-export type FONT_FRAGMENTResult = {
+export type FONT_FRAGMENT_RESULT = {
   baseSize: never;
   capitalize: never;
   font: never;
   letterSpacing: never;
   lineHeight: never;
 };
+
+// Source: app/data/sanity/fragments.ts
 // Variable: RICHTEXT_FRAGMENT
 // Query: {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }}
-export type RICHTEXT_FRAGMENTResult = never;
+export type RICHTEXT_FRAGMENT_RESULT = never;
 
-// Source: ./app/data/sanity/links.ts
+// Source: app/data/sanity/links.ts
 // Variable: LINK_REFERENCE_FRAGMENT
 // Query: {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },}
-export type LINK_REFERENCE_FRAGMENTResult = {
+export type LINK_REFERENCE_FRAGMENT_RESULT = {
   documentType: never;
   slug: null;
 };
+
+// Source: app/data/sanity/links.ts
 // Variable: INTERNAL_LINK_FRAGMENT
 // Query: {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,}
-export type INTERNAL_LINK_FRAGMENTResult = {
+export type INTERNAL_LINK_FRAGMENT_RESULT = {
   _key: never;
   _type: never;
   anchor: never;
   link: never;
   name: never;
 };
+
+// Source: app/data/sanity/links.ts
 // Variable: EXTERNAL_LINK_FRAGMENT
 // Query: {  _key,  _type,  link,  name,  openInNewTab,}
-export type EXTERNAL_LINK_FRAGMENTResult = {
+export type EXTERNAL_LINK_FRAGMENT_RESULT = {
   _key: never;
   _type: never;
   link: never;
   name: never;
   openInNewTab: never;
 };
+
+// Source: app/data/sanity/links.ts
 // Variable: NESTED_NAVIGATION_FRAGMENT
 // Query: {  _key,  _type,  childLinks[] {    _type == "externalLink" => {  _key,  _type,  link,  name,  openInNewTab,},    _type == "internalLink" => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},  },  link -> {    'documentType': _type,    'slug': coalesce(      slug,      store.slug    ) {      _type,      current    },  },  name,}
-export type NESTED_NAVIGATION_FRAGMENTResult = {
+export type NESTED_NAVIGATION_FRAGMENT_RESULT = {
   _key: never;
   _type: never;
   childLinks: never;
   link: never;
   name: never;
 };
+
+// Source: app/data/sanity/links.ts
 // Variable: LINKS_LIST_SELECTION
 // Query: {  _type == "externalLink" => {  _key,  _type,  link,  name,  openInNewTab,},  _type == "internalLink" => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},  _type == "nestedNavigation" => {  _key,  _type,  childLinks[] {    _type == "externalLink" => {  _key,  _type,  link,  name,  openInNewTab,},    _type == "internalLink" => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},  },  link -> {    'documentType': _type,    'slug': coalesce(      slug,      store.slug    ) {      _type,      current    },  },  name,},}
-export type LINKS_LIST_SELECTIONResult = {};
+export type LINKS_LIST_SELECTION_RESULT = {};
 
-// Source: ./app/data/sanity/queries.ts
+// Source: app/data/sanity/queries.ts
 // Variable: DEFAULT_PRODUCT_TEMPLATE
 // Query: *[_type == 'productTemplate' && default == true][0] {    _type,    name,    sections[] {      _key,      _type,          _type == 'richtextSection' => {  _key,  _type,  contentAlignment,  desktopContentPosition,  maxWidth,  "richtext": coalesce(    richtext[_key == $language][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},    richtext[_key == $defaultLanguage][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},  )[],  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    _type == 'carouselSection' => {  _key,  _type,  arrows,  autoplay,  "title": coalesce(    title[_key == $language][0].value,    title[_key == $defaultLanguage][0].value,  ),  loop,  pagination,  slides[] {    _key,    image {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  },  slidesPerViewDesktop,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    _type == 'collectionListSection' => {  _key,  _type,  collections[] -> {    store {      gid    }  },  desktopColumns,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    _type == 'featuredProductSection' => {  _key,  _type,  mediaAspectRatio,  product -> {    store {      descriptionHtml,      "firstVariant": variants[0] -> {        store {          gid,          previewImageUrl,          price        }      },      gid,      options[] {        name,        values      },      previewImageUrl,      title    }  },  'richtext': coalesce(    richtext[_key == $language][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},    richtext[_key == $defaultLanguage][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},  )[],  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    _type == 'featuredCollectionSection' => {  _key,  _type,  collection -> {    store {      gid,      slug,      title    }  },  desktopColumns,  "heading": coalesce(    heading[_key == $language][0].value,    heading[_key == $defaultLanguage][0].value,  ),  maxProducts,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding},  viewAll},    _type == 'imageBannerSection' => {  _key,  _type,  backgroundImage {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  bannerHeight,  "content": coalesce(    content[_key == $language][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},    content[_key == $defaultLanguage][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},  )[],  contentAlignment,  contentPosition,  overlayOpacity,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},            _type == 'productInformationSection' => {  _key,  _type,  desktopMediaPosition,  desktopMediaWidth,  mediaAspectRatio,  "richtext": coalesce(    richtext[_key == $language][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},    richtext[_key == $defaultLanguage][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},  )[],  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    _type == 'relatedProductsSection' => {  _key,  _type,  desktopColumns,  "heading": coalesce(    heading[_key == $language][0].value,    heading[_key == $defaultLanguage][0].value,  ),  maxProducts,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},      },  }
-export type DEFAULT_PRODUCT_TEMPLATEResult = {
+export type DEFAULT_PRODUCT_TEMPLATE_RESULT = {
   _type: 'productTemplate';
   name: string | null;
   sections: Array<
@@ -1653,12 +1642,7 @@ export type DEFAULT_PRODUCT_TEMPLATEResult = {
           _key: string;
           image: {
             _type: 'image';
-            asset: {
-              _ref: string;
-              _type: 'reference';
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-            } | null;
+            asset: SanityImageAssetReference | null;
             altText: string | null;
             _ref: string | null;
             hotspot: SanityImageHotspot | null;
@@ -1671,100 +1655,44 @@ export type DEFAULT_PRODUCT_TEMPLATEResult = {
             background: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             border: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             card: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             cardForeground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             foreground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             primary: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             primaryForeground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
           } | null;
           customCss: Code | null;
@@ -1786,100 +1714,44 @@ export type DEFAULT_PRODUCT_TEMPLATEResult = {
             background: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             border: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             card: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             cardForeground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             foreground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             primary: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             primaryForeground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
           } | null;
           customCss: Code | null;
@@ -1905,100 +1777,44 @@ export type DEFAULT_PRODUCT_TEMPLATEResult = {
             background: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             border: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             card: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             cardForeground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             foreground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             primary: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             primaryForeground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
           } | null;
           customCss: Code | null;
@@ -2125,100 +1941,44 @@ export type DEFAULT_PRODUCT_TEMPLATEResult = {
             background: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             border: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             card: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             cardForeground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             foreground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             primary: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             primaryForeground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
           } | null;
           customCss: Code | null;
@@ -2231,12 +1991,7 @@ export type DEFAULT_PRODUCT_TEMPLATEResult = {
         _type: 'imageBannerSection';
         backgroundImage: {
           _type: 'image';
-          asset: {
-            _ref: string;
-            _type: 'reference';
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-          } | null;
+          asset: SanityImageAssetReference | null;
           altText: string | null;
           _ref: string | null;
           hotspot: SanityImageHotspot | null;
@@ -2304,100 +2059,44 @@ export type DEFAULT_PRODUCT_TEMPLATEResult = {
             background: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             border: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             card: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             cardForeground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             foreground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             primary: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             primaryForeground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
           } | null;
           customCss: Code | null;
@@ -2506,100 +2205,44 @@ export type DEFAULT_PRODUCT_TEMPLATEResult = {
             background: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             border: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             card: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             cardForeground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             foreground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             primary: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             primaryForeground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
           } | null;
           customCss: Code | null;
@@ -2618,100 +2261,44 @@ export type DEFAULT_PRODUCT_TEMPLATEResult = {
             background: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             border: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             card: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             cardForeground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             foreground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             primary: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             primaryForeground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
           } | null;
           customCss: Code | null;
@@ -2727,12 +2314,7 @@ export type DEFAULT_PRODUCT_TEMPLATEResult = {
         maxWidth: RangeSlider | null;
         richtext: Array<
           | {
-              asset: {
-                _ref: string;
-                _type: 'reference';
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-              } | null;
+              asset: SanityImageAssetReference | null;
               media?: unknown;
               hotspot: SanityImageHotspot | null;
               crop: SanityImageCrop | null;
@@ -2853,100 +2435,44 @@ export type DEFAULT_PRODUCT_TEMPLATEResult = {
             background: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             border: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             card: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             cardForeground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             foreground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             primary: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             primaryForeground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
           } | null;
           customCss: Code | null;
@@ -2956,9 +2482,11 @@ export type DEFAULT_PRODUCT_TEMPLATEResult = {
       }
   > | null;
 } | null;
+
+// Source: app/data/sanity/queries.ts
 // Variable: DEFAULT_COLLECTION_TEMPLATE
 // Query: *[_type == 'collectionTemplate' && default == true][0] {    _type,    name,    sections[] {      _key,      _type,          _type == 'richtextSection' => {  _key,  _type,  contentAlignment,  desktopContentPosition,  maxWidth,  "richtext": coalesce(    richtext[_key == $language][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},    richtext[_key == $defaultLanguage][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},  )[],  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    _type == 'carouselSection' => {  _key,  _type,  arrows,  autoplay,  "title": coalesce(    title[_key == $language][0].value,    title[_key == $defaultLanguage][0].value,  ),  loop,  pagination,  slides[] {    _key,    image {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  },  slidesPerViewDesktop,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    _type == 'collectionListSection' => {  _key,  _type,  collections[] -> {    store {      gid    }  },  desktopColumns,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    _type == 'featuredProductSection' => {  _key,  _type,  mediaAspectRatio,  product -> {    store {      descriptionHtml,      "firstVariant": variants[0] -> {        store {          gid,          previewImageUrl,          price        }      },      gid,      options[] {        name,        values      },      previewImageUrl,      title    }  },  'richtext': coalesce(    richtext[_key == $language][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},    richtext[_key == $defaultLanguage][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},  )[],  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    _type == 'featuredCollectionSection' => {  _key,  _type,  collection -> {    store {      gid,      slug,      title    }  },  desktopColumns,  "heading": coalesce(    heading[_key == $language][0].value,    heading[_key == $defaultLanguage][0].value,  ),  maxProducts,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding},  viewAll},    _type == 'imageBannerSection' => {  _key,  _type,  backgroundImage {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  bannerHeight,  "content": coalesce(    content[_key == $language][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},    content[_key == $defaultLanguage][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},  )[],  contentAlignment,  contentPosition,  overlayOpacity,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},            _type == 'collectionBannerSection' => {  _key,  _type,  bannerHeight,  contentAlignment,  contentPosition,  overlayOpacity,  showDescription,  showImage,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    _type == 'collectionProductGridSection' => {  _key,  _type,  desktopColumns,  enableFiltering,  enableSorting,  mobileColumns,  productsPerPage,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},      },  }
-export type DEFAULT_COLLECTION_TEMPLATEResult = {
+export type DEFAULT_COLLECTION_TEMPLATE_RESULT = {
   _type: 'collectionTemplate';
   name: string | null;
   sections: Array<
@@ -2974,12 +2502,7 @@ export type DEFAULT_COLLECTION_TEMPLATEResult = {
           _key: string;
           image: {
             _type: 'image';
-            asset: {
-              _ref: string;
-              _type: 'reference';
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-            } | null;
+            asset: SanityImageAssetReference | null;
             altText: string | null;
             _ref: string | null;
             hotspot: SanityImageHotspot | null;
@@ -2992,100 +2515,44 @@ export type DEFAULT_COLLECTION_TEMPLATEResult = {
             background: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             border: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             card: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             cardForeground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             foreground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             primary: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             primaryForeground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
           } | null;
           customCss: Code | null;
@@ -3107,100 +2574,44 @@ export type DEFAULT_COLLECTION_TEMPLATEResult = {
             background: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             border: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             card: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             cardForeground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             foreground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             primary: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             primaryForeground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
           } | null;
           customCss: Code | null;
@@ -3222,100 +2633,44 @@ export type DEFAULT_COLLECTION_TEMPLATEResult = {
             background: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             border: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             card: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             cardForeground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             foreground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             primary: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             primaryForeground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
           } | null;
           customCss: Code | null;
@@ -3336,100 +2691,44 @@ export type DEFAULT_COLLECTION_TEMPLATEResult = {
             background: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             border: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             card: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             cardForeground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             foreground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             primary: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             primaryForeground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
           } | null;
           customCss: Code | null;
@@ -3455,100 +2754,44 @@ export type DEFAULT_COLLECTION_TEMPLATEResult = {
             background: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             border: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             card: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             cardForeground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             foreground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             primary: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             primaryForeground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
           } | null;
           customCss: Code | null;
@@ -3675,100 +2918,44 @@ export type DEFAULT_COLLECTION_TEMPLATEResult = {
             background: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             border: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             card: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             cardForeground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             foreground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             primary: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             primaryForeground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
           } | null;
           customCss: Code | null;
@@ -3781,12 +2968,7 @@ export type DEFAULT_COLLECTION_TEMPLATEResult = {
         _type: 'imageBannerSection';
         backgroundImage: {
           _type: 'image';
-          asset: {
-            _ref: string;
-            _type: 'reference';
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-          } | null;
+          asset: SanityImageAssetReference | null;
           altText: string | null;
           _ref: string | null;
           hotspot: SanityImageHotspot | null;
@@ -3854,100 +3036,44 @@ export type DEFAULT_COLLECTION_TEMPLATEResult = {
             background: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             border: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             card: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             cardForeground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             foreground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             primary: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             primaryForeground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
           } | null;
           customCss: Code | null;
@@ -3963,12 +3089,7 @@ export type DEFAULT_COLLECTION_TEMPLATEResult = {
         maxWidth: RangeSlider | null;
         richtext: Array<
           | {
-              asset: {
-                _ref: string;
-                _type: 'reference';
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-              } | null;
+              asset: SanityImageAssetReference | null;
               media?: unknown;
               hotspot: SanityImageHotspot | null;
               crop: SanityImageCrop | null;
@@ -4089,100 +3210,44 @@ export type DEFAULT_COLLECTION_TEMPLATEResult = {
             background: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             border: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             card: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             cardForeground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             foreground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             primary: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             primaryForeground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
           } | null;
           customCss: Code | null;
@@ -4192,108 +3257,54 @@ export type DEFAULT_COLLECTION_TEMPLATEResult = {
       }
   > | null;
 } | null;
+
+// Source: app/data/sanity/queries.ts
 // Variable: ROOT_QUERY
 // Query: {  '_type': 'root',  "defaultColorScheme": *[_type == "colorScheme" && default == true][0] {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  "fonts": *[_type == "typography"][0] {    body {  baseSize,  capitalize,  font[] {    antialiased,    fontAssets[] {      "fontName": ^.fontName,      fontStyle,      fontWeight,      ttf {  "extension": asset -> extension,  "mimeType": asset -> mimeType,  "url": asset -> url,},      woff {  "extension": asset -> extension,  "mimeType": asset -> mimeType,  "url": asset -> url,},      woff2 {  "extension": asset -> extension,  "mimeType": asset -> mimeType,  "url": asset -> url,},    },    fontName,    fontType,  },  letterSpacing,  lineHeight,},    heading {  baseSize,  capitalize,  font[] {    antialiased,    fontAssets[] {      "fontName": ^.fontName,      fontStyle,      fontWeight,      ttf {  "extension": asset -> extension,  "mimeType": asset -> mimeType,  "url": asset -> url,},      woff {  "extension": asset -> extension,  "mimeType": asset -> mimeType,  "url": asset -> url,},      woff2 {  "extension": asset -> extension,  "mimeType": asset -> mimeType,  "url": asset -> url,},    },    fontName,    fontType,  },  letterSpacing,  lineHeight,},    extra {  baseSize,  capitalize,  font[] {    antialiased,    fontAssets[] {      "fontName": ^.fontName,      fontStyle,      fontWeight,      ttf {  "extension": asset -> extension,  "mimeType": asset -> mimeType,  "url": asset -> url,},      woff {  "extension": asset -> extension,  "mimeType": asset -> mimeType,  "url": asset -> url,},      woff2 {  "extension": asset -> extension,  "mimeType": asset -> mimeType,  "url": asset -> url,},    },    fontName,    fontType,  },  letterSpacing,  lineHeight,},  },  "footer": *[_type == 'footer'][0] {    "footer": footers[0] {      _key,      _type,          _type == 'socialLinksOnly' => {  _key,  _type,  "copyright": coalesce(    copyright[_key == $language][0].value,    copyright[_key == $defaultLanguage][0].value,  ),  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding},},      },    sections[] {      _key,      _type,          _type == 'richtextSection' => {  _key,  _type,  contentAlignment,  desktopContentPosition,  maxWidth,  "richtext": coalesce(    richtext[_key == $language][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},    richtext[_key == $defaultLanguage][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},  )[],  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    _type == 'carouselSection' => {  _key,  _type,  arrows,  autoplay,  "title": coalesce(    title[_key == $language][0].value,    title[_key == $defaultLanguage][0].value,  ),  loop,  pagination,  slides[] {    _key,    image {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  },  slidesPerViewDesktop,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    _type == 'collectionListSection' => {  _key,  _type,  collections[] -> {    store {      gid    }  },  desktopColumns,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    _type == 'featuredProductSection' => {  _key,  _type,  mediaAspectRatio,  product -> {    store {      descriptionHtml,      "firstVariant": variants[0] -> {        store {          gid,          previewImageUrl,          price        }      },      gid,      options[] {        name,        values      },      previewImageUrl,      title    }  },  'richtext': coalesce(    richtext[_key == $language][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},    richtext[_key == $defaultLanguage][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},  )[],  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    _type == 'featuredCollectionSection' => {  _key,  _type,  collection -> {    store {      gid,      slug,      title    }  },  desktopColumns,  "heading": coalesce(    heading[_key == $language][0].value,    heading[_key == $defaultLanguage][0].value,  ),  maxProducts,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding},  viewAll},    _type == 'imageBannerSection' => {  _key,  _type,  backgroundImage {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  bannerHeight,  "content": coalesce(    content[_key == $language][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},    content[_key == $defaultLanguage][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},  )[],  contentAlignment,  contentPosition,  overlayOpacity,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},      },  },  "header": *[_type == "header"][0] {  "announcementBar": coalesce(    announcementBar[_key == $language][0].value[],    announcementBar[_key == $defaultLanguage][0].value[],  )[] {    _type == "announcement" => {      _key,      externalLink,      link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},      openInNewTab,      text,    },  },  announcementBarColorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  autoRotateAnnouncements,  blur,  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  desktopLogoWidth,  "menu": coalesce(    menu[_key == $language][0].value[],    menu[_key == $defaultLanguage][0].value[],  )[] {  _type == "externalLink" => {  _key,  _type,  link,  name,  openInNewTab,},  _type == "internalLink" => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},  _type == "nestedNavigation" => {  _key,  _type,  childLinks[] {    _type == "externalLink" => {  _key,  _type,  link,  name,  openInNewTab,},    _type == "internalLink" => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},  },  link -> {    'documentType': _type,    'slug': coalesce(      slug,      store.slug    ) {      _type,      current    },  },  name,},},  padding,  showSeparatorLine,  sticky },  "settings": *[_type == "settings"][0] {  badgesCornerRadius,  badgesPosition,  badgesSaleColorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  badgesSoldOutColorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  blogCards,  buttonsBorder,  buttonsShadow,  cartCollection -> {    store {      gid,      title,    },  },  cartColorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  collectionCards,  description,  dropdownsAndPopupsBorder,  dropdownsAndPopupsShadow,  facebook,  favicon {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  grid,  inputsBorder,  inputsShadow,  instagram,  linkedin,  logo {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  mediaBorder,  mediaShadow,  pinterest,  productCards,  showCurrencyCodes,  showTrailingZeros,  siteName,  snapchat,  socialSharingImagePreview {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  spaceBetweenTemplateSections,  tiktok,  tumblr,  twitter,  vimeo,  youtube,},  "themeContent": *[_type == "themeContent"][0] {  account {    "accountDetails": coalesce(    accountDetails[_key == $language][0].value,    accountDetails[_key == $defaultLanguage][0].value,  ),    "addAddress": coalesce(    addAddress[_key == $language][0].value,    addAddress[_key == $defaultLanguage][0].value,  ),    "addName": coalesce(    addName[_key == $language][0].value,    addName[_key == $defaultLanguage][0].value,  ),    "addressBook": coalesce(    addressBook[_key == $language][0].value,    addressBook[_key == $defaultLanguage][0].value,  ),    "addressLine1": coalesce(    addressLine1[_key == $language][0].value,    addressLine1[_key == $defaultLanguage][0].value,  ),    "addressLine2": coalesce(    addressLine2[_key == $language][0].value,    addressLine2[_key == $defaultLanguage][0].value,  ),    "cancel": coalesce(    cancel[_key == $language][0].value,    cancel[_key == $defaultLanguage][0].value,  ),    "city": coalesce(    city[_key == $language][0].value,    city[_key == $defaultLanguage][0].value,  ),     "company": coalesce(    company[_key == $language][0].value,    company[_key == $defaultLanguage][0].value,  ),    "country": coalesce(    country[_key == $language][0].value,    country[_key == $defaultLanguage][0].value,  ),    "default": coalesce(    default[_key == $language][0].value,    default[_key == $defaultLanguage][0].value,  ),    "defaultAddress": coalesce(    defaultAddress[_key == $language][0].value,    defaultAddress[_key == $defaultLanguage][0].value,  ),    "discounts": coalesce(    discounts[_key == $language][0].value,    discounts[_key == $defaultLanguage][0].value,  ),    "discountsOff": coalesce(    discountsOff[_key == $language][0].value,    discountsOff[_key == $defaultLanguage][0].value,  ),    "edit": coalesce(    edit[_key == $language][0].value,    edit[_key == $defaultLanguage][0].value,  ),    "editAddress": coalesce(    editAddress[_key == $language][0].value,    editAddress[_key == $defaultLanguage][0].value,  ),    "emailAddress": coalesce(    emailAddress[_key == $language][0].value,    emailAddress[_key == $defaultLanguage][0].value,  ),    "firstName": coalesce(    firstName[_key == $language][0].value,    firstName[_key == $defaultLanguage][0].value,  ),    "fulfillmentStatus": coalesce(    fulfillmentStatus[_key == $language][0].value,    fulfillmentStatus[_key == $defaultLanguage][0].value,  ),    "lastName": coalesce(    lastName[_key == $language][0].value,    lastName[_key == $defaultLanguage][0].value,  ),    "name": coalesce(    name[_key == $language][0].value,    name[_key == $defaultLanguage][0].value,  ),    "noAddress": coalesce(    noAddress[_key == $language][0].value,    noAddress[_key == $defaultLanguage][0].value,  ),    "noOrdersMessage": coalesce(    noOrdersMessage[_key == $language][0].value,    noOrdersMessage[_key == $defaultLanguage][0].value,  ),    "noShippingAddress": coalesce(    noShippingAddress[_key == $language][0].value,    noShippingAddress[_key == $defaultLanguage][0].value,  ),    "orderDate": coalesce(    orderDate[_key == $language][0].value,    orderDate[_key == $defaultLanguage][0].value,  ),    "orderDetail": coalesce(    orderDetail[_key == $language][0].value,    orderDetail[_key == $defaultLanguage][0].value,  ),    "orderHistory": coalesce(    orderHistory[_key == $language][0].value,    orderHistory[_key == $defaultLanguage][0].value,  ),    "orderId": coalesce(    orderId[_key == $language][0].value,    orderId[_key == $defaultLanguage][0].value,  ),    "orderNumber": coalesce(    orderNumber[_key == $language][0].value,    orderNumber[_key == $defaultLanguage][0].value,  ),    "orderStatusCancelled": coalesce(    orderStatusCancelled[_key == $language][0].value,    orderStatusCancelled[_key == $defaultLanguage][0].value,  ),    "orderStatusError": coalesce(    orderStatusError[_key == $language][0].value,    orderStatusError[_key == $defaultLanguage][0].value,  ),    "orderStatusFailure": coalesce(    orderStatusFailure[_key == $language][0].value,    orderStatusFailure[_key == $defaultLanguage][0].value,  ),    "orderStatusOpen": coalesce(    orderStatusOpen[_key == $language][0].value,    orderStatusOpen[_key == $defaultLanguage][0].value,  ),    "orderStatusPending": coalesce(    orderStatusPending[_key == $language][0].value,    orderStatusPending[_key == $defaultLanguage][0].value,  ),    "orderStatusSuccess": coalesce(    orderStatusSuccess[_key == $language][0].value,    orderStatusSuccess[_key == $defaultLanguage][0].value,  ),    "phone": coalesce(    phone[_key == $language][0].value,    phone[_key == $defaultLanguage][0].value,  ),    "phoneNumber": coalesce(    phoneNumber[_key == $language][0].value,    phoneNumber[_key == $defaultLanguage][0].value,  ),    "placedOn": coalesce(    placedOn[_key == $language][0].value,    placedOn[_key == $defaultLanguage][0].value,  ),    "postalCode": coalesce(    postalCode[_key == $language][0].value,    postalCode[_key == $defaultLanguage][0].value,  ),    "price": coalesce(    price[_key == $language][0].value,    price[_key == $defaultLanguage][0].value,  ),    "product": coalesce(    product[_key == $language][0].value,    product[_key == $defaultLanguage][0].value,  ),    "profile": coalesce(    profile[_key == $language][0].value,    profile[_key == $defaultLanguage][0].value,  ),    "quantity": coalesce(    quantity[_key == $language][0].value,    quantity[_key == $defaultLanguage][0].value,  ),    "remove": coalesce(    remove[_key == $language][0].value,    remove[_key == $defaultLanguage][0].value,  ),    "returnToAccount": coalesce(    returnToAccount[_key == $language][0].value,    returnToAccount[_key == $defaultLanguage][0].value,  ),    "save": coalesce(    save[_key == $language][0].value,    save[_key == $defaultLanguage][0].value,  ),    "saving": coalesce(    saving[_key == $language][0].value,    saving[_key == $defaultLanguage][0].value,  ),    "shippingAddress": coalesce(    shippingAddress[_key == $language][0].value,    shippingAddress[_key == $defaultLanguage][0].value,  ),    "signOut": coalesce(    signOut[_key == $language][0].value,    signOut[_key == $defaultLanguage][0].value,  ),    "startShopping": coalesce(    startShopping[_key == $language][0].value,    startShopping[_key == $defaultLanguage][0].value,  ),    "stateProvince": coalesce(    stateProvince[_key == $language][0].value,    stateProvince[_key == $defaultLanguage][0].value,  ),    "status": coalesce(    status[_key == $language][0].value,    status[_key == $defaultLanguage][0].value,  ),    "subtotal": coalesce(    subtotal[_key == $language][0].value,    subtotal[_key == $defaultLanguage][0].value,  ),    "tax": coalesce(    tax[_key == $language][0].value,    tax[_key == $defaultLanguage][0].value,  ),    "total": coalesce(    total[_key == $language][0].value,    total[_key == $defaultLanguage][0].value,  ),    "updateYourProfile": coalesce(    updateYourProfile[_key == $language][0].value,    updateYourProfile[_key == $defaultLanguage][0].value,  ),    "viewDetails": coalesce(    viewDetails[_key == $language][0].value,    viewDetails[_key == $defaultLanguage][0].value,  ),    "welcome": coalesce(    welcome[_key == $language][0].value,    welcome[_key == $defaultLanguage][0].value,  ),    "welcomeToYourAccount": coalesce(    welcomeToYourAccount[_key == $language][0].value,    welcomeToYourAccount[_key == $defaultLanguage][0].value,  ),  },  cart {    "applyDiscount": coalesce(    applyDiscount[_key == $language][0].value,    applyDiscount[_key == $defaultLanguage][0].value,  ),    "continueShopping": coalesce(    continueShopping[_key == $language][0].value,    continueShopping[_key == $defaultLanguage][0].value,  ),    "discountCode": coalesce(    discountCode[_key == $language][0].value,    discountCode[_key == $defaultLanguage][0].value,  ),    "discounts": coalesce(    discounts[_key == $language][0].value,    discounts[_key == $defaultLanguage][0].value,  ),    "emptyMessage": coalesce(    emptyMessage[_key == $language][0].value,    emptyMessage[_key == $defaultLanguage][0].value,  ),    "heading": coalesce(    heading[_key == $language][0].value,    heading[_key == $defaultLanguage][0].value,  ),    "orderSummary": coalesce(    orderSummary[_key == $language][0].value,    orderSummary[_key == $defaultLanguage][0].value,  ),    "proceedToCheckout": coalesce(    proceedToCheckout[_key == $language][0].value,    proceedToCheckout[_key == $defaultLanguage][0].value,  ),    "quantity": coalesce(    quantity[_key == $language][0].value,    quantity[_key == $defaultLanguage][0].value,  ),    "remove": coalesce(    remove[_key == $language][0].value,    remove[_key == $defaultLanguage][0].value,  ),    "subtotal": coalesce(    subtotal[_key == $language][0].value,    subtotal[_key == $defaultLanguage][0].value,  ),  },  collection {    "apply": coalesce(    apply[_key == $language][0].value,    apply[_key == $defaultLanguage][0].value,  ),    "clear": coalesce(    clear[_key == $language][0].value,    clear[_key == $defaultLanguage][0].value,  ),    "clearFilters": coalesce(    clearFilters[_key == $language][0].value,    clearFilters[_key == $defaultLanguage][0].value,  ),    "filterAndSort": coalesce(    filterAndSort[_key == $language][0].value,    filterAndSort[_key == $defaultLanguage][0].value,  ),    "filterInStock": coalesce(    filterInStock[_key == $language][0].value,    filterInStock[_key == $defaultLanguage][0].value,  ),    "filterOutOfStock": coalesce(    filterOutOfStock[_key == $language][0].value,    filterOutOfStock[_key == $defaultLanguage][0].value,  ),    "from": coalesce(    from[_key == $language][0].value,    from[_key == $defaultLanguage][0].value,  ),    "loading": coalesce(    loading[_key == $language][0].value,    loading[_key == $defaultLanguage][0].value,  ),    "loadMoreProducts": coalesce(    loadMoreProducts[_key == $language][0].value,    loadMoreProducts[_key == $defaultLanguage][0].value,  ),    "loadPrevious": coalesce(    loadPrevious[_key == $language][0].value,    loadPrevious[_key == $defaultLanguage][0].value,  ),    "noCollectionFound": coalesce(    noCollectionFound[_key == $language][0].value,    noCollectionFound[_key == $defaultLanguage][0].value,  ),    "noProductFound": coalesce(    noProductFound[_key == $language][0].value,    noProductFound[_key == $defaultLanguage][0].value,  ),    "sortBestSelling": coalesce(    sortBestSelling[_key == $language][0].value,    sortBestSelling[_key == $defaultLanguage][0].value,  ),    "sortBy": coalesce(    sortBy[_key == $language][0].value,    sortBy[_key == $defaultLanguage][0].value,  ),    "sortFeatured": coalesce(    sortFeatured[_key == $language][0].value,    sortFeatured[_key == $defaultLanguage][0].value,  ),    "sortHighLow": coalesce(    sortHighLow[_key == $language][0].value,    sortHighLow[_key == $defaultLanguage][0].value,  ),    "sortLowHigh": coalesce(    sortLowHigh[_key == $language][0].value,    sortLowHigh[_key == $defaultLanguage][0].value,  ),    "sortNewest": coalesce(    sortNewest[_key == $language][0].value,    sortNewest[_key == $defaultLanguage][0].value,  ),    "to": coalesce(    to[_key == $language][0].value,    to[_key == $defaultLanguage][0].value,  ),     "viewAll": coalesce(    viewAll[_key == $language][0].value,    viewAll[_key == $defaultLanguage][0].value,  ),  },  error {    "addressCreation": coalesce(    addressCreation[_key == $language][0].value,    addressCreation[_key == $defaultLanguage][0].value,  ),    "missingAddressId": coalesce(    missingAddressId[_key == $language][0].value,    missingAddressId[_key == $defaultLanguage][0].value,  ),    "pageNotFound": coalesce(    pageNotFound[_key == $language][0].value,    pageNotFound[_key == $defaultLanguage][0].value,  ),    "reloadPage": coalesce(    reloadPage[_key == $language][0].value,    reloadPage[_key == $defaultLanguage][0].value,  ),    "sectionError": coalesce(    sectionError[_key == $language][0].value,    sectionError[_key == $defaultLanguage][0].value,  ),    "serverError": coalesce(    serverError[_key == $language][0].value,    serverError[_key == $defaultLanguage][0].value,  ),  },  product {    "addToCart": coalesce(    addToCart[_key == $language][0].value,    addToCart[_key == $defaultLanguage][0].value,  ),    "quantitySelector": coalesce(    quantitySelector[_key == $language][0].value,    quantitySelector[_key == $defaultLanguage][0].value,  ),    "sale": coalesce(    sale[_key == $language][0].value,    sale[_key == $defaultLanguage][0].value,  ),    "soldOut": coalesce(    soldOut[_key == $language][0].value,    soldOut[_key == $defaultLanguage][0].value,  ),  },},}
-export type ROOT_QUERYResult = {
+export type ROOT_QUERY_RESULT = {
   _type: 'root';
   defaultColorScheme: {
     background: {
       alpha: null;
       hex: string | null;
-      hsl: {
-        h?: number;
-        s?: number;
-        l?: number;
-      } | null;
-      rgb: {
-        r?: number;
-        g?: number;
-        b?: number;
-      } | null;
+      hsl: Hsl | null;
+      rgb: Rgb | null;
     } | null;
     border: {
       alpha: null;
       hex: string | null;
-      hsl: {
-        h?: number;
-        s?: number;
-        l?: number;
-      } | null;
-      rgb: {
-        r?: number;
-        g?: number;
-        b?: number;
-      } | null;
+      hsl: Hsl | null;
+      rgb: Rgb | null;
     } | null;
     card: {
       alpha: null;
       hex: string | null;
-      hsl: {
-        h?: number;
-        s?: number;
-        l?: number;
-      } | null;
-      rgb: {
-        r?: number;
-        g?: number;
-        b?: number;
-      } | null;
+      hsl: Hsl | null;
+      rgb: Rgb | null;
     } | null;
     cardForeground: {
       alpha: null;
       hex: string | null;
-      hsl: {
-        h?: number;
-        s?: number;
-        l?: number;
-      } | null;
-      rgb: {
-        r?: number;
-        g?: number;
-        b?: number;
-      } | null;
+      hsl: Hsl | null;
+      rgb: Rgb | null;
     } | null;
     foreground: {
       alpha: null;
       hex: string | null;
-      hsl: {
-        h?: number;
-        s?: number;
-        l?: number;
-      } | null;
-      rgb: {
-        r?: number;
-        g?: number;
-        b?: number;
-      } | null;
+      hsl: Hsl | null;
+      rgb: Rgb | null;
     } | null;
     primary: {
       alpha: null;
       hex: string | null;
-      hsl: {
-        h?: number;
-        s?: number;
-        l?: number;
-      } | null;
-      rgb: {
-        r?: number;
-        g?: number;
-        b?: number;
-      } | null;
+      hsl: Hsl | null;
+      rgb: Rgb | null;
     } | null;
     primaryForeground: {
       alpha: null;
       hex: string | null;
-      hsl: {
-        h?: number;
-        s?: number;
-        l?: number;
-      } | null;
-      rgb: {
-        r?: number;
-        g?: number;
-        b?: number;
-      } | null;
+      hsl: Hsl | null;
+      rgb: Rgb | null;
     } | null;
   } | null;
   fonts: {
@@ -4431,100 +3442,44 @@ export type ROOT_QUERYResult = {
           background: {
             alpha: null;
             hex: string | null;
-            hsl: {
-              h?: number;
-              s?: number;
-              l?: number;
-            } | null;
-            rgb: {
-              r?: number;
-              g?: number;
-              b?: number;
-            } | null;
+            hsl: Hsl | null;
+            rgb: Rgb | null;
           } | null;
           border: {
             alpha: null;
             hex: string | null;
-            hsl: {
-              h?: number;
-              s?: number;
-              l?: number;
-            } | null;
-            rgb: {
-              r?: number;
-              g?: number;
-              b?: number;
-            } | null;
+            hsl: Hsl | null;
+            rgb: Rgb | null;
           } | null;
           card: {
             alpha: null;
             hex: string | null;
-            hsl: {
-              h?: number;
-              s?: number;
-              l?: number;
-            } | null;
-            rgb: {
-              r?: number;
-              g?: number;
-              b?: number;
-            } | null;
+            hsl: Hsl | null;
+            rgb: Rgb | null;
           } | null;
           cardForeground: {
             alpha: null;
             hex: string | null;
-            hsl: {
-              h?: number;
-              s?: number;
-              l?: number;
-            } | null;
-            rgb: {
-              r?: number;
-              g?: number;
-              b?: number;
-            } | null;
+            hsl: Hsl | null;
+            rgb: Rgb | null;
           } | null;
           foreground: {
             alpha: null;
             hex: string | null;
-            hsl: {
-              h?: number;
-              s?: number;
-              l?: number;
-            } | null;
-            rgb: {
-              r?: number;
-              g?: number;
-              b?: number;
-            } | null;
+            hsl: Hsl | null;
+            rgb: Rgb | null;
           } | null;
           primary: {
             alpha: null;
             hex: string | null;
-            hsl: {
-              h?: number;
-              s?: number;
-              l?: number;
-            } | null;
-            rgb: {
-              r?: number;
-              g?: number;
-              b?: number;
-            } | null;
+            hsl: Hsl | null;
+            rgb: Rgb | null;
           } | null;
           primaryForeground: {
             alpha: null;
             hex: string | null;
-            hsl: {
-              h?: number;
-              s?: number;
-              l?: number;
-            } | null;
-            rgb: {
-              r?: number;
-              g?: number;
-              b?: number;
-            } | null;
+            hsl: Hsl | null;
+            rgb: Rgb | null;
           } | null;
         } | null;
         customCss: Code | null;
@@ -4545,12 +3500,7 @@ export type ROOT_QUERYResult = {
             _key: string;
             image: {
               _type: 'image';
-              asset: {
-                _ref: string;
-                _type: 'reference';
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-              } | null;
+              asset: SanityImageAssetReference | null;
               altText: string | null;
               _ref: string | null;
               hotspot: SanityImageHotspot | null;
@@ -4563,100 +3513,44 @@ export type ROOT_QUERYResult = {
               background: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               border: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               card: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               cardForeground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               foreground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               primary: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               primaryForeground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
             } | null;
             customCss: Code | null;
@@ -4678,100 +3572,44 @@ export type ROOT_QUERYResult = {
               background: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               border: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               card: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               cardForeground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               foreground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               primary: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               primaryForeground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
             } | null;
             customCss: Code | null;
@@ -4797,100 +3635,44 @@ export type ROOT_QUERYResult = {
               background: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               border: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               card: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               cardForeground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               foreground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               primary: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               primaryForeground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
             } | null;
             customCss: Code | null;
@@ -5017,100 +3799,44 @@ export type ROOT_QUERYResult = {
               background: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               border: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               card: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               cardForeground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               foreground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               primary: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               primaryForeground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
             } | null;
             customCss: Code | null;
@@ -5123,12 +3849,7 @@ export type ROOT_QUERYResult = {
           _type: 'imageBannerSection';
           backgroundImage: {
             _type: 'image';
-            asset: {
-              _ref: string;
-              _type: 'reference';
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-            } | null;
+            asset: SanityImageAssetReference | null;
             altText: string | null;
             _ref: string | null;
             hotspot: SanityImageHotspot | null;
@@ -5196,100 +3917,44 @@ export type ROOT_QUERYResult = {
               background: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               border: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               card: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               cardForeground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               foreground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               primary: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               primaryForeground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
             } | null;
             customCss: Code | null;
@@ -5305,12 +3970,7 @@ export type ROOT_QUERYResult = {
           maxWidth: RangeSlider | null;
           richtext: Array<
             | {
-                asset: {
-                  _ref: string;
-                  _type: 'reference';
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-                } | null;
+                asset: SanityImageAssetReference | null;
                 media?: unknown;
                 hotspot: SanityImageHotspot | null;
                 crop: SanityImageCrop | null;
@@ -5431,100 +4091,44 @@ export type ROOT_QUERYResult = {
               background: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               border: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               card: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               cardForeground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               foreground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               primary: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               primaryForeground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
             } | null;
             customCss: Code | null;
@@ -5576,100 +4180,44 @@ export type ROOT_QUERYResult = {
       background: {
         alpha: null;
         hex: string | null;
-        hsl: {
-          h?: number;
-          s?: number;
-          l?: number;
-        } | null;
-        rgb: {
-          r?: number;
-          g?: number;
-          b?: number;
-        } | null;
+        hsl: Hsl | null;
+        rgb: Rgb | null;
       } | null;
       border: {
         alpha: null;
         hex: string | null;
-        hsl: {
-          h?: number;
-          s?: number;
-          l?: number;
-        } | null;
-        rgb: {
-          r?: number;
-          g?: number;
-          b?: number;
-        } | null;
+        hsl: Hsl | null;
+        rgb: Rgb | null;
       } | null;
       card: {
         alpha: null;
         hex: string | null;
-        hsl: {
-          h?: number;
-          s?: number;
-          l?: number;
-        } | null;
-        rgb: {
-          r?: number;
-          g?: number;
-          b?: number;
-        } | null;
+        hsl: Hsl | null;
+        rgb: Rgb | null;
       } | null;
       cardForeground: {
         alpha: null;
         hex: string | null;
-        hsl: {
-          h?: number;
-          s?: number;
-          l?: number;
-        } | null;
-        rgb: {
-          r?: number;
-          g?: number;
-          b?: number;
-        } | null;
+        hsl: Hsl | null;
+        rgb: Rgb | null;
       } | null;
       foreground: {
         alpha: null;
         hex: string | null;
-        hsl: {
-          h?: number;
-          s?: number;
-          l?: number;
-        } | null;
-        rgb: {
-          r?: number;
-          g?: number;
-          b?: number;
-        } | null;
+        hsl: Hsl | null;
+        rgb: Rgb | null;
       } | null;
       primary: {
         alpha: null;
         hex: string | null;
-        hsl: {
-          h?: number;
-          s?: number;
-          l?: number;
-        } | null;
-        rgb: {
-          r?: number;
-          g?: number;
-          b?: number;
-        } | null;
+        hsl: Hsl | null;
+        rgb: Rgb | null;
       } | null;
       primaryForeground: {
         alpha: null;
         hex: string | null;
-        hsl: {
-          h?: number;
-          s?: number;
-          l?: number;
-        } | null;
-        rgb: {
-          r?: number;
-          g?: number;
-          b?: number;
-        } | null;
+        hsl: Hsl | null;
+        rgb: Rgb | null;
       } | null;
     } | null;
     autoRotateAnnouncements: boolean | null;
@@ -5678,100 +4226,44 @@ export type ROOT_QUERYResult = {
       background: {
         alpha: null;
         hex: string | null;
-        hsl: {
-          h?: number;
-          s?: number;
-          l?: number;
-        } | null;
-        rgb: {
-          r?: number;
-          g?: number;
-          b?: number;
-        } | null;
+        hsl: Hsl | null;
+        rgb: Rgb | null;
       } | null;
       border: {
         alpha: null;
         hex: string | null;
-        hsl: {
-          h?: number;
-          s?: number;
-          l?: number;
-        } | null;
-        rgb: {
-          r?: number;
-          g?: number;
-          b?: number;
-        } | null;
+        hsl: Hsl | null;
+        rgb: Rgb | null;
       } | null;
       card: {
         alpha: null;
         hex: string | null;
-        hsl: {
-          h?: number;
-          s?: number;
-          l?: number;
-        } | null;
-        rgb: {
-          r?: number;
-          g?: number;
-          b?: number;
-        } | null;
+        hsl: Hsl | null;
+        rgb: Rgb | null;
       } | null;
       cardForeground: {
         alpha: null;
         hex: string | null;
-        hsl: {
-          h?: number;
-          s?: number;
-          l?: number;
-        } | null;
-        rgb: {
-          r?: number;
-          g?: number;
-          b?: number;
-        } | null;
+        hsl: Hsl | null;
+        rgb: Rgb | null;
       } | null;
       foreground: {
         alpha: null;
         hex: string | null;
-        hsl: {
-          h?: number;
-          s?: number;
-          l?: number;
-        } | null;
-        rgb: {
-          r?: number;
-          g?: number;
-          b?: number;
-        } | null;
+        hsl: Hsl | null;
+        rgb: Rgb | null;
       } | null;
       primary: {
         alpha: null;
         hex: string | null;
-        hsl: {
-          h?: number;
-          s?: number;
-          l?: number;
-        } | null;
-        rgb: {
-          r?: number;
-          g?: number;
-          b?: number;
-        } | null;
+        hsl: Hsl | null;
+        rgb: Rgb | null;
       } | null;
       primaryForeground: {
         alpha: null;
         hex: string | null;
-        hsl: {
-          h?: number;
-          s?: number;
-          l?: number;
-        } | null;
-        rgb: {
-          r?: number;
-          g?: number;
-          b?: number;
-        } | null;
+        hsl: Hsl | null;
+        rgb: Rgb | null;
       } | null;
     } | null;
     desktopLogoWidth: RangeSlider | null;
@@ -5919,200 +4411,88 @@ export type ROOT_QUERYResult = {
       background: {
         alpha: null;
         hex: string | null;
-        hsl: {
-          h?: number;
-          s?: number;
-          l?: number;
-        } | null;
-        rgb: {
-          r?: number;
-          g?: number;
-          b?: number;
-        } | null;
+        hsl: Hsl | null;
+        rgb: Rgb | null;
       } | null;
       border: {
         alpha: null;
         hex: string | null;
-        hsl: {
-          h?: number;
-          s?: number;
-          l?: number;
-        } | null;
-        rgb: {
-          r?: number;
-          g?: number;
-          b?: number;
-        } | null;
+        hsl: Hsl | null;
+        rgb: Rgb | null;
       } | null;
       card: {
         alpha: null;
         hex: string | null;
-        hsl: {
-          h?: number;
-          s?: number;
-          l?: number;
-        } | null;
-        rgb: {
-          r?: number;
-          g?: number;
-          b?: number;
-        } | null;
+        hsl: Hsl | null;
+        rgb: Rgb | null;
       } | null;
       cardForeground: {
         alpha: null;
         hex: string | null;
-        hsl: {
-          h?: number;
-          s?: number;
-          l?: number;
-        } | null;
-        rgb: {
-          r?: number;
-          g?: number;
-          b?: number;
-        } | null;
+        hsl: Hsl | null;
+        rgb: Rgb | null;
       } | null;
       foreground: {
         alpha: null;
         hex: string | null;
-        hsl: {
-          h?: number;
-          s?: number;
-          l?: number;
-        } | null;
-        rgb: {
-          r?: number;
-          g?: number;
-          b?: number;
-        } | null;
+        hsl: Hsl | null;
+        rgb: Rgb | null;
       } | null;
       primary: {
         alpha: null;
         hex: string | null;
-        hsl: {
-          h?: number;
-          s?: number;
-          l?: number;
-        } | null;
-        rgb: {
-          r?: number;
-          g?: number;
-          b?: number;
-        } | null;
+        hsl: Hsl | null;
+        rgb: Rgb | null;
       } | null;
       primaryForeground: {
         alpha: null;
         hex: string | null;
-        hsl: {
-          h?: number;
-          s?: number;
-          l?: number;
-        } | null;
-        rgb: {
-          r?: number;
-          g?: number;
-          b?: number;
-        } | null;
+        hsl: Hsl | null;
+        rgb: Rgb | null;
       } | null;
     } | null;
     badgesSoldOutColorScheme: {
       background: {
         alpha: null;
         hex: string | null;
-        hsl: {
-          h?: number;
-          s?: number;
-          l?: number;
-        } | null;
-        rgb: {
-          r?: number;
-          g?: number;
-          b?: number;
-        } | null;
+        hsl: Hsl | null;
+        rgb: Rgb | null;
       } | null;
       border: {
         alpha: null;
         hex: string | null;
-        hsl: {
-          h?: number;
-          s?: number;
-          l?: number;
-        } | null;
-        rgb: {
-          r?: number;
-          g?: number;
-          b?: number;
-        } | null;
+        hsl: Hsl | null;
+        rgb: Rgb | null;
       } | null;
       card: {
         alpha: null;
         hex: string | null;
-        hsl: {
-          h?: number;
-          s?: number;
-          l?: number;
-        } | null;
-        rgb: {
-          r?: number;
-          g?: number;
-          b?: number;
-        } | null;
+        hsl: Hsl | null;
+        rgb: Rgb | null;
       } | null;
       cardForeground: {
         alpha: null;
         hex: string | null;
-        hsl: {
-          h?: number;
-          s?: number;
-          l?: number;
-        } | null;
-        rgb: {
-          r?: number;
-          g?: number;
-          b?: number;
-        } | null;
+        hsl: Hsl | null;
+        rgb: Rgb | null;
       } | null;
       foreground: {
         alpha: null;
         hex: string | null;
-        hsl: {
-          h?: number;
-          s?: number;
-          l?: number;
-        } | null;
-        rgb: {
-          r?: number;
-          g?: number;
-          b?: number;
-        } | null;
+        hsl: Hsl | null;
+        rgb: Rgb | null;
       } | null;
       primary: {
         alpha: null;
         hex: string | null;
-        hsl: {
-          h?: number;
-          s?: number;
-          l?: number;
-        } | null;
-        rgb: {
-          r?: number;
-          g?: number;
-          b?: number;
-        } | null;
+        hsl: Hsl | null;
+        rgb: Rgb | null;
       } | null;
       primaryForeground: {
         alpha: null;
         hex: string | null;
-        hsl: {
-          h?: number;
-          s?: number;
-          l?: number;
-        } | null;
-        rgb: {
-          r?: number;
-          g?: number;
-          b?: number;
-        } | null;
+        hsl: Hsl | null;
+        rgb: Rgb | null;
       } | null;
     } | null;
     blogCards: {
@@ -6152,100 +4532,44 @@ export type ROOT_QUERYResult = {
       background: {
         alpha: null;
         hex: string | null;
-        hsl: {
-          h?: number;
-          s?: number;
-          l?: number;
-        } | null;
-        rgb: {
-          r?: number;
-          g?: number;
-          b?: number;
-        } | null;
+        hsl: Hsl | null;
+        rgb: Rgb | null;
       } | null;
       border: {
         alpha: null;
         hex: string | null;
-        hsl: {
-          h?: number;
-          s?: number;
-          l?: number;
-        } | null;
-        rgb: {
-          r?: number;
-          g?: number;
-          b?: number;
-        } | null;
+        hsl: Hsl | null;
+        rgb: Rgb | null;
       } | null;
       card: {
         alpha: null;
         hex: string | null;
-        hsl: {
-          h?: number;
-          s?: number;
-          l?: number;
-        } | null;
-        rgb: {
-          r?: number;
-          g?: number;
-          b?: number;
-        } | null;
+        hsl: Hsl | null;
+        rgb: Rgb | null;
       } | null;
       cardForeground: {
         alpha: null;
         hex: string | null;
-        hsl: {
-          h?: number;
-          s?: number;
-          l?: number;
-        } | null;
-        rgb: {
-          r?: number;
-          g?: number;
-          b?: number;
-        } | null;
+        hsl: Hsl | null;
+        rgb: Rgb | null;
       } | null;
       foreground: {
         alpha: null;
         hex: string | null;
-        hsl: {
-          h?: number;
-          s?: number;
-          l?: number;
-        } | null;
-        rgb: {
-          r?: number;
-          g?: number;
-          b?: number;
-        } | null;
+        hsl: Hsl | null;
+        rgb: Rgb | null;
       } | null;
       primary: {
         alpha: null;
         hex: string | null;
-        hsl: {
-          h?: number;
-          s?: number;
-          l?: number;
-        } | null;
-        rgb: {
-          r?: number;
-          g?: number;
-          b?: number;
-        } | null;
+        hsl: Hsl | null;
+        rgb: Rgb | null;
       } | null;
       primaryForeground: {
         alpha: null;
         hex: string | null;
-        hsl: {
-          h?: number;
-          s?: number;
-          l?: number;
-        } | null;
-        rgb: {
-          r?: number;
-          g?: number;
-          b?: number;
-        } | null;
+        hsl: Hsl | null;
+        rgb: Rgb | null;
       } | null;
     } | null;
     collectionCards: {
@@ -6279,12 +4603,7 @@ export type ROOT_QUERYResult = {
     facebook: string | null;
     favicon: {
       _type: 'image';
-      asset: {
-        _ref: string;
-        _type: 'reference';
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-      } | null;
+      asset: SanityImageAssetReference | null;
       altText: string | null;
       _ref: string | null;
       hotspot: SanityImageHotspot | null;
@@ -6309,12 +4628,7 @@ export type ROOT_QUERYResult = {
     linkedin: string | null;
     logo: {
       _type: 'image';
-      asset: {
-        _ref: string;
-        _type: 'reference';
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-      } | null;
+      asset: SanityImageAssetReference | null;
       altText: string | null;
       _ref: string | null;
       hotspot: SanityImageHotspot | null;
@@ -6354,12 +4668,7 @@ export type ROOT_QUERYResult = {
     snapchat: string | null;
     socialSharingImagePreview: {
       _type: 'image';
-      asset: {
-        _ref: string;
-        _type: 'reference';
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-      } | null;
+      asset: SanityImageAssetReference | null;
       altText: string | null;
       _ref: string | null;
       hotspot: SanityImageHotspot | null;
@@ -6485,9 +4794,11 @@ export type ROOT_QUERYResult = {
     } | null;
   } | null;
 };
+
+// Source: app/data/sanity/queries.ts
 // Variable: COLLECTION_QUERY
 // Query: {  '_type': 'collection',  "collection": *[_type == "collection" && store.slug.current == $collectionHandle][0] {    store {      gid,    },    template -> {      sections[] {        _key,        _type,            _type == 'richtextSection' => {  _key,  _type,  contentAlignment,  desktopContentPosition,  maxWidth,  "richtext": coalesce(    richtext[_key == $language][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},    richtext[_key == $defaultLanguage][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},  )[],  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    _type == 'carouselSection' => {  _key,  _type,  arrows,  autoplay,  "title": coalesce(    title[_key == $language][0].value,    title[_key == $defaultLanguage][0].value,  ),  loop,  pagination,  slides[] {    _key,    image {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  },  slidesPerViewDesktop,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    _type == 'collectionListSection' => {  _key,  _type,  collections[] -> {    store {      gid    }  },  desktopColumns,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    _type == 'featuredProductSection' => {  _key,  _type,  mediaAspectRatio,  product -> {    store {      descriptionHtml,      "firstVariant": variants[0] -> {        store {          gid,          previewImageUrl,          price        }      },      gid,      options[] {        name,        values      },      previewImageUrl,      title    }  },  'richtext': coalesce(    richtext[_key == $language][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},    richtext[_key == $defaultLanguage][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},  )[],  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    _type == 'featuredCollectionSection' => {  _key,  _type,  collection -> {    store {      gid,      slug,      title    }  },  desktopColumns,  "heading": coalesce(    heading[_key == $language][0].value,    heading[_key == $defaultLanguage][0].value,  ),  maxProducts,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding},  viewAll},    _type == 'imageBannerSection' => {  _key,  _type,  backgroundImage {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  bannerHeight,  "content": coalesce(    content[_key == $language][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},    content[_key == $defaultLanguage][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},  )[],  contentAlignment,  contentPosition,  overlayOpacity,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},              _type == 'collectionBannerSection' => {  _key,  _type,  bannerHeight,  contentAlignment,  contentPosition,  overlayOpacity,  showDescription,  showImage,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    _type == 'collectionProductGridSection' => {  _key,  _type,  desktopColumns,  enableFiltering,  enableSorting,  mobileColumns,  productsPerPage,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},        },    },  },  "defaultCollectionTemplate": *[_type == 'collectionTemplate' && default == true][0] {    _type,    name,    sections[] {      _key,      _type,          _type == 'richtextSection' => {  _key,  _type,  contentAlignment,  desktopContentPosition,  maxWidth,  "richtext": coalesce(    richtext[_key == $language][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},    richtext[_key == $defaultLanguage][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},  )[],  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    _type == 'carouselSection' => {  _key,  _type,  arrows,  autoplay,  "title": coalesce(    title[_key == $language][0].value,    title[_key == $defaultLanguage][0].value,  ),  loop,  pagination,  slides[] {    _key,    image {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  },  slidesPerViewDesktop,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    _type == 'collectionListSection' => {  _key,  _type,  collections[] -> {    store {      gid    }  },  desktopColumns,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    _type == 'featuredProductSection' => {  _key,  _type,  mediaAspectRatio,  product -> {    store {      descriptionHtml,      "firstVariant": variants[0] -> {        store {          gid,          previewImageUrl,          price        }      },      gid,      options[] {        name,        values      },      previewImageUrl,      title    }  },  'richtext': coalesce(    richtext[_key == $language][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},    richtext[_key == $defaultLanguage][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},  )[],  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    _type == 'featuredCollectionSection' => {  _key,  _type,  collection -> {    store {      gid,      slug,      title    }  },  desktopColumns,  "heading": coalesce(    heading[_key == $language][0].value,    heading[_key == $defaultLanguage][0].value,  ),  maxProducts,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding},  viewAll},    _type == 'imageBannerSection' => {  _key,  _type,  backgroundImage {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  bannerHeight,  "content": coalesce(    content[_key == $language][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},    content[_key == $defaultLanguage][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},  )[],  contentAlignment,  contentPosition,  overlayOpacity,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},            _type == 'collectionBannerSection' => {  _key,  _type,  bannerHeight,  contentAlignment,  contentPosition,  overlayOpacity,  showDescription,  showImage,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    _type == 'collectionProductGridSection' => {  _key,  _type,  desktopColumns,  enableFiltering,  enableSorting,  mobileColumns,  productsPerPage,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},      },  },}
-export type COLLECTION_QUERYResult = {
+export type COLLECTION_QUERY_RESULT = {
   _type: 'collection';
   collection: {
     store: {
@@ -6507,12 +4818,7 @@ export type COLLECTION_QUERYResult = {
               _key: string;
               image: {
                 _type: 'image';
-                asset: {
-                  _ref: string;
-                  _type: 'reference';
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-                } | null;
+                asset: SanityImageAssetReference | null;
                 altText: string | null;
                 _ref: string | null;
                 hotspot: SanityImageHotspot | null;
@@ -6525,100 +4831,44 @@ export type COLLECTION_QUERYResult = {
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -6640,100 +4890,44 @@ export type COLLECTION_QUERYResult = {
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -6755,100 +4949,44 @@ export type COLLECTION_QUERYResult = {
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -6869,100 +5007,44 @@ export type COLLECTION_QUERYResult = {
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -6988,100 +5070,44 @@ export type COLLECTION_QUERYResult = {
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -7208,100 +5234,44 @@ export type COLLECTION_QUERYResult = {
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -7314,12 +5284,7 @@ export type COLLECTION_QUERYResult = {
             _type: 'imageBannerSection';
             backgroundImage: {
               _type: 'image';
-              asset: {
-                _ref: string;
-                _type: 'reference';
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-              } | null;
+              asset: SanityImageAssetReference | null;
               altText: string | null;
               _ref: string | null;
               hotspot: SanityImageHotspot | null;
@@ -7387,100 +5352,44 @@ export type COLLECTION_QUERYResult = {
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -7496,12 +5405,7 @@ export type COLLECTION_QUERYResult = {
             maxWidth: RangeSlider | null;
             richtext: Array<
               | {
-                  asset: {
-                    _ref: string;
-                    _type: 'reference';
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-                  } | null;
+                  asset: SanityImageAssetReference | null;
                   media?: unknown;
                   hotspot: SanityImageHotspot | null;
                   crop: SanityImageCrop | null;
@@ -7622,100 +5526,44 @@ export type COLLECTION_QUERYResult = {
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -7742,12 +5590,7 @@ export type COLLECTION_QUERYResult = {
             _key: string;
             image: {
               _type: 'image';
-              asset: {
-                _ref: string;
-                _type: 'reference';
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-              } | null;
+              asset: SanityImageAssetReference | null;
               altText: string | null;
               _ref: string | null;
               hotspot: SanityImageHotspot | null;
@@ -7760,100 +5603,44 @@ export type COLLECTION_QUERYResult = {
               background: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               border: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               card: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               cardForeground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               foreground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               primary: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               primaryForeground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
             } | null;
             customCss: Code | null;
@@ -7875,100 +5662,44 @@ export type COLLECTION_QUERYResult = {
               background: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               border: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               card: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               cardForeground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               foreground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               primary: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               primaryForeground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
             } | null;
             customCss: Code | null;
@@ -7990,100 +5721,44 @@ export type COLLECTION_QUERYResult = {
               background: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               border: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               card: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               cardForeground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               foreground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               primary: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               primaryForeground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
             } | null;
             customCss: Code | null;
@@ -8104,100 +5779,44 @@ export type COLLECTION_QUERYResult = {
               background: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               border: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               card: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               cardForeground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               foreground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               primary: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               primaryForeground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
             } | null;
             customCss: Code | null;
@@ -8223,100 +5842,44 @@ export type COLLECTION_QUERYResult = {
               background: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               border: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               card: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               cardForeground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               foreground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               primary: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               primaryForeground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
             } | null;
             customCss: Code | null;
@@ -8443,100 +6006,44 @@ export type COLLECTION_QUERYResult = {
               background: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               border: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               card: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               cardForeground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               foreground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               primary: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               primaryForeground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
             } | null;
             customCss: Code | null;
@@ -8549,12 +6056,7 @@ export type COLLECTION_QUERYResult = {
           _type: 'imageBannerSection';
           backgroundImage: {
             _type: 'image';
-            asset: {
-              _ref: string;
-              _type: 'reference';
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-            } | null;
+            asset: SanityImageAssetReference | null;
             altText: string | null;
             _ref: string | null;
             hotspot: SanityImageHotspot | null;
@@ -8622,100 +6124,44 @@ export type COLLECTION_QUERYResult = {
               background: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               border: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               card: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               cardForeground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               foreground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               primary: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               primaryForeground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
             } | null;
             customCss: Code | null;
@@ -8731,12 +6177,7 @@ export type COLLECTION_QUERYResult = {
           maxWidth: RangeSlider | null;
           richtext: Array<
             | {
-                asset: {
-                  _ref: string;
-                  _type: 'reference';
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-                } | null;
+                asset: SanityImageAssetReference | null;
                 media?: unknown;
                 hotspot: SanityImageHotspot | null;
                 crop: SanityImageCrop | null;
@@ -8857,100 +6298,44 @@ export type COLLECTION_QUERYResult = {
               background: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               border: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               card: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               cardForeground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               foreground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               primary: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               primaryForeground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
             } | null;
             customCss: Code | null;
@@ -8961,9 +6346,11 @@ export type COLLECTION_QUERYResult = {
     > | null;
   } | null;
 };
+
+// Source: app/data/sanity/queries.ts
 // Variable: PAGE_QUERY
 // Query: *[(_type == "page" && ($handle != "home" && slug.current == $handle)) || (    _type == "home" && $handle == "home"  )][0] {    _type,    sections[] {      _key,      _type,          _type == 'richtextSection' => {  _key,  _type,  contentAlignment,  desktopContentPosition,  maxWidth,  "richtext": coalesce(    richtext[_key == $language][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},    richtext[_key == $defaultLanguage][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},  )[],  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    _type == 'carouselSection' => {  _key,  _type,  arrows,  autoplay,  "title": coalesce(    title[_key == $language][0].value,    title[_key == $defaultLanguage][0].value,  ),  loop,  pagination,  slides[] {    _key,    image {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  },  slidesPerViewDesktop,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    _type == 'collectionListSection' => {  _key,  _type,  collections[] -> {    store {      gid    }  },  desktopColumns,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    _type == 'featuredProductSection' => {  _key,  _type,  mediaAspectRatio,  product -> {    store {      descriptionHtml,      "firstVariant": variants[0] -> {        store {          gid,          previewImageUrl,          price        }      },      gid,      options[] {        name,        values      },      previewImageUrl,      title    }  },  'richtext': coalesce(    richtext[_key == $language][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},    richtext[_key == $defaultLanguage][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},  )[],  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    _type == 'featuredCollectionSection' => {  _key,  _type,  collection -> {    store {      gid,      slug,      title    }  },  desktopColumns,  "heading": coalesce(    heading[_key == $language][0].value,    heading[_key == $defaultLanguage][0].value,  ),  maxProducts,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding},  viewAll},    _type == 'imageBannerSection' => {  _key,  _type,  backgroundImage {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  bannerHeight,  "content": coalesce(    content[_key == $language][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},    content[_key == $defaultLanguage][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},  )[],  contentAlignment,  contentPosition,  overlayOpacity,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},      },    seo {      "title": coalesce(    title[_key == $language][0].value,    title[_key == $defaultLanguage][0].value,  ),      "description": coalesce(    description[_key == $language][0].value,    description[_key == $defaultLanguage][0].value,  ),      image {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},    },  }
-export type PAGE_QUERYResult =
+export type PAGE_QUERY_RESULT =
   | {
       _type: 'home';
       sections: Array<
@@ -8979,12 +6366,7 @@ export type PAGE_QUERYResult =
               _key: string;
               image: {
                 _type: 'image';
-                asset: {
-                  _ref: string;
-                  _type: 'reference';
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-                } | null;
+                asset: SanityImageAssetReference | null;
                 altText: string | null;
                 _ref: string | null;
                 hotspot: SanityImageHotspot | null;
@@ -8997,100 +6379,44 @@ export type PAGE_QUERYResult =
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -9112,100 +6438,44 @@ export type PAGE_QUERYResult =
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -9231,100 +6501,44 @@ export type PAGE_QUERYResult =
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -9451,100 +6665,44 @@ export type PAGE_QUERYResult =
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -9557,12 +6715,7 @@ export type PAGE_QUERYResult =
             _type: 'imageBannerSection';
             backgroundImage: {
               _type: 'image';
-              asset: {
-                _ref: string;
-                _type: 'reference';
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-              } | null;
+              asset: SanityImageAssetReference | null;
               altText: string | null;
               _ref: string | null;
               hotspot: SanityImageHotspot | null;
@@ -9630,100 +6783,44 @@ export type PAGE_QUERYResult =
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -9739,12 +6836,7 @@ export type PAGE_QUERYResult =
             maxWidth: RangeSlider | null;
             richtext: Array<
               | {
-                  asset: {
-                    _ref: string;
-                    _type: 'reference';
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-                  } | null;
+                  asset: SanityImageAssetReference | null;
                   media?: unknown;
                   hotspot: SanityImageHotspot | null;
                   crop: SanityImageCrop | null;
@@ -9865,100 +6957,44 @@ export type PAGE_QUERYResult =
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -9972,12 +7008,7 @@ export type PAGE_QUERYResult =
         description: string | null;
         image: {
           _type: 'image';
-          asset: {
-            _ref: string;
-            _type: 'reference';
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-          } | null;
+          asset: SanityImageAssetReference | null;
           altText: string | null;
           _ref: string | null;
           hotspot: SanityImageHotspot | null;
@@ -10000,12 +7031,7 @@ export type PAGE_QUERYResult =
               _key: string;
               image: {
                 _type: 'image';
-                asset: {
-                  _ref: string;
-                  _type: 'reference';
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-                } | null;
+                asset: SanityImageAssetReference | null;
                 altText: string | null;
                 _ref: string | null;
                 hotspot: SanityImageHotspot | null;
@@ -10018,100 +7044,44 @@ export type PAGE_QUERYResult =
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -10133,100 +7103,44 @@ export type PAGE_QUERYResult =
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -10252,100 +7166,44 @@ export type PAGE_QUERYResult =
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -10472,100 +7330,44 @@ export type PAGE_QUERYResult =
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -10578,12 +7380,7 @@ export type PAGE_QUERYResult =
             _type: 'imageBannerSection';
             backgroundImage: {
               _type: 'image';
-              asset: {
-                _ref: string;
-                _type: 'reference';
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-              } | null;
+              asset: SanityImageAssetReference | null;
               altText: string | null;
               _ref: string | null;
               hotspot: SanityImageHotspot | null;
@@ -10651,100 +7448,44 @@ export type PAGE_QUERYResult =
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -10760,12 +7501,7 @@ export type PAGE_QUERYResult =
             maxWidth: RangeSlider | null;
             richtext: Array<
               | {
-                  asset: {
-                    _ref: string;
-                    _type: 'reference';
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-                  } | null;
+                  asset: SanityImageAssetReference | null;
                   media?: unknown;
                   hotspot: SanityImageHotspot | null;
                   crop: SanityImageCrop | null;
@@ -10886,100 +7622,44 @@ export type PAGE_QUERYResult =
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -10993,12 +7673,7 @@ export type PAGE_QUERYResult =
         description: string | null;
         image: {
           _type: 'image';
-          asset: {
-            _ref: string;
-            _type: 'reference';
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-          } | null;
+          asset: SanityImageAssetReference | null;
           altText: string | null;
           _ref: string | null;
           hotspot: SanityImageHotspot | null;
@@ -11007,9 +7682,11 @@ export type PAGE_QUERYResult =
       } | null;
     }
   | null;
+
+// Source: app/data/sanity/queries.ts
 // Variable: PRODUCT_QUERY
 // Query: {  "_type": "product",  'product': *[_type == "product" && store.slug.current == $productHandle][0] {    store {      gid,    },    template -> {      sections[] {        _key,        _type,            _type == 'richtextSection' => {  _key,  _type,  contentAlignment,  desktopContentPosition,  maxWidth,  "richtext": coalesce(    richtext[_key == $language][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},    richtext[_key == $defaultLanguage][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},  )[],  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    _type == 'carouselSection' => {  _key,  _type,  arrows,  autoplay,  "title": coalesce(    title[_key == $language][0].value,    title[_key == $defaultLanguage][0].value,  ),  loop,  pagination,  slides[] {    _key,    image {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  },  slidesPerViewDesktop,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    _type == 'collectionListSection' => {  _key,  _type,  collections[] -> {    store {      gid    }  },  desktopColumns,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    _type == 'featuredProductSection' => {  _key,  _type,  mediaAspectRatio,  product -> {    store {      descriptionHtml,      "firstVariant": variants[0] -> {        store {          gid,          previewImageUrl,          price        }      },      gid,      options[] {        name,        values      },      previewImageUrl,      title    }  },  'richtext': coalesce(    richtext[_key == $language][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},    richtext[_key == $defaultLanguage][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},  )[],  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    _type == 'featuredCollectionSection' => {  _key,  _type,  collection -> {    store {      gid,      slug,      title    }  },  desktopColumns,  "heading": coalesce(    heading[_key == $language][0].value,    heading[_key == $defaultLanguage][0].value,  ),  maxProducts,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding},  viewAll},    _type == 'imageBannerSection' => {  _key,  _type,  backgroundImage {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  bannerHeight,  "content": coalesce(    content[_key == $language][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},    content[_key == $defaultLanguage][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},  )[],  contentAlignment,  contentPosition,  overlayOpacity,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},              _type == 'productInformationSection' => {  _key,  _type,  desktopMediaPosition,  desktopMediaWidth,  mediaAspectRatio,  "richtext": coalesce(    richtext[_key == $language][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},    richtext[_key == $defaultLanguage][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},  )[],  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    _type == 'relatedProductsSection' => {  _key,  _type,  desktopColumns,  "heading": coalesce(    heading[_key == $language][0].value,    heading[_key == $defaultLanguage][0].value,  ),  maxProducts,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},        },    },  },  "defaultProductTemplate": *[_type == 'productTemplate' && default == true][0] {    _type,    name,    sections[] {      _key,      _type,          _type == 'richtextSection' => {  _key,  _type,  contentAlignment,  desktopContentPosition,  maxWidth,  "richtext": coalesce(    richtext[_key == $language][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},    richtext[_key == $defaultLanguage][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},  )[],  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    _type == 'carouselSection' => {  _key,  _type,  arrows,  autoplay,  "title": coalesce(    title[_key == $language][0].value,    title[_key == $defaultLanguage][0].value,  ),  loop,  pagination,  slides[] {    _key,    image {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  },  slidesPerViewDesktop,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    _type == 'collectionListSection' => {  _key,  _type,  collections[] -> {    store {      gid    }  },  desktopColumns,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    _type == 'featuredProductSection' => {  _key,  _type,  mediaAspectRatio,  product -> {    store {      descriptionHtml,      "firstVariant": variants[0] -> {        store {          gid,          previewImageUrl,          price        }      },      gid,      options[] {        name,        values      },      previewImageUrl,      title    }  },  'richtext': coalesce(    richtext[_key == $language][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},    richtext[_key == $defaultLanguage][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},  )[],  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    _type == 'featuredCollectionSection' => {  _key,  _type,  collection -> {    store {      gid,      slug,      title    }  },  desktopColumns,  "heading": coalesce(    heading[_key == $language][0].value,    heading[_key == $defaultLanguage][0].value,  ),  maxProducts,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding},  viewAll},    _type == 'imageBannerSection' => {  _key,  _type,  backgroundImage {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  bannerHeight,  "content": coalesce(    content[_key == $language][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},    content[_key == $defaultLanguage][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},  )[],  contentAlignment,  contentPosition,  overlayOpacity,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},            _type == 'productInformationSection' => {  _key,  _type,  desktopMediaPosition,  desktopMediaWidth,  mediaAspectRatio,  "richtext": coalesce(    richtext[_key == $language][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},    richtext[_key == $defaultLanguage][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},  )[],  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    _type == 'relatedProductsSection' => {  _key,  _type,  desktopColumns,  "heading": coalesce(    heading[_key == $language][0].value,    heading[_key == $defaultLanguage][0].value,  ),  maxProducts,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},      },  },}
-export type PRODUCT_QUERYResult = {
+export type PRODUCT_QUERY_RESULT = {
   _type: 'product';
   product: {
     store: {
@@ -11029,12 +7706,7 @@ export type PRODUCT_QUERYResult = {
               _key: string;
               image: {
                 _type: 'image';
-                asset: {
-                  _ref: string;
-                  _type: 'reference';
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-                } | null;
+                asset: SanityImageAssetReference | null;
                 altText: string | null;
                 _ref: string | null;
                 hotspot: SanityImageHotspot | null;
@@ -11047,100 +7719,44 @@ export type PRODUCT_QUERYResult = {
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -11162,100 +7778,44 @@ export type PRODUCT_QUERYResult = {
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -11281,100 +7841,44 @@ export type PRODUCT_QUERYResult = {
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -11501,100 +8005,44 @@ export type PRODUCT_QUERYResult = {
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -11607,12 +8055,7 @@ export type PRODUCT_QUERYResult = {
             _type: 'imageBannerSection';
             backgroundImage: {
               _type: 'image';
-              asset: {
-                _ref: string;
-                _type: 'reference';
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-              } | null;
+              asset: SanityImageAssetReference | null;
               altText: string | null;
               _ref: string | null;
               hotspot: SanityImageHotspot | null;
@@ -11680,100 +8123,44 @@ export type PRODUCT_QUERYResult = {
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -11882,100 +8269,44 @@ export type PRODUCT_QUERYResult = {
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -11994,100 +8325,44 @@ export type PRODUCT_QUERYResult = {
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -12103,12 +8378,7 @@ export type PRODUCT_QUERYResult = {
             maxWidth: RangeSlider | null;
             richtext: Array<
               | {
-                  asset: {
-                    _ref: string;
-                    _type: 'reference';
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-                  } | null;
+                  asset: SanityImageAssetReference | null;
                   media?: unknown;
                   hotspot: SanityImageHotspot | null;
                   crop: SanityImageCrop | null;
@@ -12229,100 +8499,44 @@ export type PRODUCT_QUERYResult = {
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -12349,12 +8563,7 @@ export type PRODUCT_QUERYResult = {
             _key: string;
             image: {
               _type: 'image';
-              asset: {
-                _ref: string;
-                _type: 'reference';
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-              } | null;
+              asset: SanityImageAssetReference | null;
               altText: string | null;
               _ref: string | null;
               hotspot: SanityImageHotspot | null;
@@ -12367,100 +8576,44 @@ export type PRODUCT_QUERYResult = {
               background: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               border: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               card: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               cardForeground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               foreground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               primary: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               primaryForeground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
             } | null;
             customCss: Code | null;
@@ -12482,100 +8635,44 @@ export type PRODUCT_QUERYResult = {
               background: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               border: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               card: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               cardForeground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               foreground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               primary: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               primaryForeground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
             } | null;
             customCss: Code | null;
@@ -12601,100 +8698,44 @@ export type PRODUCT_QUERYResult = {
               background: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               border: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               card: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               cardForeground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               foreground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               primary: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               primaryForeground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
             } | null;
             customCss: Code | null;
@@ -12821,100 +8862,44 @@ export type PRODUCT_QUERYResult = {
               background: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               border: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               card: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               cardForeground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               foreground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               primary: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               primaryForeground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
             } | null;
             customCss: Code | null;
@@ -12927,12 +8912,7 @@ export type PRODUCT_QUERYResult = {
           _type: 'imageBannerSection';
           backgroundImage: {
             _type: 'image';
-            asset: {
-              _ref: string;
-              _type: 'reference';
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-            } | null;
+            asset: SanityImageAssetReference | null;
             altText: string | null;
             _ref: string | null;
             hotspot: SanityImageHotspot | null;
@@ -13000,100 +8980,44 @@ export type PRODUCT_QUERYResult = {
               background: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               border: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               card: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               cardForeground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               foreground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               primary: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               primaryForeground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
             } | null;
             customCss: Code | null;
@@ -13202,100 +9126,44 @@ export type PRODUCT_QUERYResult = {
               background: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               border: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               card: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               cardForeground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               foreground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               primary: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               primaryForeground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
             } | null;
             customCss: Code | null;
@@ -13314,100 +9182,44 @@ export type PRODUCT_QUERYResult = {
               background: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               border: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               card: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               cardForeground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               foreground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               primary: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               primaryForeground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
             } | null;
             customCss: Code | null;
@@ -13423,12 +9235,7 @@ export type PRODUCT_QUERYResult = {
           maxWidth: RangeSlider | null;
           richtext: Array<
             | {
-                asset: {
-                  _ref: string;
-                  _type: 'reference';
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-                } | null;
+                asset: SanityImageAssetReference | null;
                 media?: unknown;
                 hotspot: SanityImageHotspot | null;
                 crop: SanityImageCrop | null;
@@ -13549,100 +9356,44 @@ export type PRODUCT_QUERYResult = {
               background: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               border: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               card: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               cardForeground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               foreground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               primary: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
               primaryForeground: {
                 alpha: null;
                 hex: string | null;
-                hsl: {
-                  h?: number;
-                  s?: number;
-                  l?: number;
-                } | null;
-                rgb: {
-                  r?: number;
-                  g?: number;
-                  b?: number;
-                } | null;
+                hsl: Hsl | null;
+                rgb: Rgb | null;
               } | null;
             } | null;
             customCss: Code | null;
@@ -13653,9 +9404,11 @@ export type PRODUCT_QUERYResult = {
     > | null;
   } | null;
 };
+
+// Source: app/data/sanity/queries.ts
 // Variable: ALL_SECTIONS_QUERY
 // Query: *[][0] {  sections[] {    _key,    _type,        _type == 'richtextSection' => {  _key,  _type,  contentAlignment,  desktopContentPosition,  maxWidth,  "richtext": coalesce(    richtext[_key == $language][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},    richtext[_key == $defaultLanguage][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},  )[],  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    _type == 'carouselSection' => {  _key,  _type,  arrows,  autoplay,  "title": coalesce(    title[_key == $language][0].value,    title[_key == $defaultLanguage][0].value,  ),  loop,  pagination,  slides[] {    _key,    image {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  },  slidesPerViewDesktop,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    _type == 'collectionListSection' => {  _key,  _type,  collections[] -> {    store {      gid    }  },  desktopColumns,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    _type == 'featuredProductSection' => {  _key,  _type,  mediaAspectRatio,  product -> {    store {      descriptionHtml,      "firstVariant": variants[0] -> {        store {          gid,          previewImageUrl,          price        }      },      gid,      options[] {        name,        values      },      previewImageUrl,      title    }  },  'richtext': coalesce(    richtext[_key == $language][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},    richtext[_key == $defaultLanguage][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},  )[],  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    _type == 'featuredCollectionSection' => {  _key,  _type,  collection -> {    store {      gid,      slug,      title    }  },  desktopColumns,  "heading": coalesce(    heading[_key == $language][0].value,    heading[_key == $defaultLanguage][0].value,  ),  maxProducts,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding},  viewAll},    _type == 'imageBannerSection' => {  _key,  _type,  backgroundImage {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  bannerHeight,  "content": coalesce(    content[_key == $language][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},    content[_key == $defaultLanguage][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},  )[],  contentAlignment,  contentPosition,  overlayOpacity,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},          _type == 'productInformationSection' => {  _key,  _type,  desktopMediaPosition,  desktopMediaWidth,  mediaAspectRatio,  "richtext": coalesce(    richtext[_key == $language][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},    richtext[_key == $defaultLanguage][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},  )[],  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    _type == 'relatedProductsSection' => {  _key,  _type,  desktopColumns,  "heading": coalesce(    heading[_key == $language][0].value,    heading[_key == $defaultLanguage][0].value,  ),  maxProducts,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},          _type == 'collectionBannerSection' => {  _key,  _type,  bannerHeight,  contentAlignment,  contentPosition,  overlayOpacity,  showDescription,  showImage,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    _type == 'collectionProductGridSection' => {  _key,  _type,  desktopColumns,  enableFiltering,  enableSorting,  mobileColumns,  productsPerPage,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}},    },  footers[] {    _key,    _type,        _type == 'socialLinksOnly' => {  _key,  _type,  "copyright": coalesce(    copyright[_key == $language][0].value,    copyright[_key == $defaultLanguage][0].value,  ),  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding},},    },}
-export type ALL_SECTIONS_QUERYResult =
+export type ALL_SECTIONS_QUERY_RESULT =
   | {
       sections: null;
       footers: null;
@@ -13674,12 +9427,7 @@ export type ALL_SECTIONS_QUERYResult =
               _key: string;
               image: {
                 _type: 'image';
-                asset: {
-                  _ref: string;
-                  _type: 'reference';
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-                } | null;
+                asset: SanityImageAssetReference | null;
                 altText: string | null;
                 _ref: string | null;
                 hotspot: SanityImageHotspot | null;
@@ -13692,100 +9440,44 @@ export type ALL_SECTIONS_QUERYResult =
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -13807,100 +9499,44 @@ export type ALL_SECTIONS_QUERYResult =
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -13922,100 +9558,44 @@ export type ALL_SECTIONS_QUERYResult =
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -14036,100 +9616,44 @@ export type ALL_SECTIONS_QUERYResult =
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -14155,100 +9679,44 @@ export type ALL_SECTIONS_QUERYResult =
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -14375,100 +9843,44 @@ export type ALL_SECTIONS_QUERYResult =
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -14481,12 +9893,7 @@ export type ALL_SECTIONS_QUERYResult =
             _type: 'imageBannerSection';
             backgroundImage: {
               _type: 'image';
-              asset: {
-                _ref: string;
-                _type: 'reference';
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-              } | null;
+              asset: SanityImageAssetReference | null;
               altText: string | null;
               _ref: string | null;
               hotspot: SanityImageHotspot | null;
@@ -14554,100 +9961,44 @@ export type ALL_SECTIONS_QUERYResult =
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -14663,12 +10014,7 @@ export type ALL_SECTIONS_QUERYResult =
             maxWidth: RangeSlider | null;
             richtext: Array<
               | {
-                  asset: {
-                    _ref: string;
-                    _type: 'reference';
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-                  } | null;
+                  asset: SanityImageAssetReference | null;
                   media?: unknown;
                   hotspot: SanityImageHotspot | null;
                   crop: SanityImageCrop | null;
@@ -14789,100 +10135,44 @@ export type ALL_SECTIONS_QUERYResult =
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -14907,12 +10197,7 @@ export type ALL_SECTIONS_QUERYResult =
               _key: string;
               image: {
                 _type: 'image';
-                asset: {
-                  _ref: string;
-                  _type: 'reference';
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-                } | null;
+                asset: SanityImageAssetReference | null;
                 altText: string | null;
                 _ref: string | null;
                 hotspot: SanityImageHotspot | null;
@@ -14925,100 +10210,44 @@ export type ALL_SECTIONS_QUERYResult =
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -15040,100 +10269,44 @@ export type ALL_SECTIONS_QUERYResult =
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -15159,100 +10332,44 @@ export type ALL_SECTIONS_QUERYResult =
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -15379,100 +10496,44 @@ export type ALL_SECTIONS_QUERYResult =
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -15485,12 +10546,7 @@ export type ALL_SECTIONS_QUERYResult =
             _type: 'imageBannerSection';
             backgroundImage: {
               _type: 'image';
-              asset: {
-                _ref: string;
-                _type: 'reference';
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-              } | null;
+              asset: SanityImageAssetReference | null;
               altText: string | null;
               _ref: string | null;
               hotspot: SanityImageHotspot | null;
@@ -15558,100 +10614,44 @@ export type ALL_SECTIONS_QUERYResult =
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -15760,100 +10760,44 @@ export type ALL_SECTIONS_QUERYResult =
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -15872,100 +10816,44 @@ export type ALL_SECTIONS_QUERYResult =
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -15981,12 +10869,7 @@ export type ALL_SECTIONS_QUERYResult =
             maxWidth: RangeSlider | null;
             richtext: Array<
               | {
-                  asset: {
-                    _ref: string;
-                    _type: 'reference';
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-                  } | null;
+                  asset: SanityImageAssetReference | null;
                   media?: unknown;
                   hotspot: SanityImageHotspot | null;
                   crop: SanityImageCrop | null;
@@ -16107,100 +10990,44 @@ export type ALL_SECTIONS_QUERYResult =
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -16225,12 +11052,7 @@ export type ALL_SECTIONS_QUERYResult =
               _key: string;
               image: {
                 _type: 'image';
-                asset: {
-                  _ref: string;
-                  _type: 'reference';
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-                } | null;
+                asset: SanityImageAssetReference | null;
                 altText: string | null;
                 _ref: string | null;
                 hotspot: SanityImageHotspot | null;
@@ -16243,100 +11065,44 @@ export type ALL_SECTIONS_QUERYResult =
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -16358,100 +11124,44 @@ export type ALL_SECTIONS_QUERYResult =
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -16477,100 +11187,44 @@ export type ALL_SECTIONS_QUERYResult =
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -16697,100 +11351,44 @@ export type ALL_SECTIONS_QUERYResult =
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -16803,12 +11401,7 @@ export type ALL_SECTIONS_QUERYResult =
             _type: 'imageBannerSection';
             backgroundImage: {
               _type: 'image';
-              asset: {
-                _ref: string;
-                _type: 'reference';
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-              } | null;
+              asset: SanityImageAssetReference | null;
               altText: string | null;
               _ref: string | null;
               hotspot: SanityImageHotspot | null;
@@ -16876,100 +11469,44 @@ export type ALL_SECTIONS_QUERYResult =
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -16985,12 +11522,7 @@ export type ALL_SECTIONS_QUERYResult =
             maxWidth: RangeSlider | null;
             richtext: Array<
               | {
-                  asset: {
-                    _ref: string;
-                    _type: 'reference';
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-                  } | null;
+                  asset: SanityImageAssetReference | null;
                   media?: unknown;
                   hotspot: SanityImageHotspot | null;
                   crop: SanityImageCrop | null;
@@ -17111,100 +11643,44 @@ export type ALL_SECTIONS_QUERYResult =
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -17229,12 +11705,7 @@ export type ALL_SECTIONS_QUERYResult =
               _key: string;
               image: {
                 _type: 'image';
-                asset: {
-                  _ref: string;
-                  _type: 'reference';
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-                } | null;
+                asset: SanityImageAssetReference | null;
                 altText: string | null;
                 _ref: string | null;
                 hotspot: SanityImageHotspot | null;
@@ -17247,100 +11718,44 @@ export type ALL_SECTIONS_QUERYResult =
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -17362,100 +11777,44 @@ export type ALL_SECTIONS_QUERYResult =
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -17481,100 +11840,44 @@ export type ALL_SECTIONS_QUERYResult =
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -17701,100 +12004,44 @@ export type ALL_SECTIONS_QUERYResult =
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -17807,12 +12054,7 @@ export type ALL_SECTIONS_QUERYResult =
             _type: 'imageBannerSection';
             backgroundImage: {
               _type: 'image';
-              asset: {
-                _ref: string;
-                _type: 'reference';
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-              } | null;
+              asset: SanityImageAssetReference | null;
               altText: string | null;
               _ref: string | null;
               hotspot: SanityImageHotspot | null;
@@ -17880,100 +12122,44 @@ export type ALL_SECTIONS_QUERYResult =
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -17989,12 +12175,7 @@ export type ALL_SECTIONS_QUERYResult =
             maxWidth: RangeSlider | null;
             richtext: Array<
               | {
-                  asset: {
-                    _ref: string;
-                    _type: 'reference';
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-                  } | null;
+                  asset: SanityImageAssetReference | null;
                   media?: unknown;
                   hotspot: SanityImageHotspot | null;
                   crop: SanityImageCrop | null;
@@ -18115,100 +12296,44 @@ export type ALL_SECTIONS_QUERYResult =
                 background: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 border: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 card: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 cardForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 foreground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primary: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
                 primaryForeground: {
                   alpha: null;
                   hex: string | null;
-                  hsl: {
-                    h?: number;
-                    s?: number;
-                    l?: number;
-                  } | null;
-                  rgb: {
-                    r?: number;
-                    g?: number;
-                    b?: number;
-                  } | null;
+                  hsl: Hsl | null;
+                  rgb: Rgb | null;
                 } | null;
               } | null;
               customCss: Code | null;
@@ -18226,100 +12351,44 @@ export type ALL_SECTIONS_QUERYResult =
             background: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             border: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             card: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             cardForeground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             foreground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             primary: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
             primaryForeground: {
               alpha: null;
               hex: string | null;
-              hsl: {
-                h?: number;
-                s?: number;
-                l?: number;
-              } | null;
-              rgb: {
-                r?: number;
-                g?: number;
-                b?: number;
-              } | null;
+              hsl: Hsl | null;
+              rgb: Rgb | null;
             } | null;
           } | null;
           customCss: Code | null;
@@ -18330,18 +12399,20 @@ export type ALL_SECTIONS_QUERYResult =
     }
   | null;
 
-// Source: ./app/data/sanity/sections.ts
+// Source: app/data/sanity/sections.ts
 // Variable: SECTION_SETTINGS_FRAGMENT
 // Query: {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}
-export type SECTION_SETTINGS_FRAGMENTResult = {
+export type SECTION_SETTINGS_FRAGMENT_RESULT = {
   colorScheme: never;
   customCss: never;
   hide: never;
   padding: never;
 };
+
+// Source: app/data/sanity/sections.ts
 // Variable: RELATED_PRODUCTS_SECTION_FRAGMENT
 // Query: {  _key,  _type,  desktopColumns,  "heading": coalesce(    heading[_key == $language][0].value,    heading[_key == $defaultLanguage][0].value,  ),  maxProducts,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}}
-export type RELATED_PRODUCTS_SECTION_FRAGMENTResult = {
+export type RELATED_PRODUCTS_SECTION_FRAGMENT_RESULT = {
   _key: never;
   _type: never;
   desktopColumns: never;
@@ -18349,9 +12420,11 @@ export type RELATED_PRODUCTS_SECTION_FRAGMENTResult = {
   maxProducts: never;
   settings: never;
 };
+
+// Source: app/data/sanity/sections.ts
 // Variable: PRODUCT_INFORMATION_SECTION_FRAGMENT
 // Query: {  _key,  _type,  desktopMediaPosition,  desktopMediaWidth,  mediaAspectRatio,  "richtext": coalesce(    richtext[_key == $language][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},    richtext[_key == $defaultLanguage][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},  )[],  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}}
-export type PRODUCT_INFORMATION_SECTION_FRAGMENTResult = {
+export type PRODUCT_INFORMATION_SECTION_FRAGMENT_RESULT = {
   _key: never;
   _type: never;
   desktopMediaPosition: never;
@@ -18360,9 +12433,11 @@ export type PRODUCT_INFORMATION_SECTION_FRAGMENTResult = {
   richtext: null;
   settings: never;
 };
+
+// Source: app/data/sanity/sections.ts
 // Variable: COLLECTION_PRODUCT_GRID_SECTION_FRAGMENT
 // Query: {  _key,  _type,  desktopColumns,  enableFiltering,  enableSorting,  mobileColumns,  productsPerPage,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}}
-export type COLLECTION_PRODUCT_GRID_SECTION_FRAGMENTResult = {
+export type COLLECTION_PRODUCT_GRID_SECTION_FRAGMENT_RESULT = {
   _key: never;
   _type: never;
   desktopColumns: never;
@@ -18372,9 +12447,11 @@ export type COLLECTION_PRODUCT_GRID_SECTION_FRAGMENTResult = {
   productsPerPage: never;
   settings: never;
 };
+
+// Source: app/data/sanity/sections.ts
 // Variable: COLLECTION_BANNER_SECTION_FRAGMENT
 // Query: {  _key,  _type,  bannerHeight,  contentAlignment,  contentPosition,  overlayOpacity,  showDescription,  showImage,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}}
-export type COLLECTION_BANNER_SECTION_FRAGMENTResult = {
+export type COLLECTION_BANNER_SECTION_FRAGMENT_RESULT = {
   _key: never;
   _type: never;
   bannerHeight: never;
@@ -18385,9 +12462,11 @@ export type COLLECTION_BANNER_SECTION_FRAGMENTResult = {
   showImage: never;
   settings: never;
 };
+
+// Source: app/data/sanity/sections.ts
 // Variable: RICHTEXT_SECTION_FRAGMENT
 // Query: {  _key,  _type,  contentAlignment,  desktopContentPosition,  maxWidth,  "richtext": coalesce(    richtext[_key == $language][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},    richtext[_key == $defaultLanguage][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},  )[],  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}}
-export type RICHTEXT_SECTION_FRAGMENTResult = {
+export type RICHTEXT_SECTION_FRAGMENT_RESULT = {
   _key: never;
   _type: never;
   contentAlignment: never;
@@ -18396,9 +12475,11 @@ export type RICHTEXT_SECTION_FRAGMENTResult = {
   richtext: null;
   settings: never;
 };
+
+// Source: app/data/sanity/sections.ts
 // Variable: CAROUSEL_SECTION_FRAGMENT
 // Query: {  _key,  _type,  arrows,  autoplay,  "title": coalesce(    title[_key == $language][0].value,    title[_key == $defaultLanguage][0].value,  ),  loop,  pagination,  slides[] {    _key,    image {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  },  slidesPerViewDesktop,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}}
-export type CAROUSEL_SECTION_FRAGMENTResult = {
+export type CAROUSEL_SECTION_FRAGMENT_RESULT = {
   _key: never;
   _type: never;
   arrows: never;
@@ -18410,18 +12491,22 @@ export type CAROUSEL_SECTION_FRAGMENTResult = {
   slidesPerViewDesktop: never;
   settings: never;
 };
+
+// Source: app/data/sanity/sections.ts
 // Variable: COLLECTION_LIST_SECTION_FRAGMENT
 // Query: {  _key,  _type,  collections[] -> {    store {      gid    }  },  desktopColumns,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}}
-export type COLLECTION_LIST_SECTION_FRAGMENTResult = {
+export type COLLECTION_LIST_SECTION_FRAGMENT_RESULT = {
   _key: never;
   _type: never;
   collections: never;
   desktopColumns: never;
   settings: never;
 };
+
+// Source: app/data/sanity/sections.ts
 // Variable: FEATURED_PRODUCT_SECTION_FRAGMENT
 // Query: {  _key,  _type,  mediaAspectRatio,  product -> {    store {      descriptionHtml,      "firstVariant": variants[0] -> {        store {          gid,          previewImageUrl,          price        }      },      gid,      options[] {        name,        values      },      previewImageUrl,      title    }  },  'richtext': coalesce(    richtext[_key == $language][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},    richtext[_key == $defaultLanguage][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},  )[],  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}}
-export type FEATURED_PRODUCT_SECTION_FRAGMENTResult = {
+export type FEATURED_PRODUCT_SECTION_FRAGMENT_RESULT = {
   _key: never;
   _type: never;
   mediaAspectRatio: never;
@@ -18429,9 +12514,11 @@ export type FEATURED_PRODUCT_SECTION_FRAGMENTResult = {
   richtext: null;
   settings: never;
 };
+
+// Source: app/data/sanity/sections.ts
 // Variable: FEATURED_COLLECTION_SECTION_FRAGMENT
 // Query: {  _key,  _type,  collection -> {    store {      gid,      slug,      title    }  },  desktopColumns,  "heading": coalesce(    heading[_key == $language][0].value,    heading[_key == $defaultLanguage][0].value,  ),  maxProducts,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding},  viewAll}
-export type FEATURED_COLLECTION_SECTION_FRAGMENTResult = {
+export type FEATURED_COLLECTION_SECTION_FRAGMENT_RESULT = {
   _key: never;
   _type: never;
   collection: never;
@@ -18441,9 +12528,11 @@ export type FEATURED_COLLECTION_SECTION_FRAGMENTResult = {
   settings: never;
   viewAll: never;
 };
+
+// Source: app/data/sanity/sections.ts
 // Variable: IMAGE_BANNER_SECTION_FRAGMENT
 // Query: {  _key,  _type,  backgroundImage {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  bannerHeight,  "content": coalesce(    content[_key == $language][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},    content[_key == $defaultLanguage][0].value[] {  ...,  _type == 'image' => {  _type,  asset,  "altText": asset -> altText,  "_ref": asset._ref,  hotspot,  crop,},  _type == 'button' => {    ...,    link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  },  _type == 'block' => {    ...,    markDefs[] {      ...,      _type == 'internalLink' => {  _key,  _type,  anchor,  link -> {  'documentType': _type,  'slug': coalesce(    slug,    store.slug  ) {    _type,    current  },},  name,},      _type == 'externalLink' => {  _key,  _type,  link,  name,  openInNewTab,},    }  }},  )[],  contentAlignment,  contentPosition,  overlayOpacity,  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding}}
-export type IMAGE_BANNER_SECTION_FRAGMENTResult = {
+export type IMAGE_BANNER_SECTION_FRAGMENT_RESULT = {
   _key: never;
   _type: never;
   backgroundImage: never;
@@ -18459,38 +12548,38 @@ export type IMAGE_BANNER_SECTION_FRAGMENTResult = {
 import '@sanity/client';
 declare module '@sanity/client' {
   interface SanityQueries {
-    '{\n  _key,\n  _type,\n  "copyright": coalesce(\n    copyright[_key == $language][0].value,\n    copyright[_key == $defaultLanguage][0].value,\n  ),\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n},\n}': FOOTER_SOCIAL_LINKS_ONLY_FRAGMENTResult;
-    '{\n  _type,\n  asset,\n  "altText": asset -> altText,\n  "_ref": asset._ref,\n  hotspot,\n  crop,\n}': IMAGE_FRAGMENTResult;
-    '{\n  alpha,\n  hex,\n  hsl,\n  rgb,\n}': COLOR_FRAGMENTResult;
-    '{\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n}': COLOR_SCHEME_FRAGMENTResult;
-    '{\n  account {\n    "accountDetails": coalesce(\n    accountDetails[_key == $language][0].value,\n    accountDetails[_key == $defaultLanguage][0].value,\n  ),\n    "addAddress": coalesce(\n    addAddress[_key == $language][0].value,\n    addAddress[_key == $defaultLanguage][0].value,\n  ),\n    "addName": coalesce(\n    addName[_key == $language][0].value,\n    addName[_key == $defaultLanguage][0].value,\n  ),\n    "addressBook": coalesce(\n    addressBook[_key == $language][0].value,\n    addressBook[_key == $defaultLanguage][0].value,\n  ),\n    "addressLine1": coalesce(\n    addressLine1[_key == $language][0].value,\n    addressLine1[_key == $defaultLanguage][0].value,\n  ),\n    "addressLine2": coalesce(\n    addressLine2[_key == $language][0].value,\n    addressLine2[_key == $defaultLanguage][0].value,\n  ),\n    "cancel": coalesce(\n    cancel[_key == $language][0].value,\n    cancel[_key == $defaultLanguage][0].value,\n  ),\n    "city": coalesce(\n    city[_key == $language][0].value,\n    city[_key == $defaultLanguage][0].value,\n  ), \n    "company": coalesce(\n    company[_key == $language][0].value,\n    company[_key == $defaultLanguage][0].value,\n  ),\n    "country": coalesce(\n    country[_key == $language][0].value,\n    country[_key == $defaultLanguage][0].value,\n  ),\n    "default": coalesce(\n    default[_key == $language][0].value,\n    default[_key == $defaultLanguage][0].value,\n  ),\n    "defaultAddress": coalesce(\n    defaultAddress[_key == $language][0].value,\n    defaultAddress[_key == $defaultLanguage][0].value,\n  ),\n    "discounts": coalesce(\n    discounts[_key == $language][0].value,\n    discounts[_key == $defaultLanguage][0].value,\n  ),\n    "discountsOff": coalesce(\n    discountsOff[_key == $language][0].value,\n    discountsOff[_key == $defaultLanguage][0].value,\n  ),\n    "edit": coalesce(\n    edit[_key == $language][0].value,\n    edit[_key == $defaultLanguage][0].value,\n  ),\n    "editAddress": coalesce(\n    editAddress[_key == $language][0].value,\n    editAddress[_key == $defaultLanguage][0].value,\n  ),\n    "emailAddress": coalesce(\n    emailAddress[_key == $language][0].value,\n    emailAddress[_key == $defaultLanguage][0].value,\n  ),\n    "firstName": coalesce(\n    firstName[_key == $language][0].value,\n    firstName[_key == $defaultLanguage][0].value,\n  ),\n    "fulfillmentStatus": coalesce(\n    fulfillmentStatus[_key == $language][0].value,\n    fulfillmentStatus[_key == $defaultLanguage][0].value,\n  ),\n    "lastName": coalesce(\n    lastName[_key == $language][0].value,\n    lastName[_key == $defaultLanguage][0].value,\n  ),\n    "name": coalesce(\n    name[_key == $language][0].value,\n    name[_key == $defaultLanguage][0].value,\n  ),\n    "noAddress": coalesce(\n    noAddress[_key == $language][0].value,\n    noAddress[_key == $defaultLanguage][0].value,\n  ),\n    "noOrdersMessage": coalesce(\n    noOrdersMessage[_key == $language][0].value,\n    noOrdersMessage[_key == $defaultLanguage][0].value,\n  ),\n    "noShippingAddress": coalesce(\n    noShippingAddress[_key == $language][0].value,\n    noShippingAddress[_key == $defaultLanguage][0].value,\n  ),\n    "orderDate": coalesce(\n    orderDate[_key == $language][0].value,\n    orderDate[_key == $defaultLanguage][0].value,\n  ),\n    "orderDetail": coalesce(\n    orderDetail[_key == $language][0].value,\n    orderDetail[_key == $defaultLanguage][0].value,\n  ),\n    "orderHistory": coalesce(\n    orderHistory[_key == $language][0].value,\n    orderHistory[_key == $defaultLanguage][0].value,\n  ),\n    "orderId": coalesce(\n    orderId[_key == $language][0].value,\n    orderId[_key == $defaultLanguage][0].value,\n  ),\n    "orderNumber": coalesce(\n    orderNumber[_key == $language][0].value,\n    orderNumber[_key == $defaultLanguage][0].value,\n  ),\n    "orderStatusCancelled": coalesce(\n    orderStatusCancelled[_key == $language][0].value,\n    orderStatusCancelled[_key == $defaultLanguage][0].value,\n  ),\n    "orderStatusError": coalesce(\n    orderStatusError[_key == $language][0].value,\n    orderStatusError[_key == $defaultLanguage][0].value,\n  ),\n    "orderStatusFailure": coalesce(\n    orderStatusFailure[_key == $language][0].value,\n    orderStatusFailure[_key == $defaultLanguage][0].value,\n  ),\n    "orderStatusOpen": coalesce(\n    orderStatusOpen[_key == $language][0].value,\n    orderStatusOpen[_key == $defaultLanguage][0].value,\n  ),\n    "orderStatusPending": coalesce(\n    orderStatusPending[_key == $language][0].value,\n    orderStatusPending[_key == $defaultLanguage][0].value,\n  ),\n    "orderStatusSuccess": coalesce(\n    orderStatusSuccess[_key == $language][0].value,\n    orderStatusSuccess[_key == $defaultLanguage][0].value,\n  ),\n    "phone": coalesce(\n    phone[_key == $language][0].value,\n    phone[_key == $defaultLanguage][0].value,\n  ),\n    "phoneNumber": coalesce(\n    phoneNumber[_key == $language][0].value,\n    phoneNumber[_key == $defaultLanguage][0].value,\n  ),\n    "placedOn": coalesce(\n    placedOn[_key == $language][0].value,\n    placedOn[_key == $defaultLanguage][0].value,\n  ),\n    "postalCode": coalesce(\n    postalCode[_key == $language][0].value,\n    postalCode[_key == $defaultLanguage][0].value,\n  ),\n    "price": coalesce(\n    price[_key == $language][0].value,\n    price[_key == $defaultLanguage][0].value,\n  ),\n    "product": coalesce(\n    product[_key == $language][0].value,\n    product[_key == $defaultLanguage][0].value,\n  ),\n    "profile": coalesce(\n    profile[_key == $language][0].value,\n    profile[_key == $defaultLanguage][0].value,\n  ),\n    "quantity": coalesce(\n    quantity[_key == $language][0].value,\n    quantity[_key == $defaultLanguage][0].value,\n  ),\n    "remove": coalesce(\n    remove[_key == $language][0].value,\n    remove[_key == $defaultLanguage][0].value,\n  ),\n    "returnToAccount": coalesce(\n    returnToAccount[_key == $language][0].value,\n    returnToAccount[_key == $defaultLanguage][0].value,\n  ),\n    "save": coalesce(\n    save[_key == $language][0].value,\n    save[_key == $defaultLanguage][0].value,\n  ),\n    "saving": coalesce(\n    saving[_key == $language][0].value,\n    saving[_key == $defaultLanguage][0].value,\n  ),\n    "shippingAddress": coalesce(\n    shippingAddress[_key == $language][0].value,\n    shippingAddress[_key == $defaultLanguage][0].value,\n  ),\n    "signOut": coalesce(\n    signOut[_key == $language][0].value,\n    signOut[_key == $defaultLanguage][0].value,\n  ),\n    "startShopping": coalesce(\n    startShopping[_key == $language][0].value,\n    startShopping[_key == $defaultLanguage][0].value,\n  ),\n    "stateProvince": coalesce(\n    stateProvince[_key == $language][0].value,\n    stateProvince[_key == $defaultLanguage][0].value,\n  ),\n    "status": coalesce(\n    status[_key == $language][0].value,\n    status[_key == $defaultLanguage][0].value,\n  ),\n    "subtotal": coalesce(\n    subtotal[_key == $language][0].value,\n    subtotal[_key == $defaultLanguage][0].value,\n  ),\n    "tax": coalesce(\n    tax[_key == $language][0].value,\n    tax[_key == $defaultLanguage][0].value,\n  ),\n    "total": coalesce(\n    total[_key == $language][0].value,\n    total[_key == $defaultLanguage][0].value,\n  ),\n    "updateYourProfile": coalesce(\n    updateYourProfile[_key == $language][0].value,\n    updateYourProfile[_key == $defaultLanguage][0].value,\n  ),\n    "viewDetails": coalesce(\n    viewDetails[_key == $language][0].value,\n    viewDetails[_key == $defaultLanguage][0].value,\n  ),\n    "welcome": coalesce(\n    welcome[_key == $language][0].value,\n    welcome[_key == $defaultLanguage][0].value,\n  ),\n    "welcomeToYourAccount": coalesce(\n    welcomeToYourAccount[_key == $language][0].value,\n    welcomeToYourAccount[_key == $defaultLanguage][0].value,\n  ),\n  },\n  cart {\n    "applyDiscount": coalesce(\n    applyDiscount[_key == $language][0].value,\n    applyDiscount[_key == $defaultLanguage][0].value,\n  ),\n    "continueShopping": coalesce(\n    continueShopping[_key == $language][0].value,\n    continueShopping[_key == $defaultLanguage][0].value,\n  ),\n    "discountCode": coalesce(\n    discountCode[_key == $language][0].value,\n    discountCode[_key == $defaultLanguage][0].value,\n  ),\n    "discounts": coalesce(\n    discounts[_key == $language][0].value,\n    discounts[_key == $defaultLanguage][0].value,\n  ),\n    "emptyMessage": coalesce(\n    emptyMessage[_key == $language][0].value,\n    emptyMessage[_key == $defaultLanguage][0].value,\n  ),\n    "heading": coalesce(\n    heading[_key == $language][0].value,\n    heading[_key == $defaultLanguage][0].value,\n  ),\n    "orderSummary": coalesce(\n    orderSummary[_key == $language][0].value,\n    orderSummary[_key == $defaultLanguage][0].value,\n  ),\n    "proceedToCheckout": coalesce(\n    proceedToCheckout[_key == $language][0].value,\n    proceedToCheckout[_key == $defaultLanguage][0].value,\n  ),\n    "quantity": coalesce(\n    quantity[_key == $language][0].value,\n    quantity[_key == $defaultLanguage][0].value,\n  ),\n    "remove": coalesce(\n    remove[_key == $language][0].value,\n    remove[_key == $defaultLanguage][0].value,\n  ),\n    "subtotal": coalesce(\n    subtotal[_key == $language][0].value,\n    subtotal[_key == $defaultLanguage][0].value,\n  ),\n  },\n  collection {\n    "apply": coalesce(\n    apply[_key == $language][0].value,\n    apply[_key == $defaultLanguage][0].value,\n  ),\n    "clear": coalesce(\n    clear[_key == $language][0].value,\n    clear[_key == $defaultLanguage][0].value,\n  ),\n    "clearFilters": coalesce(\n    clearFilters[_key == $language][0].value,\n    clearFilters[_key == $defaultLanguage][0].value,\n  ),\n    "filterAndSort": coalesce(\n    filterAndSort[_key == $language][0].value,\n    filterAndSort[_key == $defaultLanguage][0].value,\n  ),\n    "filterInStock": coalesce(\n    filterInStock[_key == $language][0].value,\n    filterInStock[_key == $defaultLanguage][0].value,\n  ),\n    "filterOutOfStock": coalesce(\n    filterOutOfStock[_key == $language][0].value,\n    filterOutOfStock[_key == $defaultLanguage][0].value,\n  ),\n    "from": coalesce(\n    from[_key == $language][0].value,\n    from[_key == $defaultLanguage][0].value,\n  ),\n    "loading": coalesce(\n    loading[_key == $language][0].value,\n    loading[_key == $defaultLanguage][0].value,\n  ),\n    "loadMoreProducts": coalesce(\n    loadMoreProducts[_key == $language][0].value,\n    loadMoreProducts[_key == $defaultLanguage][0].value,\n  ),\n    "loadPrevious": coalesce(\n    loadPrevious[_key == $language][0].value,\n    loadPrevious[_key == $defaultLanguage][0].value,\n  ),\n    "noCollectionFound": coalesce(\n    noCollectionFound[_key == $language][0].value,\n    noCollectionFound[_key == $defaultLanguage][0].value,\n  ),\n    "noProductFound": coalesce(\n    noProductFound[_key == $language][0].value,\n    noProductFound[_key == $defaultLanguage][0].value,\n  ),\n    "sortBestSelling": coalesce(\n    sortBestSelling[_key == $language][0].value,\n    sortBestSelling[_key == $defaultLanguage][0].value,\n  ),\n    "sortBy": coalesce(\n    sortBy[_key == $language][0].value,\n    sortBy[_key == $defaultLanguage][0].value,\n  ),\n    "sortFeatured": coalesce(\n    sortFeatured[_key == $language][0].value,\n    sortFeatured[_key == $defaultLanguage][0].value,\n  ),\n    "sortHighLow": coalesce(\n    sortHighLow[_key == $language][0].value,\n    sortHighLow[_key == $defaultLanguage][0].value,\n  ),\n    "sortLowHigh": coalesce(\n    sortLowHigh[_key == $language][0].value,\n    sortLowHigh[_key == $defaultLanguage][0].value,\n  ),\n    "sortNewest": coalesce(\n    sortNewest[_key == $language][0].value,\n    sortNewest[_key == $defaultLanguage][0].value,\n  ),\n    "to": coalesce(\n    to[_key == $language][0].value,\n    to[_key == $defaultLanguage][0].value,\n  ), \n    "viewAll": coalesce(\n    viewAll[_key == $language][0].value,\n    viewAll[_key == $defaultLanguage][0].value,\n  ),\n  },\n  error {\n    "addressCreation": coalesce(\n    addressCreation[_key == $language][0].value,\n    addressCreation[_key == $defaultLanguage][0].value,\n  ),\n    "missingAddressId": coalesce(\n    missingAddressId[_key == $language][0].value,\n    missingAddressId[_key == $defaultLanguage][0].value,\n  ),\n    "pageNotFound": coalesce(\n    pageNotFound[_key == $language][0].value,\n    pageNotFound[_key == $defaultLanguage][0].value,\n  ),\n    "reloadPage": coalesce(\n    reloadPage[_key == $language][0].value,\n    reloadPage[_key == $defaultLanguage][0].value,\n  ),\n    "sectionError": coalesce(\n    sectionError[_key == $language][0].value,\n    sectionError[_key == $defaultLanguage][0].value,\n  ),\n    "serverError": coalesce(\n    serverError[_key == $language][0].value,\n    serverError[_key == $defaultLanguage][0].value,\n  ),\n  },\n  product {\n    "addToCart": coalesce(\n    addToCart[_key == $language][0].value,\n    addToCart[_key == $defaultLanguage][0].value,\n  ),\n    "quantitySelector": coalesce(\n    quantitySelector[_key == $language][0].value,\n    quantitySelector[_key == $defaultLanguage][0].value,\n  ),\n    "sale": coalesce(\n    sale[_key == $language][0].value,\n    sale[_key == $defaultLanguage][0].value,\n  ),\n    "soldOut": coalesce(\n    soldOut[_key == $language][0].value,\n    soldOut[_key == $defaultLanguage][0].value,\n  ),\n  },\n}': THEME_CONTENT_FRAGMENTResult;
-    '{\n  badgesCornerRadius,\n  badgesPosition,\n  badgesSaleColorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  badgesSoldOutColorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  blogCards,\n  buttonsBorder,\n  buttonsShadow,\n  cartCollection -> {\n    store {\n      gid,\n      title,\n    },\n  },\n  cartColorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  collectionCards,\n  description,\n  dropdownsAndPopupsBorder,\n  dropdownsAndPopupsShadow,\n  facebook,\n  favicon {\n  _type,\n  asset,\n  "altText": asset -> altText,\n  "_ref": asset._ref,\n  hotspot,\n  crop,\n},\n  grid,\n  inputsBorder,\n  inputsShadow,\n  instagram,\n  linkedin,\n  logo {\n  _type,\n  asset,\n  "altText": asset -> altText,\n  "_ref": asset._ref,\n  hotspot,\n  crop,\n},\n  mediaBorder,\n  mediaShadow,\n  pinterest,\n  productCards,\n  showCurrencyCodes,\n  showTrailingZeros,\n  siteName,\n  snapchat,\n  socialSharingImagePreview {\n  _type,\n  asset,\n  "altText": asset -> altText,\n  "_ref": asset._ref,\n  hotspot,\n  crop,\n},\n  spaceBetweenTemplateSections,\n  tiktok,\n  tumblr,\n  twitter,\n  vimeo,\n  youtube,\n}': SETTINGS_FRAGMENTResult;
-    '{\n  "announcementBar": coalesce(\n    announcementBar[_key == $language][0].value[],\n    announcementBar[_key == $defaultLanguage][0].value[],\n  )[] {\n    _type == "announcement" => {\n      _key,\n      externalLink,\n      link -> {\n  \'documentType\': _type,\n  \'slug\': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n      openInNewTab,\n      text,\n    },\n  },\n  announcementBarColorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  autoRotateAnnouncements,\n  blur,\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  desktopLogoWidth,\n  "menu": coalesce(\n    menu[_key == $language][0].value[],\n    menu[_key == $defaultLanguage][0].value[],\n  )[] {\n  _type == "externalLink" => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n  _type == "internalLink" => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  \'documentType\': _type,\n  \'slug\': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n  _type == "nestedNavigation" => {\n  _key,\n  _type,\n  childLinks[] {\n    _type == "externalLink" => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    _type == "internalLink" => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  \'documentType\': _type,\n  \'slug\': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n  },\n  link -> {\n    \'documentType\': _type,\n    \'slug\': coalesce(\n      slug,\n      store.slug\n    ) {\n      _type,\n      current\n    },\n  },\n  name,\n},\n},\n  padding,\n  showSeparatorLine,\n  sticky \n}': HEADER_FRAGMENTResult;
-    '{\n  "extension": asset -> extension,\n  "mimeType": asset -> mimeType,\n  "url": asset -> url,\n}': FONT_ASSET_FRAGMENTResult;
-    '{\n  baseSize,\n  capitalize,\n  font[] {\n    antialiased,\n    fontAssets[] {\n      "fontName": ^.fontName,\n      fontStyle,\n      fontWeight,\n      ttf {\n  "extension": asset -> extension,\n  "mimeType": asset -> mimeType,\n  "url": asset -> url,\n},\n      woff {\n  "extension": asset -> extension,\n  "mimeType": asset -> mimeType,\n  "url": asset -> url,\n},\n      woff2 {\n  "extension": asset -> extension,\n  "mimeType": asset -> mimeType,\n  "url": asset -> url,\n},\n    },\n    fontName,\n    fontType,\n  },\n  letterSpacing,\n  lineHeight,\n}': FONT_FRAGMENTResult;
-    "{\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n}": RICHTEXT_FRAGMENTResult;
-    "{\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n}": LINK_REFERENCE_FRAGMENTResult;
-    "{\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n}": INTERNAL_LINK_FRAGMENTResult;
-    '{\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n}': EXTERNAL_LINK_FRAGMENTResult;
-    "{\n  _key,\n  _type,\n  childLinks[] {\n    _type == \"externalLink\" => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    _type == \"internalLink\" => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n  },\n  link -> {\n    'documentType': _type,\n    'slug': coalesce(\n      slug,\n      store.slug\n    ) {\n      _type,\n      current\n    },\n  },\n  name,\n}": NESTED_NAVIGATION_FRAGMENTResult;
-    "{\n  _type == \"externalLink\" => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n  _type == \"internalLink\" => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n  _type == \"nestedNavigation\" => {\n  _key,\n  _type,\n  childLinks[] {\n    _type == \"externalLink\" => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    _type == \"internalLink\" => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n  },\n  link -> {\n    'documentType': _type,\n    'slug': coalesce(\n      slug,\n      store.slug\n    ) {\n      _type,\n      current\n    },\n  },\n  name,\n},\n}": LINKS_LIST_SELECTIONResult;
-    "*[_type == 'productTemplate' && default == true][0] {\n    _type,\n    name,\n    sections[] {\n      _key,\n      _type,\n      \n    _type == 'richtextSection' => {\n  _key,\n  _type,\n  contentAlignment,\n  desktopContentPosition,\n  maxWidth,\n  \"richtext\": coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'carouselSection' => {\n  _key,\n  _type,\n  arrows,\n  autoplay,\n  \"title\": coalesce(\n    title[_key == $language][0].value,\n    title[_key == $defaultLanguage][0].value,\n  ),\n  loop,\n  pagination,\n  slides[] {\n    _key,\n    image {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  },\n  slidesPerViewDesktop,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'collectionListSection' => {\n  _key,\n  _type,\n  collections[] -> {\n    store {\n      gid\n    }\n  },\n  desktopColumns,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'featuredProductSection' => {\n  _key,\n  _type,\n  mediaAspectRatio,\n  product -> {\n    store {\n      descriptionHtml,\n      \"firstVariant\": variants[0] -> {\n        store {\n          gid,\n          previewImageUrl,\n          price\n        }\n      },\n      gid,\n      options[] {\n        name,\n        values\n      },\n      previewImageUrl,\n      title\n    }\n  },\n  'richtext': coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'featuredCollectionSection' => {\n  _key,\n  _type,\n  collection -> {\n    store {\n      gid,\n      slug,\n      title\n    }\n  },\n  desktopColumns,\n  \"heading\": coalesce(\n    heading[_key == $language][0].value,\n    heading[_key == $defaultLanguage][0].value,\n  ),\n  maxProducts,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n},\n  viewAll\n},\n    _type == 'imageBannerSection' => {\n  _key,\n  _type,\n  backgroundImage {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  bannerHeight,\n  \"content\": coalesce(\n    content[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    content[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  contentAlignment,\n  contentPosition,\n  overlayOpacity,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n  \n      \n    _type == 'productInformationSection' => {\n  _key,\n  _type,\n  desktopMediaPosition,\n  desktopMediaWidth,\n  mediaAspectRatio,\n  \"richtext\": coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'relatedProductsSection' => {\n  _key,\n  _type,\n  desktopColumns,\n  \"heading\": coalesce(\n    heading[_key == $language][0].value,\n    heading[_key == $defaultLanguage][0].value,\n  ),\n  maxProducts,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n  \n    },\n  }": DEFAULT_PRODUCT_TEMPLATEResult;
-    "*[_type == 'collectionTemplate' && default == true][0] {\n    _type,\n    name,\n    sections[] {\n      _key,\n      _type,\n      \n    _type == 'richtextSection' => {\n  _key,\n  _type,\n  contentAlignment,\n  desktopContentPosition,\n  maxWidth,\n  \"richtext\": coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'carouselSection' => {\n  _key,\n  _type,\n  arrows,\n  autoplay,\n  \"title\": coalesce(\n    title[_key == $language][0].value,\n    title[_key == $defaultLanguage][0].value,\n  ),\n  loop,\n  pagination,\n  slides[] {\n    _key,\n    image {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  },\n  slidesPerViewDesktop,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'collectionListSection' => {\n  _key,\n  _type,\n  collections[] -> {\n    store {\n      gid\n    }\n  },\n  desktopColumns,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'featuredProductSection' => {\n  _key,\n  _type,\n  mediaAspectRatio,\n  product -> {\n    store {\n      descriptionHtml,\n      \"firstVariant\": variants[0] -> {\n        store {\n          gid,\n          previewImageUrl,\n          price\n        }\n      },\n      gid,\n      options[] {\n        name,\n        values\n      },\n      previewImageUrl,\n      title\n    }\n  },\n  'richtext': coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'featuredCollectionSection' => {\n  _key,\n  _type,\n  collection -> {\n    store {\n      gid,\n      slug,\n      title\n    }\n  },\n  desktopColumns,\n  \"heading\": coalesce(\n    heading[_key == $language][0].value,\n    heading[_key == $defaultLanguage][0].value,\n  ),\n  maxProducts,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n},\n  viewAll\n},\n    _type == 'imageBannerSection' => {\n  _key,\n  _type,\n  backgroundImage {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  bannerHeight,\n  \"content\": coalesce(\n    content[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    content[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  contentAlignment,\n  contentPosition,\n  overlayOpacity,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n  \n      \n    _type == 'collectionBannerSection' => {\n  _key,\n  _type,\n  bannerHeight,\n  contentAlignment,\n  contentPosition,\n  overlayOpacity,\n  showDescription,\n  showImage,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'collectionProductGridSection' => {\n  _key,\n  _type,\n  desktopColumns,\n  enableFiltering,\n  enableSorting,\n  mobileColumns,\n  productsPerPage,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n  \n    },\n  }": DEFAULT_COLLECTION_TEMPLATEResult;
-    '{\n  \'_type\': \'root\',\n  "defaultColorScheme": *[_type == "colorScheme" && default == true][0] {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  "fonts": *[_type == "typography"][0] {\n    body {\n  baseSize,\n  capitalize,\n  font[] {\n    antialiased,\n    fontAssets[] {\n      "fontName": ^.fontName,\n      fontStyle,\n      fontWeight,\n      ttf {\n  "extension": asset -> extension,\n  "mimeType": asset -> mimeType,\n  "url": asset -> url,\n},\n      woff {\n  "extension": asset -> extension,\n  "mimeType": asset -> mimeType,\n  "url": asset -> url,\n},\n      woff2 {\n  "extension": asset -> extension,\n  "mimeType": asset -> mimeType,\n  "url": asset -> url,\n},\n    },\n    fontName,\n    fontType,\n  },\n  letterSpacing,\n  lineHeight,\n},\n    heading {\n  baseSize,\n  capitalize,\n  font[] {\n    antialiased,\n    fontAssets[] {\n      "fontName": ^.fontName,\n      fontStyle,\n      fontWeight,\n      ttf {\n  "extension": asset -> extension,\n  "mimeType": asset -> mimeType,\n  "url": asset -> url,\n},\n      woff {\n  "extension": asset -> extension,\n  "mimeType": asset -> mimeType,\n  "url": asset -> url,\n},\n      woff2 {\n  "extension": asset -> extension,\n  "mimeType": asset -> mimeType,\n  "url": asset -> url,\n},\n    },\n    fontName,\n    fontType,\n  },\n  letterSpacing,\n  lineHeight,\n},\n    extra {\n  baseSize,\n  capitalize,\n  font[] {\n    antialiased,\n    fontAssets[] {\n      "fontName": ^.fontName,\n      fontStyle,\n      fontWeight,\n      ttf {\n  "extension": asset -> extension,\n  "mimeType": asset -> mimeType,\n  "url": asset -> url,\n},\n      woff {\n  "extension": asset -> extension,\n  "mimeType": asset -> mimeType,\n  "url": asset -> url,\n},\n      woff2 {\n  "extension": asset -> extension,\n  "mimeType": asset -> mimeType,\n  "url": asset -> url,\n},\n    },\n    fontName,\n    fontType,\n  },\n  letterSpacing,\n  lineHeight,\n},\n  },\n  "footer": *[_type == \'footer\'][0] {\n    "footer": footers[0] {\n      _key,\n      _type,\n      \n    _type == \'socialLinksOnly\' => {\n  _key,\n  _type,\n  "copyright": coalesce(\n    copyright[_key == $language][0].value,\n    copyright[_key == $defaultLanguage][0].value,\n  ),\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n},\n},\n  \n    },\n    sections[] {\n      _key,\n      _type,\n      \n    _type == \'richtextSection\' => {\n  _key,\n  _type,\n  contentAlignment,\n  desktopContentPosition,\n  maxWidth,\n  "richtext": coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == \'image\' => {\n  _type,\n  asset,\n  "altText": asset -> altText,\n  "_ref": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == \'button\' => {\n    ...,\n    link -> {\n  \'documentType\': _type,\n  \'slug\': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == \'block\' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == \'internalLink\' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  \'documentType\': _type,\n  \'slug\': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == \'externalLink\' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == \'image\' => {\n  _type,\n  asset,\n  "altText": asset -> altText,\n  "_ref": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == \'button\' => {\n    ...,\n    link -> {\n  \'documentType\': _type,\n  \'slug\': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == \'block\' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == \'internalLink\' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  \'documentType\': _type,\n  \'slug\': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == \'externalLink\' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == \'carouselSection\' => {\n  _key,\n  _type,\n  arrows,\n  autoplay,\n  "title": coalesce(\n    title[_key == $language][0].value,\n    title[_key == $defaultLanguage][0].value,\n  ),\n  loop,\n  pagination,\n  slides[] {\n    _key,\n    image {\n  _type,\n  asset,\n  "altText": asset -> altText,\n  "_ref": asset._ref,\n  hotspot,\n  crop,\n},\n  },\n  slidesPerViewDesktop,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == \'collectionListSection\' => {\n  _key,\n  _type,\n  collections[] -> {\n    store {\n      gid\n    }\n  },\n  desktopColumns,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == \'featuredProductSection\' => {\n  _key,\n  _type,\n  mediaAspectRatio,\n  product -> {\n    store {\n      descriptionHtml,\n      "firstVariant": variants[0] -> {\n        store {\n          gid,\n          previewImageUrl,\n          price\n        }\n      },\n      gid,\n      options[] {\n        name,\n        values\n      },\n      previewImageUrl,\n      title\n    }\n  },\n  \'richtext\': coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == \'image\' => {\n  _type,\n  asset,\n  "altText": asset -> altText,\n  "_ref": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == \'button\' => {\n    ...,\n    link -> {\n  \'documentType\': _type,\n  \'slug\': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == \'block\' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == \'internalLink\' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  \'documentType\': _type,\n  \'slug\': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == \'externalLink\' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == \'image\' => {\n  _type,\n  asset,\n  "altText": asset -> altText,\n  "_ref": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == \'button\' => {\n    ...,\n    link -> {\n  \'documentType\': _type,\n  \'slug\': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == \'block\' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == \'internalLink\' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  \'documentType\': _type,\n  \'slug\': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == \'externalLink\' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == \'featuredCollectionSection\' => {\n  _key,\n  _type,\n  collection -> {\n    store {\n      gid,\n      slug,\n      title\n    }\n  },\n  desktopColumns,\n  "heading": coalesce(\n    heading[_key == $language][0].value,\n    heading[_key == $defaultLanguage][0].value,\n  ),\n  maxProducts,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n},\n  viewAll\n},\n    _type == \'imageBannerSection\' => {\n  _key,\n  _type,\n  backgroundImage {\n  _type,\n  asset,\n  "altText": asset -> altText,\n  "_ref": asset._ref,\n  hotspot,\n  crop,\n},\n  bannerHeight,\n  "content": coalesce(\n    content[_key == $language][0].value[] {\n  ...,\n  _type == \'image\' => {\n  _type,\n  asset,\n  "altText": asset -> altText,\n  "_ref": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == \'button\' => {\n    ...,\n    link -> {\n  \'documentType\': _type,\n  \'slug\': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == \'block\' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == \'internalLink\' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  \'documentType\': _type,\n  \'slug\': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == \'externalLink\' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    content[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == \'image\' => {\n  _type,\n  asset,\n  "altText": asset -> altText,\n  "_ref": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == \'button\' => {\n    ...,\n    link -> {\n  \'documentType\': _type,\n  \'slug\': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == \'block\' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == \'internalLink\' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  \'documentType\': _type,\n  \'slug\': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == \'externalLink\' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  contentAlignment,\n  contentPosition,\n  overlayOpacity,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n  \n    },\n  },\n  "header": *[_type == "header"][0] {\n  "announcementBar": coalesce(\n    announcementBar[_key == $language][0].value[],\n    announcementBar[_key == $defaultLanguage][0].value[],\n  )[] {\n    _type == "announcement" => {\n      _key,\n      externalLink,\n      link -> {\n  \'documentType\': _type,\n  \'slug\': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n      openInNewTab,\n      text,\n    },\n  },\n  announcementBarColorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  autoRotateAnnouncements,\n  blur,\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  desktopLogoWidth,\n  "menu": coalesce(\n    menu[_key == $language][0].value[],\n    menu[_key == $defaultLanguage][0].value[],\n  )[] {\n  _type == "externalLink" => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n  _type == "internalLink" => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  \'documentType\': _type,\n  \'slug\': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n  _type == "nestedNavigation" => {\n  _key,\n  _type,\n  childLinks[] {\n    _type == "externalLink" => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    _type == "internalLink" => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  \'documentType\': _type,\n  \'slug\': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n  },\n  link -> {\n    \'documentType\': _type,\n    \'slug\': coalesce(\n      slug,\n      store.slug\n    ) {\n      _type,\n      current\n    },\n  },\n  name,\n},\n},\n  padding,\n  showSeparatorLine,\n  sticky \n},\n  "settings": *[_type == "settings"][0] {\n  badgesCornerRadius,\n  badgesPosition,\n  badgesSaleColorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  badgesSoldOutColorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  blogCards,\n  buttonsBorder,\n  buttonsShadow,\n  cartCollection -> {\n    store {\n      gid,\n      title,\n    },\n  },\n  cartColorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  collectionCards,\n  description,\n  dropdownsAndPopupsBorder,\n  dropdownsAndPopupsShadow,\n  facebook,\n  favicon {\n  _type,\n  asset,\n  "altText": asset -> altText,\n  "_ref": asset._ref,\n  hotspot,\n  crop,\n},\n  grid,\n  inputsBorder,\n  inputsShadow,\n  instagram,\n  linkedin,\n  logo {\n  _type,\n  asset,\n  "altText": asset -> altText,\n  "_ref": asset._ref,\n  hotspot,\n  crop,\n},\n  mediaBorder,\n  mediaShadow,\n  pinterest,\n  productCards,\n  showCurrencyCodes,\n  showTrailingZeros,\n  siteName,\n  snapchat,\n  socialSharingImagePreview {\n  _type,\n  asset,\n  "altText": asset -> altText,\n  "_ref": asset._ref,\n  hotspot,\n  crop,\n},\n  spaceBetweenTemplateSections,\n  tiktok,\n  tumblr,\n  twitter,\n  vimeo,\n  youtube,\n},\n  "themeContent": *[_type == "themeContent"][0] {\n  account {\n    "accountDetails": coalesce(\n    accountDetails[_key == $language][0].value,\n    accountDetails[_key == $defaultLanguage][0].value,\n  ),\n    "addAddress": coalesce(\n    addAddress[_key == $language][0].value,\n    addAddress[_key == $defaultLanguage][0].value,\n  ),\n    "addName": coalesce(\n    addName[_key == $language][0].value,\n    addName[_key == $defaultLanguage][0].value,\n  ),\n    "addressBook": coalesce(\n    addressBook[_key == $language][0].value,\n    addressBook[_key == $defaultLanguage][0].value,\n  ),\n    "addressLine1": coalesce(\n    addressLine1[_key == $language][0].value,\n    addressLine1[_key == $defaultLanguage][0].value,\n  ),\n    "addressLine2": coalesce(\n    addressLine2[_key == $language][0].value,\n    addressLine2[_key == $defaultLanguage][0].value,\n  ),\n    "cancel": coalesce(\n    cancel[_key == $language][0].value,\n    cancel[_key == $defaultLanguage][0].value,\n  ),\n    "city": coalesce(\n    city[_key == $language][0].value,\n    city[_key == $defaultLanguage][0].value,\n  ), \n    "company": coalesce(\n    company[_key == $language][0].value,\n    company[_key == $defaultLanguage][0].value,\n  ),\n    "country": coalesce(\n    country[_key == $language][0].value,\n    country[_key == $defaultLanguage][0].value,\n  ),\n    "default": coalesce(\n    default[_key == $language][0].value,\n    default[_key == $defaultLanguage][0].value,\n  ),\n    "defaultAddress": coalesce(\n    defaultAddress[_key == $language][0].value,\n    defaultAddress[_key == $defaultLanguage][0].value,\n  ),\n    "discounts": coalesce(\n    discounts[_key == $language][0].value,\n    discounts[_key == $defaultLanguage][0].value,\n  ),\n    "discountsOff": coalesce(\n    discountsOff[_key == $language][0].value,\n    discountsOff[_key == $defaultLanguage][0].value,\n  ),\n    "edit": coalesce(\n    edit[_key == $language][0].value,\n    edit[_key == $defaultLanguage][0].value,\n  ),\n    "editAddress": coalesce(\n    editAddress[_key == $language][0].value,\n    editAddress[_key == $defaultLanguage][0].value,\n  ),\n    "emailAddress": coalesce(\n    emailAddress[_key == $language][0].value,\n    emailAddress[_key == $defaultLanguage][0].value,\n  ),\n    "firstName": coalesce(\n    firstName[_key == $language][0].value,\n    firstName[_key == $defaultLanguage][0].value,\n  ),\n    "fulfillmentStatus": coalesce(\n    fulfillmentStatus[_key == $language][0].value,\n    fulfillmentStatus[_key == $defaultLanguage][0].value,\n  ),\n    "lastName": coalesce(\n    lastName[_key == $language][0].value,\n    lastName[_key == $defaultLanguage][0].value,\n  ),\n    "name": coalesce(\n    name[_key == $language][0].value,\n    name[_key == $defaultLanguage][0].value,\n  ),\n    "noAddress": coalesce(\n    noAddress[_key == $language][0].value,\n    noAddress[_key == $defaultLanguage][0].value,\n  ),\n    "noOrdersMessage": coalesce(\n    noOrdersMessage[_key == $language][0].value,\n    noOrdersMessage[_key == $defaultLanguage][0].value,\n  ),\n    "noShippingAddress": coalesce(\n    noShippingAddress[_key == $language][0].value,\n    noShippingAddress[_key == $defaultLanguage][0].value,\n  ),\n    "orderDate": coalesce(\n    orderDate[_key == $language][0].value,\n    orderDate[_key == $defaultLanguage][0].value,\n  ),\n    "orderDetail": coalesce(\n    orderDetail[_key == $language][0].value,\n    orderDetail[_key == $defaultLanguage][0].value,\n  ),\n    "orderHistory": coalesce(\n    orderHistory[_key == $language][0].value,\n    orderHistory[_key == $defaultLanguage][0].value,\n  ),\n    "orderId": coalesce(\n    orderId[_key == $language][0].value,\n    orderId[_key == $defaultLanguage][0].value,\n  ),\n    "orderNumber": coalesce(\n    orderNumber[_key == $language][0].value,\n    orderNumber[_key == $defaultLanguage][0].value,\n  ),\n    "orderStatusCancelled": coalesce(\n    orderStatusCancelled[_key == $language][0].value,\n    orderStatusCancelled[_key == $defaultLanguage][0].value,\n  ),\n    "orderStatusError": coalesce(\n    orderStatusError[_key == $language][0].value,\n    orderStatusError[_key == $defaultLanguage][0].value,\n  ),\n    "orderStatusFailure": coalesce(\n    orderStatusFailure[_key == $language][0].value,\n    orderStatusFailure[_key == $defaultLanguage][0].value,\n  ),\n    "orderStatusOpen": coalesce(\n    orderStatusOpen[_key == $language][0].value,\n    orderStatusOpen[_key == $defaultLanguage][0].value,\n  ),\n    "orderStatusPending": coalesce(\n    orderStatusPending[_key == $language][0].value,\n    orderStatusPending[_key == $defaultLanguage][0].value,\n  ),\n    "orderStatusSuccess": coalesce(\n    orderStatusSuccess[_key == $language][0].value,\n    orderStatusSuccess[_key == $defaultLanguage][0].value,\n  ),\n    "phone": coalesce(\n    phone[_key == $language][0].value,\n    phone[_key == $defaultLanguage][0].value,\n  ),\n    "phoneNumber": coalesce(\n    phoneNumber[_key == $language][0].value,\n    phoneNumber[_key == $defaultLanguage][0].value,\n  ),\n    "placedOn": coalesce(\n    placedOn[_key == $language][0].value,\n    placedOn[_key == $defaultLanguage][0].value,\n  ),\n    "postalCode": coalesce(\n    postalCode[_key == $language][0].value,\n    postalCode[_key == $defaultLanguage][0].value,\n  ),\n    "price": coalesce(\n    price[_key == $language][0].value,\n    price[_key == $defaultLanguage][0].value,\n  ),\n    "product": coalesce(\n    product[_key == $language][0].value,\n    product[_key == $defaultLanguage][0].value,\n  ),\n    "profile": coalesce(\n    profile[_key == $language][0].value,\n    profile[_key == $defaultLanguage][0].value,\n  ),\n    "quantity": coalesce(\n    quantity[_key == $language][0].value,\n    quantity[_key == $defaultLanguage][0].value,\n  ),\n    "remove": coalesce(\n    remove[_key == $language][0].value,\n    remove[_key == $defaultLanguage][0].value,\n  ),\n    "returnToAccount": coalesce(\n    returnToAccount[_key == $language][0].value,\n    returnToAccount[_key == $defaultLanguage][0].value,\n  ),\n    "save": coalesce(\n    save[_key == $language][0].value,\n    save[_key == $defaultLanguage][0].value,\n  ),\n    "saving": coalesce(\n    saving[_key == $language][0].value,\n    saving[_key == $defaultLanguage][0].value,\n  ),\n    "shippingAddress": coalesce(\n    shippingAddress[_key == $language][0].value,\n    shippingAddress[_key == $defaultLanguage][0].value,\n  ),\n    "signOut": coalesce(\n    signOut[_key == $language][0].value,\n    signOut[_key == $defaultLanguage][0].value,\n  ),\n    "startShopping": coalesce(\n    startShopping[_key == $language][0].value,\n    startShopping[_key == $defaultLanguage][0].value,\n  ),\n    "stateProvince": coalesce(\n    stateProvince[_key == $language][0].value,\n    stateProvince[_key == $defaultLanguage][0].value,\n  ),\n    "status": coalesce(\n    status[_key == $language][0].value,\n    status[_key == $defaultLanguage][0].value,\n  ),\n    "subtotal": coalesce(\n    subtotal[_key == $language][0].value,\n    subtotal[_key == $defaultLanguage][0].value,\n  ),\n    "tax": coalesce(\n    tax[_key == $language][0].value,\n    tax[_key == $defaultLanguage][0].value,\n  ),\n    "total": coalesce(\n    total[_key == $language][0].value,\n    total[_key == $defaultLanguage][0].value,\n  ),\n    "updateYourProfile": coalesce(\n    updateYourProfile[_key == $language][0].value,\n    updateYourProfile[_key == $defaultLanguage][0].value,\n  ),\n    "viewDetails": coalesce(\n    viewDetails[_key == $language][0].value,\n    viewDetails[_key == $defaultLanguage][0].value,\n  ),\n    "welcome": coalesce(\n    welcome[_key == $language][0].value,\n    welcome[_key == $defaultLanguage][0].value,\n  ),\n    "welcomeToYourAccount": coalesce(\n    welcomeToYourAccount[_key == $language][0].value,\n    welcomeToYourAccount[_key == $defaultLanguage][0].value,\n  ),\n  },\n  cart {\n    "applyDiscount": coalesce(\n    applyDiscount[_key == $language][0].value,\n    applyDiscount[_key == $defaultLanguage][0].value,\n  ),\n    "continueShopping": coalesce(\n    continueShopping[_key == $language][0].value,\n    continueShopping[_key == $defaultLanguage][0].value,\n  ),\n    "discountCode": coalesce(\n    discountCode[_key == $language][0].value,\n    discountCode[_key == $defaultLanguage][0].value,\n  ),\n    "discounts": coalesce(\n    discounts[_key == $language][0].value,\n    discounts[_key == $defaultLanguage][0].value,\n  ),\n    "emptyMessage": coalesce(\n    emptyMessage[_key == $language][0].value,\n    emptyMessage[_key == $defaultLanguage][0].value,\n  ),\n    "heading": coalesce(\n    heading[_key == $language][0].value,\n    heading[_key == $defaultLanguage][0].value,\n  ),\n    "orderSummary": coalesce(\n    orderSummary[_key == $language][0].value,\n    orderSummary[_key == $defaultLanguage][0].value,\n  ),\n    "proceedToCheckout": coalesce(\n    proceedToCheckout[_key == $language][0].value,\n    proceedToCheckout[_key == $defaultLanguage][0].value,\n  ),\n    "quantity": coalesce(\n    quantity[_key == $language][0].value,\n    quantity[_key == $defaultLanguage][0].value,\n  ),\n    "remove": coalesce(\n    remove[_key == $language][0].value,\n    remove[_key == $defaultLanguage][0].value,\n  ),\n    "subtotal": coalesce(\n    subtotal[_key == $language][0].value,\n    subtotal[_key == $defaultLanguage][0].value,\n  ),\n  },\n  collection {\n    "apply": coalesce(\n    apply[_key == $language][0].value,\n    apply[_key == $defaultLanguage][0].value,\n  ),\n    "clear": coalesce(\n    clear[_key == $language][0].value,\n    clear[_key == $defaultLanguage][0].value,\n  ),\n    "clearFilters": coalesce(\n    clearFilters[_key == $language][0].value,\n    clearFilters[_key == $defaultLanguage][0].value,\n  ),\n    "filterAndSort": coalesce(\n    filterAndSort[_key == $language][0].value,\n    filterAndSort[_key == $defaultLanguage][0].value,\n  ),\n    "filterInStock": coalesce(\n    filterInStock[_key == $language][0].value,\n    filterInStock[_key == $defaultLanguage][0].value,\n  ),\n    "filterOutOfStock": coalesce(\n    filterOutOfStock[_key == $language][0].value,\n    filterOutOfStock[_key == $defaultLanguage][0].value,\n  ),\n    "from": coalesce(\n    from[_key == $language][0].value,\n    from[_key == $defaultLanguage][0].value,\n  ),\n    "loading": coalesce(\n    loading[_key == $language][0].value,\n    loading[_key == $defaultLanguage][0].value,\n  ),\n    "loadMoreProducts": coalesce(\n    loadMoreProducts[_key == $language][0].value,\n    loadMoreProducts[_key == $defaultLanguage][0].value,\n  ),\n    "loadPrevious": coalesce(\n    loadPrevious[_key == $language][0].value,\n    loadPrevious[_key == $defaultLanguage][0].value,\n  ),\n    "noCollectionFound": coalesce(\n    noCollectionFound[_key == $language][0].value,\n    noCollectionFound[_key == $defaultLanguage][0].value,\n  ),\n    "noProductFound": coalesce(\n    noProductFound[_key == $language][0].value,\n    noProductFound[_key == $defaultLanguage][0].value,\n  ),\n    "sortBestSelling": coalesce(\n    sortBestSelling[_key == $language][0].value,\n    sortBestSelling[_key == $defaultLanguage][0].value,\n  ),\n    "sortBy": coalesce(\n    sortBy[_key == $language][0].value,\n    sortBy[_key == $defaultLanguage][0].value,\n  ),\n    "sortFeatured": coalesce(\n    sortFeatured[_key == $language][0].value,\n    sortFeatured[_key == $defaultLanguage][0].value,\n  ),\n    "sortHighLow": coalesce(\n    sortHighLow[_key == $language][0].value,\n    sortHighLow[_key == $defaultLanguage][0].value,\n  ),\n    "sortLowHigh": coalesce(\n    sortLowHigh[_key == $language][0].value,\n    sortLowHigh[_key == $defaultLanguage][0].value,\n  ),\n    "sortNewest": coalesce(\n    sortNewest[_key == $language][0].value,\n    sortNewest[_key == $defaultLanguage][0].value,\n  ),\n    "to": coalesce(\n    to[_key == $language][0].value,\n    to[_key == $defaultLanguage][0].value,\n  ), \n    "viewAll": coalesce(\n    viewAll[_key == $language][0].value,\n    viewAll[_key == $defaultLanguage][0].value,\n  ),\n  },\n  error {\n    "addressCreation": coalesce(\n    addressCreation[_key == $language][0].value,\n    addressCreation[_key == $defaultLanguage][0].value,\n  ),\n    "missingAddressId": coalesce(\n    missingAddressId[_key == $language][0].value,\n    missingAddressId[_key == $defaultLanguage][0].value,\n  ),\n    "pageNotFound": coalesce(\n    pageNotFound[_key == $language][0].value,\n    pageNotFound[_key == $defaultLanguage][0].value,\n  ),\n    "reloadPage": coalesce(\n    reloadPage[_key == $language][0].value,\n    reloadPage[_key == $defaultLanguage][0].value,\n  ),\n    "sectionError": coalesce(\n    sectionError[_key == $language][0].value,\n    sectionError[_key == $defaultLanguage][0].value,\n  ),\n    "serverError": coalesce(\n    serverError[_key == $language][0].value,\n    serverError[_key == $defaultLanguage][0].value,\n  ),\n  },\n  product {\n    "addToCart": coalesce(\n    addToCart[_key == $language][0].value,\n    addToCart[_key == $defaultLanguage][0].value,\n  ),\n    "quantitySelector": coalesce(\n    quantitySelector[_key == $language][0].value,\n    quantitySelector[_key == $defaultLanguage][0].value,\n  ),\n    "sale": coalesce(\n    sale[_key == $language][0].value,\n    sale[_key == $defaultLanguage][0].value,\n  ),\n    "soldOut": coalesce(\n    soldOut[_key == $language][0].value,\n    soldOut[_key == $defaultLanguage][0].value,\n  ),\n  },\n},\n}': ROOT_QUERYResult;
-    "{\n  '_type': 'collection',\n  \"collection\": *[_type == \"collection\" && store.slug.current == $collectionHandle][0] {\n    store {\n      gid,\n    },\n    template -> {\n      sections[] {\n        _key,\n        _type,\n        \n    _type == 'richtextSection' => {\n  _key,\n  _type,\n  contentAlignment,\n  desktopContentPosition,\n  maxWidth,\n  \"richtext\": coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'carouselSection' => {\n  _key,\n  _type,\n  arrows,\n  autoplay,\n  \"title\": coalesce(\n    title[_key == $language][0].value,\n    title[_key == $defaultLanguage][0].value,\n  ),\n  loop,\n  pagination,\n  slides[] {\n    _key,\n    image {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  },\n  slidesPerViewDesktop,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'collectionListSection' => {\n  _key,\n  _type,\n  collections[] -> {\n    store {\n      gid\n    }\n  },\n  desktopColumns,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'featuredProductSection' => {\n  _key,\n  _type,\n  mediaAspectRatio,\n  product -> {\n    store {\n      descriptionHtml,\n      \"firstVariant\": variants[0] -> {\n        store {\n          gid,\n          previewImageUrl,\n          price\n        }\n      },\n      gid,\n      options[] {\n        name,\n        values\n      },\n      previewImageUrl,\n      title\n    }\n  },\n  'richtext': coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'featuredCollectionSection' => {\n  _key,\n  _type,\n  collection -> {\n    store {\n      gid,\n      slug,\n      title\n    }\n  },\n  desktopColumns,\n  \"heading\": coalesce(\n    heading[_key == $language][0].value,\n    heading[_key == $defaultLanguage][0].value,\n  ),\n  maxProducts,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n},\n  viewAll\n},\n    _type == 'imageBannerSection' => {\n  _key,\n  _type,\n  backgroundImage {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  bannerHeight,\n  \"content\": coalesce(\n    content[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    content[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  contentAlignment,\n  contentPosition,\n  overlayOpacity,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n  \n        \n    _type == 'collectionBannerSection' => {\n  _key,\n  _type,\n  bannerHeight,\n  contentAlignment,\n  contentPosition,\n  overlayOpacity,\n  showDescription,\n  showImage,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'collectionProductGridSection' => {\n  _key,\n  _type,\n  desktopColumns,\n  enableFiltering,\n  enableSorting,\n  mobileColumns,\n  productsPerPage,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n  \n      },\n    },\n  },\n  \"defaultCollectionTemplate\": *[_type == 'collectionTemplate' && default == true][0] {\n    _type,\n    name,\n    sections[] {\n      _key,\n      _type,\n      \n    _type == 'richtextSection' => {\n  _key,\n  _type,\n  contentAlignment,\n  desktopContentPosition,\n  maxWidth,\n  \"richtext\": coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'carouselSection' => {\n  _key,\n  _type,\n  arrows,\n  autoplay,\n  \"title\": coalesce(\n    title[_key == $language][0].value,\n    title[_key == $defaultLanguage][0].value,\n  ),\n  loop,\n  pagination,\n  slides[] {\n    _key,\n    image {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  },\n  slidesPerViewDesktop,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'collectionListSection' => {\n  _key,\n  _type,\n  collections[] -> {\n    store {\n      gid\n    }\n  },\n  desktopColumns,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'featuredProductSection' => {\n  _key,\n  _type,\n  mediaAspectRatio,\n  product -> {\n    store {\n      descriptionHtml,\n      \"firstVariant\": variants[0] -> {\n        store {\n          gid,\n          previewImageUrl,\n          price\n        }\n      },\n      gid,\n      options[] {\n        name,\n        values\n      },\n      previewImageUrl,\n      title\n    }\n  },\n  'richtext': coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'featuredCollectionSection' => {\n  _key,\n  _type,\n  collection -> {\n    store {\n      gid,\n      slug,\n      title\n    }\n  },\n  desktopColumns,\n  \"heading\": coalesce(\n    heading[_key == $language][0].value,\n    heading[_key == $defaultLanguage][0].value,\n  ),\n  maxProducts,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n},\n  viewAll\n},\n    _type == 'imageBannerSection' => {\n  _key,\n  _type,\n  backgroundImage {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  bannerHeight,\n  \"content\": coalesce(\n    content[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    content[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  contentAlignment,\n  contentPosition,\n  overlayOpacity,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n  \n      \n    _type == 'collectionBannerSection' => {\n  _key,\n  _type,\n  bannerHeight,\n  contentAlignment,\n  contentPosition,\n  overlayOpacity,\n  showDescription,\n  showImage,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'collectionProductGridSection' => {\n  _key,\n  _type,\n  desktopColumns,\n  enableFiltering,\n  enableSorting,\n  mobileColumns,\n  productsPerPage,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n  \n    },\n  },\n}": COLLECTION_QUERYResult;
-    "*[(_type == \"page\" && ($handle != \"home\" && slug.current == $handle)) || (\n    _type == \"home\" && $handle == \"home\"\n  )][0] {\n    _type,\n    sections[] {\n      _key,\n      _type,\n      \n    _type == 'richtextSection' => {\n  _key,\n  _type,\n  contentAlignment,\n  desktopContentPosition,\n  maxWidth,\n  \"richtext\": coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'carouselSection' => {\n  _key,\n  _type,\n  arrows,\n  autoplay,\n  \"title\": coalesce(\n    title[_key == $language][0].value,\n    title[_key == $defaultLanguage][0].value,\n  ),\n  loop,\n  pagination,\n  slides[] {\n    _key,\n    image {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  },\n  slidesPerViewDesktop,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'collectionListSection' => {\n  _key,\n  _type,\n  collections[] -> {\n    store {\n      gid\n    }\n  },\n  desktopColumns,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'featuredProductSection' => {\n  _key,\n  _type,\n  mediaAspectRatio,\n  product -> {\n    store {\n      descriptionHtml,\n      \"firstVariant\": variants[0] -> {\n        store {\n          gid,\n          previewImageUrl,\n          price\n        }\n      },\n      gid,\n      options[] {\n        name,\n        values\n      },\n      previewImageUrl,\n      title\n    }\n  },\n  'richtext': coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'featuredCollectionSection' => {\n  _key,\n  _type,\n  collection -> {\n    store {\n      gid,\n      slug,\n      title\n    }\n  },\n  desktopColumns,\n  \"heading\": coalesce(\n    heading[_key == $language][0].value,\n    heading[_key == $defaultLanguage][0].value,\n  ),\n  maxProducts,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n},\n  viewAll\n},\n    _type == 'imageBannerSection' => {\n  _key,\n  _type,\n  backgroundImage {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  bannerHeight,\n  \"content\": coalesce(\n    content[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    content[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  contentAlignment,\n  contentPosition,\n  overlayOpacity,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n  \n    },\n    seo {\n      \"title\": coalesce(\n    title[_key == $language][0].value,\n    title[_key == $defaultLanguage][0].value,\n  ),\n      \"description\": coalesce(\n    description[_key == $language][0].value,\n    description[_key == $defaultLanguage][0].value,\n  ),\n      image {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n    },\n  }": PAGE_QUERYResult;
-    "{\n  \"_type\": \"product\",\n  'product': *[_type == \"product\" && store.slug.current == $productHandle][0] {\n    store {\n      gid,\n    },\n    template -> {\n      sections[] {\n        _key,\n        _type,\n        \n    _type == 'richtextSection' => {\n  _key,\n  _type,\n  contentAlignment,\n  desktopContentPosition,\n  maxWidth,\n  \"richtext\": coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'carouselSection' => {\n  _key,\n  _type,\n  arrows,\n  autoplay,\n  \"title\": coalesce(\n    title[_key == $language][0].value,\n    title[_key == $defaultLanguage][0].value,\n  ),\n  loop,\n  pagination,\n  slides[] {\n    _key,\n    image {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  },\n  slidesPerViewDesktop,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'collectionListSection' => {\n  _key,\n  _type,\n  collections[] -> {\n    store {\n      gid\n    }\n  },\n  desktopColumns,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'featuredProductSection' => {\n  _key,\n  _type,\n  mediaAspectRatio,\n  product -> {\n    store {\n      descriptionHtml,\n      \"firstVariant\": variants[0] -> {\n        store {\n          gid,\n          previewImageUrl,\n          price\n        }\n      },\n      gid,\n      options[] {\n        name,\n        values\n      },\n      previewImageUrl,\n      title\n    }\n  },\n  'richtext': coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'featuredCollectionSection' => {\n  _key,\n  _type,\n  collection -> {\n    store {\n      gid,\n      slug,\n      title\n    }\n  },\n  desktopColumns,\n  \"heading\": coalesce(\n    heading[_key == $language][0].value,\n    heading[_key == $defaultLanguage][0].value,\n  ),\n  maxProducts,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n},\n  viewAll\n},\n    _type == 'imageBannerSection' => {\n  _key,\n  _type,\n  backgroundImage {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  bannerHeight,\n  \"content\": coalesce(\n    content[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    content[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  contentAlignment,\n  contentPosition,\n  overlayOpacity,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n  \n        \n    _type == 'productInformationSection' => {\n  _key,\n  _type,\n  desktopMediaPosition,\n  desktopMediaWidth,\n  mediaAspectRatio,\n  \"richtext\": coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'relatedProductsSection' => {\n  _key,\n  _type,\n  desktopColumns,\n  \"heading\": coalesce(\n    heading[_key == $language][0].value,\n    heading[_key == $defaultLanguage][0].value,\n  ),\n  maxProducts,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n  \n      },\n    },\n  },\n  \"defaultProductTemplate\": *[_type == 'productTemplate' && default == true][0] {\n    _type,\n    name,\n    sections[] {\n      _key,\n      _type,\n      \n    _type == 'richtextSection' => {\n  _key,\n  _type,\n  contentAlignment,\n  desktopContentPosition,\n  maxWidth,\n  \"richtext\": coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'carouselSection' => {\n  _key,\n  _type,\n  arrows,\n  autoplay,\n  \"title\": coalesce(\n    title[_key == $language][0].value,\n    title[_key == $defaultLanguage][0].value,\n  ),\n  loop,\n  pagination,\n  slides[] {\n    _key,\n    image {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  },\n  slidesPerViewDesktop,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'collectionListSection' => {\n  _key,\n  _type,\n  collections[] -> {\n    store {\n      gid\n    }\n  },\n  desktopColumns,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'featuredProductSection' => {\n  _key,\n  _type,\n  mediaAspectRatio,\n  product -> {\n    store {\n      descriptionHtml,\n      \"firstVariant\": variants[0] -> {\n        store {\n          gid,\n          previewImageUrl,\n          price\n        }\n      },\n      gid,\n      options[] {\n        name,\n        values\n      },\n      previewImageUrl,\n      title\n    }\n  },\n  'richtext': coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'featuredCollectionSection' => {\n  _key,\n  _type,\n  collection -> {\n    store {\n      gid,\n      slug,\n      title\n    }\n  },\n  desktopColumns,\n  \"heading\": coalesce(\n    heading[_key == $language][0].value,\n    heading[_key == $defaultLanguage][0].value,\n  ),\n  maxProducts,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n},\n  viewAll\n},\n    _type == 'imageBannerSection' => {\n  _key,\n  _type,\n  backgroundImage {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  bannerHeight,\n  \"content\": coalesce(\n    content[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    content[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  contentAlignment,\n  contentPosition,\n  overlayOpacity,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n  \n      \n    _type == 'productInformationSection' => {\n  _key,\n  _type,\n  desktopMediaPosition,\n  desktopMediaWidth,\n  mediaAspectRatio,\n  \"richtext\": coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'relatedProductsSection' => {\n  _key,\n  _type,\n  desktopColumns,\n  \"heading\": coalesce(\n    heading[_key == $language][0].value,\n    heading[_key == $defaultLanguage][0].value,\n  ),\n  maxProducts,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n  \n    },\n  },\n}": PRODUCT_QUERYResult;
-    "*[][0] {\n  sections[] {\n    _key,\n    _type,\n    \n    _type == 'richtextSection' => {\n  _key,\n  _type,\n  contentAlignment,\n  desktopContentPosition,\n  maxWidth,\n  \"richtext\": coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'carouselSection' => {\n  _key,\n  _type,\n  arrows,\n  autoplay,\n  \"title\": coalesce(\n    title[_key == $language][0].value,\n    title[_key == $defaultLanguage][0].value,\n  ),\n  loop,\n  pagination,\n  slides[] {\n    _key,\n    image {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  },\n  slidesPerViewDesktop,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'collectionListSection' => {\n  _key,\n  _type,\n  collections[] -> {\n    store {\n      gid\n    }\n  },\n  desktopColumns,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'featuredProductSection' => {\n  _key,\n  _type,\n  mediaAspectRatio,\n  product -> {\n    store {\n      descriptionHtml,\n      \"firstVariant\": variants[0] -> {\n        store {\n          gid,\n          previewImageUrl,\n          price\n        }\n      },\n      gid,\n      options[] {\n        name,\n        values\n      },\n      previewImageUrl,\n      title\n    }\n  },\n  'richtext': coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'featuredCollectionSection' => {\n  _key,\n  _type,\n  collection -> {\n    store {\n      gid,\n      slug,\n      title\n    }\n  },\n  desktopColumns,\n  \"heading\": coalesce(\n    heading[_key == $language][0].value,\n    heading[_key == $defaultLanguage][0].value,\n  ),\n  maxProducts,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n},\n  viewAll\n},\n    _type == 'imageBannerSection' => {\n  _key,\n  _type,\n  backgroundImage {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  bannerHeight,\n  \"content\": coalesce(\n    content[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    content[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  contentAlignment,\n  contentPosition,\n  overlayOpacity,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n  \n    \n    _type == 'productInformationSection' => {\n  _key,\n  _type,\n  desktopMediaPosition,\n  desktopMediaWidth,\n  mediaAspectRatio,\n  \"richtext\": coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'relatedProductsSection' => {\n  _key,\n  _type,\n  desktopColumns,\n  \"heading\": coalesce(\n    heading[_key == $language][0].value,\n    heading[_key == $defaultLanguage][0].value,\n  ),\n  maxProducts,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n  \n    \n    _type == 'collectionBannerSection' => {\n  _key,\n  _type,\n  bannerHeight,\n  contentAlignment,\n  contentPosition,\n  overlayOpacity,\n  showDescription,\n  showImage,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'collectionProductGridSection' => {\n  _key,\n  _type,\n  desktopColumns,\n  enableFiltering,\n  enableSorting,\n  mobileColumns,\n  productsPerPage,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n  \n  },\n  footers[] {\n    _key,\n    _type,\n    \n    _type == 'socialLinksOnly' => {\n  _key,\n  _type,\n  \"copyright\": coalesce(\n    copyright[_key == $language][0].value,\n    copyright[_key == $defaultLanguage][0].value,\n  ),\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n},\n},\n  \n  },\n}": ALL_SECTIONS_QUERYResult;
-    '{\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}': SECTION_SETTINGS_FRAGMENTResult;
-    '{\n  _key,\n  _type,\n  desktopColumns,\n  "heading": coalesce(\n    heading[_key == $language][0].value,\n    heading[_key == $defaultLanguage][0].value,\n  ),\n  maxProducts,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n}': RELATED_PRODUCTS_SECTION_FRAGMENTResult;
-    "{\n  _key,\n  _type,\n  desktopMediaPosition,\n  desktopMediaWidth,\n  mediaAspectRatio,\n  \"richtext\": coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n}": PRODUCT_INFORMATION_SECTION_FRAGMENTResult;
-    '{\n  _key,\n  _type,\n  desktopColumns,\n  enableFiltering,\n  enableSorting,\n  mobileColumns,\n  productsPerPage,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n}': COLLECTION_PRODUCT_GRID_SECTION_FRAGMENTResult;
-    '{\n  _key,\n  _type,\n  bannerHeight,\n  contentAlignment,\n  contentPosition,\n  overlayOpacity,\n  showDescription,\n  showImage,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n}': COLLECTION_BANNER_SECTION_FRAGMENTResult;
-    "{\n  _key,\n  _type,\n  contentAlignment,\n  desktopContentPosition,\n  maxWidth,\n  \"richtext\": coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n}": RICHTEXT_SECTION_FRAGMENTResult;
-    '{\n  _key,\n  _type,\n  arrows,\n  autoplay,\n  "title": coalesce(\n    title[_key == $language][0].value,\n    title[_key == $defaultLanguage][0].value,\n  ),\n  loop,\n  pagination,\n  slides[] {\n    _key,\n    image {\n  _type,\n  asset,\n  "altText": asset -> altText,\n  "_ref": asset._ref,\n  hotspot,\n  crop,\n},\n  },\n  slidesPerViewDesktop,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n}': CAROUSEL_SECTION_FRAGMENTResult;
-    '{\n  _key,\n  _type,\n  collections[] -> {\n    store {\n      gid\n    }\n  },\n  desktopColumns,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n}': COLLECTION_LIST_SECTION_FRAGMENTResult;
-    "{\n  _key,\n  _type,\n  mediaAspectRatio,\n  product -> {\n    store {\n      descriptionHtml,\n      \"firstVariant\": variants[0] -> {\n        store {\n          gid,\n          previewImageUrl,\n          price\n        }\n      },\n      gid,\n      options[] {\n        name,\n        values\n      },\n      previewImageUrl,\n      title\n    }\n  },\n  'richtext': coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n}": FEATURED_PRODUCT_SECTION_FRAGMENTResult;
-    '{\n  _key,\n  _type,\n  collection -> {\n    store {\n      gid,\n      slug,\n      title\n    }\n  },\n  desktopColumns,\n  "heading": coalesce(\n    heading[_key == $language][0].value,\n    heading[_key == $defaultLanguage][0].value,\n  ),\n  maxProducts,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n},\n  viewAll\n}': FEATURED_COLLECTION_SECTION_FRAGMENTResult;
-    "{\n  _key,\n  _type,\n  backgroundImage {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  bannerHeight,\n  \"content\": coalesce(\n    content[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    content[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  contentAlignment,\n  contentPosition,\n  overlayOpacity,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n}": IMAGE_BANNER_SECTION_FRAGMENTResult;
+    '{\n  _key,\n  _type,\n  "copyright": coalesce(\n    copyright[_key == $language][0].value,\n    copyright[_key == $defaultLanguage][0].value,\n  ),\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n},\n}': FOOTER_SOCIAL_LINKS_ONLY_FRAGMENT_RESULT;
+    '{\n  _type,\n  asset,\n  "altText": asset -> altText,\n  "_ref": asset._ref,\n  hotspot,\n  crop,\n}': IMAGE_FRAGMENT_RESULT;
+    '{\n  alpha,\n  hex,\n  hsl,\n  rgb,\n}': COLOR_FRAGMENT_RESULT;
+    '{\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n}': COLOR_SCHEME_FRAGMENT_RESULT;
+    '{\n  account {\n    "accountDetails": coalesce(\n    accountDetails[_key == $language][0].value,\n    accountDetails[_key == $defaultLanguage][0].value,\n  ),\n    "addAddress": coalesce(\n    addAddress[_key == $language][0].value,\n    addAddress[_key == $defaultLanguage][0].value,\n  ),\n    "addName": coalesce(\n    addName[_key == $language][0].value,\n    addName[_key == $defaultLanguage][0].value,\n  ),\n    "addressBook": coalesce(\n    addressBook[_key == $language][0].value,\n    addressBook[_key == $defaultLanguage][0].value,\n  ),\n    "addressLine1": coalesce(\n    addressLine1[_key == $language][0].value,\n    addressLine1[_key == $defaultLanguage][0].value,\n  ),\n    "addressLine2": coalesce(\n    addressLine2[_key == $language][0].value,\n    addressLine2[_key == $defaultLanguage][0].value,\n  ),\n    "cancel": coalesce(\n    cancel[_key == $language][0].value,\n    cancel[_key == $defaultLanguage][0].value,\n  ),\n    "city": coalesce(\n    city[_key == $language][0].value,\n    city[_key == $defaultLanguage][0].value,\n  ), \n    "company": coalesce(\n    company[_key == $language][0].value,\n    company[_key == $defaultLanguage][0].value,\n  ),\n    "country": coalesce(\n    country[_key == $language][0].value,\n    country[_key == $defaultLanguage][0].value,\n  ),\n    "default": coalesce(\n    default[_key == $language][0].value,\n    default[_key == $defaultLanguage][0].value,\n  ),\n    "defaultAddress": coalesce(\n    defaultAddress[_key == $language][0].value,\n    defaultAddress[_key == $defaultLanguage][0].value,\n  ),\n    "discounts": coalesce(\n    discounts[_key == $language][0].value,\n    discounts[_key == $defaultLanguage][0].value,\n  ),\n    "discountsOff": coalesce(\n    discountsOff[_key == $language][0].value,\n    discountsOff[_key == $defaultLanguage][0].value,\n  ),\n    "edit": coalesce(\n    edit[_key == $language][0].value,\n    edit[_key == $defaultLanguage][0].value,\n  ),\n    "editAddress": coalesce(\n    editAddress[_key == $language][0].value,\n    editAddress[_key == $defaultLanguage][0].value,\n  ),\n    "emailAddress": coalesce(\n    emailAddress[_key == $language][0].value,\n    emailAddress[_key == $defaultLanguage][0].value,\n  ),\n    "firstName": coalesce(\n    firstName[_key == $language][0].value,\n    firstName[_key == $defaultLanguage][0].value,\n  ),\n    "fulfillmentStatus": coalesce(\n    fulfillmentStatus[_key == $language][0].value,\n    fulfillmentStatus[_key == $defaultLanguage][0].value,\n  ),\n    "lastName": coalesce(\n    lastName[_key == $language][0].value,\n    lastName[_key == $defaultLanguage][0].value,\n  ),\n    "name": coalesce(\n    name[_key == $language][0].value,\n    name[_key == $defaultLanguage][0].value,\n  ),\n    "noAddress": coalesce(\n    noAddress[_key == $language][0].value,\n    noAddress[_key == $defaultLanguage][0].value,\n  ),\n    "noOrdersMessage": coalesce(\n    noOrdersMessage[_key == $language][0].value,\n    noOrdersMessage[_key == $defaultLanguage][0].value,\n  ),\n    "noShippingAddress": coalesce(\n    noShippingAddress[_key == $language][0].value,\n    noShippingAddress[_key == $defaultLanguage][0].value,\n  ),\n    "orderDate": coalesce(\n    orderDate[_key == $language][0].value,\n    orderDate[_key == $defaultLanguage][0].value,\n  ),\n    "orderDetail": coalesce(\n    orderDetail[_key == $language][0].value,\n    orderDetail[_key == $defaultLanguage][0].value,\n  ),\n    "orderHistory": coalesce(\n    orderHistory[_key == $language][0].value,\n    orderHistory[_key == $defaultLanguage][0].value,\n  ),\n    "orderId": coalesce(\n    orderId[_key == $language][0].value,\n    orderId[_key == $defaultLanguage][0].value,\n  ),\n    "orderNumber": coalesce(\n    orderNumber[_key == $language][0].value,\n    orderNumber[_key == $defaultLanguage][0].value,\n  ),\n    "orderStatusCancelled": coalesce(\n    orderStatusCancelled[_key == $language][0].value,\n    orderStatusCancelled[_key == $defaultLanguage][0].value,\n  ),\n    "orderStatusError": coalesce(\n    orderStatusError[_key == $language][0].value,\n    orderStatusError[_key == $defaultLanguage][0].value,\n  ),\n    "orderStatusFailure": coalesce(\n    orderStatusFailure[_key == $language][0].value,\n    orderStatusFailure[_key == $defaultLanguage][0].value,\n  ),\n    "orderStatusOpen": coalesce(\n    orderStatusOpen[_key == $language][0].value,\n    orderStatusOpen[_key == $defaultLanguage][0].value,\n  ),\n    "orderStatusPending": coalesce(\n    orderStatusPending[_key == $language][0].value,\n    orderStatusPending[_key == $defaultLanguage][0].value,\n  ),\n    "orderStatusSuccess": coalesce(\n    orderStatusSuccess[_key == $language][0].value,\n    orderStatusSuccess[_key == $defaultLanguage][0].value,\n  ),\n    "phone": coalesce(\n    phone[_key == $language][0].value,\n    phone[_key == $defaultLanguage][0].value,\n  ),\n    "phoneNumber": coalesce(\n    phoneNumber[_key == $language][0].value,\n    phoneNumber[_key == $defaultLanguage][0].value,\n  ),\n    "placedOn": coalesce(\n    placedOn[_key == $language][0].value,\n    placedOn[_key == $defaultLanguage][0].value,\n  ),\n    "postalCode": coalesce(\n    postalCode[_key == $language][0].value,\n    postalCode[_key == $defaultLanguage][0].value,\n  ),\n    "price": coalesce(\n    price[_key == $language][0].value,\n    price[_key == $defaultLanguage][0].value,\n  ),\n    "product": coalesce(\n    product[_key == $language][0].value,\n    product[_key == $defaultLanguage][0].value,\n  ),\n    "profile": coalesce(\n    profile[_key == $language][0].value,\n    profile[_key == $defaultLanguage][0].value,\n  ),\n    "quantity": coalesce(\n    quantity[_key == $language][0].value,\n    quantity[_key == $defaultLanguage][0].value,\n  ),\n    "remove": coalesce(\n    remove[_key == $language][0].value,\n    remove[_key == $defaultLanguage][0].value,\n  ),\n    "returnToAccount": coalesce(\n    returnToAccount[_key == $language][0].value,\n    returnToAccount[_key == $defaultLanguage][0].value,\n  ),\n    "save": coalesce(\n    save[_key == $language][0].value,\n    save[_key == $defaultLanguage][0].value,\n  ),\n    "saving": coalesce(\n    saving[_key == $language][0].value,\n    saving[_key == $defaultLanguage][0].value,\n  ),\n    "shippingAddress": coalesce(\n    shippingAddress[_key == $language][0].value,\n    shippingAddress[_key == $defaultLanguage][0].value,\n  ),\n    "signOut": coalesce(\n    signOut[_key == $language][0].value,\n    signOut[_key == $defaultLanguage][0].value,\n  ),\n    "startShopping": coalesce(\n    startShopping[_key == $language][0].value,\n    startShopping[_key == $defaultLanguage][0].value,\n  ),\n    "stateProvince": coalesce(\n    stateProvince[_key == $language][0].value,\n    stateProvince[_key == $defaultLanguage][0].value,\n  ),\n    "status": coalesce(\n    status[_key == $language][0].value,\n    status[_key == $defaultLanguage][0].value,\n  ),\n    "subtotal": coalesce(\n    subtotal[_key == $language][0].value,\n    subtotal[_key == $defaultLanguage][0].value,\n  ),\n    "tax": coalesce(\n    tax[_key == $language][0].value,\n    tax[_key == $defaultLanguage][0].value,\n  ),\n    "total": coalesce(\n    total[_key == $language][0].value,\n    total[_key == $defaultLanguage][0].value,\n  ),\n    "updateYourProfile": coalesce(\n    updateYourProfile[_key == $language][0].value,\n    updateYourProfile[_key == $defaultLanguage][0].value,\n  ),\n    "viewDetails": coalesce(\n    viewDetails[_key == $language][0].value,\n    viewDetails[_key == $defaultLanguage][0].value,\n  ),\n    "welcome": coalesce(\n    welcome[_key == $language][0].value,\n    welcome[_key == $defaultLanguage][0].value,\n  ),\n    "welcomeToYourAccount": coalesce(\n    welcomeToYourAccount[_key == $language][0].value,\n    welcomeToYourAccount[_key == $defaultLanguage][0].value,\n  ),\n  },\n  cart {\n    "applyDiscount": coalesce(\n    applyDiscount[_key == $language][0].value,\n    applyDiscount[_key == $defaultLanguage][0].value,\n  ),\n    "continueShopping": coalesce(\n    continueShopping[_key == $language][0].value,\n    continueShopping[_key == $defaultLanguage][0].value,\n  ),\n    "discountCode": coalesce(\n    discountCode[_key == $language][0].value,\n    discountCode[_key == $defaultLanguage][0].value,\n  ),\n    "discounts": coalesce(\n    discounts[_key == $language][0].value,\n    discounts[_key == $defaultLanguage][0].value,\n  ),\n    "emptyMessage": coalesce(\n    emptyMessage[_key == $language][0].value,\n    emptyMessage[_key == $defaultLanguage][0].value,\n  ),\n    "heading": coalesce(\n    heading[_key == $language][0].value,\n    heading[_key == $defaultLanguage][0].value,\n  ),\n    "orderSummary": coalesce(\n    orderSummary[_key == $language][0].value,\n    orderSummary[_key == $defaultLanguage][0].value,\n  ),\n    "proceedToCheckout": coalesce(\n    proceedToCheckout[_key == $language][0].value,\n    proceedToCheckout[_key == $defaultLanguage][0].value,\n  ),\n    "quantity": coalesce(\n    quantity[_key == $language][0].value,\n    quantity[_key == $defaultLanguage][0].value,\n  ),\n    "remove": coalesce(\n    remove[_key == $language][0].value,\n    remove[_key == $defaultLanguage][0].value,\n  ),\n    "subtotal": coalesce(\n    subtotal[_key == $language][0].value,\n    subtotal[_key == $defaultLanguage][0].value,\n  ),\n  },\n  collection {\n    "apply": coalesce(\n    apply[_key == $language][0].value,\n    apply[_key == $defaultLanguage][0].value,\n  ),\n    "clear": coalesce(\n    clear[_key == $language][0].value,\n    clear[_key == $defaultLanguage][0].value,\n  ),\n    "clearFilters": coalesce(\n    clearFilters[_key == $language][0].value,\n    clearFilters[_key == $defaultLanguage][0].value,\n  ),\n    "filterAndSort": coalesce(\n    filterAndSort[_key == $language][0].value,\n    filterAndSort[_key == $defaultLanguage][0].value,\n  ),\n    "filterInStock": coalesce(\n    filterInStock[_key == $language][0].value,\n    filterInStock[_key == $defaultLanguage][0].value,\n  ),\n    "filterOutOfStock": coalesce(\n    filterOutOfStock[_key == $language][0].value,\n    filterOutOfStock[_key == $defaultLanguage][0].value,\n  ),\n    "from": coalesce(\n    from[_key == $language][0].value,\n    from[_key == $defaultLanguage][0].value,\n  ),\n    "loading": coalesce(\n    loading[_key == $language][0].value,\n    loading[_key == $defaultLanguage][0].value,\n  ),\n    "loadMoreProducts": coalesce(\n    loadMoreProducts[_key == $language][0].value,\n    loadMoreProducts[_key == $defaultLanguage][0].value,\n  ),\n    "loadPrevious": coalesce(\n    loadPrevious[_key == $language][0].value,\n    loadPrevious[_key == $defaultLanguage][0].value,\n  ),\n    "noCollectionFound": coalesce(\n    noCollectionFound[_key == $language][0].value,\n    noCollectionFound[_key == $defaultLanguage][0].value,\n  ),\n    "noProductFound": coalesce(\n    noProductFound[_key == $language][0].value,\n    noProductFound[_key == $defaultLanguage][0].value,\n  ),\n    "sortBestSelling": coalesce(\n    sortBestSelling[_key == $language][0].value,\n    sortBestSelling[_key == $defaultLanguage][0].value,\n  ),\n    "sortBy": coalesce(\n    sortBy[_key == $language][0].value,\n    sortBy[_key == $defaultLanguage][0].value,\n  ),\n    "sortFeatured": coalesce(\n    sortFeatured[_key == $language][0].value,\n    sortFeatured[_key == $defaultLanguage][0].value,\n  ),\n    "sortHighLow": coalesce(\n    sortHighLow[_key == $language][0].value,\n    sortHighLow[_key == $defaultLanguage][0].value,\n  ),\n    "sortLowHigh": coalesce(\n    sortLowHigh[_key == $language][0].value,\n    sortLowHigh[_key == $defaultLanguage][0].value,\n  ),\n    "sortNewest": coalesce(\n    sortNewest[_key == $language][0].value,\n    sortNewest[_key == $defaultLanguage][0].value,\n  ),\n    "to": coalesce(\n    to[_key == $language][0].value,\n    to[_key == $defaultLanguage][0].value,\n  ), \n    "viewAll": coalesce(\n    viewAll[_key == $language][0].value,\n    viewAll[_key == $defaultLanguage][0].value,\n  ),\n  },\n  error {\n    "addressCreation": coalesce(\n    addressCreation[_key == $language][0].value,\n    addressCreation[_key == $defaultLanguage][0].value,\n  ),\n    "missingAddressId": coalesce(\n    missingAddressId[_key == $language][0].value,\n    missingAddressId[_key == $defaultLanguage][0].value,\n  ),\n    "pageNotFound": coalesce(\n    pageNotFound[_key == $language][0].value,\n    pageNotFound[_key == $defaultLanguage][0].value,\n  ),\n    "reloadPage": coalesce(\n    reloadPage[_key == $language][0].value,\n    reloadPage[_key == $defaultLanguage][0].value,\n  ),\n    "sectionError": coalesce(\n    sectionError[_key == $language][0].value,\n    sectionError[_key == $defaultLanguage][0].value,\n  ),\n    "serverError": coalesce(\n    serverError[_key == $language][0].value,\n    serverError[_key == $defaultLanguage][0].value,\n  ),\n  },\n  product {\n    "addToCart": coalesce(\n    addToCart[_key == $language][0].value,\n    addToCart[_key == $defaultLanguage][0].value,\n  ),\n    "quantitySelector": coalesce(\n    quantitySelector[_key == $language][0].value,\n    quantitySelector[_key == $defaultLanguage][0].value,\n  ),\n    "sale": coalesce(\n    sale[_key == $language][0].value,\n    sale[_key == $defaultLanguage][0].value,\n  ),\n    "soldOut": coalesce(\n    soldOut[_key == $language][0].value,\n    soldOut[_key == $defaultLanguage][0].value,\n  ),\n  },\n}': THEME_CONTENT_FRAGMENT_RESULT;
+    '{\n  badgesCornerRadius,\n  badgesPosition,\n  badgesSaleColorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  badgesSoldOutColorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  blogCards,\n  buttonsBorder,\n  buttonsShadow,\n  cartCollection -> {\n    store {\n      gid,\n      title,\n    },\n  },\n  cartColorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  collectionCards,\n  description,\n  dropdownsAndPopupsBorder,\n  dropdownsAndPopupsShadow,\n  facebook,\n  favicon {\n  _type,\n  asset,\n  "altText": asset -> altText,\n  "_ref": asset._ref,\n  hotspot,\n  crop,\n},\n  grid,\n  inputsBorder,\n  inputsShadow,\n  instagram,\n  linkedin,\n  logo {\n  _type,\n  asset,\n  "altText": asset -> altText,\n  "_ref": asset._ref,\n  hotspot,\n  crop,\n},\n  mediaBorder,\n  mediaShadow,\n  pinterest,\n  productCards,\n  showCurrencyCodes,\n  showTrailingZeros,\n  siteName,\n  snapchat,\n  socialSharingImagePreview {\n  _type,\n  asset,\n  "altText": asset -> altText,\n  "_ref": asset._ref,\n  hotspot,\n  crop,\n},\n  spaceBetweenTemplateSections,\n  tiktok,\n  tumblr,\n  twitter,\n  vimeo,\n  youtube,\n}': SETTINGS_FRAGMENT_RESULT;
+    '{\n  "announcementBar": coalesce(\n    announcementBar[_key == $language][0].value[],\n    announcementBar[_key == $defaultLanguage][0].value[],\n  )[] {\n    _type == "announcement" => {\n      _key,\n      externalLink,\n      link -> {\n  \'documentType\': _type,\n  \'slug\': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n      openInNewTab,\n      text,\n    },\n  },\n  announcementBarColorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  autoRotateAnnouncements,\n  blur,\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  desktopLogoWidth,\n  "menu": coalesce(\n    menu[_key == $language][0].value[],\n    menu[_key == $defaultLanguage][0].value[],\n  )[] {\n  _type == "externalLink" => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n  _type == "internalLink" => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  \'documentType\': _type,\n  \'slug\': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n  _type == "nestedNavigation" => {\n  _key,\n  _type,\n  childLinks[] {\n    _type == "externalLink" => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    _type == "internalLink" => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  \'documentType\': _type,\n  \'slug\': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n  },\n  link -> {\n    \'documentType\': _type,\n    \'slug\': coalesce(\n      slug,\n      store.slug\n    ) {\n      _type,\n      current\n    },\n  },\n  name,\n},\n},\n  padding,\n  showSeparatorLine,\n  sticky \n}': HEADER_FRAGMENT_RESULT;
+    '{\n  "extension": asset -> extension,\n  "mimeType": asset -> mimeType,\n  "url": asset -> url,\n}': FONT_ASSET_FRAGMENT_RESULT;
+    '{\n  baseSize,\n  capitalize,\n  font[] {\n    antialiased,\n    fontAssets[] {\n      "fontName": ^.fontName,\n      fontStyle,\n      fontWeight,\n      ttf {\n  "extension": asset -> extension,\n  "mimeType": asset -> mimeType,\n  "url": asset -> url,\n},\n      woff {\n  "extension": asset -> extension,\n  "mimeType": asset -> mimeType,\n  "url": asset -> url,\n},\n      woff2 {\n  "extension": asset -> extension,\n  "mimeType": asset -> mimeType,\n  "url": asset -> url,\n},\n    },\n    fontName,\n    fontType,\n  },\n  letterSpacing,\n  lineHeight,\n}': FONT_FRAGMENT_RESULT;
+    "{\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n}": RICHTEXT_FRAGMENT_RESULT;
+    "{\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n}": LINK_REFERENCE_FRAGMENT_RESULT;
+    "{\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n}": INTERNAL_LINK_FRAGMENT_RESULT;
+    '{\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n}': EXTERNAL_LINK_FRAGMENT_RESULT;
+    "{\n  _key,\n  _type,\n  childLinks[] {\n    _type == \"externalLink\" => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    _type == \"internalLink\" => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n  },\n  link -> {\n    'documentType': _type,\n    'slug': coalesce(\n      slug,\n      store.slug\n    ) {\n      _type,\n      current\n    },\n  },\n  name,\n}": NESTED_NAVIGATION_FRAGMENT_RESULT;
+    "{\n  _type == \"externalLink\" => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n  _type == \"internalLink\" => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n  _type == \"nestedNavigation\" => {\n  _key,\n  _type,\n  childLinks[] {\n    _type == \"externalLink\" => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    _type == \"internalLink\" => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n  },\n  link -> {\n    'documentType': _type,\n    'slug': coalesce(\n      slug,\n      store.slug\n    ) {\n      _type,\n      current\n    },\n  },\n  name,\n},\n}": LINKS_LIST_SELECTION_RESULT;
+    "*[_type == 'productTemplate' && default == true][0] {\n    _type,\n    name,\n    sections[] {\n      _key,\n      _type,\n      \n    _type == 'richtextSection' => {\n  _key,\n  _type,\n  contentAlignment,\n  desktopContentPosition,\n  maxWidth,\n  \"richtext\": coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'carouselSection' => {\n  _key,\n  _type,\n  arrows,\n  autoplay,\n  \"title\": coalesce(\n    title[_key == $language][0].value,\n    title[_key == $defaultLanguage][0].value,\n  ),\n  loop,\n  pagination,\n  slides[] {\n    _key,\n    image {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  },\n  slidesPerViewDesktop,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'collectionListSection' => {\n  _key,\n  _type,\n  collections[] -> {\n    store {\n      gid\n    }\n  },\n  desktopColumns,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'featuredProductSection' => {\n  _key,\n  _type,\n  mediaAspectRatio,\n  product -> {\n    store {\n      descriptionHtml,\n      \"firstVariant\": variants[0] -> {\n        store {\n          gid,\n          previewImageUrl,\n          price\n        }\n      },\n      gid,\n      options[] {\n        name,\n        values\n      },\n      previewImageUrl,\n      title\n    }\n  },\n  'richtext': coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'featuredCollectionSection' => {\n  _key,\n  _type,\n  collection -> {\n    store {\n      gid,\n      slug,\n      title\n    }\n  },\n  desktopColumns,\n  \"heading\": coalesce(\n    heading[_key == $language][0].value,\n    heading[_key == $defaultLanguage][0].value,\n  ),\n  maxProducts,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n},\n  viewAll\n},\n    _type == 'imageBannerSection' => {\n  _key,\n  _type,\n  backgroundImage {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  bannerHeight,\n  \"content\": coalesce(\n    content[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    content[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  contentAlignment,\n  contentPosition,\n  overlayOpacity,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n  \n      \n    _type == 'productInformationSection' => {\n  _key,\n  _type,\n  desktopMediaPosition,\n  desktopMediaWidth,\n  mediaAspectRatio,\n  \"richtext\": coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'relatedProductsSection' => {\n  _key,\n  _type,\n  desktopColumns,\n  \"heading\": coalesce(\n    heading[_key == $language][0].value,\n    heading[_key == $defaultLanguage][0].value,\n  ),\n  maxProducts,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n  \n    },\n  }": DEFAULT_PRODUCT_TEMPLATE_RESULT;
+    "*[_type == 'collectionTemplate' && default == true][0] {\n    _type,\n    name,\n    sections[] {\n      _key,\n      _type,\n      \n    _type == 'richtextSection' => {\n  _key,\n  _type,\n  contentAlignment,\n  desktopContentPosition,\n  maxWidth,\n  \"richtext\": coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'carouselSection' => {\n  _key,\n  _type,\n  arrows,\n  autoplay,\n  \"title\": coalesce(\n    title[_key == $language][0].value,\n    title[_key == $defaultLanguage][0].value,\n  ),\n  loop,\n  pagination,\n  slides[] {\n    _key,\n    image {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  },\n  slidesPerViewDesktop,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'collectionListSection' => {\n  _key,\n  _type,\n  collections[] -> {\n    store {\n      gid\n    }\n  },\n  desktopColumns,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'featuredProductSection' => {\n  _key,\n  _type,\n  mediaAspectRatio,\n  product -> {\n    store {\n      descriptionHtml,\n      \"firstVariant\": variants[0] -> {\n        store {\n          gid,\n          previewImageUrl,\n          price\n        }\n      },\n      gid,\n      options[] {\n        name,\n        values\n      },\n      previewImageUrl,\n      title\n    }\n  },\n  'richtext': coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'featuredCollectionSection' => {\n  _key,\n  _type,\n  collection -> {\n    store {\n      gid,\n      slug,\n      title\n    }\n  },\n  desktopColumns,\n  \"heading\": coalesce(\n    heading[_key == $language][0].value,\n    heading[_key == $defaultLanguage][0].value,\n  ),\n  maxProducts,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n},\n  viewAll\n},\n    _type == 'imageBannerSection' => {\n  _key,\n  _type,\n  backgroundImage {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  bannerHeight,\n  \"content\": coalesce(\n    content[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    content[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  contentAlignment,\n  contentPosition,\n  overlayOpacity,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n  \n      \n    _type == 'collectionBannerSection' => {\n  _key,\n  _type,\n  bannerHeight,\n  contentAlignment,\n  contentPosition,\n  overlayOpacity,\n  showDescription,\n  showImage,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'collectionProductGridSection' => {\n  _key,\n  _type,\n  desktopColumns,\n  enableFiltering,\n  enableSorting,\n  mobileColumns,\n  productsPerPage,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n  \n    },\n  }": DEFAULT_COLLECTION_TEMPLATE_RESULT;
+    '{\n  \'_type\': \'root\',\n  "defaultColorScheme": *[_type == "colorScheme" && default == true][0] {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  "fonts": *[_type == "typography"][0] {\n    body {\n  baseSize,\n  capitalize,\n  font[] {\n    antialiased,\n    fontAssets[] {\n      "fontName": ^.fontName,\n      fontStyle,\n      fontWeight,\n      ttf {\n  "extension": asset -> extension,\n  "mimeType": asset -> mimeType,\n  "url": asset -> url,\n},\n      woff {\n  "extension": asset -> extension,\n  "mimeType": asset -> mimeType,\n  "url": asset -> url,\n},\n      woff2 {\n  "extension": asset -> extension,\n  "mimeType": asset -> mimeType,\n  "url": asset -> url,\n},\n    },\n    fontName,\n    fontType,\n  },\n  letterSpacing,\n  lineHeight,\n},\n    heading {\n  baseSize,\n  capitalize,\n  font[] {\n    antialiased,\n    fontAssets[] {\n      "fontName": ^.fontName,\n      fontStyle,\n      fontWeight,\n      ttf {\n  "extension": asset -> extension,\n  "mimeType": asset -> mimeType,\n  "url": asset -> url,\n},\n      woff {\n  "extension": asset -> extension,\n  "mimeType": asset -> mimeType,\n  "url": asset -> url,\n},\n      woff2 {\n  "extension": asset -> extension,\n  "mimeType": asset -> mimeType,\n  "url": asset -> url,\n},\n    },\n    fontName,\n    fontType,\n  },\n  letterSpacing,\n  lineHeight,\n},\n    extra {\n  baseSize,\n  capitalize,\n  font[] {\n    antialiased,\n    fontAssets[] {\n      "fontName": ^.fontName,\n      fontStyle,\n      fontWeight,\n      ttf {\n  "extension": asset -> extension,\n  "mimeType": asset -> mimeType,\n  "url": asset -> url,\n},\n      woff {\n  "extension": asset -> extension,\n  "mimeType": asset -> mimeType,\n  "url": asset -> url,\n},\n      woff2 {\n  "extension": asset -> extension,\n  "mimeType": asset -> mimeType,\n  "url": asset -> url,\n},\n    },\n    fontName,\n    fontType,\n  },\n  letterSpacing,\n  lineHeight,\n},\n  },\n  "footer": *[_type == \'footer\'][0] {\n    "footer": footers[0] {\n      _key,\n      _type,\n      \n    _type == \'socialLinksOnly\' => {\n  _key,\n  _type,\n  "copyright": coalesce(\n    copyright[_key == $language][0].value,\n    copyright[_key == $defaultLanguage][0].value,\n  ),\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n},\n},\n  \n    },\n    sections[] {\n      _key,\n      _type,\n      \n    _type == \'richtextSection\' => {\n  _key,\n  _type,\n  contentAlignment,\n  desktopContentPosition,\n  maxWidth,\n  "richtext": coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == \'image\' => {\n  _type,\n  asset,\n  "altText": asset -> altText,\n  "_ref": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == \'button\' => {\n    ...,\n    link -> {\n  \'documentType\': _type,\n  \'slug\': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == \'block\' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == \'internalLink\' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  \'documentType\': _type,\n  \'slug\': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == \'externalLink\' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == \'image\' => {\n  _type,\n  asset,\n  "altText": asset -> altText,\n  "_ref": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == \'button\' => {\n    ...,\n    link -> {\n  \'documentType\': _type,\n  \'slug\': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == \'block\' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == \'internalLink\' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  \'documentType\': _type,\n  \'slug\': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == \'externalLink\' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == \'carouselSection\' => {\n  _key,\n  _type,\n  arrows,\n  autoplay,\n  "title": coalesce(\n    title[_key == $language][0].value,\n    title[_key == $defaultLanguage][0].value,\n  ),\n  loop,\n  pagination,\n  slides[] {\n    _key,\n    image {\n  _type,\n  asset,\n  "altText": asset -> altText,\n  "_ref": asset._ref,\n  hotspot,\n  crop,\n},\n  },\n  slidesPerViewDesktop,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == \'collectionListSection\' => {\n  _key,\n  _type,\n  collections[] -> {\n    store {\n      gid\n    }\n  },\n  desktopColumns,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == \'featuredProductSection\' => {\n  _key,\n  _type,\n  mediaAspectRatio,\n  product -> {\n    store {\n      descriptionHtml,\n      "firstVariant": variants[0] -> {\n        store {\n          gid,\n          previewImageUrl,\n          price\n        }\n      },\n      gid,\n      options[] {\n        name,\n        values\n      },\n      previewImageUrl,\n      title\n    }\n  },\n  \'richtext\': coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == \'image\' => {\n  _type,\n  asset,\n  "altText": asset -> altText,\n  "_ref": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == \'button\' => {\n    ...,\n    link -> {\n  \'documentType\': _type,\n  \'slug\': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == \'block\' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == \'internalLink\' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  \'documentType\': _type,\n  \'slug\': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == \'externalLink\' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == \'image\' => {\n  _type,\n  asset,\n  "altText": asset -> altText,\n  "_ref": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == \'button\' => {\n    ...,\n    link -> {\n  \'documentType\': _type,\n  \'slug\': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == \'block\' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == \'internalLink\' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  \'documentType\': _type,\n  \'slug\': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == \'externalLink\' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == \'featuredCollectionSection\' => {\n  _key,\n  _type,\n  collection -> {\n    store {\n      gid,\n      slug,\n      title\n    }\n  },\n  desktopColumns,\n  "heading": coalesce(\n    heading[_key == $language][0].value,\n    heading[_key == $defaultLanguage][0].value,\n  ),\n  maxProducts,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n},\n  viewAll\n},\n    _type == \'imageBannerSection\' => {\n  _key,\n  _type,\n  backgroundImage {\n  _type,\n  asset,\n  "altText": asset -> altText,\n  "_ref": asset._ref,\n  hotspot,\n  crop,\n},\n  bannerHeight,\n  "content": coalesce(\n    content[_key == $language][0].value[] {\n  ...,\n  _type == \'image\' => {\n  _type,\n  asset,\n  "altText": asset -> altText,\n  "_ref": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == \'button\' => {\n    ...,\n    link -> {\n  \'documentType\': _type,\n  \'slug\': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == \'block\' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == \'internalLink\' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  \'documentType\': _type,\n  \'slug\': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == \'externalLink\' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    content[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == \'image\' => {\n  _type,\n  asset,\n  "altText": asset -> altText,\n  "_ref": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == \'button\' => {\n    ...,\n    link -> {\n  \'documentType\': _type,\n  \'slug\': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == \'block\' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == \'internalLink\' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  \'documentType\': _type,\n  \'slug\': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == \'externalLink\' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  contentAlignment,\n  contentPosition,\n  overlayOpacity,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n  \n    },\n  },\n  "header": *[_type == "header"][0] {\n  "announcementBar": coalesce(\n    announcementBar[_key == $language][0].value[],\n    announcementBar[_key == $defaultLanguage][0].value[],\n  )[] {\n    _type == "announcement" => {\n      _key,\n      externalLink,\n      link -> {\n  \'documentType\': _type,\n  \'slug\': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n      openInNewTab,\n      text,\n    },\n  },\n  announcementBarColorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  autoRotateAnnouncements,\n  blur,\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  desktopLogoWidth,\n  "menu": coalesce(\n    menu[_key == $language][0].value[],\n    menu[_key == $defaultLanguage][0].value[],\n  )[] {\n  _type == "externalLink" => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n  _type == "internalLink" => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  \'documentType\': _type,\n  \'slug\': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n  _type == "nestedNavigation" => {\n  _key,\n  _type,\n  childLinks[] {\n    _type == "externalLink" => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    _type == "internalLink" => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  \'documentType\': _type,\n  \'slug\': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n  },\n  link -> {\n    \'documentType\': _type,\n    \'slug\': coalesce(\n      slug,\n      store.slug\n    ) {\n      _type,\n      current\n    },\n  },\n  name,\n},\n},\n  padding,\n  showSeparatorLine,\n  sticky \n},\n  "settings": *[_type == "settings"][0] {\n  badgesCornerRadius,\n  badgesPosition,\n  badgesSaleColorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  badgesSoldOutColorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  blogCards,\n  buttonsBorder,\n  buttonsShadow,\n  cartCollection -> {\n    store {\n      gid,\n      title,\n    },\n  },\n  cartColorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  collectionCards,\n  description,\n  dropdownsAndPopupsBorder,\n  dropdownsAndPopupsShadow,\n  facebook,\n  favicon {\n  _type,\n  asset,\n  "altText": asset -> altText,\n  "_ref": asset._ref,\n  hotspot,\n  crop,\n},\n  grid,\n  inputsBorder,\n  inputsShadow,\n  instagram,\n  linkedin,\n  logo {\n  _type,\n  asset,\n  "altText": asset -> altText,\n  "_ref": asset._ref,\n  hotspot,\n  crop,\n},\n  mediaBorder,\n  mediaShadow,\n  pinterest,\n  productCards,\n  showCurrencyCodes,\n  showTrailingZeros,\n  siteName,\n  snapchat,\n  socialSharingImagePreview {\n  _type,\n  asset,\n  "altText": asset -> altText,\n  "_ref": asset._ref,\n  hotspot,\n  crop,\n},\n  spaceBetweenTemplateSections,\n  tiktok,\n  tumblr,\n  twitter,\n  vimeo,\n  youtube,\n},\n  "themeContent": *[_type == "themeContent"][0] {\n  account {\n    "accountDetails": coalesce(\n    accountDetails[_key == $language][0].value,\n    accountDetails[_key == $defaultLanguage][0].value,\n  ),\n    "addAddress": coalesce(\n    addAddress[_key == $language][0].value,\n    addAddress[_key == $defaultLanguage][0].value,\n  ),\n    "addName": coalesce(\n    addName[_key == $language][0].value,\n    addName[_key == $defaultLanguage][0].value,\n  ),\n    "addressBook": coalesce(\n    addressBook[_key == $language][0].value,\n    addressBook[_key == $defaultLanguage][0].value,\n  ),\n    "addressLine1": coalesce(\n    addressLine1[_key == $language][0].value,\n    addressLine1[_key == $defaultLanguage][0].value,\n  ),\n    "addressLine2": coalesce(\n    addressLine2[_key == $language][0].value,\n    addressLine2[_key == $defaultLanguage][0].value,\n  ),\n    "cancel": coalesce(\n    cancel[_key == $language][0].value,\n    cancel[_key == $defaultLanguage][0].value,\n  ),\n    "city": coalesce(\n    city[_key == $language][0].value,\n    city[_key == $defaultLanguage][0].value,\n  ), \n    "company": coalesce(\n    company[_key == $language][0].value,\n    company[_key == $defaultLanguage][0].value,\n  ),\n    "country": coalesce(\n    country[_key == $language][0].value,\n    country[_key == $defaultLanguage][0].value,\n  ),\n    "default": coalesce(\n    default[_key == $language][0].value,\n    default[_key == $defaultLanguage][0].value,\n  ),\n    "defaultAddress": coalesce(\n    defaultAddress[_key == $language][0].value,\n    defaultAddress[_key == $defaultLanguage][0].value,\n  ),\n    "discounts": coalesce(\n    discounts[_key == $language][0].value,\n    discounts[_key == $defaultLanguage][0].value,\n  ),\n    "discountsOff": coalesce(\n    discountsOff[_key == $language][0].value,\n    discountsOff[_key == $defaultLanguage][0].value,\n  ),\n    "edit": coalesce(\n    edit[_key == $language][0].value,\n    edit[_key == $defaultLanguage][0].value,\n  ),\n    "editAddress": coalesce(\n    editAddress[_key == $language][0].value,\n    editAddress[_key == $defaultLanguage][0].value,\n  ),\n    "emailAddress": coalesce(\n    emailAddress[_key == $language][0].value,\n    emailAddress[_key == $defaultLanguage][0].value,\n  ),\n    "firstName": coalesce(\n    firstName[_key == $language][0].value,\n    firstName[_key == $defaultLanguage][0].value,\n  ),\n    "fulfillmentStatus": coalesce(\n    fulfillmentStatus[_key == $language][0].value,\n    fulfillmentStatus[_key == $defaultLanguage][0].value,\n  ),\n    "lastName": coalesce(\n    lastName[_key == $language][0].value,\n    lastName[_key == $defaultLanguage][0].value,\n  ),\n    "name": coalesce(\n    name[_key == $language][0].value,\n    name[_key == $defaultLanguage][0].value,\n  ),\n    "noAddress": coalesce(\n    noAddress[_key == $language][0].value,\n    noAddress[_key == $defaultLanguage][0].value,\n  ),\n    "noOrdersMessage": coalesce(\n    noOrdersMessage[_key == $language][0].value,\n    noOrdersMessage[_key == $defaultLanguage][0].value,\n  ),\n    "noShippingAddress": coalesce(\n    noShippingAddress[_key == $language][0].value,\n    noShippingAddress[_key == $defaultLanguage][0].value,\n  ),\n    "orderDate": coalesce(\n    orderDate[_key == $language][0].value,\n    orderDate[_key == $defaultLanguage][0].value,\n  ),\n    "orderDetail": coalesce(\n    orderDetail[_key == $language][0].value,\n    orderDetail[_key == $defaultLanguage][0].value,\n  ),\n    "orderHistory": coalesce(\n    orderHistory[_key == $language][0].value,\n    orderHistory[_key == $defaultLanguage][0].value,\n  ),\n    "orderId": coalesce(\n    orderId[_key == $language][0].value,\n    orderId[_key == $defaultLanguage][0].value,\n  ),\n    "orderNumber": coalesce(\n    orderNumber[_key == $language][0].value,\n    orderNumber[_key == $defaultLanguage][0].value,\n  ),\n    "orderStatusCancelled": coalesce(\n    orderStatusCancelled[_key == $language][0].value,\n    orderStatusCancelled[_key == $defaultLanguage][0].value,\n  ),\n    "orderStatusError": coalesce(\n    orderStatusError[_key == $language][0].value,\n    orderStatusError[_key == $defaultLanguage][0].value,\n  ),\n    "orderStatusFailure": coalesce(\n    orderStatusFailure[_key == $language][0].value,\n    orderStatusFailure[_key == $defaultLanguage][0].value,\n  ),\n    "orderStatusOpen": coalesce(\n    orderStatusOpen[_key == $language][0].value,\n    orderStatusOpen[_key == $defaultLanguage][0].value,\n  ),\n    "orderStatusPending": coalesce(\n    orderStatusPending[_key == $language][0].value,\n    orderStatusPending[_key == $defaultLanguage][0].value,\n  ),\n    "orderStatusSuccess": coalesce(\n    orderStatusSuccess[_key == $language][0].value,\n    orderStatusSuccess[_key == $defaultLanguage][0].value,\n  ),\n    "phone": coalesce(\n    phone[_key == $language][0].value,\n    phone[_key == $defaultLanguage][0].value,\n  ),\n    "phoneNumber": coalesce(\n    phoneNumber[_key == $language][0].value,\n    phoneNumber[_key == $defaultLanguage][0].value,\n  ),\n    "placedOn": coalesce(\n    placedOn[_key == $language][0].value,\n    placedOn[_key == $defaultLanguage][0].value,\n  ),\n    "postalCode": coalesce(\n    postalCode[_key == $language][0].value,\n    postalCode[_key == $defaultLanguage][0].value,\n  ),\n    "price": coalesce(\n    price[_key == $language][0].value,\n    price[_key == $defaultLanguage][0].value,\n  ),\n    "product": coalesce(\n    product[_key == $language][0].value,\n    product[_key == $defaultLanguage][0].value,\n  ),\n    "profile": coalesce(\n    profile[_key == $language][0].value,\n    profile[_key == $defaultLanguage][0].value,\n  ),\n    "quantity": coalesce(\n    quantity[_key == $language][0].value,\n    quantity[_key == $defaultLanguage][0].value,\n  ),\n    "remove": coalesce(\n    remove[_key == $language][0].value,\n    remove[_key == $defaultLanguage][0].value,\n  ),\n    "returnToAccount": coalesce(\n    returnToAccount[_key == $language][0].value,\n    returnToAccount[_key == $defaultLanguage][0].value,\n  ),\n    "save": coalesce(\n    save[_key == $language][0].value,\n    save[_key == $defaultLanguage][0].value,\n  ),\n    "saving": coalesce(\n    saving[_key == $language][0].value,\n    saving[_key == $defaultLanguage][0].value,\n  ),\n    "shippingAddress": coalesce(\n    shippingAddress[_key == $language][0].value,\n    shippingAddress[_key == $defaultLanguage][0].value,\n  ),\n    "signOut": coalesce(\n    signOut[_key == $language][0].value,\n    signOut[_key == $defaultLanguage][0].value,\n  ),\n    "startShopping": coalesce(\n    startShopping[_key == $language][0].value,\n    startShopping[_key == $defaultLanguage][0].value,\n  ),\n    "stateProvince": coalesce(\n    stateProvince[_key == $language][0].value,\n    stateProvince[_key == $defaultLanguage][0].value,\n  ),\n    "status": coalesce(\n    status[_key == $language][0].value,\n    status[_key == $defaultLanguage][0].value,\n  ),\n    "subtotal": coalesce(\n    subtotal[_key == $language][0].value,\n    subtotal[_key == $defaultLanguage][0].value,\n  ),\n    "tax": coalesce(\n    tax[_key == $language][0].value,\n    tax[_key == $defaultLanguage][0].value,\n  ),\n    "total": coalesce(\n    total[_key == $language][0].value,\n    total[_key == $defaultLanguage][0].value,\n  ),\n    "updateYourProfile": coalesce(\n    updateYourProfile[_key == $language][0].value,\n    updateYourProfile[_key == $defaultLanguage][0].value,\n  ),\n    "viewDetails": coalesce(\n    viewDetails[_key == $language][0].value,\n    viewDetails[_key == $defaultLanguage][0].value,\n  ),\n    "welcome": coalesce(\n    welcome[_key == $language][0].value,\n    welcome[_key == $defaultLanguage][0].value,\n  ),\n    "welcomeToYourAccount": coalesce(\n    welcomeToYourAccount[_key == $language][0].value,\n    welcomeToYourAccount[_key == $defaultLanguage][0].value,\n  ),\n  },\n  cart {\n    "applyDiscount": coalesce(\n    applyDiscount[_key == $language][0].value,\n    applyDiscount[_key == $defaultLanguage][0].value,\n  ),\n    "continueShopping": coalesce(\n    continueShopping[_key == $language][0].value,\n    continueShopping[_key == $defaultLanguage][0].value,\n  ),\n    "discountCode": coalesce(\n    discountCode[_key == $language][0].value,\n    discountCode[_key == $defaultLanguage][0].value,\n  ),\n    "discounts": coalesce(\n    discounts[_key == $language][0].value,\n    discounts[_key == $defaultLanguage][0].value,\n  ),\n    "emptyMessage": coalesce(\n    emptyMessage[_key == $language][0].value,\n    emptyMessage[_key == $defaultLanguage][0].value,\n  ),\n    "heading": coalesce(\n    heading[_key == $language][0].value,\n    heading[_key == $defaultLanguage][0].value,\n  ),\n    "orderSummary": coalesce(\n    orderSummary[_key == $language][0].value,\n    orderSummary[_key == $defaultLanguage][0].value,\n  ),\n    "proceedToCheckout": coalesce(\n    proceedToCheckout[_key == $language][0].value,\n    proceedToCheckout[_key == $defaultLanguage][0].value,\n  ),\n    "quantity": coalesce(\n    quantity[_key == $language][0].value,\n    quantity[_key == $defaultLanguage][0].value,\n  ),\n    "remove": coalesce(\n    remove[_key == $language][0].value,\n    remove[_key == $defaultLanguage][0].value,\n  ),\n    "subtotal": coalesce(\n    subtotal[_key == $language][0].value,\n    subtotal[_key == $defaultLanguage][0].value,\n  ),\n  },\n  collection {\n    "apply": coalesce(\n    apply[_key == $language][0].value,\n    apply[_key == $defaultLanguage][0].value,\n  ),\n    "clear": coalesce(\n    clear[_key == $language][0].value,\n    clear[_key == $defaultLanguage][0].value,\n  ),\n    "clearFilters": coalesce(\n    clearFilters[_key == $language][0].value,\n    clearFilters[_key == $defaultLanguage][0].value,\n  ),\n    "filterAndSort": coalesce(\n    filterAndSort[_key == $language][0].value,\n    filterAndSort[_key == $defaultLanguage][0].value,\n  ),\n    "filterInStock": coalesce(\n    filterInStock[_key == $language][0].value,\n    filterInStock[_key == $defaultLanguage][0].value,\n  ),\n    "filterOutOfStock": coalesce(\n    filterOutOfStock[_key == $language][0].value,\n    filterOutOfStock[_key == $defaultLanguage][0].value,\n  ),\n    "from": coalesce(\n    from[_key == $language][0].value,\n    from[_key == $defaultLanguage][0].value,\n  ),\n    "loading": coalesce(\n    loading[_key == $language][0].value,\n    loading[_key == $defaultLanguage][0].value,\n  ),\n    "loadMoreProducts": coalesce(\n    loadMoreProducts[_key == $language][0].value,\n    loadMoreProducts[_key == $defaultLanguage][0].value,\n  ),\n    "loadPrevious": coalesce(\n    loadPrevious[_key == $language][0].value,\n    loadPrevious[_key == $defaultLanguage][0].value,\n  ),\n    "noCollectionFound": coalesce(\n    noCollectionFound[_key == $language][0].value,\n    noCollectionFound[_key == $defaultLanguage][0].value,\n  ),\n    "noProductFound": coalesce(\n    noProductFound[_key == $language][0].value,\n    noProductFound[_key == $defaultLanguage][0].value,\n  ),\n    "sortBestSelling": coalesce(\n    sortBestSelling[_key == $language][0].value,\n    sortBestSelling[_key == $defaultLanguage][0].value,\n  ),\n    "sortBy": coalesce(\n    sortBy[_key == $language][0].value,\n    sortBy[_key == $defaultLanguage][0].value,\n  ),\n    "sortFeatured": coalesce(\n    sortFeatured[_key == $language][0].value,\n    sortFeatured[_key == $defaultLanguage][0].value,\n  ),\n    "sortHighLow": coalesce(\n    sortHighLow[_key == $language][0].value,\n    sortHighLow[_key == $defaultLanguage][0].value,\n  ),\n    "sortLowHigh": coalesce(\n    sortLowHigh[_key == $language][0].value,\n    sortLowHigh[_key == $defaultLanguage][0].value,\n  ),\n    "sortNewest": coalesce(\n    sortNewest[_key == $language][0].value,\n    sortNewest[_key == $defaultLanguage][0].value,\n  ),\n    "to": coalesce(\n    to[_key == $language][0].value,\n    to[_key == $defaultLanguage][0].value,\n  ), \n    "viewAll": coalesce(\n    viewAll[_key == $language][0].value,\n    viewAll[_key == $defaultLanguage][0].value,\n  ),\n  },\n  error {\n    "addressCreation": coalesce(\n    addressCreation[_key == $language][0].value,\n    addressCreation[_key == $defaultLanguage][0].value,\n  ),\n    "missingAddressId": coalesce(\n    missingAddressId[_key == $language][0].value,\n    missingAddressId[_key == $defaultLanguage][0].value,\n  ),\n    "pageNotFound": coalesce(\n    pageNotFound[_key == $language][0].value,\n    pageNotFound[_key == $defaultLanguage][0].value,\n  ),\n    "reloadPage": coalesce(\n    reloadPage[_key == $language][0].value,\n    reloadPage[_key == $defaultLanguage][0].value,\n  ),\n    "sectionError": coalesce(\n    sectionError[_key == $language][0].value,\n    sectionError[_key == $defaultLanguage][0].value,\n  ),\n    "serverError": coalesce(\n    serverError[_key == $language][0].value,\n    serverError[_key == $defaultLanguage][0].value,\n  ),\n  },\n  product {\n    "addToCart": coalesce(\n    addToCart[_key == $language][0].value,\n    addToCart[_key == $defaultLanguage][0].value,\n  ),\n    "quantitySelector": coalesce(\n    quantitySelector[_key == $language][0].value,\n    quantitySelector[_key == $defaultLanguage][0].value,\n  ),\n    "sale": coalesce(\n    sale[_key == $language][0].value,\n    sale[_key == $defaultLanguage][0].value,\n  ),\n    "soldOut": coalesce(\n    soldOut[_key == $language][0].value,\n    soldOut[_key == $defaultLanguage][0].value,\n  ),\n  },\n},\n}': ROOT_QUERY_RESULT;
+    "{\n  '_type': 'collection',\n  \"collection\": *[_type == \"collection\" && store.slug.current == $collectionHandle][0] {\n    store {\n      gid,\n    },\n    template -> {\n      sections[] {\n        _key,\n        _type,\n        \n    _type == 'richtextSection' => {\n  _key,\n  _type,\n  contentAlignment,\n  desktopContentPosition,\n  maxWidth,\n  \"richtext\": coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'carouselSection' => {\n  _key,\n  _type,\n  arrows,\n  autoplay,\n  \"title\": coalesce(\n    title[_key == $language][0].value,\n    title[_key == $defaultLanguage][0].value,\n  ),\n  loop,\n  pagination,\n  slides[] {\n    _key,\n    image {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  },\n  slidesPerViewDesktop,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'collectionListSection' => {\n  _key,\n  _type,\n  collections[] -> {\n    store {\n      gid\n    }\n  },\n  desktopColumns,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'featuredProductSection' => {\n  _key,\n  _type,\n  mediaAspectRatio,\n  product -> {\n    store {\n      descriptionHtml,\n      \"firstVariant\": variants[0] -> {\n        store {\n          gid,\n          previewImageUrl,\n          price\n        }\n      },\n      gid,\n      options[] {\n        name,\n        values\n      },\n      previewImageUrl,\n      title\n    }\n  },\n  'richtext': coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'featuredCollectionSection' => {\n  _key,\n  _type,\n  collection -> {\n    store {\n      gid,\n      slug,\n      title\n    }\n  },\n  desktopColumns,\n  \"heading\": coalesce(\n    heading[_key == $language][0].value,\n    heading[_key == $defaultLanguage][0].value,\n  ),\n  maxProducts,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n},\n  viewAll\n},\n    _type == 'imageBannerSection' => {\n  _key,\n  _type,\n  backgroundImage {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  bannerHeight,\n  \"content\": coalesce(\n    content[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    content[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  contentAlignment,\n  contentPosition,\n  overlayOpacity,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n  \n        \n    _type == 'collectionBannerSection' => {\n  _key,\n  _type,\n  bannerHeight,\n  contentAlignment,\n  contentPosition,\n  overlayOpacity,\n  showDescription,\n  showImage,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'collectionProductGridSection' => {\n  _key,\n  _type,\n  desktopColumns,\n  enableFiltering,\n  enableSorting,\n  mobileColumns,\n  productsPerPage,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n  \n      },\n    },\n  },\n  \"defaultCollectionTemplate\": *[_type == 'collectionTemplate' && default == true][0] {\n    _type,\n    name,\n    sections[] {\n      _key,\n      _type,\n      \n    _type == 'richtextSection' => {\n  _key,\n  _type,\n  contentAlignment,\n  desktopContentPosition,\n  maxWidth,\n  \"richtext\": coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'carouselSection' => {\n  _key,\n  _type,\n  arrows,\n  autoplay,\n  \"title\": coalesce(\n    title[_key == $language][0].value,\n    title[_key == $defaultLanguage][0].value,\n  ),\n  loop,\n  pagination,\n  slides[] {\n    _key,\n    image {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  },\n  slidesPerViewDesktop,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'collectionListSection' => {\n  _key,\n  _type,\n  collections[] -> {\n    store {\n      gid\n    }\n  },\n  desktopColumns,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'featuredProductSection' => {\n  _key,\n  _type,\n  mediaAspectRatio,\n  product -> {\n    store {\n      descriptionHtml,\n      \"firstVariant\": variants[0] -> {\n        store {\n          gid,\n          previewImageUrl,\n          price\n        }\n      },\n      gid,\n      options[] {\n        name,\n        values\n      },\n      previewImageUrl,\n      title\n    }\n  },\n  'richtext': coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'featuredCollectionSection' => {\n  _key,\n  _type,\n  collection -> {\n    store {\n      gid,\n      slug,\n      title\n    }\n  },\n  desktopColumns,\n  \"heading\": coalesce(\n    heading[_key == $language][0].value,\n    heading[_key == $defaultLanguage][0].value,\n  ),\n  maxProducts,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n},\n  viewAll\n},\n    _type == 'imageBannerSection' => {\n  _key,\n  _type,\n  backgroundImage {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  bannerHeight,\n  \"content\": coalesce(\n    content[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    content[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  contentAlignment,\n  contentPosition,\n  overlayOpacity,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n  \n      \n    _type == 'collectionBannerSection' => {\n  _key,\n  _type,\n  bannerHeight,\n  contentAlignment,\n  contentPosition,\n  overlayOpacity,\n  showDescription,\n  showImage,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'collectionProductGridSection' => {\n  _key,\n  _type,\n  desktopColumns,\n  enableFiltering,\n  enableSorting,\n  mobileColumns,\n  productsPerPage,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n  \n    },\n  },\n}": COLLECTION_QUERY_RESULT;
+    "*[(_type == \"page\" && ($handle != \"home\" && slug.current == $handle)) || (\n    _type == \"home\" && $handle == \"home\"\n  )][0] {\n    _type,\n    sections[] {\n      _key,\n      _type,\n      \n    _type == 'richtextSection' => {\n  _key,\n  _type,\n  contentAlignment,\n  desktopContentPosition,\n  maxWidth,\n  \"richtext\": coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'carouselSection' => {\n  _key,\n  _type,\n  arrows,\n  autoplay,\n  \"title\": coalesce(\n    title[_key == $language][0].value,\n    title[_key == $defaultLanguage][0].value,\n  ),\n  loop,\n  pagination,\n  slides[] {\n    _key,\n    image {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  },\n  slidesPerViewDesktop,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'collectionListSection' => {\n  _key,\n  _type,\n  collections[] -> {\n    store {\n      gid\n    }\n  },\n  desktopColumns,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'featuredProductSection' => {\n  _key,\n  _type,\n  mediaAspectRatio,\n  product -> {\n    store {\n      descriptionHtml,\n      \"firstVariant\": variants[0] -> {\n        store {\n          gid,\n          previewImageUrl,\n          price\n        }\n      },\n      gid,\n      options[] {\n        name,\n        values\n      },\n      previewImageUrl,\n      title\n    }\n  },\n  'richtext': coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'featuredCollectionSection' => {\n  _key,\n  _type,\n  collection -> {\n    store {\n      gid,\n      slug,\n      title\n    }\n  },\n  desktopColumns,\n  \"heading\": coalesce(\n    heading[_key == $language][0].value,\n    heading[_key == $defaultLanguage][0].value,\n  ),\n  maxProducts,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n},\n  viewAll\n},\n    _type == 'imageBannerSection' => {\n  _key,\n  _type,\n  backgroundImage {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  bannerHeight,\n  \"content\": coalesce(\n    content[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    content[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  contentAlignment,\n  contentPosition,\n  overlayOpacity,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n  \n    },\n    seo {\n      \"title\": coalesce(\n    title[_key == $language][0].value,\n    title[_key == $defaultLanguage][0].value,\n  ),\n      \"description\": coalesce(\n    description[_key == $language][0].value,\n    description[_key == $defaultLanguage][0].value,\n  ),\n      image {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n    },\n  }": PAGE_QUERY_RESULT;
+    "{\n  \"_type\": \"product\",\n  'product': *[_type == \"product\" && store.slug.current == $productHandle][0] {\n    store {\n      gid,\n    },\n    template -> {\n      sections[] {\n        _key,\n        _type,\n        \n    _type == 'richtextSection' => {\n  _key,\n  _type,\n  contentAlignment,\n  desktopContentPosition,\n  maxWidth,\n  \"richtext\": coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'carouselSection' => {\n  _key,\n  _type,\n  arrows,\n  autoplay,\n  \"title\": coalesce(\n    title[_key == $language][0].value,\n    title[_key == $defaultLanguage][0].value,\n  ),\n  loop,\n  pagination,\n  slides[] {\n    _key,\n    image {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  },\n  slidesPerViewDesktop,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'collectionListSection' => {\n  _key,\n  _type,\n  collections[] -> {\n    store {\n      gid\n    }\n  },\n  desktopColumns,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'featuredProductSection' => {\n  _key,\n  _type,\n  mediaAspectRatio,\n  product -> {\n    store {\n      descriptionHtml,\n      \"firstVariant\": variants[0] -> {\n        store {\n          gid,\n          previewImageUrl,\n          price\n        }\n      },\n      gid,\n      options[] {\n        name,\n        values\n      },\n      previewImageUrl,\n      title\n    }\n  },\n  'richtext': coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'featuredCollectionSection' => {\n  _key,\n  _type,\n  collection -> {\n    store {\n      gid,\n      slug,\n      title\n    }\n  },\n  desktopColumns,\n  \"heading\": coalesce(\n    heading[_key == $language][0].value,\n    heading[_key == $defaultLanguage][0].value,\n  ),\n  maxProducts,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n},\n  viewAll\n},\n    _type == 'imageBannerSection' => {\n  _key,\n  _type,\n  backgroundImage {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  bannerHeight,\n  \"content\": coalesce(\n    content[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    content[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  contentAlignment,\n  contentPosition,\n  overlayOpacity,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n  \n        \n    _type == 'productInformationSection' => {\n  _key,\n  _type,\n  desktopMediaPosition,\n  desktopMediaWidth,\n  mediaAspectRatio,\n  \"richtext\": coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'relatedProductsSection' => {\n  _key,\n  _type,\n  desktopColumns,\n  \"heading\": coalesce(\n    heading[_key == $language][0].value,\n    heading[_key == $defaultLanguage][0].value,\n  ),\n  maxProducts,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n  \n      },\n    },\n  },\n  \"defaultProductTemplate\": *[_type == 'productTemplate' && default == true][0] {\n    _type,\n    name,\n    sections[] {\n      _key,\n      _type,\n      \n    _type == 'richtextSection' => {\n  _key,\n  _type,\n  contentAlignment,\n  desktopContentPosition,\n  maxWidth,\n  \"richtext\": coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'carouselSection' => {\n  _key,\n  _type,\n  arrows,\n  autoplay,\n  \"title\": coalesce(\n    title[_key == $language][0].value,\n    title[_key == $defaultLanguage][0].value,\n  ),\n  loop,\n  pagination,\n  slides[] {\n    _key,\n    image {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  },\n  slidesPerViewDesktop,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'collectionListSection' => {\n  _key,\n  _type,\n  collections[] -> {\n    store {\n      gid\n    }\n  },\n  desktopColumns,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'featuredProductSection' => {\n  _key,\n  _type,\n  mediaAspectRatio,\n  product -> {\n    store {\n      descriptionHtml,\n      \"firstVariant\": variants[0] -> {\n        store {\n          gid,\n          previewImageUrl,\n          price\n        }\n      },\n      gid,\n      options[] {\n        name,\n        values\n      },\n      previewImageUrl,\n      title\n    }\n  },\n  'richtext': coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'featuredCollectionSection' => {\n  _key,\n  _type,\n  collection -> {\n    store {\n      gid,\n      slug,\n      title\n    }\n  },\n  desktopColumns,\n  \"heading\": coalesce(\n    heading[_key == $language][0].value,\n    heading[_key == $defaultLanguage][0].value,\n  ),\n  maxProducts,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n},\n  viewAll\n},\n    _type == 'imageBannerSection' => {\n  _key,\n  _type,\n  backgroundImage {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  bannerHeight,\n  \"content\": coalesce(\n    content[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    content[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  contentAlignment,\n  contentPosition,\n  overlayOpacity,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n  \n      \n    _type == 'productInformationSection' => {\n  _key,\n  _type,\n  desktopMediaPosition,\n  desktopMediaWidth,\n  mediaAspectRatio,\n  \"richtext\": coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'relatedProductsSection' => {\n  _key,\n  _type,\n  desktopColumns,\n  \"heading\": coalesce(\n    heading[_key == $language][0].value,\n    heading[_key == $defaultLanguage][0].value,\n  ),\n  maxProducts,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n  \n    },\n  },\n}": PRODUCT_QUERY_RESULT;
+    "*[][0] {\n  sections[] {\n    _key,\n    _type,\n    \n    _type == 'richtextSection' => {\n  _key,\n  _type,\n  contentAlignment,\n  desktopContentPosition,\n  maxWidth,\n  \"richtext\": coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'carouselSection' => {\n  _key,\n  _type,\n  arrows,\n  autoplay,\n  \"title\": coalesce(\n    title[_key == $language][0].value,\n    title[_key == $defaultLanguage][0].value,\n  ),\n  loop,\n  pagination,\n  slides[] {\n    _key,\n    image {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  },\n  slidesPerViewDesktop,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'collectionListSection' => {\n  _key,\n  _type,\n  collections[] -> {\n    store {\n      gid\n    }\n  },\n  desktopColumns,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'featuredProductSection' => {\n  _key,\n  _type,\n  mediaAspectRatio,\n  product -> {\n    store {\n      descriptionHtml,\n      \"firstVariant\": variants[0] -> {\n        store {\n          gid,\n          previewImageUrl,\n          price\n        }\n      },\n      gid,\n      options[] {\n        name,\n        values\n      },\n      previewImageUrl,\n      title\n    }\n  },\n  'richtext': coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'featuredCollectionSection' => {\n  _key,\n  _type,\n  collection -> {\n    store {\n      gid,\n      slug,\n      title\n    }\n  },\n  desktopColumns,\n  \"heading\": coalesce(\n    heading[_key == $language][0].value,\n    heading[_key == $defaultLanguage][0].value,\n  ),\n  maxProducts,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n},\n  viewAll\n},\n    _type == 'imageBannerSection' => {\n  _key,\n  _type,\n  backgroundImage {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  bannerHeight,\n  \"content\": coalesce(\n    content[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    content[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  contentAlignment,\n  contentPosition,\n  overlayOpacity,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n  \n    \n    _type == 'productInformationSection' => {\n  _key,\n  _type,\n  desktopMediaPosition,\n  desktopMediaWidth,\n  mediaAspectRatio,\n  \"richtext\": coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'relatedProductsSection' => {\n  _key,\n  _type,\n  desktopColumns,\n  \"heading\": coalesce(\n    heading[_key == $language][0].value,\n    heading[_key == $defaultLanguage][0].value,\n  ),\n  maxProducts,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n  \n    \n    _type == 'collectionBannerSection' => {\n  _key,\n  _type,\n  bannerHeight,\n  contentAlignment,\n  contentPosition,\n  overlayOpacity,\n  showDescription,\n  showImage,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n    _type == 'collectionProductGridSection' => {\n  _key,\n  _type,\n  desktopColumns,\n  enableFiltering,\n  enableSorting,\n  mobileColumns,\n  productsPerPage,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n},\n  \n  },\n  footers[] {\n    _key,\n    _type,\n    \n    _type == 'socialLinksOnly' => {\n  _key,\n  _type,\n  \"copyright\": coalesce(\n    copyright[_key == $language][0].value,\n    copyright[_key == $defaultLanguage][0].value,\n  ),\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n},\n},\n  \n  },\n}": ALL_SECTIONS_QUERY_RESULT;
+    '{\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}': SECTION_SETTINGS_FRAGMENT_RESULT;
+    '{\n  _key,\n  _type,\n  desktopColumns,\n  "heading": coalesce(\n    heading[_key == $language][0].value,\n    heading[_key == $defaultLanguage][0].value,\n  ),\n  maxProducts,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n}': RELATED_PRODUCTS_SECTION_FRAGMENT_RESULT;
+    "{\n  _key,\n  _type,\n  desktopMediaPosition,\n  desktopMediaWidth,\n  mediaAspectRatio,\n  \"richtext\": coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n}": PRODUCT_INFORMATION_SECTION_FRAGMENT_RESULT;
+    '{\n  _key,\n  _type,\n  desktopColumns,\n  enableFiltering,\n  enableSorting,\n  mobileColumns,\n  productsPerPage,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n}': COLLECTION_PRODUCT_GRID_SECTION_FRAGMENT_RESULT;
+    '{\n  _key,\n  _type,\n  bannerHeight,\n  contentAlignment,\n  contentPosition,\n  overlayOpacity,\n  showDescription,\n  showImage,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n}': COLLECTION_BANNER_SECTION_FRAGMENT_RESULT;
+    "{\n  _key,\n  _type,\n  contentAlignment,\n  desktopContentPosition,\n  maxWidth,\n  \"richtext\": coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n}": RICHTEXT_SECTION_FRAGMENT_RESULT;
+    '{\n  _key,\n  _type,\n  arrows,\n  autoplay,\n  "title": coalesce(\n    title[_key == $language][0].value,\n    title[_key == $defaultLanguage][0].value,\n  ),\n  loop,\n  pagination,\n  slides[] {\n    _key,\n    image {\n  _type,\n  asset,\n  "altText": asset -> altText,\n  "_ref": asset._ref,\n  hotspot,\n  crop,\n},\n  },\n  slidesPerViewDesktop,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n}': CAROUSEL_SECTION_FRAGMENT_RESULT;
+    '{\n  _key,\n  _type,\n  collections[] -> {\n    store {\n      gid\n    }\n  },\n  desktopColumns,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n}': COLLECTION_LIST_SECTION_FRAGMENT_RESULT;
+    "{\n  _key,\n  _type,\n  mediaAspectRatio,\n  product -> {\n    store {\n      descriptionHtml,\n      \"firstVariant\": variants[0] -> {\n        store {\n          gid,\n          previewImageUrl,\n          price\n        }\n      },\n      gid,\n      options[] {\n        name,\n        values\n      },\n      previewImageUrl,\n      title\n    }\n  },\n  'richtext': coalesce(\n    richtext[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    richtext[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n}": FEATURED_PRODUCT_SECTION_FRAGMENT_RESULT;
+    '{\n  _key,\n  _type,\n  collection -> {\n    store {\n      gid,\n      slug,\n      title\n    }\n  },\n  desktopColumns,\n  "heading": coalesce(\n    heading[_key == $language][0].value,\n    heading[_key == $defaultLanguage][0].value,\n  ),\n  maxProducts,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n},\n  viewAll\n}': FEATURED_COLLECTION_SECTION_FRAGMENT_RESULT;
+    "{\n  _key,\n  _type,\n  backgroundImage {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  bannerHeight,\n  \"content\": coalesce(\n    content[_key == $language][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n    content[_key == $defaultLanguage][0].value[] {\n  ...,\n  _type == 'image' => {\n  _type,\n  asset,\n  \"altText\": asset -> altText,\n  \"_ref\": asset._ref,\n  hotspot,\n  crop,\n},\n  _type == 'button' => {\n    ...,\n    link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  },\n  _type == 'block' => {\n    ...,\n    markDefs[] {\n      ...,\n      _type == 'internalLink' => {\n  _key,\n  _type,\n  anchor,\n  link -> {\n  'documentType': _type,\n  'slug': coalesce(\n    slug,\n    store.slug\n  ) {\n    _type,\n    current\n  },\n},\n  name,\n},\n      _type == 'externalLink' => {\n  _key,\n  _type,\n  link,\n  name,\n  openInNewTab,\n},\n    }\n  }\n},\n  )[],\n  contentAlignment,\n  contentPosition,\n  overlayOpacity,\n  settings {\n  colorScheme -> {\n  background {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  border {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  card {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  cardForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  foreground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primary {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n  primaryForeground {\n  alpha,\n  hex,\n  hsl,\n  rgb,\n},\n},\n  customCss,\n  hide,\n  padding\n}\n}": IMAGE_BANNER_SECTION_FRAGMENT_RESULT;
   }
 }

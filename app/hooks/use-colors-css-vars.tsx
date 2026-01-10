@@ -1,5 +1,5 @@
 import type {FooterDataType, SectionDataType} from 'types';
-import type {ROOT_QUERYResult} from 'types/sanity/sanity.generated';
+import type {ROOT_QUERY_RESULT} from 'types/sanity/sanity.generated';
 
 import {darken, mix, readableColor, toRgba} from 'color2k';
 
@@ -7,9 +7,9 @@ import {useRootLoaderData} from '~/root';
 
 export type CmsSectionSettings = SectionDataType['settings'];
 export type FooterSettings = FooterDataType['settings'];
-type HeaderQuery = NonNullable<ROOT_QUERYResult['header']>;
+type HeaderQuery = NonNullable<ROOT_QUERY_RESULT['header']>;
 type CartColorScheme = {
-  colorScheme?: NonNullable<ROOT_QUERYResult['settings']>['cartColorScheme'];
+  colorScheme?: NonNullable<ROOT_QUERY_RESULT['settings']>['cartColorScheme'];
 };
 type Rgb =
   | null

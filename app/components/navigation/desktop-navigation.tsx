@@ -1,4 +1,4 @@
-import type {ROOT_QUERYResult} from 'types/sanity/sanity.generated';
+import type {ROOT_QUERY_RESULT} from 'types/sanity/sanity.generated';
 
 import {useEffect, useRef, useState} from 'react';
 
@@ -12,7 +12,7 @@ import {
 } from '../ui/navigation-menu';
 import {NestedNavigation} from './nested-navigation';
 
-export type NavigationProps = NonNullable<ROOT_QUERYResult['header']>['menu'];
+export type NavigationProps = NonNullable<ROOT_QUERY_RESULT['header']>['menu'];
 
 export function DesktopNavigation(props: {data?: NavigationProps}) {
   const menuRef = useRef<HTMLUListElement>(null);

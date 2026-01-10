@@ -6,7 +6,7 @@ import type {ImageUrlBuilder} from 'sanity';
 import type {I18nLocale} from 'types';
 import type {
   AspectRatios,
-  ROOT_QUERYResult,
+  ROOT_QUERY_RESULT,
 } from 'types/sanity/sanity.generated';
 
 import {useLocation} from 'react-router';
@@ -139,7 +139,7 @@ export function setShowTrailingZeroKeyValue(locale: I18nLocale) {
 
 export function statusMessage(
   status: FulfillmentStatus,
-  themeContent?: null | ROOT_QUERYResult['themeContent'],
+  themeContent?: null | ROOT_QUERY_RESULT['themeContent'],
 ) {
   const translations: Record<FulfillmentStatus, string> = {
     CANCELLED: themeContent?.account?.orderStatusCancelled || 'Cancelled',

@@ -1,4 +1,4 @@
-import type {ROOT_QUERYResult} from 'types/sanity/sanity.generated';
+import type {ROOT_QUERY_RESULT} from 'types/sanity/sanity.generated';
 
 import {Link} from 'react-router';
 import {cx} from 'class-variance-authority';
@@ -19,7 +19,7 @@ import {
 } from '../ui/carousel';
 
 type AnnouncementBarProps = NonNullable<
-  NonNullable<ROOT_QUERYResult['header']>['announcementBar']
+  NonNullable<ROOT_QUERY_RESULT['header']>['announcementBar']
 >[number];
 
 export function AnnouncementBar() {

@@ -12,8 +12,8 @@ import type {
 import type {BreadcrumbList, CollectionPage, Offer} from 'schema-dts';
 import type {SanityImage} from 'types';
 import type {
-  PAGE_QUERYResult,
-  ROOT_QUERYResult,
+  PAGE_QUERY_RESULT,
+  ROOT_QUERY_RESULT,
 } from 'types/sanity/sanity.generated';
 
 import {getImageDimensions} from '@sanity/asset-utils';
@@ -31,7 +31,7 @@ function root({
   sanity,
   url,
 }: {
-  root: ROOT_QUERYResult;
+  root: ROOT_QUERY_RESULT;
   sanity: SanityConfig;
   url: Request['url'];
 }): SeoConfig {
@@ -93,7 +93,7 @@ function home({
   page,
   sanity,
 }: {
-  page: PAGE_QUERYResult;
+  page: PAGE_QUERY_RESULT;
   sanity: SanityConfig;
 }): SeoConfig {
   const media = generateOGImageData({

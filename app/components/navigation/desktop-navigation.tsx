@@ -73,7 +73,7 @@ function CssVars(props: {dropdownWidth: number; viewportPosition: number}) {
 
 // Dynamically calculate the position of the <NavigationMenuPrimitive.Viewport /> based on the active item
 function useViewportPosition(
-  menuRef: React.RefObject<HTMLUListElement>,
+  menuRef: React.RefObject<HTMLUListElement | null>,
   activeItem: null | string | undefined,
   dropdownWidth: number,
 ) {

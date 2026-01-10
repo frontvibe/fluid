@@ -1,7 +1,8 @@
 import {cx} from 'class-variance-authority';
+import type {ComponentProps} from 'react';
 import {twMerge} from 'tailwind-merge';
 
-export type IconProps = JSX.IntrinsicElements['svg'] & {
+export type IconProps = ComponentProps<'svg'> & {
   direction?: 'down' | 'left' | 'right' | 'up';
 };
 

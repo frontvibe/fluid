@@ -1,4 +1,4 @@
-import type {ROOT_QUERYResult} from 'types/sanity/sanity.generated';
+import type {ROOT_QUERY_RESULT} from 'types/sanity/sanity.generated';
 
 import {useEffect, useRef, useState} from 'react';
 
@@ -12,7 +12,7 @@ import {
 } from '../ui/navigation-menu';
 import {NestedNavigation} from './nested-navigation';
 
-export type NavigationProps = NonNullable<ROOT_QUERYResult['header']>['menu'];
+export type NavigationProps = NonNullable<ROOT_QUERY_RESULT['header']>['menu'];
 
 export function DesktopNavigation(props: {data?: NavigationProps}) {
   const menuRef = useRef<HTMLUListElement>(null);
@@ -73,7 +73,7 @@ function CssVars(props: {dropdownWidth: number; viewportPosition: number}) {
 
 // Dynamically calculate the position of the <NavigationMenuPrimitive.Viewport /> based on the active item
 function useViewportPosition(
-  menuRef: React.RefObject<HTMLUListElement>,
+  menuRef: React.RefObject<HTMLUListElement | null>,
   activeItem: null | string | undefined,
   dropdownWidth: number,
 ) {

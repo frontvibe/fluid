@@ -6,32 +6,11 @@ import {defineConfig} from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 import {typegenWatcher} from './types/plugin';
+import {sanitySSRFix} from './vite/sanity-ssr-fix';
 
 export default defineConfig({
-  optimizeDeps: {
-    include: [
-      'react-use/esm/useMedia',
-      'react-use/esm/useDebounce',
-      '@shopify/hydrogen-react',
-      'radix-ui',
-      'class-variance-authority',
-      '@sanity/client/stega',
-      'color2k',
-      '@sanity/image-url',
-      'tailwind-merge',
-      '@sanity/visual-editing/react-router',
-      'embla-carousel-autoplay',
-      'motion/react',
-      '@tanem/react-nprogress',
-      '@sanity/asset-utils',
-      'embla-carousel-react',
-      '@portabletext/react',
-      'vaul',
-      '@shopify/hydrogen-react/Image',
-      '@vercel/stega',
-    ],
-  },
   plugins: [
+    sanitySSRFix(),
     hydrogen(),
     oxygen(),
     reactRouter(),
@@ -40,34 +19,47 @@ export default defineConfig({
     typegenWatcher(),
   ],
   build: {
-    // Allow a strict Content-Security-Policy
-    // withtout inlining assets as base64:
     assetsInlineLimit: 0,
   },
   resolve: {
     mainFields: ['browser', 'module', 'main'],
   },
+  optimizeDeps: {
+    include: [
+      '@portabletext/react',
+      '@sanity/asset-utils',
+      '@sanity/client/stega',
+      '@sanity/image-url',
+      '@sanity/visual-editing',
+      '@sanity/visual-editing/react-router',
+      '@shopify/hydrogen-react',
+      '@shopify/hydrogen-react/Image',
+      '@tanem/react-nprogress',
+      '@vercel/stega',
+      'class-variance-authority',
+      'color2k',
+      'embla-carousel-autoplay',
+      'embla-carousel-react',
+      'motion/react',
+      'radix-ui',
+      'react-use/esm/useDebounce',
+      'react-use/esm/useMedia',
+      'tailwind-merge',
+      'vaul',
+    ],
+  },
   ssr: {
     resolve: {
-      conditions: ['workerd', 'worker', 'browser'],
+      conditions: ['workerd', 'worker'],
     },
     optimizeDeps: {
-      /**
-       * Include dependencies here if they throw CJS<>ESM errors.
-       * For example, for the following error:
-       *
-       * > ReferenceError: module is not defined
-       * >   at /Users/.../node_modules/example-dep/index.js:1:1
-       *
-       * Include 'example-dep' in the array below.
-       * @see https://vitejs.dev/config/dep-optimization-options
-       */
       include: [
+        '@sanity/client',
+        '@sanity/core-loader',
+        '@sanity/image-url',
+        '@sanity/visual-editing',
         'radix-ui',
         'react-router',
-        'react-compiler-runtime',
-        '@sanity/image-url',
-        '@sanity/client',
       ],
     },
   },

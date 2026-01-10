@@ -1,4 +1,4 @@
-import type {COLLECTION_QUERYResult} from 'types/sanity/sanity.generated';
+import type {COLLECTION_QUERY_RESULT} from 'types/sanity/sanity.generated';
 import type {CollectionDetailsQuery} from 'types/shopify/storefrontapi.generated';
 
 import {Analytics} from '@shopify/hydrogen';
@@ -32,7 +32,10 @@ export async function loader({context, params, request}: Route.LoaderArgs) {
   };
 
   const collectionData = Promise.all([
-    sanity.loadQuery<COLLECTION_QUERYResult>(CMS_COLLECTION_QUERY, queryParams),
+    sanity.loadQuery<COLLECTION_QUERY_RESULT>(
+      CMS_COLLECTION_QUERY,
+      queryParams,
+    ),
     storefront.query<CollectionDetailsQuery>(COLLECTION_QUERY, {
       variables: {
         country: storefront.i18n.country,

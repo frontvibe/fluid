@@ -1,4 +1,4 @@
-import type {CropMode} from '@sanity/image-url/lib/types/types';
+import type {CropMode} from '@sanity/image-url';
 import type {FulfillmentStatus} from '@shopify/hydrogen/customer-account-api-types';
 import type {SelectedOption} from '@shopify/hydrogen/storefront-api-types';
 import type {ClassValue} from 'class-variance-authority/types';
@@ -6,12 +6,12 @@ import type {ImageUrlBuilder} from 'sanity';
 import type {I18nLocale} from 'types';
 import type {
   AspectRatios,
-  ROOT_QUERYResult,
+  ROOT_QUERY_RESULT,
 } from 'types/sanity/sanity.generated';
 
 import {useLocation} from 'react-router';
 import {stegaClean} from '@sanity/client/stega';
-import imageUrlBuilder from '@sanity/image-url';
+import {createImageUrlBuilder} from '@sanity/image-url';
 import {cx} from 'class-variance-authority';
 import {useMemo} from 'react';
 import {twMerge} from 'tailwind-merge';
@@ -139,7 +139,7 @@ export function setShowTrailingZeroKeyValue(locale: I18nLocale) {
 
 export function statusMessage(
   status: FulfillmentStatus,
-  themeContent?: null | ROOT_QUERYResult['themeContent'],
+  themeContent?: null | ROOT_QUERY_RESULT['themeContent'],
 ) {
   const translations: Record<FulfillmentStatus, string> = {
     CANCELLED: themeContent?.account?.orderStatusCancelled || 'Cancelled',
@@ -203,7 +203,7 @@ export function generateSanityImageUrl({
   width: number;
 }) {
   if (!ref) return null;
-  const urlBuilder = imageUrlBuilder({
+  const urlBuilder = createImageUrlBuilder({
     dataset,
     projectId,
   })

@@ -8,4 +8,12 @@ export default defineCliConfig({
     projectId,
     dataset,
   },
+  typegen: {
+    path: [
+      "'./app/{sanity,sections}/**/*.{ts,tsx}'",
+      "'./app/data/sanity/**/*.{ts,tsx}'",
+    ],
+    schema: './types/sanity/schema.json',
+    generates: './types/sanity/sanity.generated.d.ts',
+  },
 });

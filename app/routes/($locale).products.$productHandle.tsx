@@ -1,4 +1,4 @@
-import type {PRODUCT_QUERYResult} from 'types/sanity/sanity.generated';
+import type {PRODUCT_QUERY_RESULT} from 'types/sanity/sanity.generated';
 import type {ProductQuery} from 'types/shopify/storefrontapi.generated';
 
 import {
@@ -41,7 +41,7 @@ export async function loader({context, params, request}: Route.LoaderArgs) {
   };
 
   const productData = Promise.all([
-    sanity.loadQuery<PRODUCT_QUERYResult>(CMS_PRODUCT_QUERY, queryParams),
+    sanity.loadQuery<PRODUCT_QUERY_RESULT>(CMS_PRODUCT_QUERY, queryParams),
     storefront.query<ProductQuery>(PRODUCT_QUERY, {
       variables: {
         country: storefront.i18n.country,

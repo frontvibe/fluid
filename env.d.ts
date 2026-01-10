@@ -34,16 +34,11 @@ declare global {
 }
 
 declare module 'react-router' {
-  interface AppLoadContext
-    extends Awaited<ReturnType<typeof createAppLoadContext>> {}
+  interface AppLoadContext extends Awaited<
+    ReturnType<typeof createAppLoadContext>
+  > {}
 
   interface SessionData extends HydrogenSessionData {
     // declare local additions to the Hydrogen session data here
-  }
-}
-
-declare module 'react' {
-  interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
-    fetchpriority?: 'high' | 'low' | 'auto';
   }
 }

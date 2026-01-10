@@ -1,8 +1,8 @@
-import type {ROOT_QUERYResult} from 'types/sanity/sanity.generated';
+import type {ROOT_QUERY_RESULT} from 'types/sanity/sanity.generated';
 
 import {getFonts} from '~/components/fonts';
 
-export type FontsQuery = NonNullable<ROOT_QUERYResult['fonts']>;
+export type FontsQuery = NonNullable<ROOT_QUERY_RESULT['fonts']>;
 
 type PreloadLink = {
   as: string;

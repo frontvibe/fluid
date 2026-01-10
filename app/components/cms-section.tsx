@@ -78,7 +78,7 @@ function SectionWrapper(props: {
       )}
     </footer>
   ) : (
-    <SectionContext.Provider
+    <SectionContext
       value={{
         encodeDataAttribute: props.encodeDataAttribute,
         id: _key,
@@ -97,7 +97,7 @@ function SectionWrapper(props: {
           <style dangerouslySetInnerHTML={{__html: customCss}} />
         )}
       </section>
-    </SectionContext.Provider>
+    </SectionContext>
   );
 }
 

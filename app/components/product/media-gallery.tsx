@@ -70,7 +70,7 @@ function MainMedia({
         className={cn('h-auto w-full', aspectRatio?.className)}
         data={media.image}
         decoding="sync"
-        fetchpriority="high"
+        fetchPriority="high"
         loading="eager"
         sizes="(min-width: 1024px) 50vw, 100vw"
       />
@@ -120,7 +120,7 @@ function MobileCarousel({
                     )}
                     data={media.image}
                     decoding={index === 0 ? 'sync' : 'async'}
-                    fetchpriority={index === 0 ? 'high' : 'low'}
+                    fetchPriority={index === 0 ? 'high' : 'low'}
                     loading={index === 0 ? 'eager' : 'lazy'}
                     sizes="100vw"
                   />

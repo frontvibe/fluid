@@ -7,7 +7,7 @@ import type {
 } from '@shopify/hydrogen/storefront-api-types';
 
 import type {
-  ALL_SECTIONS_QUERYResult,
+  ALL_SECTIONS_QUERY_RESULT,
   internalGroqTypeReferenceTo,
   Richtext,
   SanityImageCrop,
@@ -38,23 +38,23 @@ export type SectionDefaultProps = {
  * All possible sections _types
  */
 type AllSectionsTypes = NonNullable<
-  NonNullable<ALL_SECTIONS_QUERYResult>['sections']
+  NonNullable<ALL_SECTIONS_QUERY_RESULT>['sections']
 >[number]['_type'];
 
 type AllFootersTypes = NonNullable<
-  NonNullable<ALL_SECTIONS_QUERYResult>['footers']
+  NonNullable<ALL_SECTIONS_QUERY_RESULT>['footers']
 >[number]['_type'];
 
 export type SectionDataType = NonNullable<
-  NonNullable<ALL_SECTIONS_QUERYResult>['sections']
+  NonNullable<ALL_SECTIONS_QUERY_RESULT>['sections']
 >[0];
 
 export type FooterDataType = NonNullable<
-  NonNullable<ALL_SECTIONS_QUERYResult>['footers']
+  NonNullable<ALL_SECTIONS_QUERY_RESULT>['footers']
 >[0];
 
 export type SectionOfType<T extends AllSectionsTypes> =
-  NonNullable<ALL_SECTIONS_QUERYResult>['sections'] extends Array<
+  NonNullable<ALL_SECTIONS_QUERY_RESULT>['sections'] extends Array<
     infer S
   > | null
     ? S extends {_type: T}
@@ -63,7 +63,9 @@ export type SectionOfType<T extends AllSectionsTypes> =
     : never;
 
 export type FooterOfType<T extends AllFootersTypes> =
-  NonNullable<ALL_SECTIONS_QUERYResult>['footers'] extends Array<infer S> | null
+  NonNullable<ALL_SECTIONS_QUERY_RESULT>['footers'] extends Array<
+    infer S
+  > | null
     ? S extends {_type: T}
       ? S
       : never

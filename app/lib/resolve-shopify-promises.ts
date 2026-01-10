@@ -1,9 +1,9 @@
 import type {Storefront} from '@shopify/hydrogen';
 import type {
-  COLLECTION_QUERYResult,
-  PAGE_QUERYResult,
-  PRODUCT_QUERYResult,
-  ROOT_QUERYResult,
+  COLLECTION_QUERY_RESULT,
+  PAGE_QUERY_RESULT,
+  PRODUCT_QUERY_RESULT,
+  ROOT_QUERY_RESULT,
 } from 'types/sanity/sanity.generated';
 import type {
   CollectionsQuery,
@@ -27,10 +27,10 @@ import {
 
 import {getFiltersFromParam} from './shopify-collection';
 
-type SanityPageData = PAGE_QUERYResult;
-type SanityProductData = PRODUCT_QUERYResult;
-type SanityCollectionData = COLLECTION_QUERYResult;
-type SanityRootData = ROOT_QUERYResult;
+type SanityPageData = PAGE_QUERY_RESULT;
+type SanityProductData = PRODUCT_QUERY_RESULT;
+type SanityCollectionData = COLLECTION_QUERY_RESULT;
+type SanityRootData = ROOT_QUERY_RESULT;
 type PromiseResolverArgs = {
   collectionId?: string;
   document: {

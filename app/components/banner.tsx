@@ -4,7 +4,6 @@ import type {
 } from 'types/sanity/sanity.generated';
 
 import {stegaClean} from '@sanity/client/stega';
-import {forwardRef} from 'react';
 
 import {cn} from '~/lib/utils';
 
@@ -13,17 +12,17 @@ import {
   contentPositionVariants,
 } from './cva/content-alignment';
 
-const Banner = forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement> & {
-    height: null | number;
-  }
->(({className, height, ...props}, ref) => {
+function Banner({
+  className,
+  height,
+  ...props
+}: React.ComponentProps<'div'> & {
+  height: null | number;
+}) {
   const bannerHeight = `${height ?? 200}px`;
   return (
     <div
       className={cn('relative h-[var(--banner-height)]', className)}
-      ref={ref}
       style={
         {
           '--banner-height': bannerHeight,
@@ -32,31 +31,28 @@ const Banner = forwardRef<
       {...props}
     />
   );
-});
-Banner.displayName = 'Banner';
+}
 
-const BannerMedia = forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({className, ...props}, ref) => (
-  <div
-    className={cn('absolute inset-0 overflow-hidden', className)}
-    ref={ref}
-    {...props}
-  >
-    <div className="[&_img]:h-(--banner-height) [&_img]:w-screen [&_img]:object-cover">
-      {props.children}
+function BannerMedia({className, ...props}: React.ComponentProps<'div'>) {
+  return (
+    <div
+      className={cn('absolute inset-0 overflow-hidden', className)}
+      {...props}
+    >
+      <div className="[&_img]:h-(--banner-height) [&_img]:w-screen [&_img]:object-cover">
+        {props.children}
+      </div>
     </div>
-  </div>
-));
-BannerMedia.displayName = 'BannerMedia';
+  );
+}
 
-const BannerMediaOverlay = forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement> & {
-    opacity?: null | number;
-  }
->(({className, opacity, ...props}, ref) => {
+function BannerMediaOverlay({
+  className,
+  opacity,
+  ...props
+}: React.ComponentProps<'div'> & {
+  opacity?: null | number;
+}) {
   const style = {
     '--opacity': Number(opacity) ? `${opacity}%` : '0%',
   } as React.CSSProperties;
@@ -67,21 +63,21 @@ const BannerMediaOverlay = forwardRef<
     <div
       aria-hidden
       className={cn('absolute inset-0 z-2 bg-black/(--opacity)', className)}
-      ref={ref}
       style={style}
       {...props}
     />
   );
-});
-BannerMediaOverlay.displayName = 'BannerMediaOverlay';
+}
 
-const BannerContent = forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement> & {
-    contentAlignment: ContentAlignment | null;
-    contentPosition: ContentPosition | null;
-  }
->(({className, contentAlignment, contentPosition, ...props}, ref) => {
+function BannerContent({
+  className,
+  contentAlignment,
+  contentPosition,
+  ...props
+}: React.ComponentProps<'div'> & {
+  contentAlignment: ContentAlignment | null;
+  contentPosition: ContentPosition | null;
+}) {
   // Remove all stega encoded data
   const cleanContentPosition = stegaClean(contentPosition);
   const cleanContentAlignement = stegaClean(contentAlignment);
@@ -98,13 +94,11 @@ const BannerContent = forwardRef<
         }),
         className,
       )}
-      ref={ref}
       {...props}
     >
       <div className={cn('max-w-[40rem]')}>{props.children}</div>
     </div>
   );
-});
-BannerContent.displayName = 'BannerContent';
+}
 
 export {Banner, BannerContent, BannerMedia, BannerMediaOverlay};

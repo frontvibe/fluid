@@ -1,4 +1,4 @@
-import type {PAGE_QUERYResult} from 'types/sanity/sanity.generated';
+import type {PAGE_QUERY_RESULT} from 'types/sanity/sanity.generated';
 import type {Route} from './+types/($locale).$';
 
 import {DEFAULT_LOCALE} from 'countries';
@@ -24,7 +24,7 @@ export async function loader({context, request}: Route.LoaderArgs) {
     language,
   };
 
-  const page = await sanity.loadQuery<PAGE_QUERYResult>(
+  const page = await sanity.loadQuery<PAGE_QUERY_RESULT>(
     PAGE_QUERY,
     queryParams,
   );

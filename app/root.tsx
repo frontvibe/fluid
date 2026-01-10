@@ -1,6 +1,6 @@
 import type {ShouldRevalidateFunction} from 'react-router';
 
-import type {ROOT_QUERYResult} from 'types/sanity/sanity.generated';
+import type {ROOT_QUERY_RESULT} from 'types/sanity/sanity.generated';
 
 import {
   isRouteErrorResponse,
@@ -89,7 +89,7 @@ export async function loader({context, request}: Route.LoaderArgs) {
     language,
   };
 
-  const sanityRoot = await sanity.loadQuery<ROOT_QUERYResult>(
+  const sanityRoot = await sanity.loadQuery<ROOT_QUERY_RESULT>(
     ROOT_QUERY,
     queryParams,
   );

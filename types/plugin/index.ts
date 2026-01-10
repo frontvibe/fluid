@@ -1,7 +1,7 @@
-import type {FilterPattern, Plugin} from 'vite';
 import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 
+import type {FilterPattern, Plugin} from 'vite';
 import {createFilter} from 'vite';
 import {execa} from 'execa';
 

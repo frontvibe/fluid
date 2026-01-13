@@ -131,6 +131,12 @@
     "dist",
     "studio/*"
   ],
+  "overrides": {
+    "uuid": "^11.1.0"
+  },
+  "resolutions": {
+    "uuid": "^11.1.0"
+  },
   "pnpm": {
     "overrides": {
       "uuid": "^11.1.0"

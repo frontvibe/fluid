@@ -74,7 +74,7 @@
     "vaul": "^1.1.2"
   },
   "devDependencies": {
-    "@eslint/compat": "^1.4.1",
+    "@eslint/compat": "^2.0.1",
     "@eslint/eslintrc": "^3.3.3",
     "@eslint/js": "^9.39.2",
     "@graphql-codegen/cli": "^6.1.1",

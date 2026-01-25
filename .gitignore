@@ -16,6 +16,7 @@ node_modules
 .DS_Store
 *.pem
 .vercel
+.vercel/output/
 .env*.local
 
 # Sanity scripts cache

@@ -5,6 +5,11 @@ import {createContentSecurityPolicy} from '@shopify/hydrogen';
 import {isbot} from 'isbot';
 import {renderToReadableStream} from 'react-dom/server';
 
+import {
+  createSafeSignal,
+  wrapStreamWithCompletion,
+} from '../lib/hydrogen-vercel';
+
 export default async function handleRequest(
   request: Request,
   responseStatusCode: number,
@@ -22,6 +27,10 @@ export default async function handleRequest(
     }),
   });
 
+  // Create a safe abort signal to prevent "Controller is already closed" errors
+  // when the stream completes but the request signal fires afterwards
+  const {signal, markComplete} = createSafeSignal(request.signal);
+
   const body = await renderToReadableStream(
     <NonceProvider>
       <ServerRouter
@@ -36,7 +45,7 @@ export default async function handleRequest(
         console.error(error);
         responseStatusCode = 500;
       },
-      signal: request.signal,
+      signal,
     },
   );
 
@@ -44,10 +53,13 @@ export default async function handleRequest(
     await body.allReady;
   }
 
+  // Wrap the stream to mark completion before closing
+  const safeBody = wrapStreamWithCompletion(body, markComplete);
+
   responseHeaders.set('Content-Type', 'text/html');
   responseHeaders.set('Content-Security-Policy', header);
 
-  return new Response(body, {
+  return new Response(safeBody, {
     headers: responseHeaders,
     status: responseStatusCode,
   });

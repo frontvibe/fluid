@@ -5,6 +5,7 @@ import {SANITY_API_VERSION, SANITY_STUDIO_PATH} from '~/sanity/constants';
 
 import {envVariables} from './env.server';
 import {AppSession} from './hydrogen.session.server';
+import {createUpstashCache} from './redis-cache';
 import {createSanityContext} from './sanity/sanity.server';
 import {SanitySession} from './sanity/sanity.session.server';
 import {CART_QUERY_FRAGMENT} from '~/data/shopify/queries';
@@ -25,9 +26,12 @@ export async function createAppLoadContext(
 
   /*
    * Open a cache instance in the worker and a custom session instance.
+   * Falls back to Upstash Redis cache on Vercel (where caches API is unavailable).
    */
   const [cache, session, sanitySession] = await Promise.all([
-    caches.open('hydrogen'),
+    typeof caches !== 'undefined'
+      ? caches.open('hydrogen')
+      : Promise.resolve(createUpstashCache()),
     AppSession.init(request, [env.SESSION_SECRET]),
     SanitySession.init(request, [env.SESSION_SECRET]),
   ]);

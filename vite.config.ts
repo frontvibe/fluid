@@ -5,19 +5,21 @@ import tailwindcss from '@tailwindcss/vite';
 import {defineConfig} from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
+import {vercel} from './lib/hydrogen-vercel';
 import {typegenWatcher} from './types/plugin';
 import {sanitySSRFix} from './vite/sanity-ssr-fix';
 
-export default defineConfig({
+export default defineConfig(({command}) => ({
   plugins: [
     sanitySSRFix(),
     hydrogen(),
-    oxygen(),
+    command === 'serve' ? oxygen() : null,
+    vercel(),
     reactRouter(),
     tsconfigPaths(),
     tailwindcss(),
     typegenWatcher(),
-  ],
+  ].filter(Boolean),
   build: {
     assetsInlineLimit: 0,
   },
@@ -68,4 +70,4 @@ export default defineConfig({
       ignored: ['**/types/{sanity,shopify}/**', '**/types/index.ts'],
     },
   },
-});
+}));

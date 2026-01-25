@@ -9,30 +9,7 @@ import {createAppLoadContext} from '~/lib/context';
  */
 function getEnv(env?: Env): Env {
   if (env?.SESSION_SECRET) return env;
-  return {
-    NODE_ENV: process.env.NODE_ENV,
-    SESSION_SECRET: process.env.SESSION_SECRET || '',
-    PUBLIC_STORE_DOMAIN: process.env.PUBLIC_STORE_DOMAIN || '',
-    PUBLIC_CHECKOUT_DOMAIN: process.env.PUBLIC_CHECKOUT_DOMAIN || '',
-    PUBLIC_STOREFRONT_API_TOKEN: process.env.PUBLIC_STOREFRONT_API_TOKEN || '',
-    PUBLIC_STOREFRONT_API_VERSION:
-      process.env.PUBLIC_STOREFRONT_API_VERSION || '',
-    PUBLIC_STOREFRONT_ID: process.env.PUBLIC_STOREFRONT_ID || '',
-    PRIVATE_STOREFRONT_API_TOKEN:
-      process.env.PRIVATE_STOREFRONT_API_TOKEN || '',
-    PUBLIC_CUSTOMER_ACCOUNT_API_CLIENT_ID:
-      process.env.PUBLIC_CUSTOMER_ACCOUNT_API_CLIENT_ID || '',
-    PUBLIC_CUSTOMER_ACCOUNT_API_URL:
-      process.env.PUBLIC_CUSTOMER_ACCOUNT_API_URL || '',
-    PUBLIC_SANITY_STUDIO_PROJECT_ID:
-      process.env.PUBLIC_SANITY_STUDIO_PROJECT_ID || '',
-    PUBLIC_SANITY_STUDIO_DATASET:
-      process.env.PUBLIC_SANITY_STUDIO_DATASET || '',
-    SANITY_STUDIO_USE_PREVIEW_MODE:
-      process.env.SANITY_STUDIO_USE_PREVIEW_MODE || '',
-    SANITY_STUDIO_TOKEN: process.env.SANITY_STUDIO_TOKEN || '',
-    SHOP_ID: process.env.SHOP_ID || '',
-  } as Env;
+  return process.env as unknown as Env;
 }
 
 /**

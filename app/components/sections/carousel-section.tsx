@@ -19,7 +19,7 @@ import {
 export function CarouselSection(
   props: SectionDefaultProps & {data: SectionOfType<'carouselSection'>},
 ) {
-  const {data} = props;
+  const {data, encodeDataAttribute} = props;
   const {arrows, autoplay, loop, pagination, slides, title} = data;
   const ref = useRef<HTMLDivElement>(null);
   const slidesPerViewDesktop = data.slidesPerViewDesktop || 3;
@@ -55,11 +55,12 @@ export function CarouselSection(
         >
           <div className="relative">
             <CarouselContent>
-              {slides.map((slide) => (
+              {slides.map((slide, index) => (
                 <CarouselItem className="[&>span]:h-full" key={slide._key}>
                   <SanityImage
                     className="size-full object-cover"
                     data={slide.image}
+                    dataSanity={encodeDataAttribute?.(['slides', index, 'image'])}
                     loading={inView ? 'eager' : 'lazy'}
                     showBorder={false}
                     showShadow={false}

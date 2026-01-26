@@ -58,6 +58,7 @@ function SanityImage({
   aspectRatio,
   className,
   data,
+  dataSanity,
   decoding = 'async',
   loading = 'lazy',
   lqip = true,
@@ -198,6 +199,7 @@ function SanityImage({
           '[box-shadow:rgb(var(--shadow)_/_var(--media-shadow-opacity))_var(--media-shadow-horizontal-offset)_var(--media-shadow-vertical-offset)_var(--media-shadow-blur-radius)_0px]',
         className,
       )}
+      data-sanity={dataSanity}
       decoding={decoding}
       height={aspectRatioHeight ? aspectRatioHeight * 100 : height}
       loading={loading}

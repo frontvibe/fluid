@@ -18,6 +18,7 @@ import {getIntValue} from './utils';
 
 export const DEFAULT_PRODUCT_TEMPLATE =
   defineQuery(`*[_type == 'productTemplate' && default == true][0] {
+    _id,
     _type,
     name,
     sections[] {
@@ -30,6 +31,7 @@ export const DEFAULT_PRODUCT_TEMPLATE =
 
 export const DEFAULT_COLLECTION_TEMPLATE =
   defineQuery(`*[_type == 'collectionTemplate' && default == true][0] {
+    _id,
     _type,
     name,
     sections[] {
@@ -49,6 +51,8 @@ export const ROOT_QUERY = defineQuery(`{
     extra ${FONT_FRAGMENT},
   },
   "footer": *[_type == 'footer'][0] {
+    _id,
+    _type,
     "footer": footers[0] {
       _key,
       _type,
@@ -72,6 +76,8 @@ export const COLLECTION_QUERY = defineQuery(`{
       gid,
     },
     template -> {
+      _id,
+      _type,
       sections[] {
         _key,
         _type,
@@ -87,6 +93,7 @@ export const PAGE_QUERY =
   defineQuery(`*[(_type == "page" && ($handle != "home" && slug.current == $handle)) || (
     _type == "home" && $handle == "home"
   )][0] {
+    _id,
     _type,
     sections[] {
       _key,
@@ -107,6 +114,8 @@ export const PRODUCT_QUERY = defineQuery(`{
       gid,
     },
     template -> {
+      _id,
+      _type,
       sections[] {
         _key,
         _type,

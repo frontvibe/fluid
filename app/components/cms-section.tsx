@@ -1,7 +1,10 @@
-import type {EncodeDataAttributeCallback} from '@sanity/react-loader';
+import type {
+  EncodeDataAttributeCallback,
+  StudioPathLike,
+} from '@sanity/react-loader';
 import type {FooterDataType, SectionDataType} from 'types';
 
-import {createContext, useContext, useMemo} from 'react';
+import {createContext, useCallback, useContext, useMemo} from 'react';
 
 import {
   useCardColorsCssVars,
@@ -26,16 +29,32 @@ export function CmsSection(props: {
   const type = _type;
   const Section = useMemo(() => sections[type], [type]);
 
+  // Create a scoped encodeDataAttribute that prepends the section path
+  const scopedEncodeDataAttribute: EncodeDataAttributeCallback | undefined =
+    useCallback(
+      (path: StudioPathLike) => {
+        if (!encodeDataAttribute || props.index === undefined) return undefined;
+        const pathArray = Array.isArray(path) ? path : [path];
+        return encodeDataAttribute(['sections', props.index, ...pathArray]);
+      },
+      [encodeDataAttribute, props.index],
+    );
+
+  const sectionEncodeDataAttribute =
+    encodeDataAttribute && props.index !== undefined
+      ? scopedEncodeDataAttribute
+      : undefined;
+
   if (settings?.hide) return null;
 
   return Section ? (
     <SectionWrapper
       data={data}
-      encodeDataAttribute={encodeDataAttribute}
+      encodeDataAttribute={sectionEncodeDataAttribute}
       index={props.index}
       type={props.type}
     >
-      <Section data={data} encodeDataAttribute={encodeDataAttribute} />
+      <Section data={data} encodeDataAttribute={sectionEncodeDataAttribute} />
     </SectionWrapper>
   ) : isDev ? (
     <MissingSection type={type} />

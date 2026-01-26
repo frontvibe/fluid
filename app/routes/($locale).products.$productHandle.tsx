@@ -14,6 +14,7 @@ import type {Route} from './+types/($locale).products.$productHandle';
 
 import {CmsSection} from '~/components/cms-section';
 import {PRODUCT_QUERY as CMS_PRODUCT_QUERY} from '~/data/sanity/queries';
+import {useEncodeDataAttribute} from '~/hooks/use-encode-data-attribute';
 import {PRODUCT_QUERY} from '~/data/shopify/queries';
 import {resolveShopifyPromises} from '~/lib/resolve-shopify-promises';
 import {getSeoMetaFromMatches} from '~/lib/seo';
@@ -104,13 +105,19 @@ export default function Product({loaderData}: Route.ComponentProps) {
   );
 
   const template = data?.product?.template || data?.defaultProductTemplate;
+  const encodeDataAttribute = useEncodeDataAttribute(template ?? {});
 
   return (
     <ProductProvider product={product}>
       {template?.sections &&
         template.sections.length > 0 &&
         template.sections.map((section, index) => (
-          <CmsSection data={section} index={index} key={section._key} />
+          <CmsSection
+            data={section}
+            encodeDataAttribute={encodeDataAttribute}
+            index={index}
+            key={section._key}
+          />
         ))}
       <Analytics.ProductView
         data={{

@@ -21,17 +21,17 @@ type ImageBannerSectionProps = SectionOfType<'imageBannerSection'>;
 export function ImageBannerSection(
   props: SectionDefaultProps & {data: ImageBannerSectionProps},
 ) {
-  const {data} = props;
+  const {data, encodeDataAttribute} = props;
   const {contentAlignment, contentPosition, overlayOpacity} = data;
   const section = useSection();
 
-  // Todo: add encodeDataAttribute to SanityImage
   return (
     <Banner height={data.bannerHeight}>
       <BannerMedia>
         <SanityImage
           aspectRatio="16/9"
           data={data.backgroundImage}
+          dataSanity={encodeDataAttribute?.('backgroundImage')}
           decoding="sync"
           draggable={false}
           fetchPriority={section?.index === 0 ? 'high' : 'auto'}

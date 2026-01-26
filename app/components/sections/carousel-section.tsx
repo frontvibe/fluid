@@ -60,7 +60,11 @@ export function CarouselSection(
                   <SanityImage
                     className="size-full object-cover"
                     data={slide.image}
-                    dataSanity={encodeDataAttribute?.(['slides', index, 'image'])}
+                    dataSanity={encodeDataAttribute?.([
+                      'slides',
+                      index,
+                      'image',
+                    ])}
                     loading={inView ? 'eager' : 'lazy'}
                     showBorder={false}
                     showShadow={false}

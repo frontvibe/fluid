@@ -103,7 +103,7 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
     "execa": "^9.6.1",
-    "globals": "^16.5.0",
+    "globals": "^17.1.0",
     "graphql-config": "^5.1.5",
     "hydrogen-sanity": "^6.1.0",
     "prettier": "^3.8.1",

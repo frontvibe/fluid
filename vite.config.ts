@@ -2,15 +2,15 @@ import {reactRouter} from '@react-router/dev/vite';
 import {hydrogen} from '@shopify/hydrogen/vite';
 import {oxygen} from '@shopify/mini-oxygen/vite';
 import tailwindcss from '@tailwindcss/vite';
+import {sanity} from 'hydrogen-sanity/vite';
 import {defineConfig} from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 import {typegenWatcher} from './types/plugin';
-import {sanitySSRFix} from './vite/sanity-ssr-fix';
 
 export default defineConfig({
   plugins: [
-    sanitySSRFix(),
+    sanity(),
     hydrogen(),
     oxygen(),
     reactRouter(),
@@ -54,7 +54,6 @@ export default defineConfig({
     },
     optimizeDeps: {
       include: [
-        '@sanity/client',
         '@sanity/core-loader',
         '@sanity/image-url',
         '@sanity/visual-editing',

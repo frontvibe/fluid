@@ -57,8 +57,8 @@ importers:
         specifier: ^5.2.1
         version: 5.2.1(@emotion/is-prop-valid@1.4.0)(@sanity/client@7.15.0)(@sanity/types@5.9.0(@types/react@19.2.14))(react-dom@19.2.4(react@19.2.4))(react-is@19.2.4)(react-router@7.13.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(styled-components@6.3.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(typescript@5.9.3)
       '@shopify/hydrogen':
-        specifier: ^2025.10.1
-        version: 2025.10.1(@react-router/dev@7.13.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(lightningcss@1.30.2)(react-router@7.13.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(terser@5.39.0)(tsx@4.21.0)(typescript@5.9.3)(vite@6.4.1(@types/node@25.2.3)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.39.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react-router@7.13.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(three@0.139.2)(vite@6.4.1(@types/node@25.2.3)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.39.0)(tsx@4.21.0)(yaml@2.8.2))(xstate@5.28.0)
+        specifier: ^2026.1.0
+        version: 2026.1.0(@react-router/dev@7.13.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(lightningcss@1.30.2)(react-router@7.13.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(terser@5.39.0)(tsx@4.21.0)(typescript@5.9.3)(vite@6.4.1(@types/node@25.2.3)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.39.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react-router@7.13.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(three@0.139.2)(vite@6.4.1(@types/node@25.2.3)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.39.0)(tsx@4.21.0)(yaml@2.8.2))(xstate@5.28.0)
       '@shopify/hydrogen-react':
         specifier: ^2026.1.0
         version: 2026.1.0(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(three@0.139.2)(vite@6.4.1(@types/node@25.2.3)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.39.0)(tsx@4.21.0)(yaml@2.8.2))(xstate@5.28.0)
@@ -260,7 +260,7 @@ importers:
         version: 5.1.5(@types/node@25.2.3)(graphql@16.12.0)(typescript@5.9.3)
       hydrogen-sanity:
         specifier: ^6.1.0
-        version: 6.1.0(731fe301f98fe4cf1ae81c46506eb90d)
+        version: 6.1.0(bd792925e2d118891eb9811e2d9afff2)
       prettier:
         specifier: ^3.8.1
         version: 3.8.1
@@ -4197,14 +4197,6 @@ packages:
   '@shopify/hydrogen-codegen@0.3.3':
     resolution: {integrity: sha512-Kqtea44dALwjgd+O4bSskBj/zTJXwfAnkBU9jkBwMqcEGvoz0y3TCUcAxdBtJNI07vt6LTzmXmNU9dbql1HDzQ==, tarball: https://registry.npmjs.org/@shopify/hydrogen-codegen/-/hydrogen-codegen-0.3.3.tgz}
 
-  '@shopify/hydrogen-react@2025.10.0':
-    resolution: {integrity: sha512-8zZP/2/kzZ++Yq20ndcCczH/2PcDkOcuuKAF7dwaja5cSAGl44x8Xp89XsTKfKBOWstb0YMuz+cAiElcIJ8caw==, tarball: https://registry.npmjs.org/@shopify/hydrogen-react/-/hydrogen-react-2025.10.0.tgz}
-    engines: {node: '>=18.0.0'}
-    peerDependencies:
-      react: ^18.3.1 || ~19.0.3 || ~19.1.4 || ^19.2.3
-      react-dom: ^18.3.1 || ~19.0.3 || ~19.1.4 || ^19.2.3
-      vite: ^5.1.0 || ^6.2.1
-
   '@shopify/hydrogen-react@2026.1.0':
     resolution: {integrity: sha512-rlj6CNlOAy2k6vHd+FuC6N0e/RkHzZ07kuQCxP9f+rqmSap3OztV8RaKX7UpRt56bvP2NI9GHnhDg5JfJEMhug==, tarball: https://registry.npmjs.org/@shopify/hydrogen-react/-/hydrogen-react-2026.1.0.tgz}
     engines: {node: '>=18.0.0'}
@@ -4213,8 +4205,8 @@ packages:
       react-dom: ^18.3.1 || ~19.0.3 || ~19.1.4 || ^19.2.3
       vite: ^5.1.0 || ^6.2.1
 
-  '@shopify/hydrogen@2025.10.1':
-    resolution: {integrity: sha512-FJGjn2Ywflw4a2YZNqIGf9J2h5AYmoCW2vA1qPT3/Gn9brwHYXegf3QDYImpwgTUeuZ/cGNwmPphu/WcoI5QIw==, tarball: https://registry.npmjs.org/@shopify/hydrogen/-/hydrogen-2025.10.1.tgz}
+  '@shopify/hydrogen@2026.1.0':
+    resolution: {integrity: sha512-KMWI5FdkkMgIGtSObDGLLWapZvlnv4XDnKsTZD4TP1UpjEvTJKvzTYKlYKFNvzS/CY/OpEFVewgLiFlDo2diZA==, tarball: https://registry.npmjs.org/@shopify/hydrogen/-/hydrogen-2026.1.0.tgz}
     peerDependencies:
       '@react-router/dev': 7.12.0
       react: ^18.3.1 || ~19.0.3 || ~19.1.4 || ^19.2.3
@@ -14402,24 +14394,6 @@ snapshots:
       - graphql
       - graphql-sock
 
-  '@shopify/hydrogen-react@2025.10.0(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(three@0.139.2)(vite@6.4.1(@types/node@25.2.3)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.39.0)(tsx@4.21.0)(yaml@2.8.2))(xstate@5.28.0)':
-    dependencies:
-      '@google/model-viewer': 4.1.0(three@0.139.2)
-      '@xstate/fsm': 2.0.0
-      '@xstate/react': 3.2.1(@types/react@19.2.14)(@xstate/fsm@2.0.0)(react@19.2.4)(xstate@5.28.0)
-      graphql: 16.12.0
-      react: 19.2.4
-      react-dom: 19.2.4(react@19.2.4)
-      type-fest: 4.41.0
-      use-isomorphic-layout-effect: 1.2.1(@types/react@19.2.14)(react@19.2.4)
-      use-sync-external-store: 1.6.0(react@19.2.4)
-      vite: 6.4.1(@types/node@25.2.3)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.39.0)(tsx@4.21.0)(yaml@2.8.2)
-      worktop: 0.7.3
-    transitivePeerDependencies:
-      - '@types/react'
-      - three
-      - xstate
-
   '@shopify/hydrogen-react@2026.1.0(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(three@0.139.2)(vite@6.4.1(@types/node@25.2.3)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.39.0)(tsx@4.21.0)(yaml@2.8.2))(xstate@5.28.0)':
     dependencies:
       '@google/model-viewer': 4.1.0(three@0.139.2)
@@ -14438,11 +14412,11 @@ snapshots:
       - three
       - xstate
 
-  '@shopify/hydrogen@2025.10.1(@react-router/dev@7.13.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(lightningcss@1.30.2)(react-router@7.13.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(terser@5.39.0)(tsx@4.21.0)(typescript@5.9.3)(vite@6.4.1(@types/node@25.2.3)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.39.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react-router@7.13.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(three@0.139.2)(vite@6.4.1(@types/node@25.2.3)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.39.0)(tsx@4.21.0)(yaml@2.8.2))(xstate@5.28.0)':
+  '@shopify/hydrogen@2026.1.0(@react-router/dev@7.13.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(lightningcss@1.30.2)(react-router@7.13.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(terser@5.39.0)(tsx@4.21.0)(typescript@5.9.3)(vite@6.4.1(@types/node@25.2.3)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.39.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react-router@7.13.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(three@0.139.2)(vite@6.4.1(@types/node@25.2.3)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.39.0)(tsx@4.21.0)(yaml@2.8.2))(xstate@5.28.0)':
     dependencies:
       '@react-router/dev': 7.13.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(lightningcss@1.30.2)(react-router@7.13.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(terser@5.39.0)(tsx@4.21.0)(typescript@5.9.3)(vite@6.4.1(@types/node@25.2.3)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.39.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2)
       '@shopify/graphql-client': 1.4.1
-      '@shopify/hydrogen-react': 2025.10.0(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(three@0.139.2)(vite@6.4.1(@types/node@25.2.3)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.39.0)(tsx@4.21.0)(yaml@2.8.2))(xstate@5.28.0)
+      '@shopify/hydrogen-react': 2026.1.0(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(three@0.139.2)(vite@6.4.1(@types/node@25.2.3)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.39.0)(tsx@4.21.0)(yaml@2.8.2))(xstate@5.28.0)
       content-security-policy-builder: 2.3.0
       flame-chart-js: 2.3.1
       isbot: 5.1.35
@@ -17094,7 +17068,7 @@ snapshots:
 
   humanize-list@1.0.1: {}
 
-  hydrogen-sanity@6.1.0(731fe301f98fe4cf1ae81c46506eb90d):
+  hydrogen-sanity@6.1.0(bd792925e2d118891eb9811e2d9afff2):
     dependencies:
       '@sanity/client': 7.15.0(debug@4.4.3)
       '@sanity/comlink': 4.0.1
@@ -17104,7 +17078,7 @@ snapshots:
       '@sanity/preview-url-secret': 4.0.3(@sanity/client@7.15.0)
       '@sanity/react-loader': 2.0.7(@sanity/types@5.9.0(@types/react@19.2.14))(react@19.2.4)(typescript@5.9.3)
       '@sanity/visual-editing': 4.0.3(@emotion/is-prop-valid@1.4.0)(@sanity/client@7.15.0)(@sanity/types@5.9.0(@types/react@19.2.14))(react-dom@19.2.4(react@19.2.4))(react-is@19.2.4)(react-router@7.13.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(sanity@5.9.0(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.0.1)(@types/node@25.2.3)(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(@typescript-eslint/eslint-plugin@8.55.0(@typescript-eslint/parser@8.55.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3))(@typescript-eslint/parser@8.55.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3))(babel-plugin-react-compiler@1.0.0)(eslint@9.39.2(jiti@2.6.1))(immer@11.1.3)(jiti@2.6.1)(lightningcss@1.30.2)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(styled-components@6.3.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(terser@5.39.0)(tsx@4.21.0)(typescript@5.9.3)(yaml@2.8.2))(styled-components@6.3.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(typescript@5.9.3)
-      '@shopify/hydrogen': 2025.10.1(@react-router/dev@7.13.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(lightningcss@1.30.2)(react-router@7.13.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(terser@5.39.0)(tsx@4.21.0)(typescript@5.9.3)(vite@6.4.1(@types/node@25.2.3)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.39.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react-router@7.13.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(three@0.139.2)(vite@6.4.1(@types/node@25.2.3)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.39.0)(tsx@4.21.0)(yaml@2.8.2))(xstate@5.28.0)
+      '@shopify/hydrogen': 2026.1.0(@react-router/dev@7.13.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(lightningcss@1.30.2)(react-router@7.13.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(terser@5.39.0)(tsx@4.21.0)(typescript@5.9.3)(vite@6.4.1(@types/node@25.2.3)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.39.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react-router@7.13.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(three@0.139.2)(vite@6.4.1(@types/node@25.2.3)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.39.0)(tsx@4.21.0)(yaml@2.8.2))(xstate@5.28.0)
       react: 19.2.4
       react-router: 7.13.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       use-effect-event: 2.0.3(react@19.2.4)

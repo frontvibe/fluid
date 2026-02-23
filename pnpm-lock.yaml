@@ -72,8 +72,8 @@ importers:
         specifier: ^3.0.2
         version: 3.0.2(@shopify/oxygen-workers-types@4.2.0)(react-router@7.13.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))
       '@tanem/react-nprogress':
-        specifier: ^5.0.63
-        version: 5.0.63(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        specifier: ^6.0.1
+        version: 6.0.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@vercel/stega':
         specifier: ^1.0.0
         version: 1.0.0
@@ -4371,6 +4371,12 @@ packages:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
+  '@tanem/react-nprogress@6.0.1':
+    resolution: {integrity: sha512-u8gKm/qFukxwgScVMo36kWeG38BdqI3iDIffNBokMZupp9ARa3Gh8rXTNRIqJa4NCciHNK7l6ZiQA7XZYPLJ8w==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+
   '@tanstack/react-table@8.21.3':
     resolution: {integrity: sha512-5nNMTSETP4ykGegmVkhjcS8tTLW6Vl4axfEGQN3v0zdHYbK4UfoqfPChclTrJ4EoK9QynqAu9oUf8VEmrpZ5Ww==}
     engines: {node: '>=12'}
@@ -4819,6 +4825,11 @@ packages:
 
   acorn@8.15.0:
     resolution: {integrity: sha512-NZyJarBfL7nWwIq+FDL6Zp/yHEhePMNnnJ0y3qfieCrmNvYct8uvtiV41UvlSe6apAfk0fY1FbWx+NwfmpvtTg==}
+    engines: {node: '>=0.4.0'}
+    hasBin: true
+
+  acorn@8.16.0:
+    resolution: {integrity: sha512-UVJyE9MttOsBQIDKw1skb9nAwQuR5wuGD3+82K6JgJlm/Y+KI92oNsMNGZCYdDsVtRHSak0pcV5Dno5+4jh9sw==}
     engines: {node: '>=0.4.0'}
     hasBin: true
 
@@ -14572,6 +14583,13 @@ snapshots:
       react: 19.2.4
       react-dom: 19.2.4(react@19.2.4)
 
+  '@tanem/react-nprogress@6.0.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+    dependencies:
+      '@babel/runtime': 7.28.6
+      hoist-non-react-statics: 3.3.2
+      react: 19.2.4
+      react-dom: 19.2.4(react@19.2.4)
+
   '@tanstack/react-table@8.21.3(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
     dependencies:
       '@tanstack/table-core': 8.21.3
@@ -15052,6 +15070,9 @@ snapshots:
   acorn@8.14.0: {}
 
   acorn@8.15.0: {}
+
+  acorn@8.16.0:
+    optional: true
 
   adm-zip@0.5.16: {}
 
@@ -19630,7 +19651,7 @@ snapshots:
   terser@5.39.0:
     dependencies:
       '@jridgewell/source-map': 0.3.11
-      acorn: 8.15.0
+      acorn: 8.16.0
       commander: 2.20.3
       source-map-support: 0.5.21
     optional: true

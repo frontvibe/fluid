@@ -42,7 +42,7 @@
     "@shopify/mini-oxygen": "^4.0.0",
     "@shopify/polaris": "^13.9.5",
     "@shopify/remix-oxygen": "^3.0.2",
-    "@tanem/react-nprogress": "^5.0.63",
+    "@tanem/react-nprogress": "^6.0.1",
     "@vercel/stega": "^1.0.0",
     "class-variance-authority": "^0.7.1",
     "color2k": "^2.0.3",

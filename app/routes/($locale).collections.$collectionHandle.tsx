@@ -7,9 +7,9 @@ import invariant from 'tiny-invariant';
 
 import type {Route} from './+types/($locale).collections.$collectionHandle';
 
-import {CmsSection} from '~/components/cms-section';
 import {COLLECTION_QUERY as CMS_COLLECTION_QUERY} from '~/data/sanity/queries';
 import {useEncodeDataAttribute} from '~/hooks/use-encode-data-attribute';
+import {SectionsRenderer} from '~/components/sections-renderer';
 import {COLLECTION_QUERY} from '~/data/shopify/queries';
 import {mergeRouteModuleMeta} from '~/lib/meta';
 import {resolveShopifyPromises} from '~/lib/resolve-shopify-promises';
@@ -88,16 +88,14 @@ export default function Collection({loaderData}: Route.ComponentProps) {
 
   return (
     <>
-      {template?.sections && template.sections.length > 0
-        ? template.sections.map((section, index) => (
-            <CmsSection
-              data={section}
-              encodeDataAttribute={encodeDataAttribute}
-              index={index}
-              key={section._key}
-            />
-          ))
-        : null}
+      {template?.sections && template.sections.length > 0 ? (
+        <SectionsRenderer
+          documentId={template._id}
+          documentType={template._type}
+          encodeDataAttribute={encodeDataAttribute}
+          sections={template.sections}
+        />
+      ) : null}
       <Analytics.CollectionView
         data={{
           collection: {

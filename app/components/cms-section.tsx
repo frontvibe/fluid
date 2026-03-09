@@ -19,6 +19,7 @@ type CmsSectionProps = FooterDataType | SectionDataType;
 
 export function CmsSection(props: {
   data: CmsSectionProps;
+  dataSanity?: string;
   encodeDataAttribute?: EncodeDataAttributeCallback;
   index?: number;
   type?: CmsSectionType;
@@ -50,6 +51,7 @@ export function CmsSection(props: {
   return Section ? (
     <SectionWrapper
       data={data}
+      dataSanity={props.dataSanity}
       encodeDataAttribute={sectionEncodeDataAttribute}
       index={props.index}
       type={props.type}
@@ -64,6 +66,7 @@ export function CmsSection(props: {
 function SectionWrapper(props: {
   children: React.ReactNode;
   data: CmsSectionProps;
+  dataSanity?: string;
   encodeDataAttribute?: EncodeDataAttributeCallback;
   index?: number;
   type?: CmsSectionType;
@@ -106,6 +109,7 @@ function SectionWrapper(props: {
     >
       <section
         className="relative bg-background section-padding text-foreground"
+        data-sanity={props.dataSanity}
         data-section-type={isDev ? sectionType : null}
         id={`section-${_key}`}
       >

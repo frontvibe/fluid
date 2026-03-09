@@ -5,9 +5,9 @@ import type {Route} from './+types/($locale).$';
 
 import {DEFAULT_LOCALE} from 'countries';
 
-import {CmsSection} from '~/components/cms-section';
 import {PAGE_QUERY} from '~/data/sanity/queries';
 import {useEncodeDataAttribute} from '~/hooks/use-encode-data-attribute';
+import {SectionsRenderer} from '~/components/sections-renderer';
 
 import {resolveShopifyPromises} from '~/lib/resolve-shopify-promises';
 import {getSeoMetaFromMatches} from '~/lib/seo';
@@ -73,16 +73,14 @@ export default function PageRoute({loaderData}: Route.ComponentProps) {
   const {data} = loaderData.page;
   const encodeDataAttribute = useEncodeDataAttribute(data ?? {});
 
-  return data?.sections && data.sections.length > 0
-    ? data.sections.map((section, index) => (
-        <CmsSection
-          data={section}
-          encodeDataAttribute={encodeDataAttribute}
-          index={index}
-          key={section._key}
-        />
-      ))
-    : null;
+  return data?.sections && data.sections.length > 0 ? (
+    <SectionsRenderer
+      documentId={data._id}
+      documentType={data._type}
+      encodeDataAttribute={encodeDataAttribute}
+      sections={data.sections}
+    />
+  ) : null;
 }
 
 function getPageHandle(args: {

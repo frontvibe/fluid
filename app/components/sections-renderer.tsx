@@ -22,10 +22,16 @@ export function SectionsRenderer(props: SectionsRendererProps) {
 
   const optimisticSections = useOptimistic<
     SectionDataType[],
-    SanityDocument<{sections: SectionDataType[]}>
+    SanityDocument<{sections: Array<{_key: string}>}>
   >(sections, (currentSections, action) => {
-    if (action.type === 'mutate' && action.id === documentId) {
-      return action.document?.sections ?? currentSections;
+    if (action.id === documentId && action.document?.sections) {
+      // Reconcile: use the new order from the mutation but keep the
+      // GROQ-projected data from currentSections. The raw document
+      // has unresolved portable text/references that can't be rendered.
+      return action.document.sections.map(
+        (section) =>
+          currentSections?.find((s) => s._key === section._key) || section,
+      ) as SectionDataType[];
     }
     return currentSections;
   });

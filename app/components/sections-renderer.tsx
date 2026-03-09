@@ -24,7 +24,7 @@ export function SectionsRenderer(props: SectionsRendererProps) {
     SectionDataType[],
     SanityDocument<{sections: SectionDataType[]}>
   >(sections, (currentSections, action) => {
-    if (action.type === 'mutate') {
+    if (action.type === 'mutate' && action.id === documentId) {
       return action.document?.sections ?? currentSections;
     }
     return currentSections;
@@ -53,7 +53,10 @@ export function SectionsRenderer(props: SectionsRendererProps) {
   if (!optimisticSections || optimisticSections.length === 0) return null;
 
   return (
-    <div data-sanity={baseDataAttribute?.scope('sections').toString()}>
+    <div
+      className="contents"
+      data-sanity={baseDataAttribute?.scope('sections').toString()}
+    >
       {optimisticSections.map((section, index) => (
         <CmsSection
           data={section}

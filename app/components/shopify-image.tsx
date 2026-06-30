@@ -1,10 +1,16 @@
-import {
-  Image,
-  parseAspectRatio,
-  shopifyLoader,
-} from '@shopify/hydrogen-react/Image'; // eslint-disable-line import/no-unresolved
+import {Image, shopifyLoader} from '@shopify/hydrogen-react/Image'; // eslint-disable-line import/no-unresolved
 
 import {cn} from '~/lib/utils';
+
+/**
+ * Parse an aspect ratio string (e.g. `4/5`) into the height/width multiplier.
+ * Mirrors the helper previously exported by `@shopify/hydrogen-react`.
+ */
+function parseAspectRatio(aspectRatio?: string): number | undefined {
+  if (!aspectRatio) return;
+  const [width, height] = aspectRatio.split('/');
+  return 1 / (Number(width) / Number(height));
+}
 
 /**
  * Shopify's Image component is a wrapper around the HTML image element.

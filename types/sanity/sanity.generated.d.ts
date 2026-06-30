@@ -1439,12 +1439,6 @@ export type AllSanitySchemaTypes =
 
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
-type ArrayOf<T> = Array<
-  T & {
-    _key: string;
-  }
->;
-
 // Source: app/data/sanity/footers.ts
 // Variable: FOOTER_SOCIAL_LINKS_ONLY_FRAGMENT
 // Query: {  _key,  _type,  "copyright": coalesce(    copyright[_key == $language][0].value,    copyright[_key == $defaultLanguage][0].value,  ),  settings {  colorScheme -> {  background {  alpha,  hex,  hsl,  rgb,},  border {  alpha,  hex,  hsl,  rgb,},  card {  alpha,  hex,  hsl,  rgb,},  cardForeground {  alpha,  hex,  hsl,  rgb,},  foreground {  alpha,  hex,  hsl,  rgb,},  primary {  alpha,  hex,  hsl,  rgb,},  primaryForeground {  alpha,  hex,  hsl,  rgb,},},  customCss,  hide,  padding},}
@@ -3326,16 +3320,7 @@ export type ROOT_QUERY_RESULT = {
           fontName: string | null;
           fontStyle: 'italic' | 'normal' | null;
           fontWeight:
-            | 100
-            | 200
-            | 300
-            | 400
-            | 500
-            | 600
-            | 700
-            | 800
-            | 900
-            | null;
+            100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | null;
           ttf: {
             extension: string | null;
             mimeType: string | null;
@@ -3367,16 +3352,7 @@ export type ROOT_QUERY_RESULT = {
           fontName: string | null;
           fontStyle: 'italic' | 'normal' | null;
           fontWeight:
-            | 100
-            | 200
-            | 300
-            | 400
-            | 500
-            | 600
-            | 700
-            | 800
-            | 900
-            | null;
+            100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | null;
           ttf: {
             extension: string | null;
             mimeType: string | null;
@@ -3408,16 +3384,7 @@ export type ROOT_QUERY_RESULT = {
           fontName: string | null;
           fontStyle: 'italic' | 'normal' | null;
           fontWeight:
-            | 100
-            | 200
-            | 300
-            | 400
-            | 500
-            | 600
-            | 700
-            | 800
-            | 900
-            | null;
+            100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | null;
           ttf: {
             extension: string | null;
             mimeType: string | null;
@@ -4413,11 +4380,7 @@ export type ROOT_QUERY_RESULT = {
   settings: {
     badgesCornerRadius: RangeSlider | null;
     badgesPosition:
-      | 'bottom_left'
-      | 'bottom_right'
-      | 'top_left'
-      | 'top_right'
-      | null;
+      'bottom_left' | 'bottom_right' | 'top_left' | 'top_right' | null;
     badgesSaleColorScheme: {
       background: {
         alpha: null;

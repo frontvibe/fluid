@@ -23,10 +23,7 @@ type Rgb =
 export function useColorsCssVars(props: {
   selector?: string;
   settings?:
-    | CartColorScheme
-    | CmsSectionSettings
-    | FooterSettings
-    | HeaderQuery;
+    CartColorScheme | CmsSectionSettings | FooterSettings | HeaderQuery;
 }) {
   const {settings} = props;
   const {sanityRoot} = useRootLoaderData();

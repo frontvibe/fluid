@@ -86,9 +86,7 @@ function AwaitCollectionList(props: {
         {(data) => {
           // Resolve the collection list data from Shopify with the gids from Sanity
           let collections:
-            | NonNullable<CollectionsQuery['collections']>
-            | null
-            | undefined;
+            NonNullable<CollectionsQuery['collections']> | null | undefined;
 
           for (const result of data) {
             if (result.status === 'fulfilled') {

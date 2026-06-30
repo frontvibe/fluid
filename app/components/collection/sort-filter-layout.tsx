@@ -32,11 +32,7 @@ export type AppliedFilter = {
 };
 
 export type SortParam =
-  | 'best-selling'
-  | 'featured'
-  | 'newest'
-  | 'price-high-low'
-  | 'price-low-high';
+  'best-selling' | 'featured' | 'newest' | 'price-high-low' | 'price-low-high';
 
 type Props = {
   appliedFilters?: AppliedFilter[];

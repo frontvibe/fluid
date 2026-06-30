@@ -202,9 +202,7 @@ function AwaitFeaturedProduct(props: {
         {(data) => {
           // Resolve the collection data from Shopify with the gid from Sanity
           let product:
-            | NonNullable<FeaturedProductQuery['product']>
-            | null
-            | undefined;
+            NonNullable<FeaturedProductQuery['product']> | null | undefined;
 
           for (const result of data) {
             if (result.status === 'fulfilled') {

@@ -1,7 +1,5 @@
-import type {
-  EncodeDataAttributeCallback,
-  StudioPathLike,
-} from '@sanity/react-loader';
+import type {StudioPathLike} from '@sanity/client/csm';
+import type {EncodeDataAttributeCallback} from '@sanity/react-loader';
 import type {FooterDataType, SectionDataType} from 'types';
 
 import {createContext, useCallback, useContext, useMemo} from 'react';

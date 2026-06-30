@@ -100,10 +100,7 @@ export function resolveShopifyPromises({
 
 function getSections(document: {
   data:
-    | SanityCollectionData
-    | SanityPageData
-    | SanityProductData
-    | SanityRootData;
+    SanityCollectionData | SanityPageData | SanityProductData | SanityRootData;
 }) {
   if (document.data?._type === 'root') {
     return document.data.footer?.sections;

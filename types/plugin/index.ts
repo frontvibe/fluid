@@ -84,12 +84,10 @@ export function typegenWatcher(options?: {
       }
     } catch (err) {
       const e = err as any;
-      if (
-        !(
-          e?.killed &&
-          (e?.signal === 'SIGTERM' || e?.signalDescription === 'Termination')
-        )
-      ) {
+      if (!(
+        e?.killed &&
+        (e?.signal === 'SIGTERM' || e?.signalDescription === 'Termination')
+      )) {
         console.error('\x1b[31m%s\x1b[0m', '[sanity-typegen] Error', err);
       }
     } finally {

@@ -1,6 +1,6 @@
 import type {EncodeDataAttributeCallback} from '@sanity/react-loader';
 
-import {createDataAttribute} from '@sanity/react-loader';
+import {createDataAttribute} from '@sanity/visual-editing';
 import {useMemo} from 'react';
 
 import {useRootLoaderData} from '~/root';
